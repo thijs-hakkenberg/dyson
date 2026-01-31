@@ -9,13 +9,11 @@
 			{ label: 'Blog', href: '/blog' }
 		],
 		resources: [
-			{ label: 'Funding', href: '/funding' },
-			{ label: 'Documentation', href: '/docs' }
+			{ label: 'Funding', href: '/funding' }
 		],
 		community: [
 			{ label: 'GitHub', href: 'https://github.com/project-dyson', external: true },
-			{ label: 'Discord', href: '#', external: true },
-			{ label: 'Twitter', href: '#', external: true }
+			{ label: 'Discord', href: '#', external: true }
 		]
 	};
 </script>

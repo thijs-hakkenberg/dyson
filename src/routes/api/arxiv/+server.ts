@@ -2,6 +2,9 @@ import { json, error } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import type { ArxivPaper, ArxivSearchParams, ArxivSearchResult } from '$lib/types';
 
+// This API route cannot be prerendered - it requires a server
+export const prerender = false;
+
 const ARXIV_API = 'http://export.arxiv.org/api/query';
 
 /**

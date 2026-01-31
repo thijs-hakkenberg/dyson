@@ -13,7 +13,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUTPUT_DIR = join(__dirname, '../static/content/llm-opinions');
 
 // Configuration
-const DATABRICKS_TOKEN = process.env.DATABRICKS_TOKEN || 'REDACTED';
+const DATABRICKS_TOKEN = process.env.DATABRICKS_TOKEN;
 const DATABRICKS_WORKSPACE = process.env.DATABRICKS_WORKSPACE || 'https://adb-6239133969168510.10.azuredatabricks.net';
 
 const MODELS = {

@@ -9,6 +9,7 @@
 	} from '$lib/services/bom-specs';
 	import type { BOMItemSpec } from '$lib/types';
 	import { Marked } from 'marked';
+	import ConsensusView from '$lib/components/phases/ConsensusView.svelte';
 
 	const phase = $derived(getPhaseById($page.params.phase));
 	const itemSlug = $derived($page.params.item);
@@ -17,9 +18,9 @@
 	let specs: BOMItemSpec | null = $state(null);
 	let loading = $state(true);
 	let error = $state<string | null>(null);
-	let activeTab = $state('claude-opus-4-5');
+	let activeTab = $state('consensus');
 
-	const modelOrder = ['claude-opus-4-5', 'gemini-3-pro', 'gpt-5-2'];
+	const modelOrder = ['consensus', 'claude-opus-4-5', 'gemini-3-pro', 'gpt-5-2'];
 
 	// Configure marked for proper rendering
 	const marked = new Marked({
@@ -190,60 +191,104 @@
 				<!-- Tab Navigation -->
 				<div class="flex flex-wrap gap-2 mb-6">
 					{#each modelOrder as modelId}
-						{@const model = LLM_MODELS[modelId as keyof typeof LLM_MODELS]}
-						{@const hasSpec = specs?.specs.some((s) => s.modelId === modelId)}
-						<button
-							class="px-4 py-2 rounded-lg text-sm font-medium transition-all {activeTab === modelId
-								? 'bg-cosmic-blue text-white'
-								: hasSpec
-									? 'bg-space-600 text-star-dim hover:bg-space-500 hover:text-star-white'
-									: 'bg-space-700 text-star-faint cursor-not-allowed'}"
-							onclick={() => hasSpec && (activeTab = modelId)}
-							disabled={!hasSpec}
-						>
-							{model?.name || modelId}
-							{#if !hasSpec}
-								<span class="ml-1 text-xs">(pending)</span>
-							{/if}
-						</button>
+						{#if modelId === 'consensus'}
+							{@const hasConsensus = specs?.consensus && specs.consensus.keySpecs.length > 0}
+							<button
+								class="px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 {activeTab === 'consensus'
+									? 'bg-gradient-to-r from-cosmic-blue to-cosmic-purple text-white'
+									: hasConsensus
+										? 'bg-space-600 text-star-dim hover:bg-space-500 hover:text-star-white'
+										: 'bg-space-700 text-star-faint cursor-not-allowed'}"
+								onclick={() => hasConsensus && (activeTab = 'consensus')}
+								disabled={!hasConsensus}
+							>
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+								Consensus
+								{#if !hasConsensus}
+									<span class="text-xs">(pending)</span>
+								{/if}
+							</button>
+						{:else}
+							{@const model = LLM_MODELS[modelId as keyof typeof LLM_MODELS]}
+							{@const hasSpec = specs?.specs.some((s) => s.modelId === modelId)}
+							<button
+								class="px-4 py-2 rounded-lg text-sm font-medium transition-all {activeTab === modelId
+									? 'bg-cosmic-blue text-white'
+									: hasSpec
+										? 'bg-space-600 text-star-dim hover:bg-space-500 hover:text-star-white'
+										: 'bg-space-700 text-star-faint cursor-not-allowed'}"
+								onclick={() => hasSpec && (activeTab = modelId)}
+								disabled={!hasSpec}
+							>
+								{model?.name || modelId}
+								{#if !hasSpec}
+									<span class="ml-1 text-xs">(pending)</span>
+								{/if}
+							</button>
+						{/if}
 					{/each}
 				</div>
 
 				<!-- Spec Content -->
 				<div class="card-glow p-6 md:p-8">
-					{#each modelOrder as modelId}
-						{@const spec = getModelSpec(modelId)}
-						{#if activeTab === modelId}
-							{#if spec}
-								<div class="mb-4 flex flex-wrap items-center justify-between gap-4">
-									<div>
-										<h2 class="text-xl font-bold text-star-white">{spec.modelName}</h2>
-										<p class="text-sm text-star-faint">Generated: {spec.generatedDate}</p>
-									</div>
-								</div>
-								<article class="prose-spec">
-									{@html renderMarkdown(spec.content)}
-								</article>
-							{:else}
-								<div class="text-center py-12">
-									<svg
-										class="w-16 h-16 mx-auto mb-4 text-star-faint"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<path
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											stroke-width="1.5"
-											d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-										/>
-									</svg>
-									<p class="text-star-dim">Specification not yet generated</p>
-								</div>
-							{/if}
+					{#if activeTab === 'consensus'}
+						{#if specs?.consensus && specs.consensus.keySpecs.length > 0}
+							<ConsensusView consensus={specs.consensus} itemName={itemMeta?.name || 'Item'} />
+						{:else}
+							<div class="text-center py-12">
+								<svg
+									class="w-16 h-16 mx-auto mb-4 text-star-faint"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="1.5"
+										d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+									/>
+								</svg>
+								<p class="text-star-dim">Consensus analysis not yet available</p>
+							</div>
 						{/if}
-					{/each}
+					{:else}
+						{#each modelOrder.filter(id => id !== 'consensus') as modelId}
+							{@const spec = getModelSpec(modelId)}
+							{#if activeTab === modelId}
+								{#if spec}
+									<div class="mb-4 flex flex-wrap items-center justify-between gap-4">
+										<div>
+											<h2 class="text-xl font-bold text-star-white">{spec.modelName}</h2>
+											<p class="text-sm text-star-faint">Generated: {spec.generatedDate}</p>
+										</div>
+									</div>
+									<article class="prose-spec">
+										{@html renderMarkdown(spec.content)}
+									</article>
+								{:else}
+									<div class="text-center py-12">
+										<svg
+											class="w-16 h-16 mx-auto mb-4 text-star-faint"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="1.5"
+												d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+											/>
+										</svg>
+										<p class="text-star-dim">Specification not yet generated</p>
+									</div>
+								{/if}
+							{/if}
+						{/each}
+					{/if}
 				</div>
 			</div>
 
