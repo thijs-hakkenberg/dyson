@@ -1,0 +1,410 @@
+<script lang="ts">
+	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
+	import { getPhaseById, formatCurrency } from '$lib/services/content';
+	import {
+		getBOMItemBySlug,
+		fetchAllBOMSpecs,
+		LLM_MODELS,
+		type BOMItemMeta
+	} from '$lib/services/bom-specs';
+	import type { BOMItemSpec } from '$lib/types';
+
+	const phase = $derived(getPhaseById($page.params.phase));
+	const itemSlug = $derived($page.params.item);
+	const itemMeta = $derived(getBOMItemBySlug(itemSlug));
+
+	let specs: BOMItemSpec | null = $state(null);
+	let loading = $state(true);
+	let error = $state<string | null>(null);
+	let activeTab = $state('claude-opus-4-5');
+
+	const modelOrder = ['claude-opus-4-5', 'gemini-3-pro', 'gpt-5-2'];
+
+	onMount(async () => {
+		if (itemMeta && phase) {
+			try {
+				specs = await fetchAllBOMSpecs($page.params.phase, itemSlug);
+				if (!specs || specs.specs.length === 0) {
+					error = 'No specifications found for this item.';
+				}
+			} catch (e) {
+				error = 'Failed to load specifications.';
+				console.error(e);
+			}
+		}
+		loading = false;
+	});
+
+	function getModelSpec(modelId: string) {
+		return specs?.specs.find((s) => s.modelId === modelId);
+	}
+
+	const categoryColors: Record<string, string> = {
+		Spacecraft: 'bg-cosmic-blue/20 text-cosmic-cyan',
+		Robotics: 'bg-cosmic-purple/20 text-cosmic-purple',
+		Infrastructure: 'bg-sun-gold/20 text-sun-gold',
+		'Power Systems': 'bg-green-500/20 text-green-400'
+	};
+
+	function renderMarkdown(content: string): string {
+		return content
+			.replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold text-star-white mt-6 mb-3">$1</h3>')
+			.replace(/^## (.*$)/gim, '<h2 class="text-xl font-bold text-star-white mt-8 mb-4">$1</h2>')
+			.replace(/^# (.*$)/gim, '<h1 class="text-2xl font-bold text-star-white mt-8 mb-4">$1</h1>')
+			.replace(/\*\*(.*?)\*\*/g, '<strong class="text-star-white">$1</strong>')
+			.replace(/\*(.*?)\*/g, '<em>$1</em>')
+			.replace(/`(.*?)`/g, '<code class="bg-space-600 px-1 py-0.5 rounded text-cosmic-cyan">$1</code>')
+			.replace(/^\| (.+) \|$/gim, (match) => {
+				const cells = match.slice(1, -1).split('|').map(c => c.trim());
+				return '<tr>' + cells.map(c => `<td class="border border-space-500 px-3 py-2">${c}</td>`).join('') + '</tr>';
+			})
+			.replace(/^[-*] (.+)$/gim, '<li class="ml-4 text-star-dim">$1</li>')
+			.replace(/^\d+\. (.+)$/gim, '<li class="ml-4 text-star-dim list-decimal">$1</li>')
+			.replace(/^> (.*$)/gim, '<blockquote class="border-l-4 border-cosmic-cyan pl-4 my-4 text-star-dim italic">$1</blockquote>')
+			.replace(/```[\s\S]*?```/g, (match) => {
+				const code = match.slice(3, -3).trim();
+				return `<pre class="bg-space-700 p-4 rounded-lg overflow-x-auto my-4"><code class="text-sm text-star-dim">${code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`;
+			})
+			.replace(/\n\n/g, '</p><p class="text-star-dim mb-4">')
+			.replace(/^(?!<)(.+)$/gim, '<p class="text-star-dim mb-4">$1</p>');
+	}
+</script>
+
+<svelte:head>
+	<title
+		>{itemMeta ? `${itemMeta.name} - Phase ${phase?.number}` : 'BOM Item'} - Project Dyson</title
+	>
+</svelte:head>
+
+{#if loading}
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+		<div class="card-glow p-12 text-center">
+			<div
+				class="w-12 h-12 mx-auto mb-4 border-4 border-cosmic-cyan border-t-transparent rounded-full animate-spin"
+			></div>
+			<p class="text-star-dim">Loading specifications...</p>
+		</div>
+	</div>
+{:else if !phase || !itemMeta}
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+		<div class="card-glow p-12 text-center">
+			<svg
+				class="w-16 h-16 mx-auto mb-4 text-star-faint"
+				fill="none"
+				stroke="currentColor"
+				viewBox="0 0 24 24"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="1.5"
+					d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+				/>
+			</svg>
+			<h1 class="text-2xl font-bold text-star-white mb-2">Item Not Found</h1>
+			<p class="text-star-dim mb-6">The requested BOM item doesn't exist.</p>
+			<a href="/plan/{$page.params.phase}" class="btn-primary">Back to Phase</a>
+		</div>
+	</div>
+{:else}
+	<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+		<!-- Breadcrumb -->
+		<nav class="mb-8">
+			<ol class="flex items-center gap-2 text-sm flex-wrap">
+				<li><a href="/plan" class="text-star-dim hover:text-cosmic-cyan">Plan</a></li>
+				<li class="text-star-faint">/</li>
+				<li>
+					<a href="/plan/{phase.id}" class="text-star-dim hover:text-cosmic-cyan"
+						>Phase {phase.number}</a
+					>
+				</li>
+				<li class="text-star-faint">/</li>
+				<li class="text-star-white">{itemMeta.name}</li>
+			</ol>
+		</nav>
+
+		<!-- Header -->
+		<div class="mb-8">
+			<div class="flex flex-col md:flex-row md:items-start gap-6 mb-6">
+				<div
+					class="w-16 h-16 rounded-lg bg-gradient-to-br from-cosmic-blue to-cosmic-purple flex items-center justify-center flex-shrink-0"
+				>
+					<svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"
+						/>
+					</svg>
+				</div>
+				<div class="flex-1">
+					<div class="flex flex-wrap items-center gap-3 mb-2">
+						<h1 class="text-3xl md:text-4xl font-bold text-star-white">{itemMeta.name}</h1>
+						<span class="px-3 py-1 rounded text-sm {categoryColors[itemMeta.category] || 'bg-space-600 text-star-dim'}">
+							{itemMeta.category}
+						</span>
+					</div>
+					<p class="text-star-dim">
+						Detailed technical specifications from multiple AI perspectives for Phase {phase.number}
+						- {phase.title}
+					</p>
+				</div>
+			</div>
+
+			<!-- Stats Row -->
+			<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+				<div class="card-glow p-4">
+					<p class="text-xs text-star-faint mb-1">Quantity</p>
+					<p class="text-xl font-bold text-star-white">{itemMeta.quantity}</p>
+				</div>
+				<div class="card-glow p-4">
+					<p class="text-xs text-star-faint mb-1">Budget Allocation</p>
+					<p class="text-xl font-bold text-sun-gold">{itemMeta.cost}</p>
+				</div>
+				<div class="card-glow p-4">
+					<p class="text-xs text-star-faint mb-1">BOM ID</p>
+					<p class="text-xl font-bold text-star-white font-mono">{itemMeta.bomId}</p>
+				</div>
+				<div class="card-glow p-4">
+					<p class="text-xs text-star-faint mb-1">Specifications</p>
+					<p class="text-xl font-bold text-cosmic-cyan">{specs?.specs.length || 0} models</p>
+				</div>
+			</div>
+		</div>
+
+		{#if error}
+			<div class="card-glow p-8 text-center mb-8 border border-red-500/30">
+				<svg
+					class="w-12 h-12 mx-auto mb-4 text-red-400"
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+					/>
+				</svg>
+				<p class="text-red-400">{error}</p>
+				<p class="text-star-faint text-sm mt-2">
+					Run <code class="bg-space-600 px-2 py-1 rounded">node scripts/query-bom-specs.js</code> to
+					generate specifications.
+				</p>
+			</div>
+		{/if}
+
+		<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+			<!-- Main Content: Tabbed Specs -->
+			<div class="lg:col-span-3">
+				<!-- Tab Navigation -->
+				<div class="flex flex-wrap gap-2 mb-6">
+					{#each modelOrder as modelId}
+						{@const model = LLM_MODELS[modelId as keyof typeof LLM_MODELS]}
+						{@const hasSpec = specs?.specs.some((s) => s.modelId === modelId)}
+						<button
+							class="px-4 py-2 rounded-lg text-sm font-medium transition-all {activeTab === modelId
+								? 'bg-cosmic-blue text-white'
+								: hasSpec
+									? 'bg-space-600 text-star-dim hover:bg-space-500 hover:text-star-white'
+									: 'bg-space-700 text-star-faint cursor-not-allowed'}"
+							onclick={() => hasSpec && (activeTab = modelId)}
+							disabled={!hasSpec}
+						>
+							{model?.name || modelId}
+							{#if !hasSpec}
+								<span class="ml-1 text-xs">(pending)</span>
+							{/if}
+						</button>
+					{/each}
+				</div>
+
+				<!-- Spec Content -->
+				<div class="card-glow p-6 md:p-8">
+					{#each modelOrder as modelId}
+						{@const spec = getModelSpec(modelId)}
+						{#if activeTab === modelId}
+							{#if spec}
+								<div class="mb-4 flex flex-wrap items-center justify-between gap-4">
+									<div>
+										<h2 class="text-xl font-bold text-star-white">{spec.modelName}</h2>
+										<p class="text-sm text-star-faint">Generated: {spec.generatedDate}</p>
+									</div>
+								</div>
+								<div class="prose-content">
+									{@html renderMarkdown(spec.content)}
+								</div>
+							{:else}
+								<div class="text-center py-12">
+									<svg
+										class="w-16 h-16 mx-auto mb-4 text-star-faint"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="1.5"
+											d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+										/>
+									</svg>
+									<p class="text-star-dim">Specification not yet generated</p>
+								</div>
+							{/if}
+						{/if}
+					{/each}
+				</div>
+			</div>
+
+			<!-- Sidebar: Consensus Summary -->
+			<div class="lg:col-span-1">
+				<div class="card-glow p-6 sticky top-24">
+					<h3 class="text-lg font-bold text-star-white mb-4">Consensus Summary</h3>
+
+					{#if specs?.consensus && specs.consensus.keySpecs.length > 0}
+						<!-- Key Specifications -->
+						<div class="mb-6">
+							<h4 class="text-sm font-semibold text-cosmic-cyan mb-2">Key Specifications</h4>
+							<ul class="space-y-2">
+								{#each specs.consensus.keySpecs.slice(0, 5) as spec}
+									<li class="text-sm text-star-dim flex items-start gap-2">
+										<svg
+											class="w-4 h-4 text-green-400 flex-shrink-0 mt-0.5"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M5 13l4 4L19 7"
+											/>
+										</svg>
+										{spec}
+									</li>
+								{/each}
+							</ul>
+						</div>
+
+						<!-- Divergent Views -->
+						{#if specs.consensus.divergentViews.length > 0}
+							<div class="mb-6">
+								<h4 class="text-sm font-semibold text-sun-gold mb-2">Divergent Views</h4>
+								<ul class="space-y-2">
+									{#each specs.consensus.divergentViews.slice(0, 3) as view}
+										<li class="text-sm text-star-dim flex items-start gap-2">
+											<svg
+												class="w-4 h-4 text-sun-gold flex-shrink-0 mt-0.5"
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+												/>
+											</svg>
+											{view}
+										</li>
+									{/each}
+								</ul>
+							</div>
+						{/if}
+
+						<!-- Open Questions -->
+						{#if specs.consensus.openQuestions.length > 0}
+							<div class="mb-6">
+								<h4 class="text-sm font-semibold text-cosmic-purple mb-2">Open Questions</h4>
+								<ul class="space-y-2">
+									{#each specs.consensus.openQuestions.slice(0, 3) as question}
+										<li class="text-sm text-star-dim flex items-start gap-2">
+											<svg
+												class="w-4 h-4 text-cosmic-purple flex-shrink-0 mt-0.5"
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+											>
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+												/>
+											</svg>
+											{question}
+										</li>
+									{/each}
+								</ul>
+							</div>
+						{/if}
+					{:else}
+						<p class="text-sm text-star-faint">
+							Consensus analysis will be available once all model specifications are generated.
+						</p>
+					{/if}
+
+					<!-- Back Link -->
+					<div class="pt-4 border-t border-space-600">
+						<a
+							href="/plan/{phase.id}"
+							class="text-sm text-cosmic-cyan hover:text-cosmic-blue transition-colors flex items-center gap-2"
+						>
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									stroke-width="2"
+									d="M10 19l-7-7m0 0l7-7m-7 7h18"
+								/>
+							</svg>
+							Back to Phase {phase.number}
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
+
+<style>
+	.prose-content :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+	.prose-content :global(th),
+	.prose-content :global(td) {
+		border: 1px solid rgb(var(--color-space-500));
+		padding: 0.5rem 0.75rem;
+		text-align: left;
+	}
+	.prose-content :global(th) {
+		background-color: rgb(var(--color-space-600));
+		color: rgb(var(--color-star-white));
+		font-weight: 600;
+	}
+	.prose-content :global(ul),
+	.prose-content :global(ol) {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+	.prose-content :global(ul) {
+		list-style-type: disc;
+		padding-left: 1.5rem;
+	}
+	.prose-content :global(ol) {
+		list-style-type: decimal;
+		padding-left: 1.5rem;
+	}
+	.prose-content :global(li) {
+		margin-bottom: 0.25rem;
+	}
+</style>

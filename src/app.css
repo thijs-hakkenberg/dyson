@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+/* Custom Dark Space Theme */
+@theme {
+  /* Space backgrounds */
+  --color-space-900: #0a0a0f;
+  --color-space-800: #12121a;
+  --color-space-700: #1a1a2e;
+  --color-space-600: #252540;
+  --color-space-500: #2d2d4a;
+
+  /* Cosmic accents */
+  --color-cosmic-blue: #4f46e5;
+  --color-cosmic-purple: #7c3aed;
+  --color-cosmic-cyan: #06b6d4;
+
+  /* Star colors */
+  --color-star-white: #f8fafc;
+  --color-star-dim: #94a3b8;
+  --color-star-faint: #64748b;
+
+  /* Sun/solar colors */
+  --color-sun-gold: #fbbf24;
+  --color-sun-orange: #f97316;
+  --color-sun-red: #ef4444;
+
+  /* Gradients */
+  --gradient-cosmic: linear-gradient(135deg, var(--color-cosmic-blue), var(--color-cosmic-purple));
+  --gradient-solar: linear-gradient(135deg, var(--color-sun-gold), var(--color-sun-orange));
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-space-900);
+  color: var(--color-star-white);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Star field background */
+.star-field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 160px 120px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 200px 50px, rgba(255,255,255,0.25), transparent),
+    radial-gradient(1px 1px at 250px 90px, rgba(255,255,255,0.35), transparent),
+    radial-gradient(2px 2px at 300px 150px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 350px 30px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 400px 100px, rgba(255,255,255,0.25), transparent);
+  background-size: 500px 500px;
+  animation: star-twinkle 8s ease-in-out infinite;
+}
+
+@keyframes star-twinkle {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Card glow effects */
+.card-glow {
+  position: relative;
+  background: var(--color-space-700);
+  border: 1px solid var(--color-space-500);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.card-glow:hover {
+  border-color: var(--color-cosmic-blue);
+  box-shadow: 0 0 20px rgba(79, 70, 229, 0.3);
+}
+
+/* Gradient border effect */
+.gradient-border {
+  position: relative;
+  background: var(--color-space-700);
+  border-radius: 0.75rem;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--color-cosmic-blue), var(--color-cosmic-purple));
+  z-index: -1;
+  opacity: 0.5;
+}
+
+/* Button styles */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-cosmic-blue), var(--color-cosmic-purple));
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 20px rgba(79, 70, 229, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: var(--color-space-600);
+  color: var(--color-star-white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-space-500);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--color-space-500);
+  border-color: var(--color-cosmic-cyan);
+}
+
+/* Solar glow effect */
+.solar-glow {
+  box-shadow: 0 0 60px rgba(251, 191, 36, 0.3);
+}
+
+/* Text gradient */
+.text-gradient {
+  background: linear-gradient(135deg, var(--color-cosmic-blue), var(--color-cosmic-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Prose styles for content */
+.prose-space {
+  color: var(--color-star-dim);
+  line-height: 1.75;
+}
+
+.prose-space h1, .prose-space h2, .prose-space h3 {
+  color: var(--color-star-white);
+  font-weight: 600;
+}
+
+.prose-space a {
+  color: var(--color-cosmic-cyan);
+  text-decoration: none;
+}
+
+.prose-space a:hover {
+  text-decoration: underline;
+}
+
+.prose-space code {
+  background: var(--color-space-600);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.prose-space pre {
+  background: var(--color-space-800);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+.prose-space blockquote {
+  border-left: 4px solid var(--color-cosmic-purple);
+  padding-left: 1rem;
+  color: var(--color-star-dim);
+  font-style: italic;
+}
+
+/* Loading spinner */
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--color-space-600);
+  border-top-color: var(--color-cosmic-cyan);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
