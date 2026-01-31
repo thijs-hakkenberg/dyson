@@ -1,14 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import { getPhaseById, formatCurrency } from '$lib/services/content';
+	import { getPhaseById } from '$lib/services/content';
 	import {
 		getBOMItemBySlug,
 		fetchAllBOMSpecs,
-		LLM_MODELS,
-		type BOMItemMeta
+		LLM_MODELS
 	} from '$lib/services/bom-specs';
 	import type { BOMItemSpec } from '$lib/types';
+	import { Marked } from 'marked';
 
 	const phase = $derived(getPhaseById($page.params.phase));
 	const itemSlug = $derived($page.params.item);
@@ -20,6 +20,12 @@
 	let activeTab = $state('claude-opus-4-5');
 
 	const modelOrder = ['claude-opus-4-5', 'gemini-3-pro', 'gpt-5-2'];
+
+	// Configure marked for proper rendering
+	const marked = new Marked({
+		gfm: true,
+		breaks: false
+	});
 
 	onMount(async () => {
 		if (itemMeta && phase) {
@@ -48,26 +54,7 @@
 	};
 
 	function renderMarkdown(content: string): string {
-		return content
-			.replace(/^### (.*$)/gim, '<h3 class="text-lg font-semibold text-star-white mt-6 mb-3">$1</h3>')
-			.replace(/^## (.*$)/gim, '<h2 class="text-xl font-bold text-star-white mt-8 mb-4">$1</h2>')
-			.replace(/^# (.*$)/gim, '<h1 class="text-2xl font-bold text-star-white mt-8 mb-4">$1</h1>')
-			.replace(/\*\*(.*?)\*\*/g, '<strong class="text-star-white">$1</strong>')
-			.replace(/\*(.*?)\*/g, '<em>$1</em>')
-			.replace(/`(.*?)`/g, '<code class="bg-space-600 px-1 py-0.5 rounded text-cosmic-cyan">$1</code>')
-			.replace(/^\| (.+) \|$/gim, (match) => {
-				const cells = match.slice(1, -1).split('|').map(c => c.trim());
-				return '<tr>' + cells.map(c => `<td class="border border-space-500 px-3 py-2">${c}</td>`).join('') + '</tr>';
-			})
-			.replace(/^[-*] (.+)$/gim, '<li class="ml-4 text-star-dim">$1</li>')
-			.replace(/^\d+\. (.+)$/gim, '<li class="ml-4 text-star-dim list-decimal">$1</li>')
-			.replace(/^> (.*$)/gim, '<blockquote class="border-l-4 border-cosmic-cyan pl-4 my-4 text-star-dim italic">$1</blockquote>')
-			.replace(/```[\s\S]*?```/g, (match) => {
-				const code = match.slice(3, -3).trim();
-				return `<pre class="bg-space-700 p-4 rounded-lg overflow-x-auto my-4"><code class="text-sm text-star-dim">${code.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</code></pre>`;
-			})
-			.replace(/\n\n/g, '</p><p class="text-star-dim mb-4">')
-			.replace(/^(?!<)(.+)$/gim, '<p class="text-star-dim mb-4">$1</p>');
+		return marked.parse(content) as string;
 	}
 </script>
 
@@ -234,9 +221,9 @@
 										<p class="text-sm text-star-faint">Generated: {spec.generatedDate}</p>
 									</div>
 								</div>
-								<div class="prose-content">
+								<article class="prose-spec">
 									{@html renderMarkdown(spec.content)}
-								</div>
+								</article>
 							{:else}
 								<div class="text-center py-12">
 									<svg
@@ -374,37 +361,147 @@
 {/if}
 
 <style>
-	.prose-content :global(table) {
-		width: 100%;
-		border-collapse: collapse;
-		margin-top: 1rem;
+	/* Markdown content styling */
+	.prose-spec :global(h1) {
+		font-size: 1.75rem;
+		font-weight: 700;
+		color: rgb(var(--color-star-white));
+		margin-top: 2rem;
 		margin-bottom: 1rem;
 	}
-	.prose-content :global(th),
-	.prose-content :global(td) {
-		border: 1px solid rgb(var(--color-space-500));
-		padding: 0.5rem 0.75rem;
-		text-align: left;
+	.prose-spec :global(h2) {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: rgb(var(--color-star-white));
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+		padding-bottom: 0.5rem;
+		border-bottom: 1px solid rgb(var(--color-space-500));
 	}
-	.prose-content :global(th) {
-		background-color: rgb(var(--color-space-600));
+	.prose-spec :global(h3) {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: rgb(var(--color-star-white));
+		margin-top: 1.5rem;
+		margin-bottom: 0.75rem;
+	}
+	.prose-spec :global(h4) {
+		font-size: 1.1rem;
+		font-weight: 600;
+		color: rgb(var(--color-star-white));
+		margin-top: 1.25rem;
+		margin-bottom: 0.5rem;
+	}
+	.prose-spec :global(p) {
+		color: rgb(var(--color-star-dim));
+		margin-bottom: 1rem;
+		line-height: 1.7;
+	}
+	.prose-spec :global(strong) {
 		color: rgb(var(--color-star-white));
 		font-weight: 600;
 	}
-	.prose-content :global(ul),
-	.prose-content :global(ol) {
-		margin-top: 1rem;
-		margin-bottom: 1rem;
+	.prose-spec :global(em) {
+		font-style: italic;
 	}
-	.prose-content :global(ul) {
+	.prose-spec :global(a) {
+		color: rgb(var(--color-cosmic-cyan));
+		text-decoration: underline;
+	}
+	.prose-spec :global(a:hover) {
+		color: rgb(var(--color-cosmic-blue));
+	}
+
+	/* Lists */
+	.prose-spec :global(ul) {
 		list-style-type: disc;
 		padding-left: 1.5rem;
+		margin-bottom: 1rem;
+		color: rgb(var(--color-star-dim));
 	}
-	.prose-content :global(ol) {
+	.prose-spec :global(ol) {
 		list-style-type: decimal;
 		padding-left: 1.5rem;
+		margin-bottom: 1rem;
+		color: rgb(var(--color-star-dim));
 	}
-	.prose-content :global(li) {
-		margin-bottom: 0.25rem;
+	.prose-spec :global(li) {
+		margin-bottom: 0.5rem;
+		line-height: 1.6;
+	}
+	.prose-spec :global(li strong) {
+		color: rgb(var(--color-star-white));
+	}
+
+	/* Tables */
+	.prose-spec :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1.5rem 0;
+		font-size: 0.9rem;
+	}
+	.prose-spec :global(thead) {
+		background-color: rgb(var(--color-space-600));
+	}
+	.prose-spec :global(th) {
+		padding: 0.75rem 1rem;
+		text-align: left;
+		font-weight: 600;
+		color: rgb(var(--color-star-white));
+		border: 1px solid rgb(var(--color-space-500));
+	}
+	.prose-spec :global(td) {
+		padding: 0.75rem 1rem;
+		border: 1px solid rgb(var(--color-space-500));
+		color: rgb(var(--color-star-dim));
+	}
+	.prose-spec :global(tr:nth-child(even)) {
+		background-color: rgba(var(--color-space-600), 0.3);
+	}
+
+	/* Code blocks */
+	.prose-spec :global(pre) {
+		background-color: rgb(var(--color-space-700));
+		border: 1px solid rgb(var(--color-space-500));
+		border-radius: 0.5rem;
+		padding: 1rem;
+		overflow-x: auto;
+		margin: 1.5rem 0;
+		font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+		font-size: 0.85rem;
+		line-height: 1.5;
+	}
+	.prose-spec :global(pre code) {
+		background: none;
+		padding: 0;
+		color: rgb(var(--color-star-dim));
+		white-space: pre;
+	}
+	.prose-spec :global(code) {
+		background-color: rgb(var(--color-space-600));
+		padding: 0.2rem 0.4rem;
+		border-radius: 0.25rem;
+		font-size: 0.9em;
+		color: rgb(var(--color-cosmic-cyan));
+		font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+	}
+
+	/* Blockquotes */
+	.prose-spec :global(blockquote) {
+		border-left: 4px solid rgb(var(--color-cosmic-cyan));
+		padding-left: 1rem;
+		margin: 1.5rem 0;
+		color: rgb(var(--color-star-dim));
+		font-style: italic;
+	}
+	.prose-spec :global(blockquote p) {
+		margin-bottom: 0;
+	}
+
+	/* Horizontal rules */
+	.prose-spec :global(hr) {
+		border: none;
+		border-top: 1px solid rgb(var(--color-space-500));
+		margin: 2rem 0;
 	}
 </style>
