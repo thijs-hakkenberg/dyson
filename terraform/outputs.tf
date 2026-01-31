@@ -1,6 +1,6 @@
 output "pages_url" {
   description = "The URL of the deployed Cloudflare Pages site"
-  value       = "https://${cloudflare_pages_project.dyson.subdomain}.pages.dev"
+  value       = "https://${cloudflare_pages_project.dyson.subdomain}"
 }
 
 output "pages_project_name" {
