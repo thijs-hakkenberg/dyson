@@ -12,7 +12,7 @@
 			{ label: 'Funding', href: '/funding' }
 		],
 		community: [
-			{ label: 'GitHub', href: 'https://github.com/project-dyson', external: true },
+			{ label: 'GitHub', href: 'https://github.com/thijs-hakkenberg/dyson', external: true },
 			{ label: 'Discord', href: '#', external: true }
 		]
 	};
