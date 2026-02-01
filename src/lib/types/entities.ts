@@ -20,6 +20,17 @@ export type ResearchQuestionStatus = 'open' | 'investigating' | 'answered' | 'de
 export type ActivityStatus = 'pending' | 'in-progress' | 'completed' | 'blocked';
 export type Priority = 'critical' | 'high' | 'medium' | 'low';
 
+// Question classification types
+export type QuestionType =
+	| 'meta-research' // Literature review, meta-analysis
+	| 'experimentation' // Requires physical testing
+	| 'simulation' // Computational modeling
+	| 'engineering-decision' // Design tradeoff analysis
+	| 'discussion'; // Stakeholder consensus building
+
+// Question slug type
+export type QuestionSlug = string;
+
 /**
  * BOM Item Entity with hierarchy support
  * Supports composite → sub-assembly → component → raw-material relationships
@@ -73,6 +84,41 @@ export interface ResearchQuestionEntity {
 	// Metadata
 	assignedTo?: string;
 	dueDate?: Date;
+	answer?: string;
+	references?: string[];
+}
+
+/**
+ * Extended Research Question
+ * Full question data with classification, source tracking, and cross-references
+ */
+export interface ResearchQuestion {
+	id: ResearchQuestionId;
+	slug: QuestionSlug;
+	title: string;
+	description: string;
+
+	// Context - background information to understand the question standalone
+	context: string;
+	sourceBOMItemName: string;
+
+	// Classification
+	questionType: QuestionType;
+	priority: Priority;
+	status: ResearchQuestionStatus;
+
+	// Source tracking
+	sourcePhaseId: PhaseId;
+	sourceBOMItemId: BOMItemId;
+	sourceBOMItemSlug: string;
+
+	// Cross-references
+	relatedBOMItems: BOMItemId[];
+	relatedQuestionIds: ResearchQuestionId[];
+
+	// Metadata
+	createdDate: string;
+	tags: string[];
 	answer?: string;
 	references?: string[];
 }

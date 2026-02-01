@@ -371,6 +371,38 @@
 						</p>
 					{/if}
 
+					<!-- Related Research Questions -->
+					{#if data.relatedQuestions && data.relatedQuestions.length > 0}
+						<div class="mb-6 pt-4 border-t border-space-600">
+							<h4 class="text-sm font-semibold text-cosmic-cyan mb-2 flex items-center gap-2">
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+								</svg>
+								Research Questions ({data.relatedQuestions.length})
+							</h4>
+							<ul class="space-y-2">
+								{#each data.relatedQuestions.slice(0, 5) as question}
+									<li>
+										<a
+											href="/questions/{question.slug}"
+											class="text-sm text-star-dim hover:text-cosmic-cyan transition-colors block"
+										>
+											{question.title}
+										</a>
+									</li>
+								{/each}
+							</ul>
+							{#if data.relatedQuestions.length > 5}
+								<a
+									href="/questions?bomItem={data.itemSlug}"
+									class="text-xs text-cosmic-cyan hover:underline mt-2 inline-block"
+								>
+									View all {data.relatedQuestions.length} questions
+								</a>
+							{/if}
+						</div>
+					{/if}
+
 					<!-- Back Link -->
 					<div class="pt-4 border-t border-space-600">
 						<a

@@ -8,6 +8,7 @@
 		{ label: 'About', href: '/about' },
 		{ label: 'Plan', href: '/plan' },
 		{ label: 'Research', href: '/research' },
+		{ label: 'Questions', href: '/questions' },
 		{ label: 'Blog', href: '/blog' },
 		{ label: 'Funding', href: '/funding' }
 	];

@@ -1,0 +1,60 @@
+---
+questionId: "rq-1-14"
+slug: "joining-technology-selection"
+title: "Optimal joining technology mix for solar collector structures"
+questionType: "experimentation"
+priority: "high"
+status: "open"
+sourcePhase: "phase-1"
+sourceBOMItemId: "bom-1-3"
+sourceBOMItemSlug: "assembly-robots"
+sourceBOMItemName: "Assembly Robots"
+relatedBOMItems:
+  - "bom-1-3"
+  - "bom-1-4"
+tags:
+  - "joining"
+  - "welding"
+  - "fastening"
+  - "thermal-cycling"
+createdDate: "2026-02-01"
+---
+
+## Background
+
+Assembly Robots are the autonomous workforce responsible for constructing the Dyson swarm's solar collector infrastructure. The consensus document establishes a three-class robot architecture—heavy manipulators (1,000–2,500 kg), precision assemblers (150–500 kg), and logistics drones (50–100 kg)—all requiring sub-millimeter positioning accuracy (±0.1mm to ±0.5mm). A critical divergence exists among design approaches regarding how these robots will permanently join structural elements: Claude specifies electron beam welding (60–150 kV, up to 25 kW) and friction stir welding; Gemini assumes snap-fits and thermal welding with zero screws; GPT focuses on mechanical latching with kinematic docking and compliant connectors. The recommended approach prioritizes mechanical joining for Phase 1 while developing welding capability for Phase 2, but this guidance requires experimental validation before detailed robot tooling design can proceed.
+
+## Why This Matters
+
+The joining technology selection directly determines robot end-effector design, power system sizing, thermal management requirements, and operational throughput. An electron beam welder demands 25 kW peak power and precise vacuum-compatible fixturing, while mechanical latching systems require only actuation force (GPT's AT-1 specifies 500 N end-force capability) but add mass to every joint interface. This decision cascades into multiple dependencies:
+
+- **Robot power architecture**: The 2–15 kWh battery storage specified for eclipse operations may prove inadequate if welding becomes the primary joining method, requiring redesign of solar array sizing and thermal dissipation
+- **Tile/Collector interface design**: The open question regarding final mass, stiffness, and deployment mechanisms cannot be resolved until joining methods are selected—mechanical fasteners add distributed mass while welds require specific material preparation zones
+- **Production rate feasibility**: Gemini's target of 10,000 units/month assumes simplified snap-fit assembly; welding-intensive designs may bottleneck at robot throughput
+- **Long-term reliability**: Solar collectors must survive decades of thermal cycling between eclipse and full solar exposure at 0.7–1.0 AU (initial operations) scaling to 5,480 W/m² at 0.5 AU. Joint failure modes differ fundamentally between welded, fastened, and bonded connections
+
+Selecting the wrong technology mix risks either structural failures during thermal cycling or unacceptable assembly rates that delay swarm deployment by years.
+
+## Key Considerations
+
+**Thermal cycling severity**: At 0.5 AU, structures experience ~5,480 W/m² solar flux during illumination and rapid cooling during eclipse. Differential thermal expansion between dissimilar materials creates cyclic stress at joints—welded connections may crack, mechanical fasteners may loosen, adhesives may degrade.
+
+**Contamination constraints**: The consensus document identifies thruster plumes, outgassing, and debris as threats to thin-film photovoltaics. Welding generates spatter and vapor; friction stir welding produces particulates; adhesives outgas volatiles. Acceptable exposure thresholds remain undefined.
+
+**Robot capability alignment**: Precision assemblers require ±0.1mm accuracy. Electron beam welding demands similar precision for beam targeting, while mechanical latching tolerates looser positioning through compliant interfaces. Friction stir welding requires substantial reaction forces that may exceed the 500 N end-force specification.
+
+**Serviceability requirement**: All robots must be designed for in-space repair by peer robots. Welded joints are inherently non-serviceable without cutting equipment; mechanical fasteners enable disassembly and replacement.
+
+**Mass budget tradeoffs**: Mechanical fasteners add 5–15% mass to joint interfaces but eliminate welding equipment mass from robots. The optimal balance depends on total joint count per collector element.
+
+## Research Directions
+
+1. **Thermal cycle testing of candidate joint configurations**: Fabricate representative joint samples using aluminum and composite materials in welded (E-beam, FSW), mechanically fastened, and adhesive-bonded configurations. Subject to accelerated thermal cycling simulating 0.5 AU conditions (−150°C to +200°C range, 10,000+ cycles). Measure joint stiffness degradation, crack initiation, and ultimate failure modes.
+
+2. **Contamination characterization study**: Quantify particulate and molecular contamination generated by each joining method in vacuum conditions. Establish deposition rates at relevant standoff distances (0.5m to 5m) and correlate with photovoltaic cell degradation thresholds. Determine required exclusion zones or shielding approaches.
+
+3. **Assembly throughput modeling**: Develop time-motion models for each joining technology applied to baseline collector geometries. Include setup time, execution time, inspection requirements, and robot repositioning. Calculate robots required to achieve Phase 1 deployment rates under each scenario.
+
+4. **Hybrid joint architecture prototyping**: Design and test joints combining mechanical primary attachment (for serviceability and initial alignment) with secondary welding or bonding (for stiffness and sealing). Evaluate whether hybrid approaches capture benefits of multiple methods without compounding failure modes.
+
+5. **Material compatibility matrix development**: Catalog candidate structural materials (aluminum alloys, titanium, carbon composites, thin-film substrates) and systematically evaluate joinability via each method. Identify material pairings that enable or preclude specific joining technologies.
