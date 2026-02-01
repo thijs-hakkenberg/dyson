@@ -9,64 +9,68 @@ topics:
   - id: "operating-orbit"
     topic: "Operating Orbit"
     positions:
-      - statement: "**0"
+      - statement: "0.5 AU heliocentric (4× solar flux, 5,480 W/m²)"
         models:
           - "Claude"
-          - "Gemini"
-      - statement: "**1"
+      - statement: "0.3 AU near Mercury (11× flux, ~15,000 W/m²)"
         models:
-          - "Gpt"
+          - "Gemini"
+      - statement: "1.0 AU Earth-like orbit (1,361 W/m², simpler thermal management)"
+        models:
+          - "GPT"
   - id: "power-conversion-technology"
     topic: "Power Conversion Technology"
     positions:
-      - statement: "**Stirling engines at 50–55% efficiency** for thermal-to-electric conversion"
+      - statement: "Stirling engines at 50–55% efficiency for thermal-to-electric conversion"
         models:
           - "Claude"
-      - statement: "GPT both recommend **direct thin-film photovoltaics** (25–42% efficiency) as simpler and lighter"
+      - statement: "Direct thin-film photovoltaics (25–42% efficiency) as simpler and lighter"
         models:
           - "Gemini"
+          - "GPT"
   - id: "unit-scale"
     topic: "Unit Scale"
     positions:
-      - statement: "**1 km² (1,000,000 m²) per satellite** at 850 metric tons"
+      - statement: "1 km² (1,000,000 m²) per satellite at 850 metric tons"
         models:
           - "Claude"
-      - statement: "**0"
+      - statement: "0.785 km² (785,000 m²) at 225 kg"
         models:
           - "Gemini"
-      - statement: "**5,000 m²** at 2,500 kg—a 200× difference in collection area"
+      - statement: "5,000 m² at 2,500 kg—a 200× difference in collection area"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "power-transmission-architecture"
     topic: "Power Transmission Architecture"
     positions:
-      - statement: "**2"
+      - statement: "Integrates 2.5 GW microwave phased arrays on each collector"
         models:
           - "Claude"
-      - statement: "**solid-state phased arrays** per unit"
+      - statement: "Solid-state phased arrays per unit"
         models:
           - "Gemini"
-      - statement: "collectors should output **DC only** with dedicated relay/beaming nodes handling transmission"
+      - statement: "Collectors should output DC only with dedicated relay/beaming nodes handling transmission"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "station-keeping-propulsion"
     topic: "Station-Keeping Propulsion"
     positions:
-      - statement: "**gridded ion thrusters with xenon** (Isp 3,000s)"
+      - statement: "Gridded ion thrusters with xenon (Isp 3,000s)"
         models:
           - "Claude"
-      - statement: "**electric solar wind sails (E-Sails)** requiring no propellant"
+      - statement: "Electric solar wind sails (E-Sails) requiring no propellant"
         models:
           - "Gemini"
-      - statement: "**Hall-effect thrusters with xenon or krypton** (Isp ~1,600s)"
+      - statement: "Hall-effect thrusters with xenon or krypton (Isp ~1,600s)"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "manufacturing-location"
     topic: "Manufacturing Location"
     positions:
-      - statement: "GPT assume **Earth-based manufacturing** transitioning to in-space over time"
+      - statement: "Earth-based manufacturing transitioning to in-space over time"
         models:
           - "Claude"
-      - statement: "**Mercury surface mining and L2 orbital foundries** from the outset, with no Earth launches"
+          - "GPT"
+      - statement: "Mercury surface mining and L2 orbital foundries from the outset, with no Earth launches"
         models:
           - "Gemini"

@@ -17,31 +17,31 @@ topics:
           - "Gemini"
       - statement: "modular pod-based nodes (300-600t) with standardized interfaces for incremental scaling"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "location-strategy"
     topic: "Location Strategy"
     positions:
       - statement: "Sun-Earth L4/L5 for stability and solar access"
         models:
           - "Claude"
-      - statement: "stable resonant heliocentric orbits near deployment zones"
+      - statement: "Stable resonant heliocentric orbits near deployment zones"
         models:
           - "Gemini"
-      - statement: "heliocentric orbit at 0"
+      - statement: "Heliocentric orbit at 0.9-1.1 AU near primary resource streams"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "power-architecture"
     topic: "Power Architecture"
     positions:
-      - statement: "solar PV arrays (50 MW) with battery storage"
+      - statement: "Solar PV arrays (50 MW) with battery storage"
         models:
           - "Claude"
-      - statement: "Concentrated Solar Thermal (CST) with molten salt storage (2"
+      - statement: "Concentrated Solar Thermal (CST) with molten salt storage (2.5 GW thermal)"
         models:
           - "Gemini"
-      - statement: "starting with PV+DC then migrating to solar-thermal Brayton as radiator mass becomes dominant"
+      - statement: "Starting with PV+DC then migrating to solar-thermal Brayton as radiator mass becomes dominant"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "human-presence"
     topic: "Human Presence"
     positions:
@@ -53,7 +53,7 @@ topics:
           - "Gemini"
       - statement: "for fully autonomous operation from the start with no human presence assumed"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "primary-refining-process"
     topic: "Primary Refining Process"
     positions:
@@ -65,7 +65,7 @@ topics:
           - "Gemini"
       - statement: "advocates Molten Oxide Electrolysis (MOE) for oxygen byproduct and electrical power compatibility"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "thermal-rejection-method"
     topic: "Thermal Rejection Method"
     positions:
@@ -77,4 +77,4 @@ topics:
           - "Gemini"
       - statement: "two-loop system with NaK/molten salts but flags droplet radiators as high-risk due to contamination concerns"
         models:
-          - "Gpt"
+          - "GPT"

@@ -17,7 +17,7 @@ topics:
           - "Gemini"
       - statement: "two tiers (MD-A Inspectors and MD-B Servicers) with fleet size dependent on swarm density and failure rates"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "repair-philosophy"
     topic: "Repair philosophy"
     positions:
@@ -29,7 +29,7 @@ topics:
           - "Gemini"
       - statement: "a middle position recommending swap-first with advanced repair deferred to Phase 3"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "inspector-drone-mass"
     topic: "Inspector drone mass"
     positions:
@@ -41,7 +41,7 @@ topics:
           - "Gemini"
       - statement: "14-15 kg for MD-A micro-drones, arguing smaller mass enables higher fleet numbers and faster inspection throughput"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "manipulator-configuration"
     topic: "Manipulator configuration"
     positions:
@@ -53,7 +53,7 @@ topics:
           - "Gemini"
       - statement: "2× 7-DOF arms with quick-change tool couplers and separate tool interface standard"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "hall-thruster-inclusion-on-inspection-drones"
     topic: "Hall thruster inclusion on inspection drones"
     positions:
@@ -62,7 +62,7 @@ topics:
           - "Claude"
       - statement: "recommends no Hall thrusters on MD-A to reduce complexity, relying on dense depot placement"
         models:
-          - "Gpt"
+          - "GPT"
   - id: "unit-cost-estimates"
     topic: "Unit cost estimates"
     positions:
@@ -72,6 +72,6 @@ topics:
       - statement: "$825K per Weaver unit at 5,000 quantity"
         models:
           - "Gemini"
-      - statement: "$0"
+      - statement: "$0.4-1.2M for MD-A and $8-20M for MD-B, noting robotic arms dominate servicer costs"
         models:
-          - "Gpt"
+          - "GPT"
