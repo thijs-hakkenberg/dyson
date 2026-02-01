@@ -29,6 +29,7 @@ Project Dyson is a **non-profit initiative** planning the construction of a Dyso
 |----------|---------|
 | `static/content/bom-specs/phase-0/` | Phase 0 LLM specs and consensus docs |
 | `static/content/bom-specs/phase-1/` | Phase 1 LLM specs and consensus docs |
+| `static/content/bom-specs/phase-2/` | Phase 2 LLM specs and consensus docs |
 
 ### Scripts
 
@@ -36,16 +37,35 @@ Project Dyson is a **non-profit initiative** planning the construction of a Dyso
 |--------|---------|
 | `scripts/query-bom-specs.js` | Generates LLM specs and consensus documents |
 
+## Script Configuration
+
+The `query-bom-specs.js` script uses `max_tokens: 100000` to ensure complete responses from all LLM models. Some models (GPT-5.2, Gemini 3 Pro) use reasoning tokens internally, requiring higher limits to produce full output.
+
 ## Common Operations
+
+### Adding a New Phase
+
+1. Add BOM items to `src/lib/services/bom/bom-data.ts`:
+   - Create `PHASE_X_BOM_ITEMS` array with metadata
+   - Add case to `getAllBOMItemsForPhase()` and `getBOMItemBySlug()`
+
+2. Add phase definition to `src/lib/services/content.ts`:
+   - Add full phase object with BOM details to the `phases` array
+
+3. Generate specifications for the entire phase:
+   ```bash
+   export DATABRICKS_TOKEN=...
+   node scripts/query-bom-specs.js --phase=phase-X
+   node scripts/query-bom-specs.js --phase=phase-X --consensus-only
+   ```
 
 ### Adding a New BOM Item
 
 1. Add metadata to `src/lib/services/bom/bom-data.ts`:
    - Add to appropriate `PHASE_X_BOM_ITEMS` array
-   - Add slug mapping to `BOM_ITEM_SLUGS`
 
 2. Add full definition to `src/lib/services/content.ts`:
-   - Add to the phase's `bom` array with all fields
+   - Add to the phase's `bom` array with all fields including `slug`
 
 3. Generate specifications:
    ```bash

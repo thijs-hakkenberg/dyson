@@ -158,6 +158,37 @@ export const PHASE_1_BOM_ITEMS: BOMItemMeta[] = [
 ];
 
 /**
+ * Phase 2 BOM Items - Swarm Expansion
+ * Quantity and cost estimates to be derived from multi-model LLM consensus
+ */
+export const PHASE_2_BOM_ITEMS: BOMItemMeta[] = [
+	{
+		bomId: 'bom-2-1',
+		slug: 'collector-satellites',
+		name: 'Solar Collector Satellites',
+		quantity: '100,000 units',
+		cost: '$5T',
+		category: 'Spacecraft'
+	},
+	{
+		bomId: 'bom-2-2',
+		slug: 'maintenance-drones',
+		name: 'Maintenance Drones',
+		quantity: '5,000 units',
+		cost: '$50B',
+		category: 'Robotics'
+	},
+	{
+		bomId: 'bom-2-3',
+		slug: 'manufacturing-expansion',
+		name: 'Additional Manufacturing Capacity',
+		quantity: '5 facilities',
+		cost: '$75B',
+		category: 'Infrastructure'
+	}
+];
+
+/**
  * LLM Model information for display
  */
 export const LLM_MODELS = {
@@ -191,7 +222,8 @@ export function getBOMItemBySlug(slug: string, phaseId?: string): BOMItemMeta | 
 	// Search all phases
 	return (
 		PHASE_0_BOM_ITEMS.find((item) => item.slug === slug) ||
-		PHASE_1_BOM_ITEMS.find((item) => item.slug === slug)
+		PHASE_1_BOM_ITEMS.find((item) => item.slug === slug) ||
+		PHASE_2_BOM_ITEMS.find((item) => item.slug === slug)
 	);
 }
 
@@ -204,6 +236,8 @@ export function getAllBOMItemsForPhase(phaseId: string): BOMItemMeta[] {
 			return PHASE_0_BOM_ITEMS;
 		case 'phase-1':
 			return PHASE_1_BOM_ITEMS;
+		case 'phase-2':
+			return PHASE_2_BOM_ITEMS;
 		default:
 			return [];
 	}

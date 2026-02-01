@@ -105,9 +105,16 @@ const PHASE_1_BOM_ITEMS = [
   { bomId: 'bom-1-7', slug: 'swarm-control-system', name: 'Swarm Control System', category: 'Computing' }
 ];
 
+const PHASE_2_BOM_ITEMS = [
+  { bomId: 'bom-2-1', slug: 'collector-satellites', name: 'Solar Collector Satellites', category: 'Spacecraft' },
+  { bomId: 'bom-2-2', slug: 'maintenance-drones', name: 'Maintenance Drones', category: 'Robotics' },
+  { bomId: 'bom-2-3', slug: 'manufacturing-expansion', name: 'Additional Manufacturing Capacity', category: 'Infrastructure' }
+];
+
 const ALL_BOM_ITEMS = {
   'phase-0': PHASE_0_BOM_ITEMS,
-  'phase-1': PHASE_1_BOM_ITEMS
+  'phase-1': PHASE_1_BOM_ITEMS,
+  'phase-2': PHASE_2_BOM_ITEMS
 };
 
 // Legacy alias for backwards compatibility
@@ -119,7 +126,8 @@ const BOM_ITEMS = PHASE_0_BOM_ITEMS;
 function getPhaseContext(phaseId) {
   const contexts = {
     'phase-0': 'Phase 0 - Space Resource Processing',
-    'phase-1': 'Phase 1 - Initial Swarm Deployment'
+    'phase-1': 'Phase 1 - Initial Swarm Deployment',
+    'phase-2': 'Phase 2 - Swarm Expansion'
   };
   return contexts[phaseId] || phaseId;
 }
@@ -180,7 +188,7 @@ async function queryDatabricks(modelKey, prompt) {
             content: prompt
           }
         ],
-        max_tokens: 16384,
+        max_tokens: 64000,
         temperature: 0.7
       })
     });

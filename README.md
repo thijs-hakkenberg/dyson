@@ -29,7 +29,8 @@ project_dyson/
 │   └── content/
 │       └── bom-specs/      # LLM-generated specifications
 │           ├── phase-0/    # Phase 0 BOM item specs
-│           └── phase-1/    # Phase 1 BOM item specs
+│           ├── phase-1/    # Phase 1 BOM item specs
+│           └── phase-2/    # Phase 2 BOM item specs
 ├── scripts/
 │   └── query-bom-specs.js  # LLM specification generator
 └── terraform/              # Cloudflare deployment config

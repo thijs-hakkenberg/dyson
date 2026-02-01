@@ -1,0 +1,80 @@
+# Divergent Views for manufacturing-expansion
+# Auto-generated from consensus document
+
+bomId: "bom-2-3"
+itemSlug: "manufacturing-expansion"
+generated: "2026-02-01"
+
+topics:
+  - id: "facility-scale-philosophy"
+    topic: "Facility Scale Philosophy"
+    positions:
+      - statement: "many smaller 2,400t Autonomous Manufacturing Nodes (AMNs) with replication-over-optimization strategy"
+        models:
+          - "Claude"
+      - statement: "larger 85,000t Mobile Orbital Foundries (MOFs) with 450m length"
+        models:
+          - "Gemini"
+      - statement: "modular pod-based nodes (300-600t) with standardized interfaces for incremental scaling"
+        models:
+          - "Gpt"
+  - id: "location-strategy"
+    topic: "Location Strategy"
+    positions:
+      - statement: "Sun-Earth L4/L5 for stability and solar access"
+        models:
+          - "Claude"
+      - statement: "stable resonant heliocentric orbits near deployment zones"
+        models:
+          - "Gemini"
+      - statement: "heliocentric orbit at 0"
+        models:
+          - "Gpt"
+  - id: "power-architecture"
+    topic: "Power Architecture"
+    positions:
+      - statement: "solar PV arrays (50 MW) with battery storage"
+        models:
+          - "Claude"
+      - statement: "Concentrated Solar Thermal (CST) with molten salt storage (2"
+        models:
+          - "Gemini"
+      - statement: "starting with PV+DC then migrating to solar-thermal Brayton as radiator mass becomes dominant"
+        models:
+          - "Gpt"
+  - id: "human-presence"
+    topic: "Human Presence"
+    positions:
+      - statement: "minimal human oversight with AI autonomy"
+        models:
+          - "Claude"
+      - statement: "questions necessity of humans (recommends skeleton crew of 6 initially, then phase out)"
+        models:
+          - "Gemini"
+      - statement: "for fully autonomous operation from the start with no human presence assumed"
+        models:
+          - "Gpt"
+  - id: "primary-refining-process"
+    topic: "Primary Refining Process"
+    positions:
+      - statement: "solar furnace smelting (12 MW thermal, 1,800°C) with carbothermic reduction"
+        models:
+          - "Claude"
+      - statement: "plasma separation"
+        models:
+          - "Gemini"
+      - statement: "advocates Molten Oxide Electrolysis (MOE) for oxygen byproduct and electrical power compatibility"
+        models:
+          - "Gpt"
+  - id: "thermal-rejection-method"
+    topic: "Thermal Rejection Method"
+    positions:
+      - statement: "conventional radiator panels (210t)"
+        models:
+          - "Claude"
+      - statement: "droplet radiators using liquid tin"
+        models:
+          - "Gemini"
+      - statement: "two-loop system with NaK/molten salts but flags droplet radiators as high-risk due to contamination concerns"
+        models:
+          - "Gpt"

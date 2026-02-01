@@ -198,32 +198,35 @@ export const PHASES: Phase[] = [
 			{
 				id: 'bom-2-1',
 				name: 'Solar Collector Satellites',
-				description: 'Mass-produced swarm elements',
+				description: 'Mass-produced swarm elements for exponential energy capture scaling',
 				quantity: 100000,
 				unit: 'units',
 				unitCost: 50000000,
 				totalCost: 5000000000000,
-				category: 'Spacecraft'
+				category: 'Spacecraft',
+				slug: 'collector-satellites'
 			},
 			{
 				id: 'bom-2-2',
 				name: 'Maintenance Drones',
-				description: 'Autonomous repair and servicing robots',
+				description: 'Autonomous repair and servicing robots for swarm upkeep',
 				quantity: 5000,
 				unit: 'units',
 				unitCost: 10000000,
 				totalCost: 50000000000,
-				category: 'Robotics'
+				category: 'Robotics',
+				slug: 'maintenance-drones'
 			},
 			{
 				id: 'bom-2-3',
 				name: 'Additional Manufacturing Capacity',
-				description: 'New orbital factories for exponential production',
+				description: 'New orbital factories for exponential production scaling',
 				quantity: 5,
 				unit: 'facilities',
 				unitCost: 15000000000,
 				totalCost: 75000000000,
-				category: 'Infrastructure'
+				category: 'Infrastructure',
+				slug: 'manufacturing-expansion'
 			}
 		],
 		totalCost: 5125000000000,

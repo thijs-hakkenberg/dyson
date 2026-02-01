@@ -306,7 +306,7 @@
 												d="M5 13l4 4L19 7"
 											/>
 										</svg>
-										{spec}
+										<span class="sidebar-prose">{@html renderMarkdown(spec)}</span>
 									</li>
 								{/each}
 							</ul>
@@ -332,7 +332,7 @@
 													d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 												/>
 											</svg>
-											{view}
+											<span class="sidebar-prose">{@html renderMarkdown(view)}</span>
 										</li>
 									{/each}
 								</ul>
@@ -359,7 +359,7 @@
 													d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 												/>
 											</svg>
-											{question}
+											<span class="sidebar-prose">{@html renderMarkdown(question)}</span>
 										</li>
 									{/each}
 								</ul>
@@ -537,5 +537,25 @@
 		border: none;
 		border-top: 1px solid rgb(var(--color-space-500));
 		margin: 2rem 0;
+	}
+
+	/* Sidebar prose for inline markdown */
+	.sidebar-prose :global(p) {
+		display: inline;
+		margin: 0;
+	}
+	.sidebar-prose :global(strong) {
+		color: rgb(var(--color-star-white));
+		font-weight: 600;
+	}
+	.sidebar-prose :global(em) {
+		font-style: italic;
+	}
+	.sidebar-prose :global(code) {
+		background-color: rgb(var(--color-space-600));
+		padding: 0.1rem 0.3rem;
+		border-radius: 0.25rem;
+		font-size: 0.85em;
+		color: rgb(var(--color-cosmic-cyan));
 	}
 </style>

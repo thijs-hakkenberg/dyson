@@ -1,0 +1,77 @@
+# Divergent Views for maintenance-drones
+# Auto-generated from consensus document
+
+bomId: "bom-2-2"
+itemSlug: "maintenance-drones"
+generated: "2026-02-01"
+
+topics:
+  - id: "fleet-sizing-and-class-structure"
+    topic: "Fleet sizing and class structure"
+    positions:
+      - statement: "three drone classes (35,000 Inspectors, 12,000 Technicians, 3,000 Constructors) for 10M satellites"
+        models:
+          - "Claude"
+      - statement: "a single \"Weaver\" class (5,000 units) with modular payload"
+        models:
+          - "Gemini"
+      - statement: "two tiers (MD-A Inspectors and MD-B Servicers) with fleet size dependent on swarm density and failure rates"
+        models:
+          - "Gpt"
+  - id: "repair-philosophy"
+    topic: "Repair philosophy"
+    positions:
+      - statement: "component-level repair with onboard welding/brazing capability"
+        models:
+          - "Claude"
+      - statement: "advocates \"Swap-and-Drop\" doctrine (replacement only, no in-situ repair) to reduce complexity"
+        models:
+          - "Gemini"
+      - statement: "a middle position recommending swap-first with advanced repair deferred to Phase 3"
+        models:
+          - "Gpt"
+  - id: "inspector-drone-mass"
+    topic: "Inspector drone mass"
+    positions:
+      - statement: "45-52 kg wet mass"
+        models:
+          - "Claude"
+      - statement: "not include a separate inspector class"
+        models:
+          - "Gemini"
+      - statement: "14-15 kg for MD-A micro-drones, arguing smaller mass enables higher fleet numbers and faster inspection throughput"
+        models:
+          - "Gpt"
+  - id: "manipulator-configuration"
+    topic: "Manipulator configuration"
+    positions:
+      - statement: "7-DOF dual arms on repair drones"
+        models:
+          - "Claude"
+      - statement: "a \"Tri-Hand\" system (2 anchor arms + 1 precision worker arm)"
+        models:
+          - "Gemini"
+      - statement: "2× 7-DOF arms with quick-change tool couplers and separate tool interface standard"
+        models:
+          - "Gpt"
+  - id: "hall-thruster-inclusion-on-inspection-drones"
+    topic: "Hall thruster inclusion on inspection drones"
+    positions:
+      - statement: "2× 25mN Hall thrusters on Class A Inspectors"
+        models:
+          - "Claude"
+      - statement: "recommends no Hall thrusters on MD-A to reduce complexity, relying on dense depot placement"
+        models:
+          - "Gpt"
+  - id: "unit-cost-estimates"
+    topic: "Unit cost estimates"
+    positions:
+      - statement: "$195K-$885K per drone depending on class"
+        models:
+          - "Claude"
+      - statement: "$825K per Weaver unit at 5,000 quantity"
+        models:
+          - "Gemini"
+      - statement: "$0"
+        models:
+          - "Gpt"
