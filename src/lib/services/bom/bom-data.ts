@@ -21,11 +21,20 @@ export interface BOMItemMeta {
  * BOM Item slug mappings (ID -> slug)
  */
 export const BOM_ITEM_SLUGS: Record<string, string> = {
+	// Phase 0
 	'bom-0-1': 'prospecting-satellites',
 	'bom-0-2': 'mining-robots',
 	'bom-0-3': 'material-processing-station',
 	'bom-0-4': 'transport-vehicles',
-	'bom-0-5': 'solar-power-arrays'
+	'bom-0-5': 'solar-power-arrays',
+	// Phase 1
+	'bom-1-1': 'collector-units',
+	'bom-1-2': 'pv-blanket-arrays',
+	'bom-1-3': 'assembly-robots',
+	'bom-1-4': 'assembly-node',
+	'bom-1-5': 'mass-drivers',
+	'bom-1-6': 'orbital-tugs',
+	'bom-1-7': 'swarm-control-system'
 };
 
 /**
@@ -86,6 +95,69 @@ export const PHASE_0_BOM_ITEMS: BOMItemMeta[] = [
 ];
 
 /**
+ * Phase 1 BOM Items - Initial Swarm Deployment
+ * Note: quantity and cost are TBD - they emerge from LLM consensus
+ */
+export const PHASE_1_BOM_ITEMS: BOMItemMeta[] = [
+	{
+		bomId: 'bom-1-1',
+		slug: 'collector-units',
+		name: 'Solar Collector Units',
+		quantity: 'TBD',
+		cost: 'TBD',
+		category: 'Spacecraft'
+	},
+	{
+		bomId: 'bom-1-2',
+		slug: 'pv-blanket-arrays',
+		name: 'PV Blanket Arrays',
+		quantity: 'TBD',
+		cost: 'TBD',
+		category: 'Power Systems'
+	},
+	{
+		bomId: 'bom-1-3',
+		slug: 'assembly-robots',
+		name: 'Assembly Robots',
+		quantity: 'TBD',
+		cost: 'TBD',
+		category: 'Robotics'
+	},
+	{
+		bomId: 'bom-1-4',
+		slug: 'assembly-node',
+		name: 'Assembly Node Hub',
+		quantity: 'TBD',
+		cost: 'TBD',
+		category: 'Infrastructure'
+	},
+	{
+		bomId: 'bom-1-5',
+		slug: 'mass-drivers',
+		name: 'Mass Drivers',
+		quantity: 'TBD',
+		cost: 'TBD',
+		category: 'Infrastructure'
+	},
+	{
+		bomId: 'bom-1-6',
+		slug: 'orbital-tugs',
+		name: 'Orbital Tugs',
+		quantity: 'TBD',
+		cost: 'TBD',
+		category: 'Spacecraft'
+	},
+	{
+		bomId: 'bom-1-7',
+		slug: 'swarm-control-system',
+		name: 'Swarm Control System',
+		quantity: 'TBD',
+		cost: 'TBD',
+		category: 'Computing'
+	}
+];
+
+/**
  * LLM Model information for display
  */
 export const LLM_MODELS = {
@@ -111,16 +183,28 @@ export type LLMModelId = keyof typeof LLM_MODELS;
 /**
  * Get BOM item by slug
  */
-export function getBOMItemBySlug(slug: string): BOMItemMeta | undefined {
-	return PHASE_0_BOM_ITEMS.find((item) => item.slug === slug);
+export function getBOMItemBySlug(slug: string, phaseId?: string): BOMItemMeta | undefined {
+	if (phaseId) {
+		const items = getAllBOMItemsForPhase(phaseId);
+		return items.find((item) => item.slug === slug);
+	}
+	// Search all phases
+	return (
+		PHASE_0_BOM_ITEMS.find((item) => item.slug === slug) ||
+		PHASE_1_BOM_ITEMS.find((item) => item.slug === slug)
+	);
 }
 
 /**
  * Get all BOM items for a phase
  */
 export function getAllBOMItemsForPhase(phaseId: string): BOMItemMeta[] {
-	if (phaseId === 'phase-0') {
-		return PHASE_0_BOM_ITEMS;
+	switch (phaseId) {
+		case 'phase-0':
+			return PHASE_0_BOM_ITEMS;
+		case 'phase-1':
+			return PHASE_1_BOM_ITEMS;
+		default:
+			return [];
 	}
-	return [];
 }
