@@ -1,0 +1,36 @@
+bomId: "bom-0-5"
+itemSlug: "solar-power-arrays"
+generated: "2026-02-01"
+topics:
+  - id: "concentrator-vs-flat-plate"
+    topic: "Concentrator vs. Flat-Plate"
+    positions:
+      - statement: "Flat-plate for simplicity"
+        models: ["Claude", "GPT"]
+      - statement: "Concentrators could reduce cell costs"
+        models: ["Gemini"]
+  - id: "energy-storage"
+    topic: "Energy Storage"
+    positions:
+      - statement: "500 MWh Li-ion"
+        models: ["Claude"]
+      - statement: "200 MWh is sufficient"
+        models: ["Gemini"]
+      - statement: "Flow batteries for longer life"
+        models: ["GPT"]
+  - id: "module-size"
+    topic: "Module Size"
+    positions:
+      - statement: "2 MW modules"
+        models: ["Claude"]
+      - statement: "1 MW for easier handling"
+        models: ["Gemini"]
+      - statement: "5 MW for efficiency"
+        models: ["GPT"]
+  - id: "cell-technology"
+    topic: "Cell Technology"
+    positions:
+      - statement: "Use current III-V cells"
+        models: ["Claude", "Gemini"]
+      - statement: "Wait for next-generation (40%+) options"
+        models: ["GPT"]

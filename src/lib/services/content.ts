@@ -209,13 +209,6 @@ export function getPhaseById(id: string): Phase | undefined {
 }
 
 /**
- * Get phase by number
- */
-export function getPhaseByNumber(number: number): Phase | undefined {
-	return PHASES.find((p) => p.number === number);
-}
-
-/**
  * Format currency for display
  */
 export function formatCurrency(amount: number): string {

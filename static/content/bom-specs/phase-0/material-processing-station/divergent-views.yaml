@@ -1,0 +1,34 @@
+bomId: "bom-0-3"
+itemSlug: "material-processing-station"
+generated: "2026-02-01"
+topics:
+  - id: "crew-presence"
+    topic: "Crew Presence"
+    positions:
+      - statement: "Human-tended with quarterly visits"
+        models: ["Claude", "GPT"]
+      - statement: "Fully autonomous with annual visits only"
+        models: ["Gemini"]
+  - id: "silicon-processing"
+    topic: "Silicon Processing"
+    positions:
+      - statement: "Dedicated silicon refining module included"
+        models: ["Claude"]
+      - statement: "Solar-grade silicon may not be achievable in early phases"
+        models: ["Gemini"]
+  - id: "smelting-technology"
+    topic: "Smelting Technology"
+    positions:
+      - statement: "Solar concentrator furnaces"
+        models: ["Claude"]
+      - statement: "Electric arc furnaces"
+        models: ["GPT"]
+      - statement: "Hybrid approach"
+        models: ["Gemini"]
+  - id: "location"
+    topic: "Location"
+    positions:
+      - statement: "L4/L5 co-located with asteroid"
+        models: ["Claude", "Gemini"]
+      - statement: "L4/L5 optimized for Earth access"
+        models: ["GPT"]

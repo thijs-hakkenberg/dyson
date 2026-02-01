@@ -7,8 +7,9 @@
 	import PhaseDAG from '$lib/components/phases/PhaseDAG.svelte';
 	import type { TimelineNode } from '$lib/types';
 
-	const phase = $derived(getPhaseById($page.params.phase));
-	const timeline = $derived(getPhaseTimeline($page.params.phase));
+	const phaseId = $derived($page.params.phase || '');
+	const phase = $derived(getPhaseById(phaseId));
+	const timeline = $derived(getPhaseTimeline(phaseId));
 
 	function handleTimelineNodeClick(node: TimelineNode) {
 		if (node.linkTo) {
@@ -117,7 +118,7 @@
 		</section>
 
 		<!-- LLM Consensus Analysis -->
-		<LLMConsensus phaseId={$page.params.phase} />
+		<LLMConsensus {phaseId} />
 
 		<!-- Related Research -->
 		{#if phase.relatedResearch.length > 0}

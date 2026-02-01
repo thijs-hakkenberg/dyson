@@ -473,20 +473,6 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
 }
 
 /**
- * Get posts by category
- */
-export function getPostsByCategory(category: string): BlogPost[] {
-	return getBlogPosts().filter((post) => post.category === category);
-}
-
-/**
- * Get posts by tag
- */
-export function getPostsByTag(tag: string): BlogPost[] {
-	return getBlogPosts().filter((post) => post.tags.includes(tag));
-}
-
-/**
  * Get all categories
  */
 export function getAllCategories(): string[] {
@@ -494,10 +480,3 @@ export function getAllCategories(): string[] {
 	return Array.from(categories).sort();
 }
 
-/**
- * Get all tags
- */
-export function getAllTags(): string[] {
-	const tags = new Set(BLOG_POSTS.flatMap((post) => post.tags));
-	return Array.from(tags).sort();
-}

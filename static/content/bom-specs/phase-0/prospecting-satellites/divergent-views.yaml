@@ -1,0 +1,27 @@
+bomId: "bom-0-1"
+itemSlug: "prospecting-satellites"
+generated: "2026-02-01"
+topics:
+  - id: "propulsion-system"
+    topic: "Propulsion System"
+    positions:
+      - statement: "Green monopropellant for simplicity"
+        models: ["Claude"]
+      - statement: "Electric propulsion for higher delta-V"
+        models: ["Gemini"]
+      - statement: "Hybrid approach"
+        models: ["GPT"]
+  - id: "thermal-infrared-capability"
+    topic: "Thermal Infrared Capability"
+    positions:
+      - statement: "TIR mapping (3-14 um) included"
+        models: ["Claude", "GPT"]
+      - statement: "TIR optional due to cooling complexity"
+        models: ["Gemini"]
+  - id: "inter-satellite-communication"
+    topic: "Inter-satellite Communication"
+    positions:
+      - statement: "Mesh networking for data relay emphasized"
+        models: ["Gemini"]
+      - statement: "Secondary to ground communication"
+        models: ["Claude", "GPT"]

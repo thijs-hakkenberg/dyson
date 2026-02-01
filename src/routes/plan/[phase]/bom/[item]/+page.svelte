@@ -1,23 +1,26 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
-	import { getPhaseById } from '$lib/services/content';
-	import {
-		getBOMItemBySlug,
-		fetchAllBOMSpecs,
-		LLM_MODELS
-	} from '$lib/services/bom-specs';
+	import { LLM_MODELS } from '$lib/services/bom-specs';
 	import type { BOMItemSpec } from '$lib/types';
 	import { Marked } from 'marked';
 	import ConsensusView from '$lib/components/phases/ConsensusView.svelte';
+	import { sanitizeMarkdownHTML } from '$lib/utils/sanitize';
 
-	const phase = $derived(getPhaseById($page.params.phase));
-	const itemSlug = $derived($page.params.item);
-	const itemMeta = $derived(getBOMItemBySlug(itemSlug));
+	// Get data from load function
+	let { data } = $props();
 
-	let specs: BOMItemSpec | null = $state(null);
-	let loading = $state(true);
-	let error = $state<string | null>(null);
+	const phase = $derived(data.phase);
+	const itemMeta = $derived(data.itemMeta);
+	const specs = $derived<BOMItemSpec | null>(data.specs);
+
+	// Loading state is now handled by SvelteKit
+	const loading = $derived(!data.phase || !data.itemMeta);
+	const error = $derived(
+		data.phase && data.itemMeta && (!specs || specs.specs.length === 0)
+			? 'No specifications found for this item.'
+			: null
+	);
+
 	let activeTab = $state('consensus');
 
 	const modelOrder = ['consensus', 'claude-opus-4-5', 'gemini-3-pro', 'gpt-5-2'];
@@ -26,21 +29,6 @@
 	const marked = new Marked({
 		gfm: true,
 		breaks: false
-	});
-
-	onMount(async () => {
-		if (itemMeta && phase) {
-			try {
-				specs = await fetchAllBOMSpecs($page.params.phase, itemSlug);
-				if (!specs || specs.specs.length === 0) {
-					error = 'No specifications found for this item.';
-				}
-			} catch (e) {
-				error = 'Failed to load specifications.';
-				console.error(e);
-			}
-		}
-		loading = false;
 	});
 
 	function getModelSpec(modelId: string) {
@@ -55,7 +43,8 @@
 	};
 
 	function renderMarkdown(content: string): string {
-		return marked.parse(content) as string;
+		const html = marked.parse(content) as string;
+		return sanitizeMarkdownHTML(html);
 	}
 </script>
 
@@ -235,7 +224,7 @@
 				<div class="card-glow p-6 md:p-8">
 					{#if activeTab === 'consensus'}
 						{#if specs?.consensus && specs.consensus.keySpecs.length > 0}
-							<ConsensusView consensus={specs.consensus} itemName={itemMeta?.name || 'Item'} />
+							<ConsensusView consensus={specs.consensus} divergentViewsData={specs.divergentViewsData} itemName={itemMeta?.name || 'Item'} />
 						{:else}
 							<div class="text-center py-12">
 								<svg

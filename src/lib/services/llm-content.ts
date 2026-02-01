@@ -74,13 +74,6 @@ export function parseMarkdownWithFrontmatter(content: string): {
 }
 
 /**
- * Get all available phases with LLM opinions
- */
-export function getAvailablePhases(): string[] {
-	return ['phase-0', 'phase-1'];
-}
-
-/**
  * Format currency for display
  */
 export function formatCostEstimate(amount: number): string {
@@ -92,39 +85,6 @@ export function formatCostEstimate(amount: number): string {
 		return `$${(amount / 1e6).toFixed(0)}M`;
 	}
 	return `$${amount.toLocaleString()}`;
-}
-
-/**
- * Get summary of LLM cost estimates for a phase
- */
-export function getCostSummary(opinions: LLMOpinion[]): {
-	lowest: { model: string; amount: number };
-	highest: { model: string; amount: number };
-	average: number;
-} {
-	const estimates = opinions
-		.filter((o) => o.frontmatter.total_cost_estimate || o.frontmatter.consensus_cost_estimate)
-		.map((o) => ({
-			model: o.modelName,
-			amount: o.frontmatter.total_cost_estimate || o.frontmatter.consensus_cost_estimate || 0
-		}))
-		.sort((a, b) => a.amount - b.amount);
-
-	if (estimates.length === 0) {
-		return {
-			lowest: { model: 'N/A', amount: 0 },
-			highest: { model: 'N/A', amount: 0 },
-			average: 0
-		};
-	}
-
-	const total = estimates.reduce((sum, e) => sum + e.amount, 0);
-
-	return {
-		lowest: estimates[0],
-		highest: estimates[estimates.length - 1],
-		average: total / estimates.length
-	};
 }
 
 /**

@@ -1,0 +1,36 @@
+bomId: "bom-0-4"
+itemSlug: "transport-vehicles"
+generated: "2026-02-01"
+topics:
+  - id: "propulsion-type"
+    topic: "Propulsion Type"
+    positions:
+      - statement: "Hall-effect thrusters"
+        models: ["Claude", "GPT"]
+      - statement: "Gridded ion for higher Isp despite lower thrust"
+        models: ["Gemini"]
+  - id: "payload-capacity"
+    topic: "Payload Capacity"
+    positions:
+      - statement: "200,000 kg"
+        models: ["Claude"]
+      - statement: "150,000 kg for faster transits"
+        models: ["Gemini"]
+      - statement: "Variable configuration"
+        models: ["GPT"]
+  - id: "propellant-source"
+    topic: "Propellant Source"
+    positions:
+      - statement: "Xenon initially, early transition to asteroid-derived alternatives"
+        models: ["Claude"]
+      - statement: "Xenon initially, later transition to asteroid-derived alternatives"
+        models: ["Gemini", "GPT"]
+  - id: "docking-approach"
+    topic: "Docking Approach"
+    positions:
+      - statement: "Autonomous docking"
+        models: ["Claude"]
+      - statement: "Robotic berthing backup"
+        models: ["GPT"]
+      - statement: "Dedicated cargo handling spacecraft"
+        models: ["Gemini"]

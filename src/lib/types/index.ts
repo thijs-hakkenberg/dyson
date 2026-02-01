@@ -142,6 +142,10 @@ export interface TeamMember {
 	};
 }
 
+// Divergent Views Types (re-export)
+export type { ModelName, DivergentPosition, DivergentViewTopic, DivergentViewsData } from './divergent-views';
+import type { DivergentViewsData } from './divergent-views';
+
 // BOM Item Specification Types
 export interface BOMItemSpec {
 	bomId: string;
@@ -160,6 +164,7 @@ export interface BOMItemSpec {
 		openQuestions: string[];
 		recommendedApproach: string;
 	};
+	divergentViewsData: DivergentViewsData | null;
 }
 
 // Timeline/DAG Types

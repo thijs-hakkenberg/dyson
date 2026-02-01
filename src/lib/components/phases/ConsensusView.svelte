@@ -1,135 +1,61 @@
 <script lang="ts">
-	import type { BOMItemSpec } from '$lib/types';
+	import type { BOMItemSpec, DivergentViewsData, DivergentViewTopic } from '$lib/types';
 	import { Marked } from 'marked';
+	import { sanitizeMarkdownHTML } from '$lib/utils/sanitize';
+	import { parseDivergentView, groupByPosition, type ParsedDivergence, type GroupedPosition, type ModelName } from '$lib/utils/consensus-parser';
+	import { getModelColor, getPositionBoxColor, sharedConsensusColor } from '$lib/utils/status';
 
 	interface Props {
 		consensus: BOMItemSpec['consensus'];
+		divergentViewsData?: DivergentViewsData | null;
 		itemName: string;
 	}
 
-	let { consensus, itemName }: Props = $props();
+	let { consensus, divergentViewsData = null, itemName }: Props = $props();
 
 	const marked = new Marked({
 		gfm: true,
 		breaks: false
 	});
 
-	interface ModelPosition {
-		model: string;
-		position: string;
+	/**
+	 * Convert structured DivergentViewTopic to GroupedPosition format for rendering.
+	 * No parsing needed - data is already structured!
+	 */
+	function convertToGroupedPositions(topic: DivergentViewTopic): GroupedPosition[] {
+		return topic.positions.map(pos => ({
+			models: pos.models as ModelName[],
+			position: pos.statement,
+			isShared: pos.models.length > 1
+		}));
 	}
 
-	interface ParsedDivergence {
-		topic: string;
-		positions: ModelPosition[];
-	}
-
-	// Model color scheme
-	const modelColors: Record<string, { bg: string; text: string; border: string }> = {
-		Claude: { bg: 'bg-orange-500/20', text: 'text-orange-400', border: 'border-orange-500/30' },
-		Gemini: { bg: 'bg-blue-500/20', text: 'text-blue-400', border: 'border-blue-500/30' },
-		GPT: { bg: 'bg-green-500/20', text: 'text-green-400', border: 'border-green-500/30' }
-	};
-
-	function getModelColor(model: string): { bg: string; text: string; border: string } {
-		for (const [key, value] of Object.entries(modelColors)) {
-			if (model.includes(key)) return value;
-		}
-		return { bg: 'bg-gray-500/20', text: 'text-gray-400', border: 'border-gray-500/30' };
-	}
-
-	// Parse divergent views into structured format
-	// Format: "**Topic**: Claude recommends X, while Gemini favors Y. GPT suggests Z."
-	function parseDivergentView(view: string): ParsedDivergence {
-		// Extract topic from bold text
-		const topicMatch = view.match(/^\*\*([^*]+)\*\*:\s*/);
-		const topic = topicMatch ? topicMatch[1] : 'General';
-		const remainder = topicMatch ? view.slice(topicMatch[0].length) : view;
-
-		const positions: ModelPosition[] = [];
-
-		// Pattern to match model positions
-		const patterns = [
-			/Claude\s+(?:recommends?|suggests?|favors?|prefers?|considers?|emphasizes?|includes?|treats?)\s+([^,.]+(?:,\s*[^,.]+)?)/gi,
-			/Gemini\s+(?:recommends?|suggests?|favors?|prefers?|considers?|emphasizes?|includes?|treats?)\s+([^,.]+(?:,\s*[^,.]+)?)/gi,
-			/GPT\s+(?:recommends?|suggests?|favors?|prefers?|considers?|emphasizes?|includes?|treats?)\s+([^,.]+(?:,\s*[^,.]+)?)/gi
-		];
-
-		// Also try "while X favors Y" pattern
-		const whilePatterns = [
-			/while\s+Claude\s+(?:and\s+\w+\s+)?(?:recommends?|suggests?|favors?|prefers?|considers?|emphasizes?|includes?|treats?)\s+([^,.]+)/gi,
-			/while\s+Gemini\s+(?:and\s+\w+\s+)?(?:recommends?|suggests?|favors?|prefers?|considers?|emphasizes?|includes?|treats?)\s+([^,.]+)/gi,
-			/while\s+GPT\s+(?:and\s+\w+\s+)?(?:recommends?|suggests?|favors?|prefers?|considers?|emphasizes?|includes?|treats?)\s+([^,.]+)/gi
-		];
-
-		// Combined patterns for "Claude and GPT include X"
-		const combinedPatterns = [
-			/(Claude(?:\s+and\s+(?:Gemini|GPT))?)\s+(?:include|recommend|suggest|favor|prefer|consider|emphasize|treat)[s]?\s+([^,.]+)/gi,
-			/(Gemini(?:\s+and\s+(?:Claude|GPT))?)\s+(?:include|recommend|suggest|favor|prefer|consider|emphasize|treat)[s]?\s+([^,.]+)/gi,
-			/(GPT(?:\s+and\s+(?:Claude|Gemini))?)\s+(?:include|recommend|suggest|favor|prefer|consider|emphasize|treat)[s]?\s+([^,.]+)/gi
-		];
-
-		const modelNames = ['Claude', 'Gemini', 'GPT'];
-		const foundModels = new Set<string>();
-
-		// Try combined patterns first
-		for (const pattern of combinedPatterns) {
-			let match;
-			while ((match = pattern.exec(remainder)) !== null) {
-				const models = match[1];
-				const position = match[2].trim();
-
-				for (const model of modelNames) {
-					if (models.includes(model) && !foundModels.has(model)) {
-						foundModels.add(model);
-						positions.push({ model, position });
-					}
-				}
-			}
+	// Use structured data if available, otherwise fall back to legacy parsing
+	const divergentTopics = $derived(() => {
+		if (divergentViewsData && divergentViewsData.topics.length > 0) {
+			// Structured data path - no parsing needed!
+			return divergentViewsData.topics.map(topic => ({
+				topic: topic.topic,
+				groupedPositions: convertToGroupedPositions(topic)
+			}));
 		}
 
-		// Try simple patterns
-		for (let i = 0; i < patterns.length; i++) {
-			const model = modelNames[i];
-			if (foundModels.has(model)) continue;
-
-			const match = patterns[i].exec(remainder);
-			if (match) {
-				foundModels.add(model);
-				positions.push({ model, position: match[1].trim() });
-			}
-		}
-
-		// Try while patterns
-		for (let i = 0; i < whilePatterns.length; i++) {
-			const model = modelNames[i];
-			if (foundModels.has(model)) continue;
-
-			const match = whilePatterns[i].exec(remainder);
-			if (match) {
-				foundModels.add(model);
-				positions.push({ model, position: match[1].trim() });
-			}
-		}
-
-		// If we couldn't parse individual positions, just show the whole view for each model mentioned
-		if (positions.length === 0) {
-			for (const model of modelNames) {
-				if (remainder.toLowerCase().includes(model.toLowerCase())) {
-					positions.push({ model, position: remainder });
-				}
-			}
-		}
-
-		return { topic, positions };
-	}
-
-	const parsedDivergences = $derived(
-		consensus.divergentViews.map(parseDivergentView)
-	);
+		// Legacy fallback: parse from consensus.divergentViews
+		return consensus.divergentViews
+			.map(parseDivergentView)
+			.filter(d => {
+				const grouped = groupByPosition(d.positions);
+				return grouped.length > 1;
+			})
+			.map(d => ({
+				topic: d.topic,
+				groupedPositions: groupByPosition(d.positions)
+			}));
+	});
 
 	function renderMarkdown(content: string): string {
-		return marked.parse(content) as string;
+		const html = marked.parse(content) as string;
+		return sanitizeMarkdownHTML(html);
 	}
 </script>
 
@@ -146,8 +72,8 @@
 				<h2 class="text-xl font-bold text-star-white mb-2">Multi-Model Consensus Analysis</h2>
 				<p class="text-star-dim text-sm">
 					This synthesis combines insights from <span class="text-orange-400 font-medium">Claude Opus 4.5</span>,
-					<span class="text-blue-400 font-medium">Gemini 3 Pro</span>, and
-					<span class="text-green-400 font-medium">GPT-5.2</span> to identify areas of agreement,
+					<span class="text-purple-400 font-medium">Gemini 3 Pro</span>, and
+					<span class="text-blue-400 font-medium">GPT-5.2</span> to identify areas of agreement,
 					highlight divergent perspectives, and surface open research questions for <span class="text-star-white font-medium">{itemName}</span>.
 				</p>
 			</div>
@@ -180,7 +106,7 @@
 	{/if}
 
 	<!-- Divergent Views -->
-	{#if consensus.divergentViews.length > 0}
+	{#if divergentTopics().length > 0}
 		<section>
 			<div class="flex items-center gap-2 mb-4">
 				<div class="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center">
@@ -193,26 +119,37 @@
 			</div>
 
 			<div class="space-y-4">
-				{#each parsedDivergences as divergence}
+				{#each divergentTopics() as { topic, groupedPositions }}
 					<div class="rounded-lg border border-amber-500/20 bg-amber-500/5 overflow-hidden">
 						<!-- Warning callout header -->
 						<div class="px-4 py-3 bg-amber-500/10 border-b border-amber-500/20 flex items-center gap-2">
 							<svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
 							</svg>
-							<span class="font-semibold text-amber-300">{divergence.topic}</span>
+							<span class="font-semibold text-amber-300">{topic}</span>
 						</div>
 
-						<!-- Model comparison cards -->
-						<div class="p-4 grid grid-cols-1 md:grid-cols-3 gap-3">
-							{#each divergence.positions as { model, position }}
-								{@const colors = getModelColor(model)}
-								<div class="rounded-lg p-3 {colors.bg} border {colors.border}">
-									<div class="flex items-center gap-2 mb-2">
-										<div class="w-6 h-6 rounded-full {colors.bg} flex items-center justify-center text-xs font-bold {colors.text}">
-											{model[0]}
-										</div>
-										<span class="text-sm font-medium {colors.text}">{model}</span>
+						<!-- Model comparison cards - grouped by position -->
+						<div class="p-4 flex flex-wrap gap-3">
+							{#each groupedPositions as { models, position, isShared }}
+								{@const boxColor = getPositionBoxColor(models, isShared)}
+								<div class="rounded-lg p-3 {boxColor.bg} border {boxColor.border} flex-1 min-w-[200px] max-w-full md:max-w-[calc(50%-0.375rem)]">
+									<div class="flex items-center gap-2 mb-2 flex-wrap">
+										{#if isShared}
+											<span class="text-xs font-medium {sharedConsensusColor.text} mr-1">Shared:</span>
+										{/if}
+										{#each models as model, i}
+											{@const colors = getModelColor(model)}
+											<div class="flex items-center gap-1.5">
+												<div class="w-6 h-6 rounded-full {colors.bg} flex items-center justify-center text-xs font-bold {colors.text}">
+													{model[0]}
+												</div>
+												<span class="text-sm font-medium {colors.text}">{model}</span>
+											</div>
+											{#if models.length > 1 && i < models.length - 1}
+												<span class="text-star-faint text-xs">+</span>
+											{/if}
+										{/each}
 									</div>
 									<p class="text-sm text-star-dim">{position}</p>
 								</div>

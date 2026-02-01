@@ -1,0 +1,204 @@
+/**
+ * Prose Spec Styles
+ *
+ * Markdown content styling for BOM specification documents.
+ * Can be imported globally or scoped to specific components.
+ */
+
+/* Headings */
+.prose-spec :global(h1) {
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: rgb(var(--color-star-white));
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+}
+
+.prose-spec :global(h2) {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: rgb(var(--color-star-white));
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid rgb(var(--color-space-500));
+}
+
+.prose-spec :global(h3) {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: rgb(var(--color-star-white));
+	margin-top: 1.5rem;
+	margin-bottom: 0.75rem;
+}
+
+.prose-spec :global(h4) {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: rgb(var(--color-star-white));
+	margin-top: 1.25rem;
+	margin-bottom: 0.5rem;
+}
+
+/* Paragraphs and text */
+.prose-spec :global(p) {
+	color: rgb(var(--color-star-dim));
+	margin-bottom: 1rem;
+	line-height: 1.7;
+}
+
+.prose-spec :global(strong) {
+	color: rgb(var(--color-star-white));
+	font-weight: 600;
+}
+
+.prose-spec :global(em) {
+	font-style: italic;
+}
+
+.prose-spec :global(a) {
+	color: rgb(var(--color-cosmic-cyan));
+	text-decoration: underline;
+}
+
+.prose-spec :global(a:hover) {
+	color: rgb(var(--color-cosmic-blue));
+}
+
+/* Lists */
+.prose-spec :global(ul) {
+	list-style-type: disc;
+	padding-left: 1.5rem;
+	margin-bottom: 1rem;
+	color: rgb(var(--color-star-dim));
+}
+
+.prose-spec :global(ol) {
+	list-style-type: decimal;
+	padding-left: 1.5rem;
+	margin-bottom: 1rem;
+	color: rgb(var(--color-star-dim));
+}
+
+.prose-spec :global(li) {
+	margin-bottom: 0.5rem;
+	line-height: 1.6;
+}
+
+.prose-spec :global(li strong) {
+	color: rgb(var(--color-star-white));
+}
+
+/* Tables */
+.prose-spec :global(table) {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.5rem 0;
+	font-size: 0.9rem;
+}
+
+.prose-spec :global(thead) {
+	background-color: rgb(var(--color-space-600));
+}
+
+.prose-spec :global(th) {
+	padding: 0.75rem 1rem;
+	text-align: left;
+	font-weight: 600;
+	color: rgb(var(--color-star-white));
+	border: 1px solid rgb(var(--color-space-500));
+}
+
+.prose-spec :global(td) {
+	padding: 0.75rem 1rem;
+	border: 1px solid rgb(var(--color-space-500));
+	color: rgb(var(--color-star-dim));
+}
+
+.prose-spec :global(tr:nth-child(even)) {
+	background-color: rgba(var(--color-space-600), 0.3);
+}
+
+/* Code blocks */
+.prose-spec :global(pre) {
+	background-color: rgb(var(--color-space-700));
+	border: 1px solid rgb(var(--color-space-500));
+	border-radius: 0.5rem;
+	padding: 1rem;
+	overflow-x: auto;
+	margin: 1.5rem 0;
+	font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+	font-size: 0.85rem;
+	line-height: 1.5;
+}
+
+.prose-spec :global(pre code) {
+	background: none;
+	padding: 0;
+	color: rgb(var(--color-star-dim));
+	white-space: pre;
+}
+
+.prose-spec :global(code) {
+	background-color: rgb(var(--color-space-600));
+	padding: 0.2rem 0.4rem;
+	border-radius: 0.25rem;
+	font-size: 0.9em;
+	color: rgb(var(--color-cosmic-cyan));
+	font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* Blockquotes */
+.prose-spec :global(blockquote) {
+	border-left: 4px solid rgb(var(--color-cosmic-cyan));
+	padding-left: 1rem;
+	margin: 1.5rem 0;
+	color: rgb(var(--color-star-dim));
+	font-style: italic;
+}
+
+.prose-spec :global(blockquote p) {
+	margin-bottom: 0;
+}
+
+/* Horizontal rules */
+.prose-spec :global(hr) {
+	border: none;
+	border-top: 1px solid rgb(var(--color-space-500));
+	margin: 2rem 0;
+}
+
+/* Consensus prose styles */
+.prose-consensus :global(p) {
+	color: rgb(var(--color-star-dim));
+	margin-bottom: 1rem;
+	line-height: 1.7;
+}
+
+.prose-consensus :global(strong) {
+	color: rgb(var(--color-star-white));
+	font-weight: 600;
+}
+
+.prose-consensus :global(ol) {
+	list-style-type: decimal;
+	padding-left: 1.5rem;
+	margin-bottom: 1rem;
+	color: rgb(var(--color-star-dim));
+}
+
+.prose-consensus :global(ul) {
+	list-style-type: disc;
+	padding-left: 1.5rem;
+	margin-bottom: 1rem;
+	color: rgb(var(--color-star-dim));
+}
+
+.prose-consensus :global(li) {
+	margin-bottom: 0.5rem;
+	line-height: 1.6;
+}
+
+.prose-consensus :global(li strong) {
+	color: rgb(var(--color-cosmic-cyan));
+}

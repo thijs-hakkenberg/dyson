@@ -1,0 +1,38 @@
+bomId: "bom-0-2"
+itemSlug: "mining-robots"
+generated: "2026-02-01"
+topics:
+  - id: "mobility-architecture"
+    topic: "Mobility Architecture"
+    positions:
+      - statement: "Hexapod design"
+        models: ["Claude"]
+      - statement: "Wheeled rovers for simplicity"
+        models: ["Gemini"]
+      - statement: "Hybrid wheel-leg systems"
+        models: ["GPT"]
+  - id: "anchoring-system"
+    topic: "Anchoring System"
+    positions:
+      - statement: "Microspines"
+        models: ["Claude"]
+      - statement: "Harpoon-tethers"
+        models: ["GPT"]
+      - statement: "Gecko-inspired adhesives"
+        models: ["Gemini"]
+  - id: "processing-capability"
+    topic: "Processing Capability"
+    positions:
+      - statement: "Magnetic/electrostatic separation on-robot"
+        models: ["Claude", "Gemini"]
+      - statement: "Minimal processing with bulk transport"
+        models: ["GPT"]
+  - id: "communication"
+    topic: "Communication"
+    positions:
+      - statement: "Inter-robot mesh networks"
+        models: ["Gemini"]
+      - statement: "Relay orbiter"
+        models: ["Claude"]
+      - statement: "Hybrid approach"
+        models: ["GPT"]

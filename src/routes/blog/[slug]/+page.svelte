@@ -2,8 +2,10 @@
 	import { page } from '$app/stores';
 	import { getBlogPostBySlug } from '$lib/services/blog';
 	import { marked } from 'marked';
+	import { sanitizeMarkdownHTML } from '$lib/utils/sanitize';
 
-	const post = $derived(getBlogPostBySlug($page.params.slug));
+	const slug = $derived($page.params.slug || '');
+	const post = $derived(getBlogPostBySlug(slug));
 
 	const formattedDate = $derived(
 		post
@@ -15,7 +17,7 @@
 			: ''
 	);
 
-	const htmlContent = $derived(post ? marked(post.content) : '');
+	const htmlContent = $derived(post ? sanitizeMarkdownHTML(marked(post.content) as string) : '');
 </script>
 
 <svelte:head>

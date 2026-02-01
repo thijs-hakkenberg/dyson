@@ -58,39 +58,6 @@ export async function searchArxiv(params: ArxivSearchParams): Promise<ArxivSearc
 }
 
 /**
- * Build arXiv search query string
- */
-export function buildSearchQuery(
-	terms: string[],
-	categories?: string[],
-	combineTermsWithAnd = false
-): string {
-	const termOperator = combineTermsWithAnd ? '+AND+' : '+OR+';
-
-	let query = '';
-
-	if (terms.length > 0) {
-		const termQueries = terms.map((term) => {
-			// Wrap multi-word terms in quotes
-			const escapedTerm = term.includes(' ') ? `"${term}"` : term;
-			return `all:${escapedTerm}`;
-		});
-		query = termQueries.join(termOperator);
-	}
-
-	if (categories && categories.length > 0) {
-		const catQuery = categories.map((cat) => `cat:${cat}`).join('+OR+');
-		if (query) {
-			query = `(${query})+AND+(${catQuery})`;
-		} else {
-			query = catQuery;
-		}
-	}
-
-	return query;
-}
-
-/**
  * Format paper date for display
  */
 export function formatPaperDate(date: Date): string {
@@ -101,21 +68,3 @@ export function formatPaperDate(date: Date): string {
 	}).format(new Date(date));
 }
 
-/**
- * Extract arXiv ID from full URL or ID
- */
-export function extractArxivId(idOrUrl: string): string {
-	const match = idOrUrl.match(/(\d{4}\.\d{4,5})(v\d+)?/);
-	return match ? match[1] : idOrUrl;
-}
-
-/**
- * Generate arXiv URLs from ID
- */
-export function getArxivUrls(id: string): { abstract: string; pdf: string } {
-	const cleanId = extractArxivId(id);
-	return {
-		abstract: `https://arxiv.org/abs/${cleanId}`,
-		pdf: `https://arxiv.org/pdf/${cleanId}.pdf`
-	};
-}
