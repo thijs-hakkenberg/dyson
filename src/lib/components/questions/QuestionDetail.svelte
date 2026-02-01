@@ -101,6 +101,37 @@
 				</ul>
 			</div>
 		{/if}
+
+		<!-- Interactive Tool Link (for simulation questions with available tools) -->
+		{#if question.questionType === 'simulation' && question.slug === 'minimum-constellation-size'}
+			<div class="mt-8 p-6 rounded-lg bg-cosmic-cyan/10 border border-cosmic-cyan/30">
+				<div class="flex items-start gap-4">
+					<div class="p-3 rounded-lg bg-cosmic-cyan/20">
+						<svg class="w-6 h-6 text-cosmic-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+						</svg>
+					</div>
+					<div class="flex-1">
+						<h3 class="text-lg font-semibold text-cosmic-cyan mb-2">Interactive Simulator Available</h3>
+						<p class="text-star-dim text-sm mb-4">
+							Explore this research question with our Monte Carlo constellation coverage simulator.
+							Adjust parameters and see real-time coverage curves.
+						</p>
+						<a
+							href="/questions/{question.slug}/simulator"
+							class="btn-primary inline-flex items-center gap-2"
+						>
+							<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+							</svg>
+							Launch Simulator
+						</a>
+					</div>
+				</div>
+			</div>
+		{/if}
 	</div>
 
 	<!-- Metadata Panel -->

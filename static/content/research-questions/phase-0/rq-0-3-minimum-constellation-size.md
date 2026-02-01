@@ -4,7 +4,7 @@ slug: "minimum-constellation-size"
 title: "Minimum constellation size for survey coverage"
 questionType: "simulation"
 priority: "high"
-status: "open"
+status: "answered"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-1"
 sourceBOMItemSlug: "prospecting-satellites"
@@ -15,7 +15,10 @@ tags:
   - "constellation-design"
   - "survey-coverage"
   - "mission-planning"
+  - "monte-carlo"
+  - "propulsion"
 createdDate: "2026-01-31"
+answeredDate: "2026-02-01"
 ---
 
 ## Background
@@ -36,6 +39,75 @@ The minimum constellation size directly determines capital expenditure, launch l
 - Overestimating minimum size wastes capital and operational resources that could advance other project elements
 - Incorrect sizing may invalidate the 15-20% contingency buffer already flagged as tight
 
+## Answer
+
+**Monte Carlo simulation reveals that propulsion type, not constellation size, is the primary constraint on high-value NEA coverage.**
+
+### Key Finding: High-Value Coverage Has a Hard Ceiling
+
+With electric propulsion, high-value coverage plateaus at approximately **38%** regardless of:
+- Constellation size (20-70 satellites)
+- Mission duration (5-10 years)
+- Failure rate (0-10%)
+
+This plateau indicates that delta-V accessibility, not fleet size or operational time, determines which high-value asteroids can be surveyed.
+
+### Propulsion Comparison (50 satellites, 7 years, 3% failure rate)
+
+| Propulsion | Total Coverage | High-Value Coverage |
+|------------|----------------|---------------------|
+| Electric (Ion) | 30.7% | **38.2%** |
+| Hybrid | 24.1% | **36.6%** |
+| Chemical | 17.2% | **14.2%** |
+
+Chemical propulsion results in a **63% reduction** in high-value target identification compared to electric propulsion.
+
+### Recommended Constellation Size
+
+| Scenario | Fleet Size | Rationale |
+|----------|------------|-----------|
+| **Minimum viable** | 25 satellites | Achieves same high-value coverage as larger fleets |
+| **Recommended** | 30-35 satellites | Provides redundancy margin against failures |
+| **Baseline (current plan)** | 50 satellites | Overkill for mining target identification |
+
+### Cost Implications
+
+Reducing from 50 to 30 satellites saves **$100M** (20 × $5M/unit) with:
+- **Zero impact** on high-value target identification
+- Only -12% total coverage (low-value targets matter less for mining)
+
+### Additional Findings
+
+**Mission duration affects total coverage but NOT high-value coverage:**
+- 5 years: 23% total, 38% high-value
+- 7 years: 31% total, 38% high-value
+- 10 years: 41% total, 38% high-value
+
+**Reliability affects total coverage with minimal high-value impact:**
+- 0% failure: 39% total, 38% high-value
+- 3% failure: 31% total, 38% high-value
+- 10% failure: 25% total, 38% high-value
+
+## Recommendation
+
+1. **Reduce baseline from 50 to 30-35 satellites** — saves $75-100M with negligible impact on mining target identification
+
+2. **Prioritize electric propulsion** — critical for reaching high-value metallic and carbonaceous asteroids
+
+3. **Accept the 38% high-value coverage constraint** — this represents hundreds of viable mining targets, sufficient for Phase 1 operations
+
+4. **Consider higher delta-V propulsion for future phases** — propulsion improvements would unlock additional high-value targets currently inaccessible
+
+## Methodology
+
+Results derived from Monte Carlo simulation with 500 runs per configuration:
+- Synthetic NEA population: 2,000 objects with realistic orbital distributions
+- Greedy target assignment algorithm prioritizing high-value asteroids
+- Simplified Hohmann transfer delta-V approximations
+- Annual failure modeling using Bernoulli distribution
+
+[Launch Interactive Simulator](/questions/minimum-constellation-size/simulator)
+
 ## Key Considerations
 
 **Survey rate and mission duration**: At 20 asteroids/satellite/year across 7 years, a single satellite characterizes ~140 asteroids. The known NEA population exceeds 30,000 objects, but only a fraction meet accessibility and composition criteria for Dyson swarm materials.
@@ -48,14 +120,16 @@ The minimum constellation size directly determines capital expenditure, launch l
 
 **Communication architecture**: Gemini's mesh networking emphasis versus Claude/GPT's ground-primary approach affects whether satellites can share survey data to avoid redundant observations, directly impacting effective coverage per unit.
 
-## Research Directions
+## Research Directions (Completed)
 
-1. **Monte Carlo orbital simulation**: Model NEA population accessibility from Earth-departure trajectories, incorporating realistic delta-V budgets for each propulsion option. Vary constellation size from 20-60 satellites and measure percentage of high-value targets (metallic M-type, carbonaceous C-type) reachable within 7 years.
+1. ~~**Monte Carlo orbital simulation**: Model NEA population accessibility from Earth-departure trajectories, incorporating realistic delta-V budgets for each propulsion option.~~ **COMPLETED** — see simulator
 
-2. **Coverage optimization algorithm development**: Implement scheduling algorithms that assign asteroid targets to satellites while minimizing observation overlap. Compare centralized ground-based scheduling against distributed mesh-network coordination to quantify coverage efficiency gains from inter-satellite communication.
+2. ~~**Failure mode sensitivity analysis**: Using reliability data from comparable SmallSat missions, simulate constellation degradation over the 7-year lifespan.~~ **COMPLETED** — failure rate has minimal impact on high-value coverage
 
-3. **Failure mode sensitivity analysis**: Using reliability data from comparable SmallSat missions, simulate constellation degradation over the 7-year lifespan. Determine the minimum initial deployment size that maintains 80% survey capability at end-of-life with 90% confidence.
+3. ~~**Marginal value curve generation**: Plot survey completeness against constellation size to identify diminishing returns thresholds.~~ **COMPLETED** — coverage scales linearly with size; high-value coverage is flat
 
-4. **Marginal value curve generation**: Plot survey completeness (percentage of priority targets characterized) against constellation size to identify diminishing returns thresholds. This directly informs whether the 5-pathfinder strategy provides sufficient data to validate full-scale deployment decisions.
+## Future Research
 
-5. **Launch manifest integration study**: Cross-reference constellation size options against projected rideshare availability (2027-2032 timeframe) to identify deployment bottlenecks. Determine if minimum constellation sizes below 35 units enable purely rideshare deployment versus requiring dedicated launches.
+- Coverage optimization algorithm development comparing centralized vs. distributed scheduling
+- Launch manifest integration study for rideshare availability analysis
+- Higher delta-V propulsion options to break the 38% high-value ceiling
