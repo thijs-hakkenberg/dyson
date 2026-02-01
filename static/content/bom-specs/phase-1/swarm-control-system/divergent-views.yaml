@@ -6,57 +6,75 @@ itemSlug: "swarm-control-system"
 generated: "2026-02-01"
 
 topics:
-  - id: "initial-swarm-size"
-    topic: "Initial Swarm Size"
+  - id: "phase-1-swarm-size"
+    topic: "Phase 1 Swarm Size"
     positions:
-      - statement: "10,000-100,000 satellites for Phase 1 to demonstrate meaningful scale"
+      - statement: "10,000 satellites at 0"
         models:
           - "Claude"
-      - statement: "1,000 nodes as minimum viable for proving scalable deployment and control"
+      - statement: "10,000 units at 0"
+        models:
+          - "Gemini"
+      - statement: "starting with 1,000 nodes near 1 AU to prove scalability before expansion"
         models:
           - "Gpt"
-  - id: "cluster-organization"
-    topic: "Cluster Organization"
+  - id: "primary-communication-method-node-to-node"
+    topic: "Primary Communication Method (Node-to-Node)"
     positions:
-      - statement: "formal cluster hierarchy with ~100 satellites per cluster and elected cluster heads with enhanced capabilities (+50 kg, 2x compute)"
+      - statement: "optical ISL (1550 nm laser) as primary for all tiers"
         models:
           - "Claude"
-      - statement: "the swarm as a \"statistical constellation\" without rigid cluster structures, using beacon-centric coordination instead"
+      - statement: "60 GHz V-band RF for intra-cluster with optical only for cluster-to-keeper"
+        models:
+          - "Gemini"
+      - statement: "S-band/UHF baseline with optical deferred to Phase 1"
         models:
           - "Gpt"
-  - id: "coordination-infrastructure"
-    topic: "Coordination Infrastructure"
+  - id: "central-coordination-asset"
+    topic: "Central Coordination Asset"
     positions:
-      - statement: "4 dedicated Nexus stations at Lagrange points (Earth L4/L5, Venus L4, Mars L5) with 5m dishes and 100 Gbps optical terminals"
+      - statement: "coordination across 12 gateway satellites with no single hub"
         models:
           - "Claude"
-      - statement: "3-5 smaller Beacon/Relay spacecraft (35-60 kg each, ESPA-class) with simpler S/X-band communications"
+      - statement: "a dedicated \"Swarm Keeper\" station at L1 or co-orbital"
+        models:
+          - "Gemini"
+      - statement: "3–5 \"Beacon/Relay\" spacecraft as time/catalog authorities"
         models:
           - "Gpt"
-  - id: "node-computing-power"
-    topic: "Node Computing Power"
+  - id: "navigation-approach"
+    topic: "Navigation Approach"
     positions:
-      - statement: "500 MHz quad-core RISC-V with 512 MB RAM and 2 TOPS neural accelerator at 15-25W"
+      - statement: "on inter-satellite optical ranging (±1 m) plus stellar/solar sensors with Earth-based DSN calibration"
         models:
           - "Claude"
-      - statement: "2-10 GFLOPS equivalent MCU/SoC with 512 MB RAM at 2"
+      - statement: "star trackers + IMU with no inter-satellite ranging (optical flow via cameras instead)"
+        models:
+          - "Gemini"
+      - statement: "beacon radiometric ranging + EKF with position knowledge of ≤5 km along-track"
         models:
           - "Gpt"
-  - id: "communication-bandwidth"
-    topic: "Communication Bandwidth"
+  - id: "manufacturing-philosophy"
+    topic: "Manufacturing Philosophy"
     positions:
-      - statement: "for 1-10 Gbps optical crosslinks between satellites"
+      - statement: "full rad-hard components (100 krad tolerance) with 50-year MTBF"
         models:
           - "Claude"
-      - statement: "recommends deferring optical crosslinks to Phase 1"
+      - statement: "automotive-grade (AEC-Q100) with spot shielding, accepting 2–3% annual failure rate"
+        models:
+          - "Gemini"
+      - statement: "a middle path with COTS + radiation characterization and selective hardening"
         models:
           - "Gpt"
-  - id: "control-philosophy"
-    topic: "Control Philosophy"
+  - id: "station-keeping-propulsion"
+    topic: "Station-Keeping Propulsion"
     positions:
-      - statement: "\"swarm as ecosystem\" with emergent behavior management and formation maintenance"
+      - statement: "0"
+        models:
+          - "Gpt"
+      - statement: "hybrid solar sail + ion propulsion (~62 m/s/year budget)"
         models:
           - "Claude"
-      - statement: "\"ephemeris governance\" treating nodes as independent agents with assigned orbital slots and keep-out tubes rather than formation flying"
+      - statement: "whether solar radiation pressure alone provides sufficient control authority"
         models:
-          - "Gpt"
+          - "Gemini"

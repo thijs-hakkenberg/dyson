@@ -6,60 +6,73 @@ itemSlug: "mass-drivers"
 generated: "2026-02-01"
 
 topics:
-  - id: "track-length"
-    topic: "Track Length"
+  - id: "primary-deployment-location"
+    topic: "Primary Deployment Location"
     positions:
-      - statement: "3"
-        models:
-          - "Gpt"
-      - statement: "4"
+      - statement: "lunar polar region for near-continuous solar illumination and proximity to Earth"
         models:
           - "Claude"
-      - statement: "unavailable for comparison"
+      - statement: "Mercury's north pole (Crater Prokofiev) for superior solar flux and simplified orbital insertion to heliocentric orbits"
         models:
           - "Gemini"
-  - id: "nominal-payload-mass"
-    topic: "Nominal Payload Mass"
-    positions:
-      - statement: "for 200 kg nominal payload with 45 kg reusable carrier"
-        models:
-          - "Claude"
-      - statement: "100 kg payload with 20–40 kg carrier for Phase 1, scaling to 500 kg later"
+      - statement: "lunar polar as primary with NEA as secondary target"
         models:
           - "Gpt"
-  - id: "energy-efficiency-assumptions"
-    topic: "Energy Efficiency Assumptions"
+  - id: "target-muzzle-velocity"
+    topic: "Target Muzzle Velocity"
     positions:
-      - statement: "87% efficiency achievable with superconducting coilgun technology"
+      - statement: "2"
         models:
           - "Claude"
-      - statement: "45% early/60% mature as more conservative baseline for non-superconducting systems"
+          - "Gpt"
+      - statement: "3"
+        models:
+          - "Gemini"
+  - id: "payload-mass-per-shot"
+    topic: "Payload Mass per Shot"
+    positions:
+      - statement: "for 500 kg nominal payloads (200-750 kg range)"
+        models:
+          - "Claude"
+      - statement: "on 10 kg \"Swarm Packets\" for high-cadence operations"
+        models:
+          - "Gemini"
+      - statement: "100 kg as Phase 1 baseline with growth to 500-2,000 kg"
         models:
           - "Gpt"
-  - id: "throughput-targets"
-    topic: "Throughput Targets"
+  - id: "launch-cadence"
+    topic: "Launch Cadence"
     positions:
-      - statement: "2,400 tonnes/day (12,000 launches/day at 200 kg)"
+      - statement: "5 launches/hour (12-minute cycle)"
         models:
           - "Claude"
-      - statement: "24–72 tonnes/day (10–30 shots/hour at 100 kg) for Phase 1, emphasizing incremental scaling"
+      - statement: "6 launches/minute (10-second cycle)"
+        models:
+          - "Gemini"
+      - statement: "10-30 launches/hour as nominal operating range"
         models:
           - "Gpt"
-  - id: "superconducting-vs-conventional-coils"
-    topic: "Superconducting vs. Conventional Coils"
+  - id: "annual-throughput-per-driver"
+    topic: "Annual Throughput per Driver"
     positions:
-      - statement: "YBCO superconducting coils operating at <77K with LN2 pre-cooling for maximum efficiency"
+      - statement: "21,900 tonnes/year"
         models:
           - "Claude"
-      - statement: "conventional aluminum/copper conductors for simplicity and dust tolerance, avoiding cryogenic complexity"
+      - statement: "31,536 tonnes/year (at 100% uptime)"
+        models:
+          - "Gemini"
+      - statement: "8,760-26,280 tonnes/year depending on shot rate"
         models:
           - "Gpt"
-  - id: "pulsed-power-architecture"
-    topic: "Pulsed Power Architecture"
+  - id: "sabot-carrier-strategy"
+    topic: "Sabot/Carrier Strategy"
     positions:
-      - statement: "superconducting magnetic energy storage (SMES) with 2"
+      - statement: "disposable aluminum sabots (recovery cost exceeds material value)"
         models:
           - "Claude"
-      - statement: "capacitor banks (early) transitioning to flywheel-capacitor hybrid, citing maturity and robustness over energy density"
+      - statement: "reusable HTS-equipped \"buckets\" rated for 10,000 launches with recirculation track"
+        models:
+          - "Gemini"
+      - statement: "reusable carriers (1,000+ cycles) but flags carrier return logistics as an open question"
         models:
           - "Gpt"

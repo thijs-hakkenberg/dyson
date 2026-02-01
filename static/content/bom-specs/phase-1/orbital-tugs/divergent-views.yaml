@@ -9,54 +9,72 @@ topics:
   - id: "fleet-architecture"
     topic: "Fleet Architecture"
     positions:
-      - statement: "a single standardized tug design optimized for mass production and fleet economics"
+      - statement: "a single \"Mule\" class design handling 90% of missions with a Heavy variant (1:5 ratio)"
         models:
           - "Claude"
-      - statement: "a two-tier fleet with Class E (50 kW electric freight) and Class H (20 kW hybrid with chemical backup)"
+      - statement: "a single \"Shepherd\" class with swarm logic"
+        models:
+          - "Gemini"
+      - statement: "a two-tier fleet with separate Electric Freight Tugs (Class E) and Hybrid Service Tugs (Class H) with chemical backup capability"
         models:
           - "Gpt"
   - id: "chemical-propulsion-inclusion"
     topic: "Chemical Propulsion Inclusion"
     positions:
-      - statement: "excludes chemical propulsion as \"economically absurd\" for cargo transport within 3 AU"
+      - statement: "only hydrazine RCS (8× 22N thrusters) for wheel desaturation and backup attitude control"
         models:
           - "Claude"
-      - statement: "advocates for storable bipropellant capability (MMH/NTO, 320 s Isp) on service tugs for safety margins, collision avoidance, and rapid repositioning"
+      - statement: "chemical propulsion entirely for cost savings"
+        models:
+          - "Gemini"
+      - statement: "recommends 200N biprop thrusters on service tugs for rapid rendezvous, collision avoidance, and \"tow truck\" contingency operations"
         models:
           - "Gpt"
-  - id: "power-system-sizing"
-    topic: "Power System Sizing"
+  - id: "operating-distance-from-sun"
+    topic: "Operating Distance from Sun"
     positions:
-      - statement: "2,400 m² arrays generating 480 kW BOL for high-throughput operations"
+      - statement: "for 0"
         models:
           - "Claude"
-      - statement: "more modest 28–70 kW systems for Phase 1, scaling later"
+      - statement: "specifically for 0"
+        models:
+          - "Gemini"
+      - statement: "on cislunar space (NRHO/HEO) with gradual expansion to 0"
         models:
           - "Gpt"
-  - id: "refueling-strategy"
-    topic: "Refueling Strategy"
+  - id: "unit-cost-targets"
+    topic: "Unit Cost Targets"
     positions:
-      - statement: "in-situ refueling capability as a baseline design requirement"
+      - statement: "$9"
         models:
           - "Claude"
-      - statement: "starting with tank-swap logistics at depots before transitioning to fluid transfer, citing operational simplicity and contamination risk"
+      - statement: "$1"
+        models:
+          - "Gemini"
+      - statement: "$60-120M per unit for freight tugs under Western aerospace procurement"
         models:
           - "Gpt"
-  - id: "delta-v-budget"
-    topic: "Delta-V Budget"
+  - id: "propellant-logistics-strategy"
+    topic: "Propellant Logistics Strategy"
     positions:
-      - statement: "for 18 km/s unloaded / 8 km/s with 5,000 kg payload"
+      - statement: "ground-launched xenon with depot refueling capability"
         models:
           - "Claude"
-      - statement: "for 4"
+      - statement: "securing xenon futures contracts with urgent transition to argon/krypton"
+        models:
+          - "Gemini"
+      - statement: "\"tank swap\" modules at depots initially, deferring fluid transfer to later phases"
         models:
           - "Gpt"
-  - id: "operational-domain"
-    topic: "Operational Domain"
+  - id: "electronics-hardening"
+    topic: "Electronics Hardening"
     positions:
-      - statement: "primarily on heliocentric operations (0"
+      - statement: "RAD750 processors and full radiation-hardened avionics"
         models:
           - "Claude"
-      - statement: "cislunar operations (HEO/NRHO/GTO) as the Phase 1 primary domain, expanding to heliocentric later"
+      - statement: "automotive-grade COTS electronics with spot shielding to reduce costs 10×"
+        models:
+          - "Gemini"
+      - statement: "radiation-tolerant (not fully hardened) dual-string computers with environment-specific assessment"
         models:
           - "Gpt"

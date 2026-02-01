@@ -6,69 +6,75 @@ itemSlug: "assembly-robots"
 generated: "2026-02-01"
 
 topics:
-  - id: "heavy-handler-mass"
-    topic: "Heavy Handler Mass"
+  - id: "heavy-manipulator-mass"
+    topic: "Heavy Manipulator Mass"
     positions:
-      - statement: "AR-S at 450 kg dry / 650 kg wet"
+      - statement: "2,400 kg Welder-class with 6"
         models:
           - "Claude"
-      - statement: "AT-1 at 1,200 kg dry with 250 kg propellant"
-        models:
-          - "Gpt"
-      - statement: "not provide explicit mass figures for the structural class"
+      - statement: "45 kg Weaver-class hexagonal drones forming \"super-bots\" for heavy loads"
         models:
           - "Gemini"
-  - id: "boom-reach-configuration"
-    topic: "Boom/Reach Configuration"
-    positions:
-      - statement: "a 25m telescoping boom for structural work"
-        models:
-          - "Claude"
-      - statement: "8m tip-to-tip arm span for the heavy handler"
+      - statement: "1,200 kg AT-1 Assembly Tug with 4m reach and 500 N end-force"
         models:
           - "Gpt"
-      - statement: "not specify reach dimensions"
+  - id: "precision-assembler-design-philosophy"
+    topic: "Precision Assembler Design Philosophy"
+    positions:
+      - statement: "180 kg eight-legged Spider-class for traversing 3D structures"
+        models:
+          - "Claude"
+      - statement: "manipulation into the 45 kg Weaver's six 3-DOF arms"
         models:
           - "Gemini"
-  - id: "welding-capability"
-    topic: "Welding Capability"
-    positions:
-      - statement: "integrated 3 kW electron beam welding on the structural robot (AR-S)"
-        models:
-          - "Claude"
-      - statement: "Gemini do not specify welding as a primary assembly robot function, implying mechanical fastening or pre-integrated joints"
+      - statement: "450 kg DW-1 with two 7-DOF arms and quick-change end-effectors"
         models:
           - "Gpt"
-  - id: "team-cell-composition"
-    topic: "Team/Cell Composition"
+  - id: "primary-joining-technology"
+    topic: "Primary Joining Technology"
     positions:
-      - statement: "9 robots per team (4 precision + 2 structural + 3 logistics)"
+      - statement: "electron beam welding (60–150 kV, up to 25 kW) and friction stir welding as primary methods"
         models:
           - "Claude"
-      - statement: "7 robots per cell (1 heavy tug + 2 dexterous workers + 4 logistics drones)"
-        models:
-          - "Gpt"
-      - statement: "not specify team composition"
+      - statement: "snap-fits and thermal welding with zero screws"
         models:
           - "Gemini"
-  - id: "logistics-drone-payload"
-    topic: "Logistics Drone Payload"
-    positions:
-      - statement: "AR-L at 150 kg dry with 200 kg cargo capacity"
-        models:
-          - "Claude"
-      - statement: "LD-1 at 60 kg dry with 20 kg payload capacity"
+      - statement: "on mechanical latching with kinematic docking and compliant connectors"
         models:
           - "Gpt"
-      - statement: "not provide logistics drone specifications"
+  - id: "unit-cost-targets"
+    topic: "Unit Cost Targets"
+    positions:
+      - statement: "$12M–$45M per unit at production rates"
+        models:
+          - "Claude"
+      - statement: "$235,000 per unit through radical simplification and swarm redundancy"
         models:
           - "Gemini"
-  - id: "development-cost-estimates"
-    topic: "Development Cost Estimates"
-    positions:
-      - statement: "detailed NRE estimates ($1"
+      - statement: "$20M–$120M per unit depending on class"
         models:
           - "Gpt"
-      - statement: "Gemini do not provide cost estimates"
+  - id: "operating-distance-from-sun"
+    topic: "Operating Distance from Sun"
+    positions:
+      - statement: "specifically for 0"
         models:
           - "Claude"
+      - statement: "Mercury-Sun Lagrange point"
+        models:
+          - "Gemini"
+      - statement: "conservative 0"
+        models:
+          - "Gpt"
+  - id: "production-rate-philosophy"
+    topic: "Production Rate Philosophy"
+    positions:
+      - statement: "350 robots total for Phase 1"
+        models:
+          - "Claude"
+      - statement: "10,000 units/month by end of Phase 1"
+        models:
+          - "Gemini"
+      - statement: "modular \"Assembly Cells\" scaled incrementally"
+        models:
+          - "Gpt"

@@ -7,71 +7,79 @@ generated: "2026-02-01"
 phase: "phase-1"
 ---
 
-# Assembly Robots Technical Synthesis
+# Consensus Technical Specifications: Assembly Robots
 ## Phase 1 - Initial Swarm Deployment
 
 ---
 
 ## Key Specifications
 
-All models agree on the following core specifications:
+All three models agree on the following core specifications and design principles:
 
-- **Heterogeneous robot architecture**: Multiple specialized robot classes (precision/dexterous workers, heavy structural handlers, and logistics drones) rather than a single general-purpose design
-- **Manipulator configuration**: 6-7 DOF arms with force/torque sensing at the wrist, enabling compliant contact operations and precision assembly
-- **Position accuracy requirements**: ±0.1–2.0 mm at end effector depending on task class (finer for electronics/connectors, coarser for structural work)
-- **Power architecture**: 120–300 VDC primary bus with solar arrays sized for 1 AU operations; battery backup of 2.5–10 kWh depending on robot class for eclipse/peak operations
-- **Propulsion approach**: Electric propulsion (Hall-effect thrusters, Isp 1,600–2,000 s) for repositioning combined with low-contamination cold/warm gas RCS for proximity operations
-- **Standardized interfaces**: Universal docking ports, quick-change tool interfaces, and common grapple fixtures across all robot classes and swarm elements
-- **Autonomy level**: Supervised autonomy with local perception, error recovery, and human approval for critical steps (accounting for 8–20 minute communication latency at 1 AU)
-- **Design life**: 8–15 years with in-situ maintainability by other robots; modular components with standardized replacement interfaces
-- **Radiation tolerance**: 100 krad TID minimum using radiation-hardened processors with COTS co-processors (shielded) for high-performance vision tasks
+- **Multi-class robot architecture**: All models reject a single universal robot in favor of specialized classes—heavy manipulators (2,400 kg / 1,200 kg / 1,200 kg), precision assemblers (180 kg / 45 kg / 450 kg), and logistics/transport units (600 kg / 62 kg / 60 kg)
+
+- **Primary propulsion**: Hall-effect thrusters with xenon propellant, achieving Isp of 1,600–2,000 seconds for efficient repositioning between work sites
+
+- **Manipulation precision**: Sub-millimeter positioning accuracy required (±0.5mm for heavy manipulators, ±0.1mm for precision work)
+
+- **Power architecture**: Solar arrays as primary power source (GaAs triple-junction cells), with lithium-based battery storage (2–15 kWh depending on class) for peak loads and eclipse operations
+
+- **Radiation hardening**: All flight computers require radiation-hardened processors (LEON4, RAD750, or equivalent) with Triple Modular Redundancy (TMR) for critical functions
+
+- **Standardized interfaces**: Universal mechanical grapple/docking fixtures, standardized power buses (28V service + higher voltage primary), and common data protocols across all robot classes
+
+- **Autonomous operation**: Level 4+ autonomy required due to communication latency; hierarchical control with local coordination and Earth-based strategic oversight
+
+- **Design life**: 5–20 years depending on robot class, with emphasis on graceful degradation over traditional redundancy
+
+- **Communication**: Multi-layer architecture combining Ka/X-band for Earth link, optical inter-satellite links for high-bandwidth local coordination, and UHF backup
 
 ---
 
 ## Divergent Views
 
-- **Heavy Handler Mass**: Claude specifies AR-S at 450 kg dry / 650 kg wet; GPT specifies AT-1 at 1,200 kg dry with 250 kg propellant; Gemini does not provide explicit mass figures for the structural class.
+- **Heavy Manipulator Mass**: Claude recommends 2,400 kg Welder-class with 6.5m arm reach and 500 kg payload capacity; Gemini prefers 45 kg Weaver-class hexagonal drones forming "super-bots" for heavy loads; GPT suggests 1,200 kg AT-1 Assembly Tug with 4m reach and 500 N end-force
 
-- **Boom/Reach Configuration**: Claude proposes a 25m telescoping boom for structural work; GPT specifies 8m tip-to-tip arm span for the heavy handler; Gemini does not specify reach dimensions.
+- **Precision Assembler Design Philosophy**: Claude proposes 180 kg eight-legged Spider-class for traversing 3D structures; Gemini integrates manipulation into the 45 kg Weaver's six 3-DOF arms; GPT recommends 450 kg DW-1 with two 7-DOF arms and quick-change end-effectors
 
-- **Welding Capability**: Claude includes integrated 3 kW electron beam welding on the structural robot (AR-S); GPT and Gemini do not specify welding as a primary assembly robot function, implying mechanical fastening or pre-integrated joints.
+- **Primary Joining Technology**: Claude specifies electron beam welding (60–150 kV, up to 25 kW) and friction stir welding as primary methods; Gemini assumes snap-fits and thermal welding with zero screws; GPT focuses on mechanical latching with kinematic docking and compliant connectors
 
-- **Team/Cell Composition**: Claude recommends 9 robots per team (4 precision + 2 structural + 3 logistics); GPT recommends 7 robots per cell (1 heavy tug + 2 dexterous workers + 4 logistics drones); Gemini does not specify team composition.
+- **Unit Cost Targets**: Claude estimates $12M–$45M per unit at production rates; Gemini targets $235,000 per unit through radical simplification and swarm redundancy; GPT estimates $20M–$120M per unit depending on class
 
-- **Logistics Drone Payload**: Claude specifies AR-L at 150 kg dry with 200 kg cargo capacity; GPT specifies LD-1 at 60 kg dry with 20 kg payload capacity; Gemini does not provide logistics drone specifications.
+- **Operating Distance from Sun**: Claude designs specifically for 0.5 AU (5,480 W/m² solar flux) with extensive thermal management; Gemini targets Mercury-Sun Lagrange point; GPT recommends conservative 0.7–1.0 AU operations for Phase 1
 
-- **Development Cost Estimates**: GPT provides detailed NRE estimates ($1.2B–$2.45B total) and per-unit recurring costs ($60–120M for heavy handler); Claude and Gemini do not provide cost estimates.
+- **Production Rate Philosophy**: Claude targets 350 robots total for Phase 1; Gemini targets 10,000 units/month by end of Phase 1; GPT proposes modular "Assembly Cells" scaled incrementally
 
 ---
 
 ## Open Questions
 
-1. **Tile/Collector Architecture Finalization**: What are the final mass (200–400 kg range cited), stiffness, and deployment mechanism specifications for swarm elements? These directly drive robot force, torque, and precision requirements.
+1. **Thermal Management at Inner Solar System**: How to maintain component temperatures within operational limits at 0.5 AU or closer? Passive radiators vs. active cooling loops—what is the mass/reliability trade?
 
-2. **Welding vs. Mechanical Joining**: Should structural assembly rely on electron beam welding (requiring vacuum-compatible systems and thermal management) or standardized mechanical fasteners with robotic torque tools? Trade involves mass, reliability, and rework capability.
+2. **Joining Technology Selection**: What is the optimal mix of welding (E-beam, FSW), mechanical fastening, and adhesive bonding for solar collector structures? How do these perform over decades of thermal cycling?
 
-3. **Propulsion Contamination Thresholds**: What are acceptable plume exposure limits for thin-film photovoltaics? This determines keep-out zones, RCS propellant selection, and operational constraints during proximity operations.
+3. **Contamination Control**: How to prevent thruster plumes, outgassing, and debris from degrading thin-film photovoltaics and optical sensors? What are acceptable exposure thresholds?
 
-4. **Repair Philosophy**: What fraction of tile defects should be repaired on-site versus replaced? This affects tool inventory, spares strategy, and robot capability requirements (patching vs. module swap).
+4. **Autonomy Certification**: What safety case and verification approach is acceptable for fully autonomous assembly operations with no human-in-the-loop for extended periods?
 
-5. **Thermal Regime for Later Phases**: How close to the Sun must Phase 1 robots operate? Operations inside 0.7 AU require significant thermal redesign (reflective sunshields, high-temperature lubricants, enhanced radiators).
+5. **Dust and Debris Management**: How to keep optical sensors and laser communications clean without consumables, especially if operating near asteroid-sourced materials?
 
-6. **Autonomy Certification and Safety Case**: What level of autonomous decision-making is acceptable for non-profit governance and public trust? This affects software architecture, verification requirements, and operational protocols.
+6. **Tile/Collector Interface Finalization**: What are the final mass, stiffness, and deployment mechanisms for swarm elements? These strongly drive robot force, precision, and throughput requirements.
 
 ---
 
 ## Recommended Approach
 
-1. **Lock interface standards first**: Finalize mechanical grapple/docking fixtures, power bus voltage (recommend 200 VDC as compromise), data protocols, and metrology fiducial specifications before optimizing individual robot designs.
+1. **Adopt a three-class robot architecture** with standardized interfaces: a heavy handler (1,000–2,500 kg class) for positioning large assemblies, a dexterous worker (150–500 kg class) for precision tasks, and logistics drones (50–100 kg class) for material transport—balancing Claude's specialization philosophy with GPT's "Assembly Cell" modularity
 
-2. **Adopt three-class heterogeneous architecture**: Implement specialized precision/dexterous workers (400–500 kg class), heavy structural handlers (600–1,200 kg class), and lightweight logistics drones (60–150 kg class) to optimize mass and capability for distinct task domains.
+2. **Lock interface standards before detailed design**: Define universal grapple fixtures, docking rings, power/data connectors, and metrology targets as binding requirements across all robot and tile designs, following GPT's emphasis on interface control
 
-3. **Prioritize dexterous worker development and LEO demonstration**: The contact operations, connector mating, and cable routing tasks represent the highest technical risk; fly a DW-1/AR-P class robot with realistic mock payloads in LEO within 24–48 months to retire risk.
+3. **Prioritize mechanical joining over welding for Phase 1**: Use kinematic docking, compliant latches, and captive fasteners as primary assembly methods to reduce technology risk; develop welding capability in parallel for Phase 2 structural applications
 
-4. **Design for robot-serviceable modularity**: All robots must be maintainable by other robots with no Earth-return required; implement external access panels, blind-mate connectors, captive fasteners, and standardized joint cartridges for field replacement.
+4. **Design for 0.7–1.0 AU initial operations** with growth path to 0.5 AU: Begin with conservative thermal environment to accelerate deployment, incorporating Claude's thermal-first design principles for later phases
 
-5. **Implement graceful degradation**: Design all robots to continue useful operation with up to 30% subsystem failure through redundant actuators, distributed computing, and dynamic role reconfiguration within the team/cell.
+5. **Implement supervised autonomy with bounded behaviors**: Deploy hierarchical control (strategic planning from Earth, tactical coordination locally, reflexive safety at hardware level) with robust "call for help" modes and human approval gates for critical operations
 
-6. **Establish contamination and debris control protocols**: Specify low-outgassing materials (NASA ASTM E595), define thruster plume keep-out zones, require debris capture for all cutting operations, and mandate captive fasteners throughout.
+6. **Execute phased development with early orbital demonstration**: Ground prototypes (Years 1–2), LEO demonstration mission (Years 2–4), heliocentric pilot cell (Years 4–6), following the convergent roadmap across all models
 
-7. **Plan incremental autonomy deployment**: Begin with supervised autonomy (human goal-setting, robot execution with local error recovery), then expand autonomous capability based on demonstrated reliability and operational experience at 1 AU.
+7. **Design all robots for in-space serviceability**: External access panels, blind-mate connectors, modular joint cartridges, and robot-friendly fasteners—assume repair by peer robots with no Earth return option

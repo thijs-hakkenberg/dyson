@@ -6,57 +6,75 @@ itemSlug: "assembly-node"
 generated: "2026-02-01"
 
 topics:
-  - id: "production-rate-targets"
-    topic: "Production Rate Targets"
+  - id: "orbital-location"
+    topic: "Orbital Location"
     positions:
-      - statement: "1,000 collector units/day (100 m² each, 14 kW output) within 24 months of IOC"
+      - statement: "Sun-Earth L1 vicinity (~1 AU) for balanced communication and swarm deployment geometry"
         models:
           - "Claude"
-      - statement: "~50 tiles/month (100 m² each, 20 kW output), approximately 1 MW equivalent monthly—a difference of roughly 600× in unit throughput"
+      - statement: "Sun-Mercury L1 (~0"
+        models:
+          - "Gemini"
+      - statement: "heliocentric orbit at 0"
         models:
           - "Gpt"
-  - id: "total-hub-mass"
-    topic: "Total Hub Mass"
+  - id: "primary-power-source"
+    topic: "Primary Power Source"
     positions:
-      - statement: "45,000 metric tons for a mature distributed cluster"
+      - statement: "for nuclear fission (4×500 kW Kilopower-derived reactors) with solar backup for eclipse independence and compactness"
         models:
           - "Claude"
-      - statement: "~150,000 kg (150 metric tons) for a single modular hub—a 300× difference reflecting fundamentally different scale assumptions"
+      - statement: "solar PV plus solar-thermal concentrators (120 MW at 0"
+        models:
+          - "Gemini"
+      - statement: "solar PV only (1"
         models:
           - "Gpt"
-  - id: "architecture-configuration"
-    topic: "Architecture Configuration"
+  - id: "feedstock-acquisition-method"
+    topic: "Feedstock Acquisition Method"
     positions:
-      - statement: "a distributed cluster of specialized modules at 1–10 km separation connected by autonomous transfer vehicles"
+      - statement: "conventional cargo delivery via tugs from asteroid sources"
         models:
           - "Claude"
-      - statement: "a single integrated modular hub with swappable pallets on a central truss spine"
+      - statement: "an electromagnetic \"Catch\" mechanism to intercept hypervelocity packets from a Mercury surface mass driver"
+        models:
+          - "Gemini"
+      - statement: "standardized cargo canisters with cooperative docking and limited non-cooperative capture"
         models:
           - "Gpt"
-  - id: "power-generation-scale"
-    topic: "Power Generation Scale"
+  - id: "hub-configuration"
+    topic: "Hub Configuration"
     positions:
-      - statement: "1"
-        models:
-          - "Gpt"
-      - statement: "2"
+      - statement: "a hexagonal 6-petal architecture (340 m diameter) with parallel assembly lines for redundancy"
         models:
           - "Claude"
-  - id: "collector-unit-design"
-    topic: "Collector Unit Design"
-    positions:
-      - statement: "thin-film CIGS cells at 22% efficiency, 0"
+      - statement: "a linear \"spine\" design (120 m) with forward thermal shield and radial arms"
         models:
-          - "Claude"
-      - statement: "10m × 10m membrane tiles with integrated conductors, edge stiffeners, and 20% efficiency with 0"
+          - "Gemini"
+      - statement: "a truss-based modular layout (18 m spine) with bilateral radiator/PV wings"
         models:
           - "Gpt"
-  - id: "program-cost-estimates"
-    topic: "Program Cost Estimates"
+  - id: "solar-collector-unit-size"
+    topic: "Solar Collector Unit Size"
     positions:
-      - statement: "detailed ROM of $15–18B for Phase 1 through 10 years operations"
-        models:
-          - "Gpt"
-      - statement: "not provide cost figures, focusing on technical specifications only"
+      - statement: "100 m² thin-film units (45 kg each)"
         models:
           - "Claude"
+      - statement: "1 km² ultra-thin statites produced every 48 hours"
+        models:
+          - "Gemini"
+      - statement: "100 m² membrane tiles with stiffened edges (~20 kW each at 1 AU)"
+        models:
+          - "Gpt"
+  - id: "total-program-cost-estimate"
+    topic: "Total Program Cost Estimate"
+    positions:
+      - statement: "$10B for first ANH development through initial operations"
+        models:
+          - "Claude"
+      - statement: "$9"
+        models:
+          - "Gemini"
+      - statement: "$15–18B through 10 years of operations including demonstrator mission"
+        models:
+          - "Gpt"

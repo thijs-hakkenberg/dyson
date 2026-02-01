@@ -6,63 +6,72 @@ itemSlug: "pv-blanket-arrays"
 generated: "2026-02-01"
 
 topics:
-  - id: "bus-voltage-selection"
-    topic: "Bus Voltage Selection"
+  - id: "orbital-location"
+    topic: "Orbital Location"
     positions:
-      - statement: "120V regulated output from 90V strings"
+      - statement: "Earth-Sun L1 halo orbit (0"
         models:
           - "Claude"
-      - statement: "800V HVDC to minimize harness mass"
-        models:
-          - "Gpt"
-      - statement: "not specify but implies lower voltage heritage approach"
+      - statement: "Mercury-Sun L1 staging then 0"
         models:
           - "Gemini"
+      - statement: "flexible 0"
+        models:
+          - "Gpt"
   - id: "cell-technology-selection"
     topic: "Cell Technology Selection"
     positions:
-      - statement: "recommends perovskite-on-silicon tandem (2-terminal) citing manufacturability and thin-film compatibility"
+      - statement: "CdTe thin-film for manufacturing maturity (TRL 9) and radiation hardness despite lower efficiency"
         models:
           - "Claude"
-      - statement: "dual-track procurement with III-V flexible for early flights and perovskite/tandem for cost-down"
-        models:
-          - "Gpt"
-      - statement: "unavailable for comparison"
+      - statement: "Perovskite on polyimide for extreme mass reduction and roll-to-roll printing compatibility"
         models:
           - "Gemini"
-  - id: "unit-size-optimization"
-    topic: "Unit Size Optimization"
-    positions:
-      - statement: "100m × 100m (10,000 m²) units at 145 kg total"
-        models:
-          - "Claude"
-      - statement: "30m × 40m (1,200 m²) units at 690 kg total"
+      - statement: "dual-track procurement with III-V flexible cells for early flights and tandem thin-film (perovskite/Si) for cost-down at scale"
         models:
           - "Gpt"
-  - id: "segment-granularity"
-    topic: "Segment Granularity"
+  - id: "unit-scale"
+    topic: "Unit Scale"
     positions:
-      - statement: "quadrant-level segmentation (4 segments per unit)"
+      - statement: "1 km² hexagonal units (45,000 kg, 200 MW)"
         models:
           - "Claude"
-      - statement: "48 segments at 25 m² each with individual MPPT modules"
+      - statement: "1 km diameter circular units (850 kg, 2"
+        models:
+          - "Gemini"
+      - statement: "smaller 1,200 m² rectangular units (690 kg, 400 kW) optimized for near-term manufacturability and launch constraints"
         models:
           - "Gpt"
-  - id: "specific-power-target"
-    topic: "Specific Power Target"
+  - id: "power-transmission-method"
+    topic: "Power Transmission Method"
     positions:
-      - statement: "~1,400 W/kg (145 kg for 200 kW EOL)"
+      - statement: "integrated laser power beaming (1064 nm phased array, 200 MW optical output per unit)"
         models:
           - "Claude"
-      - statement: "~565 W/kg (690 kg for 390 kW BOL)"
+      - statement: "laser beaming to Mercury rectenna or relay satellite"
+        models:
+          - "Gemini"
+      - statement: "power delivery architecture as an open interface question (local use vs beaming)"
         models:
           - "Gpt"
-  - id: "cost-assumptions"
-    topic: "Cost Assumptions"
+  - id: "manufacturing-location"
+    topic: "Manufacturing Location"
     positions:
-      - statement: "$50/m² at scale for blanket fabrication"
+      - statement: "GPT assume Earth-based manufacturing for Phase 1 with roll-to-roll production lines"
         models:
           - "Claude"
-      - statement: "$50–200/m² for mature thin-film production"
+      - statement: "in-situ manufacturing on Mercury or asteroid is mandatory from the start, arguing 1 km structures cannot be launched from Earth"
+        models:
+          - "Gemini"
+  - id: "bus-voltage"
+    topic: "Bus Voltage"
+    positions:
+      - statement: "tiered architecture (100V string → 1kV sector → 10kV main bus)"
+        models:
+          - "Claude"
+      - statement: "not specify voltage explicitly"
+        models:
+          - "Gemini"
+      - statement: "800V DC primary bus as optimal trade between harness mass and arcing risk, noting this requires further analysis"
         models:
           - "Gpt"

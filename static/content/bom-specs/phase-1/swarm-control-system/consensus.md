@@ -7,77 +7,81 @@ generated: "2026-02-01"
 phase: "phase-1"
 ---
 
-# Swarm Control System - Synthesized Technical Specifications
+# Swarm Control System - Consensus Technical Specification
 ## Phase 1 - Initial Swarm Deployment
 
 ---
 
 ## Key Specifications
 
-All models agree on the following core specifications:
+All three models converge on the following technical parameters:
 
-- **Hierarchical/Distributed Architecture**: Control system uses tiered autonomy with local satellite decision-making for safety-critical functions (collision avoidance) and higher-level coordination for optimization, avoiding centralized single points of failure.
+- **Hierarchical Architecture**: All models agree on a tiered control structure with individual satellites/nodes at the base, intermediate cluster/group coordination, and a top-level swarm/beacon authority layer—rejecting both pure centralization and pure decentralization.
 
-- **Collision Avoidance Latency**: Autonomous onboard collision detection and avoidance must execute within <60 seconds of threat confirmation, with detection screening at 1 Hz or better.
+- **Node Control Unit Mass**: 0.45–2.1 kg per satellite for the control/compute/comm subsystem (Claude: 2.1 kg full SCU; Gemini: 0.45 kg; GPT: 0.45 kg), with consensus that the target should be <2.5 kg.
 
-- **Radiation-Hardened Computing**: Node processors require radiation tolerance of 50-100 krad TID minimum, with ECC memory, watchdog timers, and fault-tolerant architectures (lockstep cores or TMR).
+- **Node Power Consumption**: 1.2–15 W nominal, 8–45 W peak across models, with agreement that average power should remain under 20 W for scalability.
 
-- **Time Synchronization**: Swarm-wide time sync accuracy of ≤10 ms (1σ) required for coordination, TDMA scheduling, and ephemeris consistency; achieved via disciplined oscillators (OCXO or CSAC) synchronized to beacon/nexus broadcasts.
+- **Radiation-Hardened Processing**: All specify rad-tolerant processors (RISC-V preferred by Claude and Gemini; ARM+FPGA acceptable per GPT) with ECC memory (512 MB–4 GB nonvolatile storage).
 
-- **Position Knowledge Requirements**: Along-track position uncertainty ≤5 km (1σ), cross-track/radial ≤2 km (1σ), achieved through radiometric ranging, solar/stellar attitude determination, and dynamics modeling.
+- **Optical Inter-Satellite Links**: All models recommend 1550 nm laser communication for high-bandwidth backbone links, with data rates of 1–100 Gbps depending on tier/range.
 
-- **Communication Architecture**: Beacon/relay assets provide time authority, ephemeris bulletins, and store-and-forward capability; nodes communicate via scheduled TDMA windows rather than continuous mesh.
+- **Collision Avoidance Requirement**: Target collision probability <10⁻⁶ per node-year (Claude targets 10⁻¹², Gemini and GPT target 10⁻⁶), with multi-layer avoidance (predictive + reactive + emergency).
 
-- **Node Autonomy Duration**: Individual satellites must survive and operate safely for 30+ days without ground or beacon contact, maintaining safe separation and basic functions.
+- **Autonomous Operation**: All models require nodes to survive 7–30+ days without ground contact, with local collision avoidance executed without human-in-the-loop.
 
-- **Graceful Degradation**: No single node or relay failure should degrade overall swarm performance by more than 0.1%; system designed for eventual consistency rather than strong consistency.
+- **Time Synchronization**: Agreement on ≤10 ms swarm-wide time sync using OCXO or chip-scale atomic clocks disciplined by a central time authority.
+
+- **Cluster Size**: Approximately 100 satellites per logical cluster/group for intermediate coordination (Claude: 100; Gemini: 100; GPT: implicit in beacon coverage).
+
+- **Formally Verified Software Kernel**: All models recommend seL4 or equivalent mathematically verified RTOS for safety-critical functions.
 
 ---
 
 ## Divergent Views
 
-- **Initial Swarm Size**: Claude recommends 10,000-100,000 satellites for Phase 1 to demonstrate meaningful scale; GPT suggests 1,000 nodes as minimum viable for proving scalable deployment and control.
+- **Phase 1 Swarm Size**: Claude proposes 10,000 satellites at 0.5 AU; Gemini proposes 10,000 units at 0.9 AU; GPT recommends starting with 1,000 nodes near 1 AU to prove scalability before expansion.
 
-- **Cluster Organization**: Claude proposes formal cluster hierarchy with ~100 satellites per cluster and elected cluster heads with enhanced capabilities (+50 kg, 2x compute); GPT treats the swarm as a "statistical constellation" without rigid cluster structures, using beacon-centric coordination instead.
+- **Primary Communication Method (Node-to-Node)**: Claude specifies optical ISL (1550 nm laser) as primary for all tiers; Gemini recommends 60 GHz V-band RF for intra-cluster with optical only for cluster-to-keeper; GPT prefers S-band/UHF baseline with optical deferred to Phase 1.5.
 
-- **Coordination Infrastructure**: Claude specifies 4 dedicated Nexus stations at Lagrange points (Earth L4/L5, Venus L4, Mars L5) with 5m dishes and 100 Gbps optical terminals; GPT recommends 3-5 smaller Beacon/Relay spacecraft (35-60 kg each, ESPA-class) with simpler S/X-band communications.
+- **Central Coordination Asset**: Claude distributes coordination across 12 gateway satellites with no single hub; Gemini proposes a dedicated "Swarm Keeper" station at L1 or co-orbital; GPT recommends 3–5 "Beacon/Relay" spacecraft as time/catalog authorities.
 
-- **Node Computing Power**: Claude specifies 500 MHz quad-core RISC-V with 512 MB RAM and 2 TOPS neural accelerator at 15-25W; GPT recommends 2-10 GFLOPS equivalent MCU/SoC with 512 MB RAM at 2.5-12W, prioritizing simplicity and manufacturability.
+- **Navigation Approach**: Claude relies on inter-satellite optical ranging (±1 m) plus stellar/solar sensors with Earth-based DSN calibration; Gemini uses star trackers + IMU with no inter-satellite ranging (optical flow via cameras instead); GPT uses beacon radiometric ranging + EKF with position knowledge of ≤5 km along-track.
 
-- **Communication Bandwidth**: Claude designs for 1-10 Gbps optical crosslinks between satellites; GPT explicitly recommends deferring optical crosslinks to Phase 1.5, using only S-band/UHF at 1-10 kb/day per node for Phase 1.
+- **Manufacturing Philosophy**: Claude specifies full rad-hard components (100 krad tolerance) with 50-year MTBF; Gemini advocates automotive-grade (AEC-Q100) with spot shielding, accepting 2–3% annual failure rate; GPT takes a middle path with COTS + radiation characterization and selective hardening.
 
-- **Control Philosophy**: Claude emphasizes "swarm as ecosystem" with emergent behavior management and formation maintenance; GPT advocates "ephemeris governance" treating nodes as independent agents with assigned orbital slots and keep-out tubes rather than formation flying.
+- **Station-Keeping Propulsion**: Claude recommends hybrid solar sail + ion propulsion (~62 m/s/year budget); Gemini questions whether solar radiation pressure alone provides sufficient control authority; GPT specifies 0.5–5 m/s/year via sail trim or microprop, favoring minimal propellant.
 
 ---
 
 ## Open Questions
 
-1. **Node Actuation Method**: Is station-keeping achieved via solar radiation pressure (SRP) trim only, or does each node require micropropulsion? This fundamentally affects control bandwidth, ΔV budget (0.5-10 m/s/year), and collision avoidance response time.
+1. **Propulsion/Actuation Authority**: Can solar radiation pressure trimming alone provide sufficient control bandwidth for collision avoidance and slot-keeping, or is dedicated propulsion (cold gas, ion) required? What is the minimum ΔV budget per year?
 
-2. **Ranging and Navigation Method Selection**: Two-way S-band ranging to beacons vs. time-difference-of-arrival with multiple beacons vs. inter-satellite ranging—each approach has different implications for power, antenna pointing requirements, and achievable accuracy.
+2. **Optical Surface Degradation**: At what rate do micrometeoroid impacts degrade laser communication lens performance, and when does bit error rate become unsustainable—requiring fallback to RF?
 
-3. **Minimum Safe Spacing Policy**: What node density and separation distance is acceptable for Phase 1? Claude suggests ~50,000 km mean separation; GPT implies tighter spacing is possible with robust conjunction screening. Conservative spacing simplifies control but reduces collection efficiency.
+3. **Cluster Coordinator Duty Cycle**: How frequently should the coordinator role rotate within a cluster to balance power consumption, data transfer overhead, and single-point-of-failure risk?
 
-4. **Slot Ownership and Reallocation Governance**: How are orbital slots reassigned when nodes fail, drift, or are decommissioned? Requires robust policy to prevent cascading conflicts and maintain swarm integrity over decades.
+4. **Slot Reallocation Governance**: When a node fails or drifts out of its assigned orbital slot, what is the protocol for reassigning slots to prevent cascading conflicts or density violations?
 
-5. **Software Update Strategy at Scale**: How to safely deploy delta updates, signed images, and rollback capability across thousands to millions of nodes without risking mass failures or security vulnerabilities.
+5. **Software Update Strategy at Scale**: How do we safely deploy delta updates to thousands of nodes with rollback capability, preventing mass bricking from a faulty patch?
 
-6. **End-of-Life and Disposal Protocol**: What is the passivation and disposal plan for failed nodes in heliocentric orbit? Drift to designated "graveyard" bands, or accept debris accumulation at operational altitudes?
+6. **End-of-Life Disposal**: What is the passivation and disposal protocol for failed nodes in heliocentric orbit—drift to "graveyard" bands, controlled deorbit, or acceptance of debris persistence?
 
 ---
 
 ## Recommended Approach
 
-1. **Adopt Tiered Autonomy Architecture**: Implement three-tier control (satellite/cluster/swarm or node/beacon/ground) with strict subsidiarity—collision avoidance decisions made locally within 60 seconds, regional coordination at minute-to-hour timescales, global optimization at day-to-week timescales.
+1. **Adopt a Three-Tier Federated Architecture**: Implement individual node autonomy (Tier 1), cluster-level coordination with rotating coordinators (Tier 2, ~100 nodes per cluster), and 3–5 beacon/relay spacecraft for time authority, ephemeris catalog, and ground gateway (Tier 3). This balances scalability with operational simplicity.
 
-2. **Start with Conservative Beacon-Centric Design**: Deploy 3 beacon/relay spacecraft initially (scalable to 5+) providing time authority, ephemeris bulletins, and store-and-forward. Defer dedicated Nexus stations and optical crosslinks until Phase 2 when swarm exceeds 10,000 nodes.
+2. **Start with 1,000–3,000 Nodes for Phase 1**: Begin at the lower end of proposed swarm sizes to validate control algorithms, communication protocols, and collision avoidance before scaling to 10,000+. Use this phase to retire navigation and autonomy risks.
 
-3. **Design for Statistical Constellation, Not Formation Flying**: Assign each node an orbital element set with keep-out tubes and mean anomaly windows rather than rigid formation geometry. Use "ephemeris governance" with periodic global optimization nudges rather than continuous tight formation control.
+3. **Use Hybrid Communication**: Deploy S-band/UHF for baseline node-to-beacon links (robust, simple), with optical ISL reserved for high-bandwidth cluster backbone and inter-sector links. Defer full optical mesh to Phase 1.5 after validating pointing and reliability.
 
-4. **Prioritize Manufacturability Over Performance**: Select COTS-derived, radiation-characterized components over full rad-hard where possible. Target node SCS mass <0.5 kg, power <15W average, and unit cost <$2,000 at 1,000+ quantity to enable scaling.
+4. **Implement Ephemeris Governance, Not Formation Flying**: Assign each node an orbital element window and keep-out tube rather than rigid formation geometry. Use distributed conjunction screening with beacon-broadcast catalogs and local avoidance authority.
 
-5. **Implement Robust Safety Kernel**: Develop formally verified safety-critical software for collision avoidance and safe-mode behavior. Limit autonomous maneuver authority (ΔV <1 m/s without coordination) and enforce safety envelopes on all commanded actions.
+5. **Design for Graceful Degradation**: Accept 1–3% annual node failure rate by using automotive-grade components with selective spot shielding and ECC. Ensure no single node or beacon failure destabilizes the swarm; nodes must survive 30 days in free-run mode.
 
-6. **Build Comprehensive Simulation Infrastructure Early**: Invest in Monte Carlo simulation (10,000+ node swarms) and hardware-in-loop testbeds before flight hardware. Validate time sync, TDMA scheduling, conjunction screening, and emergent behavior under degraded conditions.
+6. **Invest Heavily in Simulation and Hardware-in-the-Loop Testing**: Build a 10,000+ node software simulation with Monte Carlo error injection before flight. Validate all autonomy and collision avoidance logic in HIL testbeds with representative hardware.
 
-7. **Plan Incremental Scaling Milestones**: Target 10-node orbital demonstration (TRL 6) at month 18, 200-node pre-production validation (TRL 7) at month 28, and 1,000-node Phase 1 operational capability (TRL 8) at month 36, with architecture designed to scale to 100,000+ nodes without fundamental redesign.
+7. **Formally Verify Safety-Critical Software**: Use seL4 or equivalent verified microkernel for the safety envelope. Limit maneuver authority in software to prevent runaway thrust commands. Implement authenticated, signed broadcasts with per-node identity keys to prevent spoofing.

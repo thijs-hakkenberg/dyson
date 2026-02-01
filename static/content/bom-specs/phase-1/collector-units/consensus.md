@@ -7,71 +7,71 @@ generated: "2026-02-01"
 phase: "phase-1"
 ---
 
-# Solar Collector Units - Synthesized Technical Specifications
+# Solar Collector Unit (SCU) Synthesis Document
 ## Phase 1 - Initial Swarm Deployment
 
 ---
 
 ## Key Specifications
 
-All three models converge on the following core specifications:
+All three models converge on the following technical parameters:
 
-- **Architecture**: Thin-film photovoltaic on tensioned membrane/blanket structure with deployable frame, prioritizing mass efficiency over peak conversion efficiency
-- **Areal Density Target**: <200 g/m² system-level (Claude: 185 g/m², GPT: ~170 g/m² implied from 69 kg/40 m² + structure)
-- **Solar Cell Efficiency**: 15-28% BOL depending on technology selection, with 15-25% degradation expected over design life
-- **Operating Voltage**: High-voltage DC internal bus (600-1200 VDC) to minimize I²R losses and harness mass
-- **Thermal Management**: Passive radiative cooling with rear-facing radiators, targeting PV operating temperatures of 40-120°C
-- **Attitude Control**: Reaction wheels for fine pointing with propulsive momentum dumping (magnetorquers ineffective in heliocentric orbit)
-- **Design Philosophy**: Graceful degradation with no single-point failures; swarm functionality degrades linearly with unit loss
-- **Manufacturing Priority**: Design for automated mass production; complexity pushed to ground facilities
-- **Autonomy Level**: High unit-level autonomy for fault detection/isolation/recovery (FDIR), with ground-supervised swarm coordination in Phase 1
+- **Architecture**: Thin-film photovoltaic membrane/sail design with modular, mass-producible units prioritizing areal density over rigid panel construction
+- **Conversion Efficiency**: 28-31% beginning-of-life (BOL) using multi-junction or perovskite-silicon tandem cells, degrading to ~20-25% end-of-life (EOL)
+- **Areal Density Target**: <100 g/m² for collector surfaces (Claude: 85 g/m², Gemini: ~13 g/m², GPT: ~0.5 kg/m² for blanket alone)
+- **Power Transmission Method**: Microwave wireless power transmission at 2.45 GHz or 5.8 GHz using phased array antennas with electronic beam steering
+- **Autonomy Requirement**: High unit-level autonomy with fault detection, isolation, and recovery (FDIR) due to communication latency (minutes to Earth)
+- **Propulsion**: Ion or electrospray propulsion for station-keeping with 20-100 m/s ΔV capability over mission life; solar radiation pressure utilized for attitude control
+- **Thermal Management**: Passive radiative cooling using high-emissivity rear coatings (ε > 0.9) to maintain PV operating temperatures below 120-200°C
+- **Redundancy Philosophy**: Graceful degradation design where loss of 10% of units or components does not compromise mission; no single-point failures
+- **Communications Architecture**: Mesh network topology with inter-SCU links; hierarchical control with "shepherd" or relay nodes for Earth communication
 
 ---
 
 ## Divergent Views
 
-- **Unit Size/Power Output**: Claude recommends large 10,000 m² units producing ~5-10 MW each; GPT advocates smaller 40 m² "tile" units at ~10 kW each for easier manufacturing and launch packaging; Gemini specification not fully detailed but implies modular approach.
+- **Orbital Distance**: Claude recommends 0.5 AU (solar flux 5,480 W/m², 52 MW per unit); Gemini prefers 0.3 AU (solar flux ~15,000 W/m², 44 MW per unit); GPT suggests 1.0 AU baseline (solar flux 1,361 W/m², 10-11 kW per unit) for reduced thermal/radiation stress and simpler operations.
 
-- **Photovoltaic Technology Selection**: Claude strongly recommends CIGS thin-film (16% efficiency, ~85 g/m²) accepting lower efficiency for mass savings; GPT prefers space-grade multi-junction cells (28% efficiency) on lightweight blanket substrates if budget allows, with thin-film as cost-reduction option; Gemini not specified.
+- **Unit Size/Power Class**: Claude specifies 10,000 m² collectors producing 52 MW each at 1,850 kg total mass; Gemini proposes 6,500 m² hexagonal sails producing 44 MW at 85 kg; GPT recommends smaller 40 m² "tile" units producing 10 kW at 69 kg for manufacturing simplicity and rapid iteration.
 
-- **Orbital Position**: Claude specifies 0.7 AU heliocentric (inside Venus orbit) for ~2× solar flux increase; GPT baselines 1 AU Earth-trailing/leading orbit for simpler operations and thermal environment; Gemini not specified.
+- **Attitude Control Approach**: Claude recommends Control Moment Gyros (CMGs) with ion thruster momentum dumping; Gemini advocates spin-stabilization (5 RPM) with heliogyro solar pressure control and minimal propellant; GPT proposes reaction wheels with micropropulsion for a balance of simplicity and precision.
 
-- **Design Life**: Claude targets 15-year design life with degradation margins; GPT suggests 5-year baseline for Phase 1 units with 1-year minimum acceptable for pathfinders; Gemini not specified.
+- **PV Technology Selection**: Claude selects perovskite-silicon tandem (TRL 5, 31% efficiency, best mass efficiency); Gemini specifies perovskite/CIGS flexible thin-film (45% claimed, aggressive); GPT favors space-proven multi-junction III-V cells (TRL 7-9) despite higher cost, citing radiation tolerance concerns.
 
-- **Propulsion Technology**: Claude specifies conventional ion thruster with xenon propellant (120 kg subsystem); GPT recommends electrospray (ionic liquid) or cold gas for simplicity, with 20-50 m/s Δv capability in a 6 kg package; Gemini not specified.
+- **Phase 1 Beamed Power Requirement**: Claude includes full 44.5 MW microwave transmission as baseline capability; Gemini integrates metamaterial phased array into sail structure as core function; GPT recommends beamed power as optional demonstration module only, not baseline requirement for Phase 1.
 
-- **Beamed Power in Phase 1**: Claude includes laser communication terminal but does not emphasize power beaming; GPT explicitly recommends beamed power as optional "nice-to-have" demo only, not baseline requirement, suggesting 100-500W optical laser if included.
+- **Unit Cost Estimates**: Claude projects $2.4M per unit at 1,000-unit scale; Gemini estimates $154,000 per unit (hardware + launch); GPT ranges $0.7M-$4.9M depending on PV technology choice and reliability requirements.
 
 ---
 
 ## Open Questions
 
-1. **Orbit Selection Trade**: What is the optimal balance between increased solar flux at closer orbits (0.7 AU) versus thermal management complexity, radiation environment, and operational accessibility? This fundamentally affects power output, thermal design, and mission operations.
+1. **Radiation Degradation Rates**: What is the actual 5-year survival curve for unshielded thin-film PV (especially perovskites) under intense proton flux at 0.3-0.5 AU? Laboratory data is insufficient for mission planning.
 
-2. **Unit Size Optimization**: Should Phase 1 prioritize fewer large collectors (MW-class) for reduced avionics overhead per watt, or many small tiles (kW-class) for manufacturing learning curve acceleration and launch flexibility? Cost-per-watt crossover point needs analysis.
+2. **Station-Keeping Propellant Budget**: Can solar radiation pressure alone maintain precise formation geometry required for phased array power transmission, or will propellant consumption exceed mass budgets?
 
-3. **PV Technology Readiness vs. Performance**: How to balance TRL-9 space-proven multi-junction cells (expensive, efficient) against emerging thin-film technologies (cheaper, lighter, less radiation-tested)? What minimum lifetime is acceptable for Phase 1 learning units?
+3. **Xenon Supply Chain**: Phase 1 at Claude's scale requires 150 tonnes of xenon (global annual production ~70 tonnes). Is alternative propellant (krypton, ionic liquid) viable without significant Isp penalty?
 
-4. **High-Voltage Arc Fault Management**: What specific detection, isolation, and prevention strategies are required for 600-1200 VDC systems in the space plasma environment? This is identified as a critical reliability driver with limited flight heritage at proposed power levels.
+4. **High-Voltage Arc Fault Behavior**: How do 600-1200 VDC systems behave in the plasma environment at various solar distances? What detection/isolation response times are required?
 
-5. **Swarm Collision Avoidance**: What conjunction probability is acceptable, and what level of autonomous avoidance capability is required versus ground-commanded maneuvers? How do units maintain safe separation during deployment dispersions?
+5. **Deployment Reliability at Scale**: What is acceptable deployment failure rate for origami-folded or roll-out membrane structures at 100-1000x scale? How many ground deployment cycles validate flight reliability?
 
-6. **End-of-Life Disposal**: What passivation and disposal strategy prevents long-term orbital debris hazards for thousands of units in heliocentric space?
+6. **Swarm Collision Probability**: With 1,000+ units in formation, what inter-unit spacing and autonomous avoidance capability prevents cascading collisions while maintaining power transmission coherence?
 
 ---
 
 ## Recommended Approach
 
-1. **Adopt a modular "tile" architecture** in the 10-100 kW range per unit as a compromise between Claude's large collectors and GPT's small tiles, enabling manufacturing scale-up while keeping individual unit complexity manageable. Target ~1,000-2,500 m² per unit (~500 kW class).
+1. **Adopt a modular "tile" architecture** starting with 100-1000 m² class units (compromise between GPT's 40 m² and Claude's 10,000 m²) to enable manufacturing learning while generating meaningful power (~500 kW-5 MW per unit). Scale unit size in later phases as production matures.
 
-2. **Baseline CIGS or advanced thin-film PV** for Phase 1 to validate mass-efficient approach, while maintaining interface compatibility for future multi-junction upgrades. Accept 15-18% efficiency in exchange for <100 g/m² areal density.
+2. **Begin Phase 1 deployment at 1.0 AU** (GPT's recommendation) to reduce thermal management complexity and radiation exposure, enabling validation of core systems before migrating to higher-flux orbits (0.5 AU) in Phase 2.
 
-3. **Design for 1 AU operations initially** with thermal margins supporting future migration to 0.7-0.8 AU. This reduces Phase 1 risk while preserving the option for higher-flux orbits as operational experience accumulates.
+3. **Select space-proven multi-junction PV for initial units** while conducting parallel qualification of perovskite-silicon tandem technology. Transition to tandem cells in Phase 1B/1C once radiation tolerance is demonstrated in flight.
 
-4. **Prioritize HV power management and arc fault protection** as critical path development items. Invest in extensive ground testing of 600-1200 VDC systems including plasma chamber validation before flight.
+4. **Implement hybrid attitude control**: reaction wheels for fine pointing with solar radiation pressure augmentation (Gemini's heliogyro principles) to minimize propellant consumption. Reserve ion propulsion for station-keeping and momentum dumping only.
 
-5. **Implement a phased flight demonstration**: 3-10 pathfinder units (1-2 year design life) followed by 50-200 unit initial tranche (5-year design life), with manufacturing improvements incorporated between tranches.
+5. **Defer full-scale beamed power transmission to Phase 1B**: Initial units should demonstrate power generation, storage, and electrical export interfaces. Include standardized payload bay (GPT's approach) for beamed power demonstrator modules on a subset of units.
 
-6. **Defer beamed power to optional payload accommodation** rather than baseline requirement. Design standard payload bay with power, data, and pointing interfaces so subset of units can host beaming demonstrators without impacting core SCU design.
+6. **Establish manufacturing pilot line for 50-200 units** before committing to 1,000-unit production. Use pathfinder flights (3-10 units) to validate deployment, thermal, and autonomy systems with real operational data.
 
-7. **Establish autonomous FDIR as mandatory** for all units, with swarm-level coordination remaining ground-supervised in Phase 1. Develop distributed autonomy algorithms in parallel for Phase 2 deployment.
+7. **Prioritize high-voltage power management and arc fault protection** as critical path technology development. This subsystem enables efficient power aggregation across the swarm and is common to all architectural variants.
