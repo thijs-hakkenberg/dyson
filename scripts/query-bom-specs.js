@@ -180,7 +180,7 @@ async function queryDatabricks(modelKey, prompt) {
             content: prompt
           }
         ],
-        max_tokens: 4096,
+        max_tokens: 16384,
         temperature: 0.7
       })
     });
@@ -191,7 +191,15 @@ async function queryDatabricks(modelKey, prompt) {
     }
 
     const data = await response.json();
-    return data.choices?.[0]?.message?.content || data.content;
+    const content = data.choices?.[0]?.message?.content;
+
+    // Handle Gemini's array format where content is [{type: 'text', text: '...'}]
+    if (Array.isArray(content)) {
+      const textContent = content.find(c => c.type === 'text');
+      return textContent?.text || null;
+    }
+
+    return content || data.content;
   } catch (error) {
     console.error(`Error querying ${model.name}:`, error.message);
     return null;

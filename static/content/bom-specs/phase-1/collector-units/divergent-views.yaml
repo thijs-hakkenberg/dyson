@@ -1,0 +1,77 @@
+# Divergent Views for collector-units
+# Auto-generated from consensus document
+
+bomId: "bom-1-1"
+itemSlug: "collector-units"
+generated: "2026-02-01"
+
+topics:
+  - id: "unit-size-power-output"
+    topic: "Unit Size/Power Output"
+    positions:
+      - statement: "large 10,000 m² units producing ~5-10 MW each"
+        models:
+          - "Claude"
+      - statement: "smaller 40 m² \"tile\" units at ~10 kW each for easier manufacturing and launch packaging"
+        models:
+          - "Gpt"
+      - statement: "not fully detailed but implies modular approach"
+        models:
+          - "Gemini"
+  - id: "photovoltaic-technology-selection"
+    topic: "Photovoltaic Technology Selection"
+    positions:
+      - statement: "recommends CIGS thin-film (16% efficiency, ~85 g/m²) accepting lower efficiency for mass savings"
+        models:
+          - "Claude"
+      - statement: "space-grade multi-junction cells (28% efficiency) on lightweight blanket substrates if budget allows, with thin-film as cost-reduction option"
+        models:
+          - "Gpt"
+      - statement: "specified"
+        models:
+          - "Gemini"
+  - id: "orbital-position"
+    topic: "Orbital Position"
+    positions:
+      - statement: "0"
+        models:
+          - "Claude"
+      - statement: "1 AU Earth-trailing/leading orbit for simpler operations and thermal environment"
+        models:
+          - "Gpt"
+      - statement: "specified"
+        models:
+          - "Gemini"
+  - id: "design-life"
+    topic: "Design Life"
+    positions:
+      - statement: "15-year design life with degradation margins"
+        models:
+          - "Claude"
+      - statement: "5-year baseline for Phase 1 units with 1-year minimum acceptable for pathfinders"
+        models:
+          - "Gpt"
+      - statement: "specified"
+        models:
+          - "Gemini"
+  - id: "propulsion-technology"
+    topic: "Propulsion Technology"
+    positions:
+      - statement: "conventional ion thruster with xenon propellant (120 kg subsystem)"
+        models:
+          - "Claude"
+      - statement: "electrospray (ionic liquid) or cold gas for simplicity, with 20-50 m/s Δv capability in a 6 kg package"
+        models:
+          - "Gpt"
+      - statement: "specified"
+        models:
+          - "Gemini"
+  - id: "beamed-power-in-phase-1"
+    topic: "Beamed Power in Phase 1"
+    positions:
+      - statement: "laser communication terminal but does not emphasize power beaming"
+        models:
+          - "Claude"
+      - statement: "recommends beamed power as optional \"nice-to-have\" demo only, not baseline requirement, suggesting 100-500W optical laser if included"
+        models:
+          - "Gpt"

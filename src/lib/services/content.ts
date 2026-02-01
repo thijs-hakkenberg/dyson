@@ -83,63 +83,102 @@ export const PHASES: Phase[] = [
 	{
 		id: 'phase-1',
 		number: 1,
-		title: 'Structural Closure',
+		title: 'Initial Swarm Deployment',
 		description:
-			'Begin construction of the first Dyson swarm elements. This phase focuses on building and deploying initial solar collector satellites and establishing the communication/control infrastructure.',
+			'Begin construction of the first Dyson swarm elements. This phase focuses on building and deploying initial solar collector satellites, establishing assembly infrastructure, and creating the communication/control systems.',
 		status: 'planned',
 		objectives: [
 			'Design and prototype swarm satellite units',
+			'Deploy assembly node hub and robotic workforce',
 			'Manufacture first batch of solar collectors',
-			'Deploy initial swarm constellation',
-			'Establish ground control and communication network',
+			'Deploy initial swarm constellation (1,000 units)',
+			'Establish swarm control and communication network',
+			'Deploy mass drivers for lunar material transport',
 			'Begin power transmission tests'
 		],
 		bom: [
 			{
 				id: 'bom-1-1',
-				name: 'Solar Collector Satellites',
-				description: 'Individual swarm elements with solar panels and power transmission systems',
+				name: 'Solar Collector Units',
+				description: 'Individual swarm elements with thin-film PV on tensioned membrane structure',
 				quantity: 1000,
 				unit: 'units',
 				unitCost: 100000000,
 				totalCost: 100000000000,
-				category: 'Spacecraft'
+				category: 'Spacecraft',
+				slug: 'collector-units'
 			},
 			{
 				id: 'bom-1-2',
-				name: 'Communication Relay Satellites',
-				description: 'High-bandwidth relay network for swarm coordination',
-				quantity: 50,
+				name: 'PV Blanket Arrays',
+				description: 'Rollable thin-film photovoltaic blankets for collector unit power generation',
+				quantity: 5000,
 				unit: 'units',
-				unitCost: 500000000,
+				unitCost: 5000000,
 				totalCost: 25000000000,
-				category: 'Communications'
+				category: 'Power Systems',
+				slug: 'pv-blanket-arrays'
 			},
 			{
 				id: 'bom-1-3',
-				name: 'Ground Receiving Stations',
-				description: 'Earth-based facilities for receiving transmitted power',
-				quantity: 10,
-				unit: 'stations',
-				unitCost: 5000000000,
-				totalCost: 50000000000,
-				category: 'Infrastructure'
+				name: 'Assembly Robots',
+				description: 'Heterogeneous robot fleet including tugs, dexterous workers, and logistics drones',
+				quantity: 50,
+				unit: 'units',
+				unitCost: 60000000,
+				totalCost: 3000000000,
+				category: 'Robotics',
+				slug: 'assembly-robots'
 			},
 			{
 				id: 'bom-1-4',
-				name: 'Manufacturing Facility Expansion',
-				description: 'Orbital factory upgrades for mass satellite production',
+				name: 'Assembly Node Hub',
+				description: 'Modular orbital manufacturing and assembly facility with robotic assembly cells',
 				quantity: 1,
-				unit: 'facility',
-				unitCost: 20000000000,
-				totalCost: 20000000000,
-				category: 'Infrastructure'
+				unit: 'hub',
+				unitCost: 15000000000,
+				totalCost: 15000000000,
+				category: 'Infrastructure',
+				slug: 'assembly-node'
+			},
+			{
+				id: 'bom-1-5',
+				name: 'Mass Drivers',
+				description: 'Electromagnetic coilgun systems for launching lunar materials to orbit',
+				quantity: 2,
+				unit: 'systems',
+				unitCost: 4000000000,
+				totalCost: 8000000000,
+				category: 'Infrastructure',
+				slug: 'mass-drivers'
+			},
+			{
+				id: 'bom-1-6',
+				name: 'Orbital Tugs',
+				description: 'Solar-electric propulsion spacecraft for cargo transport between orbits',
+				quantity: 20,
+				unit: 'units',
+				unitCost: 100000000,
+				totalCost: 2000000000,
+				category: 'Spacecraft',
+				slug: 'orbital-tugs'
+			},
+			{
+				id: 'bom-1-7',
+				name: 'Swarm Control System',
+				description: 'Distributed control infrastructure with beacon relays and ground stations',
+				quantity: 1,
+				unit: 'system',
+				unitCost: 5000000000,
+				totalCost: 5000000000,
+				category: 'Computing',
+				slug: 'swarm-control-system'
 			}
 		],
-		totalCost: 195000000000,
+		totalCost: 158000000000,
 		estimatedDuration: '20-30 years',
 		dependencies: ['phase-0'],
-		relatedResearch: ['solar sail', 'space-based solar power', 'wireless power transmission']
+		relatedResearch: ['solar sail', 'space-based solar power', 'wireless power transmission', 'electromagnetic launch']
 	},
 	{
 		id: 'phase-2',

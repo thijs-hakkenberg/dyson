@@ -96,63 +96,63 @@ export const PHASE_0_BOM_ITEMS: BOMItemMeta[] = [
 
 /**
  * Phase 1 BOM Items - Initial Swarm Deployment
- * Note: quantity and cost are TBD - they emerge from LLM consensus
+ * Quantity and cost estimates derived from multi-model LLM consensus (2026-02-01)
  */
 export const PHASE_1_BOM_ITEMS: BOMItemMeta[] = [
 	{
 		bomId: 'bom-1-1',
 		slug: 'collector-units',
 		name: 'Solar Collector Units',
-		quantity: 'TBD',
-		cost: 'TBD',
+		quantity: '1,000 units',
+		cost: '$100B',
 		category: 'Spacecraft'
 	},
 	{
 		bomId: 'bom-1-2',
 		slug: 'pv-blanket-arrays',
 		name: 'PV Blanket Arrays',
-		quantity: 'TBD',
-		cost: 'TBD',
+		quantity: '5,000 units',
+		cost: '$25B',
 		category: 'Power Systems'
 	},
 	{
 		bomId: 'bom-1-3',
 		slug: 'assembly-robots',
 		name: 'Assembly Robots',
-		quantity: 'TBD',
-		cost: 'TBD',
+		quantity: '50 units',
+		cost: '$3B',
 		category: 'Robotics'
 	},
 	{
 		bomId: 'bom-1-4',
 		slug: 'assembly-node',
 		name: 'Assembly Node Hub',
-		quantity: 'TBD',
-		cost: 'TBD',
+		quantity: '1 hub',
+		cost: '$15B',
 		category: 'Infrastructure'
 	},
 	{
 		bomId: 'bom-1-5',
 		slug: 'mass-drivers',
 		name: 'Mass Drivers',
-		quantity: 'TBD',
-		cost: 'TBD',
+		quantity: '2 systems',
+		cost: '$8B',
 		category: 'Infrastructure'
 	},
 	{
 		bomId: 'bom-1-6',
 		slug: 'orbital-tugs',
 		name: 'Orbital Tugs',
-		quantity: 'TBD',
-		cost: 'TBD',
+		quantity: '20 units',
+		cost: '$2B',
 		category: 'Spacecraft'
 	},
 	{
 		bomId: 'bom-1-7',
 		slug: 'swarm-control-system',
 		name: 'Swarm Control System',
-		quantity: 'TBD',
-		cost: 'TBD',
+		quantity: '1 system',
+		cost: '$5B',
 		category: 'Computing'
 	}
 ];

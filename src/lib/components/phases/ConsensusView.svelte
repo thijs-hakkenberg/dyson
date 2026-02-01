@@ -98,7 +98,7 @@
 						<svg class="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 						</svg>
-						<span class="text-star-dim text-sm">{spec}</span>
+						<span class="text-star-dim text-sm prose-inline">{@html renderMarkdown(spec)}</span>
 					</div>
 				{/each}
 			</div>
@@ -151,7 +151,7 @@
 											{/if}
 										{/each}
 									</div>
-									<p class="text-sm text-star-dim">{position}</p>
+									<p class="text-sm text-star-dim prose-inline">{@html renderMarkdown(position)}</p>
 								</div>
 							{/each}
 						</div>
@@ -184,7 +184,7 @@
 							<svg class="w-5 h-5 text-purple-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
 							</svg>
-							<span class="text-sm text-star-dim">{question}</span>
+							<span class="text-sm text-star-dim prose-inline">{@html renderMarkdown(question)}</span>
 						</div>
 					{/each}
 				</div>
@@ -215,6 +215,26 @@
 </div>
 
 <style>
+	/* Inline prose for rendered markdown in compact areas */
+	.prose-inline :global(p) {
+		display: inline;
+		margin: 0;
+	}
+	.prose-inline :global(strong) {
+		color: rgb(var(--color-star-white));
+		font-weight: 600;
+	}
+	.prose-inline :global(em) {
+		font-style: italic;
+	}
+	.prose-inline :global(code) {
+		background-color: rgb(var(--color-space-600));
+		padding: 0.1rem 0.3rem;
+		border-radius: 0.25rem;
+		font-size: 0.9em;
+		color: rgb(var(--color-cosmic-cyan));
+	}
+
 	.prose-consensus :global(p) {
 		color: rgb(var(--color-star-dim));
 		margin-bottom: 1rem;

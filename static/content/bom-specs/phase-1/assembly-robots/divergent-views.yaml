@@ -1,0 +1,74 @@
+# Divergent Views for assembly-robots
+# Auto-generated from consensus document
+
+bomId: "bom-1-3"
+itemSlug: "assembly-robots"
+generated: "2026-02-01"
+
+topics:
+  - id: "heavy-handler-mass"
+    topic: "Heavy Handler Mass"
+    positions:
+      - statement: "AR-S at 450 kg dry / 650 kg wet"
+        models:
+          - "Claude"
+      - statement: "AT-1 at 1,200 kg dry with 250 kg propellant"
+        models:
+          - "Gpt"
+      - statement: "not provide explicit mass figures for the structural class"
+        models:
+          - "Gemini"
+  - id: "boom-reach-configuration"
+    topic: "Boom/Reach Configuration"
+    positions:
+      - statement: "a 25m telescoping boom for structural work"
+        models:
+          - "Claude"
+      - statement: "8m tip-to-tip arm span for the heavy handler"
+        models:
+          - "Gpt"
+      - statement: "not specify reach dimensions"
+        models:
+          - "Gemini"
+  - id: "welding-capability"
+    topic: "Welding Capability"
+    positions:
+      - statement: "integrated 3 kW electron beam welding on the structural robot (AR-S)"
+        models:
+          - "Claude"
+      - statement: "Gemini do not specify welding as a primary assembly robot function, implying mechanical fastening or pre-integrated joints"
+        models:
+          - "Gpt"
+  - id: "team-cell-composition"
+    topic: "Team/Cell Composition"
+    positions:
+      - statement: "9 robots per team (4 precision + 2 structural + 3 logistics)"
+        models:
+          - "Claude"
+      - statement: "7 robots per cell (1 heavy tug + 2 dexterous workers + 4 logistics drones)"
+        models:
+          - "Gpt"
+      - statement: "not specify team composition"
+        models:
+          - "Gemini"
+  - id: "logistics-drone-payload"
+    topic: "Logistics Drone Payload"
+    positions:
+      - statement: "AR-L at 150 kg dry with 200 kg cargo capacity"
+        models:
+          - "Claude"
+      - statement: "LD-1 at 60 kg dry with 20 kg payload capacity"
+        models:
+          - "Gpt"
+      - statement: "not provide logistics drone specifications"
+        models:
+          - "Gemini"
+  - id: "development-cost-estimates"
+    topic: "Development Cost Estimates"
+    positions:
+      - statement: "detailed NRE estimates ($1"
+        models:
+          - "Gpt"
+      - statement: "Gemini do not provide cost estimates"
+        models:
+          - "Claude"

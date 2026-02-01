@@ -1,0 +1,62 @@
+# Divergent Views for swarm-control-system
+# Auto-generated from consensus document
+
+bomId: "bom-1-7"
+itemSlug: "swarm-control-system"
+generated: "2026-02-01"
+
+topics:
+  - id: "initial-swarm-size"
+    topic: "Initial Swarm Size"
+    positions:
+      - statement: "10,000-100,000 satellites for Phase 1 to demonstrate meaningful scale"
+        models:
+          - "Claude"
+      - statement: "1,000 nodes as minimum viable for proving scalable deployment and control"
+        models:
+          - "Gpt"
+  - id: "cluster-organization"
+    topic: "Cluster Organization"
+    positions:
+      - statement: "formal cluster hierarchy with ~100 satellites per cluster and elected cluster heads with enhanced capabilities (+50 kg, 2x compute)"
+        models:
+          - "Claude"
+      - statement: "the swarm as a \"statistical constellation\" without rigid cluster structures, using beacon-centric coordination instead"
+        models:
+          - "Gpt"
+  - id: "coordination-infrastructure"
+    topic: "Coordination Infrastructure"
+    positions:
+      - statement: "4 dedicated Nexus stations at Lagrange points (Earth L4/L5, Venus L4, Mars L5) with 5m dishes and 100 Gbps optical terminals"
+        models:
+          - "Claude"
+      - statement: "3-5 smaller Beacon/Relay spacecraft (35-60 kg each, ESPA-class) with simpler S/X-band communications"
+        models:
+          - "Gpt"
+  - id: "node-computing-power"
+    topic: "Node Computing Power"
+    positions:
+      - statement: "500 MHz quad-core RISC-V with 512 MB RAM and 2 TOPS neural accelerator at 15-25W"
+        models:
+          - "Claude"
+      - statement: "2-10 GFLOPS equivalent MCU/SoC with 512 MB RAM at 2"
+        models:
+          - "Gpt"
+  - id: "communication-bandwidth"
+    topic: "Communication Bandwidth"
+    positions:
+      - statement: "for 1-10 Gbps optical crosslinks between satellites"
+        models:
+          - "Claude"
+      - statement: "recommends deferring optical crosslinks to Phase 1"
+        models:
+          - "Gpt"
+  - id: "control-philosophy"
+    topic: "Control Philosophy"
+    positions:
+      - statement: "\"swarm as ecosystem\" with emergent behavior management and formation maintenance"
+        models:
+          - "Claude"
+      - statement: "\"ephemeris governance\" treating nodes as independent agents with assigned orbital slots and keep-out tubes rather than formation flying"
+        models:
+          - "Gpt"

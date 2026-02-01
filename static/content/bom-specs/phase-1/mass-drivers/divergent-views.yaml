@@ -1,0 +1,65 @@
+# Divergent Views for mass-drivers
+# Auto-generated from consensus document
+
+bomId: "bom-1-5"
+itemSlug: "mass-drivers"
+generated: "2026-02-01"
+
+topics:
+  - id: "track-length"
+    topic: "Track Length"
+    positions:
+      - statement: "3"
+        models:
+          - "Gpt"
+      - statement: "4"
+        models:
+          - "Claude"
+      - statement: "unavailable for comparison"
+        models:
+          - "Gemini"
+  - id: "nominal-payload-mass"
+    topic: "Nominal Payload Mass"
+    positions:
+      - statement: "for 200 kg nominal payload with 45 kg reusable carrier"
+        models:
+          - "Claude"
+      - statement: "100 kg payload with 20–40 kg carrier for Phase 1, scaling to 500 kg later"
+        models:
+          - "Gpt"
+  - id: "energy-efficiency-assumptions"
+    topic: "Energy Efficiency Assumptions"
+    positions:
+      - statement: "87% efficiency achievable with superconducting coilgun technology"
+        models:
+          - "Claude"
+      - statement: "45% early/60% mature as more conservative baseline for non-superconducting systems"
+        models:
+          - "Gpt"
+  - id: "throughput-targets"
+    topic: "Throughput Targets"
+    positions:
+      - statement: "2,400 tonnes/day (12,000 launches/day at 200 kg)"
+        models:
+          - "Claude"
+      - statement: "24–72 tonnes/day (10–30 shots/hour at 100 kg) for Phase 1, emphasizing incremental scaling"
+        models:
+          - "Gpt"
+  - id: "superconducting-vs-conventional-coils"
+    topic: "Superconducting vs. Conventional Coils"
+    positions:
+      - statement: "YBCO superconducting coils operating at <77K with LN2 pre-cooling for maximum efficiency"
+        models:
+          - "Claude"
+      - statement: "conventional aluminum/copper conductors for simplicity and dust tolerance, avoiding cryogenic complexity"
+        models:
+          - "Gpt"
+  - id: "pulsed-power-architecture"
+    topic: "Pulsed Power Architecture"
+    positions:
+      - statement: "superconducting magnetic energy storage (SMES) with 2"
+        models:
+          - "Claude"
+      - statement: "capacitor banks (early) transitioning to flywheel-capacitor hybrid, citing maturity and robustness over energy density"
+        models:
+          - "Gpt"

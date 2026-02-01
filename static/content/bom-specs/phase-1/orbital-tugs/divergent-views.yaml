@@ -1,0 +1,62 @@
+# Divergent Views for orbital-tugs
+# Auto-generated from consensus document
+
+bomId: "bom-1-6"
+itemSlug: "orbital-tugs"
+generated: "2026-02-01"
+
+topics:
+  - id: "fleet-architecture"
+    topic: "Fleet Architecture"
+    positions:
+      - statement: "a single standardized tug design optimized for mass production and fleet economics"
+        models:
+          - "Claude"
+      - statement: "a two-tier fleet with Class E (50 kW electric freight) and Class H (20 kW hybrid with chemical backup)"
+        models:
+          - "Gpt"
+  - id: "chemical-propulsion-inclusion"
+    topic: "Chemical Propulsion Inclusion"
+    positions:
+      - statement: "excludes chemical propulsion as \"economically absurd\" for cargo transport within 3 AU"
+        models:
+          - "Claude"
+      - statement: "advocates for storable bipropellant capability (MMH/NTO, 320 s Isp) on service tugs for safety margins, collision avoidance, and rapid repositioning"
+        models:
+          - "Gpt"
+  - id: "power-system-sizing"
+    topic: "Power System Sizing"
+    positions:
+      - statement: "2,400 m² arrays generating 480 kW BOL for high-throughput operations"
+        models:
+          - "Claude"
+      - statement: "more modest 28–70 kW systems for Phase 1, scaling later"
+        models:
+          - "Gpt"
+  - id: "refueling-strategy"
+    topic: "Refueling Strategy"
+    positions:
+      - statement: "in-situ refueling capability as a baseline design requirement"
+        models:
+          - "Claude"
+      - statement: "starting with tank-swap logistics at depots before transitioning to fluid transfer, citing operational simplicity and contamination risk"
+        models:
+          - "Gpt"
+  - id: "delta-v-budget"
+    topic: "Delta-V Budget"
+    positions:
+      - statement: "for 18 km/s unloaded / 8 km/s with 5,000 kg payload"
+        models:
+          - "Claude"
+      - statement: "for 4"
+        models:
+          - "Gpt"
+  - id: "operational-domain"
+    topic: "Operational Domain"
+    positions:
+      - statement: "primarily on heliocentric operations (0"
+        models:
+          - "Claude"
+      - statement: "cislunar operations (HEO/NRHO/GTO) as the Phase 1 primary domain, expanding to heliocentric later"
+        models:
+          - "Gpt"

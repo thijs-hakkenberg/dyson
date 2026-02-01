@@ -1,0 +1,68 @@
+# Divergent Views for pv-blanket-arrays
+# Auto-generated from consensus document
+
+bomId: "bom-1-2"
+itemSlug: "pv-blanket-arrays"
+generated: "2026-02-01"
+
+topics:
+  - id: "bus-voltage-selection"
+    topic: "Bus Voltage Selection"
+    positions:
+      - statement: "120V regulated output from 90V strings"
+        models:
+          - "Claude"
+      - statement: "800V HVDC to minimize harness mass"
+        models:
+          - "Gpt"
+      - statement: "not specify but implies lower voltage heritage approach"
+        models:
+          - "Gemini"
+  - id: "cell-technology-selection"
+    topic: "Cell Technology Selection"
+    positions:
+      - statement: "recommends perovskite-on-silicon tandem (2-terminal) citing manufacturability and thin-film compatibility"
+        models:
+          - "Claude"
+      - statement: "dual-track procurement with III-V flexible for early flights and perovskite/tandem for cost-down"
+        models:
+          - "Gpt"
+      - statement: "unavailable for comparison"
+        models:
+          - "Gemini"
+  - id: "unit-size-optimization"
+    topic: "Unit Size Optimization"
+    positions:
+      - statement: "100m × 100m (10,000 m²) units at 145 kg total"
+        models:
+          - "Claude"
+      - statement: "30m × 40m (1,200 m²) units at 690 kg total"
+        models:
+          - "Gpt"
+  - id: "segment-granularity"
+    topic: "Segment Granularity"
+    positions:
+      - statement: "quadrant-level segmentation (4 segments per unit)"
+        models:
+          - "Claude"
+      - statement: "48 segments at 25 m² each with individual MPPT modules"
+        models:
+          - "Gpt"
+  - id: "specific-power-target"
+    topic: "Specific Power Target"
+    positions:
+      - statement: "~1,400 W/kg (145 kg for 200 kW EOL)"
+        models:
+          - "Claude"
+      - statement: "~565 W/kg (690 kg for 390 kW BOL)"
+        models:
+          - "Gpt"
+  - id: "cost-assumptions"
+    topic: "Cost Assumptions"
+    positions:
+      - statement: "$50/m² at scale for blanket fabrication"
+        models:
+          - "Claude"
+      - statement: "$50–200/m² for mature thin-film production"
+        models:
+          - "Gpt"
