@@ -30,6 +30,14 @@
 		deferred: 'Deferred'
 	};
 
+	// Slugs that have interactive simulators available
+	const simulatorSlugs = ['minimum-constellation-size', 'fleet-size-vs-vehicle-capacity', 'onboard-vs-ground-spectral-unmixing'];
+	const simulatorDescriptions: Record<string, string> = {
+		'minimum-constellation-size': 'Explore this research question with our Monte Carlo constellation coverage simulator. Adjust parameters and see real-time coverage curves.',
+		'fleet-size-vs-vehicle-capacity': 'Explore fleet configurations with our discrete event logistics simulator. Compare throughput and cost efficiency across different vehicle counts and payload sizes.',
+		'onboard-vs-ground-spectral-unmixing': 'Compare on-board vs ground processing with our spectral analysis simulator. See how latency and bandwidth affect survey efficiency.'
+	};
+
 	// Render context markdown if available
 	const renderedContext = $derived(
 		question.context ? renderMarkdown(question.context) : ''
@@ -103,7 +111,7 @@
 		{/if}
 
 		<!-- Interactive Tool Link (for simulation questions with available tools) -->
-		{#if question.questionType === 'simulation' && question.slug === 'minimum-constellation-size'}
+		{#if question.questionType === 'simulation' && simulatorSlugs.includes(question.slug)}
 			<div class="mt-8 p-6 rounded-lg bg-cosmic-cyan/10 border border-cosmic-cyan/30">
 				<div class="flex items-start gap-4">
 					<div class="p-3 rounded-lg bg-cosmic-cyan/20">
@@ -115,8 +123,7 @@
 					<div class="flex-1">
 						<h3 class="text-lg font-semibold text-cosmic-cyan mb-2">Interactive Simulator Available</h3>
 						<p class="text-star-dim text-sm mb-4">
-							Explore this research question with our Monte Carlo constellation coverage simulator.
-							Adjust parameters and see real-time coverage curves.
+							{simulatorDescriptions[question.slug]}
 						</p>
 						<a
 							href="/questions/{question.slug}/simulator"
