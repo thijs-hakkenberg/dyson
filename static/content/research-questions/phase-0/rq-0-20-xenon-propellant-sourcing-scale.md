@@ -4,7 +4,8 @@ slug: "xenon-propellant-sourcing-scale"
 title: "Xenon propellant sourcing at scale"
 questionType: "meta-research"
 priority: "high"
-status: "open"
+status: "answered"
+answeredDate: "2026-02-03"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-4"
 sourceBOMItemSlug: "transport-vehicles"
@@ -61,3 +62,43 @@ The $2B fleet investment becomes stranded capital without reliable propellant su
 4. **ISRU feasibility study**: Analyze asteroid composition data to estimate noble gas concentrations in target bodies. Design conceptual extraction systems and calculate energy requirements, processing rates, and break-even timelines versus Earth-sourced xenon.
 
 5. **Hybrid propulsion architecture**: Investigate dual-propellant systems that use xenon for precision maneuvers and lower-cost alternatives (krypton/argon) for bulk delta-V. Assess vehicle mass and complexity penalties against propellant cost savings.
+
+## Answer
+
+Comprehensive analysis using the Tsiolkovsky rocket equation and market research has definitively answered this question. **Xenon is not viable as the primary propellant for Project Dyson at scale.**
+
+### Key Findings
+
+| Parameter | Value | Implication |
+|-----------|-------|-------------|
+| Annual fleet demand (expected) | 750,000 kg | 15-20x global production |
+| Annual fleet demand (minimum) | 320,000 kg | 6-8x global production |
+| Global xenon production | 40-50 tonnes/year | Fundamental constraint |
+| Xenon ISRU feasibility | Not viable | Parts-per-trillion concentrations |
+| Krypton efficiency vs xenon | 70-85% | Acceptable for bulk operations |
+| Iodine efficiency vs xenon | 95-100% | Near-parity at 1-2% cost |
+
+### Critical Conclusions
+
+1. **Xenon supply is fundamentally inadequate** - Even the minimum demand scenario exceeds global production by 6-8x
+2. **ISRU is not feasible** - Asteroid xenon concentrations are measured in parts per trillion, requiring processing of 10 million tonnes of material per kg of xenon
+3. **Alternative propellants are viable** - Krypton (TRL 9), argon (TRL 9), and iodine (TRL 7-8) offer acceptable performance trade-offs
+4. **Hybrid architecture recommended** - Use xenon (10-20%) for precision maneuvers, alternatives (80-90%) for bulk delta-V
+
+### Recommended Propellant Strategy
+
+| Phase | Timeline | Primary Propellant | Rationale |
+|-------|----------|-------------------|-----------|
+| Phase 1 | Years 1-5 | Krypton | Best flight heritage + availability |
+| Phase 2 | Years 5-10 | Iodine | Near-xenon performance at 1% cost |
+| Phase 3 | Years 10+ | Argon | Highest volume, fuel-efficient operations |
+
+### Investment Required
+
+$50-100M allocated for:
+- Thruster qualification programs (krypton, iodine at 5-20 kW)
+- Long-term supplier agreements
+- Propellant-flexible vehicle design
+- Depot infrastructure development
+
+[Read Full Research Report](/content/research/xenon-propellant-analysis.md)
