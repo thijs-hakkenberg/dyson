@@ -82,3 +82,67 @@ export {
 	runSimulation,
 	runQuickPreview
 } from './simulation-worker';
+
+// Orbital Location Trade Analysis (Simulator 3)
+export * from './orbital-trade';
+
+// Depot Logistics (Simulator 5)
+export * from './depot-logistics';
+
+// Swarm Coordination (Simulator 4)
+// Re-export with namespace to avoid naming conflicts
+export {
+	// Types
+	type CoordinationTopology,
+	type SwarmCoordinationConfig,
+	type EventType as SwarmEventType,
+	type SimEvent as SwarmSimEvent,
+	type NodeStatus,
+	type SwarmNode,
+	type Cluster,
+	type Message as SwarmMessage,
+	type PropagationStats,
+	type SwarmCoordinationRunResult,
+	type SwarmCoordinationResult,
+	type SwarmCoordinationOutput,
+	type TopologyComparisonResult,
+	type SwarmCoordinationProgress,
+	type TopologyConfig,
+	type NetworkStructure,
+	// Monte Carlo
+	DEFAULT_SWARM_COORDINATION_CONFIG,
+	runSwarmCoordinationMonteCarlo,
+	runSwarmCoordinationComparison,
+	generateScalingConfigs,
+	runScalingAnalysis,
+	runQuickSwarmSimulation,
+	// Simulator
+	SwarmCoordinationSimulator,
+	// Topology
+	initializeNetwork,
+	getMessageRouting,
+	getHopCount,
+	estimateBottleneckThreshold,
+	// Message passing
+	MESSAGE_SIZES,
+	lightTimeDelay,
+	calculateBandwidthRequirement,
+	calculatePropagationDelay,
+	calculateCommunicationOverhead,
+	estimateMessageCount,
+	createMessage,
+	MessageQueue,
+	// Coordinator model
+	createNode,
+	createCluster,
+	calculatePowerConsumption,
+	updateNodePower,
+	calculateCoordinatorAvailability,
+	performHandoff,
+	calculatePowerVariance,
+	failNode,
+	needsHandoff,
+	getOperationalNodes,
+	calculateHandoffTime,
+	calculateTotalEnergy
+} from './swarm-coordination';

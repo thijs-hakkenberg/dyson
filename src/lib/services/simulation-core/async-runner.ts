@@ -65,18 +65,32 @@ export class AsyncRunner {
 		for (let i = 0; i < totalIterations; i++) {
 			if (shouldStop?.()) break;
 
-			const result = await iterationFn(i);
-			results.push(result);
-
-			await this.maybeYield();
-
-			if (onProgress && (i % 5 === 0 || i === totalIterations - 1)) {
+			// Report progress BEFORE the iteration so UI shows what's about to run
+			if (onProgress && (i % 5 === 0 || i === totalIterations - 1 || i === 0)) {
 				onProgress({
 					currentIteration: i + 1,
 					totalIterations,
-					percentComplete: ((i + 1) / totalIterations) * 100
+					percentComplete: (i / totalIterations) * 100
 				});
+				// Always yield after progress update to allow browser to paint
+				await this.yieldToUI();
+				this.lastYieldTime = Date.now();
 			}
+
+			const result = await iterationFn(i);
+			results.push(result);
+
+			// Yield periodically during computation to keep UI responsive
+			await this.maybeYield();
+		}
+
+		// Final progress update
+		if (onProgress) {
+			onProgress({
+				currentIteration: totalIterations,
+				totalIterations,
+				percentComplete: 100
+			});
 		}
 
 		return results;
@@ -106,6 +120,22 @@ export class AsyncRunner {
 			for (let innerIdx = 0; innerIdx < innerItems.length; innerIdx++) {
 				if (shouldStop?.()) break;
 
+				// Report progress BEFORE the iteration
+				if (onProgress && (completedIterations % 5 === 0 || completedIterations === 0)) {
+					onProgress({
+						currentIteration: completedIterations + 1,
+						totalIterations,
+						percentComplete: (completedIterations / totalIterations) * 100,
+						outerIndex: outerIdx,
+						innerIndex: innerIdx,
+						outerTotal: outerItems.length,
+						innerTotal: innerItems.length
+					});
+					// Always yield after progress update to allow browser to paint
+					await this.yieldToUI();
+					this.lastYieldTime = Date.now();
+				}
+
 				const result = await iterationFn(
 					outerItems[outerIdx],
 					innerItems[innerIdx],
@@ -116,18 +146,6 @@ export class AsyncRunner {
 
 				completedIterations++;
 				await this.maybeYield();
-
-				if (onProgress && (completedIterations % 5 === 0 || completedIterations === totalIterations)) {
-					onProgress({
-						currentIteration: completedIterations,
-						totalIterations,
-						percentComplete: (completedIterations / totalIterations) * 100,
-						outerIndex: outerIdx,
-						innerIndex: innerIdx,
-						outerTotal: outerItems.length,
-						innerTotal: innerItems.length
-					});
-				}
 			}
 
 			results.push(outerResults);
@@ -135,6 +153,19 @@ export class AsyncRunner {
 			// Always yield between outer iterations
 			await this.yieldToUI();
 			this.lastYieldTime = Date.now();
+		}
+
+		// Final progress update
+		if (onProgress) {
+			onProgress({
+				currentIteration: totalIterations,
+				totalIterations,
+				percentComplete: 100,
+				outerIndex: outerItems.length - 1,
+				innerIndex: innerItems.length - 1,
+				outerTotal: outerItems.length,
+				innerTotal: innerItems.length
+			});
 		}
 
 		return results;

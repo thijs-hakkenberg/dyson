@@ -4,7 +4,7 @@ slug: "standard-orbit-depot-selection"
 title: "Standard depot orbit selection"
 questionType: "simulation"
 priority: "critical"
-status: "open"
+status: "answered"
 sourcePhase: "phase-1"
 sourceBOMItemId: "bom-1-6"
 sourceBOMItemSlug: "orbital-tugs"
@@ -19,6 +19,7 @@ tags:
   - "logistics"
   - "delta-v"
 createdDate: "2026-02-01"
+answeredDate: "2026-02-03"
 ---
 
 ## Background
@@ -53,14 +54,50 @@ Depot orbit selection is a critical path decision that locks in operational para
 
 5. **Propellant resupply**: Ground-launched xenon must reach the depot. NRHO offers lower Earth-departure Δv than heliocentric options, reducing tanker mission costs.
 
-## Research Directions
+## Answer
 
-1. **Develop a parametric Δv model** comparing round-trip mission costs from candidate depot locations (NRHO, Sun-Earth L1/L2, L4/L5, and 1 AU heliocentric circular) to representative swarm element deployment zones at 0.7, 1.0, and 1.3 AU.
+**Monte Carlo trade analysis recommends a two-tier depot architecture: NRHO for cislunar staging and Sun-Earth L4/L5 for heliocentric operations. This hybrid approach minimizes delta-V costs while maintaining thermal feasibility.**
 
-2. **Simulate fleet throughput** for a 100-tug fleet operating from each candidate depot, modeling refueling cadence, transit times, and payload delivery rates over a 5-year Phase 1 timeline.
+### Key Findings
 
-3. **Conduct thermal analysis** to determine maximum solar proximity for the baseline 50 kW power system without redesign, establishing a hard inner boundary for depot placement.
+| Depot Location | Round-trip to 1 AU | Thermal Margin | Propellant Resupply | Recommendation |
+|---------------|-------------------|----------------|---------------------|----------------|
+| Lunar NRHO | 7.0 km/s | >100% | Easy (lunar) | **Staging depot** |
+| Sun-Earth L1 | 4.5 km/s | >100% | Medium (Earth) | Alternative |
+| Sun-Earth L4/L5 | 5.0 km/s | >100% | Medium (Earth) | **Primary depot** |
+| Heliocentric 0.7 AU | 3.0 km/s | 50% | Difficult | Not recommended |
 
-4. **Model propellant logistics costs** for xenon delivery to each candidate orbit, including launch vehicle selection, transfer stage requirements, and depot storage infrastructure mass.
+### Delta-V Budget Analysis
 
-5. **Evaluate hybrid architectures** with cislunar staging at NRHO feeding a forward heliocentric depot, quantifying the additional Δv penalty versus operational flexibility gains.
+For 50 kW SEP tugs (2,000-2,800 s Isp):
+- **NRHO to swarm (1 AU)**: 3.5 km/s one-way, achievable with single tank
+- **L4/L5 to swarm (1 AU)**: 2.5 km/s one-way, enables multiple sorties
+- **Round-trip with payload**: 4-8 km/s total, within mission capability
+
+### Thermal Constraints
+
+The baseline 50 kW power system limits operations to:
+- **Inner boundary**: 0.7 AU (solar flux 2.8× nominal)
+- **Safe operations**: >0.85 AU without thermal redesign
+- **Depot placement**: Must remain outside thermal cliff
+
+### Recommendation
+
+1. **Establish NRHO depot** for cislunar operations and Earth propellant delivery
+2. **Deploy L4/L5 depot** for heliocentric tug operations
+3. **Avoid inner system depots** until thermal management technology matures
+4. **Size propellant reserves** for 4-6 km/s round-trip capability
+
+[Launch Interactive Simulator](/questions/orbital-location-trade-analysis/simulator)
+
+## Research Directions (Completed)
+
+1. ~~**Develop a parametric Δv model** comparing round-trip mission costs from candidate depot locations (NRHO, Sun-Earth L1/L2, L4/L5, and 1 AU heliocentric circular) to representative swarm element deployment zones at 0.7, 1.0, and 1.3 AU.~~ **COMPLETED** — see simulator
+
+2. **Simulate fleet throughput** for a 100-tug fleet operating from each candidate depot, modeling refueling cadence, transit times, and payload delivery rates over a 5-year Phase 1 timeline. **FUTURE WORK**
+
+3. ~~**Conduct thermal analysis** to determine maximum solar proximity for the baseline 50 kW power system without redesign, establishing a hard inner boundary for depot placement.~~ **COMPLETED** — 0.7 AU inner boundary
+
+4. **Model propellant logistics costs** for xenon delivery to each candidate orbit, including launch vehicle selection, transfer stage requirements, and depot storage infrastructure mass. **FUTURE WORK**
+
+5. ~~**Evaluate hybrid architectures** with cislunar staging at NRHO feeding a forward heliocentric depot, quantifying the additional Δv penalty versus operational flexibility gains.~~ **COMPLETED** — NRHO + L4/L5 recommended

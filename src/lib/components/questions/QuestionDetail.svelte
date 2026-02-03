@@ -31,11 +31,45 @@
 	};
 
 	// Slugs that have interactive simulators available
-	const simulatorSlugs = ['minimum-constellation-size', 'fleet-size-vs-vehicle-capacity', 'onboard-vs-ground-spectral-unmixing'];
+	const simulatorSlugs = [
+		'minimum-constellation-size',
+		'fleet-size-vs-vehicle-capacity',
+		'onboard-vs-ground-spectral-unmixing',
+		// Swarm Dynamics simulator (3 questions)
+		'station-keeping-propellant-budget',
+		'swarm-collision-probability',
+		'propulsion-actuation-authority',
+		// ISRU Economics simulator
+		'isru-manufacturing-transition-point',
+		// Orbital Trade simulator (2 questions)
+		'orbital-location-trade-analysis',
+		'standard-orbit-depot-selection',
+		// Swarm Coordination simulator (3 questions)
+		'swarm-coordination-architecture-scale',
+		'cluster-coordinator-duty-cycle',
+		'fleet-coordination-scale-constraints',
+		// Depot Logistics simulator
+		'depot-spacing-logistics-architecture'
+	];
 	const simulatorDescriptions: Record<string, string> = {
 		'minimum-constellation-size': 'Explore this research question with our Monte Carlo constellation coverage simulator. Adjust parameters and see real-time coverage curves.',
 		'fleet-size-vs-vehicle-capacity': 'Explore fleet configurations with our discrete event logistics simulator. Compare throughput and cost efficiency across different vehicle counts and payload sizes.',
-		'onboard-vs-ground-spectral-unmixing': 'Compare on-board vs ground processing with our spectral analysis simulator. See how latency and bandwidth affect survey efficiency.'
+		'onboard-vs-ground-spectral-unmixing': 'Compare on-board vs ground processing with our spectral analysis simulator. See how latency and bandwidth affect survey efficiency.',
+		// Swarm Dynamics descriptions
+		'station-keeping-propellant-budget': 'Analyze station-keeping requirements with our Monte Carlo swarm dynamics simulator. Compare solar radiation pressure vs propulsive control authority.',
+		'swarm-collision-probability': 'Model collision probability across swarm configurations with our Monte Carlo simulator. Explore spacing vs collision risk trade-offs.',
+		'propulsion-actuation-authority': 'Evaluate propulsion authority requirements for collision avoidance with our swarm dynamics simulator.',
+		// ISRU Economics description
+		'isru-manufacturing-transition-point': 'Find the Earth-to-space manufacturing crossover point with our Monte Carlo cost model. Compare launch costs vs ISRU capital investment.',
+		// Orbital Trade descriptions
+		'orbital-location-trade-analysis': 'Compare orbital locations with our multi-objective Monte Carlo trade analysis. Evaluate delta-V, thermal, and communication trade-offs.',
+		'standard-orbit-depot-selection': 'Analyze depot placement options with our orbital trade simulator. Compare Mercury, Earth, L4/L5, and NRHO locations.',
+		// Swarm Coordination descriptions
+		'swarm-coordination-architecture-scale': 'Test swarm coordination architectures at scale with our discrete event simulator. Compare centralized, hierarchical, and mesh topologies.',
+		'cluster-coordinator-duty-cycle': 'Optimize coordinator duty cycles with our swarm coordination simulator. Balance power distribution and update propagation.',
+		'fleet-coordination-scale-constraints': 'Identify coordination scaling limits with our discrete event simulator. Find bottleneck thresholds for million-unit swarms.',
+		// Depot Logistics description
+		'depot-spacing-logistics-architecture': 'Optimize depot spacing for billion-unit maintenance with our discrete event simulator. Balance response time, propellant, and fleet utilization.'
 	};
 
 	// Render context markdown if available

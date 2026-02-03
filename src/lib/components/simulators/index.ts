@@ -19,3 +19,21 @@ export { default as SpectralSimulator } from './spectral/SpectralSimulator.svelt
 export { default as SpectralControls } from './spectral/SpectralControls.svelte';
 export { default as SpectralResults } from './spectral/SpectralResults.svelte';
 export { default as ComparisonChart } from './spectral/ComparisonChart.svelte';
+
+// Swarm Dynamics Simulator Components
+export { default as SwarmDynamicsSimulator } from './swarm-dynamics/SwarmDynamicsSimulator.svelte';
+export { default as SwarmControls } from './swarm-dynamics/SwarmControls.svelte';
+export { default as SwarmResults } from './swarm-dynamics/SwarmResults.svelte';
+export { default as CollisionChart } from './swarm-dynamics/CollisionChart.svelte';
+
+// Orbital Trade Simulator Components
+export { default as OrbitalTradeSimulator } from './orbital-trade/OrbitalTradeSimulator.svelte';
+export { default as OrbitalControls } from './orbital-trade/OrbitalControls.svelte';
+export { default as OrbitalResults } from './orbital-trade/OrbitalResults.svelte';
+export { default as ParetoChart } from './orbital-trade/ParetoChart.svelte';
+
+// ISRU Economics Simulator Components
+export { default as ISRUSimulator } from './isru-economics/ISRUSimulator.svelte';
+export { default as ISRUControls } from './isru-economics/ISRUControls.svelte';
+export { default as ISRUResults } from './isru-economics/ISRUResults.svelte';
+export { default as CostCurveChart } from './isru-economics/CostCurveChart.svelte';
