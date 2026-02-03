@@ -56,8 +56,8 @@ export const PHASE_0_BOM_ITEMS: BOMItemMeta[] = [
 		bomId: 'bom-0-1',
 		slug: 'prospecting-satellites',
 		name: 'Prospecting Satellites',
-		quantity: '50 units',
-		cost: '$250M',
+		quantity: '32 units',
+		cost: '$160M',
 		category: 'Spacecraft'
 	},
 	{
@@ -80,7 +80,7 @@ export const PHASE_0_BOM_ITEMS: BOMItemMeta[] = [
 		bomId: 'bom-0-4',
 		slug: 'transport-vehicles',
 		name: 'Transport Vehicles',
-		quantity: '10 units',
+		quantity: '15 units',
 		cost: '$2B',
 		category: 'Spacecraft'
 	},

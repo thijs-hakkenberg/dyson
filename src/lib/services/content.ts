@@ -23,10 +23,10 @@ export const PHASES: Phase[] = [
 				id: 'bom-0-1',
 				name: 'Prospecting Satellites',
 				description: 'Small satellites equipped with spectrometers for asteroid composition analysis',
-				quantity: 50,
+				quantity: 32,
 				unit: 'units',
 				unitCost: 5000000,
-				totalCost: 250000000,
+				totalCost: 160000000,
 				category: 'Spacecraft',
 				slug: 'prospecting-satellites'
 			},
@@ -55,10 +55,10 @@ export const PHASES: Phase[] = [
 			{
 				id: 'bom-0-4',
 				name: 'Transport Vehicles',
-				description: 'Cargo spacecraft for moving materials between asteroids and processing station',
-				quantity: 10,
+				description: 'Cargo spacecraft for moving materials between asteroids and processing station. Krypton/iodine propulsion (xenon not viable due to supply constraints - demand exceeds global production 15-20×)',
+				quantity: 15,
 				unit: 'units',
-				unitCost: 200000000,
+				unitCost: 133333333,
 				totalCost: 2000000000,
 				category: 'Spacecraft',
 				slug: 'transport-vehicles'
@@ -75,7 +75,7 @@ export const PHASES: Phase[] = [
 				slug: 'solar-power-arrays'
 			}
 		],
-		totalCost: 13750000000,
+		totalCost: 13660000000,
 		estimatedDuration: '10-15 years',
 		dependencies: [],
 		relatedResearch: ['asteroid mining', 'in-situ resource utilization', 'space manufacturing']
@@ -100,7 +100,7 @@ export const PHASES: Phase[] = [
 			{
 				id: 'bom-1-1',
 				name: 'Solar Collector Units',
-				description: 'Individual swarm elements with thin-film PV on tensioned membrane structure',
+				description: 'Individual swarm elements with thin-film PV on tensioned membrane structure. 2 km minimum spacing for <10⁻⁶ collision probability. Hybrid SRP + ion propulsion (SRP primary at ≤0.7 AU)',
 				quantity: 1000,
 				unit: 'units',
 				unitCost: 100000000,
@@ -133,7 +133,7 @@ export const PHASES: Phase[] = [
 			{
 				id: 'bom-1-4',
 				name: 'Assembly Node Hub',
-				description: 'Modular orbital manufacturing and assembly facility with robotic assembly cells',
+				description: 'Modular orbital manufacturing and assembly facility with robotic assembly cells. Located at Sun-Earth L1/L4. Earth manufacturing first 1,000-2,000 units, ISRU transition at ~3,500 units. Hierarchical coordination to 1M+ nodes',
 				quantity: 1,
 				unit: 'hub',
 				unitCost: 15000000000,
@@ -155,7 +155,7 @@ export const PHASES: Phase[] = [
 			{
 				id: 'bom-1-6',
 				name: 'Orbital Tugs',
-				description: 'Solar-electric propulsion spacecraft for cargo transport between orbits',
+				description: 'Solar-electric propulsion spacecraft for cargo transport between orbits. Two-tier depot architecture: NRHO (cislunar) + L4/L5 (heliocentric)',
 				quantity: 20,
 				unit: 'units',
 				unitCost: 100000000,
@@ -166,7 +166,7 @@ export const PHASES: Phase[] = [
 			{
 				id: 'bom-1-7',
 				name: 'Swarm Control System',
-				description: 'Distributed control infrastructure with beacon relays and ground stations',
+				description: 'Distributed control infrastructure with beacon relays and ground stations. Hierarchical architecture (50-100 node clusters), 24-48 hour coordinator duty cycles, scales to 1M+ nodes',
 				quantity: 1,
 				unit: 'system',
 				unitCost: 5000000000,
@@ -209,7 +209,7 @@ export const PHASES: Phase[] = [
 			{
 				id: 'bom-2-2',
 				name: 'Maintenance Drones',
-				description: 'Autonomous repair and servicing robots for swarm upkeep',
+				description: 'Autonomous repair and servicing robots for swarm upkeep. ~400 depots at 150,000-200,000 km spacing. Fleet: ~20,000 inspectors + ~2,000 servicers. <7 day MTTR',
 				quantity: 5000,
 				unit: 'units',
 				unitCost: 10000000,
@@ -220,7 +220,7 @@ export const PHASES: Phase[] = [
 			{
 				id: 'bom-2-3',
 				name: 'Additional Manufacturing Capacity',
-				description: 'New orbital factories for exponential production scaling',
+				description: 'New orbital factories for exponential production scaling. Hierarchical coordination scales to 100,000+ manufacturing nodes',
 				quantity: 5,
 				unit: 'facilities',
 				unitCost: 15000000000,
