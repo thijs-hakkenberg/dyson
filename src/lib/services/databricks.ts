@@ -26,8 +26,8 @@ export const MODELS: DatabricksModel[] = [
 		description: 'OpenAI\'s latest generation model'
 	},
 	{
-		id: 'databricks-claude-opus-4-5',
-		name: 'Claude Opus 4.5',
+		id: 'databricks-claude-opus-4-6',
+		name: 'Claude Opus 4.6',
 		description: 'Anthropic\'s most capable model'
 	}
 ];

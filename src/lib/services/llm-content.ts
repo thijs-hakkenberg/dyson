@@ -49,7 +49,7 @@ export interface PhaseConsensus {
 const MODEL_NAMES: Record<string, string> = {
 	'gemini-3-pro': 'Gemini 3 Pro',
 	'gpt-5-2': 'GPT-5.2',
-	'claude-opus-4-5': 'Claude Opus 4.5'
+	'claude-opus-4-6': 'Claude Opus 4.6'
 };
 
 /**

@@ -268,13 +268,18 @@ async function main() {
 	console.log('PHASE 2: Generating cross-reviews');
 	console.log('-'.repeat(40));
 
-	// Load Claude's existing content if available
+	// Load Claude's existing content if available (check both old and new filenames)
 	const claudeContent = {};
 	for (const phase of [0, 1]) {
-		const claudePath = join(OUTPUT_DIR, `phase-${phase}`, 'claude-opus-4-5.md');
-		if (existsSync(claudePath)) {
-			claudeContent[phase] = readFileSync(claudePath, 'utf-8');
+		// Try new filename first, fall back to old filename for backwards compatibility
+		const newPath = join(OUTPUT_DIR, `phase-${phase}`, 'claude-opus-4-6.md');
+		const oldPath = join(OUTPUT_DIR, `phase-${phase}`, 'claude-opus-4-5.md');
+		if (existsSync(newPath)) {
+			claudeContent[phase] = readFileSync(newPath, 'utf-8');
 			console.log(`Loaded Claude content for phase ${phase}`);
+		} else if (existsSync(oldPath)) {
+			claudeContent[phase] = readFileSync(oldPath, 'utf-8');
+			console.log(`Loaded Claude content for phase ${phase} (legacy file)`);
 		}
 	}
 
@@ -285,7 +290,7 @@ async function main() {
 
 		// Add Claude if content exists
 		if (claudeContent[phase]) {
-			modelsToReview.push('claude-opus-4-5');
+			modelsToReview.push('claude-opus-4-6');
 		}
 
 		for (const reviewerModelId of Object.keys(MODELS)) {
@@ -296,9 +301,9 @@ async function main() {
 				let contentToReview;
 				let reviewedModelName;
 
-				if (reviewedModelId === 'claude-opus-4-5') {
+				if (reviewedModelId === 'claude-opus-4-6') {
 					contentToReview = claudeContent[phase];
-					reviewedModelName = 'Claude Opus 4.5';
+					reviewedModelName = 'Claude Opus 4.6';
 				} else {
 					contentToReview = results[phase][reviewedModelId];
 					reviewedModelName = MODELS[reviewedModelId].name;

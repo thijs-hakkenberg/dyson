@@ -23,7 +23,7 @@
 
 	let activeTab = $state('consensus');
 
-	const modelOrder = ['consensus', 'claude-opus-4-5', 'gemini-3-pro', 'gpt-5-2'];
+	const modelOrder = ['consensus', 'claude-opus-4-6', 'gemini-3-pro', 'gpt-5-2'];
 
 	// Configure marked for proper rendering
 	const marked = new Marked({

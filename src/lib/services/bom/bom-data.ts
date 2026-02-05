@@ -202,10 +202,10 @@ export const LLM_MODELS = {
 		name: 'GPT-5.2',
 		filename: 'gpt-5-2.md'
 	},
-	'claude-opus-4-5': {
-		id: 'claude-opus-4-5',
-		name: 'Claude Opus 4.5',
-		filename: 'claude-opus-4-5.md'
+	'claude-opus-4-6': {
+		id: 'claude-opus-4-6',
+		name: 'Claude Opus 4.6',
+		filename: 'claude-opus-4-6.md'
 	}
 } as const;
 

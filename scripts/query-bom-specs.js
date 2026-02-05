@@ -32,11 +32,11 @@ const DATABRICKS_HOST = process.env.DATABRICKS_HOST || 'https://adb-623913396916
 const DATABRICKS_TOKEN = process.env.DATABRICKS_TOKEN;
 
 const MODELS = {
-  'claude-opus-4-5': {
-    id: 'databricks-claude-opus-4-5',
-    name: 'Claude Opus 4.5',
-    filename: 'claude-opus-4-5.md',
-    endpoint: '/serving-endpoints/databricks-claude-opus-4-5/invocations'
+  'claude-opus-4-6': {
+    id: 'databricks-claude-opus-4-6',
+    name: 'Claude Opus 4.6',
+    filename: 'claude-opus-4-6.md',
+    endpoint: '/serving-endpoints/databricks-claude-opus-4-6/invocations'
   },
   'gemini-3-pro': {
     id: 'databricks-gemini-3-pro',
@@ -322,7 +322,7 @@ A numbered list of 5-7 synthesized recommendations.
 Be specific about which model holds which view in the Divergent Views section.`;
 
   console.log(`  Generating consensus for ${item.name}...`);
-  const content = await queryDatabricks('claude-opus-4-5', prompt);
+  const content = await queryDatabricks('claude-opus-4-6', prompt);
 
   if (!content) {
     console.log('    Failed to generate consensus - no API response');

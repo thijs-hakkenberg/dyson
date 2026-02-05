@@ -29,7 +29,7 @@ const PROJECT_ROOT = path.resolve(__dirname, '..');
 const DATABRICKS_HOST = process.env.DATABRICKS_HOST || 'https://adb-6239133969168510.10.azuredatabricks.net';
 const DATABRICKS_TOKEN = process.env.DATABRICKS_TOKEN;
 
-const CLAUDE_ENDPOINT = '/serving-endpoints/databricks-claude-opus-4-5/invocations';
+const CLAUDE_ENDPOINT = '/serving-endpoints/databricks-claude-opus-4-6/invocations';
 
 const QUESTIONS_DIR = path.join(PROJECT_ROOT, 'static/content/research-questions');
 const BOM_SPECS_DIR = path.join(PROJECT_ROOT, 'static/content/bom-specs');
