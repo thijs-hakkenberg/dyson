@@ -146,3 +146,6 @@ export {
 	calculateHandoffTime,
 	calculateTotalEnergy
 } from './swarm-coordination';
+
+// Radiation Degradation (PV survival Monte Carlo)
+export * from './radiation-degradation';
