@@ -3,6 +3,490 @@ import type { BlogPost } from '$lib/types';
 // Sample blog posts (in a production app, these would be loaded from markdown files)
 export const BLOG_POSTS: BlogPost[] = [
 	{
+		slug: 'tracking-progress-resolution-system',
+		title: 'Tracking Progress: New Resolution System for Research Questions',
+		description:
+			'Introducing our resolution tracking system that documents how research questions are answered, providing transparency into Project Dyson\'s decision-making process.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-05'),
+		tags: ['announcement', 'research-questions', 'tracking', 'features'],
+		category: 'Announcements',
+		content: `
+# Tracking Progress: New Resolution System for Research Questions
+
+Project Dyson now has **over 100 open research questions** spanning three construction phases. As we answer these questions through simulation, literature review, and expert analysis, we need a systematic way to track what's been resolved and what those resolutions mean for the project.
+
+Today we're launching the **Resolution Tracking System**—a comprehensive way to document how research questions move from "open" to "resolved."
+
+## Why Track Resolutions?
+
+Research questions don't just disappear when answered. Each resolution:
+- **Informs design decisions** for BOM items
+- **Updates cost estimates** with new data
+- **Identifies follow-up questions** that emerge from answers
+- **Creates institutional memory** for the project
+
+Without formal tracking, we risk losing context on why decisions were made.
+
+## Resolution Statuses
+
+Questions can now have one of four resolution statuses:
+
+| Status | Meaning |
+|--------|---------|
+| **Open** | Not yet answered—research ongoing |
+| **Partially Resolved** | Some aspects answered, others remain open |
+| **Resolved** | Fully answered with documented conclusions |
+| **Superseded** | Replaced by a different question or approach |
+
+## What Gets Documented
+
+Each resolved question now includes:
+
+### Resolution Summary
+A concise explanation of what was learned and how it affects the project.
+
+### Resolution Source
+How the answer was determined:
+- **Simulation** — Monte Carlo or discrete event modeling
+- **Literature** — Published research and mission data
+- **Expert Analysis** — Multi-LLM consensus synthesis
+- **Experiment** — Empirical validation (future)
+
+### Implications
+Specific impacts on:
+- Cost estimates (updates to BOM items)
+- Design decisions (architecture changes)
+- Follow-up questions (what new questions emerged)
+
+## Resolution Statistics
+
+The new [Resolved Questions](/questions/resolved) page provides:
+- **Progress tracking** — Percentage of questions resolved per phase
+- **Resolution timeline** — When questions were answered
+- **Source breakdown** — How answers were determined
+- **Phase filtering** — Focus on specific construction phases
+
+## Example: RQ-0-20 Xenon Propellant Sourcing
+
+Our first formally tracked resolution is [RQ-0-20: Xenon propellant sourcing at scale](/questions/xenon-propellant-sourcing-scale).
+
+**Status:** Resolved
+
+**Summary:** Xenon-primary propulsion is infeasible at Project Dyson scale. Global production is 40-50 tonnes/year; we would need 15-20× that amount. Krypton and iodine are viable alternatives with proven flight heritage.
+
+**Source:** Literature review + Tsiolkovsky equation analysis
+
+**Implications:**
+- Transport vehicle specifications updated to require propellant flexibility
+- $50-100M added to budget for alternative propellant qualification
+- New research question opened for thruster qualification programs
+
+## Try It Yourself
+
+Visit [/questions/resolved](/questions/resolved) to explore:
+- All resolved questions with full context
+- Filter by phase and resolution status
+- View the resolution timeline
+- See statistics on project progress
+
+## What's Next
+
+We're working on:
+1. **Automated updates** — Resolution status propagates to affected BOM items
+2. **Dependency tracking** — Questions that block other questions
+3. **Notification system** — Alerts when key questions are resolved
+
+The resolution tracking system brings transparency to how Project Dyson makes decisions. Every answer is documented, every implication is traced, and the reasoning is preserved for future reference.
+
+---
+
+**Explore:** [Resolved Questions](/questions/resolved) | [All Research Questions](/questions)
+		`
+	},
+	{
+		slug: 'from-theory-to-experiment-validation-tracking',
+		title: 'From Theory to Experiment: Introducing Validation Tracking',
+		description:
+			'New validation tracking system connects theoretical claims to experimental evidence, building confidence in Dyson swarm specifications through systematic verification.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-05'),
+		tags: ['announcement', 'validation', 'experiments', 'research'],
+		category: 'Announcements',
+		relatedPhases: ['phase-0', 'phase-1'],
+		content: `
+# From Theory to Experiment: Introducing Validation Tracking
+
+Multi-LLM consensus gives us engineering specifications. Monte Carlo simulations test parameter sensitivities. But how do we know these theoretical claims match reality?
+
+Today we're launching **Validation Tracking**—a system that connects claims in our specifications to experimental evidence, simulation results, and mission data.
+
+## The Validation Challenge
+
+Project Dyson's specifications contain thousands of technical claims:
+- "Hall-effect thrusters achieve 2,500s Isp"
+- "Solar radiation pressure provides sufficient station-keeping at 0.5 AU"
+- "ISRU costs cross over Earth launch at ~3,500 units"
+
+Some claims are well-established physics. Others are extrapolations. Still others are educated guesses. Without tracking which is which, we can't prioritize where to invest in validation.
+
+## How Validation Tracking Works
+
+### Validated Claims
+
+Each claim in our specifications can now be linked to validation evidence:
+
+| Validation Status | Meaning |
+|-------------------|---------|
+| **Unvalidated** | Claim exists but no validation attempted |
+| **Partially Validated** | Some evidence supports the claim |
+| **Validated** | Strong evidence confirms the claim |
+| **Refuted** | Evidence contradicts the claim |
+| **Outdated** | Validation evidence is stale |
+
+### Validation Sources
+
+Evidence comes from multiple sources:
+
+- **Experiment** — Lab testing or hardware demonstrations
+- **Simulation** — Monte Carlo, discrete event, or physics models
+- **Expert Review** — Multi-LLM consensus or specialist analysis
+- **Literature** — Peer-reviewed research and textbooks
+- **Mission Data** — Actual flight heritage
+
+### Confidence Levels
+
+Each validation entry includes a confidence percentage (0-100%) reflecting:
+- Quality of the evidence source
+- Relevance to our specific application
+- Recency of the data
+
+## The Validation Roadmap
+
+Not all claims need immediate validation. The [Validation Roadmap](/validation) prioritizes experiments based on:
+
+1. **Cost Impact** — Claims affecting major budget items
+2. **Technical Risk** — Claims with high uncertainty
+3. **Schedule Criticality** — Claims on the critical path
+4. **Feasibility** — What can be tested with available resources
+
+### Example Timeline
+
+| Timeframe | Validation Focus |
+|-----------|------------------|
+| 2026-2027 | Propulsion alternatives (krypton, iodine thrusters) |
+| 2027-2028 | Thermal management at 0.5-0.7 AU |
+| 2028-2029 | ISRU processing efficiency |
+| 2029-2030 | Swarm coordination protocols |
+
+## Current Validation Statistics
+
+Our initial pass through Phase 0 and Phase 1 specifications identified:
+- **23 claims** requiring validation
+- **8 validated** (simulation or literature)
+- **12 partially validated**
+- **3 unvalidated** (high priority)
+
+The unvalidated claims include critical assumptions about asteroid anchoring, dust mitigation effectiveness, and rubble-pile structural integrity—all requiring empirical testing.
+
+## Connecting to Research Questions
+
+Validation tracking integrates with our research question system:
+- Each validation links to the research questions it addresses
+- Resolution of research questions can trigger validation status updates
+- The validation roadmap informs research question prioritization
+
+## Try It Yourself
+
+Explore validation tracking:
+- [Validation Dashboard](/validation) — See all validated claims
+- [Validation Roadmap](/validation) — Planned experiments
+- Individual BOM item pages — Validation status for each component
+
+## Why This Matters
+
+A Dyson swarm built on unvalidated assumptions is a recipe for failure. By systematically tracking what we know vs. what we assume, Project Dyson ensures:
+- **Transparency** — Everyone sees the evidence basis
+- **Prioritization** — Limited resources go to critical validations
+- **Progress** — Confidence grows as validations complete
+
+The validation tracking system transforms Project Dyson from "interesting speculation" to "engineering project with evidence trail."
+
+---
+
+**Explore:** [Validation Dashboard](/validation) | [Research Questions](/questions)
+		`
+	},
+	{
+		slug: 'understanding-uncertainty-cost-confidence',
+		title: 'Understanding Uncertainty: Cost Confidence Intervals and Reconciliation',
+		description:
+			'New cost analysis tools help quantify uncertainty in Dyson swarm budgets, from confidence intervals on BOM items to reconciliation analysis across LLM estimates.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-05'),
+		tags: ['technical', 'cost-analysis', 'uncertainty', 'BOM'],
+		category: 'Technical',
+		relatedPhases: ['phase-0', 'phase-1', 'phase-2'],
+		content: `
+# Understanding Uncertainty: Cost Confidence Intervals and Reconciliation
+
+Project Dyson's Phase 0 estimate is $9 billion. But what does that number actually mean?
+
+Is it a floor that assumes everything goes perfectly? A ceiling with maximum contingency? A median with equal probability of over/under? Without understanding the uncertainty, a cost estimate is just a number.
+
+Today we're releasing **cost confidence intervals** and **reconciliation analysis**—tools that quantify and explain uncertainty in our estimates.
+
+## The Problem with Point Estimates
+
+Our three-LLM consensus approach produces different estimates for every BOM item:
+
+| BOM Item | Claude | GPT | Gemini |
+|----------|--------|-----|--------|
+| Prospecting Satellites | $250M | $280M | $220M |
+| Processing Platform | $800M | $1.2B | $650M |
+| Transport Vehicles | $2.0B | $1.8B | $2.2B |
+
+Which estimate is "right"? They all are—under different assumptions about technology readiness, launch costs, development complexity, and risk margins.
+
+## Cost Confidence Intervals
+
+Each BOM item now includes three cost levels:
+
+| Level | Definition | Use Case |
+|-------|------------|----------|
+| **Low** | 10th percentile estimate | Best-case with favorable assumptions |
+| **Medium** | 50th percentile estimate | Most likely outcome |
+| **High** | 90th percentile estimate | Conservative with risk margins |
+
+### How Intervals Are Determined
+
+1. **LLM Variation** — Range across Claude, GPT, and Gemini estimates
+2. **Historical Analogs** — NASA cost growth factors for comparable missions
+3. **TRL Adjustment** — Higher uncertainty for lower technology readiness
+4. **Divergent Views** — Explicit disagreements widen intervals
+
+### Example: Processing Platform
+
+| Metric | Value |
+|--------|-------|
+| Low Estimate | $650M |
+| Medium Estimate | $850M |
+| High Estimate | $1.2B |
+| Confidence Spread | 1.85× |
+
+The 1.85× spread reflects significant uncertainty about ISRU processing efficiency and first-of-a-kind development costs.
+
+## Cost Reconciliation Analysis
+
+The new [Cost Reconciliation](/analysis/cost-reconciliation) tool answers: **Where do our LLMs disagree, and why?**
+
+### Reconciliation Categories
+
+| Category | Meaning |
+|----------|---------|
+| **Aligned** | All models within 20% of consensus |
+| **Minor Divergence** | 20-50% spread, different assumptions |
+| **Major Divergence** | >50% spread, fundamental disagreement |
+
+### Major Divergence Example: ISRU Capital Costs
+
+Claude estimates $50B for seed factory infrastructure. Gemini estimates $30B. GPT estimates $100B.
+
+**Root Cause:** Different assumptions about:
+- Self-replication capability (Claude: partial, GPT: minimal, Gemini: full)
+- Material processing efficiency
+- Automation level required
+
+**Resolution Path:** The simulation (RQ-1-12) suggests $50B baseline is reasonable, but the range should be $30-100B until design matures.
+
+## Divergent View Prioritization
+
+Not all disagreements matter equally. The new **prioritization system** ranks divergent views by:
+
+1. **Cost Impact** — Absolute dollar difference
+2. **Schedule Impact** — Effect on critical path
+3. **Technical Risk** — Likelihood of being wrong
+4. **Actionability** — Can we resolve through research?
+
+### Top Divergent Views (February 2026)
+
+| Rank | Topic | Impact | Status |
+|------|-------|--------|--------|
+| 1 | ISRU capital investment | $70B range | Research planned |
+| 2 | Collector unit size | 3× cost difference | Under simulation |
+| 3 | Assembly Hub location | $5B logistics delta | Resolved (L4/L5) |
+
+## Using Cost Tools
+
+### For BOM Items
+
+Each BOM detail page now shows:
+- Low/Medium/High cost range
+- Confidence interval visualization
+- Divergent views affecting that item
+- Links to reconciliation analysis
+
+### For Phases
+
+Phase summary pages include:
+- Aggregate confidence intervals
+- Monte Carlo probability distribution
+- Top cost risks for the phase
+
+### For Project-Wide Analysis
+
+The [Cost Reconciliation](/analysis/cost-reconciliation) page provides:
+- All major divergences ranked by impact
+- Resolution status for each divergence
+- Trend tracking as research progresses
+
+## Why This Matters
+
+A $9B estimate with ±50% uncertainty means something very different from $9B with ±10% uncertainty. By quantifying and explaining cost uncertainty:
+
+- **Funders** understand the range of outcomes
+- **Engineers** know where to focus cost reduction
+- **Planners** can build appropriate contingencies
+- **Critics** see we're honest about what we don't know
+
+The goal isn't to eliminate uncertainty—it's to measure and manage it.
+
+---
+
+**Explore:** [Cost Reconciliation](/analysis/cost-reconciliation) | [Phase 0 BOM](/plan/phase-0) | [Phase 1 BOM](/plan/phase-1)
+		`
+	},
+	{
+		slug: 'building-partnerships-organizations-registry',
+		title: 'Building Partnerships: External Organizations Registry',
+		description:
+			'New organizations registry tracks space agencies, research labs, and industry partners whose expertise and data inform Dyson swarm planning.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-05'),
+		tags: ['announcement', 'organizations', 'partnerships', 'outreach'],
+		category: 'Announcements',
+		content: `
+# Building Partnerships: External Organizations Registry
+
+Project Dyson isn't building a Dyson swarm alone. The specifications, cost estimates, and technical approaches documented here draw on decades of research from space agencies, universities, and industry partners worldwide.
+
+Today we're launching the **External Organizations Registry**—a structured way to track which organizations inform our work and what questions we need to ask them.
+
+## Why Track Organizations?
+
+Every technical claim in Project Dyson traces back to real-world expertise:
+- **NASA** operates the Deep Space Network we'd rely on for communication
+- **JAXA** returned asteroid samples that inform our ISRU assumptions
+- **JPL** develops the propulsion systems we specify
+- **ESA** researches solar sail technologies for station-keeping
+
+By formally tracking these relationships, we can:
+1. **Acknowledge sources** of critical data
+2. **Identify gaps** where we need expert input
+3. **Plan outreach** to validate assumptions
+4. **Build credibility** through documented expertise
+
+## Organization Categories
+
+The registry organizes partners by domain:
+
+| Category | Examples | Relevance |
+|----------|----------|-----------|
+| **Space Agency** | NASA, ESA, JAXA, CNSA | Mission heritage, infrastructure |
+| **Propulsion Lab** | JPL, ERPS, Ad Astra | Thruster specifications |
+| **PV Research** | Fraunhofer ISE, NREL | Solar cell efficiency data |
+| **Manufacturing** | SpaceX, Relativity | Production cost baselines |
+| **University** | MIT, Caltech, TU Delft | Research papers, analysis |
+| **Standards Body** | CCSDS, AIAA | Protocol specifications |
+
+## Organization Questions
+
+Each organization entry includes **specific questions** we need answered:
+
+### Example: NASA (Jet Propulsion Laboratory)
+
+| Question | Status | Priority |
+|----------|--------|----------|
+| What is current Hall-effect thruster TRL for 50+ kW? | Draft | High |
+| Can DSN support 10,000+ spacecraft swarm communication? | Awaiting Response | Critical |
+| What thermal limits apply at 0.5 AU operations? | Responded | Medium |
+
+Questions link to the research questions they help resolve, creating traceability from expert input to specification updates.
+
+## Current Registry
+
+The initial registry includes 15 organizations across all categories:
+
+### Space Agencies
+- **NASA** — Mission heritage, DSN, propulsion research
+- **ESA** — Solar sail development, asteroid missions
+- **JAXA** — Hayabusa samples, ISRU data
+
+### Propulsion Labs
+- **JPL** — Ion propulsion, autonomous systems
+- **Ad Astra Rocket Company** — VASIMR development
+
+### PV Research
+- **Fraunhofer ISE** — Solar cell efficiency records
+- **NREL** — Space-qualified photovoltaics
+
+### Manufacturing
+- **SpaceX** — Launch costs, Starlink production rates
+- **Relativity Space** — 3D printing for space
+
+### Universities
+- **MIT** — Swarm coordination, autonomy research
+- **Caltech** — MAPLE power transmission demonstration
+
+## Outreach Tracking
+
+The registry tracks engagement status:
+
+| Status | Meaning |
+|--------|---------|
+| **Draft** | Question formulated but not sent |
+| **Sent** | Outreach initiated |
+| **Awaiting Response** | No response yet |
+| **Responded** | Answer received |
+| **Closed** | Question resolved or no longer relevant |
+
+This visibility helps prioritize follow-up and identifies which organizations are responsive.
+
+## How Organizations Inform Specifications
+
+Each organization page shows:
+- **Relevant domains** — What aspects of the project they inform
+- **BOM connections** — Which items use their data
+- **Research questions** — Which RQs they help answer
+- **Contact status** — Current engagement level
+
+### Example: Fraunhofer ISE → Solar Collector Units
+
+Fraunhofer ISE's record-breaking 47.6% multi-junction cell efficiency directly informs our Solar Collector Unit specifications. Their research on radiation degradation rates affects our 10-year operational lifetime assumptions.
+
+## Try It Yourself
+
+Explore the registry:
+- [All Organizations](/organizations) — Browse by category
+- Individual organization pages — See questions and connections
+- [Research Questions](/questions) — See which RQs link to organizations
+
+## What's Next
+
+We're working on:
+1. **Formal outreach program** — Template letters for expert engagement
+2. **Response tracking** — Document expert feedback systematically
+3. **Citation system** — Link specifications to authoritative sources
+4. **Partnership opportunities** — Identify collaboration possibilities
+
+The organizations registry makes Project Dyson's knowledge sources explicit. Every specification has a pedigree, every assumption has an expert behind it, and every gap has an outreach plan.
+
+---
+
+**Explore:** [Organizations Registry](/organizations) | [Research Questions](/questions)
+		`
+	},
+	{
 		slug: 'swarm-dynamics-station-keeping-collision-findings',
 		title: 'Solar Radiation Pressure: The Free Propulsion That Could Save Billions',
 		description:
