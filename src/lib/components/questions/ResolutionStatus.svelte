@@ -45,7 +45,7 @@
 		}
 	};
 
-	const config = statusConfig[effectiveStatus];
+	const config = $derived(statusConfig[effectiveStatus]);
 
 	const sizeClasses = {
 		sm: 'px-2 py-0.5 text-xs',

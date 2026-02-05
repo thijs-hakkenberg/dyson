@@ -76,7 +76,7 @@
 	<div class="space-y-6">
 		<!-- Candidate Locations -->
 		<div>
-			<label class="block text-sm text-star-dim mb-2">Candidate Locations</label>
+			<span class="block text-sm text-star-dim mb-2">Candidate Locations</span>
 			<div class="grid grid-cols-2 gap-2">
 				{#each locationOptions as option}
 					<button
@@ -188,7 +188,7 @@
 
 		<!-- Objective Weights -->
 		<div class="border-t border-space-600 pt-4">
-			<label class="block text-sm text-star-dim mb-3">Objective Weights</label>
+			<span class="block text-sm text-star-dim mb-3">Objective Weights</span>
 
 			<div class="space-y-3">
 				<!-- Cost Weight -->

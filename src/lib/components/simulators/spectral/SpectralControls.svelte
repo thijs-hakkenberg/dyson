@@ -34,7 +34,7 @@
 	<div class="space-y-6">
 		<!-- Processing Location -->
 		<div>
-			<label class="block text-sm text-star-dim mb-3">Processing Location</label>
+			<span class="block text-sm text-star-dim mb-3">Processing Location</span>
 			<div class="space-y-2">
 				{#each processingOptions as option}
 					<button

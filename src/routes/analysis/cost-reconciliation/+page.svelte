@@ -6,8 +6,11 @@
 
 	let { data } = $props();
 
-	// Filter state
-	let selectedPhase = $state(data.selectedPhase);
+	// Filter state - initialize from data but allow local changes
+	let selectedPhase = $state('all');
+	$effect(() => {
+		selectedPhase = data.selectedPhase;
+	});
 	let selectedSeverity = $state<Discrepancy['severity'] | 'all'>('all');
 	let showDetails = $state(false);
 	let searchQuery = $state('');
@@ -161,7 +164,7 @@
 
 			<!-- Show Details Toggle -->
 			<div class="flex-shrink-0">
-				<label class="block text-sm font-medium text-star-dim mb-1">Options</label>
+				<span class="block text-sm font-medium text-star-dim mb-1">Options</span>
 				<label class="flex items-center gap-2 cursor-pointer">
 					<input
 						type="checkbox"
