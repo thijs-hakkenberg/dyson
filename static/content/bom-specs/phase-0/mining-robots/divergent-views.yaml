@@ -11,6 +11,9 @@ topics:
         models: ["Gemini"]
       - statement: "Hybrid wheel-leg systems"
         models: ["GPT"]
+    priority: "high"
+    impact: "Mobility system choice directly affects robot mass, power consumption, terrain capability, and manufacturing complexity. Wrong choice could result in robots unable to traverse asteroid terrain effectively."
+    resolutionPath: "Conduct trade study with simulated asteroid terrain models. Build and test prototypes of each mobility approach in reduced-gravity environments."
   - id: "anchoring-system"
     topic: "Anchoring System"
     positions:
@@ -20,6 +23,9 @@ topics:
         models: ["GPT"]
       - statement: "Gecko-inspired adhesives"
         models: ["Gemini"]
+    priority: "critical"
+    impact: "In microgravity, anchoring is essential for mining operations. Failure of anchoring system means robots cannot exert force for drilling/excavation. Safety-critical for preventing robots from drifting away."
+    resolutionPath: "Test all three approaches on asteroid simulant materials in vacuum chamber. Evaluate against multiple surface types (regolith, solid rock, mixed)."
   - id: "processing-capability"
     topic: "Processing Capability"
     positions:
@@ -27,6 +33,9 @@ topics:
         models: ["Claude", "Gemini"]
       - statement: "Minimal processing with bulk transport"
         models: ["GPT"]
+    priority: "medium"
+    impact: "Affects material transport logistics and processing station requirements. On-robot processing reduces transport volume but increases robot complexity and mass."
+    resolutionPath: "Model total system mass and energy for both approaches across expected asteroid compositions. Decision depends on transport vehicle capacity and processing station throughput."
   - id: "communication"
     topic: "Communication"
     positions:
@@ -36,3 +45,6 @@ topics:
         models: ["Claude"]
       - statement: "Hybrid approach"
         models: ["GPT"]
+    priority: "low"
+    impact: "All approaches are technically viable. Choice affects latency and redundancy but not fundamental mission capability. Can be adapted after deployment."
+    resolutionPath: "Start with relay orbiter baseline (proven technology). Implement mesh networking as secondary mode for inter-robot coordination."

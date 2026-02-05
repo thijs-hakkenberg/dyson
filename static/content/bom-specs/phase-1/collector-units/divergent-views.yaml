@@ -9,13 +9,16 @@ topics:
   - id: "orbital-distance"
     topic: "Orbital Distance"
     positions:
-      - statement: "0"
+      - statement: "0.3-0.5 AU from Sun for higher solar flux"
         models:
           - "Claude"
           - "Gemini"
-      - statement: "1"
+      - statement: "1 AU (Earth orbit) for easier access and maintenance"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "critical"
+    impact: "Orbital distance determines solar flux (4-11x variation), thermal management requirements, communication latency, and accessibility for repairs. Changes total power output by 50%+ and affects entire system architecture."
+    resolutionPath: "Model total system cost including thermal management, launch delta-v, and maintenance logistics for each distance option. Validate thermal designs through simulation and material testing."
   - id: "unit-size-power-class"
     topic: "Unit Size/Power Class"
     positions:
@@ -25,9 +28,12 @@ topics:
       - statement: "6,500 m² hexagonal sails producing 44 MW at 85 kg"
         models:
           - "Gemini"
-      - statement: "smaller 40 m² \"tile\" units producing 10 kW at 69 kg for manufacturing simplicity and rapid iteration"
+      - statement: "smaller 40 m² tile units producing 10 kW at 69 kg for manufacturing simplicity and rapid iteration"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "critical"
+    impact: "Unit size determines manufacturing complexity, deployment strategy, failure modes, and total system cost. Difference between 85 kg and 1,850 kg per unit is 20x mass difference affecting launch costs fundamentally."
+    resolutionPath: "Build prototypes at each scale. Evaluate manufacturing yield, deployment reliability, and in-space assembly requirements. Start with smaller units to validate technology before scaling."
   - id: "attitude-control-approach"
     topic: "Attitude Control Approach"
     positions:
@@ -39,7 +45,10 @@ topics:
           - "Gemini"
       - statement: "reaction wheels with micropropulsion for a balance of simplicity and precision"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "high"
+    impact: "Attitude control affects pointing accuracy for beamed power, propellant consumption over mission lifetime, and mechanical complexity. Wrong choice could result in premature satellite failures."
+    resolutionPath: "Simulate long-duration station-keeping for each approach. Evaluate propellant budget over 20-year mission life. Test pointing accuracy requirements against beamed power needs."
   - id: "pv-technology-selection"
     topic: "PV Technology Selection"
     positions:
@@ -51,11 +60,14 @@ topics:
           - "Gemini"
       - statement: "space-proven multi-junction III-V cells (TRL 7-9) despite higher cost, citing radiation tolerance concerns"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "high"
+    impact: "PV technology choice affects efficiency, radiation degradation rate, manufacturing scalability, and cost per watt. TRL differences mean different development timelines."
+    resolutionPath: "Conduct accelerated radiation testing on perovskite samples. Track TRL advancement of tandem cells. Plan phased approach starting with proven III-V, transitioning to tandems as they mature."
   - id: "phase-1-beamed-power-requirement"
     topic: "Phase 1 Beamed Power Requirement"
     positions:
-      - statement: "full 44"
+      - statement: "full 44 GHz microwave beaming capability required"
         models:
           - "Claude"
       - statement: "metamaterial phased array into sail structure as core function"
@@ -63,16 +75,22 @@ topics:
           - "Gemini"
       - statement: "beamed power as optional demonstration module only, not baseline requirement for Phase 1"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "medium"
+    impact: "Beamed power adds complexity but is required for eventual energy delivery to Earth. Phase 1 scope affects development timeline and initial costs."
+    resolutionPath: "Define minimum viable Phase 1 that demonstrates swarm operation. Defer full beamed power to Phase 1.5 or Phase 2 if it delays initial deployment significantly."
   - id: "unit-cost-estimates"
     topic: "Unit Cost Estimates"
     positions:
-      - statement: "$2"
+      - statement: "$2M per unit at scale"
         models:
           - "Claude"
       - statement: "$154,000 per unit (hardware + launch)"
         models:
           - "Gemini"
-      - statement: "$0"
+      - statement: "$500K per unit with aggressive cost reduction"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "medium"
+    impact: "Cost estimates vary by 10x, significantly affecting total Phase 1 budget. Accurate cost modeling needed for funding and timeline planning."
+    resolutionPath: "Develop detailed bottom-up cost model. Benchmark against current satellite manufacturing costs. Identify cost drivers and validate assumptions with aerospace manufacturers."

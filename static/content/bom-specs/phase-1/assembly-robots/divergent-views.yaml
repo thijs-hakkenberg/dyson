@@ -9,15 +9,18 @@ topics:
   - id: "heavy-manipulator-mass"
     topic: "Heavy Manipulator Mass"
     positions:
-      - statement: "2,400 kg Welder-class with 6"
+      - statement: "2,400 kg Welder-class with 6m reach and 2kN end-force"
         models:
           - "Claude"
-      - statement: "45 kg Weaver-class hexagonal drones forming \"super-bots\" for heavy loads"
+      - statement: "45 kg Weaver-class hexagonal drones forming super-bots for heavy loads"
         models:
           - "Gemini"
       - statement: "1,200 kg AT-1 Assembly Tug with 4m reach and 500 N end-force"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "high"
+    impact: "Robot mass determines launch costs and manipulation capability. 50x mass difference between approaches affects total assembly infrastructure costs and operational philosophy."
+    resolutionPath: "Define minimum manipulation requirements for collector unit assembly. Test swarm coordination vs single heavy manipulator approaches in simulation. Validate structural assembly loads."
   - id: "precision-assembler-design-philosophy"
     topic: "Precision Assembler Design Philosophy"
     positions:
@@ -29,43 +32,55 @@ topics:
           - "Gemini"
       - statement: "450 kg DW-1 with two 7-DOF arms and quick-change end-effectors"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "medium"
+    impact: "Precision assembly approach affects inspection capability, repair operations, and manufacturing tolerances achievable. All approaches viable with different trade-offs."
+    resolutionPath: "Prototype precision manipulation tasks in neutral buoyancy or parabolic flight. Evaluate reach, dexterity, and positioning accuracy requirements against collector unit design."
   - id: "primary-joining-technology"
     topic: "Primary Joining Technology"
     positions:
-      - statement: "electron beam welding (60–150 kV, up to 25 kW) and friction stir welding as primary methods"
+      - statement: "electron beam welding (60-150 kV, up to 25 kW) and friction stir welding as primary methods"
         models:
           - "Claude"
       - statement: "snap-fits and thermal welding with zero screws"
         models:
           - "Gemini"
-      - statement: "on mechanical latching with kinematic docking and compliant connectors"
+      - statement: "mechanical latching with kinematic docking and compliant connectors"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "critical"
+    impact: "Joining technology determines structural integrity, repairability, and assembly speed. Welding provides strong permanent joints but prevents repair. Mechanical joints allow disassembly but add mass and failure points."
+    resolutionPath: "Design collector units for the chosen joining approach - this is co-dependent. Test joint strength under thermal cycling. Evaluate repair scenarios and failure modes for each approach."
   - id: "unit-cost-targets"
     topic: "Unit Cost Targets"
     positions:
-      - statement: "$12M–$45M per unit at production rates"
+      - statement: "$12M-$45M per unit at production rates"
         models:
           - "Claude"
       - statement: "$235,000 per unit through radical simplification and swarm redundancy"
         models:
           - "Gemini"
-      - statement: "$20M–$120M per unit depending on class"
+      - statement: "$20M-$120M per unit depending on class"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "medium"
+    impact: "200x cost variation across estimates. Determines Phase 1 infrastructure budget significantly. Lower cost enables more redundancy through larger fleet."
+    resolutionPath: "Develop detailed cost model for each robot class. Identify cost drivers (actuators, sensors, avionics). Benchmark against terrestrial industrial robots and space heritage systems."
   - id: "operating-distance-from-sun"
     topic: "Operating Distance from Sun"
     positions:
-      - statement: "specifically for 0"
+      - statement: "specifically designed for 0.3-0.4 AU operations with active cooling"
         models:
           - "Claude"
-      - statement: "Mercury-Sun Lagrange point"
+      - statement: "Mercury-Sun Lagrange point operations"
         models:
           - "Gemini"
-      - statement: "conservative 0"
+      - statement: "conservative 0.7-1.0 AU operations to minimize thermal challenges"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "high"
+    impact: "Operating distance affects thermal design, material selection, and electronics radiation hardening. Must be consistent with collector unit orbital distance decision."
+    resolutionPath: "Link to collector unit orbital distance decision. Design thermal management system for worst-case solar flux. Test electronics and lubricants for high-temperature operations."
   - id: "production-rate-philosophy"
     topic: "Production Rate Philosophy"
     positions:
@@ -75,6 +90,9 @@ topics:
       - statement: "10,000 units/month by end of Phase 1"
         models:
           - "Gemini"
-      - statement: "modular \"Assembly Cells\" scaled incrementally"
+      - statement: "modular Assembly Cells scaled incrementally"
         models:
-          - "Gpt"
+          - "GPT"
+    priority: "low"
+    impact: "Production rate affects manufacturing facility sizing but can be adjusted over Phase 1. Start with lower rate and scale up as operations mature."
+    resolutionPath: "Begin with minimum viable fleet size. Establish production capacity for replacement rate. Scale manufacturing based on demonstrated assembly throughput and collector deployment rate."
