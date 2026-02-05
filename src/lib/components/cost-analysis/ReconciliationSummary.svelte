@@ -117,7 +117,7 @@
 				<div class="rounded-lg bg-blue-500/10 border border-blue-500/20 p-3 text-center">
 					<div class="text-2xl font-bold text-blue-400">{summary.minorDiscrepancies}</div>
 					<div class="text-xs text-blue-400/70">Minor</div>
-					<div class="text-xs text-star-faint mt-1"><50% diff</div>
+					<div class="text-xs text-star-faint mt-1">&lt;50% diff</div>
 				</div>
 			</div>
 		</div>

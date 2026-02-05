@@ -9,7 +9,7 @@
 
 	let { status, size = 'md', showIcon = true }: Props = $props();
 
-	const effectiveStatus = status || 'open';
+	const effectiveStatus = $derived(status || 'open');
 
 	const statusConfig: Record<
 		ResolutionStatus,

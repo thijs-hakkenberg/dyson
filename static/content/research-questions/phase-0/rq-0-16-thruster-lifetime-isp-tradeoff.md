@@ -4,7 +4,7 @@ slug: "thruster-lifetime-isp-tradeoff"
 title: "Thruster lifetime vs Isp tradeoff"
 questionType: "engineering-decision"
 priority: "high"
-status: "open"
+status: "investigating"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-4"
 sourceBOMItemSlug: "transport-vehicles"
@@ -17,6 +17,14 @@ tags:
   - "thrusters"
   - "mission-design"
 createdDate: "2026-01-31"
+resolutionStatus: "partially-resolved"
+resolutionDate: "2026-02-04"
+resolutionSource: "experiment"
+resolutionSummary: "Hall-effect thruster testing shows 30,000+ hour lifetimes achievable at 2,000s Isp with magnetic shielding. Grid erosion in ion engines remains limiting factor for higher-Isp designs. Hybrid architecture (Hall for bulk thrust, ion for precision) under evaluation."
+implications:
+  - "Baseline thruster selection converging on magnetically-shielded Hall-effect at 2,000-2,500s Isp"
+  - "Module replacement strategy still needed for 15-year vehicle lifetime"
+  - "Hybrid propulsion architecture requires additional mass budget validation"
 ---
 
 ## Background

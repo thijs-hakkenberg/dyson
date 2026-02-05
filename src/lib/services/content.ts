@@ -28,7 +28,11 @@ export const PHASES: Phase[] = [
 				unitCost: 5000000,
 				totalCost: 160000000,
 				category: 'Spacecraft',
-				slug: 'prospecting-satellites'
+				slug: 'prospecting-satellites',
+				costMin: 112000000,
+				costMax: 240000000,
+				costConfidence: 'high',
+				costBasis: 'Based on existing CubeSat and small satellite mission costs with heritage spectrometer payloads'
 			},
 			{
 				id: 'bom-0-2',
@@ -39,7 +43,11 @@ export const PHASES: Phase[] = [
 				unitCost: 50000000,
 				totalCost: 1000000000,
 				category: 'Robotics',
-				slug: 'mining-robots'
+				slug: 'mining-robots',
+				costMin: 600000000,
+				costMax: 1500000000,
+				costConfidence: 'medium',
+				costBasis: 'Extrapolated from planetary rover costs; asteroid surface operations add uncertainty'
 			},
 			{
 				id: 'bom-0-3',
@@ -50,18 +58,26 @@ export const PHASES: Phase[] = [
 				unitCost: 10000000000,
 				totalCost: 10000000000,
 				category: 'Infrastructure',
-				slug: 'material-processing-station'
+				slug: 'material-processing-station',
+				costMin: 7000000000,
+				costMax: 15000000000,
+				costConfidence: 'medium',
+				costBasis: 'Scaled from ISS module costs; novel processing equipment adds uncertainty'
 			},
 			{
 				id: 'bom-0-4',
 				name: 'Transport Vehicles',
-				description: 'Cargo spacecraft for moving materials between asteroids and processing station. Krypton/iodine propulsion (xenon not viable due to supply constraints - demand exceeds global production 15-20×)',
+				description: 'Cargo spacecraft for moving materials between asteroids and processing station. Krypton/iodine propulsion (xenon not viable due to supply constraints - demand exceeds global production 15-20x)',
 				quantity: 15,
 				unit: 'units',
 				unitCost: 133333333,
 				totalCost: 2000000000,
 				category: 'Spacecraft',
-				slug: 'transport-vehicles'
+				slug: 'transport-vehicles',
+				costMin: 1400000000,
+				costMax: 3000000000,
+				costConfidence: 'medium',
+				costBasis: 'Based on SEP spacecraft costs; krypton/iodine propulsion well-characterized'
 			},
 			{
 				id: 'bom-0-5',
@@ -72,7 +88,11 @@ export const PHASES: Phase[] = [
 				unitCost: 5000000,
 				totalCost: 500000000,
 				category: 'Power Systems',
-				slug: 'solar-power-arrays'
+				slug: 'solar-power-arrays',
+				costMin: 350000000,
+				costMax: 750000000,
+				costConfidence: 'high',
+				costBasis: 'Based on current thin-film PV costs with established space deployment track record'
 			}
 		],
 		totalCost: 13660000000,
@@ -100,13 +120,17 @@ export const PHASES: Phase[] = [
 			{
 				id: 'bom-1-1',
 				name: 'Solar Collector Units',
-				description: 'Individual swarm elements with thin-film PV on tensioned membrane structure. 2 km minimum spacing for <10⁻⁶ collision probability. Hybrid SRP + ion propulsion (SRP primary at ≤0.7 AU)',
+				description: 'Individual swarm elements with thin-film PV on tensioned membrane structure. 2 km minimum spacing for <10^-6 collision probability. Hybrid SRP + ion propulsion (SRP primary at <=0.7 AU)',
 				quantity: 1000,
 				unit: 'units',
 				unitCost: 100000000,
 				totalCost: 100000000000,
 				category: 'Spacecraft',
-				slug: 'collector-units'
+				slug: 'collector-units',
+				costMin: 60000000000,
+				costMax: 160000000000,
+				costConfidence: 'low',
+				costBasis: 'First-of-kind large-scale thin-film membrane spacecraft; high uncertainty in manufacturing scale-up'
 			},
 			{
 				id: 'bom-1-2',
@@ -117,7 +141,11 @@ export const PHASES: Phase[] = [
 				unitCost: 5000000,
 				totalCost: 25000000000,
 				category: 'Power Systems',
-				slug: 'pv-blanket-arrays'
+				slug: 'pv-blanket-arrays',
+				costMin: 15000000000,
+				costMax: 40000000000,
+				costConfidence: 'medium',
+				costBasis: 'Based on thin-film PV roadmap projections; scale-up costs uncertain'
 			},
 			{
 				id: 'bom-1-3',
@@ -128,7 +156,11 @@ export const PHASES: Phase[] = [
 				unitCost: 60000000,
 				totalCost: 3000000000,
 				category: 'Robotics',
-				slug: 'assembly-robots'
+				slug: 'assembly-robots',
+				costMin: 1800000000,
+				costMax: 4800000000,
+				costConfidence: 'medium',
+				costBasis: 'Extrapolated from ISS robotic systems; heterogeneous fleet adds design complexity'
 			},
 			{
 				id: 'bom-1-4',
@@ -139,7 +171,11 @@ export const PHASES: Phase[] = [
 				unitCost: 15000000000,
 				totalCost: 15000000000,
 				category: 'Infrastructure',
-				slug: 'assembly-node'
+				slug: 'assembly-node',
+				costMin: 9000000000,
+				costMax: 24000000000,
+				costConfidence: 'low',
+				costBasis: 'Novel orbital manufacturing facility; no direct heritage systems for comparison'
 			},
 			{
 				id: 'bom-1-5',
@@ -150,7 +186,11 @@ export const PHASES: Phase[] = [
 				unitCost: 4000000000,
 				totalCost: 8000000000,
 				category: 'Infrastructure',
-				slug: 'mass-drivers'
+				slug: 'mass-drivers',
+				costMin: 4800000000,
+				costMax: 12800000000,
+				costConfidence: 'low',
+				costBasis: 'Electromagnetic launch technology TRL 4-5; significant development costs expected'
 			},
 			{
 				id: 'bom-1-6',
@@ -161,7 +201,11 @@ export const PHASES: Phase[] = [
 				unitCost: 100000000,
 				totalCost: 2000000000,
 				category: 'Spacecraft',
-				slug: 'orbital-tugs'
+				slug: 'orbital-tugs',
+				costMin: 1200000000,
+				costMax: 3200000000,
+				costConfidence: 'medium',
+				costBasis: 'Based on existing SEP spacecraft with depot operations; well-understood propulsion'
 			},
 			{
 				id: 'bom-1-7',
@@ -172,7 +216,11 @@ export const PHASES: Phase[] = [
 				unitCost: 5000000000,
 				totalCost: 5000000000,
 				category: 'Computing',
-				slug: 'swarm-control-system'
+				slug: 'swarm-control-system',
+				costMin: 3000000000,
+				costMax: 8000000000,
+				costConfidence: 'medium',
+				costBasis: 'Distributed computing infrastructure; scaling to 1M+ nodes introduces uncertainty'
 			}
 		],
 		totalCost: 158000000000,
@@ -204,7 +252,11 @@ export const PHASES: Phase[] = [
 				unitCost: 50000000,
 				totalCost: 5000000000000,
 				category: 'Spacecraft',
-				slug: 'collector-satellites'
+				slug: 'collector-satellites',
+				costMin: 2500000000000,
+				costMax: 8500000000000,
+				costConfidence: 'low',
+				costBasis: 'Assumes successful ISRU transition and learning curve; highly dependent on Phase 1 outcomes'
 			},
 			{
 				id: 'bom-2-2',
@@ -215,7 +267,11 @@ export const PHASES: Phase[] = [
 				unitCost: 10000000,
 				totalCost: 50000000000,
 				category: 'Robotics',
-				slug: 'maintenance-drones'
+				slug: 'maintenance-drones',
+				costMin: 25000000000,
+				costMax: 85000000000,
+				costConfidence: 'low',
+				costBasis: 'Autonomous repair systems at scale; depot architecture costs highly uncertain'
 			},
 			{
 				id: 'bom-2-3',
@@ -226,7 +282,11 @@ export const PHASES: Phase[] = [
 				unitCost: 15000000000,
 				totalCost: 75000000000,
 				category: 'Infrastructure',
-				slug: 'manufacturing-expansion'
+				slug: 'manufacturing-expansion',
+				costMin: 37500000000,
+				costMax: 127500000000,
+				costConfidence: 'low',
+				costBasis: 'Orbital factory replication; depends on ISRU maturity and automation advances'
 			}
 		],
 		totalCost: 5125000000000,

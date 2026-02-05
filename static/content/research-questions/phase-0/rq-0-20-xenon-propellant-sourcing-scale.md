@@ -19,6 +19,16 @@ tags:
   - "propellant"
   - "supply-chain"
 createdDate: "2026-01-31"
+resolutionStatus: "resolved"
+resolutionDate: "2026-02-03"
+resolutionSource: "industry-data"
+resolutionSummary: "Industry data confirms global xenon production is 40-50 tonnes/year, fundamentally inadequate for Project Dyson scale requirements of 320,000-750,000 kg/year. Alternative propellants (krypton, iodine, argon) provide viable paths forward."
+implications:
+  - "Transport vehicle propulsion system must be designed for multi-propellant operation (krypton primary, xenon secondary)"
+  - "Phase 1 collector units should adopt krypton-compatible Hall-effect thrusters from the start"
+  - "Thruster qualification programs needed for krypton and iodine at 5-20 kW power levels"
+  - "Propellant depot infrastructure must accommodate multiple noble gas types"
+  - "Long-term supplier agreements required for krypton at 100+ tonnes/year scale"
 ---
 
 ## Background

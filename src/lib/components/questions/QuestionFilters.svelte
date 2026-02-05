@@ -1,13 +1,15 @@
 <script lang="ts">
-	import type { QuestionType, ResearchQuestionStatus, Priority, PhaseId } from '$lib/types/entities';
+	import type { QuestionType, ResearchQuestionStatus, Priority, PhaseId, ResolutionStatus } from '$lib/types/entities';
 
 	interface Props {
 		selectedPhase: PhaseId | '';
 		selectedType: QuestionType | '';
 		selectedStatus: ResearchQuestionStatus | '';
 		selectedPriority: Priority | '';
+		selectedResolution?: ResolutionStatus | '';
 		searchQuery: string;
 		onFilterChange: () => void;
+		showResolutionFilter?: boolean;
 	}
 
 	let {
@@ -15,8 +17,10 @@
 		selectedType = $bindable(),
 		selectedStatus = $bindable(),
 		selectedPriority = $bindable(),
+		selectedResolution = $bindable(''),
 		searchQuery = $bindable(),
-		onFilterChange
+		onFilterChange,
+		showResolutionFilter = true
 	}: Props = $props();
 
 	const phases = [
@@ -51,6 +55,14 @@
 		{ value: 'low', label: 'Low' }
 	];
 
+	const resolutionStatuses = [
+		{ value: '', label: 'All Resolution' },
+		{ value: 'open', label: 'Unresolved' },
+		{ value: 'resolved', label: 'Resolved' },
+		{ value: 'partially-resolved', label: 'Partially Resolved' },
+		{ value: 'superseded', label: 'Superseded' }
+	];
+
 	function handleChange() {
 		onFilterChange();
 	}
@@ -60,6 +72,7 @@
 		selectedType = '';
 		selectedStatus = '';
 		selectedPriority = '';
+		selectedResolution = '';
 		searchQuery = '';
 		onFilterChange();
 	}
@@ -69,6 +82,7 @@
 			selectedType !== '' ||
 			selectedStatus !== '' ||
 			selectedPriority !== '' ||
+			selectedResolution !== '' ||
 			searchQuery !== ''
 	);
 </script>
@@ -164,6 +178,23 @@
 			</select>
 		</div>
 	</div>
+
+	<!-- Resolution Filter -->
+	{#if showResolutionFilter}
+		<div>
+			<label for="resolution" class="block text-xs font-medium text-star-faint mb-1">Resolution Status</label>
+			<select
+				id="resolution"
+				bind:value={selectedResolution}
+				onchange={handleChange}
+				class="w-full px-3 py-2 bg-space-700 border border-space-500 rounded-lg text-star-white text-sm focus:outline-none focus:border-cosmic-cyan"
+			>
+				{#each resolutionStatuses as resStatus}
+					<option value={resStatus.value}>{resStatus.label}</option>
+				{/each}
+			</select>
+		</div>
+	{/if}
 
 	<!-- Clear Filters -->
 	{#if hasActiveFilters}

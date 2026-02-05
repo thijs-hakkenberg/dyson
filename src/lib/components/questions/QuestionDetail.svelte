@@ -3,6 +3,8 @@
 	import { renderMarkdown } from '$lib/utils/markdown';
 	import QuestionTypeBadge from './QuestionTypeBadge.svelte';
 	import PriorityIndicator from './PriorityIndicator.svelte';
+	import ResolutionStatus from './ResolutionStatus.svelte';
+	import ResolutionSummary from './ResolutionSummary.svelte';
 
 	interface Props {
 		question: ResearchQuestion;
@@ -79,10 +81,18 @@
 </script>
 
 <div class="space-y-6">
+	<!-- Resolution Summary (if resolved) -->
+	{#if question.resolutionStatus && question.resolutionStatus !== 'open'}
+		<ResolutionSummary {question} showImplications={true} />
+	{/if}
+
 	<!-- Main Content -->
 	<div class="card-glow p-6 md:p-8">
-		<!-- Status Badge -->
-		<div class="flex justify-end mb-4">
+		<!-- Status Badges -->
+		<div class="flex justify-end gap-2 mb-4">
+			{#if question.resolutionStatus && question.resolutionStatus !== 'open'}
+				<ResolutionStatus status={question.resolutionStatus} size="md" />
+			{/if}
 			<span class="px-3 py-1.5 rounded border {statusColors[question.status]}">
 				{statusLabels[question.status]}
 			</span>

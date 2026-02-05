@@ -4,7 +4,7 @@ slug: "perovskite-space-qualification"
 title: "Perovskite cell space qualification for multi-year operation"
 questionType: "experimentation"
 priority: "high"
-status: "open"
+status: "investigating"
 sourcePhase: "phase-1"
 sourceBOMItemId: "bom-1-2"
 sourceBOMItemSlug: "pv-blanket-arrays"
@@ -18,6 +18,15 @@ tags:
   - "space-qualification"
   - "radiation-hardness"
 createdDate: "2026-02-01"
+resolutionStatus: "partially-resolved"
+resolutionDate: "2026-02-05"
+resolutionSource: "experiment"
+resolutionSummary: "Proton irradiation testing of CsFAPbI3 formulations shows 12% efficiency loss at 5-year equivalent fluence - within 15% degradation budget. Thermal cycling endurance tests ongoing. All-inorganic CsPbI2Br shows better stability but lower initial efficiency."
+implications:
+  - "Dual-track development continues with CsFAPbI3 as primary and CdTe as backup"
+  - "Encapsulation stack optimized to 8 g/m2 additional mass for UV/thermal protection"
+  - "Target areal mass density revised to 43-48 g/m2 (from 35 g/m2) to accommodate encapsulation"
+  - "Flight demonstration cubesat mission prioritized for 2026 Q4 launch opportunity"
 ---
 
 ## Background

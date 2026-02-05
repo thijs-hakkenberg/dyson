@@ -7,6 +7,9 @@
 import type { PageLoad } from './$types';
 import { generateReconciliationReport } from '$lib/services/cost-analysis';
 
+// Disable prerender since this page uses query parameters
+export const prerender = false;
+
 export const load: PageLoad = async ({ url }) => {
 	// Get phase from query params (default to 'all')
 	const phaseId = url.searchParams.get('phase') || 'all';

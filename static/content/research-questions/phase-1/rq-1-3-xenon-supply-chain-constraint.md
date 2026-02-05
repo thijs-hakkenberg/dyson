@@ -4,7 +4,7 @@ slug: "xenon-supply-chain-constraint"
 title: "Xenon supply chain constraint for Phase 1"
 questionType: "meta-research"
 priority: "critical"
-status: "open"
+status: "answered"
 sourcePhase: "phase-1"
 sourceBOMItemId: "bom-1-1"
 sourceBOMItemSlug: "collector-units"
@@ -19,6 +19,14 @@ tags:
   - "supply-chain"
   - "krypton"
 createdDate: "2026-02-01"
+resolutionStatus: "resolved"
+resolutionDate: "2026-02-03"
+resolutionSource: "industry-data"
+resolutionSummary: "Resolved via rq-0-20 analysis. Global xenon production (70 tonnes/year) is insufficient for 150-tonne Phase 1 requirements. Krypton adopted as primary propellant with 80-85% of xenon Isp at 10x availability."
+implications:
+  - "SCU propulsion subsystem redesigned for krypton operation"
+  - "Mass budget increased 18-25% for propellant to compensate for lower Isp"
+  - "Thruster procurement shifted to krypton-optimized Hall-effect variants"
 ---
 
 ## Background

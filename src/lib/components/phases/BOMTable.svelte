@@ -1,17 +1,24 @@
 <script lang="ts">
 	import type { BOMItem } from '$lib/types';
 	import { formatCurrency, groupBOMByCategory } from '$lib/services/content';
+	import { CostRangeBar, CostConfidenceBadge } from '$lib/components/bom';
 
 	interface Props {
 		items: BOMItem[];
 		showCategories?: boolean;
 		phaseId?: string;
+		showCostRanges?: boolean;
 	}
 
-	let { items, showCategories = true, phaseId }: Props = $props();
+	let { items, showCategories = true, phaseId, showCostRanges = true }: Props = $props();
 
 	const groupedItems = $derived(showCategories ? groupBOMByCategory(items) : { 'All Items': items });
 	const totalCost = $derived(items.reduce((sum, item) => sum + item.totalCost, 0));
+	const totalCostMin = $derived(items.reduce((sum, item) => sum + (item.costMin ?? item.totalCost), 0));
+	const totalCostMax = $derived(items.reduce((sum, item) => sum + (item.costMax ?? item.totalCost), 0));
+
+	// Check if any items have cost range data
+	const hasCostRangeData = $derived(items.some(item => item.costMin !== undefined && item.costMax !== undefined));
 
 	function getItemLink(item: BOMItem): string | null {
 		if (phaseId && item.slug) {
@@ -38,6 +45,9 @@
 							<th class="px-6 py-3 font-medium">Quantity</th>
 							<th class="px-6 py-3 font-medium text-right">Unit Cost</th>
 							<th class="px-6 py-3 font-medium text-right">Total Cost</th>
+							{#if showCostRanges && hasCostRangeData}
+								<th class="px-6 py-3 font-medium">Cost Range</th>
+							{/if}
 							{#if phaseId}
 								<th class="px-6 py-3 font-medium text-center">Specs</th>
 							{/if}
@@ -75,6 +85,30 @@
 								<td class="px-6 py-4 text-right font-medium text-sun-gold">
 									{formatCurrency(item.totalCost)}
 								</td>
+								{#if showCostRanges && hasCostRangeData}
+									<td class="px-6 py-4 min-w-[200px]">
+										{#if item.costMin !== undefined && item.costMax !== undefined}
+											<div class="flex items-center gap-2">
+												<div class="flex-1">
+													<CostRangeBar
+														min={item.costMin}
+														expected={item.totalCost}
+														max={item.costMax}
+														confidence={item.costConfidence}
+														basis={item.costBasis}
+														showLabels={false}
+														compact={true}
+													/>
+												</div>
+												{#if item.costConfidence}
+													<CostConfidenceBadge confidence={item.costConfidence} size="sm" />
+												{/if}
+											</div>
+										{:else}
+											<span class="text-star-faint text-sm">-</span>
+										{/if}
+									</td>
+								{/if}
 								{#if phaseId}
 									<td class="px-6 py-4 text-center">
 										{#if itemLink}
@@ -102,9 +136,33 @@
 
 	<!-- Total -->
 	<div class="flex justify-end">
-		<div class="card-glow px-8 py-4 inline-flex items-center gap-6">
-			<span class="text-star-dim font-medium">Total Estimated Cost:</span>
-			<span class="text-2xl font-bold text-sun-gold">{formatCurrency(totalCost)}</span>
+		<div class="card-glow px-8 py-4">
+			<div class="flex items-center gap-6">
+				<span class="text-star-dim font-medium">Total Estimated Cost:</span>
+				<span class="text-2xl font-bold text-sun-gold">{formatCurrency(totalCost)}</span>
+			</div>
+			{#if showCostRanges && hasCostRangeData}
+				<div class="mt-3 pt-3 border-t border-space-500">
+					<div class="text-xs text-star-faint mb-2">Uncertainty Range</div>
+					<div class="flex items-center gap-4 text-sm">
+						<span class="text-star-dim">
+							<span class="text-star-faint">Min:</span> {formatCurrency(totalCostMin)}
+						</span>
+						<span class="text-star-dim">
+							<span class="text-star-faint">Max:</span> {formatCurrency(totalCostMax)}
+						</span>
+					</div>
+					<div class="mt-2 w-64">
+						<CostRangeBar
+							min={totalCostMin}
+							expected={totalCost}
+							max={totalCostMax}
+							showLabels={false}
+							compact={true}
+						/>
+					</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 </div>

@@ -149,3 +149,9 @@ export {
 
 // Radiation Degradation (PV survival Monte Carlo)
 export * from './radiation-degradation';
+
+// Electrical Fault Analysis (HV systems in plasma environment)
+export * from './electrical-fault';
+
+// Payload Capture Systems (mass driver projectile capture)
+export * from './capture';

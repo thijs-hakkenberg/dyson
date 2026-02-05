@@ -275,7 +275,7 @@
 				</p>
 			</div>
 			<div>
-				<h4 class="font-medium text-blue-400 mb-1">Minor (<50%)</h4>
+				<h4 class="font-medium text-blue-400 mb-1">Minor (&lt;50%)</h4>
 				<p class="text-star-dim">
 					Normal estimation variance. Within acceptable uncertainty range.
 				</p>

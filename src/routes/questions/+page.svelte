@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { ResearchQuestion, QuestionType, ResearchQuestionStatus, Priority, PhaseId } from '$lib/types/entities';
+	import type { ResearchQuestion, QuestionType, ResearchQuestionStatus, Priority, PhaseId, ResolutionStatus } from '$lib/types/entities';
 	import { filterQuestions } from '$lib/services/questions';
+	import { filterByResolutionStatus } from '$lib/services/resolution';
 	import { QuestionCard, QuestionFilters, QuestionStats } from '$lib/components/questions';
 
 	let { data } = $props();
@@ -10,21 +11,30 @@
 	let selectedType = $state<QuestionType | ''>('');
 	let selectedStatus = $state<ResearchQuestionStatus | ''>('');
 	let selectedPriority = $state<Priority | ''>('');
+	let selectedResolution = $state<ResolutionStatus | ''>('');
 	let searchQuery = $state('');
 
 	// Filtered questions - use derived for reactive filtering
 	let filteredQuestions = $derived.by(() => {
-		// If no filters are active, return all questions
-		if (!selectedPhase && !selectedType && !selectedStatus && !selectedPriority && !searchQuery) {
-			return data.questions;
+		let questions = data.questions;
+
+		// Apply standard filters
+		if (selectedPhase || selectedType || selectedStatus || selectedPriority || searchQuery) {
+			questions = filterQuestions(questions, {
+				phaseId: selectedPhase || undefined,
+				questionType: selectedType || undefined,
+				status: selectedStatus || undefined,
+				priority: selectedPriority || undefined,
+				search: searchQuery || undefined
+			});
 		}
-		return filterQuestions(data.questions, {
-			phaseId: selectedPhase || undefined,
-			questionType: selectedType || undefined,
-			status: selectedStatus || undefined,
-			priority: selectedPriority || undefined,
-			search: searchQuery || undefined
-		});
+
+		// Apply resolution status filter
+		if (selectedResolution) {
+			questions = filterByResolutionStatus(questions, selectedResolution);
+		}
+
+		return questions;
 	});
 
 	function applyFilters() {
@@ -62,9 +72,24 @@
 				bind:selectedType
 				bind:selectedStatus
 				bind:selectedPriority
+				bind:selectedResolution
 				bind:searchQuery
 				onFilterChange={applyFilters}
 			/>
+
+			<!-- Quick Links -->
+			<div class="card-glow p-4">
+				<h3 class="text-sm font-semibold text-star-white mb-3">Quick Links</h3>
+				<a
+					href="/questions/resolved"
+					class="flex items-center gap-2 text-cosmic-cyan hover:underline text-sm"
+				>
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+					</svg>
+					View Resolved Questions
+				</a>
+			</div>
 		</div>
 
 		<!-- Main Content: Question Grid -->

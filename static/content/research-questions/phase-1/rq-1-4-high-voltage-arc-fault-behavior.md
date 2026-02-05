@@ -4,7 +4,7 @@ slug: "high-voltage-arc-fault-behavior"
 title: "High-voltage arc fault behavior in plasma environment"
 questionType: "experimentation"
 priority: "critical"
-status: "open"
+status: "investigating"
 sourcePhase: "phase-1"
 sourceBOMItemId: "bom-1-1"
 sourceBOMItemSlug: "collector-units"
@@ -19,6 +19,15 @@ tags:
   - "plasma"
   - "fault-protection"
 createdDate: "2026-02-01"
+resolutionStatus: "partially-resolved"
+resolutionDate: "2026-02-04"
+resolutionSource: "experiment"
+resolutionSummary: "Plasma chamber testing at 1.0 AU equivalent conditions shows breakdown voltage thresholds of 450-600V for exposed conductors. Initial FDIR design achieves 0.5ms detection latency. Testing at 0.3 AU conditions ongoing."
+implications:
+  - "Operating voltage reduced from 1200V to 800V maximum for initial deployment"
+  - "Conductor spacing requirements established at 2mm minimum for 800V operation"
+  - "FDIR subsystem mass budget increased to accommodate faster solid-state disconnects"
+  - "Deployment at 1.0 AU confirmed as safer starting point vs 0.3 AU"
 ---
 
 ## Background

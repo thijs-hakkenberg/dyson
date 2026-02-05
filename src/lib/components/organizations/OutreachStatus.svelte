@@ -36,9 +36,9 @@
 		}
 	};
 
-	const config = statusConfig[status];
-	const sizeClasses = size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-sm';
-	const iconSize = size === 'sm' ? 'w-3 h-3' : 'w-4 h-4';
+	const config = $derived(statusConfig[status]);
+	const sizeClasses = $derived(size === 'sm' ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-sm');
+	const iconSize = $derived(size === 'sm' ? 'w-3 h-3' : 'w-4 h-4');
 </script>
 
 <span class="inline-flex items-center gap-1.5 rounded {config.color} {sizeClasses}">

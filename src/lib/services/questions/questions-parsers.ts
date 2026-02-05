@@ -12,7 +12,9 @@ import type {
 	BOMItemId,
 	QuestionType,
 	Priority,
-	ResearchQuestionStatus
+	ResearchQuestionStatus,
+	ResolutionStatus,
+	ResolutionSourceType
 } from '$lib/types/entities';
 
 /**
@@ -34,6 +36,12 @@ export interface QuestionFrontmatter {
 	createdDate: string;
 	answer?: string;
 	references?: string[];
+	// Resolution tracking fields
+	resolutionStatus?: ResolutionStatus;
+	resolutionDate?: string;
+	resolutionSource?: ResolutionSourceType;
+	resolutionSummary?: string;
+	implications?: string[];
 }
 
 /**
@@ -181,6 +189,16 @@ export function frontmatterToQuestion(
 		references = rawRefs;
 	}
 
+	// Handle implications - could be string or array
+	let implications: string[] | undefined;
+	const rawImplications = frontmatter.implications;
+	if (typeof rawImplications === 'string') {
+		implications = parseArrayValue(rawImplications);
+		if (implications.length === 0) implications = undefined;
+	} else if (Array.isArray(rawImplications) && rawImplications.length > 0) {
+		implications = rawImplications;
+	}
+
 	return {
 		id: frontmatter.questionId as ResearchQuestionId,
 		slug: frontmatter.slug,
@@ -199,7 +217,13 @@ export function frontmatterToQuestion(
 		createdDate: frontmatter.createdDate || new Date().toISOString().split('T')[0],
 		tags,
 		answer: frontmatter.answer,
-		references
+		references,
+		// Resolution tracking fields
+		resolutionStatus: frontmatter.resolutionStatus as ResolutionStatus | undefined,
+		resolutionDate: frontmatter.resolutionDate,
+		resolutionSource: frontmatter.resolutionSource as ResolutionSourceType | undefined,
+		resolutionSummary: frontmatter.resolutionSummary,
+		implications
 	};
 }
 

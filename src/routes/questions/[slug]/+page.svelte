@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { QuestionDetail, QuestionCard } from '$lib/components/questions';
+	import { ValidationStatus, ValidationCard } from '$lib/components/validation';
 
 	let { data } = $props();
 
 	const question = $derived(data.question);
 	const relatedQuestions = $derived(data.relatedQuestions);
+	const relatedValidations = $derived(data.relatedValidations);
 
 	const phaseLabels: Record<string, string> = {
 		'phase-0': 'Phase 0',
@@ -69,6 +71,39 @@
 				</div>
 			{/if}
 
+			<!-- Related Validations -->
+			{#if relatedValidations.length > 0}
+				<div class="card-glow p-6">
+					<h3 class="text-lg font-bold text-star-white mb-4">Related Validations</h3>
+					<div class="space-y-4">
+						{#each relatedValidations.slice(0, 3) as validation}
+							<a
+								href="/validation/{validation.slug}"
+								class="block p-3 rounded-lg bg-space-700 hover:bg-space-600 transition-colors"
+							>
+								<div class="flex items-center gap-2 mb-2">
+									<ValidationStatus status={validation.status} size="sm" showIcon={false} />
+								</div>
+								<p class="text-sm text-star-white line-clamp-2 mb-1">
+									{validation.claim}
+								</p>
+								<span class="text-xs text-star-faint">
+									{validation.validations.length} validation{validation.validations.length !== 1 ? 's' : ''}
+								</span>
+							</a>
+						{/each}
+						{#if relatedValidations.length > 3}
+							<a
+								href="/validation?search={question.id}"
+								class="block text-center text-sm text-cosmic-cyan hover:underline py-2"
+							>
+								View all {relatedValidations.length} validations
+							</a>
+						{/if}
+					</div>
+				</div>
+			{/if}
+
 			<!-- Navigation -->
 			<div class="card-glow p-6">
 				<h3 class="text-lg font-bold text-star-white mb-4">Navigation</h3>
@@ -114,6 +149,20 @@
 							/>
 						</svg>
 						View Phase
+					</a>
+					<a
+						href="/validation"
+						class="flex items-center gap-2 text-cosmic-cyan hover:underline"
+					>
+						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="2"
+								d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+							/>
+						</svg>
+						Validation Tracking
 					</a>
 				</div>
 			</div>

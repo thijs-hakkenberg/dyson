@@ -5,11 +5,23 @@
 	import BOMTable from '$lib/components/phases/BOMTable.svelte';
 	import LLMConsensus from '$lib/components/phases/LLMConsensus.svelte';
 	import PhaseDAG from '$lib/components/phases/PhaseDAG.svelte';
+	import { CostRangeBar } from '$lib/components/bom';
 	import type { TimelineNode } from '$lib/types';
 
 	const phaseId = $derived($page.params.phase || '');
 	const phase = $derived(getPhaseById(phaseId));
 	const timeline = $derived(getPhaseTimeline(phaseId));
+
+	// Calculate cost ranges from BOM items
+	const totalCostMin = $derived(
+		phase?.bom.reduce((sum, item) => sum + (item.costMin ?? item.totalCost), 0) ?? 0
+	);
+	const totalCostMax = $derived(
+		phase?.bom.reduce((sum, item) => sum + (item.costMax ?? item.totalCost), 0) ?? 0
+	);
+	const hasCostRangeData = $derived(
+		phase?.bom.some(item => item.costMin !== undefined && item.costMax !== undefined) ?? false
+	);
 
 	function handleTimelineNodeClick(node: TimelineNode) {
 		if (node.linkTo) {
@@ -67,6 +79,20 @@
 				<div class="card-glow p-5">
 					<p class="text-sm text-star-faint mb-1">Total Cost</p>
 					<p class="text-2xl font-bold text-sun-gold">{formatCurrency(phase.totalCost)}</p>
+					{#if hasCostRangeData}
+						<div class="mt-2">
+							<CostRangeBar
+								min={totalCostMin}
+								expected={phase.totalCost}
+								max={totalCostMax}
+								showLabels={false}
+								compact={true}
+							/>
+							<p class="text-xs text-star-faint mt-1">
+								{formatCurrency(totalCostMin)} - {formatCurrency(totalCostMax)}
+							</p>
+						</div>
+					{/if}
 				</div>
 				<div class="card-glow p-5">
 					<p class="text-sm text-star-faint mb-1">Duration</p>

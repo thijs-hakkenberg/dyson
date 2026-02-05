@@ -17,7 +17,7 @@
 
 	// Calculate positions as percentages of the total range
 	// Add some padding so min and max markers are visible
-	const totalRange = max - min;
+	const totalRange = $derived(max - min);
 	const expectedPosition = $derived(totalRange > 0 ? ((expected - min) / totalRange) * 100 : 50);
 
 	// Color based on confidence level
