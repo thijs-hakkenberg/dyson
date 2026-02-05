@@ -11,6 +11,7 @@
 		{ label: 'Questions', href: '/questions' },
 		{ label: 'Organizations', href: '/organizations' },
 		{ label: 'Blog', href: '/blog' },
+		{ label: 'Changelog', href: '/changelog' },
 		{ label: 'Funding', href: '/funding' }
 	];
 
