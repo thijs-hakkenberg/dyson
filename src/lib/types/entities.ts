@@ -88,6 +88,12 @@ export interface ResearchQuestionEntity {
 	references?: string[];
 }
 
+// Resolution status types for tracking question resolution
+export type ResolutionStatus = 'open' | 'resolved' | 'partially-resolved' | 'superseded';
+
+// Source types for resolution
+export type ResolutionSourceType = 'paper' | 'experiment' | 'expert' | 'simulation' | 'industry-data' | 'consensus';
+
 /**
  * Extended Research Question
  * Full question data with classification, source tracking, and cross-references
@@ -121,6 +127,13 @@ export interface ResearchQuestion {
 	tags: string[];
 	answer?: string;
 	references?: string[];
+
+	// Resolution tracking
+	resolutionStatus?: ResolutionStatus;
+	resolutionDate?: string;
+	resolutionSource?: ResolutionSourceType;
+	resolutionSummary?: string;
+	implications?: string[];
 }
 
 /**
