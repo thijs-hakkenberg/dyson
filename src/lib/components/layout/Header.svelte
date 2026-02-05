@@ -9,6 +9,7 @@
 		{ label: 'Plan', href: '/plan' },
 		{ label: 'Research', href: '/research' },
 		{ label: 'Questions', href: '/questions' },
+		{ label: 'Organizations', href: '/organizations' },
 		{ label: 'Blog', href: '/blog' },
 		{ label: 'Funding', href: '/funding' }
 	];

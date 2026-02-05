@@ -1,0 +1,309 @@
+# External Organizations Registry
+# Project Dyson - Specification Validation Partners
+
+organizations:
+  - id: "org-001"
+    slug: "nasa"
+    name: "National Aeronautics and Space Administration"
+    shortName: "NASA"
+    category: "space-agency"
+    website: "https://www.nasa.gov"
+    description: "US space agency with extensive ISS solar array data and ISRU research programs."
+    relevantDomains:
+      - "solar-array-degradation"
+      - "isru"
+      - "space-power-systems"
+      - "debris-mitigation"
+    contacts:
+      - name: "ISS Power Systems Office"
+        role: "Technical Contact"
+        department: "Johnson Space Center"
+        notes: "Primary contact for ISS solar array performance data"
+    lastContact: null
+    notes: "Key data source for long-term solar array degradation in LEO environment"
+
+  - id: "org-002"
+    slug: "jpl"
+    name: "Jet Propulsion Laboratory"
+    shortName: "JPL"
+    category: "propulsion-lab"
+    website: "https://www.jpl.nasa.gov"
+    description: "NASA's lead center for robotic exploration with Dawn ion propulsion heritage."
+    relevantDomains:
+      - "ion-propulsion"
+      - "deep-space-operations"
+      - "autonomous-systems"
+      - "mission-planning"
+    contacts:
+      - name: "Dawn Mission Team"
+        role: "Ion Propulsion Experts"
+        department: "Propulsion & Flight Systems"
+        notes: "Operated xenon ion thrusters for 11+ years in deep space"
+    lastContact: null
+    notes: "Dawn mission achieved 11.5 km/s delta-V using ion propulsion"
+
+  - id: "org-003"
+    slug: "esa"
+    name: "European Space Agency"
+    shortName: "ESA"
+    category: "space-agency"
+    website: "https://www.esa.int"
+    description: "European space agency with expertise in debris mitigation and precision formation flying."
+    relevantDomains:
+      - "debris-mitigation"
+      - "formation-flying"
+      - "space-environment"
+      - "drag-free-control"
+    contacts:
+      - name: "Space Debris Office"
+        role: "Debris Mitigation Experts"
+        department: "ESOC"
+        notes: "Leading authority on space debris modeling and mitigation"
+      - name: "LISA Pathfinder Team"
+        role: "Formation Flying Experts"
+        department: "Science & Exploration"
+        notes: "Achieved unprecedented drag-free control precision"
+    lastContact: null
+    notes: "LISA Pathfinder demonstrated femto-g acceleration sensing"
+
+  - id: "org-004"
+    slug: "busek"
+    name: "Busek Co. Inc."
+    shortName: "Busek"
+    category: "propulsion-lab"
+    website: "https://www.busek.com"
+    description: "Commercial Hall thruster manufacturer with alternative propellant expertise."
+    relevantDomains:
+      - "hall-thrusters"
+      - "alternative-propellants"
+      - "iodine-propulsion"
+      - "krypton-propulsion"
+    contacts:
+      - name: "Engineering Department"
+        role: "Hall Thruster Development"
+        notes: "Pioneered iodine Hall thruster technology"
+    lastContact: null
+    notes: "Leading commercial provider of alternative propellant Hall thrusters"
+
+  - id: "org-005"
+    slug: "aerojet-rocketdyne"
+    name: "Aerojet Rocketdyne"
+    shortName: "Aerojet"
+    category: "propulsion-lab"
+    website: "https://www.rocket.com"
+    description: "Major propulsion contractor with high-power Hall thruster development."
+    relevantDomains:
+      - "hall-thrusters"
+      - "high-power-ep"
+      - "space-propulsion"
+      - "thruster-lifetime"
+    contacts:
+      - name: "Electric Propulsion Division"
+        role: "High-Power EP Development"
+        notes: "AEPS program for 13+ kW Hall thrusters"
+    lastContact: null
+    notes: "Developing Advanced Electric Propulsion System for lunar missions"
+
+  - id: "org-006"
+    slug: "nrel"
+    name: "National Renewable Energy Laboratory"
+    shortName: "NREL"
+    category: "pv-research"
+    website: "https://www.nrel.gov"
+    description: "DOE laboratory with perovskite and advanced PV research programs."
+    relevantDomains:
+      - "perovskite-pv"
+      - "thin-film-solar"
+      - "radiation-hardness"
+      - "pv-degradation"
+    contacts:
+      - name: "Perovskite Research Group"
+        role: "Advanced PV Development"
+        notes: "World-leading perovskite solar cell efficiency records"
+    lastContact: null
+    notes: "Critical data source for perovskite radiation stability"
+
+  - id: "org-007"
+    slug: "mit-ssl"
+    name: "MIT Space Systems Laboratory"
+    shortName: "MIT SSL"
+    category: "university"
+    website: "https://ssl.mit.edu"
+    description: "Academic research lab specializing in swarm coordination and distributed systems."
+    relevantDomains:
+      - "swarm-coordination"
+      - "distributed-systems"
+      - "autonomous-assembly"
+      - "space-robotics"
+    contacts:
+      - name: "SPHERES Team"
+        role: "Swarm Coordination Research"
+        notes: "ISS-tested multi-agent coordination algorithms"
+    lastContact: null
+    notes: "SPHERES and Astrobee programs provide swarm coordination heritage"
+
+  - id: "org-008"
+    slug: "itu"
+    name: "International Telecommunication Union"
+    shortName: "ITU"
+    category: "standards-body"
+    website: "https://www.itu.int"
+    description: "UN agency coordinating global radio spectrum and satellite orbits."
+    relevantDomains:
+      - "spectrum-allocation"
+      - "orbital-coordination"
+      - "interference-management"
+      - "regulatory-compliance"
+    contacts:
+      - name: "Radiocommunication Bureau"
+        role: "Space Services Division"
+        notes: "Coordinates satellite orbital slots and frequencies"
+    lastContact: null
+    notes: "Essential for swarm communication frequency allocation"
+
+questions:
+  # NASA Questions
+  - id: "oq-1-1"
+    organizationId: "org-001"
+    question: "What is the measured degradation rate of ISS solar arrays after 20+ years of LEO operation?"
+    context: "Project Dyson collector units require 30-year lifespans. ISS data provides the longest baseline for thin-film and multi-junction PV degradation in the space environment."
+    relatedRQs:
+      - "rq-1-1"
+      - "rq-0-25"
+    priority: "critical"
+    status: "draft"
+    dateCreated: "2026-02-05"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "solar-degradation"
+      - "space-environment"
+
+  - id: "oq-1-2"
+    organizationId: "org-001"
+    question: "What ISRU technology readiness levels have been achieved for oxygen and metal extraction from regolith?"
+    context: "Phase 2 manufacturing expansion relies on in-situ resource utilization. NASA's ISRU programs provide the most advanced TRL data."
+    relatedRQs:
+      - "rq-1-12"
+      - "rq-1-21"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-02-05"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "isru"
+      - "manufacturing"
+
+  # JPL Questions
+  - id: "oq-2-1"
+    organizationId: "org-002"
+    question: "What was the actual xenon consumption rate and thruster degradation observed during the Dawn mission?"
+    context: "Dawn operated ion thrusters for 11+ years, providing the longest operational dataset for high-Isp propulsion. This data is critical for Transport Vehicle propellant budgeting."
+    relatedRQs:
+      - "rq-0-20"
+      - "rq-1-3"
+    priority: "critical"
+    status: "draft"
+    dateCreated: "2026-02-05"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "ion-propulsion"
+      - "xenon"
+      - "propellant"
+
+  # ESA Questions
+  - id: "oq-3-1"
+    organizationId: "org-003"
+    question: "What collision probability models does ESA recommend for large-scale satellite constellations?"
+    context: "Project Dyson will deploy millions of collector units. Current debris models may not scale to these population sizes."
+    relatedRQs:
+      - "rq-1-6"
+      - "rq-2-3"
+    priority: "critical"
+    status: "draft"
+    dateCreated: "2026-02-05"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "debris"
+      - "collision-avoidance"
+
+  - id: "oq-3-2"
+    organizationId: "org-003"
+    question: "What drag-free control precision was achieved by LISA Pathfinder, and what are the scaling limits?"
+    context: "Swarm coordination requires precise station-keeping. LISA Pathfinder's drag-free technology may inform collector unit attitude control."
+    relatedRQs:
+      - "rq-1-2"
+      - "rq-1-37"
+    priority: "medium"
+    status: "draft"
+    dateCreated: "2026-02-05"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "formation-flying"
+      - "station-keeping"
+
+  # Busek Questions
+  - id: "oq-4-1"
+    organizationId: "org-004"
+    question: "What performance characteristics have been demonstrated for iodine Hall thrusters at 5-20 kW power levels?"
+    context: "Iodine offers 95-100% xenon performance at ~1% cost. Data on large-scale iodine thruster operation is critical for propellant strategy."
+    relatedRQs:
+      - "rq-0-20"
+      - "rq-1-31"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-02-05"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "iodine"
+      - "hall-thrusters"
+      - "alternative-propellants"
+
+  # NREL Questions
+  - id: "oq-6-1"
+    organizationId: "org-006"
+    question: "What radiation hardness data exists for perovskite solar cells under proton/electron bombardment?"
+    context: "Perovskite PV offers manufacturing advantages but radiation stability is uncertain. NREL's testing data is essential for collector unit material selection."
+    relatedRQs:
+      - "rq-1-1"
+      - "rq-1-9"
+    priority: "critical"
+    status: "draft"
+    dateCreated: "2026-02-05"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "perovskite"
+      - "radiation"
+      - "solar-cells"
+
+  # MIT SSL Questions
+  - id: "oq-7-1"
+    organizationId: "org-007"
+    question: "What coordination algorithms from SPHERES/Astrobee scale to million-unit swarms?"
+    context: "Project Dyson requires billion-scale swarm coordination. Academic research may provide theoretical foundations for scaling."
+    relatedRQs:
+      - "rq-1-24"
+      - "rq-2-17"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-02-05"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "swarm"
+      - "coordination"
+      - "algorithms"
