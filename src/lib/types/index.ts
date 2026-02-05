@@ -32,6 +32,9 @@ export interface LLMCouncilQuery {
 	timestamp: Date;
 }
 
+// Cost Confidence Types
+export type CostConfidenceLevel = 'low' | 'medium' | 'high';
+
 // Phase Types
 export interface BOMItem {
 	id: string;
@@ -44,6 +47,10 @@ export interface BOMItem {
 	category: string;
 	notes?: string;
 	slug?: string;
+	costMin?: number;
+	costMax?: number;
+	costConfidence?: CostConfidenceLevel;
+	costBasis?: string;
 }
 
 export interface Phase {
@@ -143,7 +150,7 @@ export interface TeamMember {
 }
 
 // Divergent Views Types (re-export)
-export type { ModelName, DivergentPosition, DivergentViewTopic, DivergentViewsData } from './divergent-views';
+export type { ModelName, DivergentPosition, DivergentViewTopic, DivergentViewsData, DivergentViewPriority } from './divergent-views';
 import type { DivergentViewsData } from './divergent-views';
 
 // BOM Item Specification Types
@@ -185,3 +192,14 @@ export interface PhaseDependencyGraph {
 	nodes: TimelineNode[];
 	criticalPathDuration: number;
 }
+
+// Cost Analysis Types (re-export)
+export type {
+	CostLineItem,
+	ModelCostBreakdown,
+	ModelCostComparison,
+	Discrepancy,
+	ReconciliationSummary,
+	ReconciliationReport,
+	ExtractedCosts
+} from './cost-analysis';

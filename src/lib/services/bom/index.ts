@@ -21,7 +21,8 @@ export {
 	getBOMSpecPath,
 	getConsensusPath,
 	getBOMItemDir,
-	getAllSpecPaths
+	getAllSpecPaths,
+	getDivergentViewsPath
 } from './bom-paths';
 
 // Parser exports
@@ -31,6 +32,7 @@ export {
 	extractListSection,
 	extractTextSection,
 	parseBOMSpec,
+	parseDivergentViewsYAML,
 	type BOMSpecFrontmatter
 } from './bom-parsers';
 
@@ -41,3 +43,11 @@ export {
 	fetchConsensus,
 	checkSpecsExist
 } from './bom-fetchers';
+
+// Divergent views exports
+export {
+	getPrioritizedDivergentViews,
+	getDivergentViewsByPriority,
+	getDivergentViewPriorityCounts,
+	type PrioritizedDivergentView
+} from './bom-divergent-views';
