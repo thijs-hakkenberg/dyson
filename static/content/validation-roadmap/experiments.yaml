@@ -1,0 +1,310 @@
+# Validation Roadmap - Experiments and Missions
+# Project Dyson - Mapping open questions to validation experiments
+
+experiments:
+  # Ground-based propulsion testing
+  - id: "exp-001"
+    name: "Ground-based Xenon Hall Thruster Tests"
+    description: "Comprehensive ground testing campaign for high-power (10-20 kW) Hall thrusters using xenon propellant. Tests include lifetime validation, performance characterization, and erosion measurements to validate transport vehicle propulsion specifications."
+    targetDate: "2026"
+    status: "in-progress"
+    estimatedCost: 15000000
+    organization: "NASA Glenn Research Center"
+    relatedRQs:
+      - "rq-0-20"
+      - "rq-0-21"
+    relatedBOMItems:
+      - "bom-0-5"
+    tags:
+      - "propulsion"
+      - "hall-thruster"
+      - "xenon"
+      - "ground-test"
+    expectedOutcomes:
+      - "Thruster lifetime data exceeding 20,000 hours"
+      - "Specific impulse measurements at various power levels"
+      - "Erosion rate characterization"
+    referenceUrl: "https://www.nasa.gov/glenn/electric-propulsion"
+    notes: "Builds on AEPS program heritage"
+
+  # LEO deployment demonstration
+  - id: "exp-002"
+    name: "LEO Membrane Deployment Test"
+    description: "Orbital demonstration of large-area thin-film membrane deployment mechanisms in LEO. Tests deployment reliability, membrane tension control, and structural dynamics for collector unit design validation."
+    targetDate: "2027"
+    status: "funded"
+    estimatedCost: 45000000
+    organization: "NASA/L'Garde Partnership"
+    relatedRQs:
+      - "rq-1-2"
+      - "rq-1-9"
+      - "rq-1-37"
+    relatedBOMItems:
+      - "bom-1-2"
+      - "bom-2-1"
+    tags:
+      - "deployment"
+      - "membrane"
+      - "structural"
+      - "LEO"
+    expectedOutcomes:
+      - "Deployment success rate data"
+      - "Post-deployment shape accuracy measurements"
+      - "Membrane tension uniformity data"
+    referenceUrl: "https://www.lgarde.com/solar-sails"
+    notes: "Leverages solar sail deployment heritage from IKAROS and LightSail"
+
+  # ISRU demonstration mission
+  - id: "exp-003"
+    name: "ISRU Demonstrator Mission"
+    description: "Lunar surface demonstration of in-situ resource utilization for oxygen extraction and regolith processing. Validates mining robot operational concepts and material processing specifications for Phase 1 manufacturing expansion."
+    targetDate: "2028"
+    status: "funded"
+    estimatedCost: 350000000
+    organization: "NASA Artemis Program"
+    relatedRQs:
+      - "rq-0-1"
+      - "rq-0-6"
+      - "rq-1-12"
+      - "rq-1-21"
+    relatedBOMItems:
+      - "bom-0-1"
+      - "bom-0-3"
+      - "bom-2-3"
+    tags:
+      - "isru"
+      - "lunar"
+      - "mining"
+      - "oxygen-extraction"
+    expectedOutcomes:
+      - "Oxygen extraction rate from lunar regolith"
+      - "Power consumption per kg of extracted material"
+      - "Equipment lifetime in lunar dust environment"
+    referenceUrl: "https://www.nasa.gov/artemis"
+    notes: "Part of Artemis III+ surface operations"
+
+  # ISS PV degradation study
+  - id: "exp-004"
+    name: "ISS PV Degradation Study"
+    description: "Ongoing analysis of International Space Station solar array performance data spanning 25+ years. Provides long-baseline radiation damage and degradation data for validating collector unit lifetime models."
+    targetDate: "2026"
+    status: "in-progress"
+    estimatedCost: 2000000
+    organization: "NASA Johnson Space Center"
+    relatedRQs:
+      - "rq-0-25"
+      - "rq-1-1"
+      - "rq-1-9"
+    relatedBOMItems:
+      - "bom-0-4"
+      - "bom-1-2"
+    tags:
+      - "solar-arrays"
+      - "degradation"
+      - "radiation"
+      - "long-duration"
+    expectedOutcomes:
+      - "Degradation rate curves over 25-year period"
+      - "Correlation with solar activity cycles"
+      - "Thermal cycling effects quantification"
+    referenceUrl: "https://www.nasa.gov/iss-research"
+    notes: "Utilizes existing ISS telemetry data"
+
+  # Asteroid redirect demonstration
+  - id: "exp-005"
+    name: "Asteroid Redirect Demo"
+    description: "Technology demonstration for asteroid capture and redirect techniques applicable to Near-Earth Object mining operations. Validates capture system designs and low-thrust trajectory optimization for material transport."
+    targetDate: "2030"
+    status: "proposed"
+    estimatedCost: 800000000
+    organization: "NASA/ESA Joint Mission"
+    relatedRQs:
+      - "rq-0-1"
+      - "rq-0-6"
+      - "rq-1-3"
+    relatedBOMItems:
+      - "bom-0-1"
+      - "bom-0-5"
+    tags:
+      - "asteroid"
+      - "capture"
+      - "redirect"
+      - "ion-propulsion"
+    expectedOutcomes:
+      - "Capture mechanism effectiveness data"
+      - "Delta-V requirements for asteroid redirect"
+      - "Autonomous navigation performance"
+    notes: "Builds on DART mission heritage"
+
+  # Swarm coordination testbed
+  - id: "exp-006"
+    name: "Multi-Satellite Swarm Coordination Testbed"
+    description: "Ground-based hardware-in-the-loop simulation facility for testing swarm coordination algorithms at scale. Validates distributed control architectures and inter-satellite communication protocols for million-unit swarm management."
+    targetDate: "2027"
+    status: "funded"
+    estimatedCost: 25000000
+    organization: "MIT Space Systems Laboratory"
+    relatedRQs:
+      - "rq-1-24"
+      - "rq-2-17"
+      - "rq-1-6"
+    relatedBOMItems:
+      - "bom-1-7"
+    tags:
+      - "swarm"
+      - "coordination"
+      - "simulation"
+      - "distributed-systems"
+    expectedOutcomes:
+      - "Algorithm performance at 100,000+ node scale"
+      - "Communication latency characterization"
+      - "Fault tolerance metrics"
+    referenceUrl: "https://ssl.mit.edu"
+    notes: "Extension of SPHERES/Astrobee research"
+
+  # Perovskite space qualification
+  - id: "exp-007"
+    name: "Perovskite PV Space Qualification"
+    description: "Dedicated space experiment to qualify perovskite solar cells for long-duration space applications. Tests radiation tolerance, thermal cycling stability, and encapsulation effectiveness in the GEO radiation environment."
+    targetDate: "2027"
+    status: "proposed"
+    estimatedCost: 35000000
+    organization: "NREL/NASA Partnership"
+    relatedRQs:
+      - "rq-1-1"
+      - "rq-1-9"
+    relatedBOMItems:
+      - "bom-1-2"
+      - "bom-2-1"
+    tags:
+      - "perovskite"
+      - "solar-cells"
+      - "radiation"
+      - "qualification"
+    expectedOutcomes:
+      - "Degradation rate in GEO radiation environment"
+      - "Optimal encapsulation approach"
+      - "Temperature coefficient characterization"
+    referenceUrl: "https://www.nrel.gov/pv/perovskite-solar-cells.html"
+    notes: "Critical for Phase 1 collector unit material selection"
+
+  # Alternative propellant testing
+  - id: "exp-008"
+    name: "Iodine Hall Thruster Flight Demonstration"
+    description: "Orbital demonstration of iodine-fueled Hall thrusters as xenon alternative. Tests long-duration performance, storage system reliability, and feed system behavior to validate alternative propellant strategies."
+    targetDate: "2026"
+    status: "in-progress"
+    estimatedCost: 18000000
+    organization: "Busek/ThrustMe"
+    relatedRQs:
+      - "rq-0-20"
+      - "rq-1-31"
+    relatedBOMItems:
+      - "bom-0-5"
+    tags:
+      - "propulsion"
+      - "iodine"
+      - "hall-thruster"
+      - "alternative-propellant"
+    expectedOutcomes:
+      - "Iodine vs xenon performance comparison"
+      - "Feed system reliability data"
+      - "Specific impulse at various power levels"
+    referenceUrl: "https://www.busek.com"
+    notes: "Iodine offers 95-100% xenon performance at ~1% cost"
+
+  # Collision avoidance demonstration
+  - id: "exp-009"
+    name: "Dense Constellation Collision Avoidance Demo"
+    description: "Operational demonstration of autonomous collision avoidance in a dense satellite constellation. Tests real-time maneuver planning, inter-satellite coordination, and ground segment integration for swarm safety validation."
+    targetDate: "2028"
+    status: "proposed"
+    estimatedCost: 120000000
+    organization: "ESA/Starlink Collaboration"
+    relatedRQs:
+      - "rq-1-6"
+      - "rq-2-3"
+    relatedBOMItems:
+      - "bom-1-7"
+      - "bom-2-2"
+    tags:
+      - "collision-avoidance"
+      - "constellation"
+      - "safety"
+      - "autonomous"
+    expectedOutcomes:
+      - "Collision probability reduction metrics"
+      - "Maneuver fuel consumption data"
+      - "Response time characterization"
+    referenceUrl: "https://www.esa.int/Safety_Security/Space_Debris"
+    notes: "Leverages ESA Space Debris Office expertise"
+
+  # Mass driver prototype
+  - id: "exp-010"
+    name: "Lunar Mass Driver Prototype"
+    description: "Ground-based demonstration of electromagnetic mass driver technology for lunar payload launch. Tests acceleration profiles, targeting accuracy, and power system integration for Phase 1 mass driver specifications."
+    targetDate: "2029"
+    status: "proposed"
+    estimatedCost: 75000000
+    organization: "NASA Marshall Space Flight Center"
+    relatedRQs:
+      - "rq-1-12"
+      - "rq-1-4"
+    relatedBOMItems:
+      - "bom-1-5"
+    tags:
+      - "mass-driver"
+      - "electromagnetic"
+      - "lunar"
+      - "launch"
+    expectedOutcomes:
+      - "Achievable acceleration profiles"
+      - "Targeting accuracy at relevant scales"
+      - "Power system efficiency"
+    notes: "Builds on electromagnetic launcher research for aircraft carriers"
+
+milestones:
+  - id: "ms-001"
+    name: "Propulsion Technology Validation"
+    targetDate: "2027"
+    description: "Complete validation of Hall thruster specifications for transport vehicles"
+    relatedExperiments:
+      - "exp-001"
+      - "exp-008"
+    criticalPath: true
+
+  - id: "ms-002"
+    name: "Collector Unit Material Selection"
+    targetDate: "2028"
+    description: "Final material selection for collector unit PV based on space qualification data"
+    relatedExperiments:
+      - "exp-004"
+      - "exp-007"
+    criticalPath: true
+
+  - id: "ms-003"
+    name: "ISRU Technology Readiness"
+    targetDate: "2029"
+    description: "Achieve TRL 7 for in-situ resource utilization systems"
+    relatedExperiments:
+      - "exp-003"
+    criticalPath: true
+
+  - id: "ms-004"
+    name: "Swarm Coordination Architecture Freeze"
+    targetDate: "2028"
+    description: "Finalize swarm coordination architecture based on testbed results"
+    relatedExperiments:
+      - "exp-006"
+      - "exp-009"
+    criticalPath: false
+
+  - id: "ms-005"
+    name: "Phase 0 Design Review"
+    targetDate: "2027"
+    description: "Complete Phase 0 preliminary design review with validated specifications"
+    relatedExperiments:
+      - "exp-001"
+      - "exp-003"
+      - "exp-008"
+    criticalPath: true
