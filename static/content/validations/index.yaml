@@ -1,0 +1,262 @@
+# Validation Tracking Registry
+# Project Dyson - Tracking validation status of LLM predictions and specifications
+
+validations:
+  # Validated claim - Xenon production rate
+  - id: "val-001"
+    slug: "xenon-production-rate"
+    claim: "Global xenon production rate of approximately 70 tonnes per year is sufficient for initial Phase 0 propulsion needs"
+    bomItemId: "bom-0-5"
+    questionId: "rq-0-20"
+    status: "validated"
+    validations:
+      - id: "val-001-1"
+        date: "2026-01-15"
+        source: "literature"
+        sourceDetails: "USGS Mineral Commodity Summaries 2025 - Xenon production statistics"
+        conclusion: "Global xenon production confirmed at 65-75 tonnes/year, with potential for 10-15% increase through dedicated extraction"
+        confidence: 95
+        relatedRQs:
+          - "rq-0-20"
+        sourceUrl: "https://pubs.usgs.gov/periodicals/mcs2025"
+        validator: "Materials Research Team"
+        notes: "Industry data confirms LLM estimates within 10% margin"
+      - id: "val-001-2"
+        date: "2026-01-20"
+        source: "expert-review"
+        sourceDetails: "Review by Air Liquide xenon procurement specialist"
+        conclusion: "Production estimates accurate; major constraint is competing demand from semiconductor industry"
+        confidence: 90
+        relatedRQs:
+          - "rq-0-20"
+        validator: "External Consultant"
+    lastUpdated: "2026-01-20"
+    phaseId: "phase-0"
+    tags:
+      - "propellant"
+      - "xenon"
+      - "supply-chain"
+      - "ion-propulsion"
+    claimSource: "Phase 0 Transport Vehicles Consensus Document"
+
+  # Partially validated claim - Perovskite degradation
+  - id: "val-002"
+    slug: "perovskite-degradation-rate"
+    claim: "Perovskite solar cells will degrade at 0.5-1% per year in the space radiation environment"
+    bomItemId: "bom-1-2"
+    questionId: "rq-1-1"
+    status: "partially-validated"
+    validations:
+      - id: "val-002-1"
+        date: "2025-11-10"
+        source: "experiment"
+        sourceDetails: "NREL proton irradiation study on perovskite tandem cells"
+        conclusion: "Ground-based radiation testing shows 0.3-0.8% degradation under equivalent 1-year GEO proton flux; electron damage not yet characterized"
+        confidence: 70
+        relatedRQs:
+          - "rq-1-1"
+          - "rq-1-9"
+        sourceUrl: "https://www.nrel.gov/pv/perovskite-solar-cells.html"
+        validator: "PV Research Team"
+        notes: "Proton damage well-characterized; electron and combined effects need more testing"
+      - id: "val-002-2"
+        date: "2026-01-05"
+        source: "literature"
+        sourceDetails: "Nature Energy review: Space applications of perovskite photovoltaics"
+        conclusion: "Literature suggests wide range of 0.2-2% depending on encapsulation and composition; more in-situ data needed"
+        confidence: 60
+        relatedRQs:
+          - "rq-1-1"
+        validator: "Literature Review Team"
+    lastUpdated: "2026-01-05"
+    phaseId: "phase-1"
+    tags:
+      - "solar-cells"
+      - "perovskite"
+      - "radiation"
+      - "degradation"
+    claimSource: "Phase 1 PV Blanket Arrays Consensus Document"
+
+  # Unvalidated claim - Mass driver accuracy
+  - id: "val-003"
+    slug: "mass-driver-targeting-accuracy"
+    claim: "Electromagnetic mass drivers can achieve 0.01 degree targeting accuracy for lunar-to-L2 payload delivery"
+    bomItemId: "bom-1-5"
+    questionId: "rq-1-12"
+    status: "unvalidated"
+    validations: []
+    lastUpdated: "2026-01-01"
+    phaseId: "phase-1"
+    tags:
+      - "mass-driver"
+      - "payload-delivery"
+      - "targeting"
+      - "lunar-operations"
+    claimSource: "Phase 1 Mass Drivers Consensus Document"
+
+  # Refuted claim - Swarm communication latency
+  - id: "val-004"
+    slug: "swarm-comm-latency-original"
+    claim: "Inter-satellite optical links can achieve sub-microsecond latency for swarm coordination commands"
+    bomItemId: "bom-1-7"
+    questionId: "rq-1-24"
+    status: "refuted"
+    validations:
+      - id: "val-004-1"
+        date: "2025-12-15"
+        source: "simulation"
+        sourceDetails: "High-fidelity optical link simulation including acquisition and tracking overhead"
+        conclusion: "Realistic optical link latency is 10-50 microseconds due to acquisition, tracking, and protocol overhead; sub-microsecond only achievable for pre-established links"
+        confidence: 85
+        relatedRQs:
+          - "rq-1-24"
+        validator: "Communications Team"
+        notes: "Original claim too optimistic; revised estimates in updated consensus"
+      - id: "val-004-2"
+        date: "2026-01-08"
+        source: "expert-review"
+        sourceDetails: "Review by Starlink optical crosslink engineering team"
+        conclusion: "Industry experience confirms 10-100 microsecond range for operational optical links; sub-microsecond not achievable with current technology"
+        confidence: 95
+        relatedRQs:
+          - "rq-1-24"
+        validator: "External Consultant"
+    lastUpdated: "2026-01-08"
+    phaseId: "phase-1"
+    tags:
+      - "communications"
+      - "optical-links"
+      - "latency"
+      - "swarm-control"
+    claimSource: "Phase 1 Swarm Control System Claude Opus 4.5 Spec"
+
+  # Validated claim - ISS solar array degradation
+  - id: "val-005"
+    slug: "iss-solar-degradation-rate"
+    claim: "ISS solar arrays degrade at approximately 2-3% per year in the LEO environment"
+    bomItemId: "bom-1-2"
+    questionId: "rq-0-25"
+    status: "validated"
+    validations:
+      - id: "val-005-1"
+        date: "2025-10-20"
+        source: "mission-data"
+        sourceDetails: "NASA ISS Power Systems telemetry data 2000-2025"
+        conclusion: "ISS solar array power output has declined 2.5% annually on average over 25 years of operation, consistent with predictions"
+        confidence: 98
+        relatedRQs:
+          - "rq-0-25"
+          - "rq-1-1"
+        sourceUrl: "https://www.nasa.gov/mission_pages/station/research"
+        validator: "NASA Liaison Team"
+        notes: "Actual flight data provides highest confidence validation"
+    lastUpdated: "2025-10-20"
+    phaseId: "phase-0"
+    tags:
+      - "solar-arrays"
+      - "degradation"
+      - "iss"
+      - "space-environment"
+    claimSource: "Phase 0 Solar Power Arrays Consensus Document"
+
+  # Outdated claim - needs re-validation
+  - id: "val-006"
+    slug: "hall-thruster-lifetime"
+    claim: "Hall thrusters can achieve 50,000+ hours of operational lifetime"
+    bomItemId: "bom-0-5"
+    questionId: "rq-0-20"
+    status: "outdated"
+    validations:
+      - id: "val-006-1"
+        date: "2024-06-15"
+        source: "mission-data"
+        sourceDetails: "Dawn mission post-flight analysis - 48,000 hours achieved"
+        conclusion: "Dawn ion thrusters exceeded design life, achieving 48,000 hours; supports 50,000 hour target"
+        confidence: 85
+        relatedRQs:
+          - "rq-0-20"
+        validator: "Propulsion Team"
+        notes: "Based on Dawn gridded ion thrusters; Hall thruster data from Starlink may update this"
+      - id: "val-006-2"
+        date: "2025-03-10"
+        source: "literature"
+        sourceDetails: "New research suggests erosion models underestimate wear at high power levels"
+        conclusion: "Recent papers indicate 50,000 hour lifetime may require design modifications for high-power (>10kW) Hall thrusters"
+        confidence: 60
+        relatedRQs:
+          - "rq-0-20"
+        validator: "Literature Review Team"
+        notes: "Marked as outdated pending Starlink operational data release"
+    lastUpdated: "2025-03-10"
+    phaseId: "phase-0"
+    tags:
+      - "hall-thruster"
+      - "lifetime"
+      - "propulsion"
+      - "ion-propulsion"
+    claimSource: "Phase 0 Transport Vehicles GPT-5.2 Spec"
+
+  # Partially validated - Swarm coordination scaling
+  - id: "val-007"
+    slug: "swarm-coordination-million-scale"
+    claim: "Hierarchical swarm coordination can scale to 1 million units with 100ms update propagation"
+    bomItemId: "bom-1-7"
+    questionId: "rq-1-24"
+    status: "partially-validated"
+    validations:
+      - id: "val-007-1"
+        date: "2025-12-01"
+        source: "simulation"
+        sourceDetails: "MIT SSL discrete event simulation of hierarchical swarm coordination"
+        conclusion: "Simulation shows 100ms propagation achievable at 100,000 units; 1M units requires 200-500ms with current algorithms"
+        confidence: 75
+        relatedRQs:
+          - "rq-1-24"
+          - "rq-2-17"
+        validator: "Swarm Architecture Team"
+        notes: "Scaling requires algorithm improvements; current tech supports 100K scale"
+      - id: "val-007-2"
+        date: "2026-01-25"
+        source: "expert-review"
+        sourceDetails: "Review by distributed systems researcher from MIT CSAIL"
+        conclusion: "100ms at 1M scale is ambitious but theoretically achievable with optimal hierarchical design and edge computing"
+        confidence: 65
+        relatedRQs:
+          - "rq-1-24"
+        validator: "External Academic Reviewer"
+    lastUpdated: "2026-01-25"
+    phaseId: "phase-1"
+    tags:
+      - "swarm"
+      - "coordination"
+      - "scaling"
+      - "distributed-systems"
+    claimSource: "Phase 1 Swarm Control System Consensus Document"
+
+  # Validated via simulation - Collision probability
+  - id: "val-008"
+    slug: "swarm-collision-probability-model"
+    claim: "Collision probability for 10km-spaced swarm elements is less than 10^-9 per unit per year"
+    bomItemId: "bom-1-7"
+    questionId: "rq-1-6"
+    status: "validated"
+    validations:
+      - id: "val-008-1"
+        date: "2026-01-30"
+        source: "simulation"
+        sourceDetails: "Monte Carlo collision probability analysis with 10^8 trials"
+        conclusion: "At 10km spacing with active station-keeping, collision probability is 3.2 x 10^-10 per unit per year, well below threshold"
+        confidence: 92
+        relatedRQs:
+          - "rq-1-6"
+          - "rq-2-3"
+        validator: "Orbital Mechanics Team"
+        notes: "Validated using ESA MASTER debris model integration"
+    lastUpdated: "2026-01-30"
+    phaseId: "phase-1"
+    tags:
+      - "collision"
+      - "debris"
+      - "safety"
+      - "orbital-mechanics"
+    claimSource: "Phase 1 Swarm Control System Consensus Document"
