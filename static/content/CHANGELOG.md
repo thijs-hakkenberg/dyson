@@ -2,9 +2,14 @@
 
 All notable changes to Project Dyson are documented here.
 
-## [Unreleased] - 2026-02-05
+## [Unreleased] - 2026-02-07
 
 ### Added
+
+#### Research Questions & Discussions
+- Add rq-2-20: Swarm operational threshold for meeting humanity's energy needs (ROI analysis)
+- Add multi-model discussion for rq-2-20 with 2-round consensus
+- Add blog article: "Resolved: When Does the Dyson Swarm Start Paying Off?"
 
 #### Simulators
 - Add Capture Monte Carlo simulator for asteroid capture modeling
@@ -32,6 +37,8 @@ All notable changes to Project Dyson are documented here.
 ### Changed
 - Update Claude model from Opus 4.5 to 4.6
 - Update phase BOM data from research question findings
+- Update Phase 1 objectives: add ground receiver site selection for Phase 2
+- Update Phase 2 with ROI threshold framework: four-tier milestones (100 GW → 1 TW), success metric as delivered power not unit count, ground receiver infrastructure ($2-5T)
 
 ### Fixed
 - Fix Svelte 5 warnings

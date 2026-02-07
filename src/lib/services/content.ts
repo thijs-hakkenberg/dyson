@@ -129,7 +129,8 @@ export const PHASES: Phase[] = [
 			'Deploy initial swarm constellation (1,000 units)',
 			'Establish swarm control and communication network',
 			'Deploy mass drivers for lunar material transport',
-			'Begin power transmission tests'
+			'Begin power transmission tests',
+			'Initiate ground receiver site selection (10-20 stations) for Phase 2 power delivery'
 		],
 		bom: [
 			{
@@ -248,20 +249,22 @@ export const PHASES: Phase[] = [
 		number: 2,
 		title: 'Swarm Expansion',
 		description:
-			'Scale up satellite production and deployment to achieve significant solar energy capture. This phase focuses on exponential growth of the swarm while maintaining system stability.',
+			'Scale up satellite production and deployment to achieve grid-significant power delivery (~1 TW to Earth). Success metric: delivered power, not unit count. Four-tier threshold framework: Tier 1 (100 GW, ~10k units) for market entry, Tier 2 (1 TW, ~100k units) for grid significance and institutional lock-in.',
 		status: 'planned',
 		objectives: [
 			'Achieve self-sustaining production capacity',
 			'Deploy 100,000+ collector satellites',
-			'Establish redundant power transmission grid',
-			'Begin supplying significant Earth energy needs',
+			'Reach Tier 1 threshold: 100 GW delivered to Earth (political sustainability milestone)',
+			'Reach Tier 2 threshold: 1 TW delivered to Earth (grid significance, irreversibility)',
+			'Deploy ~1,000 ground receiver stations ($2-5T infrastructure)',
+			'Establish redundant power transmission grid with 15-30% end-to-end efficiency',
 			'Develop autonomous maintenance systems'
 		],
 		bom: [
 			{
 				id: 'bom-2-1',
 				name: 'Solar Collector Satellites',
-				description: 'Mass-produced swarm elements for exponential energy capture scaling',
+				description: 'Mass-produced swarm elements using Reference architecture (50,000 m², 0.7 AU, 35% efficiency). At 100k units: ~9.5 TW gross generation, ~1 TW delivered to Earth. Architecture spans 3 orders of magnitude in outcomes—conservative designs rejected as inadequate for ROI.',
 				quantity: 100000,
 				unit: 'units',
 				unitCost: 50000000,
