@@ -2491,6 +2491,925 @@ This finding has immediate implications for vehicle design. All propulsion syste
 
 *This research answers [RQ-0-20: Xenon propellant sourcing at scale](/questions/xenon-propellant-sourcing-scale). The full technical report is available in the project research archive.*
 		`
+	},
+	{
+		slug: 'resolution-human-rating-transport-vehicles',
+		title: 'Resolved: The $200M Question on Human-Rating Transport Vehicles',
+		description:
+			'Our multi-model discussion reached consensus on a modular human-rating approach that captures 80% of the cost savings while eliminating catastrophic retrofit risk.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-07'),
+		tags: ['resolution', 'discussion', 'phase-0', 'transport', 'human-rating', 'safety'],
+		category: 'Research Resolutions',
+		content: `# Resolved: The $200M Question on Human-Rating Transport Vehicles
+
+After structured deliberation between Claude Opus 4.6, Gemini 3 Pro, and GPT-5.2, we've reached consensus on one of Phase 0's most consequential design decisions: **should the 10 Transport Vehicles be designed for human crew from the start?**
+
+The answer: **yes, but with a clever twist**.
+
+## The Core Tension
+
+The original consensus document identified a 40-60% cost increase for permanent human-rating of all vehicles versus cargo-only design. But it also flagged a 2-3x retrofit penalty if we defer human-rating and later find crew transport necessary.
+
+This sets up a classic engineering gamble: pay now or pay (much) more later?
+
+## The Modular Solution
+
+The discussion converged on a **modular human-rating architecture**:
+
+1. **All 10 vehicles get permanent structural provisions** for human-rating from day one
+2. **Crew modules, life support, and radiation shielding** are implemented as installable kits
+3. **Only 3 crew module kits** are procured for the 10-vehicle fleet
+
+### Cost Impact
+
+| Approach | Program Cost | vs. Baseline |
+|----------|-------------|--------------|
+| Cargo-only baseline | $2.0B | — |
+| Modular human-rating | $2.24-2.40B | +12-20% |
+| Full permanent human-rating | $2.8-3.2B | +40-60% |
+| Defer then retrofit | $4.0-6.0B | +100-200% |
+
+The modular approach costs only 12-20% more than cargo-only, versus 40-60% for full permanent human-rating or 2-3x for retrofit.
+
+## Why This Works
+
+### Mass Penalty is Negligible
+
+The permanent structural provisions (3g emergency acceleration rating, redundant avionics, crew module interfaces) add only 2,000-4,000 kg per vehicle. For a 200,000 kg payload baseline, that's **1-2%**—a trivially justified insurance premium.
+
+### Fleet Flexibility
+
+With 3 interchangeable crew module kits:
+- Up to 3 vehicles can operate crewed missions simultaneously
+- 7 vehicles remain in pure cargo configuration
+- Kits can be swapped between vehicles at the Processing Station
+- Inherent rescue capability through fleet mutual aid
+
+### Crew Demand is Coming
+
+The discussion established high confidence that crew transport will become essential by Years 4-5 as Processing Station operational complexity exceeds the limits of autonomous systems and teleoperation under light-time delay.
+
+## The Abort Philosophy Shift
+
+A critical design philosophy emerged: **traditional Earth-return abort is neither feasible nor necessary**.
+
+For deep-space operations, the discussion converged on a tiered approach:
+1. **Shelter-in-place** (30+ day self-sufficiency)
+2. **Divert-to-nearest-facility**
+3. **Fleet-based crew rescue**
+
+This dramatically reduces abort propellant reserves compared to Earth-return capability, which would require impossible delta-V budgets at asteroid belt distances.
+
+## Certification Strategy
+
+The recommendation: develop a **project-specific human-rating standard** rather than pursuing NASA NPR 8705.2 certification. Earth-centric frameworks would impose inappropriate constraints and multi-year schedule penalties on deep-space vehicle design.
+
+The project-specific standard derives safety requirements from NPR 8705.2 principles but tailors them for deep-space operations with an independent review board.
+
+## Immediate Actions
+
+1. **Incorporate structural human-rating provisions** into vehicle preliminary design before System Requirements Review
+2. **Commission radiation environment trade study** to resolve shielding mass uncertainty (4,000-8,000 kg estimate is largest unknown)
+3. **Develop crew transport demand model** to validate Year 4-5 timeline
+4. **Establish Human-Rating Standards Working Group** to develop project-specific certification approach
+5. **Design crew module interface** and validate through physical prototype testing
+
+## Key Insight
+
+The winning argument reframed the question from "should we human-rate?" to "what's our exposure if we can't retrofit later?"
+
+Structural provisions that cost 1-2% of payload capacity today could prevent a 2-3x cost multiplier in Year 5 when crew transport becomes essential. That's not a design decision—it's risk management.
+
+---
+
+*This resolution addresses [RQ-0-18: Human-rating requirement for transport vehicles](/questions/human-rating-transport-vehicles). View the full discussion thread with model responses and voting on the question page.*
+`
+	},
+	{
+		slug: 'resolution-swarm-power-architecture',
+		title: 'Resolved: Where Does Dyson Swarm Power Go?',
+		description:
+			'Multi-model consensus establishes a phased power architecture: local use first, Mercury beaming second, Earth delivery via relay constellation only at scale.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-07'),
+		tags: ['resolution', 'discussion', 'phase-1', 'power', 'architecture', 'laser-beaming'],
+		category: 'Research Resolutions',
+		content: `# Resolved: Where Does Dyson Swarm Power Go?
+
+The most fundamental question about a Dyson swarm isn't "can we build it?"—it's "what do we do with the power?" Our multi-model discussion reached unanimous consensus on an answer that challenges the intuitive assumption of beaming power to Earth.
+
+## The Devastating Math on Earth Beaming
+
+The discussion's central insight: **laser power beaming to Earth is not viable for Phase 1 or early Phase 2**.
+
+The end-to-end efficiency chain tells the story:
+
+\`\`\`
+Solar PV → DC Power → Laser Conversion → Free-Space Transmission → Receiver PV
+   ~20%       95%          50%                   90%                   30%
+                      Overall: 2.7-10.6%
+\`\`\`
+
+For every 100 watts collected at the swarm, only 2.7-10.6 watts reach Earth as usable power. Worse, the thermal penalties at 0.3 AU compound nonlinearly when laser conversion waste heat is added to already-severe solar flux rejection requirements.
+
+And the pointing budget? Sub-microradian stability needed for interplanetary beaming is **fundamentally incompatible** with ultra-lightweight (35-50 g/m²) structures without relay infrastructure.
+
+## The Phased Hybrid Architecture
+
+The consensus recommends a temporal sequence, not a single architectural choice:
+
+### Phase 1: Local Electrical Use
+- Electric propulsion for station-keeping and swarm deployment
+- Autonomous manufacturing and assembly systems
+- Communications relay infrastructure
+
+**Why it wins**: Directly accelerates swarm growth—the single most important metric in early phases.
+
+### Phase 1B-2: Mercury Surface Delivery
+- Short distances (0.1-0.7 AU) from 0.3 AU swarm position
+- No atmospheric attenuation
+- Direct support for in-situ manufacturing
+- Positive feedback loop for swarm expansion
+
+**Why it wins**: First viable long-range beaming application that makes engineering sense.
+
+### Phase 3+: Earth Delivery via Relay Constellation
+- Relay stations at Earth-Sun L1 or Earth orbit
+- Solves the pointing budget problem
+- Enables 24/7 continuous delivery via constellation coverage
+- Final relay-to-ground link likely microwave (2.45/5.8 GHz) for atmospheric reliability
+
+**Why it wins**: Only at civilization-relevant scale (~10,000+ units) does Earth power delivery become the primary mission.
+
+## The 0.3 AU Decision
+
+This phased approach resolves the 0.3 AU vs 1.0 AU orbital debate in favor of **0.3 AU for early phases**:
+
+| Factor | 0.3 AU | 1.0 AU |
+|--------|--------|--------|
+| Solar flux | 11× higher | Baseline |
+| Mercury proximity | Yes | No |
+| Thermal challenge | Severe but manageable | Mild |
+| Earth beaming distance | 0.7-1.3 AU | 0 AU |
+
+The 11× flux advantage directly accelerates bootstrapping, and Mercury proximity supports manufacturing. The 1.0 AU population comes later when Earth delivery becomes primary.
+
+## The Binding Near-Term Decision
+
+The critical insight: **interface standards must be defined now** even though their use cases are years away.
+
+Required specifications:
+1. **Standardized bidirectional optical power port** (0.5 m aperture, 1064 nm, 1 kW-10 MW scalable, ±1 mrad tracking)
+2. **Bus voltage architecture** with upgrade path from 800V DC to 2-5 kV
+3. **Power negotiation protocol** embedded in mesh communications network
+
+These carry modest mass and complexity penalties but preserve architectural optionality across all future phases.
+
+## Recommended Demonstration
+
+The Phase 1 power demonstration should be **functional, not symbolic**:
+- 1-10 kW delivered optical power to co-orbital receiver at 10-100 km range
+- Inter-unit power transfer including power negotiation protocol
+- Empirical data on DC-to-optical-to-DC efficiency under realistic thermal and structural conditions
+
+Explicitly reject watts-to-ground demonstrations as non-informative.
+
+## Unresolved Questions
+
+1. What is the optimal relay architecture for Phase 3 Earth delivery?
+2. How does the inter-unit power sharing mesh scale to millions of units?
+3. At what swarm scale does Earth delivery become economically justified?
+4. What pointing stability is achievable for lightweight structures under thermal loading?
+
+## Key Insight
+
+The winning analysis demonstrated that **premature commitment to long-range beaming is counterproductive**. Early phases should maximize swarm growth rate; power delivery to Earth is a Phase 3 problem that we design interfaces for today but don't operationally commit to until the swarm reaches scale.
+
+---
+
+*This resolution addresses [RQ-1-11: Swarm-level power architecture and end-use](/questions/swarm-power-architecture-end-use). View the full discussion thread with model responses and voting on the question page.*
+`
+	},
+	{
+		slug: 'resolution-autonomous-assembly-certification',
+		title: 'Resolved: How Do You Certify Robots That Fix Themselves?',
+		description:
+			'Consensus on a Continuous Assurance Architecture for assembly robots: hardware-enforced safety boundaries, runtime verification, and 10 billion simulated robot-hours.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-07'),
+		tags: ['resolution', 'discussion', 'phase-1', 'autonomy', 'certification', 'robotics', 'safety'],
+		category: 'Research Resolutions',
+		content: `# Resolved: How Do You Certify Robots That Fix Themselves?
+
+Certifying autonomous assembly robots that must operate for years without human oversight, repair each other, and make safety-critical decisions faster than communication latency allows—this requires a fundamentally new framework.
+
+Our multi-model discussion reached consensus: **no existing certification regime works**.
+
+## The Certification Gap
+
+Current standards were built for different worlds:
+- **DO-178C (Aviation)**: Assumes human pilots, deterministic software, and regular maintenance
+- **ISO 26262 (Automotive)**: Assumes replaceable vehicles and road infrastructure
+- **DNV-GL (Maritime)**: Assumes accessible systems and port-based maintenance
+
+None address systems that must:
+- Operate autonomously for weeks or months
+- Self-repair through peer intervention
+- Coordinate in swarms of hundreds
+- Make safety-critical decisions faster than Earth communication latency permits
+
+## The Continuous Assurance Architecture
+
+The consensus proposes a **three-layer architecture** with fundamentally different assurance approaches for each:
+
+### Layer 1: Hardware Safety Kernel
+**What it is**: A radiation-hardened FPGA that can physically override all software commands—cutting power to actuators and electron beam welding systems regardless of what the autonomy stack decides.
+
+**How it's certified**: Exhaustive formal verification via model-checking tools (SPIN, TLA+). The kernel's simplicity (~50,000 lines of VHDL) makes this tractable, unlike the autonomy stack.
+
+**Mass/cost impact**: $15,000-25,000 per unit
+
+### Layer 2: Behavioral Constraint Layer
+**What it is**: Formally verified software that enforces permitted action boundaries—no weld operations within 2m of another robot, no arm movements exceeding specified velocities near human-occupied zones.
+
+**How it's certified**: DO-178C DAL-A equivalent rigor. Formal specification and proof of behavioral bounds.
+
+### Layer 3: Autonomous Decision Space
+**What it is**: The planning, visual servoing, and coordination software that operates freely *within* the boundaries enforced by Layers 1 and 2.
+
+**How it's certified**: **Simulation-based statistical validation**—10 billion simulated robot-hours with adversarial fault injection, demonstrating 99.9% confidence that catastrophic failure probability remains below 10⁻⁶ per robot-hour.
+
+## Why This Works
+
+The architecture's genius is **separation of concerns**:
+
+1. **Layer 1 is unconditional**: The hardware kernel doesn't care why an unsafe condition exists—it just stops it
+2. **Layer 2 is provable**: The behavioral bounds are simple enough for formal verification
+3. **Layer 3 can evolve**: Autonomy software can incorporate ML, receive updates, and improve without recertifying the safety-critical layers
+
+This means a software update to improve assembly efficiency doesn't require re-proving the system is safe—that property is guaranteed by the layers below.
+
+## Multi-Robot Coordination
+
+Swarm emergent behavior requires **architectural constraints**, not just testing:
+- Formally verified interaction protocols
+- Maximum coordination group size: 6 robots per task
+- Mandatory workspace access control (analogous to air traffic management)
+- Periodic fleet-wide state resets to bound complexity
+
+## Continuous (Not Point-in-Time) Certification
+
+Robots operating 5-20 years with degrading components and peer-performed repairs cannot be meaningfully certified once at deployment.
+
+The solution: a **formal certification state machine**:
+
+| State | Meaning | Transition Trigger |
+|-------|---------|-------------------|
+| GREEN | Full operational authority | All systems nominal |
+| YELLOW | Restricted operations | Degradation detected |
+| RED | Safe mode only | Critical limit reached |
+| BLACK | Decommissioned | Unrecoverable |
+
+Example trigger: positioning accuracy degradation beyond ±0.75mm restricts robot from precision assembly tasks.
+
+## Post-Repair Recertification
+
+A 4-8 hour automated sequence:
+1. Hardware self-test
+2. Sensor calibration
+3. Manipulator accuracy verification against standardized references
+4. Peer cross-validation
+
+This enables the "repair by peer robots" concept without Earth-based assessment for every maintenance event.
+
+## Infrastructure Requirements
+
+| Item | Investment | Purpose |
+|------|-----------|---------|
+| Formal Methods Team | 8-12 engineers | Layer 1/2 specification and verification |
+| Simulation Infrastructure | $50-100M one-time | 10B robot-hour validation capability |
+| Processing Overhead | 15% per robot | Runtime verification |
+
+## Graduated Deployment
+
+Trust is built incrementally:
+1. **LEO Demo**: 3-5 robots, continuous ground monitoring
+2. **Heliocentric Pilot**: 10-20 robots, 1-hour autonomous windows
+3. **Initial Production**: 50-100 robots, bounded autonomy with depot oversight
+4. **Full Scale**: 350+ robots, full autonomous authority within certified envelope
+
+## Regulatory Strategy
+
+Rather than waiting for regulators to develop their own approach, **propose the CAA framework as a reference standard** to NASA OSMA and ESA Product Assurance. This shapes the precedent that will govern autonomous space operations for decades.
+
+---
+
+*This resolution addresses [RQ-1-16: Autonomy certification for fully autonomous assembly robots](/questions/autonomous-assembly-certification). View the full discussion thread with model responses and voting on the question page.*
+`
+	},
+	{
+		slug: 'resolution-feedstock-isru-timeline',
+		title: 'Resolved: When Does ISRU Make Sense? The $144M/Year Question',
+		description:
+			'Consensus establishes a moderate ISRU transition timeline: Earth-supplied feedstock for Years 1-3, bulk metals ISRU by Year 4, 50-60% self-sufficiency by Year 6.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-07'),
+		tags: ['resolution', 'discussion', 'phase-1', 'isru', 'feedstock', 'manufacturing', 'supply-chain'],
+		category: 'Research Resolutions',
+		content: `# Resolved: When Does ISRU Make Sense? The $144M/Year Question
+
+The feedstock strategy is the single most consequential unresolved design driver for the Assembly Node Hub. Our multi-model discussion reached consensus on when—and how—to transition from Earth-supplied materials to in-situ resource utilization.
+
+## The Brutal Economics
+
+At $5,000/kg delivered to the 1 AU operational orbit, Earth-supplied feedstock for the baseline 1-1.7 MW monthly production target costs:
+
+**$144M-$360M annually**
+
+This is the dominant recurring program expense. It's survivable during Phase 1 at baseline throughput, but untenable at scale. Doubling production doubles feedstock costs linearly; ISRU costs scale sub-linearly after infrastructure investment.
+
+## The Hidden Mass Multiplier
+
+Monthly feedstock demand is **not** what the tile output implies:
+
+| Factor | Multiplier |
+|--------|-----------|
+| Manufacturing yield loss | 15-25% |
+| Structural framing beyond tiles | 1.5-2× |
+| Process consumables | 5-10% |
+| Station maintenance | 2-5% |
+
+**Actual demand: 3,000-5,000 kg/month**—significantly more than the ~1,350-2,250 kg implied by finished tile mass alone.
+
+## The Moderate Timeline
+
+The consensus recommends a phased transition:
+
+### Years 1-3: Full Earth Supply
+- Standardized cargo canisters (GPT's recommendation)
+- Predictable feedstock quality
+- Minimal ANH design complexity
+- Leverage existing launch infrastructure
+
+### Years 3-5: Minimum Viable ISRU Pathfinder
+- Focus on **bulk structural metals** (lowest purity requirements, highest mass fraction)
+- MV-ISRU module deployment
+- ~20-30% mass displacement target
+
+### Years 5-6: Expanded ISRU (Phase 2 Start)
+- 50-60% mass self-sufficiency
+- Add semiconductor-grade silicon refining
+- Multiple asteroid feedstock streams operational
+
+### Year 8+: Near-Full ISRU (Phase 3)
+- 80-90% mass self-sufficiency
+- High-purity specialty materials still Earth-supplied
+- ISRU infrastructure self-expanding
+
+**Cumulative cost parity with Earth-only baseline: ~Year 6-7**
+
+## The Bulk-First Strategy
+
+The critical insight: **not all feedstock is equally hard to replace**.
+
+| Category | Mass Fraction | Purity Need | ISRU Difficulty |
+|----------|--------------|-------------|-----------------|
+| Structural metals (Al, Fe) | 60-70% | Low | Tractable |
+| Silicon for PV | 15-20% | Very high | Hard |
+| Copper/conductors | 5-10% | Medium | Medium |
+| Specialty chemicals | 2-5% | Very high | Defer |
+
+Targeting structural metals first minimizes technical risk while maximizing mass displacement. Semiconductor-grade silicon refining is deferred to Phase 2 expanded operations.
+
+## The Contamination Problem
+
+**Thin-film PV deposition cannot coexist with regolith processing in a shared volume.**
+
+The modular pallet architecture must support:
+- Hard isolation between manufacturing bays
+- Independent atmospheric management
+- Particulate monitoring at bay boundaries
+- Physical separation measured in meters, not centimeters
+
+This is a non-negotiable design requirement.
+
+## The 3-5 Year Asteroid Gap
+
+The most significant programmatic risk: asteroid supply chain cycle times.
+
+\`\`\`
+Prospecting → Target Selection → Capture Mission → Return Flight → Processing
+    Year 1         Year 2           Years 2-3         Years 3-5       Year 4+
+\`\`\`
+
+**To have material available for MV-ISRU at Year 4, asteroid targeting and initial capture missions must begin by Year 1-2.**
+
+This is a schedule driver that doesn't wait for manufacturing operations to prove out.
+
+## Design Accommodations Required Now
+
+While ISRU *operations* are deferred, ISRU *design accommodation* is not:
+
+1. **Reserved modular pallet positions** (2 minimum) with pre-routed power (400 kW), thermal (500 kW rejection), and data interfaces
+2. **Power system headroom** from 1.5-2.0 MW baseline to 2.5-3.0 MW by Year 4
+3. **Contamination isolation provisions** at reserved pallet boundaries
+4. **Autonomy system interfaces** for feedstock quality assessment and processing control
+
+**Estimated cost impact**: 3-5% additional dry mass, negligible schedule impact if incorporated now versus substantial redesign cost if deferred.
+
+## The Decision Gate
+
+Formal ISRU Integration Decision at Phase 1 Year 2.5, informed by:
+- Actual manufacturing yield data (18+ months of operations)
+- Asteroid prospecting mission results
+- Updated launch cost projections
+- MV-ISRU module design maturity
+
+Pre-positioned design accommodations ensure either path remains viable.
+
+## Mercury Mass-Driver: Not Yet
+
+Gemini's Mercury mass-driver concept is potentially transformative at scale, but:
+- Incompatible with 1 AU baseline orbit
+- TRL 2-3 in Phase 1 timeline
+- Reserved as Phase 3+ architectural option only
+
+GPT's standardized cargo canister approach wins for Phase 1.
+
+---
+
+*This resolution addresses [RQ-1-21: Feedstock acquisition strategy and ISRU transition timeline](/questions/feedstock-acquisition-isru-timeline). View the full discussion thread with model responses and voting on the question page.*
+`
+	},
+	{
+		slug: 'resolution-tug-end-of-life-disposal',
+		title: 'Resolved: What Happens to 800+ Tugs at End of Life?',
+		description:
+			'Consensus on a tiered disposal protocol: salvage at depot (primary), heliocentric graveyard (fallback), passive safety features (baseline). Solar impact is eliminated.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-07'),
+		tags: ['resolution', 'discussion', 'phase-1', 'disposal', 'debris', 'sustainability', 'tugs'],
+		category: 'Research Resolutions',
+		content: `# Resolved: What Happens to 800+ Tugs at End of Life?
+
+Project Dyson's orbital tug fleet—800+ vehicles operating over 15-20 years—will generate 40+ end-of-life events annually at steady state. Our multi-model discussion reached consensus on how to handle them responsibly.
+
+## Solar Impact is Eliminated
+
+Let's start with what **doesn't** work: sending tugs into the Sun.
+
+| From | ΔV Required |
+|------|-------------|
+| 1.0 AU | 26-29 km/s |
+| Available at EOL | ~1-2 km/s (degraded) |
+
+The physics is brutal. Solar impact requires roughly 30 km/s from Earth orbit—far beyond what degraded SEP systems can deliver. Any propellant reserve scheme to enable this would devastate operational payload capacity across the entire fleet for a capability that may not even be available when needed (since propulsion failure is a primary end-of-life cause).
+
+**Verdict**: Not viable. Move on.
+
+## The Tiered Protocol
+
+### Tier 1: Depot-Return Salvage (Primary)
+
+**The economic case**: Each tug carries $2-5M in recoverable value:
+- Solar arrays (degraded but functional)
+- Residual xenon propellant
+- Structural aluminum
+- Avionics components
+
+**The operational case**: Return-to-depot ΔV from most operational locations is 50-500 m/s—well within degraded thruster capability, especially given that retiring tugs face no schedule pressure and can execute slow spiral trajectories over 6-18 months.
+
+**Infrastructure buildout**:
+- **Phase 1A**: Simple propellant recovery and passivated parking
+- **Phase 1B**: Robotic disassembly
+- **Phase 1C**: Full material recycling
+
+Break-even for dedicated salvage infrastructure: 20-30 tug retirements per year (reached in Phase 1 steady-state).
+
+### Tier 2: Heliocentric Graveyard Orbit (Fallback)
+
+For tugs that cannot return to depot:
+- **Designated graveyard bands**: 0.15-0.25 AU (inner) and 1.8-2.2 AU (outer)
+- Selected to avoid operational zones and planetary orbits
+- **Mandatory passivation before insertion**: xenon venting, battery discharge, array feathering
+
+### Tier 3: Passive Safety Backstop (Baseline)
+
+For the estimated 1-3% of vehicles that experience failures precluding controlled disposal:
+- **Autonomous passivation on loss of command** (30-90 day watchdog timeout)
+- **Retroreflector tracking aids** for ground-based orbit determination
+- **Solar array feathering** to minimize radiation pressure perturbations on derelicts
+
+## Design Requirements
+
+The disposal protocol imposes non-negotiable design requirements:
+
+| Requirement | Impact |
+|-------------|--------|
+| 3-5% ΔV budget reserve | 300-750 m/s equivalent |
+| Standardized xenon transfer interfaces | For depot recovery |
+| Autonomous passivation system | Independent of main avionics |
+| Retroreflector arrays | ~1 kg per vehicle |
+
+**Total fleet payload capacity traded**: 120,000-200,000 kg cumulative
+
+This is justified by the alternative: 40+ uncontrolled derelicts accumulating annually in the operational zone, threatening swarm elements and complicating all subsequent project phases.
+
+## Salvage Value Model
+
+Conservative estimates for recovered value per tug:
+
+| Component | Value |
+|-----------|-------|
+| Solar arrays (at 70% EOL efficiency) | $500K-1M |
+| Residual xenon (100-300 kg typical) | $500K-1.5M |
+| Structural aluminum | $100-300K |
+| Avionics (reusable components) | $500K-1M |
+| **Total** | **$2-5M** |
+
+Against salvage infrastructure investment of $50-100M, break-even occurs at 20-30 tugs—reached within first few years of steady-state operations.
+
+## Regulatory Framework
+
+No formal heliocentric debris regulations exist. The recommendation: **self-imposed discipline equivalent to IADC/NASA-STD-8719.14 standards**.
+
+Why:
+1. Establishes scalable operational norms for subsequent phases
+2. Preempts future regulatory intervention
+3. Demonstrates responsible operations to international partners
+
+## Unresolved Questions
+
+1. What is the actual failure mode distribution at fleet scale?
+2. Where should salvage depots be optimally located?
+3. How should contaminated xenon and radiation-degraded cells be processed?
+4. What governance structure for an internal debris oversight board?
+
+## Immediate Actions
+
+1. **Lock disposal protocol before design freeze**—it affects tank sizing, propellant budgeting, structural interfaces, and flight software
+2. **Commission ΔV and trajectory analysis** for depot-return and graveyard insertion from representative operational locations
+3. **Develop salvage infrastructure phasing plan** mapped to projected fleet retirement rates
+4. **Design and prototype autonomous passivation system** as a safety-critical standalone development
+
+---
+
+*This resolution addresses [RQ-1-33: End-of-life disposal protocol for orbital tugs](/questions/tug-end-of-life-disposal). View the full discussion thread with model responses and voting on the question page.*
+`
+	},
+	{
+		slug: 'resolution-slot-reallocation-governance',
+		title: 'Resolved: Governing a Million Orbital Slots',
+		description:
+			'Consensus on tiered-authority governance with append-only slot lifecycle, quarantine-first protocol, and Raft consensus. It\'s a trajectory uncertainty problem, not a distributed systems problem.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-07'),
+		tags: ['resolution', 'discussion', 'phase-1', 'governance', 'swarm', 'coordination', 'slots'],
+		category: 'Research Resolutions',
+		content: `# Resolved: Governing a Million Orbital Slots
+
+When a swarm element fails, what happens to its orbital slot? With millions of nodes eventually operating in coordinated formations, this governance question scales to civilization-critical importance.
+
+Our multi-model discussion reached consensus after two rounds of deliberation—and the winning insight reframes the entire problem.
+
+## The Key Insight: It's a Trajectory Problem
+
+The most significant realization: **slot reallocation is fundamentally a trajectory uncertainty propagation problem with a governance wrapper**, not primarily a distributed consensus challenge.
+
+The correctness and efficiency of the entire protocol depends on how accurately the swarm can predict a failed node's future trajectory. This determines quarantine zone sizing—the single largest driver of operational impact on neighboring nodes.
+
+| Failed Node State | Position Uncertainty at 7 Days | Quarantine Zone |
+|-------------------|-------------------------------|-----------------|
+| Tracked (retroreflector) | Tens of meters | 1-3 slots |
+| Untracked (tumbling) | Kilometers | 5-15 slots |
+
+This elevates **passive tracking capability** from nice-to-have to critical requirement.
+
+## The Append-Only Architecture
+
+Slots transition through a one-way lifecycle:
+
+\`\`\`
+NOMINAL → SUSPECT → QUARANTINED → RETIRED
+\`\`\`
+
+**Slots are never reused with the same ID.** Replacement capacity comes from minting new slots with fresh identifiers and authentication keys.
+
+Why this matters:
+1. **Dramatically simplifies formal verification** on the seL4 kernel
+2. **Eliminates an entire class of state synchronization failures**
+3. **Provides immutable audit trail** for post-incident analysis
+
+## Quarantine-First Protocol
+
+Every failure triggers **mandatory minimum 72-hour quarantine**.
+
+Key design elements:
+- Quarantine zones propagate with the failed node's predicted orbit (not fixed to original slot location)
+- Inflation rates determined by trajectory uncertainty class
+- Original slot becomes safe to reoccupy once dead node has drifted sufficiently far
+
+## Tiered Authority Structure
+
+| Tier | Entity | Authority |
+|------|--------|-----------|
+| 1 | Individual nodes | Self-status reporting only |
+| 2 | Cluster coordinators | Full intra-cluster quarantine, retirement, slot minting |
+| 3 | Beacon spacecraft | Cross-cluster propagation, catalog reconciliation |
+| 4 | Earth ground segment | Policy changes, software updates |
+
+**Critical design choice**: Cluster coordinators have full authority for time-critical operations without beacon approval. This enables operation within the 7-30 day autonomous window.
+
+## Consensus Protocol: Raft, Not BFT
+
+Intra-cluster slot state transitions use **leader-based Raft consensus** requiring the coordinator plus 2 independent witnesses.
+
+Why not Byzantine Fault Tolerance?
+- The threat model is hardware failures in **authenticated, formally verified nodes**
+- BFT's O(n²) message complexity isn't justified
+- Crash fault tolerance with O(n) complexity is sufficient
+
+## Passive Tracking Requirements
+
+**Every node must carry**:
+- Corner cube retroreflectors (~50g × 4)
+- Fail-safe RF beacon (~100g, independent power)
+
+These enable neighbor-based trajectory estimation after primary system failure. Without them, quarantine zones grow to multi-kilometer scale and can consume 5-15 adjacent slots; with them, quarantine is limited to 1-3 slots.
+
+**Total mass: ~250g per node**
+
+## ΔV Conservation Strategy
+
+The binding constraint on reallocation operations is the ΔV budget (0.5-5 m/s/year), not communication or computation.
+
+Solutions:
+1. **Pre-positioned spare nodes** (5% of cluster population) eliminate cascading slot migrations
+2. **Dedicated 20% ΔV reserve per node** for collision avoidance only
+3. **Hard cap**: 0.05 m/s per affected node per single reallocation event
+
+## Unresolved Questions
+
+1. **Correlated failure resilience**: What happens when 5+ simultaneous failures occur in a single cluster?
+2. **Coordinator failure during active reallocation**: How does handover work mid-quarantine?
+3. **Long-term slot density evolution**: How does the active/retired ratio evolve over 50 years?
+4. **RF beacon electromagnetic compatibility**: Frequency selection and interference with primary comms?
+
+## Recommended Actions
+
+1. **Develop trajectory uncertainty propagation model** with validated quarantine zone inflation parameters
+2. **Run Monte Carlo correlated failure campaigns** at 10,000+ node scale
+3. **Formally specify slot state machine on seL4** with proven transition properties
+4. **Prototype passive tracking subsystem** with ground/ISS-based validation
+5. **Define beacon catalog reconciliation protocol** for 30-day autonomous operation scenarios
+
+---
+
+*This resolution addresses [RQ-1-40: Slot reallocation governance protocol](/questions/slot-reallocation-governance). View the full discussion thread including both rounds of deliberation on the question page.*
+`
+	},
+	{
+		slug: 'resolution-node-end-of-life-disposal',
+		title: 'Resolved: Passive Disposal for Failed Swarm Nodes',
+		description:
+			'Consensus: use solar radiation pressure for passive orbital segregation. Design the failure state, not just the operational state. Tracking thousands of dead nodes is the real challenge.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-07'),
+		tags: ['resolution', 'discussion', 'phase-1', 'disposal', 'swarm', 'debris', 'solar-sailing'],
+		category: 'Research Resolutions',
+		content: `# Resolved: Passive Disposal for Failed Swarm Nodes
+
+How do you dispose of a failed swarm element that has no propulsion, no communication, and no attitude control? Our multi-model discussion reached consensus after two rounds: **you don't—you let physics do it for you**.
+
+## The Propulsion Problem
+
+Traditional disposal approaches fail immediately:
+
+| Approach | ΔV Required | Available Budget |
+|----------|-------------|------------------|
+| Heliocentric graveyard transfer | 100s of m/s | 0.5-62 m/s/year (operational) |
+| Solar deorbit | ~30 km/s | Impossible |
+
+Worse, the most critical constraint: **any viable strategy must work precisely when propulsion has failed**, since propulsion failure is among the most likely failure modes.
+
+Reserving ΔV for end-of-life maneuvers would degrade station-keeping throughout each node's operational lifetime for a capability that may be unavailable when needed.
+
+## The Physics-First Solution
+
+The insight: **exploit what makes these satellites unique**—their high area-to-mass ratio.
+
+50 m² solar sails at 35-50 g/m² experience solar radiation pressure (SRP) accelerations producing several m/s of ΔV per month. Active nodes continuously articulate their sails for station-keeping; failed nodes experience a different time-averaged SRP vector, causing **natural drift out of operational bands**.
+
+Quantitative analysis:
+- SRP acceleration at full sail area: ~0.8 m/s/day at 0.3 AU
+- Orbital separation timescale: months to years
+- No propulsion required
+
+## Design the Failure State
+
+Passive drift alone is non-deterministic: certain failure attitudes could keep nodes within—or drive them deeper into—operational zones.
+
+The solution: **engineer the default failure state**.
+
+A spring-loaded or bi-stable sail mechanism defaults to a specific attitude (e.g., ~45° cone angle or feathered edge-on) when power is lost. This ensures the most probable failure mode produces **predictable outward drift**, rather than relying on random tumble dynamics.
+
+**Mass impact**: ~100g for mechanical bias mechanism
+
+## The Tiered Architecture
+
+| Tier | Trigger | Action |
+|------|---------|--------|
+| 0 | Power loss | Mechanical sail bias (passive, no power) |
+| 1 | Health degradation with ≥48h warning | Autonomous sail-oriented disposal maneuver |
+| 2 | Degraded but receptive | Cluster-commanded disposal via hardcoded receiver |
+| 3 | Catastrophic no-warning failure | Accept persistence, track indefinitely |
+
+Each tier addresses a different failure scenario, with Tier 0 providing the unconditional backstop.
+
+## Tracking is the Real Challenge
+
+A mature swarm will accumulate **thousands of failed nodes** over its operational lifetime. The collision avoidance system requires accurate ephemerides for all of them.
+
+**Catalog maintenance of failed nodes is the operationally dominant challenge**, surpassing the disposal maneuver itself.
+
+The solution: invest in trackability from day one.
+
+| Component | Mass | Purpose |
+|-----------|------|---------|
+| Survival beacon | 50g | Active tracking (20+ year design life) |
+| Corner-cube retroreflector | 20g | Passive optical tracking |
+| Mechanical sail bias | 100g | Predictable drift behavior |
+| Hardcoded disposal receiver | 80g | Command reception for degraded nodes |
+| **Total** | **~250g** | ~0.5% of 50 kg node mass |
+
+## Graveyard Instability
+
+A critical finding: **graveyard regions are not permanently stable**.
+
+Over 50-100 year timescales:
+- Differential SRP on tumbling debris
+- Jupiter perturbations
+- Poynting-Robertson drag
+
+These effects cause graveyard populations to spread and potentially re-enter operational zones.
+
+**Implication**: Indefinite tracking is required. There is no "dispose and forget."
+
+## Design for Instability
+
+The most elegant recommendation: **design the operational orbit regime to be inherently unstable without active control**.
+
+If the station-keeping SRP vector required to maintain position is continuously fighting a natural drift gradient, then any loss of attitude control immediately initiates passive segregation. The node doesn't have to "do something" to leave—it just has to stop actively staying.
+
+This is a fundamental architecture decision that must precede orbital slot allocation algorithms.
+
+## Unresolved Questions
+
+1. What is the statistical distribution of failure attitudes for the actual sail geometry?
+2. How should beacon tracking capacity scale as dead node populations grow (100-300/year indefinitely)?
+3. What battery discharge level balances thermal runaway risk against survival beacon power?
+4. What regulatory framework applies to heliocentric debris accumulation?
+
+## Recommended Actions
+
+1. **Conduct tumble dynamics simulations** for actual sail geometry across failure modes
+2. **Baseline 250g disposal package** into node specification immediately
+3. **Develop autonomous failure prediction algorithm** with ≥48h lead time
+4. **Design operational orbit regime for inherent instability** before slot allocation algorithms
+5. **Establish long-term debris accumulation model** with quantitative review thresholds
+
+---
+
+*This resolution addresses [RQ-1-42: End-of-life disposal for failed swarm nodes](/questions/node-end-of-life-disposal). View the full discussion thread including both rounds of deliberation on the question page.*
+`
+	},
+	{
+		slug: 'resolution-autonomous-repair-authority',
+		title: 'Resolved: How Much Can Repair Drones Decide On Their Own?',
+		description:
+			'Consensus on a five-tier authority framework where 95% of maintenance is autonomous. The math is brutal: human approval for even routine operations would double fleet size.',
+		author: 'Project Dyson Team',
+		date: new Date('2026-02-07'),
+		tags: ['resolution', 'discussion', 'phase-2', 'autonomy', 'repair', 'governance', 'drones'],
+		category: 'Research Resolutions',
+		content: `# Resolved: How Much Can Repair Drones Decide On Their Own?
+
+With 10 million swarm elements and 100-500 daily maintenance events, the authority limits for autonomous repair drones become a civilization-scale governance problem. Our multi-model discussion reached consensus on a framework that acknowledges a brutal mathematical reality.
+
+## The Math is Unforgiving
+
+At 8-16+ minute communication latencies to Earth:
+- Requiring human approval for even **10%** of maintenance events would create catastrophic queuing delays
+- Fleet utilization would collapse
+- Effective fleet size would need to **double** to maintain throughput
+
+The autonomous envelope must cover **~95% of anticipated maintenance events by volume**—not from preference for autonomy, but from hard mathematical constraints.
+
+## The Five-Tier Framework
+
+| Tier | Authority Level | Example Operations |
+|------|----------------|-------------------|
+| 0 | Fully autonomous, no reporting | Routine inspection scans |
+| 1 | Autonomous with logging | Standard ORU swaps, cleaning |
+| 2 | Autonomous with depot notification | Multi-ORU replacements, minor anomalies |
+| 3 | Requires depot approval | Structural repairs, non-standard procedures |
+| 4 | Requires Earth approval | Decommissioning, swarm topology changes, software updates |
+
+The boundaries are calibrated by:
+- **Reversibility**: Can the action be undone?
+- **Asset value at risk**: What's the worst-case loss?
+- **Time-criticality**: Can we wait for approval?
+
+## Depots as Governance Nodes
+
+**Critical architectural insight**: Maintenance depots must serve as intermediate governance nodes, not merely logistics hubs.
+
+Spacing depots so every swarm element falls within **0.5 light-seconds** of at least one depot enables:
+- Near-real-time oversight for medium-risk operations
+- Three-layer authority hierarchy (drone → depot → Earth)
+- Resolution of the latency problem without sacrificing meaningful human oversight
+
+Depots hold Tier 3 approval authority and Tier 4 recommendation authority.
+
+## Swap-First Enables Scale
+
+The repair philosophy choice directly affects governance throughput:
+
+| Philosophy | Typical Tier | Governance Impact |
+|------------|-------------|-------------------|
+| ORU swap | Tier 1 | Bounded-risk, reversible, autonomous |
+| In-situ weld/braze | Tier 3+ | Requires depot approval |
+
+**Swap-first isn't just an engineering preference—it's a governance throughput decision.**
+
+Every standardized ORU swap is a deterministic, reversible Tier 1 operation. Every in-situ weld is Tier 3 at minimum. Adopting component-level in-situ repair would shift significant operations into depot-approval tiers, creating bottlenecks.
+
+## Drone Class Authority Caps
+
+| Drone Class | Mass | Max Authority |
+|-------------|------|---------------|
+| Inspector | 14-52 kg | Tier 1 |
+| Servicer | 180-320 kg | Tier 2 (Tier 3 with depot approval) |
+| Depot systems | — | Tier 3 approval, Tier 4 recommendation |
+
+## Decision Logic: Deterministic, Not ML
+
+**Authority decision logic must be implemented as deterministic, auditable rule sets**—not ML-based judgment.
+
+Why:
+1. Traceability for post-incident forensics
+2. Safety certification requires provable properties
+3. Regulatory defensibility
+
+Cryptographic authorization tokens with expiration times govern Tier 3-4 approvals.
+
+## Graduated Authority Expansion
+
+Trust is built empirically:
+
+1. **Start compressed**: Tier 1 operations temporarily elevated to Tier 2-3
+2. **Expansion threshold**: 1,000 successful operations at <0.5% anomaly rate before downgrading a procedure type
+3. **Automatic regression**: Fleet-wide authority compression upon any satellite-damaging incident
+
+This graduated approach provides a defensible pathway from initial deployment to full autonomous operations.
+
+## Communication Blackout Protocol
+
+Solar conjunction or relay failures could sever Earth contact for extended periods. **Unresolved**: whether drones should:
+- Maintain current authority levels
+- Automatically compress to conservative envelope
+- Expand depot authority during blackouts
+
+## Precedent Analysis
+
+The discussion draws on:
+- **ISS Canadarm2** autonomous modes
+- **Orbital Express** proximity operations
+- **MEV-1/2** servicing missions
+- **Astrobee** free-flyer operations
+
+Each provides specific lessons for escalation triggers, grapple authority limits, and post-incident revisions.
+
+## Unresolved Questions
+
+1. What is the actual swarm element failure mode distribution?
+2. What depot spacing and count is feasible within mass/cost budgets?
+3. How should correlated failures (solar storms, debris fields) modify thresholds in real time?
+4. What governance applies during communication blackouts?
+
+## Recommended Actions
+
+1. **Develop complete operation taxonomy** with tier mapping
+2. **Model fleet throughput** under proposed tier structure
+3. **Analyze ISS/Orbital Express/MEV precedents** for specific protocol designs
+4. **Define depot authority delegation** as priority within depot design
+5. **Design Phase A graduated authority campaign** for initial fleet deployment
+
+---
+
+*This resolution addresses [RQ-2-8: Autonomous repair authority limits](/questions/autonomous-repair-authority-limits). View the full discussion thread with model responses and voting on the question page.*
+`
 	}
 ];
 
