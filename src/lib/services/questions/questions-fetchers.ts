@@ -17,6 +17,15 @@ const questionFiles = import.meta.glob('/static/content/research-questions/**/*.
 }) as Record<string, () => Promise<string>>;
 
 /**
+ * Filter to only include question files (rq-*.md directly in phase directories)
+ * Excludes discussion files like conclusion.md and round response files
+ */
+function isQuestionFile(path: string): boolean {
+	// Must match pattern: /phase-X/rq-X-Y-slug.md (not in subdirectories)
+	return /\/phase-\d+\/rq-\d+-\d+-[^/]+\.md$/.test(path);
+}
+
+/**
  * Cache for loaded questions to avoid redundant fetches
  */
 let questionsCache: ResearchQuestion[] | null = null;
@@ -83,8 +92,8 @@ export async function fetchAllQuestions(): Promise<ResearchQuestion[]> {
 
 	// Load all question files using import.meta.glob
 	const loadPromises = Object.entries(questionFiles).map(async ([path, loader]) => {
-		// Skip index.json files
-		if (path.endsWith('.json')) return null;
+		// Skip non-question files (index.json, discussion files, etc.)
+		if (!isQuestionFile(path)) return null;
 
 		try {
 			const content = await loader();

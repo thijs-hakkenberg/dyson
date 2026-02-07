@@ -7,6 +7,7 @@
 	const question = $derived(data.question);
 	const relatedQuestions = $derived(data.relatedQuestions);
 	const relatedValidations = $derived(data.relatedValidations);
+	const discussion = $derived(data.discussion);
 
 	const phaseLabels: Record<string, string> = {
 		'phase-0': 'Phase 0',
@@ -42,7 +43,7 @@
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
 		<!-- Main Content -->
 		<div class="lg:col-span-2">
-			<QuestionDetail {question} />
+			<QuestionDetail {question} {discussion} />
 		</div>
 
 		<!-- Sidebar -->

@@ -1,16 +1,19 @@
 <script lang="ts">
 	import type { ResearchQuestion } from '$lib/types/entities';
+	import type { DiscussionThread } from '$lib/types/discussion';
 	import { renderMarkdown } from '$lib/utils/markdown';
 	import QuestionTypeBadge from './QuestionTypeBadge.svelte';
 	import PriorityIndicator from './PriorityIndicator.svelte';
 	import ResolutionStatus from './ResolutionStatus.svelte';
 	import ResolutionSummary from './ResolutionSummary.svelte';
+	import { DiscussionThread as DiscussionThreadComponent } from '$lib/components/discussions';
 
 	interface Props {
 		question: ResearchQuestion;
+		discussion?: DiscussionThread | null;
 	}
 
-	let { question }: Props = $props();
+	let { question, discussion = null }: Props = $props();
 
 	const phaseLabels: Record<string, string> = {
 		'phase-0': 'Phase 0 - Resource Acquisition',
@@ -183,7 +186,36 @@
 				</div>
 			</div>
 		{/if}
+
+		<!-- Discussion Thread Link (for discussion questions without thread yet) -->
+		{#if question.questionType === 'discussion' && !discussion}
+			<div class="mt-8 p-6 rounded-lg bg-purple-500/10 border border-purple-500/30">
+				<div class="flex items-start gap-4">
+					<div class="p-3 rounded-lg bg-purple-500/20">
+						<svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+								d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
+						</svg>
+					</div>
+					<div class="flex-1">
+						<h3 class="text-lg font-semibold text-purple-400 mb-2">Multi-Model Discussion Available</h3>
+						<p class="text-star-dim text-sm mb-4">
+							This discussion-type question can be deliberated by Claude, Gemini, and GPT using our multi-model discussion system.
+							No discussion thread has been started yet.
+						</p>
+						<div class="text-xs text-star-faint bg-space-700 rounded p-3 font-mono">
+							node scripts/run-discussion.js --question={question.slug} --auto
+						</div>
+					</div>
+				</div>
+			</div>
+		{/if}
 	</div>
+
+	<!-- Discussion Thread (for discussion questions with an active thread) -->
+	{#if question.questionType === 'discussion' && discussion}
+		<DiscussionThreadComponent thread={discussion} />
+	{/if}
 
 	<!-- Metadata Panel -->
 	<div class="card-glow p-6">
