@@ -313,9 +313,11 @@ export const PHASES: Phase[] = [
 		relatedResearch: ['megastructure', 'orbital mechanics', 'autonomous systems']
 	},
 	{
-		id: 'phase-3',
+		id: 'phase-3a',
 		number: 3,
-		title: 'Matroska Brain',
+		suffix: 'a',
+		parallelWith: ['phase-3b'],
+		title: 'Matrioshka Brain',
 		description:
 			'Transform the Dyson swarm into a nested megastructure of computational shells, where each layer harvests waste heat from inner layers to power additional computation. This phase creates a stellar-scale computational substrate approaching fundamental thermodynamic limits.',
 		status: 'planned',
@@ -329,7 +331,7 @@ export const PHASES: Phase[] = [
 		],
 		bom: [
 			{
-				id: 'bom-3-1',
+				id: 'bom-3a-1',
 				name: 'Computational Substrate Tiles',
 				description: 'Modular hexagonal tiles integrating TPV energy harvesting, compute substrate (reversible logic/neuromorphic/ASIC), local memory, and mesh networking. Three variants: Hot (800-1200K), Mid (200-400K), Cold (40-80K).',
 				quantity: 1000000000000,
@@ -344,7 +346,7 @@ export const PHASES: Phase[] = [
 				costBasis: 'Scale-up and in-space semiconductor fabrication are primary cost drivers. Consensus range $10¹²-$10¹⁴.'
 			},
 			{
-				id: 'bom-3-2',
+				id: 'bom-3a-2',
 				name: 'Inter-Layer Optical Communication Backbone',
 				description: 'Hierarchical free-space optical network with WDM/OAM multiplexed laser links, adaptive optics, onboard routing, and integrated time/frequency authority constellation.',
 				quantity: 1000000000,
@@ -359,7 +361,7 @@ export const PHASES: Phase[] = [
 				costBasis: 'Most mature technology in Phase 3 BOM. Consensus range $10¹¹-$10¹³.'
 			},
 			{
-				id: 'bom-3-3',
+				id: 'bom-3a-3',
 				name: 'Thermal Management and Radiator Systems',
 				description: 'Dual-regime thermal management: passive spectral-selective radiator panels with metamaterial coatings for narrow-band emission, plus active cryogenic cooling systems for outer layers (<10K).',
 				quantity: 100000000000000,
@@ -374,7 +376,7 @@ export const PHASES: Phase[] = [
 				costBasis: 'Thermodynamic cascade efficiency is critical. Consensus range $10¹²-$10¹⁵.'
 			},
 			{
-				id: 'bom-3-4',
+				id: 'bom-3a-4',
 				name: 'Self-Replicating Manufacturing Foundries',
 				description: 'Autonomous factory complexes processing asteroid/KBO feedstock into finished components with 12-month replication cycle and ≥96% mass closure from in-situ resources.',
 				quantity: 1000,
@@ -389,7 +391,7 @@ export const PHASES: Phase[] = [
 				costBasis: 'Critical-path industrial capability. Highest uncertainty due to space semiconductor fabrication. Consensus range $10¹³-$10¹⁵.'
 			},
 			{
-				id: 'bom-3-5',
+				id: 'bom-3a-5',
 				name: 'Distributed Computational Operating System',
 				description: 'Hierarchical, self-organizing software fabric managing resource allocation, task scheduling, data routing, and fault tolerance across all layers with causal consistency over light-hours of delay.',
 				quantity: 1,
@@ -404,7 +406,7 @@ export const PHASES: Phase[] = [
 				costBasis: 'No precedent exists for software systems at this scale. ~10⁶ engineer-years development. Consensus range $10¹¹-$10¹².'
 			},
 			{
-				id: 'bom-3-6',
+				id: 'bom-3a-6',
 				name: 'Feedstock Supply Chain and Logistics Pipeline',
 				description: 'Continuous-flow material supply from asteroid belt and Kuiper Belt to foundries. Mining ships, mass drivers, and catcher tugs sustaining ~10⁹ tonnes/year throughput.',
 				quantity: 10000,
@@ -419,7 +421,7 @@ export const PHASES: Phase[] = [
 				costBasis: 'Scaled-up version of Phase 1-2 infrastructure with well-understood physics. Consensus range $10¹³-$10¹⁴.'
 			},
 			{
-				id: 'bom-3-7',
+				id: 'bom-3a-7',
 				name: 'Inter-Layer Power Distribution Network',
 				description: 'Two-mode power architecture: short-range HVDC within layers, long-range optical power beaming between layers and to manufacturing nodes/cold-layer platforms.',
 				quantity: 100000000000,
@@ -434,7 +436,7 @@ export const PHASES: Phase[] = [
 				costBasis: 'Essential for outer-layer viability where solar flux is insufficient. Consensus range $10¹²-$10¹⁴.'
 			},
 			{
-				id: 'bom-3-8',
+				id: 'bom-3a-8',
 				name: 'Shell Construction and Maintenance Swarm',
 				description: 'Evolved Phase 2 robotics: heavy assemblers for membrane/tile deployment, membrane-handling specialists, and ORU swap drones for continuous repair and module replacement.',
 				quantity: 100000000,
@@ -452,7 +454,152 @@ export const PHASES: Phase[] = [
 		totalCost: 10171500000000000,
 		estimatedDuration: '200-1000 years',
 		dependencies: ['phase-2'],
-		relatedResearch: ['matroska brain', 'thermophotovoltaics', 'reversible computing', 'distributed systems', 'self-replicating machines']
+		relatedResearch: ['matrioshka brain', 'thermophotovoltaics', 'reversible computing', 'distributed systems', 'self-replicating machines']
+	},
+	{
+		id: 'phase-3b',
+		number: 3,
+		suffix: 'b',
+		parallelWith: ['phase-3a'],
+		title: 'Stellar Engine',
+		description:
+			'Construct stellar propulsion systems to enable controlled movement of the Sun and Solar System. Combines passive Shkadov mirror arrays for baseline thrust with active Caplan engine systems using thermonuclear jets powered by extracted solar material, achieving accelerations up to 10⁻⁹ m/s².',
+		status: 'planned',
+		objectives: [
+			'Deploy Shkadov mirror arrays for passive radiation pressure thrust',
+			'Establish solar wind collection infrastructure across the Dyson swarm',
+			'Implement mass lifting systems to extract material from the solar chromosphere',
+			'Construct helium separation and fuel processing plants',
+			'Build electromagnetic accelerators for hydrogen return and helium jet propulsion',
+			'Integrate stellar engine control systems with Dyson swarm infrastructure',
+			'Achieve initial operational capability with measurable stellar acceleration'
+		],
+		bom: [
+			{
+				id: 'bom-3b-1',
+				name: 'Shkadov Mirror Array',
+				description: 'Parabolic reflector arrays positioned to create asymmetric radiation pressure on the Sun. Thin-film construction (~1 g/m²) maintained at L1-like equilibrium by balancing gravity and radiation pressure.',
+				quantity: 1000000000000,
+				unit: 'm² reflective area',
+				unitCost: 10,
+				totalCost: 10000000000000,
+				category: 'Infrastructure',
+				slug: 'shkadov-mirror-array',
+				costMin: 1000000000000,
+				costMax: 100000000000000,
+				costConfidence: 'low',
+				costBasis: 'Scaled from Phase 2 thin-film production. Primary uncertainty is AU-scale structural stability.'
+			},
+			{
+				id: 'bom-3b-2',
+				name: 'Thermonuclear Jet Engine',
+				description: 'Active thruster system burning helium-4 in fusion reactions to produce directed exhaust at ~0.01c. Provides 1000x greater acceleration than passive Shkadov approach.',
+				quantity: 100,
+				unit: 'engine units',
+				unitCost: 100000000000,
+				totalCost: 10000000000000,
+				category: 'Infrastructure',
+				slug: 'thermonuclear-jet-engine',
+				costMin: 1000000000000,
+				costMax: 100000000000000,
+				costConfidence: 'low',
+				costBasis: 'Novel fusion propulsion at stellar scale. No heritage systems for comparison.'
+			},
+			{
+				id: 'bom-3b-3',
+				name: 'Solar Wind Collectors',
+				description: 'Distributed collection infrastructure intercepting naturally escaping solar wind material. Magnetic funneling systems concentrate plasma for processing.',
+				quantity: 10000000,
+				unit: 'collector stations',
+				unitCost: 1000000,
+				totalCost: 10000000000000,
+				category: 'Infrastructure',
+				slug: 'solar-wind-collectors',
+				costMin: 1000000000000,
+				costMax: 50000000000000,
+				costConfidence: 'low',
+				costBasis: 'Extension of Dyson swarm infrastructure with magnetic plasma handling.'
+			},
+			{
+				id: 'bom-3b-4',
+				name: 'Mass Lifting Systems',
+				description: 'Active extraction of material from the solar chromosphere using concentrated energy beaming and magnetic channeling. Target extraction rate ~10¹² kg/s.',
+				quantity: 1000,
+				unit: 'lifting stations',
+				unitCost: 50000000000,
+				totalCost: 50000000000000,
+				category: 'Infrastructure',
+				slug: 'mass-lifting-systems',
+				costMin: 10000000000000,
+				costMax: 200000000000000,
+				costConfidence: 'low',
+				costBasis: 'Most speculative system. Requires managing solar surface disruption.'
+			},
+			{
+				id: 'bom-3b-5',
+				name: 'Helium Separation Plant',
+				description: 'Industrial-scale isotope separation facilities processing collected solar material to extract He-4 fuel for thermonuclear jets. Hydrogen byproduct returned to Sun.',
+				quantity: 500,
+				unit: 'processing plants',
+				unitCost: 20000000000,
+				totalCost: 10000000000000,
+				category: 'Infrastructure',
+				slug: 'helium-separation-plant',
+				costMin: 2000000000000,
+				costMax: 50000000000000,
+				costConfidence: 'low',
+				costBasis: 'Scaled from terrestrial isotope separation with space operation multiplier.'
+			},
+			{
+				id: 'bom-3b-6',
+				name: 'Electromagnetic Accelerators',
+				description: 'High-power EM accelerator arrays for two functions: returning hydrogen to the Sun for orbital stability, and accelerating helium exhaust for jet propulsion.',
+				quantity: 10000,
+				unit: 'accelerator units',
+				unitCost: 1000000000,
+				totalCost: 10000000000000,
+				category: 'Infrastructure',
+				slug: 'em-accelerators',
+				costMin: 2000000000000,
+				costMax: 50000000000000,
+				costConfidence: 'medium',
+				costBasis: 'Extension of Phase 1 mass driver technology to higher power levels.'
+			},
+			{
+				id: 'bom-3b-7',
+				name: 'Dyson Integration Layer',
+				description: 'Control systems and power routing infrastructure connecting stellar engine components with the Dyson swarm. Coordinates power allocation between energy collection and engine operation.',
+				quantity: 1,
+				unit: 'system',
+				unitCost: 5000000000000,
+				totalCost: 5000000000000,
+				category: 'Computing',
+				slug: 'dyson-integration-layer',
+				costMin: 1000000000000,
+				costMax: 20000000000000,
+				costConfidence: 'medium',
+				costBasis: 'Software and infrastructure integration. Builds on Phase 2 swarm control.'
+			},
+			{
+				id: 'bom-3b-8',
+				name: 'Thrust Stabilization Systems',
+				description: 'Precision thrust vectoring and orbital stability systems ensuring controlled stellar acceleration without destabilizing planetary orbits or solar activity.',
+				quantity: 10000,
+				unit: 'stabilization nodes',
+				unitCost: 500000000,
+				totalCost: 5000000000000,
+				category: 'Computing',
+				slug: 'thrust-stabilization',
+				costMin: 1000000000000,
+				costMax: 20000000000000,
+				costConfidence: 'medium',
+				costBasis: 'Control systems with century-scale feedback loops. Novel but well-defined problem.'
+			}
+		],
+		totalCost: 110000000000000,
+		estimatedDuration: '200-500 years',
+		dependencies: ['phase-2'],
+		relatedResearch: ['stellar engines', 'shkadov thruster', 'caplan engine', 'mass lifting', 'fusion propulsion']
 	}
 ];
 

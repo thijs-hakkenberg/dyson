@@ -1,0 +1,77 @@
+# Divergent Views for em-accelerators
+# Auto-generated from consensus document
+
+bomId: "bom-3b-6"
+itemSlug: "em-accelerators"
+generated: "2026-02-07"
+
+topics:
+  - id: "number-and-size-of-accelerator-units"
+    topic: "Number and size of accelerator units"
+    positions:
+      - statement: "~100,000 units each ~500 km long and ~4×10¹⁴ kg"
+        models:
+          - "Claude"
+      - statement: "10⁹ smaller units each 50 km long and ~5×10⁹ kg"
+        models:
+          - "Gemini"
+      - statement: "a hierarchical approach with 1,000–10,000 \"macro-strings\" each bundling 100–1,000 parallel beam channels over ~200 km, with individual tiles of ~1"
+        models:
+          - "Gpt"
+  - id: "total-system-mass"
+    topic: "Total system mass"
+    positions:
+      - statement: "~4×10¹⁹ kg (~7 Earth masses)"
+        models:
+          - "Claude"
+      - statement: "~5×10¹⁸ kg (~1 Earth mass)"
+        models:
+          - "Gemini"
+      - statement: "~1"
+        models:
+          - "Gpt"
+  - id: "primary-power-source-for-full-capability-operation"
+    topic: "Primary power source for full-capability operation"
+    positions:
+      - statement: "that achieving 10⁻⁹ m/s² stellar acceleration requires power exceeding solar luminosity, necessitating fusion-powered thermonuclear jet engines (BOM-3b-7) as the primary energy source with EMAs serving as beam shapers"
+        models:
+          - "Claude"
+      - statement: "the system at ~1"
+        models:
+          - "Gemini"
+      - statement: "at ~4"
+        models:
+          - "Gpt"
+  - id: "hydrogen-return-strategy"
+    topic: "Hydrogen return strategy"
+    positions:
+      - statement: "electromagnetic acceleration of hydrogen to 0"
+        models:
+          - "Claude"
+      - statement: "antiparallel dual-bore units where hydrogen return balances helium exhaust momentum locally"
+        models:
+          - "Gemini"
+      - statement: "a minimal-energy \"magnetically guided fall line\" conveyor approach, accelerating hydrogen only enough to overcome local pressure gradients, explicitly arguing against wasting energy on high-velocity hydrogen return"
+        models:
+          - "Gpt"
+  - id: "beam-neutralization"
+    topic: "Beam neutralization"
+    positions:
+      - statement: "specifies electron injection to neutralize the helium ion beam before long free-flight to mitigate space-charge divergence, treating this as a critical subsystem"
+        models:
+          - "Gpt"
+      - statement: "Gemini do not address neutralization as a distinct design element, implicitly assuming magnetically confined plasma jets remain coherent without neutralization"
+        models:
+          - "Claude"
+  - id: "manufacturing-source-material"
+    topic: "Manufacturing source material"
+    positions:
+      - statement: "material primarily from asteroid belt mining (~1% of belt mass)"
+        models:
+          - "Claude"
+      - statement: "partial disassembly of Mercury (~0"
+        models:
+          - "Gemini"
+      - statement: "inner-belt/Mercury industrial nodes from Phase 2 without committing to a single source body"
+        models:
+          - "Gpt"

@@ -1,0 +1,80 @@
+# Divergent Views for helium-separation-plant
+# Auto-generated from consensus document
+
+bomId: "bom-3b-5"
+itemSlug: "helium-separation-plant"
+generated: "2026-02-07"
+
+topics:
+  - id: "number-and-size-of-processing-units"
+    topic: "Number and size of processing units"
+    positions:
+      - statement: "**50,000 stations at 2×10⁷ kg/s each** (2"
+        models:
+          - "Claude"
+      - statement: "**10,000 nodes at 10⁸ kg/s each** (4"
+        models:
+          - "Gemini"
+      - statement: "**~1,000 strings at 10⁹ kg/s each** (~2×10⁹ kg per string, ~5 km scale)"
+        models:
+          - "Gpt"
+  - id: "total-constellation-mass"
+    topic: "Total constellation mass"
+    positions:
+      - statement: "**~1"
+        models:
+          - "Claude"
+      - statement: "**~4"
+        models:
+          - "Gemini"
+      - statement: "**~2"
+        models:
+          - "Gpt"
+  - id: "power-budget-and-energy-self-sufficiency"
+    topic: "Power budget and energy self-sufficiency"
+    positions:
+      - statement: "the HSP is a **net power producer** (~3"
+        models:
+          - "Claude"
+      - statement: "**15 PW consumption per node** (150 PW total) supplied externally by the Dyson swarm"
+        models:
+          - "Gemini"
+      - statement: "**~3 PW total** supplied by beamed power"
+        models:
+          - "Gpt"
+  - id: "he-3-enrichment-priority"
+    topic: "He-3 enrichment priority"
+    positions:
+      - statement: "He-3 separation as a **core mission requirement** with a dedicated 4-stage ICR cascade integral to every station"
+        models:
+          - "Claude"
+      - statement: "He-3 enrichment as an **open question** and optional secondary stage"
+        models:
+          - "Gemini"
+      - statement: "it as an **optional power-hungry add-on** whose necessity depends entirely on the chosen fusion cycle, recommending it be deferred until the jet engine fuel requirements are locked"
+        models:
+          - "Gpt"
+  - id: "bulk-h-he-separation-mechanism"
+    topic: "Bulk H/He separation mechanism"
+    positions:
+      - statement: "analyzes calutron-style E×B filters, rejects them for throughput reasons, and converges on **plasma centrifugal separation** (E×B-driven rotating plasma columns, 350 km/s peripheral velocity)"
+        models:
+          - "Claude"
+      - statement: "**ICR selective heating** of helium to expand its gyro-orbit for skimming"
+        models:
+          - "Gemini"
+      - statement: "a **hybrid MHD flow shaping + ICR mass filtering** approach"
+        models:
+          - "Gpt"
+  - id: "hydrogen-return-pathway"
+    topic: "Hydrogen return pathway"
+    positions:
+      - statement: "hydrogen directly to the **electromagnetic accelerator (BOM-3b-6)** via magnetic flux tube handoff as an integral part of the HSP output architecture"
+        models:
+          - "Claude"
+      - statement: "hydrogen re-injection as an **unresolved open question** with turbulence concerns"
+        models:
+          - "Gemini"
+      - statement: "the hydrogen return accelerator as a **separate subsystem within the HSP** that also serves as a flow-control valve for plant pressure balance"
+        models:
+          - "Gpt"

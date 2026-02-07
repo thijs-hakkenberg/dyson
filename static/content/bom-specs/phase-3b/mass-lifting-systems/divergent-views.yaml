@@ -1,0 +1,75 @@
+# Divergent Views for mass-lifting-systems
+# Auto-generated from consensus document
+
+bomId: "bom-3b-4"
+itemSlug: "mass-lifting-systems"
+generated: "2026-02-07"
+
+topics:
+  - id: "number-and-size-of-extraction-nodes"
+    topic: "Number and size of extraction nodes"
+    positions:
+      - statement: "~5,000 large Lifting Stations at ~1"
+        models:
+          - "Claude"
+      - statement: "1,000 very large Siphon Nodes at 4"
+        models:
+          - "Gemini"
+      - statement: "20,000–100,000 smaller MILNs at ~2×10¹⁰ kg each (50 km coil diameter, each handling ~5×10⁷ kg/s)"
+        models:
+          - "Gpt"
+  - id: "operating-orbital-radius"
+    topic: "Operating orbital radius"
+    positions:
+      - statement: "**3–5 R☉** (low solar orbit, ~2"
+        models:
+          - "Claude"
+      - statement: "nodes at **0"
+        models:
+          - "Gemini"
+      - statement: "an intermediate **1"
+        models:
+          - "Gpt"
+  - id: "primary-mass-lifting-mechanism"
+    topic: "Primary mass lifting mechanism"
+    positions:
+      - statement: "**Alfvén wave injection and ponderomotive force** as the dominant driver, essentially replicating and amplifying the natural coronal heating/solar wind acceleration mechanism"
+        models:
+          - "Claude"
+      - statement: "**induced artificial CMEs via local magnetic pressure manipulation** (creating pressure deficits to trigger violent upwelling)"
+        models:
+          - "Gemini"
+      - statement: "**controlled magnetic reconnection and biased harvesting of natural solar mass transport** (spicules, prominences, reconnection outflows) with MHD pumping"
+        models:
+          - "Gpt"
+  - id: "total-system-mass"
+    topic: "Total system mass"
+    positions:
+      - statement: "**~7"
+        models:
+          - "Claude"
+      - statement: "**~4"
+        models:
+          - "Gemini"
+          - "Gpt"
+  - id: "collection-and-routing-architecture"
+    topic: "Collection and routing architecture"
+    positions:
+      - statement: "a dedicated **Collection Ring** at 5–8 R☉ with MHD deceleration and energy recovery (~200 segments, recovering ~25% of lifting energy)"
+        models:
+          - "Claude"
+      - statement: "collection into the node design with an inline **isotope pre-sorter using ion cyclotron resonance**"
+        models:
+          - "Gemini"
+      - statement: "**100 Manifold Hubs** (each aggregating ~200 nodes) with magnetically confined toroidal buffer reservoirs holding hours of flow"
+        models:
+          - "Gpt"
+  - id: "thermal-protection-approach"
+    topic: "Thermal protection approach"
+    positions:
+      - statement: "GPT specify conventional **multi-layer reflective sunshields with active liquid-metal cooling and large solid radiator arrays**"
+        models:
+          - "Claude"
+      - statement: "proposes an **active liquid-tin droplet radiator curtain** — a cloud of sprayed and recollected droplets dissipating heat radiatively — as the primary thermal management strategy"
+        models:
+          - "Gemini"

@@ -1,0 +1,83 @@
+# Divergent Views for dyson-integration-layer
+# Auto-generated from consensus document
+
+bomId: "bom-3b-7"
+itemSlug: "dyson-integration-layer"
+generated: "2026-02-07"
+
+topics:
+  - id: "total-power-throughput-scale"
+    topic: "Total Power Throughput Scale"
+    positions:
+      - statement: "1"
+        models:
+          - "Gemini"
+      - statement: "the DIL for ~1"
+        models:
+          - "Claude"
+      - statement: "10¹⁵–10¹⁷ W scalable, explicitly starting with a fractional Dyson swarm and scaling up"
+        models:
+          - "Gpt"
+  - id: "primary-trunk-transmission-frequency"
+    topic: "Primary Trunk Transmission Frequency"
+    positions:
+      - statement: "240 GHz (1"
+        models:
+          - "Claude"
+      - statement: "245 GHz for swarm-to-aggregator microwave links but then switches to 13"
+        models:
+          - "Gemini"
+      - statement: "2–30 GHz microwave for bulk power (prioritizing rectenna efficiency and relaxed pointing tolerances) with near-IR laser (~1–2 μm) for precision channels only"
+        models:
+          - "Gpt"
+  - id: "total-system-mass"
+    topic: "Total System Mass"
+    positions:
+      - statement: "4"
+        models:
+          - "Gemini"
+      - statement: "~10¹⁷ kg (asteroid-scale, dominated by Tier 3 relay stations with 50 km rectenna arrays)"
+        models:
+          - "Claude"
+      - statement: "~10⁶ tonnes (10⁹ kg) per 100 TW tranche, implying ~10¹²–10¹³ kg for a PW-class system — orders of magnitude lighter due to the much lower power target"
+        models:
+          - "Gpt"
+  - id: "end-to-end-transmission-efficiency"
+    topic: "End-to-End Transmission Efficiency"
+    positions:
+      - statement: "68% baseline (after optimizing to 3 hops with large apertures), acknowledging 43% for a naive 10-hop chain"
+        models:
+          - "Claude"
+      - statement: ">94% end-to-end efficiency"
+        models:
+          - "Gemini"
+      - statement: "≥50% initially with a goal of ≥70%"
+        models:
+          - "Gpt"
+      - statement: "GPT provide detailed loss budgets"
+        models:
+          - "Claude"
+  - id: "construction-timeline"
+    topic: "Construction Timeline"
+    positions:
+      - statement: "a 100-year phased buildout using self-replicating von Neumann factory ships with exponential scaling"
+        models:
+          - "Claude"
+      - statement: "a 21-year timeline to \"First Light\" with 5 aggregator nodes deployed per day from Mercury shipyards"
+        models:
+          - "Gemini"
+      - statement: "an incremental TRL-gated roadmap without a fixed calendar, emphasizing safety demonstration before scaling"
+        models:
+          - "Gpt"
+  - id: "role-of-phase-3a-matrioshka-brain-in-dil-control"
+    topic: "Role of Phase 3a Matrioshka Brain in DIL Control"
+    positions:
+      - statement: "the DIL runs its own distributed control with a market-based arbitration mechanism between 3a and 3b"
+        models:
+          - "Claude"
+      - statement: "the \"Conductor\" AI directly on the Matrioshka Brain, making Phase 3a infrastructure a control dependency for Phase 3b"
+        models:
+          - "Gemini"
+      - statement: "the Matrioshka Brain as a peer consumer with governance interface, explicitly avoiding control dependency"
+        models:
+          - "Gpt"

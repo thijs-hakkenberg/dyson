@@ -65,6 +65,8 @@ export interface Phase {
 	estimatedDuration: string;
 	dependencies: string[];
 	relatedResearch: string[];
+	suffix?: string; // 'a', 'b' for parallel phases (e.g., Phase 3a, Phase 3b)
+	parallelWith?: string[]; // IDs of phases that run concurrently
 }
 
 // arXiv Types

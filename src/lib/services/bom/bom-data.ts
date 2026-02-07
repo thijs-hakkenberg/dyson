@@ -46,15 +46,24 @@ export const BOM_ITEM_SLUGS: Record<string, string> = {
 	'bom-2-1': 'collector-satellites',
 	'bom-2-2': 'maintenance-drones',
 	'bom-2-3': 'manufacturing-expansion',
-	// Phase 3 - Matroska Brain
-	'bom-3-1': 'computational-substrate-tiles',
-	'bom-3-2': 'inter-layer-optical-backbone',
-	'bom-3-3': 'thermal-management-radiator-systems',
-	'bom-3-4': 'self-replicating-manufacturing-foundries',
-	'bom-3-5': 'distributed-computational-os',
-	'bom-3-6': 'feedstock-supply-chain-pipeline',
-	'bom-3-7': 'inter-layer-power-distribution-network',
-	'bom-3-8': 'shell-construction-maintenance-swarm'
+	// Phase 3a - Matrioshka Brain
+	'bom-3a-1': 'computational-substrate-tiles',
+	'bom-3a-2': 'inter-layer-optical-backbone',
+	'bom-3a-3': 'thermal-management-radiator-systems',
+	'bom-3a-4': 'self-replicating-manufacturing-foundries',
+	'bom-3a-5': 'distributed-computational-os',
+	'bom-3a-6': 'feedstock-supply-chain-pipeline',
+	'bom-3a-7': 'inter-layer-power-distribution-network',
+	'bom-3a-8': 'shell-construction-maintenance-swarm',
+	// Phase 3b - Stellar Engine
+	'bom-3b-1': 'shkadov-mirror-array',
+	'bom-3b-2': 'thermonuclear-jet-engine',
+	'bom-3b-3': 'solar-wind-collectors',
+	'bom-3b-4': 'mass-lifting-systems',
+	'bom-3b-5': 'helium-separation-plant',
+	'bom-3b-6': 'em-accelerators',
+	'bom-3b-7': 'dyson-integration-layer',
+	'bom-3b-8': 'thrust-stabilization'
 };
 
 /**
@@ -284,13 +293,13 @@ export const PHASE_2_BOM_ITEMS: BOMItemMeta[] = [
 ];
 
 /**
- * Phase 3 BOM Items - Matroska Brain
+ * Phase 3a BOM Items - Matrioshka Brain
  * Quantity and cost estimates derived from multi-model LLM consensus (2026-02-07)
  * Uncertainty ranges: Very high for far-future stellar-scale megastructures
  */
-export const PHASE_3_BOM_ITEMS: BOMItemMeta[] = [
+export const PHASE_3A_BOM_ITEMS: BOMItemMeta[] = [
 	{
-		bomId: 'bom-3-1',
+		bomId: 'bom-3a-1',
 		slug: 'computational-substrate-tiles',
 		name: 'Computational Substrate Tiles',
 		quantity: '10¹² tiles',
@@ -302,7 +311,7 @@ export const PHASE_3_BOM_ITEMS: BOMItemMeta[] = [
 		costBasis: 'Modular tiles integrating TPV energy harvesting, compute substrate, local memory, and mesh networking. Scale-up and in-space semiconductor fabrication are primary cost drivers.'
 	},
 	{
-		bomId: 'bom-3-2',
+		bomId: 'bom-3a-2',
 		slug: 'inter-layer-optical-backbone',
 		name: 'Inter-Layer Optical Communication Backbone',
 		quantity: '10⁸-10⁹ relay nodes',
@@ -314,7 +323,7 @@ export const PHASE_3_BOM_ITEMS: BOMItemMeta[] = [
 		costBasis: 'Hierarchical free-space optical network with WDM/OAM multiplexed laser links. Most mature technology in Phase 3 BOM.'
 	},
 	{
-		bomId: 'bom-3-3',
+		bomId: 'bom-3a-3',
 		slug: 'thermal-management-radiator-systems',
 		name: 'Thermal Management and Radiator Systems',
 		quantity: '~10¹⁴ m² radiator area',
@@ -326,7 +335,7 @@ export const PHASE_3_BOM_ITEMS: BOMItemMeta[] = [
 		costBasis: 'Passive spectral-selective radiators plus active cryogenic systems for outer layers. Thermodynamic cascade efficiency is critical.'
 	},
 	{
-		bomId: 'bom-3-4',
+		bomId: 'bom-3a-4',
 		slug: 'self-replicating-manufacturing-foundries',
 		name: 'Self-Replicating Manufacturing Foundries',
 		quantity: '100-1,000 seed → 10⁴-10⁶ peak',
@@ -338,7 +347,7 @@ export const PHASE_3_BOM_ITEMS: BOMItemMeta[] = [
 		costBasis: 'Autonomous factory complexes with ≥96% mass closure from in-situ resources. Critical-path industrial capability.'
 	},
 	{
-		bomId: 'bom-3-5',
+		bomId: 'bom-3a-5',
 		slug: 'distributed-computational-os',
 		name: 'Distributed Computational Operating System',
 		quantity: '1 system (~10⁶ engineer-years)',
@@ -350,7 +359,7 @@ export const PHASE_3_BOM_ITEMS: BOMItemMeta[] = [
 		costBasis: 'Hierarchical, self-organizing software fabric managing resources across light-hours of delay. No precedent exists.'
 	},
 	{
-		bomId: 'bom-3-6',
+		bomId: 'bom-3a-6',
 		slug: 'feedstock-supply-chain-pipeline',
 		name: 'Feedstock Supply Chain and Logistics Pipeline',
 		quantity: '~10,000 ships, ~500 mass drivers',
@@ -362,7 +371,7 @@ export const PHASE_3_BOM_ITEMS: BOMItemMeta[] = [
 		costBasis: 'Scaled-up version of Phase 1-2 infrastructure with well-understood physics.'
 	},
 	{
-		bomId: 'bom-3-7',
+		bomId: 'bom-3a-7',
 		slug: 'inter-layer-power-distribution-network',
 		name: 'Inter-Layer Power Distribution Network',
 		quantity: '10⁸-10¹¹ power interface units',
@@ -374,7 +383,7 @@ export const PHASE_3_BOM_ITEMS: BOMItemMeta[] = [
 		costBasis: 'HVDC within layers plus optical power beaming between layers. Essential for outer-layer viability.'
 	},
 	{
-		bomId: 'bom-3-8',
+		bomId: 'bom-3a-8',
 		slug: 'shell-construction-maintenance-swarm',
 		name: 'Shell Construction and Maintenance Swarm',
 		quantity: '10⁶-10⁸ robots',
@@ -384,6 +393,110 @@ export const PHASE_3_BOM_ITEMS: BOMItemMeta[] = [
 		costMax: '$10T',
 		costConfidence: 'medium',
 		costBasis: 'Evolved Phase 2 robotics for deployment, repair, and recycling. Distinct from manufacturing foundries.'
+	}
+];
+
+/**
+ * Phase 3b BOM Items - Stellar Engine
+ * Based on Caplan 2019 paper "Stellar Engines: Design Considerations for Maximizing Acceleration"
+ * Uncertainty ranges: Very high for stellar-scale propulsion systems
+ */
+export const PHASE_3B_BOM_ITEMS: BOMItemMeta[] = [
+	{
+		bomId: 'bom-3b-1',
+		slug: 'shkadov-mirror-array',
+		name: 'Shkadov Mirror Array',
+		quantity: '~10¹² m² reflective area',
+		cost: '$10T-$100T',
+		category: 'Infrastructure',
+		costMin: '$1T',
+		costMax: '$100T',
+		costConfidence: 'low',
+		costBasis: 'Scaled from Phase 2 thin-film production. Primary uncertainty is AU-scale structural stability.'
+	},
+	{
+		bomId: 'bom-3b-2',
+		slug: 'thermonuclear-jet-engine',
+		name: 'Thermonuclear Jet Engine',
+		quantity: '~100 engine units',
+		cost: '$10T-$100T',
+		category: 'Infrastructure',
+		costMin: '$1T',
+		costMax: '$100T',
+		costConfidence: 'low',
+		costBasis: 'Novel fusion propulsion at stellar scale. No heritage systems for comparison.'
+	},
+	{
+		bomId: 'bom-3b-3',
+		slug: 'solar-wind-collectors',
+		name: 'Solar Wind Collectors',
+		quantity: '~10⁷ collector stations',
+		cost: '$10T-$50T',
+		category: 'Infrastructure',
+		costMin: '$1T',
+		costMax: '$50T',
+		costConfidence: 'low',
+		costBasis: 'Extension of Dyson swarm infrastructure with magnetic plasma handling.'
+	},
+	{
+		bomId: 'bom-3b-4',
+		slug: 'mass-lifting-systems',
+		name: 'Mass Lifting Systems',
+		quantity: '~1,000 lifting stations',
+		cost: '$50T-$200T',
+		category: 'Infrastructure',
+		costMin: '$10T',
+		costMax: '$200T',
+		costConfidence: 'low',
+		costBasis: 'Most speculative system. Requires managing solar surface disruption.'
+	},
+	{
+		bomId: 'bom-3b-5',
+		slug: 'helium-separation-plant',
+		name: 'Helium Separation Plant',
+		quantity: '~500 processing plants',
+		cost: '$10T-$50T',
+		category: 'Infrastructure',
+		costMin: '$2T',
+		costMax: '$50T',
+		costConfidence: 'low',
+		costBasis: 'Scaled from terrestrial isotope separation with space operation multiplier.'
+	},
+	{
+		bomId: 'bom-3b-6',
+		slug: 'em-accelerators',
+		name: 'Electromagnetic Accelerators',
+		quantity: '~10,000 accelerator units',
+		cost: '$10T-$50T',
+		category: 'Infrastructure',
+		costMin: '$2T',
+		costMax: '$50T',
+		costConfidence: 'medium',
+		costBasis: 'Extension of Phase 1 mass driver technology to higher power levels.'
+	},
+	{
+		bomId: 'bom-3b-7',
+		slug: 'dyson-integration-layer',
+		name: 'Dyson Integration Layer',
+		quantity: '1 system',
+		cost: '$5T-$20T',
+		category: 'Computing',
+		costMin: '$1T',
+		costMax: '$20T',
+		costConfidence: 'medium',
+		costBasis: 'Software and infrastructure integration. Builds on Phase 2 swarm control.'
+	},
+	{
+		bomId: 'bom-3b-8',
+		slug: 'thrust-stabilization',
+		name: 'Thrust Stabilization Systems',
+		quantity: '~10,000 stabilization nodes',
+		cost: '$5T-$20T',
+		category: 'Computing',
+		costMin: '$1T',
+		costMax: '$20T',
+		costConfidence: 'medium',
+		costBasis: 'Control systems with century-scale feedback loops. Novel but well-defined problem.'
 	}
 ];
 
@@ -428,7 +541,8 @@ export function getBOMItemBySlug(slug: string, phaseId?: string): BOMItemMeta | 
 		PHASE_0_BOM_ITEMS.find((item) => item.slug === slug) ||
 		PHASE_1_BOM_ITEMS.find((item) => item.slug === slug) ||
 		PHASE_2_BOM_ITEMS.find((item) => item.slug === slug) ||
-		PHASE_3_BOM_ITEMS.find((item) => item.slug === slug)
+		PHASE_3A_BOM_ITEMS.find((item) => item.slug === slug) ||
+		PHASE_3B_BOM_ITEMS.find((item) => item.slug === slug)
 	);
 }
 
@@ -443,8 +557,10 @@ export function getAllBOMItemsForPhase(phaseId: string): BOMItemMeta[] {
 			return PHASE_1_BOM_ITEMS;
 		case 'phase-2':
 			return PHASE_2_BOM_ITEMS;
-		case 'phase-3':
-			return PHASE_3_BOM_ITEMS;
+		case 'phase-3a':
+			return PHASE_3A_BOM_ITEMS;
+		case 'phase-3b':
+			return PHASE_3B_BOM_ITEMS;
 		default:
 			return [];
 	}

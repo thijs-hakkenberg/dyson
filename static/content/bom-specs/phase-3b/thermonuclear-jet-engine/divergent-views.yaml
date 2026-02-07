@@ -1,0 +1,74 @@
+# Divergent Views for thermonuclear-jet-engine
+# Auto-generated from consensus document
+
+bomId: "bom-3b-2"
+itemSlug: "thermonuclear-jet-engine"
+generated: "2026-02-07"
+
+topics:
+  - id: "fusion-reaction-selection"
+    topic: "Fusion reaction selection"
+    positions:
+      - statement: "D–³He as the primary reaction (18"
+        models:
+          - "Claude"
+      - statement: "the Triple-Alpha process (3 ⁴He → ¹²C) augmented by muon-catalyzed fusion to overcome the notoriously low cross-section"
+        models:
+          - "Gemini"
+      - statement: "with Claude on D–³He baseline but proposes a staged ramp from D–D to D–³He as ³He stockpiles grow, explicitly avoiding Triple-Alpha as impractical"
+        models:
+          - "Gpt"
+  - id: "number-and-size-of-engine-modules"
+    topic: "Number and size of engine modules"
+    positions:
+      - statement: "~10,000 modules at ~10¹⁴ N thrust each (module mass ~10¹¹ kg, length ~50–90 km)"
+        models:
+          - "Claude"
+      - statement: "~10⁷ small \"Torch\" modules at 5 km length and 4"
+        models:
+          - "Gemini"
+      - statement: "a tiered module class system (TJEM-S/M/L) with the baseline TJEM-M at 10¹² N thrust per unit and recommends 10³–10⁴ units, each ~10¹² kg"
+        models:
+          - "Gpt"
+  - id: "ignition-compression-driver-technology"
+    topic: "Ignition/compression driver technology"
+    positions:
+      - statement: "heavy-ion beam drivers (192 beamlines per module, Pb ions at 10 GeV, 10¹⁵ J per pulse) based on superior wall-plug efficiency and scaling"
+        models:
+          - "Claude"
+      - statement: "laser-driven inertial confinement for initial compression combined with continuous-flow Z-pinch in the burn chamber"
+        models:
+          - "Gemini"
+      - statement: "magnetized target fusion (MIF) with imploding conductive liners, emphasizing replaceable consumable liners as a maintainability advantage"
+        models:
+          - "Gpt"
+  - id: "throat-magnetic-field-strength"
+    topic: "Throat magnetic field strength"
+    positions:
+      - statement: "proposed 10⁴ T but self-corrected to ~200 T as a realistic extrapolation, requiring hybrid resistive/superconducting coils with a 2 km throat diameter"
+        models:
+          - "Claude"
+      - statement: "250 T with high-temperature superconducting ribbons at a 1 km module diameter"
+        models:
+          - "Gemini"
+      - statement: "not specify a peak throat field but implies lower fields with a 50–200 m throat radius and longer nozzle (50–300 km), prioritizing achievability over peak performance"
+        models:
+          - "Gpt"
+  - id: "station-keeping-mechanism-hydrogen-return-beam"
+    topic: "Station-keeping mechanism (Hydrogen Return Beam)"
+    positions:
+      - statement: "proposes a dedicated Hydrogen Return Beam (HRB) fired back at the Sun, serving the dual purpose of maintaining engine station against solar gravity and replenishing solar hydrogen to extend main-sequence lifetime"
+        models:
+          - "Gemini"
+      - statement: "GPT rely on a combination of reflected solar radiation pressure (Shkadov mirror synergy) and minor thrust vectoring for station-keeping, without a dedicated return beam"
+        models:
+          - "Claude"
+  - id: "feedstock-source-for-engine-construction"
+    topic: "Feedstock source for engine construction"
+    positions:
+      - statement: "proposes complete dismantlement of Mercury as the primary material source for the engine array (1"
+        models:
+          - "Gemini"
+      - statement: "GPT assume distributed asteroid mining and existing Phase 2 orbital manufacturing infrastructure without targeting a specific planetary body for destruction"
+        models:
+          - "Claude"

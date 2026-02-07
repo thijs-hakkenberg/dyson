@@ -1,0 +1,80 @@
+# Divergent Views for shkadov-mirror-array
+# Auto-generated from consensus document
+
+bomId: "bom-3b-1"
+itemSlug: "shkadov-mirror-array"
+generated: "2026-02-07"
+
+topics:
+  - id: "standoff-distance-heliocentric-radius"
+    topic: "Standoff Distance (Heliocentric Radius)"
+    positions:
+      - statement: "**0"
+        models:
+          - "Claude"
+      - statement: "selects **0"
+        models:
+          - "Gemini"
+      - statement: "**1"
+        models:
+          - "Gpt"
+  - id: "individual-element-size"
+    topic: "Individual Element Size"
+    positions:
+      - statement: "**1,000 km diameter segments** (~7"
+        models:
+          - "Claude"
+      - statement: "**100 km diameter hexagonal statites** (~150 million units)"
+        models:
+          - "Gemini"
+      - statement: "explored 10 km and 1,000 km tiles but ultimately recommends **continent-to-AU-scale \"super-petal\" membranes** (up to ~10¹⁸ m² each, with millions of embedded controllable microfacets), arguing that discrete spacecraft at km-scale are impractical given the total area required at 1 AU"
+        models:
+          - "Gpt"
+  - id: "membrane-areal-density"
+    topic: "Membrane Areal Density"
+    positions:
+      - statement: "**1"
+        models:
+          - "Claude"
+      - statement: "**0"
+        models:
+          - "Gemini"
+      - statement: "**5–6 g/m²** (including structural truss, actuators, and avionics mass amortized over area), which is the most conservative and reflects a more integrated structural accounting"
+        models:
+          - "Gpt"
+  - id: "cap-half-angle-intercepted-fraction"
+    topic: "Cap Half-Angle / Intercepted Fraction"
+    positions:
+      - statement: "an operational target of **α = 60° (capturing ~25% of hemisphere, ~6"
+        models:
+          - "Claude"
+      - statement: "**~1"
+        models:
+          - "Gemini"
+      - statement: "starting at **f = 0"
+        models:
+          - "Gpt"
+  - id: "total-system-mass"
+    topic: "Total System Mass"
+    positions:
+      - statement: "**~6 × 10¹⁷ kg** (~0"
+        models:
+          - "Claude"
+      - statement: "**~1"
+        models:
+          - "Gemini"
+      - statement: "**~3"
+        models:
+          - "Gpt"
+  - id: "control-architecture-philosophy"
+    topic: "Control Architecture Philosophy"
+    positions:
+      - statement: "a **5-level hierarchical command structure** (Array → Sector → Zone → Cluster → Segment) with optical mesh networking between individual segments"
+        models:
+          - "Claude"
+      - statement: "**boid-flocking swarm intelligence** with elected cluster leaders and phase-modulated retro-reflection for system-wide communication"
+        models:
+          - "Gemini"
+      - statement: "a **4-level hierarchy** (Global thrust controller → Regional cap managers → Local super-petal controllers → Microfacet controllers) emphasizing metrology-driven control and torque cancellation as the dominant control problem"
+        models:
+          - "Gpt"

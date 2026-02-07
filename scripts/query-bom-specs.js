@@ -146,55 +146,107 @@ const PHASE_2_BOM_ITEMS = [
   { bomId: 'bom-2-3', slug: 'manufacturing-expansion', name: 'Additional Manufacturing Capacity', category: 'Infrastructure' }
 ];
 
-// Phase 3 BOM items - Matroska Brain (determined by model consensus 2026-02-07)
-const PHASE_3_BOM_ITEMS = [
+// Phase 3a BOM items - Matrioshka Brain (determined by model consensus 2026-02-07)
+const PHASE_3A_BOM_ITEMS = [
   {
-    bomId: 'bom-3-1',
+    bomId: 'bom-3a-1',
     slug: 'computational-substrate-tiles',
     name: 'Computational Substrate Tiles',
     category: 'Computing'
   },
   {
-    bomId: 'bom-3-2',
+    bomId: 'bom-3a-2',
     slug: 'inter-layer-optical-backbone',
     name: 'Inter-Layer Optical Communication Backbone',
     category: 'Communications'
   },
   {
-    bomId: 'bom-3-3',
+    bomId: 'bom-3a-3',
     slug: 'thermal-management-radiator-systems',
     name: 'Thermal Management and Radiator Systems',
     category: 'Power Systems'
   },
   {
-    bomId: 'bom-3-4',
+    bomId: 'bom-3a-4',
     slug: 'self-replicating-manufacturing-foundries',
     name: 'Self-Replicating Manufacturing Foundries',
     category: 'Infrastructure'
   },
   {
-    bomId: 'bom-3-5',
+    bomId: 'bom-3a-5',
     slug: 'distributed-computational-os',
     name: 'Distributed Computational Operating System',
     category: 'Computing'
   },
   {
-    bomId: 'bom-3-6',
+    bomId: 'bom-3a-6',
     slug: 'feedstock-supply-chain-pipeline',
     name: 'Feedstock Supply Chain and Logistics Pipeline',
     category: 'Infrastructure'
   },
   {
-    bomId: 'bom-3-7',
+    bomId: 'bom-3a-7',
     slug: 'inter-layer-power-distribution-network',
     name: 'Inter-Layer Power Distribution Network',
     category: 'Power Systems'
   },
   {
-    bomId: 'bom-3-8',
+    bomId: 'bom-3a-8',
     slug: 'shell-construction-maintenance-swarm',
     name: 'Shell Construction and Maintenance Swarm',
     category: 'Robotics'
+  }
+];
+
+// Phase 3b BOM items - Stellar Engine (based on Caplan 2019 paper)
+const PHASE_3B_BOM_ITEMS = [
+  {
+    bomId: 'bom-3b-1',
+    slug: 'shkadov-mirror-array',
+    name: 'Shkadov Mirror Array',
+    category: 'Infrastructure'
+  },
+  {
+    bomId: 'bom-3b-2',
+    slug: 'thermonuclear-jet-engine',
+    name: 'Thermonuclear Jet Engine',
+    category: 'Infrastructure'
+  },
+  {
+    bomId: 'bom-3b-3',
+    slug: 'solar-wind-collectors',
+    name: 'Solar Wind Collectors',
+    category: 'Infrastructure'
+  },
+  {
+    bomId: 'bom-3b-4',
+    slug: 'mass-lifting-systems',
+    name: 'Mass Lifting Systems',
+    category: 'Infrastructure'
+  },
+  {
+    bomId: 'bom-3b-5',
+    slug: 'helium-separation-plant',
+    name: 'Helium Separation Plant',
+    category: 'Infrastructure'
+  },
+  {
+    bomId: 'bom-3b-6',
+    slug: 'em-accelerators',
+    name: 'Electromagnetic Accelerators',
+    category: 'Infrastructure'
+  },
+  {
+    bomId: 'bom-3b-7',
+    slug: 'dyson-integration-layer',
+    name: 'Dyson Integration Layer',
+    category: 'Computing'
+  },
+  {
+    bomId: 'bom-3b-8',
+    slug: 'thrust-stabilization',
+    name: 'Thrust Stabilization Systems',
+    category: 'Computing'
   }
 ];
 
@@ -202,7 +254,8 @@ const ALL_BOM_ITEMS = {
   'phase-0': PHASE_0_BOM_ITEMS,
   'phase-1': PHASE_1_BOM_ITEMS,
   'phase-2': PHASE_2_BOM_ITEMS,
-  'phase-3': PHASE_3_BOM_ITEMS
+  'phase-3a': PHASE_3A_BOM_ITEMS,
+  'phase-3b': PHASE_3B_BOM_ITEMS
 };
 
 // Legacy alias for backwards compatibility
@@ -216,7 +269,8 @@ function getPhaseContext(phaseId) {
     'phase-0': 'Phase 0 - Space Resource Processing',
     'phase-1': 'Phase 1 - Initial Swarm Deployment',
     'phase-2': 'Phase 2 - Swarm Expansion',
-    'phase-3': 'Phase 3 - Matroska Brain'
+    'phase-3a': 'Phase 3a - Matrioshka Brain (parallel with 3b)',
+    'phase-3b': 'Phase 3b - Stellar Engine (parallel with 3a)'
   };
   return contexts[phaseId] || phaseId;
 }
@@ -226,7 +280,7 @@ function getPhaseContext(phaseId) {
  */
 async function loadPriorConsensus() {
   const consensusDocs = [];
-  const phases = ['phase-0', 'phase-1', 'phase-2'];
+  const phases = ['phase-0', 'phase-1', 'phase-2', 'phase-3a'];
 
   for (const phaseId of phases) {
     const phaseItems = ALL_BOM_ITEMS[phaseId];
@@ -501,8 +555,8 @@ function extractItemContext(bomConsensus, itemName, bomId) {
 async function generatePrompt(item, phaseId = 'phase-0', compactContext = false) {
   let contextAddendum = '';
 
-  // For Phase 3, include context (compact or full)
-  if (phaseId === 'phase-3') {
+  // For Phase 3a (Matrioshka Brain), include context (compact or full)
+  if (phaseId === 'phase-3a') {
     const bomConsensus = await loadBOMConsensus(phaseId);
 
     if (compactContext) {
@@ -510,13 +564,13 @@ async function generatePrompt(item, phaseId = 'phase-0', compactContext = false)
       const itemContext = extractItemContext(bomConsensus, item.name, item.bomId);
       if (itemContext) {
         contextAddendum = `
-## Phase 3 BOM Context for ${item.name}
+## Phase 3a BOM Context for ${item.name}
 
-This item was defined in the multi-model consensus for Phase 3 (Matroska Brain):
+This item was defined in the multi-model consensus for Phase 3a (Matrioshka Brain):
 
 ${itemContext}
 
-The Matroska Brain is a nested megastructure of computational shells where each layer harvests waste heat from inner layers. Phase 3 builds upon Phases 0-2: space resource processing, initial swarm deployment, and swarm expansion infrastructure.
+The Matrioshka Brain is a nested megastructure of computational shells where each layer harvests waste heat from inner layers. Phase 3a builds upon Phases 0-2: space resource processing, initial swarm deployment, and swarm expansion infrastructure. It runs parallel with Phase 3b (Stellar Engine).
 
 ---
 
@@ -524,9 +578,9 @@ The Matroska Brain is a nested megastructure of computational shells where each 
       } else {
         // Fallback to brief context
         contextAddendum = `
-## Phase 3 - Matroska Brain Context
+## Phase 3a - Matrioshka Brain Context
 
-The Matroska Brain transforms the Dyson swarm into nested computational shells. Each layer harvests waste heat from inner layers via thermophotovoltaics. Key systems include:
+The Matrioshka Brain transforms the Dyson swarm into nested computational shells. Each layer harvests waste heat from inner layers via thermophotovoltaics. Key systems include:
 - Computational Substrate Tiles (10¹² tiles across thermal layers)
 - Inter-Layer Optical Communication Backbone
 - Thermal Management and Radiator Systems
@@ -548,7 +602,7 @@ This specification is for: **${item.name}** (${item.bomId})
 
 ## Multi-Model BOM Consensus Context
 
-The following consensus was reached by Claude, Gemini, and GPT on the Phase 3 BOM structure and key decisions. Your detailed specification should align with and expand upon this consensus:
+The following consensus was reached by Claude, Gemini, and GPT on the Phase 3a BOM structure and key decisions. Your detailed specification should align with and expand upon this consensus:
 
 ${bomConsensus}
 
@@ -567,13 +621,52 @@ ${bomConsensus}
 The following infrastructure has been planned and will be available:
 ${summary}
 
-Build upon this established infrastructure in your Phase 3 proposal.
+Build upon this established infrastructure in your Phase 3a proposal.
 
 ---
 
 `;
       }
     }
+  }
+
+  // For Phase 3b (Stellar Engine), provide stellar engine context
+  if (phaseId === 'phase-3b') {
+    contextAddendum = `
+## Phase 3b - Stellar Engine Context
+
+Phase 3b implements stellar propulsion systems to enable controlled movement of the Sun and Solar System. Based on Caplan's 2019 paper "Stellar Engines: Design Considerations for Maximizing Acceleration", the approach combines:
+
+**Passive Thrusters (Shkadov Mirror):**
+- Parabolic mirrors reflecting sunlight asymmetrically
+- Acceleration: ~10⁻¹² m/s²
+- Passive operation, no fuel consumption
+- Time to move 1 ly: ~1 billion years
+
+**Active Thrusters (Caplan Engine):**
+- Thermonuclear jets using mass lifted from the Sun
+- Extraction rate: ~10¹² kg/s of solar material
+- Exhaust velocity: ~0.01c
+- Acceleration: ~10⁻⁹ m/s² (1000x better than Shkadov)
+- Time to move 1 ly: ~1 million years
+
+**Key Systems:**
+- Shkadov Mirror Array - passive radiation pressure thrust
+- Solar Wind Collectors - intercepting naturally escaping material
+- Mass Lifting Systems - extracting chromospheric material
+- Helium Separation Plants - isotope separation for fuel
+- Electromagnetic Accelerators - hydrogen return and helium jet
+- Thermonuclear Jet Engines - fusion-powered directed thrust
+- Dyson Integration Layer - power routing from swarm
+- Thrust Stabilization Systems - long-term trajectory control
+
+Phase 3b runs parallel with Phase 3a (Matrioshka Brain). Both depend on the completed Phase 2 Dyson swarm infrastructure.
+
+This specification is for: **${item.name}** (${item.bomId})
+
+---
+
+`;
   }
 
   return `You are an expert space systems engineer for Project Dyson, a non-profit

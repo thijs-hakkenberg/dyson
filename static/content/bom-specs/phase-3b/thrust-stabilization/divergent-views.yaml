@@ -1,0 +1,80 @@
+# Divergent Views for thrust-stabilization
+# Auto-generated from consensus document
+
+bomId: "bom-3b-8"
+itemSlug: "thrust-stabilization"
+generated: "2026-02-07"
+
+topics:
+  - id: "station-keeping-philosophy-for-the-caplan-engine"
+    topic: "Station-keeping philosophy for the Caplan engine"
+    positions:
+      - statement: "the engine as a body in orbit whose station-keeping is handled by a separate subsystem (Electromagnetic Accelerator, 3b-6), with TSS providing only setpoints for gimbal angle and mass flow"
+        models:
+          - "Claude"
+      - statement: "dedicated \"Gravity Anchors\" — massive non-orbiting statites that gravitationally tether the engine to prevent drift, constituting a 4"
+        models:
+          - "Gemini"
+      - statement: "jet vector control as internal to TSS via distributed module throttling and electromagnetic nozzle field shaping, with no separate station-keeping system specified"
+        models:
+          - "Gpt"
+  - id: "planetary-orbit-protection"
+    topic: "Planetary orbit protection"
+    positions:
+      - statement: "the perturbation and concludes planetary orbits are inherently safe (differential acceleration ratio ~10⁻⁷ for Earth, negligible eccentricity change), requiring no active intervention"
+        models:
+          - "Claude"
+      - statement: "concern that Mars becomes chaotic after 50,000 years and proposes \"Planetary Perturbation Dampeners\" — mass-dense satellites at L1/L2 Lagrange points of major planets"
+        models:
+          - "Gemini"
+      - statement: "not address planetary stability directly, focusing TSS scope on thrust vector control only"
+        models:
+          - "Gpt"
+  - id: "scale-of-dedicated-tss-infrastructure-mass"
+    topic: "Scale of dedicated TSS infrastructure mass"
+    positions:
+      - statement: "4"
+        models:
+          - "Gemini"
+      - statement: "~3"
+        models:
+          - "Claude"
+      - statement: "~336,000 kg for RMC + TACC nodes, plus fractional mass embedded in mirror/jet hardware (0"
+        models:
+          - "Gpt"
+  - id: "metrology-approach-for-thrust-vector-truth"
+    topic: "Metrology approach for thrust vector truth"
+    positions:
+      - statement: "primarily on astrophysical observables (quasar astrometry at 0"
+        models:
+          - "Claude"
+      - statement: "a compact 48-node Reference Metrology Constellation within 1–8 AU using solar limb imaging, absolute radiometry, laser inter-node ranging, and plume spectroscopy — emphasizing engineering observables over astrophysical ones"
+        models:
+          - "Gpt"
+      - statement: "neutrino-based \"through-sun\" telemetry for CME-hardened sensing but provides less detail on the reference frame architecture"
+        models:
+          - "Gemini"
+  - id: "emergency-shutdown-mechanism"
+    topic: "Emergency shutdown mechanism"
+    positions:
+      - statement: "rotating mirror elements edge-on (~1 day) and stopping engine mass flow (~1 hour), with full thrust reversal taking ~10 years of infrastructure reconfiguration"
+        models:
+          - "Claude"
+      - statement: "a \"Dead Man's Photonic Brake\" — a diffractive lens array that defocuses the solar wind collection magnetic fields, terminating thrust within 48 hours"
+        models:
+          - "Gemini"
+      - statement: "layered safe modes (\"passive-only,\" \"jet-only,\" \"hold-vector\") but does not detail a specific emergency shutdown timeline"
+        models:
+          - "Gpt"
+  - id: "pointing-requirement-stringency"
+    topic: "Pointing requirement stringency"
+    positions:
+      - statement: "for 10 nrad long-term mean as the design target, arguing this is necessary to keep cross-track errors manageable over 10⁶ years"
+        models:
+          - "Gpt"
+      - statement: "1 µrad over century timescales, arguing that decade-timescale control bandwidth is sufficient given the Sun's enormous inertia"
+        models:
+          - "Claude"
+      - statement: "~48 nrad (0"
+        models:
+          - "Gemini"
