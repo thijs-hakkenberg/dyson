@@ -1,0 +1,104 @@
+votes:
+  - voterId: claude-opus-4-6
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: 'Exceptionally thorough and well-structured framework. The three-layer envelope architecture (hardware FPGA kernel → formally verified software monitor → validated autonomy) is the strongest articulation of the safety architecture across all responses. Specific and actionable details like the 50,000 lines of VHDL estimate, the ±0.75mm degradation threshold triggering state transitions, the 10 billion simulated robot-hours target, and the $15-25K per-unit cost for the safety kernel demonstrate deep engineering judgment. The graduated deployment timeline tied to project phases is realistic. The regulatory strategy of proactively proposing the framework rather than waiting is strategically sound. Minor weakness: the 6-robot coordination group size limit feels arbitrary and could be better justified.'
+  - voterId: claude-opus-4-6
+    targetId: gemini-3-pro
+    vote: APPROVE
+    reasoning: Strong response that arrives at the same core architectural insight (Sentinel/Sandbox = runtime assurance separating safety from planning) but presents it more concisely. The 'Chaos Monkey' adversarial testing concept for LEO demo is a valuable addition not emphasized as strongly in other responses. The 'Dashboard' approach for human oversight (approving plan hashes rather than individual actions) is a clever latency-compatible mechanism. The 48-hour 'Apprentice Mode' probationary period for repaired robots is practical and well-conceived. Slightly less detailed than the other two responses on formal methods specifics, multi-robot certification composability, and cost/schedule implications, but the ideas are sound and complementary.
+  - voterId: claude-opus-4-6
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: 'The most operationally mature and implementable of the three responses. Key differentiators: the three-class operation taxonomy (always autonomous / locally gated / Earth-authorized) most clearly resolves the human-in-the-loop ambiguity that plagues autonomous space systems. The DASS (Dyson Autonomy Safety Spec) concept as a central artifact alongside ICDs is excellent systems engineering practice. The composable local invariants approach to multi-robot certification is the most scalable solution presented. The ''permission tokens'' mechanism for hazardous actions and cryptographic identity for repaired modules show practical implementation thinking. The assurance case approach (GSN-style) for regulatory engagement is the most realistic path. Slightly less vivid on specific numerical thresholds than Claude''s response, but the framework structure is arguably the most complete and actionable.'
+  - voterId: gemini-3-pro
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: This response offers the most comprehensive and structurally sound framework. It correctly identifies the need for a hybrid approach (DO-178C + ISO 26262 + DNV-GL) and proposes a 'Continuous Assurance Architecture' that is highly specific to the prompt. The three-pillar approach (Hardware Kernel, Software Constraints, Statistical Validation) is robust, and the specific metrics (e.g., 2.0m separation, 10 billion sim hours) add valuable detail. It also addresses the 'repair by peer' recertification issue with a concrete workflow.
+  - voterId: gemini-3-pro
+    targetId: gemini-3-pro
+    vote: APPROVE
+    reasoning: This is also a very strong response that introduces the 'Sandbox & Sentinel' architecture, which is a practical way to handle the uncertifiable nature of AI planners. The distinction between 'Quality of Service' certification for the planner and 'Safety' certification for the Sentinel is a critical insight. The 'Digital Twin' statistical validation section is good, though perhaps slightly less detailed on the hardware side than Claude's. The 'Apprentice Mode' for repaired robots is a clever operational detail.
+  - voterId: gemini-3-pro
+    targetId: gpt-5-2
+    vote: NEUTRAL
+    reasoning: This response is solid but feels slightly derivative of the concepts presented in the other two, without adding as much unique structural value. It covers the 'safety kernel' concept (similar to Gemini's Sentinel and Claude's Layer 1), but the distinction between 'human approval gates' and 'machine gating' is a bit repetitive of the prompt's inherent constraints rather than a novel solution. It is a good summary of best practices but lacks the specific architectural flair of the other two.
+  - voterId: gpt-5-2
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: Strong, actionable framework with clear separation of safety kernel vs autonomy, continuous certification concept, runtime verification, explicit degraded states, and practical recertification after peer repair. Good grounding in existing standards while explaining gaps; includes multi-robot considerations and phased deployment.
+  - voterId: gpt-5-2
+    targetId: gemini-3-pro
+    vote: APPROVE
+    reasoning: Solid RTA/Simplex-style approach (“Sandbox & Sentinel”), dynamic envelope idea, simulation+fault injection emphasis, and sensible handling of latency via plan-level oversight. Recertification/probation concept is practical. Slightly less detailed/rigorous than the best response but still advances the discussion well.
+  - voterId: gpt-5-2
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: 'Comprehensive, well-structured assurance-case approach: certifying an autonomy envelope with an independent safety kernel, explicit operation classes for gating, composable multi-robot invariants, hybrid evidence (formal + statistical + HIL), staged autonomy with measurable criteria, and repair-as-configuration-change with conformity checks. Directly addresses the question and scales to fleet operations.'
+terminationVotes:
+  - modelId: claude-opus-4-6
+    vote: CONCLUDE
+    reasoning: 'All three responses converge on the same fundamental architecture: a high-integrity runtime assurance safety kernel (formally verified, hardware-enforced) wrapping an uncertified but validated autonomy stack, with certification focused on enforceable behavioral envelopes rather than the AI itself. The responses are highly complementary—Claude provides the deepest technical specifics and cost estimates, Gemini adds adversarial testing and concise framing, and GPT provides the most operationally complete framework with the clearest human-oversight taxonomy. Together they form a comprehensive certification strategy. Further rounds would likely yield diminishing returns; the core architectural consensus is strong and the implementation details are well-covered across the three responses.'
+  - modelId: gemini-3-pro
+    vote: CONCLUDE
+    reasoning: The discussion has reached a high point of clarity. Both Claude and Gemini have converged on a 'Safety Kernel/Sentinel' architecture where a simple, verifiable layer guards a complex, unverified planner. They have provided specific metrics for simulation, hardware enforcement, and recertification protocols. Further discussion is unlikely to yield significantly better architectural paradigms.
+  - modelId: gpt-5-2
+    vote: CONCLUDE
+    reasoning: All three responses converge on a coherent, technically credible certification strategy (bounded envelopes + runtime assurance + hybrid evidence + staged deployment) with sufficient detail to proceed; further rounds would likely be incremental rather than resolving major gaps.
+voteResults:
+  - targetId: claude-opus-4-6
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: 'Exceptionally thorough and well-structured framework. The three-layer envelope architecture (hardware FPGA kernel → formally verified software monitor → validated autonomy) is the strongest articulation of the safety architecture across all responses. Specific and actionable details like the 50,000 lines of VHDL estimate, the ±0.75mm degradation threshold triggering state transitions, the 10 billion simulated robot-hours target, and the $15-25K per-unit cost for the safety kernel demonstrate deep engineering judgment. The graduated deployment timeline tied to project phases is realistic. The regulatory strategy of proactively proposing the framework rather than waiting is strategically sound. Minor weakness: the 6-robot coordination group size limit feels arbitrary and could be better justified.'
+      - voterId: gemini-3-pro
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: This response offers the most comprehensive and structurally sound framework. It correctly identifies the need for a hybrid approach (DO-178C + ISO 26262 + DNV-GL) and proposes a 'Continuous Assurance Architecture' that is highly specific to the prompt. The three-pillar approach (Hardware Kernel, Software Constraints, Statistical Validation) is robust, and the specific metrics (e.g., 2.0m separation, 10 billion sim hours) add valuable detail. It also addresses the 'repair by peer' recertification issue with a concrete workflow.
+      - voterId: gpt-5-2
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: Strong, actionable framework with clear separation of safety kernel vs autonomy, continuous certification concept, runtime verification, explicit degraded states, and practical recertification after peer repair. Good grounding in existing standards while explaining gaps; includes multi-robot considerations and phased deployment.
+    rawScore: 6
+    weightedScore: 5
+    approveCount: 3
+    rejectCount: 0
+  - targetId: gemini-3-pro
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: gemini-3-pro
+        vote: APPROVE
+        reasoning: Strong response that arrives at the same core architectural insight (Sentinel/Sandbox = runtime assurance separating safety from planning) but presents it more concisely. The 'Chaos Monkey' adversarial testing concept for LEO demo is a valuable addition not emphasized as strongly in other responses. The 'Dashboard' approach for human oversight (approving plan hashes rather than individual actions) is a clever latency-compatible mechanism. The 48-hour 'Apprentice Mode' probationary period for repaired robots is practical and well-conceived. Slightly less detailed than the other two responses on formal methods specifics, multi-robot certification composability, and cost/schedule implications, but the ideas are sound and complementary.
+      - voterId: gemini-3-pro
+        targetId: gemini-3-pro
+        vote: APPROVE
+        reasoning: This is also a very strong response that introduces the 'Sandbox & Sentinel' architecture, which is a practical way to handle the uncertifiable nature of AI planners. The distinction between 'Quality of Service' certification for the planner and 'Safety' certification for the Sentinel is a critical insight. The 'Digital Twin' statistical validation section is good, though perhaps slightly less detailed on the hardware side than Claude's. The 'Apprentice Mode' for repaired robots is a clever operational detail.
+      - voterId: gpt-5-2
+        targetId: gemini-3-pro
+        vote: APPROVE
+        reasoning: Solid RTA/Simplex-style approach (“Sandbox & Sentinel”), dynamic envelope idea, simulation+fault injection emphasis, and sensible handling of latency via plan-level oversight. Recertification/probation concept is practical. Slightly less detailed/rigorous than the best response but still advances the discussion well.
+    rawScore: 6
+    weightedScore: 5
+    approveCount: 3
+    rejectCount: 0
+  - targetId: gpt-5-2
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: 'The most operationally mature and implementable of the three responses. Key differentiators: the three-class operation taxonomy (always autonomous / locally gated / Earth-authorized) most clearly resolves the human-in-the-loop ambiguity that plagues autonomous space systems. The DASS (Dyson Autonomy Safety Spec) concept as a central artifact alongside ICDs is excellent systems engineering practice. The composable local invariants approach to multi-robot certification is the most scalable solution presented. The ''permission tokens'' mechanism for hazardous actions and cryptographic identity for repaired modules show practical implementation thinking. The assurance case approach (GSN-style) for regulatory engagement is the most realistic path. Slightly less vivid on specific numerical thresholds than Claude''s response, but the framework structure is arguably the most complete and actionable.'
+      - voterId: gemini-3-pro
+        targetId: gpt-5-2
+        vote: NEUTRAL
+        reasoning: This response is solid but feels slightly derivative of the concepts presented in the other two, without adding as much unique structural value. It covers the 'safety kernel' concept (similar to Gemini's Sentinel and Claude's Layer 1), but the distinction between 'human approval gates' and 'machine gating' is a bit repetitive of the prompt's inherent constraints rather than a novel solution. It is a good summary of best practices but lacks the specific architectural flair of the other two.
+      - voterId: gpt-5-2
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: 'Comprehensive, well-structured assurance-case approach: certifying an autonomy envelope with an independent safety kernel, explicit operation classes for gating, composable multi-robot invariants, hybrid evidence (formal + statistical + HIL), staged autonomy with measurable criteria, and repair-as-configuration-change with conformity checks. Directly addresses the question and scales to fleet operations.'
+    rawScore: 5
+    weightedScore: 4
+    approveCount: 2
+    rejectCount: 0
+winnerId: claude-opus-4-6
+winnerScore: 5

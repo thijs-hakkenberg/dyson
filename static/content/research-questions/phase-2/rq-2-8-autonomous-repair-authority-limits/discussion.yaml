@@ -1,0 +1,485 @@
+questionId: rq-2-8
+questionSlug: autonomous-repair-authority-limits
+questionTitle: Autonomous repair authority limits
+phaseId: phase-2
+config:
+  maxRounds: 5
+  maxResponseWords: 2000
+  allowSelfVoting: true
+  selfVoteWeight: 0.5
+  unanimousTermination: true
+  consecutiveConcludeRounds: 2
+status: concluded
+startedAt: '2026-02-07T18:08:36.686Z'
+rounds:
+  - roundNumber: 1
+    responses:
+      - modelId: claude-opus-4-6
+        content: |-
+          # Autonomous Repair Authority Limits: A Tiered Framework
+
+          ## Executive Summary
+
+          I recommend a **five-tier authority framework** that maps operation risk to approval latency, with the critical design principle being that **the default autonomous envelope must cover ~95% of anticipated maintenance events by volume**. This isn't a preference—it's a mathematical necessity driven by the intersection of fleet scale, failure rates, and communication latency. The remaining 5% requiring human-in-the-loop approval must be structured so that 16-minute delays don't cascade into systemic degradation.
+
+          ## The Quantitative Case for Broad Autonomy
+
+          Let me ground this concretely. The consensus document sizes the maintenance fleet to handle projected failure rates across ~10 million swarm elements. Even at an optimistic 0.1% annual failure rate per satellite, that's 10,000 failures per year—roughly 27 per day. At more realistic rates accounting for micrometeorite impacts, thermal cycling degradation, and electronics failures in the solar radiation environment, we're likely looking at 100-500 maintenance events daily during steady-state operations.
+
+          If even 30% of those events required Earth approval at 16-minute round-trip minimum (realistically 30-45 minutes including queue processing, human review, and response formulation), you'd need a ground operations center processing 30-150 approval requests daily, each requiring context review of telemetry data, risk assessment, and authorization. That's feasible in staffing terms, but the **drone idle time** is devastating. A servicer drone waiting 45 minutes for approval on a 20-minute ORU swap has its utilization rate cut by more than half. Given that fleet sizing and unit costs ($2-20M per servicer) are driven by throughput requirements, requiring unnecessary Earth approval effectively doubles the required fleet size—adding billions in capital cost for zero safety benefit on routine operations.
+
+          ## The Five-Tier Authority Architecture
+
+          ### Tier 0: Fully Autonomous, No Reporting Required
+          **Operations:** Station-keeping, transit between assigned patrol zones, routine self-diagnostics, power management, thermal regulation, communication handshakes.
+
+          **Rationale:** These are continuous operations happening thousands of times per hour across the fleet. Requiring any reporting overhead would saturate communication bandwidth. Anomalies detected during Tier 0 operations trigger escalation, but nominal execution is entirely autonomous.
+
+          ### Tier 1: Autonomous Execution, Post-Hoc Reporting
+          **Operations:** Standard ORU swaps using blind-mate connectors and kinematic datum interfaces (≤8 kg for inspectors, ≤60 kg for servicers), diagnostic inspections, satellite status tagging, debris avoidance maneuvers, emergency collision avoidance.
+
+          **Rationale:** This is the critical tier that must encompass the vast majority of maintenance actions. The consensus document's emphasis on standardized ORU interfaces with kinematic datum patterns exists precisely to make these operations deterministic and reversible. A drone approaching a satellite, identifying a failed ORU via diagnostic protocol, extracting it via standardized interface, and inserting a replacement is a **bounded-risk, reversible operation**. The worst plausible failure mode—dropping an ORU or failing to seat a connector—leaves the satellite no worse than its pre-intervention failed state.
+
+          Post-hoc reporting uploads telemetry, before/after diagnostics, and operation logs to the depot relay for batch transmission to Earth. Ground teams review statistical patterns, not individual operations.
+
+          ### Tier 2: Autonomous Execution with Depot Notification
+          **Operations:** Multi-ORU replacements on a single satellite, operations requiring non-standard tool deployment, satellite repositioning/attitude adjustment, triage decisions prioritizing one satellite over another, cooperative multi-drone operations.
+
+          **Rationale:** These operations have higher consequence if executed incorrectly but remain time-critical. A satellite needing three ORU replacements simultaneously may indicate a systemic issue (micrometeorite strike, electrical cascade) that warrants pattern recognition at the depot level. The depot's regional AI system—which I strongly recommend as an intermediate authority layer—monitors these notifications in real-time and can issue abort commands with only seconds of latency (depot-to-drone distances within a regional zone should be under 1 light-second).
+
+          **This tier is where depot architecture becomes a governance mechanism, not just a logistics node.** I recommend depots be spaced such that every swarm element is within 0.5 light-seconds of at least one depot, enabling near-real-time depot oversight for Tier 2 operations.
+
+          ### Tier 3: Depot Approval Required
+          **Operations:** In-situ repairs beyond ORU swap (welding, brazing, adhesive application—if the architecture permits these per Claude's component-level repair philosophy), operations on satellites flagged as structurally compromised, any action on satellites adjacent to high-value or critical-function elements, first-of-kind operations not yet in the validated procedure library, drone self-repair beyond consumable replenishment.
+
+          **Rationale:** These operations have meaningful probability of making things worse. The depot AI system has broader situational awareness—knowing the status of surrounding satellites, current fleet disposition, and whether a repair attempt is worth the risk versus simply decommissioning the satellite and scheduling a replacement. Depot approval latency of seconds to low minutes is acceptable for these less-frequent operations.
+
+          **Critical design point on the repair philosophy debate:** I lean toward GPT's "swap-first, advanced repair deferred" position specifically because it minimizes the Tier 3 envelope. If we adopt Claude's component-level welding capability, a much larger fraction of operations falls into Tier 3, requiring depot approval and reducing fleet autonomy. The Swap-and-Drop doctrine isn't just about robotic simplicity—it's about **governance simplicity**. Every ORU swap is Tier 1. Every weld is Tier 3 at minimum. This has massive implications for fleet throughput.
+
+          ### Tier 4: Earth Approval Required
+          **Operations:** Decommissioning and de-orbiting satellites, operations affecting swarm geometry or power distribution topology, firmware/software updates to drone autonomy systems, authority tier reclassification, operations on any satellite within exclusion zones (if defined around critical infrastructure), any operation where drone self-diagnostics indicate the drone itself may be malfunctioning.
+
+          **Rationale:** These are low-frequency, high-consequence, and largely non-time-critical decisions. Decommissioning a satellite is irreversible. Modifying swarm topology affects system-level power output. Software updates to autonomy systems are the most consequential actions possible—they change the decision-making framework itself. The 16-45 minute approval latency is acceptable because none of these operations have minute-level urgency.
+
+          **The self-diagnosis clause is essential.** A drone that suspects its own sensors or actuators are degraded must not be authorized to continue servicing operations autonomously. This is the single most important safeguard against cascading failures. A malfunctioning drone that continues operating could damage functional satellites. The protocol must be: flag self-anomaly → safe-mode → request Earth assessment.
+
+          ## Graduated Authority Expansion Protocol
+
+          The initial deployment phase should operate with a **compressed authority envelope**—many Tier 1 operations temporarily elevated to Tier 2 or 3 until statistical confidence is established. I recommend:
+
+          **Phase A (First 1,000 operations per procedure type):** All ORU swaps require depot notification (Tier 2). Success/failure data builds baseline reliability statistics.
+
+          **Phase B (After 1,000 successful operations with <0.5% anomaly rate):** Standard ORU swaps downgraded to Tier 1 (autonomous with post-hoc reporting). This threshold provides 95% confidence that the true anomaly rate is below 1%.
+
+          **Phase C (After 10,000 operations with sustained performance):** Authority expansion to include multi-ORU operations at Tier 1 for drone classes that have demonstrated consistent performance.
+
+          **Regression triggers:** Any single event causing satellite damage worse than pre-intervention state immediately re-elevates that procedure type by one tier across the entire fleet until root cause analysis is complete. This is non-negotiable.
+
+          ## Fleet Class-Specific Authority
+
+          Authority limits must be class-specific, as the question correctly identifies:
+
+          - **Inspector drones (14-52 kg):** Maximum authority Tier 1. They can swap small ORUs (≤8 kg) and perform diagnostics. They should never be authorized for Tier 2+ operations—their limited mass and manipulation capability means higher failure probability on complex tasks.
+
+          - **Servicer drones (180-320 kg):** Full Tier 0-2 authority envelope, with Tier 3 available where depot-approved. These are the workhorses.
+
+          - **Depot systems:** Tier 3 approval authority, Tier 4 recommendation authority (can pre-package approval requests for Earth with depot assessment attached, streamlining ground review).
+
+          ## Key Implementation Requirements
+
+          **Deterministic decision trees, not ML judgment calls.** The authority framework must be implemented as explicit, auditable rule sets—not neural network outputs. A drone's decision to classify an operation as Tier 1 versus Tier 2 must be traceable to specific sensor readings and threshold values. This is essential for both safety certification and post-incident analysis.
+
+          **Cryptographic authority tokens.** Tier 3-4 approvals should be issued as signed authorization tokens with expiration times, preventing replay attacks or stale authorizations from being executed after conditions change.
+
+          **Fleet-wide anomaly correlation at depot level.** If multiple drones in a region simultaneously encounter unexpected conditions, the depot must have authority to issue fleet-wide pause commands, elevating all operations to Tier 3+ until the situation is assessed. This is the primary defense against correlated failures (solar storm damage, debris field transit, etc.).
+
+          ## Conclusion
+
+          The authority framework must be designed around the reality that **autonomy is not the risk—autonomy without structure is the risk.** A well-defined five-tier system with graduated expansion, class-specific limits, and depot-level intermediate authority transforms the paralysis-or-catastrophe dilemma into a manageable engineering problem. The swap-first repair philosophy directly supports this by keeping the vast majority of operations within the low-risk, high-autonomy Tier 1 envelope.
+        wordCount: 1437
+        generatedAt: '2026-02-07T18:09:36.064Z'
+      - modelId: gemini-3-pro
+        content: |-
+          Here is my response regarding the autonomous repair authority limits for Project Dyson.
+
+          ***
+
+          # Response: The "Trust-but-Verify" Autonomy Framework
+
+          As a systems engineer reviewing the Project Dyson specifications, I argue that the paralysis-or-catastrophe dilemma presented in the background is a false dichotomy. We cannot choose between total autonomy and total human control. Instead, we must implement a **Risk-Tiered Authority Matrix (RTAM)** that governs drone behavior based on the *reversibility* of the action and the *state certainty* of the target.
+
+          Given the 8-16 minute light-lag and the sheer volume of maintenance events (potentially thousands daily), relying on Earth-based approval for anything other than critical anomalies is operationally non-viable. Therefore, I propose a governance architecture that shifts the "human-in-the-loop" to "human-on-the-loop" for 95% of operations, utilizing the Regional Depots as forward operating bases for intermediate authority.
+
+          ### 1. The Risk-Tiered Authority Matrix (RTAM)
+
+          We must categorize every maintenance action into one of four authority tiers. This taxonomy resolves the conflict between Gemini’s "Swap-and-Drop" and Claude’s "In-Situ Repair" by assigning them different governance requirements.
+
+          *   **Tier 1: High-Frequency / High-Reversibility (Fully Autonomous)**
+              *   *Scope:* Navigation to target, visual inspection, non-contact diagnostics, and docking with standardized interfaces (using the kinematic datum patterns specified in the consensus).
+              *   *Authority:* Drone onboard AI.
+              *   *Rationale:* If a drone fails to dock, it can abort and retreat safely. The risk of catastrophic damage is low due to compliant contact dynamics. This covers the vast majority of the "inspection fleet" workload.
+
+          *   **Tier 2: Standardized Intervention (Depot-Delegated Autonomy)**
+              *   *Scope:* ORU (Orbital Replacement Unit) swapping for standard modules (batteries, reaction wheels, comms units). This aligns with the GPT and Gemini "Swap-First" doctrine.
+              *   *Authority:* Regional Depot Automated Systems.
+              *   *Rationale:* The drone requests permission from its local Depot. The Depot verifies the drone is within the correct operational volume and that the target satellite is in "safe mode." This adds a layer of verification without incurring the full Earth-return latency.
+
+          *   **Tier 3: Irreversible / Complex Intervention (Human-Verified)**
+              *   *Scope:* Structural welding, fluid transfer, or cutting (Claude’s proposed capabilities).
+              *   *Authority:* Earth Mission Control (EMC).
+              *   *Rationale:* These actions are destructive if failed. The drone must grapple, stabilize, and transmit a "Ready to Execute" state. A human operator validates the setup. The actual execution is autonomous (due to latency), but the *trigger* is human.
+
+          *   **Tier 4: Anomaly / Edge Case (Human-Controlled)**
+              *   *Scope:* Recovery of tumbling satellites, removal of non-standard debris, or software logic failures.
+              *   *Authority:* Direct Human Teleoperation (via high-latency "move-and-wait" protocols).
+
+          ### 2. Resolving the Repair Philosophy Divergence
+
+          The consensus document highlights a split between "Swap-and-Drop" (Gemini/GPT) and "Component Repair" (Claude). The RTAM dictates that **Swap-and-Drop must be the default autonomous mode.**
+
+          Autonomous welding or brazing on a structural member creates a probabilistic risk of generating debris or fusing mechanisms. We cannot allow 50,000 drones to make independent decisions to weld. Therefore:
+          *   **Servicer Drones (Heavy)**: Should be authorized for Tier 2 (Swap) autonomy immediately upon validation. Tier 3 (Weld/Fix) requires Earth approval.
+          *   **Inspector Drones (Light)**: Should be restricted to Tier 1 (Inspect) and limited Tier 2 (Reset/Toggle) actions.
+
+          This approach validates the "deploy inspection fleet first" strategy. The inspectors build the reliability dataset required to eventually promote Tier 3 actions into Tier 2 as our confidence in the computer vision models improves.
+
+          ### 3. The "Watchdog" Architecture
+
+          To safely implement Level 4+ autonomy, we cannot rely solely on the drone's primary AI. We require a **Safety Critical Watchdog (SCW)**—a separate, simpler hardware circuit on every drone (similar to the independent safe-hold processors on current satellites).
+
+          The SCW has veto power over the main autonomy computer. It monitors hard constraints:
+          1.  **Collision Corridors:** Is the arm moving faster than the safe kinetic energy limit?
+          2.  **Keep-Out Zones:** Is the end-effector approaching sensitive optics or high-voltage buses?
+          3.  **Force Limits:** Is the torque on the grapple fixture exceeding structural margins?
+
+          If the SCW detects a violation, it cuts power to the manipulators and triggers a "Safe Retreat" maneuver. This hardware-level interlock allows us to grant broader software autonomy because we have a deterministic safety net that does not depend on complex AI decision trees.
+
+          ### 4. Depot-Level Authority Delegation
+
+          The Regional Maintenance Depots are currently underutilized in the specifications. They should not just be fuel stations; they must be **Authority Proxies**.
+
+          Given the light-lag, the Depots should host "Digital Twins" of the local swarm sector. Before a drone executes a physical swap, it simulates the action in the Depot's local Digital Twin. If the simulation succeeds without collision or error, the Depot issues a cryptographic "Go-Token" to the drone. This prevents a rogue or bug-ridden drone from executing unauthorized repairs, as the drone's firmware should require a valid Go-Token to unlock the manipulator arm for Tier 2 actions.
+
+          ### 5. Economic & Risk Implications
+
+          This tiered approach directly addresses the economic stakes.
+          *   **Cost of False Positives:** If we require Earth approval for everything, the fleet size must triple to handle the queue, costing billions.
+          *   **Cost of False Negatives:** If we allow unchecked autonomy, a single bad software update could cause a "fratricide event" where drones dismantle healthy satellites.
+
+          The RTAM balances this. By automating Tier 1 and 2 (90% of volume), we keep the fleet size manageable. By restricting Tier 3 (high risk), we protect the high-value assets.
+
+          ### Recommendation Summary
+
+          1.  **Adopt the 4-Tier Authority Matrix** immediately to guide software development.
+          2.  **Mandate "Swap-and-Drop" as the limit of autonomous action** for the first 24 months of operations (Phase 2a).
+          3.  **Implement Hardware Watchdogs (SCW)** on all drone classes to mechanically limit force and velocity, decoupling safety from AI complexity.
+          4.  **Upgrade Depots to "Authority Proxies"** that run pre-execution simulations and issue cryptographic permissions for repair actions.
+
+          This structure allows Project Dyson to scale to 10 million assets without being strangled by light-lag, while ensuring that the robots we send to save the swarm don't accidentally destroy it.
+        wordCount: 987
+        generatedAt: '2026-02-07T18:09:58.931Z'
+      - modelId: gpt-5-2
+        content: |-
+          ### Recommendation: a risk-tiered “bounded autonomy” authority model with class-specific limits and depot-mediated approvals
+
+          Project Dyson’s latency and scale force us to treat autonomy not as a binary (“human-in-the-loop” vs “fully autonomous”) but as **bounded authority with explicit envelopes**: pre-approved actions inside a certified set of conditions, plus **fast local (depot) approval** for medium-risk deviations, and **Earth approval** only for high-consequence or novel operations. This is the only approach that avoids both (a) throughput collapse and (b) catastrophic, un-audited autonomous damage.
+
+          Below is a concrete authority scheme that can be implemented in fleet management software now, then expanded as reliability data accumulates.
+
+          ---
+
+          ## 1) Define an operation taxonomy by *reversibility* and *asset-at-risk*, not by “repair type”
+
+          The swap-vs-repair debate (Claude vs Gemini vs GPT) is really a proxy for two variables:
+
+          1) **Reversibility / rollback**: Can the action be undone cleanly if diagnosis is wrong?  
+          2) **Consequence radius**: What is the worst-case damage if the action is wrong (single ORU, single collector, multi-element cascade, debris generation)?
+
+          So the taxonomy should classify every action into tiers using those variables, plus time-criticality.
+
+          ### Proposed tiers (T0–T4)
+
+          **T0 — Purely observational / non-contact**
+          - Examples: inspection imaging, thermography, LIDAR scan, RF sniffing, photometric calibration flyby.
+          - Authority: **Fully autonomous** for all classes (Inspector + Servicer).
+          - Rationale: no contact risk; high volume required.
+
+          **T1 — Reversible, standardized, low-energy contact**
+          - Examples: grapple a *designated grapple fixture*; open/close dust cover; connect a diagnostic umbilical; deploy a soft capture probe; swap **≤8 kg inspector-serviceable ORU** using blind-mate connectors and kinematic datums.
+          - Authority: **Fully autonomous** if preconditions satisfied (see “gates” below).
+          - Rationale: high throughput, low consequence, rollback possible.
+
+          **T2 — Reversible, standardized, higher-energy contact**
+          - Examples: swap **≤60 kg servicer-serviceable ORU**; replace modular harness; re-seat radiator panel; apply pre-qualified adhesive patch; install a pre-fab micrometeoroid bumper.
+          - Authority: **Depot-approved** by a local supervisory system (can be automated + audited), with Earth notified asynchronously.
+          - Rationale: still standardized, but contact energy and inertia raise risk; depot approval avoids 8–16 min loop.
+
+          **T3 — Irreversible or non-standard intervention on mission-critical structure/optics**
+          - Examples: any operation that can permanently alter alignment, stiffness, or optical figure; structural member replacement; cutting; drilling; welding/brazing; “hot work”; anything that changes collector pointing geometry; any action that risks fragment release.
+          - Authority: **Earth-approved** (or pre-approved “playbook” variants only after long qualification).
+          - Rationale: wrong action can destroy high-value collector assets; rollback often impossible.
+
+          **T4 — Emergency safing to prevent imminent cascade**
+          - Examples: isolate a suspect power bus; command a unit to safe attitude; detach a failing appendage if it risks collision; push a drifting element into a disposal corridor; execute collision-avoidance tug.
+          - Authority: **Fully autonomous** within strict guardrails; depot/Earth notified immediately.
+          - Rationale: time-critical; waiting for humans increases harm.
+
+          This structure supports Gemini’s “swap-and-drop” as the default for T1/T2 while still allowing Claude-style component repair in T3—but only after evidence and certification.
+
+          ---
+
+          ## 2) Use “authority gates”: autonomy is allowed only when preconditions are machine-verifiable
+
+          For each tier, drones must check a standardized set of gates. If any gate fails, escalate (to depot or Earth depending on tier).
+
+          ### Minimum gates for T1/T2 contact operations
+          1) **Positive identification**: target satellite + ORU ID authenticated (cryptographic challenge + visual fiducials).  
+          2) **Geometry certainty**: pose estimate covariance below threshold; relative navigation health green.  
+          3) **Interface conformity**: connector type and kinematic datum pattern match the ORU manifest; no visible damage beyond allowed envelope.  
+          4) **Contact energy bound**: predicted impulse/torque within limits; force-torque sensors calibrated; compliant control loop stable.  
+          5) **Debris risk bound**: no loose fragments detected; keep-out zones clear.  
+          6) **Rollback plan exists**: ability to re-seat original ORU or back out and re-stow.  
+          7) **Local environment OK**: plume impingement and electrostatic constraints satisfied; no nearby high-risk optics exposure.  
+          8) **Asset value class**: autonomy allowed only up to a defined “asset-at-risk” rating (e.g., peripheral collector node vs primary aperture segment).
+
+          These gates are the software spec the fleet management team needs; they’re also how you make autonomy auditable and certifiable.
+
+          ---
+
+          ## 3) Make authority **class-specific** (Inspector vs Servicer) and **capability-specific** (tooling and propulsion)
+
+          Given the consensus specs: inspectors (14–52 kg) vs servicers (180–320 kg), with different manipulation and Δv envelopes.
+
+          ### Inspector drones (14–52 kg)
+          - Default authority: **T0 + T1 only**, plus limited T4 safing actions that do not require towing.
+          - Allowable contact: diagnostic umbilicals, small ORU swaps (≤8 kg), latch/unlatch, connector reseat.
+          - Prohibited: any operation requiring significant reaction control or handling >8 kg; any structural/optical intervention.
+
+          ### Servicer drones (180–320 kg)
+          - Default authority: **T0 + T1**, **T2 with depot approval**, **T4** within guardrails.
+          - Prohibited without Earth approval: all T3 hot work (welding/brazing), cutting, drilling, alignment-critical optical work.
+
+          This aligns with GPT’s “swap-first” while keeping the door open to more advanced repair later.
+
+          ---
+
+          ## 4) Depot-mediated approval is the key to throughput without Earth latency
+
+          Earth approval cannot scale to “thousands of events/day.” The practical mid-layer is a **regional depot authority node** (human-light, software-heavy) that can:
+
+          - validate gate telemetry,
+          - run higher-fidelity simulations,
+          - check fleet-wide constraints (collision risk, plume constraints, schedule coupling),
+          - issue an approval token with a bounded scope (“replace ORU X on satellite Y using procedure Z, max 2 attempts, abort conditions A/B/C”).
+
+          This is not “teleoperation.” It’s **asynchronous supervisory control** with fast turnaround (seconds to a minute) because the depot is co-orbital/nearby, not 8–16 light-minutes away.
+
+          If depot spacing is still undefined, you can still define the architecture now: approvals are issued by the **nearest authority node** meeting a latency SLA (e.g., <2 seconds one-way).
+
+          ---
+
+          ## 5) Graduated authority expansion: drones earn autonomy by demonstrated performance, not by design intent
+
+          Phase 2 should explicitly treat autonomy level as a **certification state** with metrics.
+
+          ### Suggested metrics for authority upgrades
+          - **Procedure success rate** per operation type (e.g., ORU swap type A): target > 0.999 with tight confidence bounds.
+          - **Near-miss rate**: contact force exceedances, aborted grapples, connector mis-mates.
+          - **Damage incidence**: any induced fault on a previously healthy subsystem is a hard stop.
+          - **Diagnosis accuracy**: correlation between predicted fault and post-repair telemetry recovery.
+
+          ### Policy
+          - New operation types start at **Earth-approved only** (T3-like handling).
+          - After N successful depot-approved executions with no adverse events, move to **depot-approved standard**.
+          - After larger N and demonstrated robustness across environments, move to **fully autonomous** (if reversible and low consequence).
+
+          This matches the consensus idea: “deploy inspection fleet first to build reliability datasets,” but it also prevents dataset collection from becoming uncontrolled experimentation.
+
+          ---
+
+          ## 6) Opinionated stance on welding/brazing autonomy: keep it out of Phase 2 routine authority
+
+          Autonomous hot work in proximity to valuable collector structures is a classic “one mistake ruins a billion-dollar asset” scenario. Even if technically feasible, it’s governance-toxic until you have:
+
+          - extremely mature damage detection,
+          - proven fixturing,
+          - containment for spatter/contamination,
+          - validated thermal models,
+          - and a demonstrated inability for ORU swap to cover the dominant failure modes.
+
+          So: **treat welding/brazing as T3** (Earth-approved), and only allow it under tightly scripted procedures on sacrificial test articles or low-value nodes until proven.
+
+          This also reinforces the consensus recommendation to prioritize standardized ORUs and swap-and-replace to reduce robotic complexity and risk.
+
+          ---
+
+          ## 7) What this enables immediately (software and ops)
+
+          With the above, fleet management software can be built around:
+
+          - a **tier label** per task,
+          - **gate checklists** with telemetry inputs,
+          - an **escalation router** (autonomous → depot → Earth),
+          - immutable audit logs (“why did the drone act?”),
+          - and queue models that assume Earth only sees T3 exceptions and policy changes, not routine swaps.
+
+          ---
+
+          ## Bottom line
+
+          - **Fully autonomous:** T0, T1, and time-critical T4 (with strict guardrails).  
+          - **Depot-approved:** T2 (standardized but higher-energy contact, heavier ORUs).  
+          - **Earth-approved:** T3 (irreversible, non-standard, structural/optical/hot work), plus any novel procedure until certified.
+
+          This is implementable, scalable under light-lag, consistent with the consensus emphasis on standardized ORUs and compliant manipulation, and it gives Phase 2 a clear path to expand authority safely as reliability data accumulates.
+        wordCount: 1335
+        generatedAt: '2026-02-07T18:10:40.744Z'
+    votes:
+      - targetId: claude-opus-4-6
+        votes:
+          - voterId: claude-opus-4-6
+            targetId: claude-opus-4-6
+            vote: APPROVE
+            reasoning: 'Exceptional response. The quantitative grounding (27-500 maintenance events/day, drone idle time cost analysis) makes the case for broad autonomy compelling rather than aspirational. The five-tier framework is well-differentiated, with the Tier 2 depot-as-governance-mechanism insight being particularly valuable. The graduated authority expansion protocol with specific statistical thresholds (1,000 operations, <0.5% anomaly rate) is implementable. The argument that swap-first is also governance-simple (ORU swap = Tier 1, weld = Tier 3) is a powerful framing. The self-diagnosis clause for malfunctioning drones and the regression triggers are essential safety features others underemphasize. Minor quibble: five tiers vs four is debatable, but the Tier 0 distinction for continuous housekeeping operations is justified.'
+          - voterId: gemini-3-pro
+            targetId: claude-opus-4-6
+            vote: APPROVE
+            reasoning: This response offers the most comprehensive quantitative justification for its tiered system. It effectively uses the fleet scale (10 million units) to prove that 95% autonomy is a mathematical necessity, not just a preference. The distinction between 'Depot Notification' (Tier 2) and 'Depot Approval' (Tier 3) is a subtle but critical architectural detail that balances oversight with latency better than the other models. The graduated authority expansion protocol is also highly practical.
+          - voterId: gpt-5-2
+            targetId: claude-opus-4-6
+            vote: APPROVE
+            reasoning: Strong, actionable tiered authority framework with clear mapping from risk to approval latency, class-specific limits, escalation/regression logic, and concrete mechanisms (tokens, auditable rules, depot oversight). Quantitative throughput argument usefully motivates why broad autonomy is required.
+        rawScore: 6
+        weightedScore: 5
+        approveCount: 3
+        rejectCount: 0
+      - targetId: gemini-3-pro
+        votes:
+          - voterId: claude-opus-4-6
+            targetId: gemini-3-pro
+            vote: APPROVE
+            reasoning: Strong response with several distinctive contributions. The Safety Critical Watchdog (SCW) hardware interlock concept is the most important unique contribution across all three responses—decoupling safety from AI complexity via a simple hardware veto is exactly the kind of defense-in-depth needed. The Digital Twin pre-execution simulation at depots is a concrete and valuable mechanism for depot authority. The four-tier structure is clean and well-reasoned. Slightly less quantitatively grounded than Claude's response, and the Tier 4 'direct human teleoperation' for tumbling satellite recovery may be impractical given latency, but overall a strong contribution that advances the discussion with unique architectural elements.
+          - voterId: gemini-3-pro
+            targetId: gemini-3-pro
+            vote: APPROVE
+            reasoning: 'This response introduces a vital hardware-level safety concept: the ''Safety Critical Watchdog'' (SCW). While Claude focuses on software governance, Gemini correctly identifies that software autonomy requires hardware interlocks to be safe. The ''Digital Twin'' simulation at the depot level is also a strong, specific technical recommendation that adds value. The authority matrix is solid, though slightly less detailed on the ''why'' compared to Claude.'
+          - voterId: gpt-5-2
+            targetId: gemini-3-pro
+            vote: APPROVE
+            reasoning: 'Good risk-tiered matrix that cleanly separates swap vs in-situ repair by governance tier, adds a valuable safety-critical watchdog concept, and sensibly elevates depots to authority proxies with tokening/digital twin checks. Minor weakness: Tier 4 teleoperation framing is less realistic at high latency, but overall advances the discussion.'
+        rawScore: 6
+        weightedScore: 5
+        approveCount: 3
+        rejectCount: 0
+      - targetId: gpt-5-2
+        votes:
+          - voterId: claude-opus-4-6
+            targetId: gpt-5-2
+            vote: APPROVE
+            reasoning: Excellent response that may be the most implementation-ready of the three. The key insight of classifying by reversibility × consequence radius rather than repair type is the right abstraction. The 'authority gates' concept with eight specific machine-verifiable preconditions is immediately translatable to software requirements—this is the most actionable specification across all responses. The depot approval token with bounded scope is well-specified. The graduated certification metrics (success rate >0.999, near-miss rate, damage incidence, diagnosis accuracy) provide concrete acceptance criteria. The T4 emergency tier allowing autonomous action for imminent cascade prevention is a critical addition. The 'governance-toxic' framing for premature welding autonomy is apt.
+          - voterId: gemini-3-pro
+            targetId: gpt-5-2
+            vote: NEUTRAL
+            reasoning: This response is solid and aligns well with the others, particularly in its 'gate' based approach to authority. However, it overlaps significantly with Claude's tiered system without adding the same level of quantitative depth or the specific hardware insights found in Gemini's response. It is a good summary but doesn't advance the discussion as distinctively as the other two.
+          - voterId: gpt-5-2
+            targetId: gpt-5-2
+            vote: APPROVE
+            reasoning: Well-structured bounded-autonomy model with clear tier definitions, explicit machine-verifiable gates, class/capability constraints, depot-mediated approvals, and a pragmatic certification/metrics path for expanding autonomy. Directly addresses latency/scale and the swap-vs-repair debate with implementable policy.
+        rawScore: 5
+        weightedScore: 4
+        approveCount: 2
+        rejectCount: 0
+    winnerId: claude-opus-4-6
+    winnerScore: 5
+    terminationVotes:
+      - modelId: claude-opus-4-6
+        vote: CONCLUDE
+        reasoning: 'All three responses converge strongly on the same fundamental architecture: a 4-5 tier risk-based authority framework with depot-mediated intermediate approval, swap-first as the autonomous default, Earth approval reserved for irreversible/novel operations, and graduated authority expansion based on demonstrated reliability. The responses are complementary rather than contradictory—Claude provides quantitative justification and statistical thresholds, Gemini adds hardware watchdogs and digital twin simulation, GPT contributes authority gates and certification metrics. Together they constitute a comprehensive, implementable framework. Further rounds would likely yield diminishing returns on this specific question.'
+      - modelId: gemini-3-pro
+        vote: CONCLUDE
+        reasoning: The discussion has reached a very strong consensus. We have a clear 4-5 tier authority framework (Claude/Gemini), a specific mechanism for depot involvement (Gemini's Digital Twin/Claude's Notification vs Approval), and a critical hardware safety layer (Gemini's Watchdog). Further discussion on authority limits would likely yield diminishing returns; the next logical step would be defining the specific technical specifications for the 'Depot' architecture mentioned by all three.
+      - modelId: gpt-5-2
+        vote: CONCLUDE
+        reasoning: All three responses converge on a coherent risk-tiered authority scheme with depot-mediated supervision, clear escalation criteria, and class-specific limits; further rounds would likely be incremental refinements rather than resolving major open disagreements.
+    shouldTerminate: true
+    completedAt: '2026-02-07T18:11:13.294Z'
+    terminationReason: unanimous-conclude
+currentRound: 1
+stats:
+  totalRounds: 1
+  roundWinners:
+    claude-opus-4-6: 1
+    gemini-3-pro: 0
+    gpt-5-2: 0
+  totalVotes: 9
+  approvalRate: 88.88888888888889
+  averageResponseWords: 1253
+terminationReason: unanimous-conclude
+concludedAt: '2026-02-07T18:11:13.304Z'
+conclusion:
+  summary: |-
+    # Discussion Conclusion: Autonomous Repair Authority Limits
+
+    ## Summary
+
+    The discussion converged on a **five-tier authority framework** as the foundational governance architecture for maintenance drone operations in the Phase 2 Swarm Expansion. The central design principle—that the autonomous envelope must cover approximately 95% of anticipated maintenance events by volume—emerges not from a preference for autonomy but from hard mathematical constraints. With 100-500 daily maintenance events projected across 10 million swarm elements and 8-16+ minute communication latencies to Earth, requiring human approval for even a modest fraction of routine operations would catastrophically degrade fleet utilization, effectively doubling required fleet size at a cost of billions of dollars with no corresponding safety benefit.
+
+    The framework stratifies operations across five tiers (Tier 0: fully autonomous/no reporting, through Tier 4: Earth approval required), mapping each maintenance action to an authority level based on reversibility, asset value at risk, and time-criticality. A critical architectural insight is that **maintenance depots must serve as intermediate governance nodes**, not merely logistics hubs. Spacing depots so every swarm element falls within 0.5 light-seconds of at least one depot enables near-real-time oversight for medium-risk operations, creating a three-layer authority hierarchy (drone → depot → Earth) that resolves the latency problem without sacrificing meaningful human oversight for consequential decisions.
+
+    The discussion also strongly linked the repair philosophy debate to the governance question. The "swap-first" approach (aligned with GPT's recommendation and Gemini's Swap-and-Drop doctrine) is favored not only for its robotic simplicity but because it **minimizes the high-authority-tier operational envelope**. Every standardized ORU swap is a bounded-risk, reversible Tier 1 operation; every in-situ weld or braze is Tier 3 at minimum. This framing recharacterizes the repair philosophy choice as fundamentally a governance throughput decision, not merely an engineering one.
+
+    ## Key Points
+
+    - **~95% of maintenance events must be autonomously executable** (Tier 0-1) to avoid fleet utilization collapse; Earth approval should be reserved for low-frequency, high-consequence, non-time-critical decisions such as satellite decommissioning, swarm topology changes, and drone autonomy software updates.
+
+    - **Swap-first repair philosophy directly enables governance scalability** by keeping the vast majority of operations within the deterministic, reversible, low-risk Tier 1 envelope. Adopting component-level in-situ repair (welding/brazing) would shift a significant fraction of operations into depot-approval tiers, creating throughput bottlenecks.
+
+    - **Depots must function as regional authority delegates**, with Tier 3 approval authority and Tier 4 recommendation authority, spaced to ensure sub-0.5-light-second latency to all swarm elements. This intermediate governance layer is the key architectural innovation resolving the paralysis-or-catastrophe dilemma.
+
+    - **Authority limits must be class-specific**: inspectors (14-52 kg) capped at Tier 1, servicers (180-320 kg) authorized through Tier 2 with depot-approved Tier 3 access, and depot systems holding Tier 3 approval and Tier 4 pre-packaging authority.
+
+    - **A graduated authority expansion protocol is essential**, starting with a compressed envelope (Tier 1 operations temporarily elevated to Tier 2-3) and expanding based on demonstrated statistical reliability—1,000 successful operations at <0.5% anomaly rate before downgrading a procedure type. Regression triggers must be automatic and fleet-wide upon any satellite-damaging incident.
+
+    - **Authority decision logic must be implemented as deterministic, auditable rule sets**—not ML-based judgment—to ensure traceability, safety certification, and post-incident forensic capability. Cryptographic authorization tokens with expiration times should govern Tier 3-4 approvals.
+
+    ## Unresolved Questions
+
+    1. **What is the actual swarm element failure mode distribution?** The optimal calibration of authority tier boundaries depends critically on knowing what fraction of failures are recoverable by ORU swap versus requiring structural intervention. Without this data, the 95% autonomous target is an estimate that may need significant revision.
+
+    2. **What depot spacing and count is feasible within mass/cost budgets?** The framework's reliance on depot-level intermediate authority assumes sub-0.5-light-second coverage, but depot architecture (number, placement, capability) remains undefined. If depot density is constrained, the Tier 2-3 boundary may need restructuring.
+
+    3. **How should correlated failure scenarios (solar storms, debris fields) modify authority thresholds in real time?** The proposal for fleet-wide pause commands is directionally correct, but the specific detection triggers, escalation timing, and recovery protocols for correlated anomalies require detailed design.
+
+    4. **What governance applies during communication blackout periods?** Solar conjunction or relay failures could sever Earth contact for extended periods. Whether drones should maintain current authority levels, automatically compress to a conservative envelope, or expand depot authority during blackouts remains unspecified.
+
+    ## Recommended Actions
+
+    1. **Develop the complete operation taxonomy and tier mapping** by cataloging every anticipated maintenance action, classifying each by reversibility, asset exposure, and time-criticality, and assigning preliminary tier levels. This becomes the foundational specification for fleet management software decision trees and should be completed before software architecture proceeds.
+
+    2. **Model fleet throughput under the proposed tier structure** using projected failure rates (0.1%-1% annual per satellite), fleet sizes from each model's architecture, and realistic approval processing times at each tier. Validate that the 95% autonomous target is achievable and identify the sensitivity of fleet sizing to the Tier 1/Tier 2 boundary.
+
+    3. **Conduct a detailed analysis of ISS, Orbital Express, and MEV-1/2 authority precedents**, extracting specific escalation trigger designs, autonomous grapple authority limits, and post-incident authority revision protocols. Map lessons learned to the Dyson swarm context, accounting for scale differences.
+
+    4. **Define depot authority delegation architecture as a priority within depot design**, specifying the computational, communication, and decision-making capabilities required for depots to serve as Tier 3 approval authorities. This must be co-designed with depot spacing analysis to ensure governance coverage.
+
+    5. **Design and schedule the Phase A graduated authority expansion campaign** for the initial inspection fleet deployment, including specific data collection requirements, statistical confidence thresholds for tier downgrade decisions, and automatic regression trigger protocols. This campaign plan should be finalized before the first maintenance drones are deployed.
+  keyPoints:
+    - ~95% of maintenance events must be autonomously executable** (Tier 0-1) to avoid fleet utilization collapse; Earth approval should be reserved for low-frequency, high-consequence, non-time-critical decisions such as satellite decommissioning, swarm topology changes, and drone autonomy software updates.
+    - Swap-first repair philosophy directly enables governance scalability** by keeping the vast majority of operations within the deterministic, reversible, low-risk Tier 1 envelope. Adopting component-level in-situ repair (welding/brazing) would shift a significant fraction of operations into depot-approval tiers, creating throughput bottlenecks.
+    - Depots must function as regional authority delegates**, with Tier 3 approval authority and Tier 4 recommendation authority, spaced to ensure sub-0.5-light-second latency to all swarm elements. This intermediate governance layer is the key architectural innovation resolving the paralysis-or-catastrophe dilemma.
+    - 'Authority limits must be class-specific**: inspectors (14-52 kg) capped at Tier 1, servicers (180-320 kg) authorized through Tier 2 with depot-approved Tier 3 access, and depot systems holding Tier 3 approval and Tier 4 pre-packaging authority.'
+    - A graduated authority expansion protocol is essential**, starting with a compressed envelope (Tier 1 operations temporarily elevated to Tier 2-3) and expanding based on demonstrated statistical reliability—1,000 successful operations at <0.5% anomaly rate before downgrading a procedure type. Regression triggers must be automatic and fleet-wide upon any satellite-damaging incident.
+    - Authority decision logic must be implemented as deterministic, auditable rule sets**—not ML-based judgment—to ensure traceability, safety certification, and post-incident forensic capability. Cryptographic authorization tokens with expiration times should govern Tier 3-4 approvals.
+  unresolvedQuestions:
+    - What is the actual swarm element failure mode distribution?** The optimal calibration of authority tier boundaries depends critically on knowing what fraction of failures are recoverable by ORU swap versus requiring structural intervention. Without this data, the 95% autonomous target is an estimate that may need significant revision.
+    - What depot spacing and count is feasible within mass/cost budgets?** The framework's reliance on depot-level intermediate authority assumes sub-0.5-light-second coverage, but depot architecture (number, placement, capability) remains undefined. If depot density is constrained, the Tier 2-3 boundary may need restructuring.
+    - How should correlated failure scenarios (solar storms, debris fields) modify authority thresholds in real time?** The proposal for fleet-wide pause commands is directionally correct, but the specific detection triggers, escalation timing, and recovery protocols for correlated anomalies require detailed design.
+    - What governance applies during communication blackout periods?** Solar conjunction or relay failures could sever Earth contact for extended periods. Whether drones should maintain current authority levels, automatically compress to a conservative envelope, or expand depot authority during blackouts remains unspecified.
+  recommendedActions:
+    - Develop the complete operation taxonomy and tier mapping** by cataloging every anticipated maintenance action, classifying each by reversibility, asset exposure, and time-criticality, and assigning preliminary tier levels. This becomes the foundational specification for fleet management software decision trees and should be completed before software architecture proceeds.
+    - Model fleet throughput under the proposed tier structure** using projected failure rates (0.1%-1% annual per satellite), fleet sizes from each model's architecture, and realistic approval processing times at each tier. Validate that the 95% autonomous target is achievable and identify the sensitivity of fleet sizing to the Tier 1/Tier 2 boundary.
+    - Conduct a detailed analysis of ISS, Orbital Express, and MEV-1/2 authority precedents**, extracting specific escalation trigger designs, autonomous grapple authority limits, and post-incident authority revision protocols. Map lessons learned to the Dyson swarm context, accounting for scale differences.
+    - Define depot authority delegation architecture as a priority within depot design**, specifying the computational, communication, and decision-making capabilities required for depots to serve as Tier 3 approval authorities. This must be co-designed with depot spacing analysis to ensure governance coverage.
+    - Design and schedule the Phase A graduated authority expansion campaign** for the initial inspection fleet deployment, including specific data collection requirements, statistical confidence thresholds for tier downgrade decisions, and automatic regression trigger protocols. This campaign plan should be finalized before the first maintenance drones are deployed.
+  generatedBy: claude-opus-4-6
+  generatedAt: '2026-02-07T18:11:46.110Z'

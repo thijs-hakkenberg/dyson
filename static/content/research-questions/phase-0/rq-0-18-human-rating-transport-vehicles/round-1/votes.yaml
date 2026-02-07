@@ -1,0 +1,104 @@
+votes:
+  - voterId: claude-opus-4-6
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: Exceptionally thorough and well-structured response. Provides the most detailed quantitative analysis of the three, with specific mass estimates for each subsystem, a credible cost table, and a clear tiered abort philosophy. The argument that structural human-rating adds only 1-2% payload penalty is compelling and well-supported. The recommendation for 3 crew module kits across 10 vehicles is a concrete, actionable architecture. The strong stance that crew transport WILL be needed by Year 4-5 is well-reasoned. The certification pathway recommendation to develop project-specific standards rather than blindly applying NPR 8705.2 is pragmatic.
+  - voterId: claude-opus-4-6
+    targetId: gemini-3-pro
+    vote: APPROVE
+    reasoning: Clear, well-organized response that arrives at essentially the same architectural conclusion as Claude but with a more concise presentation. The 'railroad not luxury liner' framing is effective. The identification of the fundamental tension between cargo and crew operational profiles is valuable. The Safe Haven abort standard is well-articulated. However, the quantitative depth is noticeably less than Claude's response—cost estimates are rougher, mass penalties less detailed, and the crew module specification is thinner. The 'Fallacy of Dual-Use' section slightly overstates the opposition between cargo and crew profiles given the modular approach all three converge on.
+  - voterId: claude-opus-4-6
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: Strong response that adds the most nuanced treatment of the radiation/transit-time problem, correctly identifying it as potentially the deciding factor for whether crew-on-cargo-tug is viable at all. The explicit separation of 'what to carry on every vehicle' vs 'what not to carry' is very clear. The five research direction recommendations are the most actionable of the three. The caution about not anchoring on NPR 8705.2 as-is is well-placed. Slightly less decisive than Claude's response—frames more as 'defer the decision' rather than 'commit now to structural provisions'—but the intellectual honesty about radiation uncertainty is valuable.
+  - voterId: gemini-3-pro
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: This response offers a highly detailed, quantitative breakdown of the 'modular kit' approach. It provides specific mass estimates for structural provisions vs. the kit itself, addresses the abort scenario with a realistic 'safe haven' philosophy, and offers a clear cost analysis. It directly answers the prompt with a strong, actionable recommendation.
+  - voterId: gemini-3-pro
+    targetId: gemini-3-pro
+    vote: APPROVE
+    reasoning: This response is excellent and effectively communicates the 'Cargo-First, Human-Ready' concept. It is conceptually very similar to Claude's but focuses more on the architectural philosophy and specific design constraints (hard points, keep-out zones) rather than detailed mass breakdowns. It is a strong contribution that reinforces the modular approach.
+  - voterId: gemini-3-pro
+    targetId: gpt-5-2
+    vote: NEUTRAL
+    reasoning: This response is solid but feels slightly less definitive than the other two. It covers the same ground (crew-capable by design) but spends more time on the 'why not' and general principles rather than offering the specific, confident architectural solution that Claude and Gemini provided. It is a good response, but the other two are stronger leaders in this specific round.
+  - voterId: gpt-5-2
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: Clear, actionable hybrid recommendation (human-ratable bus + modular crew kit) that directly addresses retrofit risk, mass/cost impacts, radiation and abort philosophy, and provides a concrete implementation/certification path. Strongly advances the discussion with quantified trade-offs.
+  - voterId: gpt-5-2
+    targetId: gemini-3-pro
+    vote: APPROVE
+    reasoning: Good “cargo-first, human-ready” framing with sensible interface/structure provisions and a realistic safe-haven abort concept. Provides cost/schedule implications and avoids over-committing to full fleet human-rating; slightly less detailed on radiation/shielding sizing but still solid.
+  - voterId: gpt-5-2
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: Well-reasoned argument against fully human-rating the whole fleet while specifying what to provision now (structure, EMI/plume, software assurance, docking) and what to defer. Strong emphasis on radiation/transit-time as the real driver and a practical research plan tied to the five directions.
+terminationVotes:
+  - modelId: claude-opus-4-6
+    vote: CONCLUDE
+    reasoning: 'All three responses converge on essentially the same architecture: design structural human-rating provisions into the baseline vehicle bus at low mass/cost penalty, implement crew systems as a modular kit installed only when needed, adopt a safe-haven abort philosophy rather than Earth-return, and develop project-specific certification standards. The differences are in emphasis and detail rather than fundamental disagreement. The key remaining uncertainty (radiation shielding mass driving feasibility) is identified by all three as requiring a trade study. Further rounds would likely refine details rather than change the architectural direction. The discussion has reached a strong consensus position ready for formalization.'
+  - modelId: gemini-3-pro
+    vote: CONCLUDE
+    reasoning: There is a strong consensus among all three models for a 'modular/provisions-only' approach. They all agree on designing the structure for human rating but implementing the actual capability via a kit or module later. Further discussion is unlikely to yield a better high-level strategy; the next steps would be detailed engineering studies which are outside the scope of this high-level architectural decision.
+  - modelId: gpt-5-2
+    vote: CONCLUDE
+    reasoning: 'All three converge on the same core resolution: provision the cargo bus for future crew capability, avoid full fleet human-rating, and use modular/dedicated crew elements with a safe-haven abort philosophy. Remaining work is execution via trade studies rather than further debate.'
+voteResults:
+  - targetId: claude-opus-4-6
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: Exceptionally thorough and well-structured response. Provides the most detailed quantitative analysis of the three, with specific mass estimates for each subsystem, a credible cost table, and a clear tiered abort philosophy. The argument that structural human-rating adds only 1-2% payload penalty is compelling and well-supported. The recommendation for 3 crew module kits across 10 vehicles is a concrete, actionable architecture. The strong stance that crew transport WILL be needed by Year 4-5 is well-reasoned. The certification pathway recommendation to develop project-specific standards rather than blindly applying NPR 8705.2 is pragmatic.
+      - voterId: gemini-3-pro
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: This response offers a highly detailed, quantitative breakdown of the 'modular kit' approach. It provides specific mass estimates for structural provisions vs. the kit itself, addresses the abort scenario with a realistic 'safe haven' philosophy, and offers a clear cost analysis. It directly answers the prompt with a strong, actionable recommendation.
+      - voterId: gpt-5-2
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: Clear, actionable hybrid recommendation (human-ratable bus + modular crew kit) that directly addresses retrofit risk, mass/cost impacts, radiation and abort philosophy, and provides a concrete implementation/certification path. Strongly advances the discussion with quantified trade-offs.
+    rawScore: 6
+    weightedScore: 5
+    approveCount: 3
+    rejectCount: 0
+  - targetId: gemini-3-pro
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: gemini-3-pro
+        vote: APPROVE
+        reasoning: Clear, well-organized response that arrives at essentially the same architectural conclusion as Claude but with a more concise presentation. The 'railroad not luxury liner' framing is effective. The identification of the fundamental tension between cargo and crew operational profiles is valuable. The Safe Haven abort standard is well-articulated. However, the quantitative depth is noticeably less than Claude's response—cost estimates are rougher, mass penalties less detailed, and the crew module specification is thinner. The 'Fallacy of Dual-Use' section slightly overstates the opposition between cargo and crew profiles given the modular approach all three converge on.
+      - voterId: gemini-3-pro
+        targetId: gemini-3-pro
+        vote: APPROVE
+        reasoning: This response is excellent and effectively communicates the 'Cargo-First, Human-Ready' concept. It is conceptually very similar to Claude's but focuses more on the architectural philosophy and specific design constraints (hard points, keep-out zones) rather than detailed mass breakdowns. It is a strong contribution that reinforces the modular approach.
+      - voterId: gpt-5-2
+        targetId: gemini-3-pro
+        vote: APPROVE
+        reasoning: Good “cargo-first, human-ready” framing with sensible interface/structure provisions and a realistic safe-haven abort concept. Provides cost/schedule implications and avoids over-committing to full fleet human-rating; slightly less detailed on radiation/shielding sizing but still solid.
+    rawScore: 6
+    weightedScore: 5
+    approveCount: 3
+    rejectCount: 0
+  - targetId: gpt-5-2
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: Strong response that adds the most nuanced treatment of the radiation/transit-time problem, correctly identifying it as potentially the deciding factor for whether crew-on-cargo-tug is viable at all. The explicit separation of 'what to carry on every vehicle' vs 'what not to carry' is very clear. The five research direction recommendations are the most actionable of the three. The caution about not anchoring on NPR 8705.2 as-is is well-placed. Slightly less decisive than Claude's response—frames more as 'defer the decision' rather than 'commit now to structural provisions'—but the intellectual honesty about radiation uncertainty is valuable.
+      - voterId: gemini-3-pro
+        targetId: gpt-5-2
+        vote: NEUTRAL
+        reasoning: This response is solid but feels slightly less definitive than the other two. It covers the same ground (crew-capable by design) but spends more time on the 'why not' and general principles rather than offering the specific, confident architectural solution that Claude and Gemini provided. It is a good response, but the other two are stronger leaders in this specific round.
+      - voterId: gpt-5-2
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: Well-reasoned argument against fully human-rating the whole fleet while specifying what to provision now (structure, EMI/plume, software assurance, docking) and what to defer. Strong emphasis on radiation/transit-time as the real driver and a practical research plan tied to the five directions.
+    rawScore: 5
+    weightedScore: 4
+    approveCount: 2
+    rejectCount: 0
+winnerId: claude-opus-4-6
+winnerScore: 5

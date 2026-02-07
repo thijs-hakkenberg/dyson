@@ -1,0 +1,104 @@
+votes:
+  - voterId: claude-opus-4-6
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: Exceptionally thorough analysis with concrete numbers for feedstock demand, cost crossover, and design implications. The phased timeline (Years 1-3 Earth-supplied, Years 3-5 MV-ISRU pathfinder, Year 5+ expanded ISRU) is well-justified. The identification of the asteroid supply chain gap as the key risk—requiring prospecting missions by Year 1-2—is a critical insight. The contamination isolation architecture requirements and power scalability needs are precisely specified. The cost crossover analysis at Year 6-7 provides a solid economic foundation for the moderate timeline.
+  - voterId: claude-opus-4-6
+    targetId: gemini-3-pro
+    vote: APPROVE
+    reasoning: Strong contribution with the 'Hybrid-Stream' model that cleanly separates 'Smart Mass' (Earth-sourced) from 'Dumb Mass' (ISRU-sourced). The mass flow reality check is well-grounded. The 'Dirty-Clean Separation' firewall concept with physical bulkhead and vacuum gap is a concrete engineering solution. The dual-port Feedstock Interface Standard (FIS) recommendation is an actionable design requirement. The identification that the ANH power budget cannot support refining without a dedicated Power Augmentation Module is an important constraint. Slightly less detailed than Opus on the crossover economics but compensates with practical interface specifications.
+  - voterId: claude-opus-4-6
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: Excellent pragmatic framing with explicit decision gates (Gate A at Year 2, Gate B at Year 4) that make the transition timeline adaptive rather than rigid. The three-category mass-flow split (bulk structure, glass/ceramics, high-purity PV/electronics) is the clearest articulation of the ISRU priority ordering. The 'dirty node' concept as a separate free-flyer is a smart architectural choice that avoids contamination coupling. The observation that ISRU becomes mandatory when logistics caps throughput (not just when it's cheaper) is a valuable strategic insight. The concrete next steps section with BOM requirements and interface control documents is highly actionable.
+  - voterId: gemini-3-pro
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: Excellent financial analysis and programmatic timeline. The concept of 'Minimum Viable ISRU' and the specific recommendation to reserve modular pallet positions with pre-routed utilities provides a concrete path to avoid design lock-in.
+  - voterId: gemini-3-pro
+    targetId: gemini-3-pro
+    vote: APPROVE
+    reasoning: Outstanding technical segmentation of feedstock into 'Smart' (Earth) vs. 'Dumb' (ISRU) streams. The identification of the power gap—noting that manufacturing power budgets cannot support refining without augmentation—is a critical engineering insight that corrects a potential oversight in other models.
+  - voterId: gemini-3-pro
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: Strong synthesis that reinforces the 'decision gate' approach. The suggestion of a separate 'dirty node' (potentially a free-flyer) to manage contamination risks is a valuable architectural alternative to the integrated firewall approach.
+  - voterId: gpt-5-2
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: Strong synthesis of the three approaches with a credible phased timeline, explicit design implications (power/thermal/contamination/interfaces), and a reasonable economic crossover framing. Provides actionable milestones and highlights the asteroid supply-chain lead-time risk.
+  - voterId: gpt-5-2
+    targetId: gemini-3-pro
+    vote: NEUTRAL
+    reasoning: Good high-level hybrid-stream framing (bulk vs high-complexity) and useful interface/contamination zoning recommendations. However, several numbers and assertions are shakier (e.g., mass fractions, lunar regolith as “logical” near-term source, aggressive 50% reduction by Year 3) and the Mercury catch/relocation mention is under-justified.
+  - voterId: gpt-5-2
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: Well-reasoned, decision-gated transition plan that matches the consensus (Earth feedstock first, ISRU-ready ANH, bulk-first ISRU). Clearly separates technical risk drivers, proposes a ‘dirty node’ architecture to manage contamination/thermal loads, and gives concrete next-step artifacts (BOM, ICD updates, supply-chain trades).
+terminationVotes:
+  - modelId: claude-opus-4-6
+    vote: CONCLUDE
+    reasoning: 'All three responses have converged on the same fundamental strategy: Earth-supplied Phase 1 with ISRU-ready design from day one, bulk structural materials as the first ISRU target by ~Year 3, clean/dirty separation as a hard architectural requirement, and Mercury mass-driver deferred to Phase 3+. The differences are in emphasis and detail rather than substance. Together they provide a comprehensive, actionable feedstock transition framework with concrete timelines, cost estimates, design requirements, and decision gates. Further rounds would likely yield diminishing returns on this specific topic.'
+  - modelId: gemini-3-pro
+    vote: CONCLUDE
+    reasoning: 'The models have converged on a robust consensus: a ''Hybrid-Stream'' approach where Phase 1 relies on Earth-supplied canisters for high-complexity components (''Smart Mass''), while transitioning to ISRU for bulk structural materials (''Dumb Mass'') around Year 3. The necessary design requirements—specifically the need for a ''Dirty/Clean'' physical separation, reserved power/thermal margins, and a dual-interface standard—have been clearly identified. No further debate is needed to draft the specification.'
+  - modelId: gpt-5-2
+    vote: CONCLUDE
+    reasoning: 'Across the top responses there is convergence on a staged approach: Phase 1 Earth/clean canisters, design-in ISRU readiness from day one, bulk-material ISRU pilot around Year ~3, scale in early Phase 2, and treat Mercury mass-driver as later-phase. Remaining work is implementation detail (BOM, interfaces, gates), not further debate.'
+voteResults:
+  - targetId: claude-opus-4-6
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: Exceptionally thorough analysis with concrete numbers for feedstock demand, cost crossover, and design implications. The phased timeline (Years 1-3 Earth-supplied, Years 3-5 MV-ISRU pathfinder, Year 5+ expanded ISRU) is well-justified. The identification of the asteroid supply chain gap as the key risk—requiring prospecting missions by Year 1-2—is a critical insight. The contamination isolation architecture requirements and power scalability needs are precisely specified. The cost crossover analysis at Year 6-7 provides a solid economic foundation for the moderate timeline.
+      - voterId: gemini-3-pro
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: Excellent financial analysis and programmatic timeline. The concept of 'Minimum Viable ISRU' and the specific recommendation to reserve modular pallet positions with pre-routed utilities provides a concrete path to avoid design lock-in.
+      - voterId: gpt-5-2
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: Strong synthesis of the three approaches with a credible phased timeline, explicit design implications (power/thermal/contamination/interfaces), and a reasonable economic crossover framing. Provides actionable milestones and highlights the asteroid supply-chain lead-time risk.
+    rawScore: 6
+    weightedScore: 5
+    approveCount: 3
+    rejectCount: 0
+  - targetId: gemini-3-pro
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: gemini-3-pro
+        vote: APPROVE
+        reasoning: Strong contribution with the 'Hybrid-Stream' model that cleanly separates 'Smart Mass' (Earth-sourced) from 'Dumb Mass' (ISRU-sourced). The mass flow reality check is well-grounded. The 'Dirty-Clean Separation' firewall concept with physical bulkhead and vacuum gap is a concrete engineering solution. The dual-port Feedstock Interface Standard (FIS) recommendation is an actionable design requirement. The identification that the ANH power budget cannot support refining without a dedicated Power Augmentation Module is an important constraint. Slightly less detailed than Opus on the crossover economics but compensates with practical interface specifications.
+      - voterId: gemini-3-pro
+        targetId: gemini-3-pro
+        vote: APPROVE
+        reasoning: Outstanding technical segmentation of feedstock into 'Smart' (Earth) vs. 'Dumb' (ISRU) streams. The identification of the power gap—noting that manufacturing power budgets cannot support refining without augmentation—is a critical engineering insight that corrects a potential oversight in other models.
+      - voterId: gpt-5-2
+        targetId: gemini-3-pro
+        vote: NEUTRAL
+        reasoning: Good high-level hybrid-stream framing (bulk vs high-complexity) and useful interface/contamination zoning recommendations. However, several numbers and assertions are shakier (e.g., mass fractions, lunar regolith as “logical” near-term source, aggressive 50% reduction by Year 3) and the Mercury catch/relocation mention is under-justified.
+    rawScore: 5
+    weightedScore: 4
+    approveCount: 2
+    rejectCount: 0
+  - targetId: gpt-5-2
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: Excellent pragmatic framing with explicit decision gates (Gate A at Year 2, Gate B at Year 4) that make the transition timeline adaptive rather than rigid. The three-category mass-flow split (bulk structure, glass/ceramics, high-purity PV/electronics) is the clearest articulation of the ISRU priority ordering. The 'dirty node' concept as a separate free-flyer is a smart architectural choice that avoids contamination coupling. The observation that ISRU becomes mandatory when logistics caps throughput (not just when it's cheaper) is a valuable strategic insight. The concrete next steps section with BOM requirements and interface control documents is highly actionable.
+      - voterId: gemini-3-pro
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: Strong synthesis that reinforces the 'decision gate' approach. The suggestion of a separate 'dirty node' (potentially a free-flyer) to manage contamination risks is a valuable architectural alternative to the integrated firewall approach.
+      - voterId: gpt-5-2
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: Well-reasoned, decision-gated transition plan that matches the consensus (Earth feedstock first, ISRU-ready ANH, bulk-first ISRU). Clearly separates technical risk drivers, proposes a ‘dirty node’ architecture to manage contamination/thermal loads, and gives concrete next-step artifacts (BOM, ICD updates, supply-chain trades).
+    rawScore: 6
+    weightedScore: 5
+    approveCount: 3
+    rejectCount: 0
+winnerId: claude-opus-4-6
+winnerScore: 5
