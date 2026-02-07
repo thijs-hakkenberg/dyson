@@ -40,7 +40,20 @@ export const BOM_ITEM_SLUGS: Record<string, string> = {
 	'bom-1-4': 'assembly-node',
 	'bom-1-5': 'mass-drivers',
 	'bom-1-6': 'orbital-tugs',
-	'bom-1-7': 'swarm-control-system'
+	'bom-1-7': 'swarm-control-system',
+	// Phase 2
+	'bom-2-1': 'collector-satellites',
+	'bom-2-2': 'maintenance-drones',
+	'bom-2-3': 'manufacturing-expansion',
+	// Phase 3 - Matroska Brain
+	'bom-3-1': 'computational-substrate-tiles',
+	'bom-3-2': 'inter-layer-optical-backbone',
+	'bom-3-3': 'thermal-management-radiator-systems',
+	'bom-3-4': 'self-replicating-manufacturing-foundries',
+	'bom-3-5': 'distributed-computational-os',
+	'bom-3-6': 'feedstock-supply-chain-pipeline',
+	'bom-3-7': 'inter-layer-power-distribution-network',
+	'bom-3-8': 'shell-construction-maintenance-swarm'
 };
 
 /**
@@ -258,9 +271,123 @@ export const PHASE_2_BOM_ITEMS: BOMItemMeta[] = [
 ];
 
 /**
+ * Phase 3 BOM Items - Matroska Brain
+ * Quantity and cost estimates derived from multi-model LLM consensus (2026-02-07)
+ * Uncertainty ranges: Very high for far-future stellar-scale megastructures
+ */
+export const PHASE_3_BOM_ITEMS: BOMItemMeta[] = [
+	{
+		bomId: 'bom-3-1',
+		slug: 'computational-substrate-tiles',
+		name: 'Computational Substrate Tiles',
+		quantity: '10¹² tiles',
+		cost: '$10¹²-$10¹⁴',
+		category: 'Computing',
+		costMin: '$1T',
+		costMax: '$100T',
+		costConfidence: 'low',
+		costBasis: 'Modular tiles integrating TPV energy harvesting, compute substrate, local memory, and mesh networking. Scale-up and in-space semiconductor fabrication are primary cost drivers.'
+	},
+	{
+		bomId: 'bom-3-2',
+		slug: 'inter-layer-optical-backbone',
+		name: 'Inter-Layer Optical Communication Backbone',
+		quantity: '10⁸-10⁹ relay nodes',
+		cost: '$10¹¹-$10¹³',
+		category: 'Communications',
+		costMin: '$100B',
+		costMax: '$10T',
+		costConfidence: 'medium',
+		costBasis: 'Hierarchical free-space optical network with WDM/OAM multiplexed laser links. Most mature technology in Phase 3 BOM.'
+	},
+	{
+		bomId: 'bom-3-3',
+		slug: 'thermal-management-radiator-systems',
+		name: 'Thermal Management and Radiator Systems',
+		quantity: '~10¹⁴ m² radiator area',
+		cost: '$10¹²-$10¹⁵',
+		category: 'Power Systems',
+		costMin: '$1T',
+		costMax: '$1000T',
+		costConfidence: 'low',
+		costBasis: 'Passive spectral-selective radiators plus active cryogenic systems for outer layers. Thermodynamic cascade efficiency is critical.'
+	},
+	{
+		bomId: 'bom-3-4',
+		slug: 'self-replicating-manufacturing-foundries',
+		name: 'Self-Replicating Manufacturing Foundries',
+		quantity: '100-1,000 seed → 10⁴-10⁶ peak',
+		cost: '$10¹³-$10¹⁵',
+		category: 'Infrastructure',
+		costMin: '$10T',
+		costMax: '$1000T',
+		costConfidence: 'low',
+		costBasis: 'Autonomous factory complexes with ≥96% mass closure from in-situ resources. Critical-path industrial capability.'
+	},
+	{
+		bomId: 'bom-3-5',
+		slug: 'distributed-computational-os',
+		name: 'Distributed Computational Operating System',
+		quantity: '1 system (~10⁶ engineer-years)',
+		cost: '$10¹¹-$10¹²',
+		category: 'Computing',
+		costMin: '$100B',
+		costMax: '$1T',
+		costConfidence: 'low',
+		costBasis: 'Hierarchical, self-organizing software fabric managing resources across light-hours of delay. No precedent exists.'
+	},
+	{
+		bomId: 'bom-3-6',
+		slug: 'feedstock-supply-chain-pipeline',
+		name: 'Feedstock Supply Chain and Logistics Pipeline',
+		quantity: '~10,000 ships, ~500 mass drivers',
+		cost: '$10¹³-$10¹⁴',
+		category: 'Infrastructure',
+		costMin: '$10T',
+		costMax: '$100T',
+		costConfidence: 'medium',
+		costBasis: 'Scaled-up version of Phase 1-2 infrastructure with well-understood physics.'
+	},
+	{
+		bomId: 'bom-3-7',
+		slug: 'inter-layer-power-distribution-network',
+		name: 'Inter-Layer Power Distribution Network',
+		quantity: '10⁸-10¹¹ power interface units',
+		cost: '$10¹²-$10¹⁴',
+		category: 'Power Systems',
+		costMin: '$1T',
+		costMax: '$100T',
+		costConfidence: 'medium',
+		costBasis: 'HVDC within layers plus optical power beaming between layers. Essential for outer-layer viability.'
+	},
+	{
+		bomId: 'bom-3-8',
+		slug: 'shell-construction-maintenance-swarm',
+		name: 'Shell Construction and Maintenance Swarm',
+		quantity: '10⁶-10⁸ robots',
+		cost: '$10¹¹-$10¹³',
+		category: 'Robotics',
+		costMin: '$100B',
+		costMax: '$10T',
+		costConfidence: 'medium',
+		costBasis: 'Evolved Phase 2 robotics for deployment, repair, and recycling. Distinct from manufacturing foundries.'
+	}
+];
+
+/**
  * LLM Model information for display
  */
 export const LLM_MODELS = {
+	'claude-opus-4-5': {
+		id: 'claude-opus-4-5',
+		name: 'Claude Opus 4.5',
+		filename: 'claude-opus-4-5.md'
+	},
+	'claude-opus-4-6': {
+		id: 'claude-opus-4-6',
+		name: 'Claude Opus 4.6',
+		filename: 'claude-opus-4-6.md'
+	},
 	'gemini-3-pro': {
 		id: 'gemini-3-pro',
 		name: 'Gemini 3 Pro',
@@ -270,11 +397,6 @@ export const LLM_MODELS = {
 		id: 'gpt-5-2',
 		name: 'GPT-5.2',
 		filename: 'gpt-5-2.md'
-	},
-	'claude-opus-4-6': {
-		id: 'claude-opus-4-6',
-		name: 'Claude Opus 4.6',
-		filename: 'claude-opus-4-6.md'
 	}
 } as const;
 
@@ -292,7 +414,8 @@ export function getBOMItemBySlug(slug: string, phaseId?: string): BOMItemMeta | 
 	return (
 		PHASE_0_BOM_ITEMS.find((item) => item.slug === slug) ||
 		PHASE_1_BOM_ITEMS.find((item) => item.slug === slug) ||
-		PHASE_2_BOM_ITEMS.find((item) => item.slug === slug)
+		PHASE_2_BOM_ITEMS.find((item) => item.slug === slug) ||
+		PHASE_3_BOM_ITEMS.find((item) => item.slug === slug)
 	);
 }
 
@@ -307,6 +430,8 @@ export function getAllBOMItemsForPhase(phaseId: string): BOMItemMeta[] {
 			return PHASE_1_BOM_ITEMS;
 		case 'phase-2':
 			return PHASE_2_BOM_ITEMS;
+		case 'phase-3':
+			return PHASE_3_BOM_ITEMS;
 		default:
 			return [];
 	}

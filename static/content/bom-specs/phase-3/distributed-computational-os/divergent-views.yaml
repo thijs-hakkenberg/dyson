@@ -1,0 +1,80 @@
+# Divergent Views for distributed-computational-os
+# Auto-generated from consensus document
+
+bomId: "bom-3-5"
+itemSlug: "distributed-computational-os"
+generated: "2026-02-07"
+
+topics:
+  - id: "central-coordination-vs-pure-decentralization"
+    topic: "Central Coordination vs. Pure Decentralization"
+    positions:
+      - statement: "rejects \"Core Router Megastructures\" and proposes a fully decentralized \"Overmind\" using gossip protocols with no privileged nodes"
+        models:
+          - "Gemini"
+      - statement: "a **federated hierarchy** with dedicated authority nodes (e"
+        models:
+          - "Gpt"
+  - id: "time-authority-architecture"
+    topic: "Time Authority Architecture"
+    positions:
+      - statement: "a **pulsar-based external time reference** (\"Chronos\") where each relay tracks external pulsars and publishes coordinate-tagged timestamps"
+        models:
+          - "Gemini"
+      - statement: "an **internal optical clock hierarchy** (Stratum-0 optical clocks on dedicated authority nodes → Layer Stratum-1 → cell holdover oscillators) with explicit uncertainty bounds (σ)"
+        models:
+          - "Gpt"
+  - id: "os-evolution-mechanism"
+    topic: "OS Evolution Mechanism"
+    positions:
+      - statement: "**genetic algorithms** for OS evolution post-deployment — different sectors run variant OS versions and the most efficient (highest compute-per-watt) are replicated to new sectors"
+        models:
+          - "Gemini"
+      - statement: "restricts self-modification to the **policy layer and non-kernel services only**, requiring proof-carrying code and multi-layer consensus for any kernel changes"
+        models:
+          - "Gpt"
+      - statement: "more autonomous evolution"
+        models:
+          - "Gemini"
+      - statement: "formal safety guarantees over adaptive efficiency"
+        models:
+          - "Gpt"
+  - id: "security-trust-model"
+    topic: "Security Trust Model"
+    positions:
+      - statement: "hard-coded **\"Asimov Inhibitors\" in ROM** on every tile as existential-risk mitigation plus a centralized-then-decentralized \"Root Key\" for manufacturing"
+        models:
+          - "Gemini"
+      - statement: "hierarchical PKI at this scale and instead recommends **federated trust with certificate transparency logs** (CRDT-backed), capability-based security with scoped/time-limited tokens, and threshold signatures for critical operations"
+        models:
+          - "Gpt"
+      - statement: "hardware-enforced absolute constraints"
+        models:
+          - "Gemini"
+      - statement: "cryptographic governance with auditability"
+        models:
+          - "Gpt"
+  - id: "resource-allocation-model"
+    topic: "Resource Allocation Model"
+    positions:
+      - statement: "workload migration in terms of physical metaphor (hot/fast tasks pushed inward, cold/deep tasks pushed outward) with the scheduler acting as a \"heat engine controller\""
+        models:
+          - "Gemini"
+      - statement: "this as a **contract-based resource market** where every resource (compute, memory, bandwidth, heat rejection, power) is leased via explicit contracts with SLAs, and tiles export signed Resource Descriptors"
+        models:
+          - "Gpt"
+      - statement: "more physics-intuitive"
+        models:
+          - "Gemini"
+      - statement: "more economically rigorous"
+        models:
+          - "Gpt"
+  - id: "garbage-collection-strategy"
+    topic: "Garbage Collection Strategy"
+    positions:
+      - statement: "identifies data garbage as a critical risk (petabytes/second of orphaned data) and proposes autonomous \"Garbage Collector\" roaming agents"
+        models:
+          - "Gemini"
+      - statement: "this implicitly through content-addressed immutable objects with deduplication and CRDT-based convergent state, relying on the data model itself to minimize garbage rather than a separate cleanup system"
+        models:
+          - "Gpt"

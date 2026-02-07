@@ -1,0 +1,59 @@
+# Divergent Views for inter-layer-optical-backbone
+# Auto-generated from consensus document
+
+bomId: "bom-3-2"
+itemSlug: "inter-layer-optical-backbone"
+generated: "2026-02-07"
+
+topics:
+  - id: "oam-orbital-angular-momentum-multiplexing-role"
+    topic: "OAM (Orbital Angular Momentum) Multiplexing Role"
+    positions:
+      - statement: "OAM as a **baseline multiplexing dimension** (16 OAM modes × 1024 WDM channels per Class A relay, integral to achieving 10 Pbps per link)"
+        models:
+          - "Gemini"
+      - statement: "OAM as an **optional link-level enhancement only**, explicitly recommending no OAM dependency in the baseline design due to sensitivity to pointing jitter, optics aberrations, and contamination, and flagging OAM practicality as an open question"
+        models:
+          - "Gpt"
+  - id: "optimal-trunk-aperture-size-strategy"
+    topic: "Optimal Trunk Aperture Size Strategy"
+    positions:
+      - statement: "**1"
+        models:
+          - "Gemini"
+      - statement: "**many 30–50 cm apertures in parallel** rather than fewer large apertures, arguing this is more manufacturable and maintainable at scale, with segmented/replicated mirrors compensated by coherent DSP and adaptive optics, deferring meter-class optics until manufacturing proves cost-effective"
+        models:
+          - "Gpt"
+  - id: "per-link-throughput-claims"
+    topic: "Per-Link Throughput Claims"
+    positions:
+      - statement: "**~10 Pbps per trunk link** (enabled by OAM+WDM on a single 1"
+        models:
+          - "Gemini"
+      - statement: "**10–200 Tbps per node at IOC scaling to 1–10 Pbps at full build** achieved via many parallel terminals and channels rather than single-link heroics, explicitly noting that capacity scales with relay density and terminal count, not individual link performance"
+        models:
+          - "Gpt"
+  - id: "adjacent-layer-vs-multi-hop-trunk-topology"
+    topic: "Adjacent-Layer vs. Multi-Hop Trunk Topology"
+    positions:
+      - statement: "advocates **adjacent-layer links only** (Layer n ↔ n+1) as the primary transport, with skip links at ≤1% of trunk count, arguing that beam divergence and pointing complexity make multi-AU single hops impractical for core capacity"
+        models:
+          - "Gpt"
+  - id: "cost-estimate-scale"
+    topic: "Cost Estimate Scale"
+    positions:
+      - statement: "a total backbone cost of **~10¹⁵ manufacturing-node-years**, driven primarily by 2×10⁹ Class A relays at $250K each"
+        models:
+          - "Gemini"
+      - statement: "**~10¹²–10¹³ equivalent**, with 10⁸–10⁹ relay nodes as the dominant cost driver, representing a **2–3 order of magnitude disagreement** that reflects fundamentally different assumptions about relay count, unit cost, and aperture strategy"
+        models:
+          - "Gpt"
+  - id: "security-and-control-plane-emphasis"
+    topic: "Security and Control Plane Emphasis"
+    positions:
+      - statement: "a detailed **security model** (hardware root of trust, post-quantum cryptography, signed routing updates, optical beam authentication, control-plane hardening) and explicit control-plane/data-plane separation on dedicated wavelengths"
+        models:
+          - "Gpt"
+      - statement: "not address security or control-plane architecture, focusing instead on physical-layer and protocol-level design"
+        models:
+          - "Gemini"

@@ -1,0 +1,80 @@
+# Divergent Views for feedstock-supply-chain-pipeline
+# Auto-generated from consensus document
+
+bomId: "bom-3-6"
+itemSlug: "feedstock-supply-chain-pipeline"
+generated: "2026-02-07"
+
+topics:
+  - id: "slug-complexity-and-onboard-systems"
+    topic: "Slug complexity and onboard systems"
+    positions:
+      - statement: "each slug with a solar-powered transponder, cold-gas thrusters (50 m/s ΔV budget), and a retroreflector array (~100 kg avionics)"
+        models:
+          - "Claude"
+      - statement: "designs slugs as \"dumb packets\" with only passive radar reflectors and visual fiducials and no active systems"
+        models:
+          - "Gemini"
+      - statement: "a middle position with minimal avionics for bulk slugs (beacon + retroreflector) but full nav and microthrusters for precision/high-value cargoes"
+        models:
+          - "Gpt"
+  - id: "concentration-processing-depot-scale-and-count"
+    topic: "Concentration/processing depot scale and count"
+    positions:
+      - statement: "~170 depots at 15,000 tonnes each with 50,000 t/day input throughput"
+        models:
+          - "Claude"
+      - statement: "processing into the mining rig itself (the AESR at 4,500 tonnes performs sintering onboard, producing 1 slug every 30 seconds)"
+        models:
+          - "Gemini"
+      - statement: "far larger depots at 50,000–500,000 tonnes each, organized into ~10–20 \"mega-port\" complexes rather than distributed stations"
+        models:
+          - "Gpt"
+  - id: "catcher-energy-recovery"
+    topic: "Catcher energy recovery"
+    positions:
+      - statement: "designs the MELN catcher as a regenerative system that recovers captured kinetic energy into supercapacitor banks and feeds it to local foundries or the power grid"
+        models:
+          - "Gemini"
+      - statement: "magnetic braking energy as waste heat that must be radiated away (~1 TW thermal dissipation)"
+        models:
+          - "Claude"
+      - statement: "for energy recovery as a critical R&D priority but acknowledges it is low-TRL and may not be achievable at scale"
+        models:
+          - "Gpt"
+  - id: "mass-driver-recoil-management"
+    topic: "Mass driver recoil management"
+    positions:
+      - statement: "bidirectional launch scheduling (paired drivers firing in opposite directions) plus dedicated ion-engine station-keeping on the anchor asteroid"
+        models:
+          - "Claude"
+      - statement: "continuous ion thruster banks firing opposite the launch vector plus counter-rotating flywheels for torque management"
+        models:
+          - "Gemini"
+      - statement: "distributing recoil over km-scale trusses with active spin/attitude control and continuous geotechnical sensing of the asteroid body"
+        models:
+          - "Gpt"
+  - id: "safety-and-governance-of-high-energy-launches"
+    topic: "Safety and governance of high-energy launches"
+    positions:
+      - statement: "this as a first-class safety-critical concern, specifying cryptographic multi-party launch authorization, geofenced trajectories with physical coil-timing limits preventing planet-crossing shots, independent audit constellations, and hardware abort logic"
+        models:
+          - "Gpt"
+      - statement: "collision avoidance and dark-slug tracking but does not address weaponization risk"
+        models:
+          - "Claude"
+      - statement: "interceptor drones for off-course slugs but does not address governance or authorization frameworks"
+        models:
+          - "Gemini"
+  - id: "outer-system-logistics-strategy"
+    topic: "Outer-system logistics strategy"
+    positions:
+      - statement: "a 50/50 split (specialty materials from inner system, bulk from local KBOs) with Class C mining ships co-located with foundries consuming individual KBOs over 10–50 years"
+        models:
+          - "Claude"
+      - statement: "not detail outer-system logistics beyond noting Main Belt and Trojans as primary sources"
+        models:
+          - "Gemini"
+      - statement: "the outer-system problem as primarily about \"seeding factories + high-value trace shipments\" and poses the crossover radius as an open design question"
+        models:
+          - "Gpt"

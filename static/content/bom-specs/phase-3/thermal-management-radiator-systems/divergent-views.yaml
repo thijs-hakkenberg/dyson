@@ -1,0 +1,62 @@
+# Divergent Views for thermal-management-radiator-systems
+# Auto-generated from consensus document
+
+bomId: "bom-3-3"
+itemSlug: "thermal-management-radiator-systems"
+generated: "2026-02-07"
+
+topics:
+  - id: "hot-radiator-areal-density-target"
+    topic: "Hot radiator areal density target"
+    positions:
+      - statement: "0"
+        models:
+          - "Gpt"
+      - statement: "an aggressive 0"
+        models:
+          - "Gemini"
+  - id: "heat-transport-philosophy-conductive-vs-fluid"
+    topic: "Heat transport philosophy (conductive vs. fluid)"
+    positions:
+      - statement: "advocates **conductive dominance** using solid-state HOPG/graphene thermal spreaders, arguing that fluid loops introduce unacceptable leak risks over centuries"
+        models:
+          - "Gemini"
+      - statement: "a **hybrid approach** with manifolded heat pipes and loop heat pipes as the primary lateral transport mechanism, arguing that conduction alone cannot prevent hotspots across kilometer-scale membranes"
+        models:
+          - "Gpt"
+  - id: "thermal-interface-material"
+    topic: "Thermal interface material"
+    positions:
+      - statement: "**liquid metal TIM (Galinstan)** sealed within compliant gaskets for maximum conductance (>50 W/m·K)"
+        models:
+          - "Gemini"
+      - statement: "**compliant graphite foil with micro-spring clamps** (no adhesives, no liquids) for simplicity and long-term reliability at trillion-tile scale"
+        models:
+          - "Gpt"
+  - id: "cryogenic-architecture-scale-and-unit-count"
+    topic: "Cryogenic architecture scale and unit count"
+    positions:
+      - statement: "10⁶–10⁷ **Cryogenic Spine Nodes (CSNs)** of 5–50 tonnes each, serving 10–100 km² patches with 10–200 kW heat lift capacity"
+        models:
+          - "Gpt"
+      - statement: "fewer but larger **1 km-long \"Spine\" units** using hybrid sorption/dilution refrigerators with superfluid helium transport"
+        models:
+          - "Gemini"
+  - id: "deep-cold-shell-priority-and-feasibility"
+    topic: "Deep cold shell priority and feasibility"
+    positions:
+      - statement: "the 10 K quantum substrate layer as an integral part of the baseline four-layer cascade"
+        models:
+          - "Gemini"
+      - statement: "recommends treating ≤20 K as **optional/aspirational second-wave capability**, prioritizing 40–80 K cold computing first with only localized deep-cold islands, citing superfluid containment at scale as TRL ~1–2 and a potential dead end"
+        models:
+          - "Gpt"
+  - id: "cost-framing-methodology"
+    topic: "Cost framing methodology"
+    positions:
+      - statement: "a dollar-denominated cost estimate of ~$1"
+        models:
+          - "Gemini"
+      - statement: "dollar costs are meaningless at this scale and recommends tracking costs in **physical throughput metrics** (kg refined product/year, m² coated radiator/year, MW validated heat lift/year)"
+        models:
+          - "Gpt"
