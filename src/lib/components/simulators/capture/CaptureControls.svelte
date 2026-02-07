@@ -212,6 +212,7 @@
 			</label>
 			<button
 				id="redundant-systems"
+				aria-label="Toggle redundant systems"
 				onclick={() => updateConfig('redundantSystems', !config.redundantSystems)}
 				{disabled}
 				class="relative w-12 h-6 rounded-full transition-colors {config.redundantSystems

@@ -119,6 +119,14 @@ const PHASE_0_BOM_ITEMS = [
     quantity: '100 MW',
     cost: '$500M',
     category: 'Power Systems'
+  },
+  {
+    bomId: 'bom-0-6',
+    slug: 'ispp-systems',
+    name: 'In-Situ Propellant Production Systems',
+    quantity: '4 units',
+    cost: '$2B',
+    category: 'Infrastructure'
   }
 ];
 

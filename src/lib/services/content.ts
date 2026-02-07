@@ -93,9 +93,24 @@ export const PHASES: Phase[] = [
 				costMax: 750000000,
 				costConfidence: 'high',
 				costBasis: 'Based on current thin-film PV costs with established space deployment track record'
+			},
+			{
+				id: 'bom-0-6',
+				name: 'In-Situ Propellant Production Systems',
+				description: 'Integrated water extraction and electrolysis systems (H2O -> H2 + O2) using bucket-wheel excavation. Dual counter-rotating design for torque balancing in microgravity. Heats regolith to 1000C to liberate water.',
+				quantity: 4,
+				unit: 'units',
+				unitCost: 500000000,
+				totalCost: 2000000000,
+				category: 'Infrastructure',
+				slug: 'ispp-systems',
+				costMin: 1400000000,
+				costMax: 3000000000,
+				costConfidence: 'medium',
+				costBasis: 'Based on arxiv 1702.00335 bucket-wheel excavation with integrated electrolysis'
 			}
 		],
-		totalCost: 13660000000,
+		totalCost: 15660000000,
 		estimatedDuration: '10-15 years',
 		dependencies: [],
 		relatedResearch: ['asteroid mining', 'in-situ resource utilization', 'space manufacturing']

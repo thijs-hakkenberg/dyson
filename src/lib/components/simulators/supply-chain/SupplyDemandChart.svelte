@@ -277,9 +277,6 @@
 	{:else if comparisonData}
 		<!-- Scenario Comparison Chart -->
 		<svg viewBox="0 0 {chartWidth} {chartHeight}" class="w-full h-auto">
-			{@const barWidth = innerWidth / comparisonData.length * 0.6}
-			{@const maxRisk = 100}
-
 			<!-- Y-axis gridlines -->
 			{#each [0, 0.25, 0.5, 0.75, 1] as tick}
 				<line
@@ -298,7 +295,7 @@
 					dominant-baseline="middle"
 					class="text-xs fill-star-faint"
 				>
-					{(maxRisk * tick).toFixed(0)}%
+					{(100 * tick).toFixed(0)}%
 				</text>
 			{/each}
 
@@ -315,8 +312,9 @@
 
 			<!-- Bars -->
 			{#each comparisonData as data, i}
+				{@const barWidth = innerWidth / comparisonData.length * 0.6}
 				{@const barX = padding.left + (i + 0.5) * (innerWidth / comparisonData.length) - barWidth / 2}
-				{@const barH = (data.constraintRisk / maxRisk) * innerHeight}
+				{@const barH = (data.constraintRisk / 100) * innerHeight}
 
 				<rect
 					x={barX}

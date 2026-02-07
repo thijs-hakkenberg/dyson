@@ -160,25 +160,27 @@
 					</span>
 				</div>
 				<div class="relative mt-2 h-2 bg-space-600 rounded-full">
-					{@const range =
-						output.result.confidenceInterval95.efficiencyUpper -
-						output.result.confidenceInterval95.efficiencyLower}
-					{@const lowerPct =
-						(output.result.confidenceInterval95.efficiencyLower / output.config.initialEfficiency) *
-						100}
-					{@const upperPct =
-						(output.result.confidenceInterval95.efficiencyUpper / output.config.initialEfficiency) *
-						100}
-					{@const meanPct =
-						(output.result.endOfLifeEfficiency / output.config.initialEfficiency) * 100}
-					<div
-						class="absolute h-2 bg-cosmic-cyan/30 rounded-full"
-						style="left: {Math.max(0, lowerPct)}%; width: {Math.min(100, upperPct) - Math.max(0, lowerPct)}%"
-					></div>
-					<div
-						class="absolute h-2 w-1 bg-cosmic-cyan rounded-full"
-						style="left: {Math.min(99, Math.max(1, meanPct))}%"
-					></div>
+					{#if true}
+						{@const range =
+							output.result.confidenceInterval95.efficiencyUpper -
+							output.result.confidenceInterval95.efficiencyLower}
+						{@const lowerPct =
+							(output.result.confidenceInterval95.efficiencyLower / output.config.initialEfficiency) *
+							100}
+						{@const upperPct =
+							(output.result.confidenceInterval95.efficiencyUpper / output.config.initialEfficiency) *
+							100}
+						{@const meanPct =
+							(output.result.endOfLifeEfficiency / output.config.initialEfficiency) * 100}
+						<div
+							class="absolute h-2 bg-cosmic-cyan/30 rounded-full"
+							style="left: {Math.max(0, lowerPct)}%; width: {Math.min(100, upperPct) - Math.max(0, lowerPct)}%"
+						></div>
+						<div
+							class="absolute h-2 w-1 bg-cosmic-cyan rounded-full"
+							style="left: {Math.min(99, Math.max(1, meanPct))}%"
+						></div>
+					{/if}
 				</div>
 			</div>
 

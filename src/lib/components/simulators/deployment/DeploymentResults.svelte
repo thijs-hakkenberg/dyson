@@ -181,17 +181,19 @@
 					</span>
 				</div>
 				<div class="relative mt-2 h-2 bg-space-600 rounded-full">
-					{@const lowerPct = output.result.confidenceInterval95.lower}
-					{@const upperPct = output.result.confidenceInterval95.upper}
-					{@const meanPct = output.result.stats.successRate}
-					<div
-						class="absolute h-2 bg-cosmic-cyan/30 rounded-full"
-						style="left: {Math.max(0, lowerPct)}%; width: {Math.min(100, upperPct) - Math.max(0, lowerPct)}%"
-					></div>
-					<div
-						class="absolute h-2 w-1 bg-cosmic-cyan rounded-full"
-						style="left: {Math.min(99, Math.max(1, meanPct))}%"
-					></div>
+					{#if true}
+						{@const lowerPct = output.result.confidenceInterval95.lower}
+						{@const upperPct = output.result.confidenceInterval95.upper}
+						{@const meanPct = output.result.stats.successRate}
+						<div
+							class="absolute h-2 bg-cosmic-cyan/30 rounded-full"
+							style="left: {Math.max(0, lowerPct)}%; width: {Math.min(100, upperPct) - Math.max(0, lowerPct)}%"
+						></div>
+						<div
+							class="absolute h-2 w-1 bg-cosmic-cyan rounded-full"
+							style="left: {Math.min(99, Math.max(1, meanPct))}%"
+						></div>
+					{/if}
 				</div>
 			</div>
 

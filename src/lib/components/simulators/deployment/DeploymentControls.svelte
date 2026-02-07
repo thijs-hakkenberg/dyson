@@ -102,12 +102,12 @@
 
 		<!-- Temperature Range -->
 		<div>
-			<label class="block text-sm text-star-dim mb-2">
+			<p class="block text-sm text-star-dim mb-2">
 				Temperature Range:
 				<span class="text-star-white font-semibold">
 					{config.minTemperature}&deg;C to {config.maxTemperature}&deg;C
 				</span>
-			</label>
+			</p>
 			<div class="space-y-2">
 				<div>
 					<span class="text-xs text-star-faint">Min Temp</span>
@@ -198,6 +198,7 @@
 			</label>
 			<button
 				id="thermal-precond"
+				aria-label="Toggle thermal preconditioning"
 				onclick={() => updateConfig('thermalPreconditioning', !config.thermalPreconditioning)}
 				{disabled}
 				class="relative w-12 h-6 rounded-full transition-colors {config.thermalPreconditioning

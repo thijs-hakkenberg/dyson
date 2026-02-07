@@ -74,7 +74,7 @@
 			{#if filteredOrganizations.length > 0}
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 					{#each filteredOrganizations as org (org.id)}
-						<OrganizationCard organization={org} questionCount={org.questionCount} />
+						<OrganizationCard organization={org} />
 					{/each}
 				</div>
 			{:else}

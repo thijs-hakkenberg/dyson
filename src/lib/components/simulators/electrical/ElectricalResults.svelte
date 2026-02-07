@@ -176,19 +176,21 @@
 					</span>
 				</div>
 				<div class="relative mt-2 h-2 bg-space-600 rounded-full">
-					{@const range = output.result.confidenceInterval95.arcProbUpper - output.result.confidenceInterval95.arcProbLower}
-					{@const lowerPct = output.result.confidenceInterval95.arcProbLower * 100}
-					{@const upperPct = output.result.confidenceInterval95.arcProbUpper * 100}
-					{@const meanPct = output.result.arcProbabilityPerYear * 100}
-					{@const scale = 100 / Math.max(upperPct, 1)}
-					<div
-						class="absolute h-2 bg-cosmic-cyan/30 rounded-full"
-						style="left: {Math.max(0, lowerPct * scale)}%; width: {(upperPct - lowerPct) * scale}%"
-					></div>
-					<div
-						class="absolute h-2 w-1 bg-cosmic-cyan rounded-full"
-						style="left: {Math.min(99, Math.max(1, meanPct * scale))}%"
-					></div>
+					{#if true}
+						{@const range = output.result.confidenceInterval95.arcProbUpper - output.result.confidenceInterval95.arcProbLower}
+						{@const lowerPct = output.result.confidenceInterval95.arcProbLower * 100}
+						{@const upperPct = output.result.confidenceInterval95.arcProbUpper * 100}
+						{@const meanPct = output.result.arcProbabilityPerYear * 100}
+						{@const scale = 100 / Math.max(upperPct, 1)}
+						<div
+							class="absolute h-2 bg-cosmic-cyan/30 rounded-full"
+							style="left: {Math.max(0, lowerPct * scale)}%; width: {(upperPct - lowerPct) * scale}%"
+						></div>
+						<div
+							class="absolute h-2 w-1 bg-cosmic-cyan rounded-full"
+							style="left: {Math.min(99, Math.max(1, meanPct * scale))}%"
+						></div>
+					{/if}
 				</div>
 			</div>
 

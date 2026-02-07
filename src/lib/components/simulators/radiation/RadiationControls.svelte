@@ -176,6 +176,7 @@
 			</label>
 			<button
 				id="temp-cycling"
+				aria-label="Toggle temperature cycling damage"
 				onclick={() => updateConfig('temperatureCycling', !config.temperatureCycling)}
 				{disabled}
 				class="relative w-12 h-6 rounded-full transition-colors {config.temperatureCycling

@@ -165,8 +165,9 @@
 			</text>
 
 			<!-- 50% threshold line -->
-			{@const halfEfficiency = maxEfficiency / 2}
-			<line
+			{#if true}
+				{@const halfEfficiency = maxEfficiency / 2}
+				<line
 				x1={padding.left}
 				y1={yScale(halfEfficiency)}
 				x2={chartWidth - padding.right}
@@ -185,6 +186,7 @@
 			>
 				50%
 			</text>
+			{/if}
 
 			<!-- Power curves -->
 			{#each chartData as data}

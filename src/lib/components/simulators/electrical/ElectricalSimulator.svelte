@@ -105,7 +105,7 @@
 	);
 
 	// Chart type mapping
-	let chartType = $derived.by(() => {
+	let chartType: 'voltage' | 'orbital' | 'material' = $derived.by(() => {
 		if (mode === 'voltage') return 'voltage';
 		if (mode === 'orbital') return 'orbital';
 		return 'material';

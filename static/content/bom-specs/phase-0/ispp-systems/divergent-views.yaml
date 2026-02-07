@@ -1,0 +1,80 @@
+# Divergent Views for ispp-systems
+# Auto-generated from consensus document
+
+bomId: "bom-0-6"
+itemSlug: "ispp-systems"
+generated: "2026-02-07"
+
+topics:
+  - id: "primary-processing-technology"
+    topic: "Primary Processing Technology"
+    positions:
+      - statement: "Molten Regolith Electrolysis (MRE) at 1600–1700°C as the baseline, producing oxygen from any anhydrous regolith with metal byproducts, and treats water ice as a supplementary bonus pathway"
+        models:
+          - "Claude"
+      - statement: "high-temperature processing entirely in favor of low-temperature (200–400°C) thermal extraction of water via a \"Thermal Worm\" auger, arguing simplicity and fewer failure modes"
+        models:
+          - "Gemini"
+      - statement: "a middle position with vacuum thermal desorption at 400–700 K focused on water-bearing regolith but does not propose anhydrous oxygen extraction at all"
+        models:
+          - "Gpt"
+  - id: "propellant-type-and-propulsion-architecture"
+    topic: "Propellant Type and Propulsion Architecture"
+    positions:
+      - statement: "to LOX/LH₂ as the primary high-performance propellant with LOX as the dominant mass fraction, supplemented by sodium/sulfur propellants at Mercury"
+        models:
+          - "Claude"
+      - statement: "for water itself as the sole propellant currency, used directly in steam thermal thrusters (Isp ~190s) and water-plasma Hall thrusters (Isp ~1,500s), explicitly rejecting cryogenic chemical propulsion complexity"
+        models:
+          - "Gemini"
+      - statement: "a dual-track LOX/LH₂ primary with LOX/CH₄ secondary, and pragmatically suggests deferring LH₂ liquefaction by initially storing hydrogen as high-pressure gas"
+        models:
+          - "Gpt"
+  - id: "target-location-and-tier-strategy"
+    topic: "Target Location and Tier Strategy"
+    positions:
+      - statement: "a three-tier architecture (Lunar south pole → C-type asteroids → Mercury) with explicit timelines and the Moon as the mandatory first node"
+        models:
+          - "Claude"
+      - statement: "exclusively on Near-Earth Asteroids as the primary and essentially only resource node, arguing that escaping gravity wells is fundamentally wrong for megastructure logistics"
+        models:
+          - "Gemini"
+      - statement: "site-agnostic, designing a modular plant adaptable to any ice-bearing body (lunar PSR, asteroid, Phobos, or Mercury PSR) and deferring site selection as an open question"
+        models:
+          - "Gpt"
+  - id: "power-source"
+    topic: "Power Source"
+    positions:
+      - statement: "recommends nuclear fission (Kilopower-class, 10 kWe units scaling to megawatt-class) as the baseline for lunar operations, citing lunar night resilience and power density"
+        models:
+          - "Claude"
+      - statement: "solar-only with large concentrators (2"
+        models:
+          - "Gemini"
+      - statement: "a hybrid-ready architecture with solar baseline and optional nuclear plug-in for permanently shadowed regions, explicitly declining to commit until site selection"
+        models:
+          - "Gpt"
+  - id: "system-scale-and-unit-philosophy"
+    topic: "System Scale and Unit Philosophy"
+    positions:
+      - statement: "large, fixed-site industrial plants (2,500 kg dry per MRE module, scaling to 50–100 modules at a single site producing 10,000 t/year)"
+        models:
+          - "Claude"
+      - statement: "small, self-propelled, swarm-deployable units (4,500 kg dry \"Hydra\" harvesters, fleet of 50+, each independently mobile)"
+        models:
+          - "Gemini"
+      - statement: "intermediate modular skids (18,000 kg dry ISPP-10 baseline) intended for replication at a single site but not self-mobile"
+        models:
+          - "Gpt"
+  - id: "initial-deployment-cost"
+    topic: "Initial Deployment Cost"
+    positions:
+      - statement: "~$6"
+        models:
+          - "Claude"
+      - statement: "$30M per operational Hydra unit at orbit (at 50-unit production scale), with total development through first deep-space mission at ~$350M"
+        models:
+          - "Gemini"
+      - statement: "$250–600M for development NRE and $120–250M per ISPP-10 first-of-a-kind flight unit, with mature recurring at $60–130M each"
+        models:
+          - "Gpt"

@@ -33,6 +33,7 @@ export const BOM_ITEM_SLUGS: Record<string, string> = {
 	'bom-0-3': 'material-processing-station',
 	'bom-0-4': 'transport-vehicles',
 	'bom-0-5': 'solar-power-arrays',
+	'bom-0-6': 'ispp-systems',
 	// Phase 1
 	'bom-1-1': 'collector-units',
 	'bom-1-2': 'pv-blanket-arrays',
@@ -131,6 +132,18 @@ export const PHASE_0_BOM_ITEMS: BOMItemMeta[] = [
 		costMax: '$750M',
 		costConfidence: 'high',
 		costBasis: 'Based on current thin-film PV costs with established space deployment track record'
+	},
+	{
+		bomId: 'bom-0-6',
+		slug: 'ispp-systems',
+		name: 'In-Situ Propellant Production Systems',
+		quantity: '4 units',
+		cost: '$2B',
+		category: 'Infrastructure',
+		costMin: '$1.4B',
+		costMax: '$3B',
+		costConfidence: 'medium',
+		costBasis: 'Based on arxiv 1702.00335 bucket-wheel excavation with integrated electrolysis'
 	}
 ];
 
