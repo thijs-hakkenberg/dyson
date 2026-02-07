@@ -17,7 +17,7 @@ import type { BOMItemId, ResearchQuestionId } from '$lib/types/entities';
 import yaml from 'js-yaml';
 
 // Use import.meta.glob to load validation YAML file at build time
-const validationFiles = import.meta.glob('/static/content/validations/*.yaml', {
+const validationFiles = import.meta.glob('/src/content/validations/*.yaml', {
 	query: '?raw',
 	import: 'default',
 	eager: false

@@ -18,7 +18,7 @@ import yaml from 'js-yaml';
 // Only use glob for discussion.yaml files in specific discussion directories
 // These are directories named with the pattern rq-X-Y-slug (containing a hyphen after the question number)
 const discussionFiles = import.meta.glob(
-	'/static/content/research-questions/phase-*/rq-*-*-*/discussion.yaml',
+	'/src/content/research-questions/phase-*/rq-*-*-*/discussion.yaml',
 	{
 		query: '?raw',
 		import: 'default',
@@ -28,7 +28,7 @@ const discussionFiles = import.meta.glob(
 
 // Conclusion files in discussion directories
 const conclusionFiles = import.meta.glob(
-	'/static/content/research-questions/phase-*/rq-*-*-*/conclusion.md',
+	'/src/content/research-questions/phase-*/rq-*-*-*/conclusion.md',
 	{
 		query: '?raw',
 		import: 'default',
@@ -115,7 +115,7 @@ function parseConclusionFile(content: string): DiscussionConclusion | null {
  * Extract question slug from file path
  */
 function extractSlugFromPath(filePath: string): QuestionSlug | null {
-	// Path format: /static/content/research-questions/phase-X/rq-X-Y-slug/discussion.yaml
+	// Path format: /src/content/research-questions/phase-X/rq-X-Y-slug/discussion.yaml
 	const match = filePath.match(/\/rq-\d+-\d+-([^/]+)\/discussion\.yaml$/);
 	return match ? match[1] : null;
 }

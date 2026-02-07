@@ -139,7 +139,7 @@ async function loadQuestion(slug) {
 	const phases = ['phase-0', 'phase-1', 'phase-2'];
 
 	for (const phase of phases) {
-		const dir = path.join(PROJECT_ROOT, 'static/content/research-questions', phase);
+		const dir = path.join(PROJECT_ROOT, 'src/content/research-questions', phase);
 		try {
 			const files = await fs.readdir(dir);
 			const matchingFile = files.find(f => f.endsWith(`-${slug}.md`) || f.includes(slug));
@@ -188,7 +188,7 @@ async function loadQuestion(slug) {
 function getDiscussionDir(question) {
 	return path.join(
 		PROJECT_ROOT,
-		'static/content/research-questions',
+		'src/content/research-questions',
 		question.sourcePhaseId,
 		`${question.id}-${question.slug}`
 	);

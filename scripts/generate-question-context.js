@@ -31,7 +31,7 @@ const DATABRICKS_TOKEN = process.env.DATABRICKS_TOKEN;
 
 const CLAUDE_ENDPOINT = '/serving-endpoints/databricks-claude-opus-4-6/invocations';
 
-const QUESTIONS_DIR = path.join(PROJECT_ROOT, 'static/content/research-questions');
+const QUESTIONS_DIR = path.join(PROJECT_ROOT, 'src/content/research-questions');
 const BOM_SPECS_DIR = path.join(PROJECT_ROOT, 'static/content/bom-specs');
 
 /**

@@ -16,7 +16,7 @@ import type {
 import type { ResearchQuestionId, BOMItemId } from '$lib/types/entities';
 
 // Use import.meta.glob to load YAML at build time
-const yamlFiles = import.meta.glob('/static/content/validation-roadmap/**/*.yaml', {
+const yamlFiles = import.meta.glob('/src/content/validation-roadmap/**/*.yaml', {
 	query: '?raw',
 	import: 'default',
 	eager: false
@@ -186,7 +186,7 @@ async function loadData(): Promise<{
 	}
 
 	// Load experiments.yaml
-	const indexPath = '/static/content/validation-roadmap/experiments.yaml';
+	const indexPath = '/src/content/validation-roadmap/experiments.yaml';
 	const loader = yamlFiles[indexPath];
 
 	if (!loader) {

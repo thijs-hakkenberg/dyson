@@ -9,10 +9,10 @@
 //   node scripts/migrate-questions-to-files.js
 //
 // Output:
-//   static/content/research-questions/phase-0/*.md
-//   static/content/research-questions/phase-1/*.md
-//   static/content/research-questions/phase-2/*.md
-//   static/content/research-questions/phase-X/index.json
+//   src/content/research-questions/phase-0/*.md
+//   src/content/research-questions/phase-1/*.md
+//   src/content/research-questions/phase-2/*.md
+//   src/content/research-questions/phase-X/index.json
 
 import fs from 'fs/promises';
 import path from 'path';
@@ -21,7 +21,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT_DIR = path.resolve(__dirname, '..');
-const OUTPUT_DIR = path.join(ROOT_DIR, 'static/content/research-questions');
+const OUTPUT_DIR = path.join(ROOT_DIR, 'src/content/research-questions');
 
 // BOM item name mappings for richer context
 const BOM_ITEM_NAMES = {

@@ -25,6 +25,17 @@ Project Dyson is a **non-profit initiative** planning the construction of a Dyso
 
 ### Content Files
 
+Content is split by loading strategy:
+
+**Bundled at build time** (`src/content/` - imported via Vite):
+| Location | Purpose |
+|----------|---------|
+| `src/content/research-questions/` | Research question markdown files and discussions |
+| `src/content/external-organizations/` | Organization registry (index.yaml) |
+| `src/content/validation-roadmap/` | Experiment roadmap data |
+| `src/content/validations/` | Validation claim data |
+
+**Fetched at runtime** (`static/content/` - served as static files):
 | Location | Purpose |
 |----------|---------|
 | `static/content/bom-specs/phase-0/` | Phase 0 LLM specs and consensus docs |

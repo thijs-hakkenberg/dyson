@@ -12,7 +12,7 @@ import { error } from '@sveltejs/kit';
 import type { ResearchQuestionId } from '$lib/types/entities';
 
 // Load all question files at build time to extract slugs for prerendering
-const questionFiles = import.meta.glob('/static/content/research-questions/**/*.md', {
+const questionFiles = import.meta.glob('/src/content/research-questions/**/*.md', {
 	query: '?raw',
 	import: 'default',
 	eager: true

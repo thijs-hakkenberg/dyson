@@ -10,7 +10,7 @@ import { parseQuestionFile } from './questions-parsers';
 
 // Use import.meta.glob to load all question markdown files at build time
 // This enables prerendering by making files available during the build process
-const questionFiles = import.meta.glob('/static/content/research-questions/**/*.md', {
+const questionFiles = import.meta.glob('/src/content/research-questions/**/*.md', {
 	query: '?raw',
 	import: 'default',
 	eager: false

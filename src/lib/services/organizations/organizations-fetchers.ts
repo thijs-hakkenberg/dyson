@@ -14,7 +14,7 @@ import { parseOrganizationsYaml } from './organizations-parsers';
 import { getQuestionsForOrganization, computeOrgQuestionStats } from './organizations-service';
 
 // Use import.meta.glob to load YAML at build time
-const yamlFiles = import.meta.glob('/static/content/external-organizations/**/*.yaml', {
+const yamlFiles = import.meta.glob('/src/content/external-organizations/**/*.yaml', {
 	query: '?raw',
 	import: 'default',
 	eager: false
@@ -46,7 +46,7 @@ async function loadData(): Promise<{
 	}
 
 	// Load index.yaml
-	const indexPath = '/static/content/external-organizations/index.yaml';
+	const indexPath = '/src/content/external-organizations/index.yaml';
 	const loader = yamlFiles[indexPath];
 
 	if (!loader) {

@@ -81,7 +81,7 @@ When terminated, the winning model generates a synthesis conclusion covering:
 Discussion data lives alongside the question:
 
 \`\`\`
-static/content/research-questions/phase-1/
+src/content/research-questions/phase-1/
   rq-1-11-swarm-power-architecture-end-use.md
   rq-1-11-swarm-power-architecture-end-use/
     discussion.yaml          # Thread metadata
