@@ -37,8 +37,47 @@
 		'phase-3b': 'bg-rose-500/5'
 	};
 
+	// Short display names for milestones (full names shown in tooltip)
+	const shortNames: Record<string, string> = {
+		'p0-mining-ops': 'Mining Ops',
+		'p0-station-ops': 'Station Ops',
+		'p1-assembly-node': 'Assembly Node',
+		'p1-initial-swarm': '100 Units',
+		'p1-full-swarm': '1k Units',
+		'p2-tier1': '100 GW',
+		'p2-tier2': '1 TW',
+		'p3a-foundry-replication': 'First Replication',
+		'p3a-hot-layer': 'Hot Layer',
+		'p3a-complete': 'Full Brain',
+		'p3b-shkadov-thrust': 'Shkadov Thrust',
+		'p3b-caplan-operational': 'Caplan Engine',
+		'p3b-complete': 'Full Engine'
+	};
+
+	function getShortName(milestone: ProjectMilestone): string {
+		return shortNames[milestone.id] || milestone.name;
+	}
+
 	function getMilestonePosition(milestone: ProjectMilestone) {
 		return (milestone.targetYear / maxYear) * 100;
+	}
+
+	// Calculate vertical offset for overlapping milestones within a phase
+	// Returns offset in pixels (-16, 0, or 16)
+	function getMilestoneOffset(milestone: ProjectMilestone, phaseMilestones: ProjectMilestone[]): number {
+		const sortedMilestones = [...phaseMilestones].sort((a, b) => a.targetYear - b.targetYear);
+		const index = sortedMilestones.findIndex(m => m.id === milestone.id);
+
+		// Check if this milestone is close to the previous one (within 15% of timeline)
+		if (index > 0) {
+			const prevMilestone = sortedMilestones[index - 1];
+			const gap = ((milestone.targetYear - prevMilestone.targetYear) / maxYear) * 100;
+			if (gap < 12) {
+				// Alternate between top and bottom offset
+				return index % 2 === 1 ? -14 : 14;
+			}
+		}
+		return 0;
 	}
 
 	function handleClick(milestone: ProjectMilestone) {
@@ -95,7 +134,7 @@
 			<div class="space-y-1">
 				{#each phases as phase, phaseIndex}
 					{@const phaseMilestones = milestones.filter((m) => m.phase === phase)}
-					<div class="relative h-14 {phaseBgColors[phase]} rounded-lg">
+					<div class="relative h-16 {phaseBgColors[phase]} rounded-lg">
 						<!-- Phase label -->
 						<div class="absolute left-2 top-1/2 -translate-y-1/2 text-xs text-star-faint w-8 font-mono">
 							{phase.replace('phase-', 'P')}
@@ -104,14 +143,15 @@
 						<!-- Milestones -->
 						{#each phaseMilestones as milestone}
 							{@const pos = getMilestonePosition(milestone)}
+							{@const offset = getMilestoneOffset(milestone, phaseMilestones)}
 							<button
-								class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 px-3 py-1.5 rounded-lg border-2 transition-all hover:scale-110 cursor-pointer text-xs font-medium whitespace-nowrap {phaseColors[phase]}"
-								style="left: {pos}%"
+								class="absolute top-1/2 -translate-x-1/2 px-2 py-1 rounded-lg border-2 transition-all hover:scale-110 hover:z-10 cursor-pointer text-xs font-medium whitespace-nowrap {phaseColors[phase]}"
+								style="left: {pos}%; transform: translateX(-50%) translateY(calc(-50% + {offset}px));"
 								onclick={() => handleClick(milestone)}
 								onmouseenter={() => (hoveredMilestone = milestone)}
 								onmouseleave={() => (hoveredMilestone = null)}
 							>
-								{milestone.name}
+								{getShortName(milestone)}
 							</button>
 						{/each}
 					</div>
@@ -119,7 +159,7 @@
 			</div>
 
 			<!-- Dependency lines (SVG overlay) -->
-			<svg class="absolute top-12 left-0 w-full pointer-events-none" style="height: 280px;">
+			<svg class="absolute top-12 left-0 w-full pointer-events-none" style="height: 340px;">
 				{#each milestones as milestone}
 					{#each milestone.dependencies as depId}
 						{@const dep = milestones.find((m) => m.id === depId)}
@@ -128,8 +168,8 @@
 							{@const toPhaseIndex = phases.indexOf(milestone.phase)}
 							{@const x1 = (dep.targetYear / maxYear) * 100}
 							{@const x2 = (milestone.targetYear / maxYear) * 100}
-							{@const y1 = fromPhaseIndex * 60 + 28}
-							{@const y2 = toPhaseIndex * 60 + 28}
+							{@const y1 = fromPhaseIndex * 68 + 32}
+							{@const y2 = toPhaseIndex * 68 + 32}
 							<line
 								x1="{x1}%"
 								{y1}
