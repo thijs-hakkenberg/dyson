@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { QuestionType, ResearchQuestionStatus, Priority, PhaseId, ResolutionStatus } from '$lib/types/entities';
+	import { SelectField } from '$lib/components/ui';
 
 	interface Props {
 		selectedPhase: PhaseId | '';
@@ -123,61 +124,41 @@
 		<!-- Phase -->
 		<div>
 			<label for="phase" class="block text-xs font-medium text-star-faint mb-1">Phase</label>
-			<select
-				id="phase"
-				bind:value={selectedPhase}
-				onchange={handleChange}
-				class="w-full px-3 py-2 bg-space-700 border border-space-500 rounded-lg text-star-white text-sm focus:outline-none focus:border-cosmic-cyan"
-			>
+			<SelectField bind:value={selectedPhase} onchange={handleChange}>
 				{#each phases as phase}
 					<option value={phase.value}>{phase.label}</option>
 				{/each}
-			</select>
+			</SelectField>
 		</div>
 
 		<!-- Type -->
 		<div>
 			<label for="type" class="block text-xs font-medium text-star-faint mb-1">Type</label>
-			<select
-				id="type"
-				bind:value={selectedType}
-				onchange={handleChange}
-				class="w-full px-3 py-2 bg-space-700 border border-space-500 rounded-lg text-star-white text-sm focus:outline-none focus:border-cosmic-cyan"
-			>
+			<SelectField bind:value={selectedType} onchange={handleChange}>
 				{#each types as type}
 					<option value={type.value}>{type.label}</option>
 				{/each}
-			</select>
+			</SelectField>
 		</div>
 
 		<!-- Status -->
 		<div>
 			<label for="status" class="block text-xs font-medium text-star-faint mb-1">Status</label>
-			<select
-				id="status"
-				bind:value={selectedStatus}
-				onchange={handleChange}
-				class="w-full px-3 py-2 bg-space-700 border border-space-500 rounded-lg text-star-white text-sm focus:outline-none focus:border-cosmic-cyan"
-			>
+			<SelectField bind:value={selectedStatus} onchange={handleChange}>
 				{#each statuses as status}
 					<option value={status.value}>{status.label}</option>
 				{/each}
-			</select>
+			</SelectField>
 		</div>
 
 		<!-- Priority -->
 		<div>
 			<label for="priority" class="block text-xs font-medium text-star-faint mb-1">Priority</label>
-			<select
-				id="priority"
-				bind:value={selectedPriority}
-				onchange={handleChange}
-				class="w-full px-3 py-2 bg-space-700 border border-space-500 rounded-lg text-star-white text-sm focus:outline-none focus:border-cosmic-cyan"
-			>
+			<SelectField bind:value={selectedPriority} onchange={handleChange}>
 				{#each priorities as priority}
 					<option value={priority.value}>{priority.label}</option>
 				{/each}
-			</select>
+			</SelectField>
 		</div>
 	</div>
 
@@ -185,16 +166,11 @@
 	{#if showResolutionFilter}
 		<div>
 			<label for="resolution" class="block text-xs font-medium text-star-faint mb-1">Resolution Status</label>
-			<select
-				id="resolution"
-				bind:value={selectedResolution}
-				onchange={handleChange}
-				class="w-full px-3 py-2 bg-space-700 border border-space-500 rounded-lg text-star-white text-sm focus:outline-none focus:border-cosmic-cyan"
-			>
+			<SelectField bind:value={selectedResolution} onchange={handleChange}>
 				{#each resolutionStatuses as resStatus}
 					<option value={resStatus.value}>{resStatus.label}</option>
 				{/each}
-			</select>
+			</SelectField>
 		</div>
 	{/if}
 

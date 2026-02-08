@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ExperimentStatus } from '$lib/types/roadmap';
 	import { experimentStatusLabels } from '$lib/types/roadmap';
+	import { SelectField } from '$lib/components/ui';
 
 	interface Props {
 		selectedStatus: ExperimentStatus | '';
@@ -75,31 +76,21 @@
 		<!-- Status -->
 		<div>
 			<label for="status" class="block text-xs font-medium text-star-faint mb-1">Status</label>
-			<select
-				id="status"
-				bind:value={selectedStatus}
-				onchange={handleChange}
-				class="w-full px-3 py-2 bg-space-700 border border-space-500 rounded-lg text-star-white text-sm focus:outline-none focus:border-cosmic-cyan"
-			>
+			<SelectField bind:value={selectedStatus} onchange={handleChange}>
 				{#each statuses as status}
 					<option value={status.value}>{status.label}</option>
 				{/each}
-			</select>
+			</SelectField>
 		</div>
 
 		<!-- Year -->
 		<div>
 			<label for="year" class="block text-xs font-medium text-star-faint mb-1">Year</label>
-			<select
-				id="year"
-				bind:value={selectedYear}
-				onchange={handleChange}
-				class="w-full px-3 py-2 bg-space-700 border border-space-500 rounded-lg text-star-white text-sm focus:outline-none focus:border-cosmic-cyan"
-			>
+			<SelectField bind:value={selectedYear} onchange={handleChange}>
 				{#each yearOptions as year}
 					<option value={year.value}>{year.label}</option>
 				{/each}
-			</select>
+			</SelectField>
 		</div>
 	</div>
 

@@ -3,6 +3,7 @@
 	import { formatCurrency } from '$lib/services/content';
 	import CampaignCard from '$lib/components/funding/CampaignCard.svelte';
 	import ProgressBar from '$lib/components/funding/ProgressBar.svelte';
+	import { IconBadge } from '$lib/components/ui';
 
 	// Sample campaigns (in production, these would come from a database)
 	const campaigns: FundingCampaign[] = [
@@ -95,11 +96,11 @@
 		<h2 class="text-2xl font-bold text-star-white mb-6">How Your Contribution Helps</h2>
 		<div class="grid md:grid-cols-3 gap-6">
 			<div class="card-glow p-6">
-				<div class="w-12 h-12 rounded-full bg-cosmic-blue/20 flex items-center justify-center mb-4">
+				<IconBadge color="cosmic-blue" class="mb-4">
 					<svg class="w-6 h-6 text-cosmic-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
 					</svg>
-				</div>
+				</IconBadge>
 				<h3 class="text-lg font-semibold text-star-white mb-2">Research Funding</h3>
 				<p class="text-star-dim text-sm">
 					Your contributions fund academic research, feasibility studies, and expert consultations.
@@ -107,11 +108,11 @@
 			</div>
 
 			<div class="card-glow p-6">
-				<div class="w-12 h-12 rounded-full bg-cosmic-purple/20 flex items-center justify-center mb-4">
+				<IconBadge color="cosmic-purple" class="mb-4">
 					<svg class="w-6 h-6 text-cosmic-purple" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
 					</svg>
-				</div>
+				</IconBadge>
 				<h3 class="text-lg font-semibold text-star-white mb-2">Computing Resources</h3>
 				<p class="text-star-dim text-sm">
 					Support the computational power needed for simulations, LLM analysis, and data processing.
@@ -119,11 +120,11 @@
 			</div>
 
 			<div class="card-glow p-6">
-				<div class="w-12 h-12 rounded-full bg-cosmic-cyan/20 flex items-center justify-center mb-4">
+				<IconBadge color="cosmic-cyan" class="mb-4">
 					<svg class="w-6 h-6 text-cosmic-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
 					</svg>
-				</div>
+				</IconBadge>
 				<h3 class="text-lg font-semibold text-star-white mb-2">Documentation</h3>
 				<p class="text-star-dim text-sm">
 					Help us create comprehensive documentation, educational materials, and public outreach.
@@ -157,11 +158,11 @@
 	<!-- Transparency Notice -->
 	<section class="card-glow p-8">
 		<div class="flex items-start gap-4">
-			<div class="w-12 h-12 rounded-full bg-sun-gold/20 flex items-center justify-center flex-shrink-0">
+			<IconBadge color="sun-gold" class="flex-shrink-0">
 				<svg class="w-6 h-6 text-sun-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
 				</svg>
-			</div>
+			</IconBadge>
 			<div>
 				<h3 class="text-lg font-semibold text-star-white mb-2">Transparency Commitment</h3>
 				<p class="text-star-dim">

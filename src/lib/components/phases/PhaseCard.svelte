@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Phase } from '$lib/types';
 	import { formatCurrency } from '$lib/services/content';
+	import { IconBadge } from '$lib/components/ui';
 
 	interface Props {
 		phase: Phase;
@@ -12,7 +13,7 @@
 	const statusColors = {
 		planned: 'bg-space-600 text-star-dim',
 		'in-progress': 'bg-cosmic-blue/20 text-cosmic-cyan',
-		completed: 'bg-green-500/20 text-green-400'
+		completed: 'bg-status-success/20 text-status-success'
 	};
 
 	const statusLabels = {
@@ -25,9 +26,9 @@
 <article class="card-glow p-6 h-full flex flex-col">
 	<div class="flex items-start justify-between gap-4 mb-4">
 		<div class="flex items-center gap-3">
-			<div class="w-12 h-12 rounded-full bg-gradient-to-br from-cosmic-blue to-cosmic-purple flex items-center justify-center flex-shrink-0">
+			<IconBadge color="gradient" class="flex-shrink-0">
 				<span class="text-white font-bold text-lg">{phase.number}</span>
-			</div>
+			</IconBadge>
 			<div>
 				<h3 class="text-lg font-semibold text-star-white">{phase.title}</h3>
 				<span class="text-xs px-2 py-0.5 rounded {statusColors[phase.status]}">

@@ -6,6 +6,12 @@
  * - CampaignCard.svelte
  * - PhaseDAG.svelte
  * - PhaseTimeline.svelte
+ *
+ * Uses semantic status colors from the theme:
+ * - status-success: green for completed/active states
+ * - status-warning: yellow for medium priority
+ * - status-error: red for critical priority
+ * - status-info: blue for info states
  */
 
 // Phase status types
@@ -28,7 +34,7 @@ export type Priority = 'critical' | 'high' | 'medium' | 'low';
 export const phaseStatusColors: Record<PhaseStatus, string> = {
 	planned: 'bg-space-600 text-star-dim',
 	'in-progress': 'bg-cosmic-blue/20 text-cosmic-cyan',
-	completed: 'bg-green-500/20 text-green-400'
+	completed: 'bg-status-success/20 text-status-success'
 };
 
 export const phaseStatusLabels: Record<PhaseStatus, string> = {
@@ -40,7 +46,7 @@ export const phaseStatusLabels: Record<PhaseStatus, string> = {
 // --- Campaign Status Colors ---
 
 export const campaignStatusColors: Record<CampaignStatus, string> = {
-	active: 'bg-green-500/20 text-green-400',
+	active: 'bg-status-success/20 text-status-success',
 	completed: 'bg-cosmic-blue/20 text-cosmic-cyan',
 	upcoming: 'bg-sun-gold/20 text-sun-gold'
 };
@@ -56,13 +62,13 @@ export const campaignStatusLabels: Record<CampaignStatus, string> = {
 export const activityStatusColors: Record<ActivityStatus, string> = {
 	pending: 'bg-space-600 border-space-500',
 	'in-progress': 'bg-cosmic-blue/20 border-cosmic-cyan',
-	completed: 'bg-green-500/20 border-green-400'
+	completed: 'bg-status-success/20 border-status-success'
 };
 
 export const activityStatusTextColors: Record<ActivityStatus, string> = {
 	pending: 'text-star-faint',
 	'in-progress': 'text-cosmic-cyan',
-	completed: 'text-green-400'
+	completed: 'text-status-success'
 };
 
 // --- Timeline Status Colors (for PhaseTimeline) ---
@@ -70,7 +76,7 @@ export const activityStatusTextColors: Record<ActivityStatus, string> = {
 export const timelineStatusColors: Record<PhaseStatus, string> = {
 	planned: 'border-space-500 bg-space-700',
 	'in-progress': 'border-cosmic-cyan bg-cosmic-blue/20',
-	completed: 'border-green-400 bg-green-500/20'
+	completed: 'border-status-success bg-status-success/20'
 };
 
 // --- Research Question Status Colors ---
@@ -78,7 +84,7 @@ export const timelineStatusColors: Record<PhaseStatus, string> = {
 export const researchQuestionStatusColors: Record<ResearchQuestionStatus, string> = {
 	open: 'bg-purple-500/20 text-purple-400',
 	investigating: 'bg-cosmic-blue/20 text-cosmic-cyan',
-	answered: 'bg-green-500/20 text-green-400',
+	answered: 'bg-status-success/20 text-status-success',
 	deferred: 'bg-space-600 text-star-dim'
 };
 
@@ -92,9 +98,9 @@ export const researchQuestionStatusLabels: Record<ResearchQuestionStatus, string
 // --- Priority Colors ---
 
 export const priorityColors: Record<Priority, string> = {
-	critical: 'bg-red-500/20 text-red-400',
+	critical: 'bg-status-error/20 text-status-error',
 	high: 'bg-orange-500/20 text-orange-400',
-	medium: 'bg-sun-gold/20 text-sun-gold',
+	medium: 'bg-status-warning/20 text-status-warning',
 	low: 'bg-space-600 text-star-dim'
 };
 
@@ -118,7 +124,7 @@ export interface ModelColorScheme {
 export const modelColors: Record<LLMModel, ModelColorScheme> = {
 	Claude: { bg: 'bg-orange-500/20', text: 'text-orange-400', border: 'border-orange-500/30' },
 	Gemini: { bg: 'bg-purple-500/20', text: 'text-purple-400', border: 'border-purple-500/30' },
-	GPT: { bg: 'bg-blue-500/20', text: 'text-blue-400', border: 'border-blue-500/30' }
+	GPT: { bg: 'bg-status-info/20', text: 'text-status-info', border: 'border-status-info/30' }
 };
 
 /**
@@ -161,8 +167,8 @@ export const categoryColors: Record<string, string> = {
 	Spacecraft: 'bg-cosmic-blue/20 text-cosmic-cyan',
 	Robotics: 'bg-cosmic-purple/20 text-cosmic-purple',
 	Infrastructure: 'bg-sun-gold/20 text-sun-gold',
-	'Power Systems': 'bg-green-500/20 text-green-400',
-	Communications: 'bg-blue-500/20 text-blue-400'
+	'Power Systems': 'bg-status-success/20 text-status-success',
+	Communications: 'bg-status-info/20 text-status-info'
 };
 
 /**

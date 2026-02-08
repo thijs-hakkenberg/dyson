@@ -24,6 +24,12 @@
   --color-sun-orange: #f97316;
   --color-sun-red: #ef4444;
 
+  /* Status colors - semantic */
+  --color-status-success: #4ade80;
+  --color-status-warning: #facc15;
+  --color-status-error: #f87171;
+  --color-status-info: #60a5fa;
+
   /* Gradients */
   --gradient-cosmic: linear-gradient(135deg, var(--color-cosmic-blue), var(--color-cosmic-purple));
   --gradient-solar: linear-gradient(135deg, var(--color-sun-gold), var(--color-sun-orange));
