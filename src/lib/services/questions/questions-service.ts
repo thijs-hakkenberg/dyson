@@ -123,7 +123,9 @@ export function computeQuestionStats(questions: ResearchQuestion[]): QuestionSta
 		byPhase: {
 			'phase-0': 0,
 			'phase-1': 0,
-			'phase-2': 0
+			'phase-2': 0,
+			'phase-3a': 0,
+			'phase-3b': 0
 		}
 	};
 

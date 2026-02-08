@@ -22,7 +22,8 @@ const questionFiles = import.meta.glob('/src/content/research-questions/**/*.md'
  */
 function isQuestionFile(path: string): boolean {
 	// Must match pattern: /phase-X/rq-X-Y-slug.md (not in subdirectories)
-	return /\/phase-\d+\/rq-\d+-\d+-[^/]+\.md$/.test(path);
+	// Supports phase-3a, phase-3b and rq-3a-1, rq-3b-1 patterns
+	return /\/phase-\d+[a-z]?\/rq-\d+[a-z]?-\d+-[^/]+\.md$/.test(path);
 }
 
 /**
@@ -111,10 +112,11 @@ export async function fetchAllQuestions(): Promise<ResearchQuestion[]> {
 	}
 
 	// Sort by ID for consistent ordering
+	// Handles both numeric (rq-1-2) and alphanumeric (rq-3a-1) IDs
 	questions.sort((a, b) => {
-		const [, aPhase, aNum] = a.id.match(/rq-(\d+)-(\d+)/) || [];
-		const [, bPhase, bNum] = b.id.match(/rq-(\d+)-(\d+)/) || [];
-		if (aPhase !== bPhase) return parseInt(aPhase) - parseInt(bPhase);
+		const [, aPhase, aNum] = a.id.match(/rq-(\d+[a-z]?)-(\d+)/) || [];
+		const [, bPhase, bNum] = b.id.match(/rq-(\d+[a-z]?)-(\d+)/) || [];
+		if (aPhase !== bPhase) return aPhase.localeCompare(bPhase);
 		return parseInt(aNum) - parseInt(bNum);
 	});
 

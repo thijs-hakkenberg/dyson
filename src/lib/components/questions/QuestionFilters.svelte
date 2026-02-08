@@ -27,7 +27,9 @@
 		{ value: '', label: 'All Phases' },
 		{ value: 'phase-0', label: 'Phase 0' },
 		{ value: 'phase-1', label: 'Phase 1' },
-		{ value: 'phase-2', label: 'Phase 2' }
+		{ value: 'phase-2', label: 'Phase 2' },
+		{ value: 'phase-3a', label: 'Phase 3a' },
+		{ value: 'phase-3b', label: 'Phase 3b' }
 	];
 
 	const types = [

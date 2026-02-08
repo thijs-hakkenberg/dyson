@@ -6,7 +6,7 @@
  */
 
 // Branded ID types for type safety
-export type PhaseId = `phase-${number}`;
+export type PhaseId = `phase-${number}` | 'phase-3a' | 'phase-3b';
 export type BOMItemId = `bom-${number}-${number}`;
 export type ResearchQuestionId = `rq-${number}-${number}`;
 export type ActivityId = `act-${number}-${number}`;
