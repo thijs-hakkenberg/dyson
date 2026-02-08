@@ -41,6 +41,7 @@
 	const shortNames: Record<string, string> = {
 		'p0-mining-ops': 'Mining Ops',
 		'p0-station-ops': 'Station Ops',
+		'p1-first-collector': 'Prototype',
 		'p1-assembly-node': 'Assembly Node',
 		'p1-initial-swarm': '100 Units',
 		'p1-full-swarm': '1k Units',
@@ -58,9 +59,24 @@
 		return shortNames[milestone.id] || milestone.name;
 	}
 
-	function getMilestonePosition(milestone: ProjectMilestone) {
-		return (milestone.targetYear / maxYear) * 100;
+	// Logarithmic scale for x-axis positioning
+	// Spreads out early milestones and compresses later ones
+	// Using offset of 10 for less aggressive compression of later years
+	function yearToPosition(year: number): number {
+		const offset = 10; // Higher offset = less aggressive log curve
+		const logYear = Math.log10(year + offset);
+		const logMax = Math.log10(maxYear + offset);
+		const logMin = Math.log10(offset);
+		// Normalize to 0-100 range
+		return ((logYear - logMin) / (logMax - logMin)) * 100;
 	}
+
+	function getMilestonePosition(milestone: ProjectMilestone) {
+		return yearToPosition(milestone.targetYear);
+	}
+
+	// Year markers that work well with log scale
+	const yearMarkers = [0, 10, 25, 50, 100, 150, 200, 280];
 
 	// Calculate vertical offset for overlapping milestones within a phase
 	// Returns offset in pixels (-16, 0, or 16)
@@ -113,19 +129,19 @@
 		<div class="min-w-[900px]">
 			<!-- Year markers -->
 			<div class="flex justify-between text-xs text-star-faint border-b border-space-600 pb-2 mb-4 relative h-6">
-				{#each Array(Math.ceil(maxYear / 50) + 1) as _, i}
-					<span class="absolute" style="left: {(i * 50 / maxYear) * 100}%">
-						Year {i * 50}
+				{#each yearMarkers as year}
+					<span class="absolute" style="left: {yearToPosition(year)}%">
+						Year {year}
 					</span>
 				{/each}
 			</div>
 
 			<!-- Grid lines -->
 			<div class="absolute top-12 left-0 right-0 bottom-0 pointer-events-none">
-				{#each Array(Math.ceil(maxYear / 50) + 1) as _, i}
+				{#each yearMarkers as year}
 					<div
 						class="absolute h-full w-px bg-space-600/30"
-						style="left: {(i * 50 / maxYear) * 100}%"
+						style="left: {yearToPosition(year)}%"
 					></div>
 				{/each}
 			</div>
@@ -166,8 +182,8 @@
 						{#if dep}
 							{@const fromPhaseIndex = phases.indexOf(dep.phase)}
 							{@const toPhaseIndex = phases.indexOf(milestone.phase)}
-							{@const x1 = (dep.targetYear / maxYear) * 100}
-							{@const x2 = (milestone.targetYear / maxYear) * 100}
+							{@const x1 = yearToPosition(dep.targetYear)}
+							{@const x2 = yearToPosition(milestone.targetYear)}
 							{@const y1 = fromPhaseIndex * 68 + 32}
 							{@const y2 = toPhaseIndex * 68 + 32}
 							<line

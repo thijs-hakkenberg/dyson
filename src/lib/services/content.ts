@@ -1578,11 +1578,19 @@ export const PROJECT_MILESTONES: ProjectMilestone[] = [
 		criticalPath: true
 	},
 	{
+		id: 'p1-first-collector',
+		name: 'First Collector Prototype',
+		phase: 'phase-1',
+		targetYear: 10,
+		dependencies: ['p0-station-ops'],
+		criticalPath: true
+	},
+	{
 		id: 'p1-assembly-node',
 		name: 'Assembly Node Operational',
 		phase: 'phase-1',
 		targetYear: 13,
-		dependencies: ['p0-station-ops'],
+		dependencies: ['p1-first-collector'],
 		criticalPath: true
 	},
 	{
