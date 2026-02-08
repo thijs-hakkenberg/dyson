@@ -2,9 +2,16 @@
 	import { getPhases, formatCurrency, getTotalProjectCost } from '$lib/services/content';
 	import PhaseTimeline from '$lib/components/phases/PhaseTimeline.svelte';
 	import PhaseCard from '$lib/components/phases/PhaseCard.svelte';
+	import MilestoneDAG from '$lib/components/phases/MilestoneDAG.svelte';
+	import { goto } from '$app/navigation';
+	import type { ProjectMilestone } from '$lib/services/content';
 
 	const phases = getPhases();
 	const totalCost = getTotalProjectCost();
+
+	function handleMilestoneClick(milestone: ProjectMilestone) {
+		goto(`/plan/${milestone.phase}`);
+	}
 </script>
 
 <svelte:head>
@@ -60,9 +67,19 @@
 		</div>
 	</div>
 
+	<!-- Project Milestones (Cross-Phase View) -->
+	<section class="mb-16">
+		<h2 class="text-2xl font-bold text-star-white mb-6">Project Milestones</h2>
+		<p class="text-star-dim mb-6 max-w-3xl">
+			High-level milestones across all phases showing the critical path to a complete Dyson swarm
+			and beyond. Click any milestone to explore that phase in detail.
+		</p>
+		<MilestoneDAG onMilestoneClick={handleMilestoneClick} />
+	</section>
+
 	<!-- Timeline View -->
 	<section class="mb-16">
-		<h2 class="text-2xl font-bold text-star-white mb-6">Project Timeline</h2>
+		<h2 class="text-2xl font-bold text-star-white mb-6">Phase Timeline</h2>
 		<PhaseTimeline {phases} />
 	</section>
 

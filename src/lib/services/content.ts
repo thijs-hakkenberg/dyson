@@ -840,11 +840,856 @@ export const PHASE_0_TIMELINE: PhaseDependencyGraph = {
 };
 
 /**
+ * Phase 1 Timeline/DAG data
+ */
+export const PHASE_1_TIMELINE: PhaseDependencyGraph = {
+	phaseId: 'phase-1',
+	criticalPathDuration: 300,
+	nodes: [
+		{
+			id: 'collector-design',
+			name: 'Collector Unit Design',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 36,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-1/bom/collector-units'
+		},
+		{
+			id: 'pv-blanket-dev',
+			name: 'PV Blanket Development',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 48,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-1/bom/pv-blanket-arrays'
+		},
+		{
+			id: 'prototype-collector',
+			name: 'Prototype Collector Test',
+			type: 'milestone',
+			startMonth: 36,
+			endMonth: 48,
+			dependencies: ['collector-design', 'pv-blanket-dev'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-1/bom/collector-units'
+		},
+		{
+			id: 'assembly-node-design',
+			name: 'Assembly Node Design',
+			type: 'activity',
+			startMonth: 12,
+			endMonth: 48,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-1/bom/assembly-node'
+		},
+		{
+			id: 'robot-dev',
+			name: 'Assembly Robot Development',
+			type: 'activity',
+			startMonth: 12,
+			endMonth: 60,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-1/bom/assembly-robots'
+		},
+		{
+			id: 'assembly-node-deploy',
+			name: 'Assembly Node Launch',
+			type: 'milestone',
+			startMonth: 48,
+			endMonth: 72,
+			dependencies: ['assembly-node-design'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-1/bom/assembly-node'
+		},
+		{
+			id: 'mass-driver-design',
+			name: 'Mass Driver Design',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 60,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-1/bom/mass-drivers'
+		},
+		{
+			id: 'mass-driver-deploy',
+			name: 'Lunar Mass Driver Install',
+			type: 'milestone',
+			startMonth: 60,
+			endMonth: 96,
+			dependencies: ['mass-driver-design'],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-1/bom/mass-drivers'
+		},
+		{
+			id: 'tug-dev',
+			name: 'Orbital Tug Development',
+			type: 'activity',
+			startMonth: 24,
+			endMonth: 60,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-1/bom/orbital-tugs'
+		},
+		{
+			id: 'tug-fleet-deploy',
+			name: 'Tug Fleet Operational',
+			type: 'milestone',
+			startMonth: 60,
+			endMonth: 84,
+			dependencies: ['tug-dev'],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-1/bom/orbital-tugs'
+		},
+		{
+			id: 'control-system-dev',
+			name: 'Swarm Control System Dev',
+			type: 'activity',
+			startMonth: 36,
+			endMonth: 84,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-1/bom/swarm-control-system'
+		},
+		{
+			id: 'isru-decision',
+			name: 'ISRU Transition Decision',
+			type: 'decision',
+			startMonth: 120,
+			endMonth: 132,
+			dependencies: ['assembly-node-deploy', 'mass-driver-deploy'],
+			status: 'pending',
+			criticalPath: true
+		},
+		{
+			id: 'batch-production',
+			name: 'Batch Production Start',
+			type: 'milestone',
+			startMonth: 96,
+			endMonth: 108,
+			dependencies: ['assembly-node-deploy', 'robot-dev', 'control-system-dev'],
+			status: 'pending',
+			criticalPath: true
+		},
+		{
+			id: 'initial-swarm',
+			name: 'Initial Swarm (100 units)',
+			type: 'milestone',
+			startMonth: 144,
+			endMonth: 156,
+			dependencies: ['batch-production'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-1/bom/collector-units'
+		},
+		{
+			id: 'power-transmission-test',
+			name: 'Power Transmission Test',
+			type: 'milestone',
+			startMonth: 156,
+			endMonth: 180,
+			dependencies: ['initial-swarm'],
+			status: 'pending',
+			criticalPath: true
+		},
+		{
+			id: 'full-swarm-deploy',
+			name: 'Full Swarm (1,000 units)',
+			type: 'milestone',
+			startMonth: 240,
+			endMonth: 300,
+			dependencies: ['initial-swarm', 'isru-decision'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-1/bom/collector-units'
+		}
+	]
+};
+
+/**
+ * Phase 2 Timeline/DAG data
+ */
+export const PHASE_2_TIMELINE: PhaseDependencyGraph = {
+	phaseId: 'phase-2',
+	criticalPathDuration: 600,
+	nodes: [
+		{
+			id: 'manufacturing-expansion-design',
+			name: 'Manufacturing Expansion Design',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 48,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-2/bom/manufacturing-expansion'
+		},
+		{
+			id: 'factory-2-deploy',
+			name: 'Factory 2 Deployment',
+			type: 'milestone',
+			startMonth: 48,
+			endMonth: 84,
+			dependencies: ['manufacturing-expansion-design'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-2/bom/manufacturing-expansion'
+		},
+		{
+			id: 'maintenance-drone-dev',
+			name: 'Maintenance Drone Development',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 60,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-2/bom/maintenance-drones'
+		},
+		{
+			id: 'depot-network-design',
+			name: 'Depot Network Design',
+			type: 'activity',
+			startMonth: 24,
+			endMonth: 72,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-2/bom/maintenance-drones'
+		},
+		{
+			id: 'drone-fleet-initial',
+			name: 'Initial Drone Fleet Deploy',
+			type: 'milestone',
+			startMonth: 72,
+			endMonth: 96,
+			dependencies: ['maintenance-drone-dev', 'depot-network-design'],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-2/bom/maintenance-drones'
+		},
+		{
+			id: 'collector-scaleup',
+			name: 'Collector Production Scaleup',
+			type: 'activity',
+			startMonth: 84,
+			endMonth: 180,
+			dependencies: ['factory-2-deploy'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-2/bom/collector-satellites'
+		},
+		{
+			id: 'tier-1-milestone',
+			name: 'Tier 1: 10k Units (100 GW)',
+			type: 'milestone',
+			startMonth: 180,
+			endMonth: 192,
+			dependencies: ['collector-scaleup'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-2/bom/collector-satellites'
+		},
+		{
+			id: 'ground-receiver-network',
+			name: 'Ground Receiver Network',
+			type: 'activity',
+			startMonth: 120,
+			endMonth: 300,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false
+		},
+		{
+			id: 'factory-3-4-deploy',
+			name: 'Factories 3-4 Deployment',
+			type: 'milestone',
+			startMonth: 180,
+			endMonth: 240,
+			dependencies: ['tier-1-milestone'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-2/bom/manufacturing-expansion'
+		},
+		{
+			id: 'exponential-growth',
+			name: 'Exponential Production Phase',
+			type: 'activity',
+			startMonth: 240,
+			endMonth: 480,
+			dependencies: ['factory-3-4-deploy'],
+			status: 'pending',
+			criticalPath: true
+		},
+		{
+			id: 'tier-2-milestone',
+			name: 'Tier 2: 100k Units (1 TW)',
+			type: 'milestone',
+			startMonth: 480,
+			endMonth: 540,
+			dependencies: ['exponential-growth', 'ground-receiver-network'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-2/bom/collector-satellites'
+		},
+		{
+			id: 'full-depot-network',
+			name: 'Full Depot Network (400 depots)',
+			type: 'milestone',
+			startMonth: 360,
+			endMonth: 420,
+			dependencies: ['drone-fleet-initial'],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-2/bom/maintenance-drones'
+		},
+		{
+			id: 'phase-2-complete',
+			name: 'Phase 2 Complete',
+			type: 'milestone',
+			startMonth: 540,
+			endMonth: 600,
+			dependencies: ['tier-2-milestone', 'full-depot-network'],
+			status: 'pending',
+			criticalPath: true
+		}
+	]
+};
+
+/**
+ * Phase 3a Timeline/DAG data (Matrioshka Brain)
+ */
+export const PHASE_3A_TIMELINE: PhaseDependencyGraph = {
+	phaseId: 'phase-3a',
+	criticalPathDuration: 2400,
+	nodes: [
+		{
+			id: 'tpv-dev',
+			name: 'TPV Converter Development',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 120,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3a/bom/computational-substrate-tiles'
+		},
+		{
+			id: 'tile-architecture',
+			name: 'Compute Tile Architecture',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 96,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3a/bom/computational-substrate-tiles'
+		},
+		{
+			id: 'foundry-design',
+			name: 'Self-Replicating Foundry Design',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 180,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3a/bom/self-replicating-manufacturing-foundries'
+		},
+		{
+			id: 'optical-backbone-design',
+			name: 'Optical Backbone Design',
+			type: 'activity',
+			startMonth: 60,
+			endMonth: 144,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-3a/bom/inter-layer-optical-backbone'
+		},
+		{
+			id: 'distributed-os-dev',
+			name: 'Distributed OS Development',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 240,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-3a/bom/distributed-computational-os'
+		},
+		{
+			id: 'seed-foundry-deploy',
+			name: 'Seed Foundry Deployment',
+			type: 'milestone',
+			startMonth: 180,
+			endMonth: 240,
+			dependencies: ['foundry-design'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3a/bom/self-replicating-manufacturing-foundries'
+		},
+		{
+			id: 'first-replication',
+			name: 'First Foundry Replication',
+			type: 'milestone',
+			startMonth: 240,
+			endMonth: 252,
+			dependencies: ['seed-foundry-deploy'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3a/bom/self-replicating-manufacturing-foundries'
+		},
+		{
+			id: 'hot-layer-prototype',
+			name: 'Hot Layer Prototype',
+			type: 'milestone',
+			startMonth: 180,
+			endMonth: 240,
+			dependencies: ['tpv-dev', 'tile-architecture'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3a/bom/computational-substrate-tiles'
+		},
+		{
+			id: 'thermal-cascade-test',
+			name: 'Thermal Cascade Validation',
+			type: 'decision',
+			startMonth: 240,
+			endMonth: 300,
+			dependencies: ['hot-layer-prototype'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3a/bom/thermal-management-radiator-systems'
+		},
+		{
+			id: 'foundry-expansion',
+			name: 'Foundry Exponential Expansion',
+			type: 'activity',
+			startMonth: 252,
+			endMonth: 600,
+			dependencies: ['first-replication'],
+			status: 'pending',
+			criticalPath: true
+		},
+		{
+			id: 'hot-layer-deploy',
+			name: 'Hot Layer Deployment',
+			type: 'activity',
+			startMonth: 360,
+			endMonth: 1200,
+			dependencies: ['thermal-cascade-test', 'foundry-expansion'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3a/bom/computational-substrate-tiles'
+		},
+		{
+			id: 'mid-layer-deploy',
+			name: 'Mid Layer Deployment',
+			type: 'activity',
+			startMonth: 800,
+			endMonth: 1800,
+			dependencies: ['hot-layer-deploy'],
+			status: 'pending',
+			criticalPath: true
+		},
+		{
+			id: 'cold-layer-deploy',
+			name: 'Cold Layer Deployment',
+			type: 'activity',
+			startMonth: 1400,
+			endMonth: 2400,
+			dependencies: ['mid-layer-deploy'],
+			status: 'pending',
+			criticalPath: true
+		},
+		{
+			id: 'initial-compute',
+			name: 'Initial Compute Operational',
+			type: 'milestone',
+			startMonth: 600,
+			endMonth: 660,
+			dependencies: ['hot-layer-deploy', 'distributed-os-dev'],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-3a/bom/distributed-computational-os'
+		},
+		{
+			id: 'phase-3a-complete',
+			name: 'Full Matrioshka Operational',
+			type: 'milestone',
+			startMonth: 2340,
+			endMonth: 2400,
+			dependencies: ['cold-layer-deploy'],
+			status: 'pending',
+			criticalPath: true
+		}
+	]
+};
+
+/**
+ * Phase 3b Timeline/DAG data (Stellar Engine)
+ */
+export const PHASE_3B_TIMELINE: PhaseDependencyGraph = {
+	phaseId: 'phase-3b',
+	criticalPathDuration: 1800,
+	nodes: [
+		{
+			id: 'shkadov-design',
+			name: 'Shkadov Mirror Design',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 120,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-3b/bom/shkadov-mirror-array'
+		},
+		{
+			id: 'standoff-trade-study',
+			name: 'Standoff Distance Trade Study',
+			type: 'decision',
+			startMonth: 60,
+			endMonth: 96,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-3b/bom/shkadov-mirror-array'
+		},
+		{
+			id: 'shkadov-prototype',
+			name: 'Shkadov Prototype Deploy',
+			type: 'milestone',
+			startMonth: 120,
+			endMonth: 180,
+			dependencies: ['shkadov-design', 'standoff-trade-study'],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-3b/bom/shkadov-mirror-array'
+		},
+		{
+			id: 'mass-lifting-research',
+			name: 'Mass Lifting R&D',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 180,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3b/bom/mass-lifting-systems'
+		},
+		{
+			id: 'solar-wind-collectors-design',
+			name: 'Solar Wind Collector Design',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 96,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-3b/bom/solar-wind-collectors'
+		},
+		{
+			id: 'fusion-engine-dev',
+			name: 'Thermonuclear Engine Development',
+			type: 'activity',
+			startMonth: 0,
+			endMonth: 240,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3b/bom/thermonuclear-jet-engine'
+		},
+		{
+			id: 'helium-sep-design',
+			name: 'Helium Separation Plant Design',
+			type: 'activity',
+			startMonth: 60,
+			endMonth: 180,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3b/bom/helium-separation-plant'
+		},
+		{
+			id: 'em-accelerator-design',
+			name: 'EM Accelerator Design',
+			type: 'activity',
+			startMonth: 60,
+			endMonth: 144,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-3b/bom/em-accelerators'
+		},
+		{
+			id: 'mass-lifting-test',
+			name: 'Mass Lifting Prototype Test',
+			type: 'milestone',
+			startMonth: 180,
+			endMonth: 240,
+			dependencies: ['mass-lifting-research'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3b/bom/mass-lifting-systems'
+		},
+		{
+			id: 'fusion-ignition',
+			name: 'Sustained Fusion Ignition',
+			type: 'milestone',
+			startMonth: 240,
+			endMonth: 300,
+			dependencies: ['fusion-engine-dev'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3b/bom/thermonuclear-jet-engine'
+		},
+		{
+			id: 'fuel-cycle-integration',
+			name: 'Fuel Cycle Integration',
+			type: 'activity',
+			startMonth: 300,
+			endMonth: 480,
+			dependencies: ['fusion-ignition', 'helium-sep-design', 'mass-lifting-test'],
+			status: 'pending',
+			criticalPath: true
+		},
+		{
+			id: 'shkadov-array-deploy',
+			name: 'Shkadov Array Deployment',
+			type: 'activity',
+			startMonth: 180,
+			endMonth: 600,
+			dependencies: ['shkadov-prototype'],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-3b/bom/shkadov-mirror-array'
+		},
+		{
+			id: 'first-measurable-thrust',
+			name: 'First Measurable Thrust',
+			type: 'milestone',
+			startMonth: 600,
+			endMonth: 660,
+			dependencies: ['shkadov-array-deploy'],
+			status: 'pending',
+			criticalPath: false
+		},
+		{
+			id: 'caplan-engine-assembly',
+			name: 'Caplan Engine Assembly',
+			type: 'activity',
+			startMonth: 480,
+			endMonth: 1200,
+			dependencies: ['fuel-cycle-integration'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3b/bom/thermonuclear-jet-engine'
+		},
+		{
+			id: 'thrust-stabilization-dev',
+			name: 'Thrust Stabilization Development',
+			type: 'activity',
+			startMonth: 240,
+			endMonth: 600,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-3b/bom/thrust-stabilization'
+		},
+		{
+			id: 'integration-layer-deploy',
+			name: 'Dyson Integration Layer Deploy',
+			type: 'activity',
+			startMonth: 360,
+			endMonth: 720,
+			dependencies: [],
+			status: 'pending',
+			criticalPath: false,
+			linkTo: '/plan/phase-3b/bom/dyson-integration-layer'
+		},
+		{
+			id: 'caplan-engine-operational',
+			name: 'Caplan Engine Operational',
+			type: 'milestone',
+			startMonth: 1200,
+			endMonth: 1260,
+			dependencies: ['caplan-engine-assembly', 'thrust-stabilization-dev', 'integration-layer-deploy'],
+			status: 'pending',
+			criticalPath: true,
+			linkTo: '/plan/phase-3b/bom/thermonuclear-jet-engine'
+		},
+		{
+			id: 'phase-3b-complete',
+			name: 'Full Stellar Engine Operational',
+			type: 'milestone',
+			startMonth: 1740,
+			endMonth: 1800,
+			dependencies: ['caplan-engine-operational', 'shkadov-array-deploy'],
+			status: 'pending',
+			criticalPath: true
+		}
+	]
+};
+
+/**
+ * Project-wide milestones for cross-phase view
+ */
+export interface ProjectMilestone {
+	id: string;
+	name: string;
+	phase: string;
+	targetYear: number;
+	dependencies: string[];
+	criticalPath: boolean;
+}
+
+export const PROJECT_MILESTONES: ProjectMilestone[] = [
+	{
+		id: 'p0-mining-ops',
+		name: 'First Asteroid Mining',
+		phase: 'phase-0',
+		targetYear: 5,
+		dependencies: [],
+		criticalPath: true
+	},
+	{
+		id: 'p0-station-ops',
+		name: 'Processing Station Operational',
+		phase: 'phase-0',
+		targetYear: 7,
+		dependencies: ['p0-mining-ops'],
+		criticalPath: true
+	},
+	{
+		id: 'p1-assembly-node',
+		name: 'Assembly Node Operational',
+		phase: 'phase-1',
+		targetYear: 13,
+		dependencies: ['p0-station-ops'],
+		criticalPath: true
+	},
+	{
+		id: 'p1-initial-swarm',
+		name: 'Initial Swarm (100 units)',
+		phase: 'phase-1',
+		targetYear: 18,
+		dependencies: ['p1-assembly-node'],
+		criticalPath: true
+	},
+	{
+		id: 'p1-full-swarm',
+		name: 'Phase 1 Swarm Complete (1,000 units)',
+		phase: 'phase-1',
+		targetYear: 32,
+		dependencies: ['p1-initial-swarm'],
+		criticalPath: true
+	},
+	{
+		id: 'p2-tier1',
+		name: 'Tier 1: 100 GW Delivered',
+		phase: 'phase-2',
+		targetYear: 50,
+		dependencies: ['p1-full-swarm'],
+		criticalPath: true
+	},
+	{
+		id: 'p2-tier2',
+		name: 'Tier 2: 1 TW Delivered',
+		phase: 'phase-2',
+		targetYear: 80,
+		dependencies: ['p2-tier1'],
+		criticalPath: true
+	},
+	{
+		id: 'p3a-foundry-replication',
+		name: 'First Foundry Self-Replication',
+		phase: 'phase-3a',
+		targetYear: 100,
+		dependencies: ['p2-tier2'],
+		criticalPath: false
+	},
+	{
+		id: 'p3a-hot-layer',
+		name: 'Hot Layer Operational',
+		phase: 'phase-3a',
+		targetYear: 130,
+		dependencies: ['p3a-foundry-replication'],
+		criticalPath: false
+	},
+	{
+		id: 'p3a-complete',
+		name: 'Full Matrioshka Brain',
+		phase: 'phase-3a',
+		targetYear: 280,
+		dependencies: ['p3a-hot-layer'],
+		criticalPath: false
+	},
+	{
+		id: 'p3b-shkadov-thrust',
+		name: 'First Measurable Shkadov Thrust',
+		phase: 'phase-3b',
+		targetYear: 130,
+		dependencies: ['p2-tier2'],
+		criticalPath: false
+	},
+	{
+		id: 'p3b-caplan-operational',
+		name: 'Caplan Engine Operational',
+		phase: 'phase-3b',
+		targetYear: 180,
+		dependencies: ['p3b-shkadov-thrust'],
+		criticalPath: false
+	},
+	{
+		id: 'p3b-complete',
+		name: 'Full Stellar Engine Operational',
+		phase: 'phase-3b',
+		targetYear: 230,
+		dependencies: ['p3b-caplan-operational'],
+		criticalPath: false
+	}
+];
+
+/**
  * Get timeline data for a phase
  */
 export function getPhaseTimeline(phaseId: string): PhaseDependencyGraph | undefined {
-	if (phaseId === 'phase-0') {
-		return PHASE_0_TIMELINE;
+	switch (phaseId) {
+		case 'phase-0':
+			return PHASE_0_TIMELINE;
+		case 'phase-1':
+			return PHASE_1_TIMELINE;
+		case 'phase-2':
+			return PHASE_2_TIMELINE;
+		case 'phase-3a':
+			return PHASE_3A_TIMELINE;
+		case 'phase-3b':
+			return PHASE_3B_TIMELINE;
+		default:
+			return undefined;
 	}
-	return undefined;
+}
+
+/**
+ * Get all project milestones
+ */
+export function getProjectMilestones(): ProjectMilestone[] {
+	return PROJECT_MILESTONES;
 }

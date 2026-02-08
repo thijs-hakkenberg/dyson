@@ -40,5 +40,6 @@
   "rq-1-39-cluster-coordinator-duty-cycle.md",
   "rq-1-40-slot-reallocation-governance.md",
   "rq-1-41-software-update-strategy-scale.md",
-  "rq-1-42-node-end-of-life-disposal.md"
+  "rq-1-42-node-end-of-life-disposal.md",
+  "rq-1-43-ml-trajectory-deployment-optimization.md"
 ]
