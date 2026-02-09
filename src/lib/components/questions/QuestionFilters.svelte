@@ -39,7 +39,8 @@
 		{ value: 'experimentation', label: 'Experiment' },
 		{ value: 'simulation', label: 'Simulation' },
 		{ value: 'engineering-decision', label: 'Decision' },
-		{ value: 'discussion', label: 'Discussion' }
+		{ value: 'discussion', label: 'Discussion' },
+		{ value: 'analysis', label: 'Analysis' }
 	];
 
 	const statuses = [

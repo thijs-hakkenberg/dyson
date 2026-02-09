@@ -112,7 +112,8 @@ export function computeQuestionStats(questions: ResearchQuestion[]): QuestionSta
 			experimentation: 0,
 			simulation: 0,
 			'engineering-decision': 0,
-			discussion: 0
+			discussion: 0,
+			analysis: 0
 		},
 		byPriority: {
 			critical: 0,
