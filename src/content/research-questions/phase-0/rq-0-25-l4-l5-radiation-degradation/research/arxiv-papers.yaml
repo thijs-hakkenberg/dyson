@@ -1,0 +1,50 @@
+# Arxiv papers relevant to rq-0-25: Radiation degradation rate at L4/L5 location
+# Generated: 2026-02-09
+
+papers:
+  - arxiv_id: "1704.06495"
+    title: "Displacement Damage dose and DLTS Analyses on Triple and Single Junction solar cells irradiated with electrons and protons"
+    authors: ["Carsten Baur", "Roberta Campesato", "Mariacristina Casale"]
+    relevance: critical
+    summary: "Radiation data for triple junction cells under electron/proton irradiation. Essential for L4/L5 degradation predictions."
+
+  - arxiv_id: "1811.11583"
+    title: "NIEL DOSE and DLTS Analyses on Triple and Single Junction solar cells irradiated with electrons and protons"
+    authors: ["Roberta Campesato", "Carsten Baur", "Mariacristina Casale"]
+    relevance: critical
+    summary: "Non-Ionizing Energy Loss dose analysis for space solar cells. Key for calculating equivalent fluence at L4/L5."
+
+  - arxiv_id: "2004.00308"
+    title: "Radiation hardness and post irradiation regeneration behavior of GaInAsP solar cells"
+    authors: ["R. Lang", "J. Schön", "J. Lefèvre"]
+    relevance: high
+    summary: "1 MeV electron irradiation damage in III-V cells. Includes annealing/regeneration data useful for L4/L5 operations."
+
+  - arxiv_id: "1012.0717"
+    title: "Moon's Radiation Environment and Expected Performance of Solar Cells during Future Lunar Missions"
+    authors: ["T. E Girish", "S Aranya"]
+    relevance: high
+    summary: "Solar cell performance outside magnetosphere. Provides context for unshielded radiation environments."
+
+  - arxiv_id: "1301.1278"
+    title: "III-V Solar Cells"
+    authors: ["James P. Connolly", "Denis Mencaraglia"]
+    relevance: medium
+    summary: "Comprehensive review of III-V cell physics. Background for understanding degradation mechanisms."
+
+  - arxiv_id: "1207.5597"
+    title: "Impacts of The Radiation Environment At L2 On Bolometers Onboard The Herschel Space Observatory"
+    authors: ["Benoît Horeau", "Olivier Boulade", "Arnaud Claret"]
+    relevance: high
+    summary: "L2 radiation effects on space instruments. L2 environment similar to L4/L5 - outside magnetosphere."
+
+key_findings:
+  - "Triple junction cells show displacement damage primarily in GaAs middle junction"
+  - "1 MeV electron equivalent fluence can predict degradation for mixed spectra"
+  - "Post-irradiation annealing at operating temperatures can partially recover performance"
+  - "L2 data from Herschel shows cosmic ray effects on sensitive instruments"
+
+gaps_identified:
+  - "No direct L4/L5 solar cell flight data exists"
+  - "SPE frequency impact on cumulative dose needs solar cycle modeling"
+  - "Need ground testing with L4/L5 spectrum rather than standard test spectra"

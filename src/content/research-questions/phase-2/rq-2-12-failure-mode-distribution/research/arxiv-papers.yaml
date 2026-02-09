@@ -1,0 +1,51 @@
+# Arxiv papers relevant to rq-2-12: Swarm element failure mode distribution
+# Generated: 2026-02-09
+
+papers:
+  - arxiv_id: "2507.14059"
+    title: "Design of a Modular Mobile Inspection and Maintenance Robot for an Orbital Servicing Hub"
+    authors: ["Tianyuan Wang", "Mark A Post", "Mathieu Deremetz"]
+    relevance: critical
+    summary: "STARFAB project orbital warehouse design. Directly applicable to modular servicing architecture."
+
+  - arxiv_id: "2302.12191"
+    title: "Orbital Facility Location Problem for Satellite Constellation Servicing Depots"
+    authors: ["Yuri Shimane", "Nick Gollins", "Koki Ho"]
+    relevance: high
+    summary: "Optimal depot placement for constellation servicing. Relevant for maintenance fleet logistics."
+
+  - arxiv_id: "1809.02028"
+    title: "Satellite Capture and Servicing Using Networks of Tethered Robots Supported by Ground Surveillance"
+    authors: ["Himangshu Kalita", "Roberto Furfaro", "Jekan Thangavelautham"]
+    relevance: high
+    summary: "Tethered robot networks for satellite servicing. Alternative architecture for swarm maintenance."
+
+  - arxiv_id: "2505.20725"
+    title: "A reinforcement learning agent for maintenance of deteriorating systems with increasingly imperfect repairs"
+    authors: ["Alberto Pliego Marugán", "Jesús M. Pinar-Pérez", "Fausto Pedro García Márquez"]
+    relevance: high
+    summary: "RL-based maintenance optimization. Applicable to autonomous drone maintenance scheduling."
+
+  - arxiv_id: "2002.00427"
+    title: "Dynamic maintenance policy for systems with repairable components subject to mutually dependent competing failure processes"
+    authors: ["Nooshin Yousefi", "David W. Coit", "Zhu Xiaoyan"]
+    relevance: high
+    summary: "Multi-component system maintenance modeling. Directly applicable to collector failure analysis."
+
+  - arxiv_id: "1902.03495"
+    title: "Evaluating reliability of complex systems for Predictive maintenance"
+    authors: ["Dongjin Lee", "Rong Pan"]
+    relevance: medium
+    summary: "Predictive maintenance for multi-component systems. Framework for swarm element reliability estimation."
+
+key_findings:
+  - "Modular ORU-based servicing is active research area (STARFAB project)"
+  - "Depot placement optimization critical for constellation-scale operations"
+  - "RL agents can optimize maintenance under imperfect repair assumptions"
+  - "Competing failure processes require integrated modeling approaches"
+
+gaps_identified:
+  - "No existing failure mode databases for large-scale satellite swarms"
+  - "ISS ORU heritage data not published in open literature"
+  - "Collector satellite-specific failure modes not characterized"
+  - "Repair vs replace decision boundaries need empirical validation"

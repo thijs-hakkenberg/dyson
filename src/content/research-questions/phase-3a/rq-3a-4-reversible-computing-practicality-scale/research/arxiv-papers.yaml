@@ -1,0 +1,46 @@
+# Arxiv papers relevant to rq-3a-4: Reversible computing practicality at Matrioshka scale
+# Generated: 2026-02-09
+
+papers:
+  - arxiv_id: "2009.00448"
+    title: "Reversible Computing with Fast, Fully Static, Fully Adiabatic CMOS"
+    authors: ["Michael P. Frank", "Robert W. Brocato", "Brian D. Tierney"]
+    relevance: critical
+    summary: "State-of-art adiabatic CMOS achieving near-Landauer efficiency. Key for practical reversible computing."
+
+  - arxiv_id: "0504088"
+    title: "Time, Space, and Energy in Reversible Computing"
+    authors: ["Paul Vitanyi"]
+    relevance: critical
+    summary: "25-year survey of reversible computing fundamentals. Essential theoretical background."
+
+  - arxiv_id: "1806.10183"
+    title: "Generalized Reversible Computing"
+    authors: ["Michael P. Frank"]
+    relevance: critical
+    summary: "Rigorous proof of Landauer's principle with generalized reversibility framework."
+
+  - arxiv_id: "2403.02240"
+    title: "Quantum Computing: Vision and Challenges"
+    authors: ["Sukhpal Singh Gill", "Oktay Cetinkaya", "Stefano Marrone"]
+    relevance: medium
+    summary: "Quantum computing overview. Relevant for comparing reversible classical vs quantum approaches."
+
+  - arxiv_id: "2006.16734"
+    title: "Dyson Spheres"
+    authors: ["Jason T. Wright"]
+    relevance: high
+    summary: "Dyson sphere engineering and physics review. Background for Matrioshka brain context."
+
+key_findings:
+  - "Fully adiabatic CMOS can approach Landauer limit at practical frequencies"
+  - "Reversible circuits require ~3x more gates than irreversible equivalents"
+  - "Energy-time tradeoffs well characterized over 25 years of research"
+  - "Memory operations remain fundamental challenge for reversibility"
+
+gaps_identified:
+  - "Practical demonstrations limited to small-scale circuits"
+  - "Error correction in reversible systems poorly understood"
+  - "Temperature-stratified efficiency analysis not found"
+  - "Superconducting reversible logic at Matrioshka outer layer temps not characterized"
+  - "Software/algorithm conversion tools immature"
