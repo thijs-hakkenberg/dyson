@@ -1,0 +1,44 @@
+# Arxiv papers relevant to rq-0-23: Energy storage technology for 30-year station life
+# Generated: 2026-02-09
+
+papers:
+  - arxiv_id: "2404.04429"
+    title: "Physics-Informed Machine Learning for Battery Degradation Diagnostics: A Comparison of State-of-the-Art Methods"
+    authors: ["Sina Navidi", "Adam Thelen", "Tingkai Li"]
+    relevance: high
+    summary: "Compares ML methods for battery degradation monitoring. Relevant for predicting Li-ion lifecycle at L4/L5."
+
+  - arxiv_id: "1907.12961"
+    title: "Modeling long-term capacity degradation of lithium-ion batteries"
+    authors: ["Marcus Johnen", "Simon Pitzen", "Udo Kamps"]
+    relevance: high
+    summary: "Sigmoidal regression models for long-term Li-ion degradation. Directly applicable to 30-year projections."
+
+  - arxiv_id: "2112.02037"
+    title: "Lithium-ion battery degradation: how to model it"
+    authors: ["Simon E. J. O'Kane", "Weilong Ai", "Ganesh Madabattula"]
+    relevance: high
+    summary: "Multi-physics degradation modeling. Essential for understanding interactions between degradation mechanisms."
+
+  - arxiv_id: "2505.04391"
+    title: "Advancements in Solid-State Sodium-Based Batteries: A Comprehensive Review"
+    authors: ["Arianna Massaro", "Lorenzo Squillantini", "Francesca De Giorgio"]
+    relevance: medium
+    summary: "Reviews solid-state Na-ion technology as Li-ion alternative. Relevant for emerging technology assessment."
+
+  - arxiv_id: "2502.07070"
+    title: "Comprehensive Analysis of Thermal Dissipation in Lithium-Ion Battery Packs"
+    authors: ["Xuguang Zhang", "Hexiang Zhang", "Amjad Almansour"]
+    relevance: medium
+    summary: "Thermal management analysis. Important for understanding space environment thermal constraints."
+
+key_findings:
+  - "Long-term Li-ion degradation follows sigmoidal patterns with predictable inflection points"
+  - "Physics-informed ML can estimate component-level degradation without destructive testing"
+  - "Solid-state batteries show promise for longer cycle life but lower energy density"
+  - "Thermal management critical - degradation accelerates above 35C"
+
+gaps_identified:
+  - "Limited data on battery performance in deep-space radiation environments"
+  - "Flow battery cycle life data not well represented in arxiv literature"
+  - "Need more data on L4/L5 specific thermal cycling effects"
