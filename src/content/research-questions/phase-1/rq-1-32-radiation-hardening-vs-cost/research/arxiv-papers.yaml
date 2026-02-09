@@ -1,0 +1,51 @@
+# Arxiv papers relevant to rq-1-32: Radiation hardening balance vs mission risk and cost
+# Generated: 2026-02-09
+
+papers:
+  - arxiv_id: "2003.08213"
+    title: "Radiation damage assessment of SensL SiPMs"
+    authors: ["Lee J. Mitchell", "Bernard Phlips", "W. Neil Johnson"]
+    relevance: high
+    summary: "SiPM radiation susceptibility in space. Shows COTS detector behavior under proton damage."
+
+  - arxiv_id: "2305.10959"
+    title: "Protocols for healing radiation-damaged single-photon detectors suitable for space environment"
+    authors: ["Joanna Krynski", "Nigar Sultana", "Youn Seok Lee"]
+    relevance: high
+    summary: "Annealing protocols for radiation-damaged SPADs. Demonstrates recovery techniques for space detectors."
+
+  - arxiv_id: "1608.01345"
+    title: "Heavy Ion Induced SEU Sensitivity Evaluation of 3D Integrated SRAMs"
+    authors: ["Xuebing Cao", "Liyi Xiao", "Mingxue Huo"]
+    relevance: high
+    summary: "SEU cross-sections for 3D SRAM via Monte Carlo. Relevant for memory selection in radiation environments."
+
+  - arxiv_id: "1505.00852"
+    title: "The effect of heavy metal in CMOS on neutron induced single event upset simulated with Geant4"
+    authors: ["Huan Zhang", "Si-guang Wang", "Wei Chen"]
+    relevance: medium
+    summary: "Heavy metal effects on SEU in CMOS. Relevant for understanding shielding interactions."
+
+  - arxiv_id: "1207.5597"
+    title: "Impacts of The Radiation Environment At L2 On Bolometers Onboard The Herschel Space Observatory"
+    authors: ["Benoît Horeau", "Olivier Boulade", "Arnaud Claret"]
+    relevance: high
+    summary: "L2 radiation glitch rates on Herschel. Provides baseline for cosmic ray effects outside magnetosphere."
+
+  - arxiv_id: "1511.03837"
+    title: "An Assessment of the Space Radiation Environment in a Near Equatorial Low Earth Orbit Based on Razaksat-1 Satellite"
+    authors: ["Wayan Suparta", "Siti Katrina Zulkeple"]
+    relevance: medium
+    summary: "Radiation environment correlation with satellite anomalies. Case study of potential radiation failure."
+
+key_findings:
+  - "COTS SiPMs show significant dark count rate increase after proton exposure"
+  - "Thermal annealing can partially recover radiation-damaged detectors"
+  - "3D integrated circuits may have different SEU sensitivity than planar designs"
+  - "Herschel L2 data shows manageable cosmic ray glitch rates with proper design"
+
+gaps_identified:
+  - "Limited COTS processor radiation testing data in open literature"
+  - "0.3-1.5 AU heliocentric radiation environment models not well characterized"
+  - "Cost-benefit analysis of rad-hard vs COTS with shielding needs quantification"
+  - "Long-duration (15+ year) COTS degradation data sparse"
