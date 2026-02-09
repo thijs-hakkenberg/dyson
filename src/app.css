@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* Custom Dark Space Theme */
 @theme {
@@ -152,45 +153,102 @@ body {
   background-clip: text;
 }
 
-/* Prose styles for content */
-.prose-space {
-  color: var(--color-star-dim);
-  line-height: 1.75;
+/*
+ * Typography customization for space theme
+ * Using @tailwindcss/typography with custom dark space colors
+ */
+
+/* Base prose customization */
+.prose {
+  --tw-prose-body: var(--color-star-dim);
+  --tw-prose-headings: var(--color-star-white);
+  --tw-prose-lead: var(--color-star-dim);
+  --tw-prose-links: var(--color-cosmic-cyan);
+  --tw-prose-bold: var(--color-star-white);
+  --tw-prose-counters: var(--color-star-faint);
+  --tw-prose-bullets: var(--color-star-faint);
+  --tw-prose-hr: var(--color-space-500);
+  --tw-prose-quotes: var(--color-star-dim);
+  --tw-prose-quote-borders: var(--color-cosmic-cyan);
+  --tw-prose-captions: var(--color-star-faint);
+  --tw-prose-code: var(--color-cosmic-cyan);
+  --tw-prose-pre-code: var(--color-star-dim);
+  --tw-prose-pre-bg: var(--color-space-700);
+  --tw-prose-th-borders: var(--color-space-500);
+  --tw-prose-td-borders: var(--color-space-500);
 }
 
-.prose-space h1, .prose-space h2, .prose-space h3 {
+/* Invert variant is same for this dark theme */
+.prose-invert {
+  --tw-prose-body: var(--color-star-dim);
+  --tw-prose-headings: var(--color-star-white);
+  --tw-prose-lead: var(--color-star-dim);
+  --tw-prose-links: var(--color-cosmic-cyan);
+  --tw-prose-bold: var(--color-star-white);
+  --tw-prose-counters: var(--color-star-faint);
+  --tw-prose-bullets: var(--color-star-faint);
+  --tw-prose-hr: var(--color-space-500);
+  --tw-prose-quotes: var(--color-star-dim);
+  --tw-prose-quote-borders: var(--color-cosmic-cyan);
+  --tw-prose-captions: var(--color-star-faint);
+  --tw-prose-code: var(--color-cosmic-cyan);
+  --tw-prose-pre-code: var(--color-star-dim);
+  --tw-prose-pre-bg: var(--color-space-700);
+  --tw-prose-th-borders: var(--color-space-500);
+  --tw-prose-td-borders: var(--color-space-500);
+}
+
+/* Additional prose styling for space theme */
+.prose h2 {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-space-500);
+}
+
+.prose a:hover {
+  color: var(--color-cosmic-blue);
+}
+
+.prose code:not(pre code) {
+  background-color: var(--color-space-600);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-weight: 400;
+}
+
+.prose code::before,
+.prose code::after {
+  content: none;
+}
+
+.prose pre {
+  border: 1px solid var(--color-space-500);
+  border-radius: 0.5rem;
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.prose thead {
+  background-color: var(--color-space-600);
+}
+
+.prose th {
   color: var(--color-star-white);
   font-weight: 600;
 }
 
-.prose-space a {
-  color: var(--color-cosmic-cyan);
-  text-decoration: none;
+.prose tbody tr:nth-child(even) {
+  background-color: color-mix(in srgb, var(--color-space-600) 30%, transparent);
 }
 
-.prose-space a:hover {
-  text-decoration: underline;
+.prose strong {
+  color: var(--color-star-white);
 }
 
-.prose-space code {
-  background: var(--color-space-600);
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
-  font-size: 0.875em;
-}
-
-.prose-space pre {
-  background: var(--color-space-800);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  overflow-x: auto;
-}
-
-.prose-space blockquote {
-  border-left: 4px solid var(--color-cosmic-purple);
-  padding-left: 1rem;
-  color: var(--color-star-dim);
-  font-style: italic;
+.prose li strong {
+  color: var(--color-star-white);
 }
 
 /* Loading spinner */

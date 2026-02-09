@@ -69,7 +69,7 @@
 		</header>
 
 		<!-- Content -->
-		<div class="prose-space">
+		<div class="prose prose-invert max-w-none">
 			{@html htmlContent}
 		</div>
 

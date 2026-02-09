@@ -31,67 +31,18 @@
 </div>
 
 <style>
+	/* Hide the duplicate h1 from markdown */
 	.changelog-content :global(h1) {
 		display: none;
 	}
 
-	.changelog-content :global(h2) {
-		font-size: 1.5rem;
-		font-weight: 700;
-		color: rgb(var(--color-star-white));
-		margin-top: 2rem;
-		margin-bottom: 1rem;
-		padding-bottom: 0.5rem;
-		border-bottom: 1px solid rgb(var(--color-space-600));
-	}
-
+	/* Remove top margin from first h2 */
 	.changelog-content :global(h2:first-of-type) {
 		margin-top: 0;
 	}
 
+	/* Cyan h3 for changelog sections (Added, Changed, etc.) */
 	.changelog-content :global(h3) {
-		font-size: 1.125rem;
-		font-weight: 600;
-		color: rgb(var(--color-cosmic-cyan));
-		margin-top: 1.5rem;
-		margin-bottom: 0.75rem;
-	}
-
-	.changelog-content :global(h4) {
-		font-size: 1rem;
-		font-weight: 500;
-		color: rgb(var(--color-star-dim));
-		margin-top: 1rem;
-		margin-bottom: 0.5rem;
-	}
-
-	.changelog-content :global(ul) {
-		list-style-type: disc;
-		list-style-position: inside;
-		color: rgb(var(--color-star-dim));
-	}
-
-	.changelog-content :global(li) {
-		color: rgb(var(--color-star-dim));
-		margin-bottom: 0.25rem;
-	}
-
-	.changelog-content :global(p) {
-		color: rgb(var(--color-star-dim));
-		margin-bottom: 1rem;
-	}
-
-	.changelog-content :global(hr) {
-		border-color: rgb(var(--color-space-600));
-		margin-top: 2rem;
-		margin-bottom: 2rem;
-	}
-
-	.changelog-content :global(code) {
-		background-color: rgb(var(--color-space-700));
-		padding: 0.125rem 0.375rem;
-		border-radius: 0.25rem;
-		color: rgb(var(--color-cosmic-blue));
-		font-size: 0.875rem;
+		color: var(--color-cosmic-cyan);
 	}
 </style>

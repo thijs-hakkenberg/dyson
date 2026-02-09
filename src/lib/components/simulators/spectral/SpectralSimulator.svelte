@@ -132,7 +132,7 @@
 	<!-- Methodology Note -->
 	<div class="card-glow p-6 max-w-4xl mx-auto">
 		<h3 class="text-lg font-bold text-star-white mb-3">Simulation Methodology</h3>
-		<div class="prose-space text-sm space-y-2">
+		<div class="prose prose-invert prose-sm max-w-none space-y-2">
 			<p>
 				This simulation models NEA encounter opportunities and analyzes how processing location
 				affects survey success rates. Each encounter has a limited observation window during which

@@ -241,7 +241,7 @@
 	<!-- Methodology Note -->
 	<div class="card-glow p-6 max-w-4xl mx-auto">
 		<h3 class="text-lg font-bold text-star-white mb-3">Capture Methods Overview</h3>
-		<div class="prose-space text-sm space-y-3">
+		<div class="prose prose-invert prose-sm max-w-none space-y-3">
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
 				<div class="p-3 bg-space-700/30 rounded-lg">
 					<p class="text-star-white font-semibold mb-1">Magnetic</p>

@@ -206,7 +206,7 @@
 			</div>
 
 			<div class="rounded-lg border border-cosmic-cyan/20 bg-gradient-to-br from-cosmic-blue/10 to-cosmic-purple/10 p-6">
-				<article class="prose-consensus">
+				<article class="prose prose-invert max-w-none prose-li:marker:text-cosmic-cyan">
 					{@html renderMarkdown(consensus.recommendedApproach)}
 				</article>
 			</div>
@@ -221,46 +221,17 @@
 		margin: 0;
 	}
 	.prose-inline :global(strong) {
-		color: rgb(var(--color-star-white));
+		color: var(--color-star-white);
 		font-weight: 600;
 	}
 	.prose-inline :global(em) {
 		font-style: italic;
 	}
 	.prose-inline :global(code) {
-		background-color: rgb(var(--color-space-600));
+		background-color: var(--color-space-600);
 		padding: 0.1rem 0.3rem;
 		border-radius: 0.25rem;
 		font-size: 0.9em;
-		color: rgb(var(--color-cosmic-cyan));
-	}
-
-	.prose-consensus :global(p) {
-		color: rgb(var(--color-star-dim));
-		margin-bottom: 1rem;
-		line-height: 1.7;
-	}
-	.prose-consensus :global(strong) {
-		color: rgb(var(--color-star-white));
-		font-weight: 600;
-	}
-	.prose-consensus :global(ol) {
-		list-style-type: decimal;
-		padding-left: 1.5rem;
-		margin-bottom: 1rem;
-		color: rgb(var(--color-star-dim));
-	}
-	.prose-consensus :global(ul) {
-		list-style-type: disc;
-		padding-left: 1.5rem;
-		margin-bottom: 1rem;
-		color: rgb(var(--color-star-dim));
-	}
-	.prose-consensus :global(li) {
-		margin-bottom: 0.5rem;
-		line-height: 1.6;
-	}
-	.prose-consensus :global(li strong) {
-		color: rgb(var(--color-cosmic-cyan));
+		color: var(--color-cosmic-cyan);
 	}
 </style>

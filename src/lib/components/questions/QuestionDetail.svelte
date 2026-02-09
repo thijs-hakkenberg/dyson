@@ -114,7 +114,7 @@
 
 		<!-- Description (fallback if no context) -->
 		{#if !question.context}
-			<div class="prose-spec mb-6">
+			<div class="prose prose-invert max-w-none mb-6">
 				<p class="text-star-dim text-lg leading-relaxed">
 					{question.description}
 				</p>
@@ -132,7 +132,7 @@
 
 		<!-- Context Section (rich markdown content from file) -->
 		{#if renderedContext}
-			<div class="prose-spec mt-8">
+			<div class="prose prose-invert max-w-none mt-8">
 				{@html renderedContext}
 			</div>
 		{/if}

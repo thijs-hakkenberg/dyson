@@ -83,7 +83,7 @@
 	<!-- Content -->
 	{#if isExpanded}
 		<div class="px-4 pb-4 border-t border-space-600">
-			<div class="prose-spec mt-4">
+			<div class="prose prose-invert max-w-none mt-4">
 				{@html renderedContent}
 			</div>
 

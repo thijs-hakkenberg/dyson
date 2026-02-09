@@ -27,7 +27,7 @@
 	</div>
 
 	<!-- Summary -->
-	<div class="prose-spec mb-6">
+	<div class="prose prose-invert max-w-none mb-6">
 		{@html renderedSummary}
 	</div>
 
