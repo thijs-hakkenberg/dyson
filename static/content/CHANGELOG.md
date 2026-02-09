@@ -6,6 +6,26 @@ All notable changes to Project Dyson are documented here.
 
 ### Added
 
+#### Research Questions
+- Add rq-0-29: Multi-century governance structure for volunteer-driven global coordination (critical, discussion)
+  - Three-layer hybrid architecture: constitutional, strategic, operational
+  - Swiss Verein + Apache-style meritocratic governance for Phase 0
+  - Sortition-based Charter Trustees for capture resistance
+  - Unanimous LLM council consensus in 1 round
+
+#### BOM Items
+- Add bom-0-7: Organizational Infrastructure ($50M) to Phase 0
+  - Legal entity establishment, succession mechanisms, coordination systems
+  - Update Phase 0 total cost: $15.66B → $15.71B
+
+#### Blog Articles
+- Add "Governing a 500-Year Project: Swiss Verein, Sortition, and Deliberate Incompleteness"
+
+#### UI Features
+- Add question sorting with "Newest First" as default
+  - Sort options: Newest, Oldest, Priority, Title (A-Z)
+  - Add sorting to resolved questions page with Resolution Date option
+
 #### Research Papers
 - Add 60 new arxiv paper evaluations across 10 categories (megastructures, asteroid-mining, ISRU, space-solar-power, power-transmission, swarm-coordination, radiation-materials, spacecraft-missions, crystal-growth, deployable-structures, lunar-regolith, vacuum-breakdown)
 - Add research consolidation analysis mapping papers to research questions
