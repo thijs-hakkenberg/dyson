@@ -61,7 +61,7 @@ Specific impacts on:
 
 ## Resolution Statistics
 
-The new [Resolved Questions](/questions/resolved) page provides:
+The new [Resolved Questions](/questions) page provides:
 - **Progress tracking** — Percentage of questions resolved per phase
 - **Resolution timeline** — When questions were answered
 - **Source breakdown** — How answers were determined
@@ -84,7 +84,7 @@ Our first formally tracked resolution is [RQ-0-20: Xenon propellant sourcing at 
 
 ## Try It Yourself
 
-Visit [/questions/resolved](/questions/resolved) to explore:
+Visit [/questions](/questions) to explore:
 - All resolved questions with full context
 - Filter by phase and resolution status
 - View the resolution timeline
@@ -101,4 +101,4 @@ The resolution tracking system brings transparency to how Project Dyson makes de
 
 ---
 
-**Explore:** [Resolved Questions](/questions/resolved) | [All Research Questions](/questions)
+**Explore:** [Resolved Questions](/questions) | [All Research Questions](/questions)

@@ -87,4 +87,4 @@ The key insight is that avoiding the melt phase entirely may be simpler than sol
 
 ---
 
-*This research synthesis addresses [RQ-0-11: Microgravity metallurgy](/questions/rq-0-11) with an alternative approach. Papers referenced: arXiv:2107.05872, arXiv:2408.04936, arXiv:2404.00800.*
+*This research synthesis addresses [RQ-0-11: Microgravity metallurgy](/questions/microgravity-metallurgy-scaling) with an alternative approach. Papers referenced: arXiv:2107.05872, arXiv:2408.04936, arXiv:2404.00800.*

@@ -63,4 +63,4 @@ These are engineering challenges, not fundamental limitations. The key insight i
 
 ---
 
-*This research synthesis informs [RQ-1-24](/questions/rq-1-24), [RQ-2-3](/questions/rq-2-3), and [RQ-2-17](/questions/rq-2-17). Papers referenced: arXiv:1805.03737, arXiv:0604110, arXiv:2302.14587.*
+*This research synthesis informs [RQ-1-24](/questions/swarm-coordination-architecture-scale), [RQ-2-3](/questions/billion-unit-collision-avoidance), and [RQ-2-17](/questions/fleet-coordination-scale-constraints). Papers referenced: arXiv:1805.03737, arXiv:0604110, arXiv:2302.14587.*
