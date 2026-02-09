@@ -2,15 +2,19 @@
 	import type { QuestionType, ResearchQuestionStatus, Priority, PhaseId, ResolutionStatus } from '$lib/types/entities';
 	import { SelectField } from '$lib/components/ui';
 
+	export type SortOption = 'newest' | 'oldest' | 'priority' | 'title';
+
 	interface Props {
 		selectedPhase: PhaseId | '';
 		selectedType: QuestionType | '';
 		selectedStatus: ResearchQuestionStatus | '';
 		selectedPriority: Priority | '';
 		selectedResolution?: ResolutionStatus | '';
+		selectedSort?: SortOption;
 		searchQuery: string;
 		onFilterChange: () => void;
 		showResolutionFilter?: boolean;
+		showSortOption?: boolean;
 	}
 
 	let {
@@ -19,9 +23,11 @@
 		selectedStatus = $bindable(),
 		selectedPriority = $bindable(),
 		selectedResolution = $bindable(''),
+		selectedSort = $bindable('newest'),
 		searchQuery = $bindable(),
 		onFilterChange,
-		showResolutionFilter = true
+		showResolutionFilter = true,
+		showSortOption = true
 	}: Props = $props();
 
 	const phases = [
@@ -67,6 +73,13 @@
 		{ value: 'superseded', label: 'Superseded' }
 	];
 
+	const sortOptions = [
+		{ value: 'newest', label: 'Newest First' },
+		{ value: 'oldest', label: 'Oldest First' },
+		{ value: 'priority', label: 'Priority' },
+		{ value: 'title', label: 'Title (A-Z)' }
+	];
+
 	function handleChange() {
 		onFilterChange();
 	}
@@ -77,6 +90,7 @@
 		selectedStatus = '';
 		selectedPriority = '';
 		selectedResolution = '';
+		selectedSort = 'newest';
 		searchQuery = '';
 		onFilterChange();
 	}
@@ -87,6 +101,7 @@
 			selectedStatus !== '' ||
 			selectedPriority !== '' ||
 			selectedResolution !== '' ||
+			selectedSort !== 'newest' ||
 			searchQuery !== ''
 	);
 </script>
@@ -119,6 +134,18 @@
 			/>
 		</div>
 	</div>
+
+	<!-- Sort Option -->
+	{#if showSortOption}
+		<div>
+			<label for="sort" class="block text-sm font-medium text-star-dim mb-2">Sort By</label>
+			<SelectField bind:value={selectedSort} onchange={handleChange}>
+				{#each sortOptions as sortOpt}
+					<option value={sortOpt.value}>{sortOpt.label}</option>
+				{/each}
+			</SelectField>
+		</div>
+	{/if}
 
 	<!-- Filter Grid -->
 	<div class="grid grid-cols-2 md:grid-cols-4 gap-3">

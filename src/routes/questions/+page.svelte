@@ -3,6 +3,7 @@
 	import { filterQuestions } from '$lib/services/questions';
 	import { filterByResolutionStatus } from '$lib/services/resolution';
 	import { QuestionCard, QuestionFilters, QuestionStats } from '$lib/components/questions';
+	import type { SortOption } from '$lib/components/questions/QuestionFilters.svelte';
 
 	let { data } = $props();
 
@@ -12,7 +13,34 @@
 	let selectedStatus = $state<ResearchQuestionStatus | ''>('');
 	let selectedPriority = $state<Priority | ''>('');
 	let selectedResolution = $state<ResolutionStatus | ''>('');
+	let selectedSort = $state<SortOption>('newest');
 	let searchQuery = $state('');
+
+	// Priority order for sorting
+	const priorityOrder: Record<Priority, number> = {
+		critical: 0,
+		high: 1,
+		medium: 2,
+		low: 3
+	};
+
+	// Sort function for questions
+	function sortQuestions(questions: ResearchQuestion[], sortBy: SortOption): ResearchQuestion[] {
+		return [...questions].sort((a, b) => {
+			switch (sortBy) {
+				case 'newest':
+					return new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime();
+				case 'oldest':
+					return new Date(a.createdDate).getTime() - new Date(b.createdDate).getTime();
+				case 'priority':
+					return priorityOrder[a.priority] - priorityOrder[b.priority];
+				case 'title':
+					return a.title.localeCompare(b.title);
+				default:
+					return 0;
+			}
+		});
+	}
 
 	// Filtered questions - use derived for reactive filtering
 	let filteredQuestions = $derived.by(() => {
@@ -33,6 +61,9 @@
 		if (selectedResolution) {
 			questions = filterByResolutionStatus(questions, selectedResolution);
 		}
+
+		// Apply sorting (default: newest first)
+		questions = sortQuestions(questions, selectedSort);
 
 		return questions;
 	});
@@ -73,6 +104,7 @@
 				bind:selectedStatus
 				bind:selectedPriority
 				bind:selectedResolution
+				bind:selectedSort
 				bind:searchQuery
 				onFilterChange={applyFilters}
 			/>

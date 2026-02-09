@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ResolutionStatus as ResolutionStatusType, PhaseId } from '$lib/types/entities';
+	import type { ResolutionStatus as ResolutionStatusType, PhaseId, Priority, ResearchQuestion } from '$lib/types/entities';
 	import {
 		QuestionCard,
 		ResolutionStatus,
@@ -11,6 +11,26 @@
 	// Filter state
 	let selectedPhase = $state<PhaseId | ''>('');
 	let selectedStatus = $state<ResolutionStatusType | ''>('');
+	let selectedSort = $state<'newest' | 'oldest' | 'resolution-date'>('resolution-date');
+
+	// Sort function for questions
+	function sortQuestions(questions: ResearchQuestion[], sortBy: 'newest' | 'oldest' | 'resolution-date'): ResearchQuestion[] {
+		return [...questions].sort((a, b) => {
+			switch (sortBy) {
+				case 'newest':
+					return new Date(b.createdDate).getTime() - new Date(a.createdDate).getTime();
+				case 'oldest':
+					return new Date(a.createdDate).getTime() - new Date(b.createdDate).getTime();
+				case 'resolution-date':
+					// Sort by resolution date (most recent first), fallback to created date
+					const aDate = a.resolutionDate ? new Date(a.resolutionDate).getTime() : new Date(a.createdDate).getTime();
+					const bDate = b.resolutionDate ? new Date(b.resolutionDate).getTime() : new Date(b.createdDate).getTime();
+					return bDate - aDate;
+				default:
+					return 0;
+			}
+		});
+	}
 
 	// Filtered questions
 	let filteredQuestions = $derived.by(() => {
@@ -23,6 +43,9 @@
 		if (selectedStatus) {
 			questions = questions.filter((q) => q.resolutionStatus === selectedStatus);
 		}
+
+		// Apply sorting
+		questions = sortQuestions(questions, selectedSort);
 
 		return questions;
 	});
@@ -41,12 +64,19 @@
 		{ value: 'superseded', label: 'Superseded' }
 	];
 
+	const sortOptions = [
+		{ value: 'resolution-date', label: 'Resolution Date' },
+		{ value: 'newest', label: 'Created (Newest)' },
+		{ value: 'oldest', label: 'Created (Oldest)' }
+	];
+
 	function clearFilters() {
 		selectedPhase = '';
 		selectedStatus = '';
+		selectedSort = 'resolution-date';
 	}
 
-	const hasActiveFilters = $derived(selectedPhase !== '' || selectedStatus !== '');
+	const hasActiveFilters = $derived(selectedPhase !== '' || selectedStatus !== '' || selectedSort !== 'resolution-date');
 </script>
 
 <svelte:head>
@@ -122,6 +152,20 @@
 			<!-- Filters -->
 			<div class="card-glow p-4 space-y-4">
 				<h3 class="text-sm font-semibold text-star-white">Filters</h3>
+
+				<!-- Sort -->
+				<div>
+					<label for="sort" class="block text-xs font-medium text-star-faint mb-1">Sort By</label>
+					<select
+						id="sort"
+						bind:value={selectedSort}
+						class="w-full px-3 py-2 bg-space-700 border border-space-500 rounded-lg text-star-white text-sm focus:outline-none focus:border-cosmic-cyan"
+					>
+						{#each sortOptions as sortOpt}
+							<option value={sortOpt.value}>{sortOpt.label}</option>
+						{/each}
+					</select>
+				</div>
 
 				<!-- Phase filter -->
 				<div>
