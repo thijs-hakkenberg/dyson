@@ -1,16 +1,16 @@
 # Project Dyson Budget Summary
 
 **Generated:** 2026-02-09
-**Status:** Draft for review
-**Total Estimated Cost:** ~$10.3 quadrillion (across all phases)
+**Status:** REVISED - Capacity Cost Model Adopted
+**Total Estimated Cost:** ~$9.2 trillion (across all phases)
 
 ---
 
 ## Executive Summary
 
-Project Dyson's budget spans five construction phases over centuries, from initial asteroid mining infrastructure (~$15.7B) to stellar-scale megastructures (~$10 quadrillion). Cost estimates are derived from multi-model LLM consensus (Claude, Gemini, GPT) using heritage scaling, learning curves, and confidence levels.
+Project Dyson's budget has been **fundamentally revised** following multi-model consensus on cost methodology ([rq-0-28](/questions/isru-cost-methodology-validation)). The previous $10.3 quadrillion estimate used linear unit-cost methodology inappropriate for self-replicating ISRU systems. The new **capacity cost model** reduces Phase 2-3 estimates by 10-1,350x.
 
-**Critical observation:** Current methodology may systematically overestimate costs for later phases by 5-20x due to applying terrestrial production economics to in-situ, autonomous, self-replicating space operations. See [Research Question rq-0-28](/research/questions/phase-0/isru-cost-methodology-validation) for ongoing methodology review.
+**Key insight:** Self-replicating, autonomous, in-situ manufacturing has fundamentally different economics than procurement-based space programs. Marginal cost per unit approaches zero once manufacturing infrastructure is operational.
 
 ---
 
@@ -20,6 +20,7 @@ Project Dyson's budget spans five construction phases over centuries, from initi
 **Total Cost:** $15.66 billion
 **Duration:** 10-15 years
 **Status:** In Progress
+**Methodology:** Heritage scaling (unchanged)
 
 | BOM ID | Item | Quantity | Cost | Range | Confidence |
 |--------|------|----------|------|-------|------------|
@@ -30,7 +31,7 @@ Project Dyson's budget spans five construction phases over centuries, from initi
 | bom-0-5 | Solar Power Arrays | 100 MW | $500M | $350M - $750M | High |
 | bom-0-6 | ISPP Systems | 4 units | $2B | $1.4B - $3B | Medium |
 
-**Cost basis:** Near-term space hardware with heritage systems. Estimates based on ISS modules, CubeSat missions, planetary rovers, and existing SEP spacecraft.
+**Cost basis:** Near-term space hardware with heritage systems. Traditional cost estimation appropriate for Earth-launched infrastructure.
 
 ---
 
@@ -38,6 +39,7 @@ Project Dyson's budget spans five construction phases over centuries, from initi
 **Total Cost:** $158 billion
 **Duration:** 20-30 years
 **Status:** Planned
+**Methodology:** Heritage scaling (unchanged)
 
 | BOM ID | Item | Quantity | Cost | Range | Confidence |
 |--------|------|----------|------|-------|------------|
@@ -49,161 +51,141 @@ Project Dyson's budget spans five construction phases over centuries, from initi
 | bom-1-6 | Orbital Tugs | 20 units | $2B | $1.2B - $3.2B | Medium |
 | bom-1-7 | Swarm Control System | 1 system | $5B | $3B - $8B | Medium |
 
-**Cost basis:** First-of-kind large-scale space manufacturing. High uncertainty due to novel thin-film membrane spacecraft and orbital assembly facilities.
+**Cost basis:** First-of-kind large-scale space manufacturing. Traditional cost estimation still appropriate for Earth-manufactured first generation.
 
-**ISRU Transition Point:** Earth manufacturing for first 1,000-2,000 units; ISRU transition at ~3,500 units. This is the critical inflection point where in-situ production begins reducing per-unit costs.
+**ISRU Transition Point:** Earth manufacturing for first 1,000-2,000 units; ISRU transition at ~3,500 units.
 
 ---
 
-### Phase 2: Swarm Expansion
-**Total Cost:** $5.125 trillion
+### Phase 2: Swarm Expansion (REVISED)
+**Total Cost:** $375 billion (previously $5.125 trillion)
+**Reduction:** ~14x
 **Duration:** 50-100 years
 **Status:** Planned
+**Methodology:** CAPACITY COST MODEL
 
-| BOM ID | Item | Quantity | Cost | Range | Confidence |
-|--------|------|----------|------|-------|------------|
-| bom-2-1 | Solar Collector Satellites | 100,000 units | $5T | $2.5T - $8.5T | Low |
-| bom-2-2 | Maintenance Drones | 5,000 units | $50B | $25B - $85B | Low |
-| bom-2-3 | Manufacturing Expansion | 5 facilities | $75B | $37.5B - $127.5B | Low |
+| BOM ID | Item | Quantity | Cost | Range | Confidence | Cost Driver |
+|--------|------|----------|------|-------|------------|-------------|
+| bom-2-1 | Solar Collector Satellites | 100,000 units | $200B | $120B - $350B | Medium | Seed foundries + vitamins |
+| bom-2-2 | Maintenance Drones | 5,000 units | $25B | $15B - $40B | Medium | Seed fleet + depots |
+| bom-2-3 | Manufacturing Expansion | 5 facilities | $150B | $100B - $250B | Medium | PRIMARY: Foundry R&D |
 
-**Cost basis:** Assumes successful ISRU transition and manufacturing learning curves from Phase 1. Unit cost of $50M/satellite assumes significant reduction from Phase 1's $100M through automation and in-situ materials.
-
-**Key assumption:** Learning curve reduces costs as production scales. However, see methodology concerns below.
+**Cost basis:** CAPACITY MODEL. Self-replicating foundries produce 100,000 units; cost represents seed investment, bootstrap operations, and "vitamin" imports—not unit-count multiplication.
 
 ---
 
-### Phase 3a: Matrioshka Brain
-**Total Cost:** $10.17 quadrillion
+### Phase 3a: Matrioshka Brain (REVISED)
+**Total Cost:** $7.5 trillion (previously $10.17 quadrillion)
+**Reduction:** ~1,350x
 **Duration:** 200-1000 years
 **Status:** Planned
+**Methodology:** CAPACITY COST MODEL
 
-| BOM ID | Item | Quantity | Cost | Range | Confidence |
-|--------|------|----------|------|-------|------------|
-| bom-3a-1 | Computational Substrate Tiles | 10^12 tiles | $10Q | $1Q - $100Q | Low |
-| bom-3a-2 | Inter-Layer Optical Backbone | 10^9 nodes | $10T | $100B - $10T | Medium |
-| bom-3a-3 | Thermal Management Systems | 10^14 m^2 | $10Q | $1T - $1000T | Low |
-| bom-3a-4 | Self-Replicating Foundries | 1,000 seed | $100T | $10T - $1000T | Low |
-| bom-3a-5 | Distributed OS | 1 system | $500B | $100B - $1T | Low |
-| bom-3a-6 | Feedstock Supply Chain | 10,000 ships | $50T | $10T - $100T | Medium |
-| bom-3a-7 | Power Distribution Network | 10^11 units | $10T | $1T - $100T | Medium |
-| bom-3a-8 | Construction Swarm | 10^8 robots | $1T | $100B - $10T | Medium |
+| BOM ID | Item | Quantity | Cost | Range | Confidence | Cost Driver |
+|--------|------|----------|------|-------|------------|-------------|
+| bom-3a-1 | Computational Substrate Tiles | 10^12 tiles | $1.5T | $800B - $3T | Low | Vitamins + R&D |
+| bom-3a-2 | Inter-Layer Optical Backbone | 10^9 nodes | $400B | $200B - $800B | Medium | Seed network |
+| bom-3a-3 | Thermal Management Systems | 10^14 m^2 | $800B | $400B - $1.5T | Low | Coating R&D |
+| bom-3a-4 | Self-Replicating Foundries | 1,000 seed | $2T | $1T - $4T | Low | PRIMARY |
+| bom-3a-5 | Distributed OS | 1 system | $500B | $300B - $800B | Low | Software dev |
+| bom-3a-6 | Feedstock Supply Chain | 10,000 ships | $1T | $600B - $1.8T | Medium | Seed fleet |
+| bom-3a-7 | Power Distribution Network | 10^11 units | $800B | $400B - $1.5T | Medium | Seed infrastructure |
+| bom-3a-8 | Construction Swarm | 10^8 robots | $500B | $250B - $1T | Medium | Seed swarm |
 
-**Cost basis:** Self-replicating manufacturing foundries with 96%+ mass closure from in-situ resources. Costs primarily reflect seed infrastructure and control systems.
+**Cost basis:** CAPACITY MODEL. 10^12 tiles ISRU-manufactured; cost represents seed foundries, semiconductor "vitamins" (rad-hard processors, precision optics), and governance software.
 
 ---
 
-### Phase 3b: Stellar Engine
-**Total Cost:** $110 trillion
+### Phase 3b: Stellar Engine (REVISED)
+**Total Cost:** $1.5 trillion (previously $110 trillion)
+**Reduction:** ~73x
 **Duration:** 200-500 years
 **Status:** Planned
+**Methodology:** CAPACITY COST MODEL
 
-| BOM ID | Item | Quantity | Cost | Range | Confidence |
-|--------|------|----------|------|-------|------------|
-| bom-3b-1 | Shkadov Mirror Array | 10^12 m^2 | $10T | $1T - $100T | Low |
-| bom-3b-2 | Thermonuclear Jet Engine | 100 units | $10T | $1T - $100T | Low |
-| bom-3b-3 | Solar Wind Collectors | 10^7 stations | $10T | $1T - $50T | Low |
-| bom-3b-4 | Mass Lifting Systems | 1,000 stations | $50T | $10T - $200T | Low |
-| bom-3b-5 | Helium Separation Plant | 500 plants | $10T | $2T - $50T | Low |
-| bom-3b-6 | EM Accelerators | 10,000 units | $10T | $2T - $50T | Medium |
-| bom-3b-7 | Dyson Integration Layer | 1 system | $5T | $1T - $20T | Medium |
-| bom-3b-8 | Thrust Stabilization | 10,000 nodes | $5T | $1T - $20T | Medium |
+| BOM ID | Item | Quantity | Cost | Range | Confidence | Cost Driver |
+|--------|------|----------|------|-------|------------|-------------|
+| bom-3b-1 | Shkadov Mirror Array | 10^12 m^2 | $150B | $80B - $300B | Medium | Seed + engineering |
+| bom-3b-2 | Thermonuclear Jet Engine | 100 units | $400B | $200B - $800B | Low | PRIMARY: Fusion R&D |
+| bom-3b-3 | Solar Wind Collectors | 10^7 stations | $100B | $50B - $200B | Medium | Plasma R&D |
+| bom-3b-4 | Mass Lifting Systems | 1,000 stations | $300B | $150B - $600B | Low | Solar interaction R&D |
+| bom-3b-5 | Helium Separation Plant | 500 plants | $150B | $80B - $300B | Medium | Seed plants |
+| bom-3b-6 | EM Accelerators | 10,000 units | $150B | $80B - $300B | Medium | Seed network |
+| bom-3b-7 | Dyson Integration Layer | 1 system | $100B | $50B - $200B | Medium | Software |
+| bom-3b-8 | Thrust Stabilization | 10,000 nodes | $150B | $80B - $300B | Medium | Control R&D |
 
-**Cost basis:** Extends Phase 2 Dyson swarm infrastructure with novel fusion propulsion and solar material extraction. No heritage systems for comparison.
+**Cost basis:** CAPACITY MODEL. Reuses Phase 2/3a foundries; cost represents fusion R&D, mass lifting R&D, and seed deployment.
 
 ---
 
 ## Grand Total Summary
 
-| Phase | Total Cost | Cumulative | Confidence |
-|-------|------------|------------|------------|
-| Phase 0 | $15.66B | $15.66B | Medium-High |
-| Phase 1 | $158B | $173.66B | Medium |
-| Phase 2 | $5.125T | $5.3T | Low |
-| Phase 3a | $10.17Q | $10.17Q | Very Low |
-| Phase 3b | $110T | ~$10.3Q | Very Low |
+| Phase | Previous Cost | Revised Cost | Reduction | Methodology |
+|-------|--------------|--------------|-----------|-------------|
+| Phase 0 | $15.66B | $15.66B | 1x | Heritage |
+| Phase 1 | $158B | $158B | 1x | Heritage |
+| Phase 2 | $5.125T | $375B | ~14x | Capacity |
+| Phase 3a | $10.17Q | $7.5T | ~1,350x | Capacity |
+| Phase 3b | $110T | $1.5T | ~73x | Capacity |
+| **Total** | **~$10.3Q** | **~$9.2T** | **~1,100x** | — |
 
-**Note:** Phase 3a and 3b may execute in parallel, so total is not strictly additive.
-
----
-
-## Current Cost Methodology
-
-### Heritage Scaling
-Early phase costs derived from existing space systems:
-- ISS modules ($2-3B each)
-- Mars rovers ($2-3B per mission)
-- Commercial satellites ($100M-500M)
-- Launch costs ($2,000-10,000/kg to LEO)
-
-### Learning Curves
-Assumes manufacturing cost reductions:
-- 85% learning curve for spacecraft production
-- Volume discounts for mass production
-- Automation reducing labor costs
-
-### Confidence Levels
-- **High:** Within 30% of estimate; based on heritage systems
-- **Medium:** Within 50% of estimate; extrapolated from heritage
-- **Low:** Within 70% of estimate; novel systems, high uncertainty
-
-### ISRU Cost Reductions
-Current estimates assume ISRU transition reduces costs by:
-- Phase 1-2 transition: 50% unit cost reduction
-- Phase 2 ongoing: 10-20% additional learning curve
+**Note:** Phase 3a and 3b execute in parallel.
 
 ---
 
-## Methodology Concerns
+## Capacity Cost Model Framework
 
-### What Current Estimates Include
+### Cost Components
 
-1. **Launch costs** - Fully accounted for Earth-manufactured components
-2. **Raw material costs** - Based on terrestrial commodity prices
-3. **Labor costs** - Engineering and manufacturing labor at terrestrial rates
-4. **Energy costs** - Power generation and distribution at commercial rates
-5. **Facility costs** - Manufacturing facilities at terrestrial construction costs
+| Component | Description | Scales With |
+|-----------|-------------|-------------|
+| **Seed Investment** | Earth-manufactured foundries, initial robots | Fixed (one-time) |
+| **Bootstrap Operations** | Support during ramp-up | Time (years) |
+| **Import Streams ("Vitamins")** | Non-ISRU components | Mass fraction × total mass |
+| **Oversight & Governance** | Software, coordination, QA | System complexity (log) |
+| **Risk Reserves** | Contingency | Percentage of above |
 
-### What ISRU Operations Eliminate
+### Key Assumptions
 
-1. **Launch costs** - Material stays in space once extracted
-2. **Raw material costs** - Asteroid resources are free (extraction cost only)
-3. **Direct labor costs** - Autonomous systems require no wages
-4. **Energy costs** - Solar power is essentially free at 1 AU
-5. **Replication costs** - Self-replicating systems amortize over generations
+- **Mass closure ratio:** ≥96% for mature foundries
+- **Replication cycle:** 12 months per foundry generation
+- **Vitamin fraction:** ~4% for structural, higher for electronics
+- **Autonomy level:** Minimal human intervention after bootstrap
 
-### Potential Overestimation
+### Critical Unknowns
 
-If the above cost categories represent 80-95% of terrestrial production costs, and ISRU eliminates most of them, then current estimates may overstate Phase 2+ costs by:
+1. **Achievable closure ratio:** If 80-90% instead of 96%, costs increase 5-50x
+2. **In-situ semiconductor fabrication:** Can rad-hard processors be asteroid-sourced?
+3. **Multi-generational replication:** Quality degradation over thousands of generations?
+4. **Autonomy maturity:** Actual oversight requirements for trillion-unit swarms?
 
-- **Conservative case:** 5x overestimate (assume 80% cost elimination, 4x operational complexity overhead)
-- **Moderate case:** 10x overestimate (assume 90% cost elimination, 1.1x complexity overhead)
-- **Optimistic case:** 20x overestimate (assume 95% cost elimination, economies of scale)
+---
 
-This implies:
-- Phase 2 actual cost: $250B - $1T (instead of $5.1T)
-- Phase 3a actual cost: $500T - $2Q (instead of $10.2Q)
-- Phase 3b actual cost: $5.5T - $22T (instead of $110T)
+## Methodology Change Rationale
 
-### Outstanding Questions
+The previous linear methodology (unit cost × unit count) is appropriate for **procurement-based systems** where every unit is Earth-manufactured and launched. It correctly estimates Phase 0-1 costs.
 
-1. **When does terrestrial economics stop applying?** At what unit count do in-situ, self-replicating systems dominate?
+For Phase 2-3, this methodology produces **phantom numbers** disconnected from actual resource requirements:
 
-2. **What is the marginal cost of the Nth unit?** Once infrastructure exists, what does it actually cost to produce additional collectors?
+- **Raw materials:** Free (asteroid feedstock)
+- **Energy:** Free (solar power)
+- **Labor:** Free (autonomous robots)
+- **Factory capacity:** Self-replicating (exponential growth)
 
-3. **How do we value "free" solar energy?** Standard economics assigns zero marginal cost to sunlight.
+The capacity cost model recognizes that **marginal cost per unit approaches zero** once manufacturing infrastructure is operational. The budget is dominated by:
 
-4. **What control system overhead exists?** Autonomous systems still require maintenance and oversight.
-
-5. **How do we account for time preference?** A 100-year construction program has different economics than a 10-year program.
+1. Initial seed investment
+2. "Vitamin" imports for non-ISRU components
+3. Software and governance systems
 
 ---
 
 ## Related Research
 
-- [ISRU Cost Methodology Validation](/research/questions/phase-0/isru-cost-methodology-validation) - Discussion question examining these methodology concerns
-- [Feedstock Acquisition Timeline](/research/questions/phase-1/feedstock-acquisition-isru-timeline) - ISRU transition economics
-- [Self-Replicating Foundry Economics](/plan/phase-3a/bom/self-replicating-manufacturing-foundries) - Phase 3a cost drivers
+- [ISRU Cost Methodology Validation](/questions/isru-cost-methodology-validation) - Full multi-model discussion
+- [Budget Methodology Blog Post](/blog/budget-methodology-revision-capacity-cost-model) - Detailed explanation
+- [Self-Replicating Foundry Economics](/plan/phase-3a/bom/self-replicating-manufacturing-foundries) - Primary cost driver analysis
 
 ---
 
-*This document reflects estimates derived from multi-model LLM consensus as of 2026-02-09. Costs are subject to revision as methodology is refined.*
+*This document reflects the capacity cost model adopted 2026-02-09. Previous estimates using linear methodology are deprecated.*

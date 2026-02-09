@@ -321,8 +321,9 @@ export const PHASE_1_BOM_ITEMS: BOMItemMeta[] = [
 
 /**
  * Phase 2 BOM Items - Swarm Expansion
- * Quantity and cost estimates to be derived from multi-model LLM consensus
- * Uncertainty ranges: typically +/-50-70% for far-future megascale systems
+ * REVISED 2026-02-09: Capacity cost model adopted per rq-0-28 consensus
+ * Previous linear unit-cost methodology ($5.1T) replaced with capacity model ($375B)
+ * Costs now represent: seed investment + bootstrap + import streams + oversight + risk
  */
 export const PHASE_2_BOM_ITEMS: BOMItemMeta[] = [
 	{
@@ -330,12 +331,12 @@ export const PHASE_2_BOM_ITEMS: BOMItemMeta[] = [
 		slug: 'collector-satellites',
 		name: 'Solar Collector Satellites',
 		quantity: '100,000 units',
-		cost: '$5T',
+		cost: '$200B',
 		category: 'Spacecraft',
-		costMin: '$2.5T',
-		costMax: '$8.5T',
-		costConfidence: 'low',
-		costBasis: 'Assumes successful ISRU transition and learning curve; highly dependent on Phase 1 outcomes',
+		costMin: '$120B',
+		costMax: '$350B',
+		costConfidence: 'medium',
+		costBasis: 'CAPACITY MODEL: Seed foundry investment ($50B) + bootstrap operations ($30B) + import stream for non-ISRU components ($80B) + swarm governance software ($40B). Unit production is ISRU-based with ~96% mass closure; marginal cost per unit approaches control system overhead only.',
 		materialAlternatives: [
 			{
 				name: 'UMG-Si (Upgraded Metallurgical-Grade Silicon)',
@@ -368,31 +369,32 @@ export const PHASE_2_BOM_ITEMS: BOMItemMeta[] = [
 		slug: 'maintenance-drones',
 		name: 'Maintenance Drones',
 		quantity: '5,000 units',
-		cost: '$50B',
+		cost: '$25B',
 		category: 'Robotics',
-		costMin: '$25B',
-		costMax: '$85B',
-		costConfidence: 'low',
-		costBasis: 'Autonomous repair systems at scale; depot architecture costs highly uncertain'
+		costMin: '$15B',
+		costMax: '$40B',
+		costConfidence: 'medium',
+		costBasis: 'CAPACITY MODEL: Seed drone fleet ($10B) + depot infrastructure ($10B) + autonomous coordination software ($5B). Production drones are ISRU-manufactured after initial seed deployment.'
 	},
 	{
 		bomId: 'bom-2-3',
 		slug: 'manufacturing-expansion',
 		name: 'Additional Manufacturing Capacity',
-		quantity: '5 facilities',
-		cost: '$75B',
+		quantity: '5 self-replicating facilities',
+		cost: '$150B',
 		category: 'Infrastructure',
-		costMin: '$37.5B',
-		costMax: '$127.5B',
-		costConfidence: 'low',
-		costBasis: 'Orbital factory replication; depends on ISRU maturity and automation advances'
+		costMin: '$100B',
+		costMax: '$250B',
+		costConfidence: 'medium',
+		costBasis: 'CAPACITY MODEL: This is the PRIMARY cost driver for Phase 2. Seed foundry development ($80B) + first-generation replication validation ($40B) + quality assurance systems ($30B). Self-replicating foundries with 12-month cycle produce all subsequent capacity.'
 	}
 ];
 
 /**
  * Phase 3a BOM Items - Matrioshka Brain
- * Quantity and cost estimates derived from multi-model LLM consensus (2026-02-07)
- * Uncertainty ranges: Very high for far-future stellar-scale megastructures
+ * REVISED 2026-02-09: Capacity cost model adopted per rq-0-28 consensus
+ * Previous linear methodology (~$10Q) replaced with capacity model (~$7.5T)
+ * ~1,350x reduction reflects self-replicating ISRU economics
  */
 export const PHASE_3A_BOM_ITEMS: BOMItemMeta[] = [
 	{
@@ -400,84 +402,84 @@ export const PHASE_3A_BOM_ITEMS: BOMItemMeta[] = [
 		slug: 'computational-substrate-tiles',
 		name: 'Computational Substrate Tiles',
 		quantity: '10¹² tiles',
-		cost: '$10¹²-$10¹⁴',
+		cost: '$1.5T',
 		category: 'Computing',
-		costMin: '$1T',
-		costMax: '$100T',
+		costMin: '$800B',
+		costMax: '$3T',
 		costConfidence: 'low',
-		costBasis: 'Modular tiles integrating TPV energy harvesting, compute substrate, local memory, and mesh networking. Scale-up and in-space semiconductor fabrication are primary cost drivers.'
+		costBasis: 'CAPACITY MODEL: Tile architecture R&D ($200B) + semiconductor "vitamin" imports ($800B) + quality assurance systems ($500B). Tile production is ISRU-based; cost represents Earth-sourced components that cannot be manufactured from asteroid feedstock (rad-hard processors, precision optics, specific dopants).'
 	},
 	{
 		bomId: 'bom-3a-2',
 		slug: 'inter-layer-optical-backbone',
 		name: 'Inter-Layer Optical Communication Backbone',
 		quantity: '10⁸-10⁹ relay nodes',
-		cost: '$10¹¹-$10¹³',
+		cost: '$400B',
 		category: 'Communications',
-		costMin: '$100B',
-		costMax: '$10T',
+		costMin: '$200B',
+		costMax: '$800B',
 		costConfidence: 'medium',
-		costBasis: 'Hierarchical free-space optical network with WDM/OAM multiplexed laser links. Most mature technology in Phase 3 BOM.'
+		costBasis: 'CAPACITY MODEL: Most mature technology in Phase 3. Seed relay network ($150B) + laser source imports ($150B) + network orchestration software ($100B). Relay node production scales via ISRU after seed deployment.'
 	},
 	{
 		bomId: 'bom-3a-3',
 		slug: 'thermal-management-radiator-systems',
 		name: 'Thermal Management and Radiator Systems',
 		quantity: '~10¹⁴ m² radiator area',
-		cost: '$10¹²-$10¹⁵',
+		cost: '$800B',
 		category: 'Power Systems',
-		costMin: '$1T',
-		costMax: '$1000T',
+		costMin: '$400B',
+		costMax: '$1.5T',
 		costConfidence: 'low',
-		costBasis: 'Passive spectral-selective radiators plus active cryogenic systems for outer layers. Thermodynamic cascade efficiency is critical.'
+		costBasis: 'CAPACITY MODEL: Spectral-selective coating R&D ($200B) + cryogenic system seed units ($300B) + thermal control software ($300B). Radiator panels are structurally simple and fully ISRU-producible; cost is primarily in metamaterial coatings and active cooling for outer layers.'
 	},
 	{
 		bomId: 'bom-3a-4',
 		slug: 'self-replicating-manufacturing-foundries',
 		name: 'Self-Replicating Manufacturing Foundries',
 		quantity: '100-1,000 seed → 10⁴-10⁶ peak',
-		cost: '$10¹³-$10¹⁵',
+		cost: '$2T',
 		category: 'Infrastructure',
-		costMin: '$10T',
-		costMax: '$1000T',
+		costMin: '$1T',
+		costMax: '$4T',
 		costConfidence: 'low',
-		costBasis: 'Autonomous factory complexes with ≥96% mass closure from in-situ resources. Critical-path industrial capability.'
+		costBasis: 'CAPACITY MODEL: PRIMARY COST DRIVER. Seed foundry development ($800B) + first-generation validation ($400B) + closure ratio optimization ($400B) + multi-generational quality assurance ($400B). This investment enables all other Phase 3a production. 12-month replication cycle with ≥96% mass closure.'
 	},
 	{
 		bomId: 'bom-3a-5',
 		slug: 'distributed-computational-os',
 		name: 'Distributed Computational Operating System',
 		quantity: '1 system (~10⁶ engineer-years)',
-		cost: '$10¹¹-$10¹²',
+		cost: '$500B',
 		category: 'Computing',
-		costMin: '$100B',
-		costMax: '$1T',
+		costMin: '$300B',
+		costMax: '$800B',
 		costConfidence: 'low',
-		costBasis: 'Hierarchical, self-organizing software fabric managing resources across light-hours of delay. No precedent exists.'
+		costBasis: 'CAPACITY MODEL: Most complex software ever built. Light-hour scale consensus protocols ($150B) + replication fidelity management ($150B) + anomaly detection and self-healing ($100B) + resource allocation across thermal layers ($100B). No precedent exists; estimate based on scaling from largest current distributed systems.'
 	},
 	{
 		bomId: 'bom-3a-6',
 		slug: 'feedstock-supply-chain-pipeline',
 		name: 'Feedstock Supply Chain and Logistics Pipeline',
 		quantity: '~10,000 ships, ~500 mass drivers',
-		cost: '$10¹³-$10¹⁴',
+		cost: '$1T',
 		category: 'Infrastructure',
-		costMin: '$10T',
-		costMax: '$100T',
+		costMin: '$600B',
+		costMax: '$1.8T',
 		costConfidence: 'medium',
-		costBasis: 'Scaled-up version of Phase 1-2 infrastructure with well-understood physics.'
+		costBasis: 'CAPACITY MODEL: Scaled Phase 2 infrastructure. Seed mining fleet ($300B) + mass driver network expansion ($400B) + logistics coordination software ($300B). Well-understood physics; cost is primarily initial seed deployment before ISRU production takes over.'
 	},
 	{
 		bomId: 'bom-3a-7',
 		slug: 'inter-layer-power-distribution-network',
 		name: 'Inter-Layer Power Distribution Network',
 		quantity: '10⁸-10¹¹ power interface units',
-		cost: '$10¹²-$10¹⁴',
+		cost: '$800B',
 		category: 'Power Systems',
-		costMin: '$1T',
-		costMax: '$100T',
+		costMin: '$400B',
+		costMax: '$1.5T',
 		costConfidence: 'medium',
-		costBasis: 'HVDC within layers plus optical power beaming between layers. Essential for outer-layer viability.',
+		costBasis: 'CAPACITY MODEL: HVDC seed infrastructure ($300B) + optical power beaming development ($300B) + power routing software ($200B). Power interface units are ISRU-producible after seed network established.',
 		materialAlternatives: [
 			{
 				name: 'High-efficiency rectenna arrays',
@@ -498,19 +500,20 @@ export const PHASE_3A_BOM_ITEMS: BOMItemMeta[] = [
 		slug: 'shell-construction-maintenance-swarm',
 		name: 'Shell Construction and Maintenance Swarm',
 		quantity: '10⁶-10⁸ robots',
-		cost: '$10¹¹-$10¹³',
+		cost: '$500B',
 		category: 'Robotics',
-		costMin: '$100B',
-		costMax: '$10T',
+		costMin: '$250B',
+		costMax: '$1T',
 		costConfidence: 'medium',
-		costBasis: 'Evolved Phase 2 robotics for deployment, repair, and recycling. Distinct from manufacturing foundries.'
+		costBasis: 'CAPACITY MODEL: Evolved Phase 2 robotics. Seed swarm development ($200B) + specialized tooling for shell deployment ($150B) + swarm coordination software ($150B). Robot production is fully ISRU-based after seed deployment.'
 	}
 ];
 
 /**
  * Phase 3b BOM Items - Stellar Engine
- * Based on Caplan 2019 paper "Stellar Engines: Design Considerations for Maximizing Acceleration"
- * Uncertainty ranges: Very high for stellar-scale propulsion systems
+ * REVISED 2026-02-09: Capacity cost model adopted per rq-0-28 consensus
+ * Previous linear methodology (~$110T) replaced with capacity model (~$1.5T)
+ * ~73x reduction reflects ISRU economics; most infrastructure reuses Phase 2/3a foundries
  */
 export const PHASE_3B_BOM_ITEMS: BOMItemMeta[] = [
 	{
@@ -518,96 +521,96 @@ export const PHASE_3B_BOM_ITEMS: BOMItemMeta[] = [
 		slug: 'shkadov-mirror-array',
 		name: 'Shkadov Mirror Array',
 		quantity: '~10¹² m² reflective area',
-		cost: '$10T-$100T',
+		cost: '$150B',
 		category: 'Infrastructure',
-		costMin: '$1T',
-		costMax: '$100T',
-		costConfidence: 'low',
-		costBasis: 'Scaled from Phase 2 thin-film production. Primary uncertainty is AU-scale structural stability.'
+		costMin: '$80B',
+		costMax: '$300B',
+		costConfidence: 'medium',
+		costBasis: 'CAPACITY MODEL: Extension of Phase 2 thin-film production. Seed mirror segments ($50B) + AU-scale structural engineering ($50B) + station-keeping propulsion ($50B). Mirror material is fully ISRU-producible; cost is primarily R&D and initial seed deployment.'
 	},
 	{
 		bomId: 'bom-3b-2',
 		slug: 'thermonuclear-jet-engine',
 		name: 'Thermonuclear Jet Engine',
 		quantity: '~100 engine units',
-		cost: '$10T-$100T',
+		cost: '$400B',
 		category: 'Infrastructure',
-		costMin: '$1T',
-		costMax: '$100T',
+		costMin: '$200B',
+		costMax: '$800B',
 		costConfidence: 'low',
-		costBasis: 'Novel fusion propulsion at stellar scale. No heritage systems for comparison.'
+		costBasis: 'CAPACITY MODEL: PRIMARY R&D COST. Fusion ignition R&D ($200B) + stellar-scale engine development ($100B) + fuel cycle integration ($100B). Novel fusion propulsion with no heritage; highest uncertainty item in Phase 3b.'
 	},
 	{
 		bomId: 'bom-3b-3',
 		slug: 'solar-wind-collectors',
 		name: 'Solar Wind Collectors',
 		quantity: '~10⁷ collector stations',
-		cost: '$10T-$50T',
+		cost: '$100B',
 		category: 'Infrastructure',
-		costMin: '$1T',
-		costMax: '$50T',
-		costConfidence: 'low',
-		costBasis: 'Extension of Dyson swarm infrastructure with magnetic plasma handling.'
+		costMin: '$50B',
+		costMax: '$200B',
+		costConfidence: 'medium',
+		costBasis: 'CAPACITY MODEL: Magnetic plasma handling R&D ($40B) + seed collector network ($40B) + collection coordination software ($20B). Extension of Dyson swarm with well-understood plasma physics; collector production is ISRU-based.'
 	},
 	{
 		bomId: 'bom-3b-4',
 		slug: 'mass-lifting-systems',
 		name: 'Mass Lifting Systems',
 		quantity: '~1,000 lifting stations',
-		cost: '$50T-$200T',
+		cost: '$300B',
 		category: 'Infrastructure',
-		costMin: '$10T',
-		costMax: '$200T',
+		costMin: '$150B',
+		costMax: '$600B',
 		costConfidence: 'low',
-		costBasis: 'Most speculative system. Requires managing solar surface disruption.'
+		costBasis: 'CAPACITY MODEL: Most speculative system. Solar surface interaction R&D ($150B) + magnetic channeling development ($100B) + lifting station seed deployment ($50B). Requires managing solar chromosphere dynamics; high R&D uncertainty.'
 	},
 	{
 		bomId: 'bom-3b-5',
 		slug: 'helium-separation-plant',
 		name: 'Helium Separation Plant',
 		quantity: '~500 processing plants',
-		cost: '$10T-$50T',
+		cost: '$150B',
 		category: 'Infrastructure',
-		costMin: '$2T',
-		costMax: '$50T',
-		costConfidence: 'low',
-		costBasis: 'Scaled from terrestrial isotope separation with space operation multiplier.'
+		costMin: '$80B',
+		costMax: '$300B',
+		costConfidence: 'medium',
+		costBasis: 'CAPACITY MODEL: Isotope separation R&D adaptation ($60B) + seed processing plants ($50B) + fuel storage and handling ($40B). Well-understood terrestrial physics adapted for space; plant production is ISRU-based after seed deployment.'
 	},
 	{
 		bomId: 'bom-3b-6',
 		slug: 'em-accelerators',
 		name: 'Electromagnetic Accelerators',
 		quantity: '~10,000 accelerator units',
-		cost: '$10T-$50T',
+		cost: '$150B',
 		category: 'Infrastructure',
-		costMin: '$2T',
-		costMax: '$50T',
+		costMin: '$80B',
+		costMax: '$300B',
 		costConfidence: 'medium',
-		costBasis: 'Extension of Phase 1 mass driver technology to higher power levels.'
+		costBasis: 'CAPACITY MODEL: Extension of Phase 1-2 mass driver technology. High-power scaling R&D ($60B) + seed accelerator network ($50B) + propellant handling systems ($40B). Most mature technology in Phase 3b; ISRU-producible after seed deployment.'
 	},
 	{
 		bomId: 'bom-3b-7',
 		slug: 'dyson-integration-layer',
 		name: 'Dyson Integration Layer',
 		quantity: '1 system',
-		cost: '$5T-$20T',
+		cost: '$100B',
 		category: 'Computing',
-		costMin: '$1T',
-		costMax: '$20T',
+		costMin: '$50B',
+		costMax: '$200B',
 		costConfidence: 'medium',
-		costBasis: 'Software and infrastructure integration. Builds on Phase 2 swarm control.'
+		costBasis: 'CAPACITY MODEL: Software and infrastructure integration. Power allocation algorithms ($40B) + engine-swarm coordination ($30B) + thrust vector management ($30B). Builds on Phase 2/3a distributed systems; primarily software development cost.'
 	},
 	{
 		bomId: 'bom-3b-8',
 		slug: 'thrust-stabilization',
 		name: 'Thrust Stabilization Systems',
 		quantity: '~10,000 stabilization nodes',
-		cost: '$5T-$20T',
+		cost: '$150B',
 		category: 'Computing',
-		costMin: '$1T',
-		costMax: '$20T',
+		costMin: '$80B',
+		costMax: '$300B',
 		costConfidence: 'medium',
-		costBasis: 'Control systems with century-scale feedback loops. Novel but well-defined problem.'
+		costBasis: 'CAPACITY MODEL: Century-scale control systems. Planetary orbit stability modeling ($50B) + feedback control algorithms ($50B) + stabilization node seed deployment ($50B). Novel timescale but well-defined control theory problem.'
 	}
 ];
 
