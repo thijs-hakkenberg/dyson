@@ -1,0 +1,57 @@
+# Arxiv papers relevant to rq-1-38: Optical surface degradation from micrometeoroids
+# Generated: 2026-02-09
+
+papers:
+  - arxiv_id: "1912.00707"
+    title: "The Dawn of Dust Astronomy"
+    authors: ["Eberhard Grün", "Harald Krüger", "Ralf Srama"]
+    relevance: critical
+    summary: "Comprehensive review of space dust science by field pioneers. Essential for understanding interplanetary dust environment."
+
+  - arxiv_id: "0609341"
+    title: "GEO debris and interplanetary dust: fluxes and charging behavior"
+    authors: ["Amara L. Graps", "Simon F. Green", "Neil McBride"]
+    relevance: high
+    summary: "GORID detector data on interplanetary dust at GEO. Provides flux measurements relevant to heliocentric operations."
+
+  - arxiv_id: "1904.07384"
+    title: "Modelling DESTINY+ interplanetary and interstellar dust measurements en route to the active asteroid (3200) Phaethon"
+    authors: ["Harald Krüger", "Peter Strub", "Ralf Srama"]
+    relevance: high
+    summary: "Interplanetary dust flux modeling for heliocentric mission. Uses Grün and Divine-Staubach models."
+
+  - arxiv_id: "0006209"
+    title: "A Dust Cloud of Ganymede Maintained by Hypervelocity Impacts of Interplanetary Micrometeoroids"
+    authors: ["Harald Krüger", "Alexander V. Krivov", "Eberhard Grün"]
+    relevance: medium
+    summary: "Hypervelocity impact dynamics. Background for understanding impact damage mechanisms."
+
+  - arxiv_id: "2108.00870"
+    title: "Comparison of space weathering spectral changes induced by solar wind and micrometeoroid impacts using ion- and femtosecond-laser-irradiated olivine and pyroxene"
+    authors: ["K. Chrbolková", "R. Brunetto", "J. Ďurech"]
+    relevance: high
+    summary: "Micrometeoroid impact effects on optical surfaces. Uses femtosecond laser to simulate hypervelocity impacts."
+
+  - arxiv_id: "1811.03413"
+    title: "Optical communication on CubeSats - Enabling the next era in space science"
+    authors: ["Alberto Carrasco-Casado", "Abhijit Biswas", "Renny Fields"]
+    relevance: high
+    summary: "CubeSat optical communication review. Discusses terminal design and environmental challenges."
+
+  - arxiv_id: "2012.12549"
+    title: "Space Debris -- Optical Measurements"
+    authors: ["Jiri Silha"]
+    relevance: medium
+    summary: "Optical observation of debris. Background on particle environment characterization."
+
+key_findings:
+  - "Grün interplanetary dust model provides flux vs heliocentric distance"
+  - "Impact velocities at 0.5-1.0 AU range 10-70 km/s"
+  - "Femtosecond laser irradiation successfully simulates micrometeoroid damage"
+  - "Optical comm terminals at 1550nm face both scattering and contamination risks"
+
+gaps_identified:
+  - "Cumulative BER degradation models for optical surfaces not found"
+  - "Protective shutter mass/complexity tradeoffs need quantification"
+  - "LCRD/DSOC degradation data not yet published in open literature"
+  - "10-50 year exposure predictions require Monte Carlo modeling"
