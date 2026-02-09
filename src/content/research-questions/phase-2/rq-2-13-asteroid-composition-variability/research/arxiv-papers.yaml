@@ -1,0 +1,64 @@
+# Arxiv papers relevant to rq-2-13: Asteroid composition variability impact on processing
+# Generated: 2026-02-09
+
+papers:
+  - arxiv_id: "1904.11831"
+    title: "ASIME 2018 White Paper. In-Space Utilisation of Asteroids: Asteroid Composition -- Answers to Questions from the Asteroid Miners"
+    authors: ["Amara L. Graps", "Angel Abbud-Madrid", "Paul Abell"]
+    relevance: critical
+    summary: "ASIME consortium white paper on asteroid composition for mining. Essential reference for ISRU planning."
+
+  - arxiv_id: "1904.09453"
+    title: "3-micron Reflectance Spectroscopy of Carbonaceous Chondrites under Asteroid-like Conditions"
+    authors: ["Driss Takir", "Karen R. Stockstill-Cahill", "Charles A. Hibbitts"]
+    relevance: critical
+    summary: "All carbonaceous chondrite types measured under asteroid conditions. Key for spectral classification."
+
+  - arxiv_id: "2111.06372"
+    title: "Lunar-like silicate material forms the Earth quasisatellite (469219) 2016 HO3 Kamo'oalewa"
+    authors: ["Benjamin N. L. Sharkey", "Vishnu Reddy", "Renu Malhotra"]
+    relevance: high
+    summary: "Composition of Earth quasi-satellite. Demonstrates unexpected composition in accessible targets."
+
+  - arxiv_id: "1210.2853"
+    title: "Composition of Near-Earth Asteroid (4179) Toutatis"
+    authors: ["Vishnu Reddy", "Juan Andreas Sanchez", "Michael Gaffey"]
+    relevance: high
+    summary: "L-chondrite composition confirmed for NEA. Example of surface composition characterization."
+
+  - arxiv_id: "1607.01253"
+    title: "A plausible link between the asteroid 21 Lutetia and CH carbonaceous chondrites"
+    authors: ["Carles E. Moyano-Cambero", "Josep M. Trigo-Rodríguez", "Jordi Llorca"]
+    relevance: high
+    summary: "Asteroid-meteorite linkage methodology. Essential for connecting spectral data to ground truth."
+
+  - arxiv_id: "1802.05893"
+    title: "A dual origin for water in carbonaceous asteroids revealed by CM chondrites"
+    authors: ["Laurette Piani", "Hisayoshi Yurimoto", "Laurent Remusat"]
+    relevance: high
+    summary: "Water content variability in carbonaceous asteroids. Critical for volatile extraction planning."
+
+  - arxiv_id: "2009.13950"
+    title: "The iron record of asteroidal processes in carbonaceous chondrites"
+    authors: ["A. Garenne", "P. Beck", "G. Montes-Hernandez"]
+    relevance: high
+    summary: "Iron speciation in carbonaceous chondrites. Important for metal extraction process design."
+
+  - arxiv_id: "1502.06302"
+    title: "Asteroid Photometry"
+    authors: ["Jian-Yang Li", "Paul Helfenstein", "Bonnie J. Buratti"]
+    relevance: medium
+    summary: "Asteroid surface characterization methods. Background for remote composition assessment."
+
+key_findings:
+  - "ASIME white paper provides mining-focused composition data framework"
+  - "Carbonaceous chondrite types show 3-22% water content variability"
+  - "Iron speciation varies with aqueous alteration history"
+  - "Spectral-meteorite links enable ground truth validation of remote sensing"
+  - "Unexpected compositions (lunar-like) found in accessible NEAs"
+
+gaps_identified:
+  - "Limited sample return data (only Ryugu, Bennu, Itokawa)"
+  - "Internal heterogeneity not well characterized from remote sensing"
+  - "Processing yield variability vs composition not quantified"
+  - "Trace element concentrations (critical for semiconductors) poorly mapped"
