@@ -108,9 +108,24 @@ export const PHASES: Phase[] = [
 				costMax: 3000000000,
 				costConfidence: 'medium',
 				costBasis: 'Based on arxiv 1702.00335 bucket-wheel excavation with integrated electrolysis'
+			},
+			{
+				id: 'bom-0-7',
+				name: 'Organizational Infrastructure',
+				description: 'Legal, governance, and coordination infrastructure for multi-century project execution. Includes legal entity establishment, succession mechanisms, global coordination systems, conflict resolution frameworks, and governance tooling.',
+				quantity: 1,
+				unit: 'organization',
+				unitCost: 50000000,
+				totalCost: 50000000,
+				category: 'Governance',
+				slug: 'organizational-infrastructure',
+				costMin: 20000000,
+				costMax: 100000000,
+				costConfidence: 'low',
+				costBasis: 'Legal setup, coordination systems, governance tooling, and succession mechanisms for multi-century operations'
 			}
 		],
-		totalCost: 15660000000,
+		totalCost: 15710000000,
 		estimatedDuration: '10-15 years',
 		dependencies: [],
 		relatedResearch: ['asteroid mining', 'in-situ resource utilization', 'space manufacturing']

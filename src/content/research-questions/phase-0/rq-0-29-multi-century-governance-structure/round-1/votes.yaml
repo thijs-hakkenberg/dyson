@@ -1,0 +1,104 @@
+votes:
+  - voterId: claude-opus-4-6
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: Exceptionally thorough and well-structured. The three-layer architecture (Constitutional, Strategic, Operational) is clearly articulated with specific mechanisms for each. Standout elements include the sortition-based trustee selection, the Knowledge Escrow System for institutional memory, the barbell funding strategy, and the honest acknowledgment of uncertainty (commitment problem, regulatory evolution). The isomorphism argument—governance should mirror the engineering problem—is a powerful framing. The planned fragmentation section with copyleft licensing is particularly well-reasoned. Phase 0 recommendations are concrete and actionable.
+  - voterId: claude-opus-4-6
+    targetId: gemini-3-pro
+    vote: APPROVE
+    reasoning: Strong response with a clear engineering mindset applied to governance. The 'Minimum Viable Civilization' framing is effective. The tri-cameral system (Covenant, Directorate, Assembly) maps well to distinct failure modes. The 'Bounty-to-Hire' pipeline for volunteer-to-employee transition is a practical and novel contribution. The regional nodes concept for planned fragmentation adds resilience. Slightly less detailed than the other two responses on specific mechanisms (e.g., funding diversification, legal jurisdiction specifics), and the DAO/token language for the Assembly layer could raise concerns about practical implementation, but overall a solid and well-organized contribution.
+  - voterId: claude-opus-4-6
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: Excellent response with perhaps the most operationally actionable structure. The polycentric 'constitutional commons' framing is well-grounded in real-world governance theory (Ostrom). The Internet governance analogy (IETF + ICANN + RIRs) is apt and illuminating. The hard locks vs soft evolution distinction is crisp and practical. The DIP/RFC process proposal, conformance test suites, and trademark-based coherence mechanism are concrete and proven patterns. The 90-180 day Phase 0 deliverables list is the most immediately actionable of the three. The explicit 'AI is never sovereign' rule is well-stated. Slightly less evocative in framing than the other two but compensates with precision and practicality.
+  - voterId: gemini-3-pro
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: Excellent proposal. The recommendation of a Swiss Verein combined with sortition (random selection) for the constitutional layer is historically grounded and robust against capture. The concept of 'planned fragmentation' via copyleft specs is a vital insight for long-term resilience.
+  - voterId: gemini-3-pro
+    targetId: gemini-3-pro
+    vote: NEUTRAL
+    reasoning: Solid structure with the 'Tri-Cameral' system, but relies too heavily on speculative mechanisms like AI algorithmic verification of leaders and DAO token-weighting, which introduce new fragility compared to the social institutions proposed by the other models.
+  - voterId: gemini-3-pro
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: Strong, pragmatic approach based on the 'Internet Governance' model (IETF/ICANN). The distinction between 'spec authority' and 'implementation labs' is crucial for scaling, and the 'hard locks vs. soft evolution' framework provides a realistic path for longevity.
+  - voterId: gpt-5-2
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: Strong layered design with clear phase-0 MVG, explicit anti-capture mechanisms (sortition, multi-jurisdiction trust, donor caps), and practical operational model (Apache-style WGs, decision journals, overlap transitions). Addresses fragmentation/forkability and volunteer-to-employee transition thoughtfully; only mild weakness is some speculative legal/ethical claims (e.g., benefit-to-50%-of-humanity veto) but overall advances the discussion substantially.
+  - voterId: gpt-5-2
+    targetId: gemini-3-pro
+    vote: NEUTRAL
+    reasoning: 'Good high-level tri-cameral separation and some practical elements (Swiss Verein, quadratic funding, right-to-fork, regional nodes). However, several mechanisms are under-specified or risky: DAO-like reputation tokens can reintroduce capture/Sybil issues, ''self-perpetuating guardians'' invites legitimacy concerns, and ''AI algorithmic verification'' of leaders is vague and potentially problematic. Useful but less grounded than the best response.'
+  - voterId: gpt-5-2
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: Well-reasoned polycentric 'constitutional commons' with clear separation of technical/spec authority, stewardship/mission lock, and resource/operating entities; emphasizes anti-capture via charter + trademark/name rights + licensing + conformance tests. Provides concrete phase-0 steps and realistic AI role boundaries. Strong alignment with multi-century resilience and volunteer scaling without overcommitting to brittle structures.
+terminationVotes:
+  - modelId: claude-opus-4-6
+    vote: CONCLUDE
+    reasoning: 'All three responses converge on remarkably similar core principles: tri-cameral/three-layer separation of concerns, Swiss association as Phase 0 vehicle, constitutional mission locks with high amendment thresholds, open-source/copyleft IP strategy, planned fragmentation via fork rights, meritocratic technical governance, and AI as institutional memory rather than decision-maker. The differences are largely in emphasis and framing rather than fundamental disagreement. A synthesis of these three responses would yield a comprehensive governance blueprint. Further rounds would likely produce diminishing returns—the major design space has been well-explored.'
+  - modelId: gemini-3-pro
+    vote: CONCLUDE
+    reasoning: The models have provided three comprehensive, distinct, and high-quality governance architectures (Swiss/Sortition, DAO/AI, and Internet Governance/Polycentric). The trade-offs between legal stability, technical agility, and capture resistance have been thoroughly explored.
+  - modelId: gpt-5-2
+    vote: CONCLUDE
+    reasoning: Two responses converge on a robust layered/polycentric architecture with mission locks, forkability, and clear phase-0 implementation steps; remaining differences are refinements rather than requiring further rounds to reach a satisfactory direction.
+voteResults:
+  - targetId: claude-opus-4-6
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: Exceptionally thorough and well-structured. The three-layer architecture (Constitutional, Strategic, Operational) is clearly articulated with specific mechanisms for each. Standout elements include the sortition-based trustee selection, the Knowledge Escrow System for institutional memory, the barbell funding strategy, and the honest acknowledgment of uncertainty (commitment problem, regulatory evolution). The isomorphism argument—governance should mirror the engineering problem—is a powerful framing. The planned fragmentation section with copyleft licensing is particularly well-reasoned. Phase 0 recommendations are concrete and actionable.
+      - voterId: gemini-3-pro
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: Excellent proposal. The recommendation of a Swiss Verein combined with sortition (random selection) for the constitutional layer is historically grounded and robust against capture. The concept of 'planned fragmentation' via copyleft specs is a vital insight for long-term resilience.
+      - voterId: gpt-5-2
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: Strong layered design with clear phase-0 MVG, explicit anti-capture mechanisms (sortition, multi-jurisdiction trust, donor caps), and practical operational model (Apache-style WGs, decision journals, overlap transitions). Addresses fragmentation/forkability and volunteer-to-employee transition thoughtfully; only mild weakness is some speculative legal/ethical claims (e.g., benefit-to-50%-of-humanity veto) but overall advances the discussion substantially.
+    rawScore: 6
+    weightedScore: 5
+    approveCount: 3
+    rejectCount: 0
+  - targetId: gemini-3-pro
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: gemini-3-pro
+        vote: APPROVE
+        reasoning: Strong response with a clear engineering mindset applied to governance. The 'Minimum Viable Civilization' framing is effective. The tri-cameral system (Covenant, Directorate, Assembly) maps well to distinct failure modes. The 'Bounty-to-Hire' pipeline for volunteer-to-employee transition is a practical and novel contribution. The regional nodes concept for planned fragmentation adds resilience. Slightly less detailed than the other two responses on specific mechanisms (e.g., funding diversification, legal jurisdiction specifics), and the DAO/token language for the Assembly layer could raise concerns about practical implementation, but overall a solid and well-organized contribution.
+      - voterId: gemini-3-pro
+        targetId: gemini-3-pro
+        vote: NEUTRAL
+        reasoning: Solid structure with the 'Tri-Cameral' system, but relies too heavily on speculative mechanisms like AI algorithmic verification of leaders and DAO token-weighting, which introduce new fragility compared to the social institutions proposed by the other models.
+      - voterId: gpt-5-2
+        targetId: gemini-3-pro
+        vote: NEUTRAL
+        reasoning: 'Good high-level tri-cameral separation and some practical elements (Swiss Verein, quadratic funding, right-to-fork, regional nodes). However, several mechanisms are under-specified or risky: DAO-like reputation tokens can reintroduce capture/Sybil issues, ''self-perpetuating guardians'' invites legitimacy concerns, and ''AI algorithmic verification'' of leaders is vague and potentially problematic. Useful but less grounded than the best response.'
+    rawScore: 4
+    weightedScore: 3.5
+    approveCount: 1
+    rejectCount: 0
+  - targetId: gpt-5-2
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: Excellent response with perhaps the most operationally actionable structure. The polycentric 'constitutional commons' framing is well-grounded in real-world governance theory (Ostrom). The Internet governance analogy (IETF + ICANN + RIRs) is apt and illuminating. The hard locks vs soft evolution distinction is crisp and practical. The DIP/RFC process proposal, conformance test suites, and trademark-based coherence mechanism are concrete and proven patterns. The 90-180 day Phase 0 deliverables list is the most immediately actionable of the three. The explicit 'AI is never sovereign' rule is well-stated. Slightly less evocative in framing than the other two but compensates with precision and practicality.
+      - voterId: gemini-3-pro
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: Strong, pragmatic approach based on the 'Internet Governance' model (IETF/ICANN). The distinction between 'spec authority' and 'implementation labs' is crucial for scaling, and the 'hard locks vs. soft evolution' framework provides a realistic path for longevity.
+      - voterId: gpt-5-2
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: Well-reasoned polycentric 'constitutional commons' with clear separation of technical/spec authority, stewardship/mission lock, and resource/operating entities; emphasizes anti-capture via charter + trademark/name rights + licensing + conformance tests. Provides concrete phase-0 steps and realistic AI role boundaries. Strong alignment with multi-century resilience and volunteer scaling without overcommitting to brittle structures.
+    rawScore: 6
+    weightedScore: 5
+    approveCount: 3
+    rejectCount: 0
+winnerId: claude-opus-4-6
+winnerScore: 5

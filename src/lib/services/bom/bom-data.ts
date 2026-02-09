@@ -45,6 +45,7 @@ export const BOM_ITEM_SLUGS: Record<string, string> = {
 	'bom-0-4': 'transport-vehicles',
 	'bom-0-5': 'solar-power-arrays',
 	'bom-0-6': 'ispp-systems',
+	'bom-0-7': 'organizational-infrastructure',
 	// Phase 1
 	'bom-1-1': 'collector-units',
 	'bom-1-2': 'pv-blanket-arrays',
@@ -164,6 +165,18 @@ export const PHASE_0_BOM_ITEMS: BOMItemMeta[] = [
 		costMax: '$3B',
 		costConfidence: 'medium',
 		costBasis: 'Based on arxiv 1702.00335 bucket-wheel excavation with integrated electrolysis'
+	},
+	{
+		bomId: 'bom-0-7',
+		slug: 'organizational-infrastructure',
+		name: 'Organizational Infrastructure',
+		quantity: '1 organization',
+		cost: '$50M',
+		category: 'Governance',
+		costMin: '$20M',
+		costMax: '$100M',
+		costConfidence: 'low',
+		costBasis: 'Legal setup, coordination systems, governance tooling, and succession mechanisms for multi-century operations'
 	}
 ];
 
