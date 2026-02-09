@@ -1,0 +1,31 @@
+# Arxiv papers relevant to rq-1-10: Critical material supply chains (Tellurium, Indium)
+# Generated: 2026-02-09
+
+papers:
+  - arxiv_id: "1201.2911"
+    title: "Analytical Model for the Optical Functions of Indium Gallium Nitride with Application to Thin Film Solar Photovoltaic Cells"
+    authors: ["D. V. P. McLaughlin", "Joshua M. Pearce"]
+    relevance: medium
+    summary: "InGaN optical properties for PV. Relevant to understanding indium requirements in alternative cell designs."
+
+  - arxiv_id: "2210.11479"
+    title: "Exploitation of material consolidation trade-offs in multi-tier complex supply networks"
+    authors: ["Vinod Kumar Chauhan", "Muhannad Alomari", "James Arney"]
+    relevance: low
+    summary: "Supply chain optimization methods. General framework applicable to critical materials logistics."
+
+key_findings:
+  - "Limited arxiv coverage of tellurium/indium supply chain specifics"
+  - "InGaN alternatives to ITO being researched for PV applications"
+
+gaps_identified:
+  - "Tellurium and indium supply chain literature primarily in materials/economics journals, not arxiv"
+  - "Need USGS/geological survey data for supply projections"
+  - "Alternative transparent conductor (AZO, FTO, graphene) space qualification data sparse"
+  - "Asteroid Te/In concentrations require mining industry or planetary science databases"
+
+recommended_sources:
+  - "USGS Mineral Commodity Summaries for Te/In production data"
+  - "IEA Critical Materials reports"
+  - "First Solar CdTe production data"
+  - "Planetary Science Institute asteroid composition databases"
