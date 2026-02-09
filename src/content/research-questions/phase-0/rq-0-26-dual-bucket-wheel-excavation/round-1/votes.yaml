@@ -1,0 +1,104 @@
+votes:
+  - voterId: claude-opus-4-6
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: 'Exceptionally thorough response that reframes the problem as an integrated regolith handling challenge rather than purely an excavation/torque problem. The asymmetric wheel sizing recommendation is a genuinely novel and well-reasoned contribution. The phased research program with specific go/no-go gates, budget estimates, and timelines is actionable. The risk assessment covering regolith variability, particle contamination at fleet scale, and thermal management of volatiles is comprehensive. The quantitative grounding (torque estimates, mass penalties, containment percentages) strengthens every argument. Minor concern: the $17M budget and 18-month timeline could use more justification, and the 1/3 scale recommendation over 1/10 scale is well-argued but the cost implications aren''t fully explored.'
+  - voterId: claude-opus-4-6
+    targetId: gemini-3-pro
+    vote: APPROVE
+    reasoning: 'Strong response that makes three focused, high-value contributions: (1) the active torque control integration with ADCS is critical and well-articulated, (2) the material transfer jamming risk with the inward-rotation passive rejection geometry is a practical engineering insight, and (3) the volatile sublimation risk from frictional heating is an important thermodynamic consideration that the other responses touch on but don''t emphasize as strongly. The response is more concise and focused than the others, which has value. Slightly weaker on the research program side—it only addresses two of the five research directions and doesn''t provide the same level of programmatic detail. But the technical contributions are sharp and actionable.'
+  - voterId: claude-opus-4-6
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: 'The most operationally mature and systems-engineering-oriented response. Excellent structure separating what the design buys vs. what it doesn''t—the explicit callout that linear reaction forces are NOT cancelled is a critical point the other responses underemphasize. The prioritized research program is the most pragmatic: starting with DEM and 1g benchtop before expensive parabolic flights is the right sequencing. The anchoring section (point 6) with the compliance element recommendation is a valuable design insight. The ''decision recommendation'' framing at the end is exactly what a program needs. The response also correctly identifies that defining quantitative interface requirements NOW allows parallel workstreams to proceed. Slightly less novel in individual technical insights compared to Claude''s asymmetric wheel proposal, but the overall engineering judgment is excellent.'
+  - voterId: gemini-3-pro
+    targetId: claude-opus-4-6
+    vote: APPROVE
+    reasoning: This response is exceptionally strong. It not only validates the architecture but introduces critical, specific engineering modifications (asymmetric wheel sizing, integrated particle capture as a primary driver, direct ISPP interface). The proposed research program is detailed, logical, and addresses the scaling issues of granular physics. It moves the discussion from 'is this a good idea?' to 'how do we actually build this?'.
+  - voterId: gemini-3-pro
+    targetId: gemini-3-pro
+    vote: APPROVE
+    reasoning: This response provides a distinct and valuable perspective (Systems Engineering). It highlights the 'zero-torque fallacy' and the thermal risks to volatiles, which are crucial insights. The recommendation for active control integration with ADCS and the specific inward-rotation strategy adds necessary detail. It complements the Claude response well by focusing on control systems and thermodynamics.
+  - voterId: gemini-3-pro
+    targetId: gpt-5-2
+    vote: NEUTRAL
+    reasoning: This is a solid, competent response that covers the basics well. It correctly identifies the pros and cons and suggests a reasonable testing path. However, it feels slightly less innovative and specific compared to the other two. It covers similar ground but with less depth on the specific mechanical implementation details (like asymmetric sizing or specific thermal risks to volatiles).
+  - voterId: gpt-5-2
+    targetId: claude-opus-4-6
+    vote: NEUTRAL
+    reasoning: Strong systems framing (handling/containment + ISPP integration) and a concrete phased test plan, but it contains several overconfident/unsupported quantitative claims (torque magnitudes, mass deltas, throughput vs kW, containment %), some questionable recommendations (positive pressure for dust containment; dismissing underwater without nuance), and a few programmatic specifics ($/months) that feel invented rather than derived.
+  - voterId: gpt-5-2
+    targetId: gemini-3-pro
+    vote: NEUTRAL
+    reasoning: Good emphasis that “zero torque” is idealized, highlights differential loading/jam transients, material transfer as a choke point, and volatile/frictional heating—useful integration concerns. However, it asserts unrealistic control requirements (sub-millisecond torque sensing/response), leans on RCS as a primary mitigator without cost/propellant implications, and provides less actionable detail on containment/anchoring compared to others.
+  - voterId: gpt-5-2
+    targetId: gpt-5-2
+    vote: APPROVE
+    reasoning: 'Balanced and technically grounded: clearly separates torque vs linear force, identifies transients/jams and regolith uncertainty, proposes a plausible enclosed dual-wheel + metered transfer architecture, and lays out a sensible, test-gated validation plan (DEM → 1g/TVAC → reduced-g → ISPP interface) without overclaiming specific numbers. Good linkage to anchoring requirements and interface specs.'
+terminationVotes:
+  - modelId: claude-opus-4-6
+    vote: CONCLUDE
+    reasoning: 'All three responses converge on adopting dual counter-rotating bucket wheels as the baseline, and collectively they cover the critical design space comprehensively: torque management and active control (all three), particle containment (Claude, GPT), volatile preservation (Gemini), anchoring implications (GPT), research prioritization (all three with complementary sequencing), and ISPP integration (all three). The key disagreements are minor and constructive (e.g., scale of prototypes, sequencing of parabolic flights). A further round would likely yield diminishing returns—the actionable next steps are clear: adopt the architecture, define interface specs, and begin DEM + 1g testing immediately.'
+  - modelId: gemini-3-pro
+    vote: CONCLUDE
+    reasoning: The discussion has reached a high level of technical maturity. We have a consensus on the architecture (Dual Counter-Rotating Bucket Wheels), identified specific design modifications (asymmetric sizing, inward rotation, enclosed housing), defined the interface with ISPP (auger feed), and outlined a robust validation program (DEM -> 1g/TVAC -> Reduced Gravity). Further discussion on this specific mechanism would likely yield diminishing returns without actual simulation data.
+  - modelId: gpt-5-2
+    vote: CONCLUDE
+    reasoning: The responses converge on adopting dual counter-rotating enclosed bucket wheels as baseline while emphasizing residual forces/transients, containment, and a staged validation program. Further rounds would likely be incremental (parameter tuning and test details) rather than resolving major open disputes.
+voteResults:
+  - targetId: claude-opus-4-6
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: 'Exceptionally thorough response that reframes the problem as an integrated regolith handling challenge rather than purely an excavation/torque problem. The asymmetric wheel sizing recommendation is a genuinely novel and well-reasoned contribution. The phased research program with specific go/no-go gates, budget estimates, and timelines is actionable. The risk assessment covering regolith variability, particle contamination at fleet scale, and thermal management of volatiles is comprehensive. The quantitative grounding (torque estimates, mass penalties, containment percentages) strengthens every argument. Minor concern: the $17M budget and 18-month timeline could use more justification, and the 1/3 scale recommendation over 1/10 scale is well-argued but the cost implications aren''t fully explored.'
+      - voterId: gemini-3-pro
+        targetId: claude-opus-4-6
+        vote: APPROVE
+        reasoning: This response is exceptionally strong. It not only validates the architecture but introduces critical, specific engineering modifications (asymmetric wheel sizing, integrated particle capture as a primary driver, direct ISPP interface). The proposed research program is detailed, logical, and addresses the scaling issues of granular physics. It moves the discussion from 'is this a good idea?' to 'how do we actually build this?'.
+      - voterId: gpt-5-2
+        targetId: claude-opus-4-6
+        vote: NEUTRAL
+        reasoning: Strong systems framing (handling/containment + ISPP integration) and a concrete phased test plan, but it contains several overconfident/unsupported quantitative claims (torque magnitudes, mass deltas, throughput vs kW, containment %), some questionable recommendations (positive pressure for dust containment; dismissing underwater without nuance), and a few programmatic specifics ($/months) that feel invented rather than derived.
+    rawScore: 5
+    weightedScore: 4
+    approveCount: 2
+    rejectCount: 0
+  - targetId: gemini-3-pro
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: gemini-3-pro
+        vote: APPROVE
+        reasoning: 'Strong response that makes three focused, high-value contributions: (1) the active torque control integration with ADCS is critical and well-articulated, (2) the material transfer jamming risk with the inward-rotation passive rejection geometry is a practical engineering insight, and (3) the volatile sublimation risk from frictional heating is an important thermodynamic consideration that the other responses touch on but don''t emphasize as strongly. The response is more concise and focused than the others, which has value. Slightly weaker on the research program side—it only addresses two of the five research directions and doesn''t provide the same level of programmatic detail. But the technical contributions are sharp and actionable.'
+      - voterId: gemini-3-pro
+        targetId: gemini-3-pro
+        vote: APPROVE
+        reasoning: This response provides a distinct and valuable perspective (Systems Engineering). It highlights the 'zero-torque fallacy' and the thermal risks to volatiles, which are crucial insights. The recommendation for active control integration with ADCS and the specific inward-rotation strategy adds necessary detail. It complements the Claude response well by focusing on control systems and thermodynamics.
+      - voterId: gpt-5-2
+        targetId: gemini-3-pro
+        vote: NEUTRAL
+        reasoning: Good emphasis that “zero torque” is idealized, highlights differential loading/jam transients, material transfer as a choke point, and volatile/frictional heating—useful integration concerns. However, it asserts unrealistic control requirements (sub-millisecond torque sensing/response), leans on RCS as a primary mitigator without cost/propellant implications, and provides less actionable detail on containment/anchoring compared to others.
+    rawScore: 5
+    weightedScore: 4
+    approveCount: 2
+    rejectCount: 0
+  - targetId: gpt-5-2
+    votes:
+      - voterId: claude-opus-4-6
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: 'The most operationally mature and systems-engineering-oriented response. Excellent structure separating what the design buys vs. what it doesn''t—the explicit callout that linear reaction forces are NOT cancelled is a critical point the other responses underemphasize. The prioritized research program is the most pragmatic: starting with DEM and 1g benchtop before expensive parabolic flights is the right sequencing. The anchoring section (point 6) with the compliance element recommendation is a valuable design insight. The ''decision recommendation'' framing at the end is exactly what a program needs. The response also correctly identifies that defining quantitative interface requirements NOW allows parallel workstreams to proceed. Slightly less novel in individual technical insights compared to Claude''s asymmetric wheel proposal, but the overall engineering judgment is excellent.'
+      - voterId: gemini-3-pro
+        targetId: gpt-5-2
+        vote: NEUTRAL
+        reasoning: This is a solid, competent response that covers the basics well. It correctly identifies the pros and cons and suggests a reasonable testing path. However, it feels slightly less innovative and specific compared to the other two. It covers similar ground but with less depth on the specific mechanical implementation details (like asymmetric sizing or specific thermal risks to volatiles).
+      - voterId: gpt-5-2
+        targetId: gpt-5-2
+        vote: APPROVE
+        reasoning: 'Balanced and technically grounded: clearly separates torque vs linear force, identifies transients/jams and regolith uncertainty, proposes a plausible enclosed dual-wheel + metered transfer architecture, and lays out a sensible, test-gated validation plan (DEM → 1g/TVAC → reduced-g → ISPP interface) without overclaiming specific numbers. Good linkage to anchoring requirements and interface specs.'
+    rawScore: 5
+    weightedScore: 4
+    approveCount: 2
+    rejectCount: 0
+winnerId: claude-opus-4-6
+winnerScore: 4

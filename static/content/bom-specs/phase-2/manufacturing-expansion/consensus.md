@@ -57,18 +57,71 @@ phase: "phase-2"
 
 6. **Dust/Particulate Control in Vacuum**: Can electrostatic and mechanical dust control achieve the cleanliness levels required for thin-film production and precision mechanisms without atmospheric filtration? (GPT emphasizes as "mission-killer"; Gemini notes vacuum chamber puncture risk)
 
+## Resolved Architecture Decisions
+
+### Fleet Coordination: Federated Autonomous Clusters (rq-2-17)
+
+**Decision**: Adopt a federated architecture of loosely-coupled autonomous clusters using intent-based coordination for manufacturing fleet operations at scale.
+
+**Rationale** (from unanimous multi-model consensus, 2026-02-08):
+- The binding constraint is **convergence time after disruptions**, not steady-state communication overhead
+- Mesh coordination becomes prohibitive beyond ~1,000 nodes; hierarchical with global sync degrades at ~3,000-5,000 nodes
+- Federated architecture scales to **50,000+ nodes** with only 10–15% efficiency loss vs. perfect central planner
+- This architectural choice **cannot be deferred**—must be embedded in Phase 1 design before exponential replication begins
+
+**Architecture Specifications**:
+
+| Parameter | Specification |
+|-----------|---------------|
+| Cluster size | 50–200 manufacturing nodes per cluster |
+| Cluster autonomy | 30+ days fully independent productive operation |
+| Inter-cluster coordination | Market-based auction mechanisms (4–8 hour cycles) |
+| Coordination model | Intent-based ("I will mine Asteroid X for 30 days at ~15 t/day") |
+| Software diversity | 3–4 independent lineages for critical subsystems |
+| Communication | Loosely-coupled; no global state synchronization |
+
+**Convergence Time SLAs** (hard architectural constraints):
+
+| Event Type | Maximum Recovery Time |
+|------------|----------------------|
+| Single node failure | <1 hour |
+| Cluster disruption | <8 hours |
+| Cross-cluster reallocation | <72 hours |
+| Fleet-wide emergency | <7 days |
+
+**Key Architectural Principles**:
+1. **Market-based resource allocation** at inter-cluster tier scales as O(N) and degrades gracefully under communication disruption
+2. **Intent-based coordination** reduces message complexity to negligible; most intents are non-conflicting
+3. **Node generation heterogeneity** is a first-order problem—clusters bounded to max 3-generation spread
+4. **Software monoculture is an existential risk**—maintain 3–4 distinct lineages plus independent auditor nodes per regional federation
+
+**Development Requirements**:
+1. Lock federated architecture into Phase 1 requirements immediately
+2. Build high-fidelity discrete-event simulation incorporating disruption dynamics
+3. Design and prototype market-based resource allocation mechanism
+4. Develop software diversity and lineage management strategy
+5. Establish convergence time SLAs with automated monitoring
+
+---
+
 ## Recommended Approach
 
-1. **Adopt Modular, Replicable Node Architecture**: Deploy standardized manufacturing nodes in the 2,000-3,000 tonne class with pod-based subsystems and common mechanical/power/thermal/data interfaces. This enables graceful degradation, incremental scaling, and faster qualification cycles while supporting eventual self-replication.
+1. **Adopt Federated Autonomous Cluster Architecture**: Design the manufacturing fleet as a loose federation of 50–200 node clusters, each capable of 30+ days independent operation (see resolved decision above). This replaces tightly-coupled fleet coordination models.
 
-2. **Prioritize Molten Oxide Electrolysis (MOE) for Primary Refining**: MOE avoids consumable electrodes, produces oxygen as a valuable byproduct, and scales well with solar-electric power. Supplement with solar furnace smelting for high-throughput metal production.
+2. **Adopt Modular, Replicable Node Architecture**: Deploy standardized manufacturing nodes in the 2,000-3,000 tonne class with pod-based subsystems and common interfaces. This enables graceful degradation, incremental scaling, and faster qualification cycles.
 
-3. **Implement Strict Zoning for Contamination Control**: Physically separate "dirty" crushing/refining zones from "clean" thin-film and assembly zones using sealed interfaces, electrostatic precipitators, and dedicated vacuum pumping with filtration.
+3. **Implement Market-Based Inter-Cluster Resource Allocation**: Use auction mechanisms with 4–8 hour cycles for feedstock and logistics slot allocation. This scales as O(N) per round and naturally handles fleet heterogeneity.
 
-4. **Design for 18-Month Replication Cycle with 30% Capacity Allocation**: Each node should dedicate approximately 30% of production capacity to manufacturing components for new nodes, targeting 94% mass closure from in-situ resources. Accept efficiency trade-offs to enable exponential growth.
+4. **Prioritize Molten Oxide Electrolysis (MOE) for Primary Refining**: MOE avoids consumable electrodes, produces oxygen as a valuable byproduct, and scales well with solar-electric power.
 
-5. **Deploy Pathfinder/Demonstrator Mission Before Production Commitment**: Launch a 1-5 MW class orbital demonstrator that validates all key processes (crushing, MOE, vapor deposition, autonomous assembly) and retires critical technology risks before committing to full-scale production nodes.
+5. **Implement Strict Zoning for Contamination Control**: Physically separate "dirty" crushing/refining zones from "clean" thin-film and assembly zones using sealed interfaces and electrostatic precipitators.
 
-6. **Establish Conservative Thermal Margins**: Size radiator systems with ≥30% margin above nominal requirements, use segmented/redundant radiator wings, and develop self-sealing coolant loops to address the thermal rejection bottleneck identified by all models.
+6. **Design for 18-Month Replication Cycle with 30% Capacity Allocation**: Each node should dedicate approximately 30% of production capacity to manufacturing components for new nodes, targeting 94% mass closure.
 
-7. **Invest Early in Fleet Autonomy Software and Digital Twins**: Develop the supervisory control, fault detection/isolation/recovery (FDIR), and fleet coordination software stack in parallel with hardware, using extensive simulation and digital twin models. Operations will be autonomy-limited if software lags hardware deployment.
+7. **Maintain Software Diversity**: Implement 3–4 independent software lineages for critical subsystems (feedstock assessment, structural fabrication, coordination protocols) to prevent fleet-wide cascading failures.
+
+8. **Establish Convergence Time SLAs as Hard Requirements**: Build convergence time measurement into the coordination architecture with automated monitoring. Automated partitioning triggers if any SLA is breached.
+
+9. **Deploy Pathfinder/Demonstrator Mission Before Production Commitment**: Launch a 1-5 MW class orbital demonstrator that validates all key processes before committing to full-scale production nodes.
+
+10. **Establish Conservative Thermal Margins**: Size radiator systems with ≥30% margin above nominal requirements to address the thermal rejection bottleneck.

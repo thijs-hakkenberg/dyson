@@ -8,6 +8,16 @@
 import type { CostConfidenceLevel } from '$lib/types';
 
 /**
+ * Material alternative research reference
+ */
+export interface MaterialAlternativeMeta {
+	name: string;
+	arxivId?: string;
+	benefit: string;
+	tradeoff?: string;
+}
+
+/**
  * BOM Item metadata interface
  */
 export interface BOMItemMeta {
@@ -21,6 +31,7 @@ export interface BOMItemMeta {
 	costMax?: string;
 	costConfidence?: CostConfidenceLevel;
 	costBasis?: string;
+	materialAlternatives?: MaterialAlternativeMeta[];
 }
 
 /**
@@ -172,7 +183,33 @@ export const PHASE_1_BOM_ITEMS: BOMItemMeta[] = [
 		costMin: '$60B',
 		costMax: '$160B',
 		costConfidence: 'low',
-		costBasis: 'First-of-kind large-scale thin-film membrane spacecraft; high uncertainty in manufacturing scale-up'
+		costBasis: 'First-of-kind large-scale thin-film membrane spacecraft; high uncertainty in manufacturing scale-up',
+		materialAlternatives: [
+			{
+				name: 'UMG-Si (Upgraded Metallurgical-Grade Silicon)',
+				arxivId: '2101.08019',
+				benefit: '20.76% efficiency at significantly lower cost than electronic-grade silicon',
+				tradeoff: 'Slightly lower efficiency than EG-Si but much better cost/watt for space applications'
+			},
+			{
+				name: 'Graphene/MoS2 heterostructures',
+				arxivId: '1503.05380',
+				benefit: 'Potential for radical mass reduction via 2D material photovoltaics',
+				tradeoff: 'Early TRL; manufacturing at scale unproven'
+			},
+			{
+				name: 'Multi-junction III-V cells',
+				arxivId: '1905.08024',
+				benefit: '47.2% theoretical efficiency under concentration',
+				tradeoff: 'Higher cost per area; optimal for concentrated solar applications'
+			},
+			{
+				name: 'Metamaterial light-trapping enhancement',
+				arxivId: '1406.6710',
+				benefit: 'Omnidirectional absorption improves off-axis performance',
+				tradeoff: 'Adds fabrication complexity; benefit diminishes for tracking systems'
+			}
+		]
 	},
 	{
 		bomId: 'bom-1-2',
@@ -184,7 +221,27 @@ export const PHASE_1_BOM_ITEMS: BOMItemMeta[] = [
 		costMin: '$15B',
 		costMax: '$40B',
 		costConfidence: 'medium',
-		costBasis: 'Based on thin-film PV roadmap projections; scale-up costs uncertain'
+		costBasis: 'Based on thin-film PV roadmap projections; scale-up costs uncertain',
+		materialAlternatives: [
+			{
+				name: 'UMG-Si thin-film',
+				arxivId: '2101.08019',
+				benefit: '20.76% efficiency with reduced purification costs',
+				tradeoff: 'Requires optimized deposition process for space-grade blankets'
+			},
+			{
+				name: 'Multi-junction concentrator cells',
+				arxivId: '1905.08024',
+				benefit: '47.2% efficiency potential reduces required collection area',
+				tradeoff: 'Requires optical concentration system; adds pointing requirements'
+			},
+			{
+				name: 'Metamaterial-enhanced absorbers',
+				arxivId: '1406.6710',
+				benefit: 'Omnidirectional light-trapping improves energy yield',
+				tradeoff: 'Manufacturing complexity for large-area blankets'
+			}
+		]
 	},
 	{
 		bomId: 'bom-1-3',
@@ -244,7 +301,21 @@ export const PHASE_1_BOM_ITEMS: BOMItemMeta[] = [
 		costMin: '$3B',
 		costMax: '$8B',
 		costConfidence: 'medium',
-		costBasis: 'Distributed computing infrastructure; scaling to 1M+ nodes introduces uncertainty'
+		costBasis: 'Distributed computing infrastructure; scaling to 1M+ nodes introduces uncertainty',
+		materialAlternatives: [
+			{
+				name: 'Retrodirective phased array beaming',
+				arxivId: '2309.14274',
+				benefit: 'Automatic beam tracking without explicit position feedback; simplifies control',
+				tradeoff: 'Requires pilot signal from ground; adds receiver complexity'
+			},
+			{
+				name: 'High-efficiency rectenna receivers',
+				arxivId: '2601.12386',
+				benefit: '68.1% demonstrated RF-to-DC conversion efficiency for power transmission',
+				tradeoff: 'Efficiency varies with power density; requires optimization for distance'
+			}
+		]
 	}
 ];
 
@@ -264,7 +335,33 @@ export const PHASE_2_BOM_ITEMS: BOMItemMeta[] = [
 		costMin: '$2.5T',
 		costMax: '$8.5T',
 		costConfidence: 'low',
-		costBasis: 'Assumes successful ISRU transition and learning curve; highly dependent on Phase 1 outcomes'
+		costBasis: 'Assumes successful ISRU transition and learning curve; highly dependent on Phase 1 outcomes',
+		materialAlternatives: [
+			{
+				name: 'UMG-Si (Upgraded Metallurgical-Grade Silicon)',
+				arxivId: '2101.08019',
+				benefit: '20.76% efficiency; ISRU-compatible purification from asteroid silicates',
+				tradeoff: 'Requires in-space refining capability development'
+			},
+			{
+				name: 'Graphene/MoS2 heterostructures',
+				arxivId: '1503.05380',
+				benefit: 'Ultra-lightweight 2D material PV could dramatically reduce mass per unit',
+				tradeoff: 'Requires breakthrough in large-area 2D material synthesis'
+			},
+			{
+				name: 'Multi-junction III-V cells',
+				arxivId: '1905.08024',
+				benefit: '47.2% efficiency enables smaller collectors for same power output',
+				tradeoff: 'III-V materials (Ga, As, In) less abundant in asteroid feedstock'
+			},
+			{
+				name: 'Metamaterial light-trapping',
+				arxivId: '1406.6710',
+				benefit: 'Omnidirectional absorption reduces tracking precision requirements',
+				tradeoff: 'Additional fabrication steps in ISRU manufacturing chain'
+			}
+		]
 	},
 	{
 		bomId: 'bom-2-2',
@@ -380,7 +477,21 @@ export const PHASE_3A_BOM_ITEMS: BOMItemMeta[] = [
 		costMin: '$1T',
 		costMax: '$100T',
 		costConfidence: 'medium',
-		costBasis: 'HVDC within layers plus optical power beaming between layers. Essential for outer-layer viability.'
+		costBasis: 'HVDC within layers plus optical power beaming between layers. Essential for outer-layer viability.',
+		materialAlternatives: [
+			{
+				name: 'High-efficiency rectenna arrays',
+				arxivId: '2601.12386',
+				benefit: '68.1% RF-to-DC efficiency demonstrated; scalable for inter-layer power beaming',
+				tradeoff: 'Efficiency drops at very high power densities; thermal management needed'
+			},
+			{
+				name: 'Retrodirective beam steering',
+				arxivId: '2309.14274',
+				benefit: 'Self-tracking beams simplify inter-layer alignment across AU distances',
+				tradeoff: 'Pilot signal latency at AU scales may require predictive algorithms'
+			}
+		]
 	},
 	{
 		bomId: 'bom-3a-8',

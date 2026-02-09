@@ -36,6 +36,16 @@ export interface LLMCouncilQuery {
 export type CostConfidenceLevel = 'low' | 'medium' | 'high';
 
 // Phase Types
+/**
+ * Material alternative research reference
+ */
+export interface MaterialAlternative {
+	name: string;
+	arxivId?: string;
+	benefit: string;
+	tradeoff?: string;
+}
+
 export interface BOMItem {
 	id: string;
 	name: string;
@@ -51,6 +61,7 @@ export interface BOMItem {
 	costMax?: number;
 	costConfidence?: CostConfidenceLevel;
 	costBasis?: string;
+	materialAlternatives?: MaterialAlternative[];
 }
 
 export interface Phase {

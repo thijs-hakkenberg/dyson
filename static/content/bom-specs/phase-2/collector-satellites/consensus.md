@@ -30,7 +30,7 @@ All three models converge on the following core specifications:
 
 - **Manufacturing Philosophy**: Design for exponential production scaling with emphasis on roll-to-roll processes, standardized interfaces, and acceptance of statistical defect rates over perfection
 
-- **Swarm Coordination**: Distributed peer-to-peer mesh networking with hierarchical command structure; individual units maintain **10–50 km minimum separation** using boid-like flocking algorithms
+- **Swarm Coordination**: Heterogeneous hierarchical architecture with dedicated "Shepherd" coordinator spacecraft managing clusters of 1,000–5,000 "Flock" collector units; individual units maintain **10–50 km minimum separation**; exception-based telemetry reduces bandwidth by ~100× (see rq-1-24 resolution)
 
 ---
 
@@ -56,7 +56,7 @@ All three models converge on the following core specifications:
 
 2. **Membrane Long-Term Degradation**: What is the actual degradation rate of thin-film substrates (Kapton, polyimide variants) under intense UV flux at 0.3–0.5 AU over 10–50 year timescales? Self-healing polymers or protective coatings may be required.
 
-3. **Swarm Collision Avoidance at Scale**: How do we certify and govern autonomous collision avoidance behaviors for billion-unit swarms? What are the verification approaches and who sets the operational rules?
+3. **Swarm Collision Avoidance at Scale**: ~~How do we certify and govern autonomous collision avoidance behaviors for billion-unit swarms?~~ **Partially resolved** (rq-1-24, rq-2-17): Heterogeneous Shepherd/Flock architecture with spatial partitioning enables O(1) collision avoidance complexity. Shepherds compute pairwise checks only within their sector plus buffer zone. Remaining questions: inter-Shepherd coordination protocols and correlated failure recovery.
 
 4. **Thermal Warping of Large Membranes**: Will thermal gradients between sun-facing and dark sides cause membrane curling that disrupts phased array focus or structural integrity? Active electrostatic stiffening may be needed.
 
@@ -81,3 +81,11 @@ All three models converge on the following core specifications:
 6. **Invest immediately in HV testing infrastructure and swarm simulation**: These are the two highest-risk, longest-lead items. Fund dedicated vacuum arc characterization facilities and million-unit swarm coordination simulations before finalizing electrical and autonomy architectures.
 
 7. **Design for Earth-based manufacturing initially with ISRU-compatible interfaces**: Gemini's Mercury foundry concept is compelling but requires infrastructure that doesn't yet exist. Build the first 1,000–10,000 units from Earth while developing in-space manufacturing capability in parallel, ensuring material and interface compatibility for the transition.
+
+---
+
+## Cross-References
+
+- **Swarm Control Architecture**: See [bom-1-7 Swarm Control System](../phase-1/swarm-control-system/consensus.md) for Shepherd/Flock heterogeneous hierarchy (rq-1-24)
+- **Fleet Coordination**: See [bom-2-3 Manufacturing Expansion](./manufacturing-expansion/consensus.md) for federated autonomous cluster architecture (rq-2-17)
+- **Excavation System**: See [bom-0-2 Mining Robots](../phase-0/mining-robots/consensus.md) for dual counter-rotating bucket wheel design (rq-0-26)

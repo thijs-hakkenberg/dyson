@@ -70,18 +70,56 @@ All three models converge on the following technical parameters:
 
 ---
 
+## Resolved Architecture Decisions
+
+### Heterogeneous Hierarchical Architecture: Shepherd/Flock Model (rq-1-24)
+
+**Decision**: Adopt a two-class heterogeneous spacecraft system with dedicated "Shepherd" coordinators and mass-optimized "Flock" collector units.
+
+**Rationale** (from unanimous multi-model consensus, 2026-02-08):
+- Simulation data definitively ruled out centralized control (bottlenecked at ~10,000 nodes) and pure mesh topologies (prohibitive overhead beyond ~100,000 nodes)
+- Hierarchical approach scales to **1,000,000+ nodes with only 2–8% communication overhead**—an order of magnitude better than mesh alternatives
+- Equipping every collector with coordinator-capable hardware imposes unacceptable mass penalty at scale; concentrating compute into dedicated Shepherds keeps collector units simple
+
+**Architecture Specifications**:
+
+| Component | Specification |
+|-----------|---------------|
+| Shepherd:Flock ratio | 1:1,000–5,000 |
+| Shepherd capabilities | High-gain comms, edge GPU, collision avoidance for sector, larger propellant reserves |
+| Flock unit design | Mass-optimized collector, minimal compute, heartbeat-only telemetry |
+| Cluster membership | Dynamic spatial partitioning (octree/voxel), units hand over between Shepherds |
+| Telemetry model | Exception-based ("silence by default")—nominal units transmit only heartbeats |
+| Collision avoidance | Computed per-sector by Shepherd; O(1) complexity vs swarm size |
+
+**Key Architectural Principles**:
+1. **Dynamic spatial partitioning** replaces static clustering—accounts for orbital drift
+2. **Exception-based telemetry** reduces aggregate bandwidth by ~100× vs full telemetry streams
+3. **ANH commands Shepherds, not units**—workload stays constant as swarm grows (20–200 Shepherds)
+4. **Collision avoidance is spatially decomposed**—each Shepherd handles only its sector plus buffer zone
+
+**Development Requirements**:
+1. Define Shepherd spacecraft specification (SWaP, compute, comms suite, propellant budget)
+2. Benchmark spatial partitioning algorithms (octree vs k-d tree vs S2-geometry) under realistic orbital conditions
+3. Prototype exception-based telemetry protocol at 10⁵, 10⁶, 10⁷ unit scales
+4. Conduct Shepherd failure mode and recovery analysis for correlated failures
+
+---
+
 ## Recommended Approach
 
-1. **Adopt a Three-Tier Federated Architecture**: Implement individual node autonomy (Tier 1), cluster-level coordination with rotating coordinators (Tier 2, ~100 nodes per cluster), and 3–5 beacon/relay spacecraft for time authority, ephemeris catalog, and ground gateway (Tier 3). This balances scalability with operational simplicity.
+1. **Adopt Heterogeneous Shepherd/Flock Architecture**: Deploy dedicated Shepherd coordinator spacecraft at 1:1,000–5,000 ratio managing mass-optimized Flock collector units (see resolved decision above). This replaces the previous rotating-coordinator model.
 
-2. **Start with 1,000–3,000 Nodes for Phase 1**: Begin at the lower end of proposed swarm sizes to validate control algorithms, communication protocols, and collision avoidance before scaling to 10,000+. Use this phase to retire navigation and autonomy risks.
+2. **Use Dynamic Spatial Partitioning**: Define cluster membership by physical volume (octree/voxel grid in orbital space), with units handing over between Shepherds as they traverse sectors. Static clustering breaks within months due to orbital perturbations.
 
-3. **Use Hybrid Communication**: Deploy S-band/UHF for baseline node-to-beacon links (robust, simple), with optical ISL reserved for high-bandwidth cluster backbone and inter-sector links. Defer full optical mesh to Phase 1.5 after validating pointing and reliability.
+3. **Implement Exception-Based Telemetry**: Nominal units transmit only periodic heartbeat chirps; Shepherds aggregate and summarize for ANH. Full telemetry streams opened only on fault detection.
 
-4. **Implement Ephemeris Governance, Not Formation Flying**: Assign each node an orbital element window and keep-out tube rather than rigid formation geometry. Use distributed conjunction screening with beacon-broadcast catalogs and local avoidance authority.
+4. **Start with 1,000–3,000 Nodes for Phase 1**: Begin at the lower end of proposed swarm sizes to validate the Shepherd/Flock model before scaling to 10,000+. Use this phase to retire coordination and autonomy risks.
 
-5. **Design for Graceful Degradation**: Accept 1–3% annual node failure rate by using automotive-grade components with selective spot shielding and ECC. Ensure no single node or beacon failure destabilizes the swarm; nodes must survive 30 days in free-run mode.
+5. **Use Hybrid Communication**: Deploy S-band/UHF for Flock-to-Shepherd links (robust, simple), with optical ISL for Shepherd-to-Shepherd backbone and ANH links.
 
-6. **Invest Heavily in Simulation and Hardware-in-the-Loop Testing**: Build a 10,000+ node software simulation with Monte Carlo error injection before flight. Validate all autonomy and collision avoidance logic in HIL testbeds with representative hardware.
+6. **Design for Graceful Degradation**: Maintain 200% signal overlap between adjacent Shepherd sectors for seamless handover on Shepherd failure. Nodes must survive 30 days in passive safe mode if orphaned.
 
-7. **Formally Verify Safety-Critical Software**: Use seL4 or equivalent verified microkernel for the safety envelope. Limit maneuver authority in software to prevent runaway thrust commands. Implement authenticated, signed broadcasts with per-node identity keys to prevent spoofing.
+7. **Invest Heavily in Simulation and Hardware-in-the-Loop Testing**: Build a 10,000+ node software simulation with Monte Carlo error injection before flight. Validate Shepherd failure recovery and sector handover logic.
+
+8. **Formally Verify Safety-Critical Software**: Use seL4 or equivalent verified microkernel for the safety envelope. Limit maneuver authority in software to prevent runaway thrust commands.

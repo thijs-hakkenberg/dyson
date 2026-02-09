@@ -146,7 +146,33 @@ export const PHASES: Phase[] = [
 				costMin: 60000000000,
 				costMax: 160000000000,
 				costConfidence: 'low',
-				costBasis: 'First-of-kind large-scale thin-film membrane spacecraft; high uncertainty in manufacturing scale-up'
+				costBasis: 'First-of-kind large-scale thin-film membrane spacecraft; high uncertainty in manufacturing scale-up',
+				materialAlternatives: [
+					{
+						name: 'UMG-Si (Upgraded Metallurgical-Grade Silicon)',
+						arxivId: '2101.08019',
+						benefit: '20.76% efficiency at significantly lower cost than electronic-grade silicon',
+						tradeoff: 'Slightly lower efficiency than EG-Si but much better cost/watt for space applications'
+					},
+					{
+						name: 'Graphene/MoS2 heterostructures',
+						arxivId: '1503.05380',
+						benefit: 'Potential for radical mass reduction via 2D material photovoltaics',
+						tradeoff: 'Early TRL; manufacturing at scale unproven'
+					},
+					{
+						name: 'Multi-junction III-V cells',
+						arxivId: '1905.08024',
+						benefit: '47.2% theoretical efficiency under concentration',
+						tradeoff: 'Higher cost per area; optimal for concentrated solar applications'
+					},
+					{
+						name: 'Metamaterial light-trapping enhancement',
+						arxivId: '1406.6710',
+						benefit: 'Omnidirectional absorption improves off-axis performance',
+						tradeoff: 'Adds fabrication complexity; benefit diminishes for tracking systems'
+					}
+				]
 			},
 			{
 				id: 'bom-1-2',
@@ -161,7 +187,27 @@ export const PHASES: Phase[] = [
 				costMin: 15000000000,
 				costMax: 40000000000,
 				costConfidence: 'medium',
-				costBasis: 'Based on thin-film PV roadmap projections; scale-up costs uncertain'
+				costBasis: 'Based on thin-film PV roadmap projections; scale-up costs uncertain',
+				materialAlternatives: [
+					{
+						name: 'UMG-Si thin-film',
+						arxivId: '2101.08019',
+						benefit: '20.76% efficiency with reduced purification costs',
+						tradeoff: 'Requires optimized deposition process for space-grade blankets'
+					},
+					{
+						name: 'Multi-junction concentrator cells',
+						arxivId: '1905.08024',
+						benefit: '47.2% efficiency potential reduces required collection area',
+						tradeoff: 'Requires optical concentration system; adds pointing requirements'
+					},
+					{
+						name: 'Metamaterial-enhanced absorbers',
+						arxivId: '1406.6710',
+						benefit: 'Omnidirectional light-trapping improves energy yield',
+						tradeoff: 'Manufacturing complexity for large-area blankets'
+					}
+				]
 			},
 			{
 				id: 'bom-1-3',
@@ -236,7 +282,21 @@ export const PHASES: Phase[] = [
 				costMin: 3000000000,
 				costMax: 8000000000,
 				costConfidence: 'medium',
-				costBasis: 'Distributed computing infrastructure; scaling to 1M+ nodes introduces uncertainty'
+				costBasis: 'Distributed computing infrastructure; scaling to 1M+ nodes introduces uncertainty',
+				materialAlternatives: [
+					{
+						name: 'Retrodirective phased array beaming',
+						arxivId: '2309.14274',
+						benefit: 'Automatic beam tracking without explicit position feedback; simplifies control',
+						tradeoff: 'Requires pilot signal from ground; adds receiver complexity'
+					},
+					{
+						name: 'High-efficiency rectenna receivers',
+						arxivId: '2601.12386',
+						benefit: '68.1% demonstrated RF-to-DC conversion efficiency for power transmission',
+						tradeoff: 'Efficiency varies with power density; requires optimization for distance'
+					}
+				]
 			}
 		],
 		totalCost: 158000000000,
@@ -274,7 +334,33 @@ export const PHASES: Phase[] = [
 				costMin: 2500000000000,
 				costMax: 8500000000000,
 				costConfidence: 'low',
-				costBasis: 'Assumes successful ISRU transition and learning curve; highly dependent on Phase 1 outcomes'
+				costBasis: 'Assumes successful ISRU transition and learning curve; highly dependent on Phase 1 outcomes',
+				materialAlternatives: [
+					{
+						name: 'UMG-Si (Upgraded Metallurgical-Grade Silicon)',
+						arxivId: '2101.08019',
+						benefit: '20.76% efficiency; ISRU-compatible purification from asteroid silicates',
+						tradeoff: 'Requires in-space refining capability development'
+					},
+					{
+						name: 'Graphene/MoS2 heterostructures',
+						arxivId: '1503.05380',
+						benefit: 'Ultra-lightweight 2D material PV could dramatically reduce mass per unit',
+						tradeoff: 'Requires breakthrough in large-area 2D material synthesis'
+					},
+					{
+						name: 'Multi-junction III-V cells',
+						arxivId: '1905.08024',
+						benefit: '47.2% efficiency enables smaller collectors for same power output',
+						tradeoff: 'III-V materials (Ga, As, In) less abundant in asteroid feedstock'
+					},
+					{
+						name: 'Metamaterial light-trapping',
+						arxivId: '1406.6710',
+						benefit: 'Omnidirectional absorption reduces tracking precision requirements',
+						tradeoff: 'Additional fabrication steps in ISRU manufacturing chain'
+					}
+				]
 			},
 			{
 				id: 'bom-2-2',
@@ -433,7 +519,21 @@ export const PHASES: Phase[] = [
 				costMin: 1000000000000,
 				costMax: 100000000000000,
 				costConfidence: 'medium',
-				costBasis: 'Essential for outer-layer viability where solar flux is insufficient. Consensus range $10¹²-$10¹⁴.'
+				costBasis: 'Essential for outer-layer viability where solar flux is insufficient. Consensus range $10¹²-$10¹⁴.',
+				materialAlternatives: [
+					{
+						name: 'High-efficiency rectenna arrays',
+						arxivId: '2601.12386',
+						benefit: '68.1% RF-to-DC efficiency demonstrated; scalable for inter-layer power beaming',
+						tradeoff: 'Efficiency drops at very high power densities; thermal management needed'
+					},
+					{
+						name: 'Retrodirective beam steering',
+						arxivId: '2309.14274',
+						benefit: 'Self-tracking beams simplify inter-layer alignment across AU distances',
+						tradeoff: 'Pilot signal latency at AU scales may require predictive algorithms'
+					}
+				]
 			},
 			{
 				id: 'bom-3a-8',
