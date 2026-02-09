@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { getPhases, formatCurrency, getTotalProjectCost } from '$lib/services/content';
-	import { getBlogPosts } from '$lib/services/blog';
 	import PhaseCard from '$lib/components/phases/PhaseCard.svelte';
 	import BlogCard from '$lib/components/blog/BlogCard.svelte';
 
+	let { data } = $props();
+
 	const phases = getPhases();
-	const recentPosts = getBlogPosts().slice(0, 3);
+	const recentPosts = data.recentPosts;
 	const totalCost = getTotalProjectCost();
 </script>
 

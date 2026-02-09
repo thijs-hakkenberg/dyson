@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { getBlogPostBySlug } from '$lib/services/blog';
 	import { marked } from 'marked';
 	import { sanitizeMarkdownHTML } from '$lib/utils/sanitize';
 
-	const slug = $derived($page.params.slug || '');
-	const post = $derived(getBlogPostBySlug(slug));
+	let { data } = $props();
+
+	const post = $derived(data.post);
 
 	const formattedDate = $derived(
 		post

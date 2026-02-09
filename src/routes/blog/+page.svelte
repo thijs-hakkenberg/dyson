@@ -1,14 +1,13 @@
 <script lang="ts">
-	import { getBlogPosts, getAllCategories } from '$lib/services/blog';
 	import BlogCard from '$lib/components/blog/BlogCard.svelte';
+	import { filterByCategory } from '$lib/services/blog';
 
-	const posts = getBlogPosts();
-	const categories = getAllCategories();
+	let { data } = $props();
 
 	let selectedCategory = $state<string | null>(null);
 
 	const filteredPosts = $derived(
-		selectedCategory ? posts.filter((p) => p.category === selectedCategory) : posts
+		filterByCategory(data.posts, selectedCategory)
 	);
 </script>
 
@@ -40,7 +39,7 @@
 		>
 			All Posts
 		</button>
-		{#each categories as category}
+		{#each data.categories as category}
 			<button
 				class="px-4 py-2 rounded-full text-sm transition-colors
 					{selectedCategory === category
