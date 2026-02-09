@@ -26,7 +26,8 @@ export type QuestionType =
 	| 'experimentation' // Requires physical testing
 	| 'simulation' // Computational modeling
 	| 'engineering-decision' // Design tradeoff analysis
-	| 'discussion'; // Stakeholder consensus building
+	| 'discussion' // Stakeholder consensus building
+	| 'analysis'; // Quantitative analysis, calculations
 
 // Question slug type
 export type QuestionSlug = string;

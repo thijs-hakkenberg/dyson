@@ -2,7 +2,54 @@
 
 All notable changes to Project Dyson are documented here.
 
-## [Unreleased] - 2026-02-07
+## [Unreleased] - 2026-02-09
+
+### Added
+
+#### Research Papers
+- Add 60 new arxiv paper evaluations across 10 categories (megastructures, asteroid-mining, ISRU, space-solar-power, power-transmission, swarm-coordination, radiation-materials, spacecraft-missions, crystal-growth, deployable-structures, lunar-regolith, vacuum-breakdown)
+- Add research consolidation analysis mapping papers to research questions
+- Create paper-to-question cross-reference matrix
+
+#### Research Questions (12 new)
+- Add rq-1-44: Minimum viable photovoltaic production rate (critical)
+- Add rq-1-45: UMG silicon viability for collector cells
+- Add rq-1-46: In-space thin-film deposition economics crossover
+- Add rq-2-21: Swarm programming language scalability
+- Add rq-2-22: Minimum inter-unit communication bandwidth
+- Add rq-2-23: GW-scale space-to-Earth power transmission efficiency (critical)
+- Add rq-2-24: Graphene/MoS2 space qualification
+- Add rq-2-25: Metamaterial light-trapping radiation survival
+- Add rq-2-26: InGaN bandgap tunability for heliocentric optimization
+- Add rq-2-27: Collective estimation with communication latency
+- Add rq-2-28: Retrodirective phase coherence at scale
+- Add rq-2-29: Meteoroid stream hazards from asteroid mining
+
+#### Resolved Discussions (3)
+- Resolve rq-0-26: Dual counter-rotating bucket wheels validated for excavation
+  - 90-95% torque cancellation, 60-80 kg subsystem, 2-5 t/hr excavation rate
+- Resolve rq-1-24: Shepherd/Flock heterogeneous hierarchy for swarm coordination
+  - 1:1,000-5,000 ratio, scales to 1M+ units at 2-8% overhead
+- Resolve rq-2-17: Federated autonomous clusters for fleet coordination
+  - 50-200 node clusters, 30-day autonomy, market-based allocation
+
+#### Blog Articles
+- Add "Swarm Coordination at Scale: Mathematical Foundations Validated"
+- Add "Alternative Materials for Collector Manufacturing"
+- Add "ISRU Chemical Processing: Beyond Thermal Metallurgy"
+
+#### BOM Enhancements
+- Add materialAlternatives field to BOMItem type
+- Add material alternatives to 6 BOM items (collector units, PV blankets, swarm control, collector satellites, power distribution)
+- Update 4 BOM consensus documents with resolved architectural decisions
+
+### Changed
+- Add "analysis" question type for quantitative calculation questions
+- Update QuestionTypeBadge with analysis type styling
+
+---
+
+## [0.4.0] - 2026-02-07
 
 ### Added
 
