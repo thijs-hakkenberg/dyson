@@ -17,7 +17,7 @@ All notable changes to Project Dyson are documented here.
 
 #### Pre-computed Simulation Artifacts (3 offline scripts)
 - Add `scripts/simulation-prep/membrane-dynamics/` — scipy eigenvalue analysis, 1000 grid points (5 diameters × 10 tensions × 5 spins × 4 areal densities)
-- Add `scripts/simulation-prep/trajectory-estimator/` — numpy MLP training on 500K Hohmann transfer pairs (val MSE 0.0049)
+- Add `scripts/simulation-prep/trajectory-estimator/` — numpy MLP training on 500K deployment-regime pairs (0.9-1.1 AU, val MSE 0.0005)
 - Add `scripts/simulation-prep/solar-atmosphere/` — 1D radial atmosphere model, 500 grid points (50 extraction rates × 10 beam powers)
 - Generate `static/content/simulation-data/membrane-dynamics/modal-grid.json` (259 KB)
 - Generate `static/content/simulation-data/trajectory-estimator/nn-weights.json` (361 KB)
@@ -33,7 +33,7 @@ All notable changes to Project Dyson are documented here.
 - Resolve rq-3a-1: Thermodynamic cascade — 50.6% efficiency at 4 shells, up to 58.9% at 7
 - Resolve rq-3a-2: Self-replication closure — 96% closure reaches 10K foundries in 27 years
 - Partially resolve rq-1-7: Membrane dynamics — FEA shows 500m marginal at 1 N/m (1.58× margin), need ≥3 N/m
-- Partially resolve rq-1-43: Deployment optimization — NN trained but 5000 m/s floor, batch wins 48%
+- Partially resolve rq-1-43: Deployment optimization — NN retrained on 0.9-1.1 AU (val MSE 0.0005), accurate but structurally limited; batch wins 48%
 - Partially resolve rq-3b-2: Solar extraction — radial model validates 10⁹-10¹³ kg/s feasible, raw efficiency 0.13%
 
 #### Blog Articles (7 new research resolution articles)
@@ -55,8 +55,10 @@ All notable changes to Project Dyson are documented here.
 - Add fetch() polyfill in simulation runner script for Node.js/vite-node artifact loading
 
 ### Changed
+- Retrain deployment NN on 0.9-1.1 AU regime: val MSE 0.0005 (10× improvement over 0.3-3.0 AU version), accurate ~155 m/s estimates for deployment transfers
+- Update rq-1-43 with retraining findings: NN accurate but structurally limited — uniform-radius slots make trajectory NN irrelevant for slot selection
 - Update rq-1-7 blog article with FEA-validated flutter margins (2-4× more conservative than analytical model)
-- Update rq-1-43 blog article with NN training results and domain mismatch analysis
+- Update rq-1-43 blog article with two-generation NN analysis (broad-domain failure → deployment-regime accuracy → structural limitation)
 - Update rq-3b-2 blog article with radial atmosphere validation and 0.13% raw efficiency finding
 
 ---

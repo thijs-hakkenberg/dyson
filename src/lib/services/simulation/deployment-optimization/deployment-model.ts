@@ -83,18 +83,19 @@ export function calculateTransferCost(
 	const phasingDays = (angDist / 360) * 365.25;
 
 	if (nnWeights) {
-		// Use NN for radial component, add phase adjustment
+		// Use NN for the radial transfer component, add phasing analytically.
+		// The NN estimates delta-V for the (r1, r2, tof) radial transfer only;
+		// phasing cost is always added separately since it depends on angular
+		// distance which the NN doesn't see as an input.
 		const tof = Math.max(hohmannDays, 30); // minimum 30 days
 		const nnDeltaV = estimateDeltaV(r1, r2, tof, nnWeights);
 
-		// Sanity check: NN estimate should be within 3x of Hohmann for the radial
-		// component. The NN has a high-value floor (~5000 m/s) that overestimates
-		// small transfers. Only use NN when it provides plausible refinement.
-		const hohmannRef = Math.max(radialDV, 50); // minimum reference to avoid div-by-zero
+		// Sanity check: NN estimate should be within 3x of the Hohmann radial
+		// component. For deployment-regime NN this should always pass.
+		const hohmannRef = Math.max(radialDV, 50);
 		if (!isNaN(nnDeltaV) && nnDeltaV > 0 && nnDeltaV < hohmannRef * 3) {
-			const totalDeltaV = nnDeltaV + phasingDeltaV;
 			return {
-				deltaV: totalDeltaV,
+				deltaV: nnDeltaV + phasingDeltaV,
 				travelDays: tof + phasingDays
 			};
 		}

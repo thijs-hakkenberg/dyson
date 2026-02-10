@@ -28,13 +28,14 @@ createdDate: "2026-02-07"
 resolutionStatus: "partially-resolved"
 resolutionDate: "2026-02-10"
 resolutionSource: "simulation"
-resolutionSummary: "Batch deployment strategy wins 100% of Monte Carlo runs, deploying 48% of 500 units within 50 km/s ΔV budget (vs 32% for sequential). NN trajectory estimator trained (val MSE 0.0049) but has a ~5000 m/s floor—unable to represent the small (50-500 m/s) transfers typical of deployment. NN-guided strategy falls back to Hohmann for all deployment-scale transfers, performing identically to sequential."
+resolutionSummary: "Batch deployment strategy wins 100% of Monte Carlo runs, deploying 48% of 500 units within 50 km/s ΔV budget (vs 32% for sequential). NN retrained on deployment regime (0.9-1.1 AU, val MSE 0.0005) produces accurate estimates (~155 m/s for L1→slot) but NN-guided strategy still matches sequential because all slots share the same orbital radius — the NN can't differentiate targets when the only variable is angular phasing."
 implications:
   - "Batch deployment from L1 is the baseline strategy for Phase 1"
   - "50 km/s ΔV budget is insufficient for 500 units—need ~100 km/s or more tugs"
-  - "NN trained on 0.3-3.0 AU transfers cannot represent the 0.99-1.01 AU deployment regime—needs retraining on deployment-specific transfer geometry"
+  - "Deployment-regime NN (0.9-1.1 AU) achieves 10x better accuracy than broad-domain NN (val MSE 0.0005 vs 0.0049)"
+  - "NN-guided strategy is structurally limited: uniform-radius swarm slots reduce trajectory optimization to phasing optimization, which analytical models handle better"
+  - "NN trajectory estimation adds value only when targets have varying orbital radii, eccentricities, or inclinations"
   - "Propellant use is remarkably consistent across strategies (~12 tonnes for 500 units)"
-  - "NN adds value only for large transfers (>1 AU ΔR); no benefit for near-orbit deployment hops"
 ---
 
 ## Background

@@ -27,15 +27,15 @@ createdDate: "2026-02-10"
 
 ## Background
 
-The RQ-1-43 ML trajectory deployment optimizer uses a trained MLP for delta-V estimation combined with greedy/NN-guided heuristics to sequence swarm unit deployment. While effective for Phase 1 scales (1,000-5,000 units), this approach has known limitations when scaling to Phase 2's 100,000+ unit deployments.
+The RQ-1-43 ML trajectory deployment optimizer uses a trained MLP for delta-V estimation combined with greedy/NN-guided heuristics to sequence swarm unit deployment. The NN has been retrained on the deployment regime (0.9-1.1 AU, val MSE 0.0005) and produces accurate transfer cost estimates, but the NN-guided strategy matches sequential performance because all swarm slots share the same orbital radius -- the NN receives identical (r1, r2) for every candidate and cannot differentiate them. This structural limitation, plus scalability challenges, motivate exploration of RL-based approaches.
 
 ## Why This Matters
 
 The current simulator achieves ~95% accuracy for deployment cost estimation at Phase 1 scale but cannot address:
 
 **Reinforcement learning gaps:**
-- The current NN-guided strategy uses a trained estimator with greedy optimization, not true RL policy learning
-- An RL agent (e.g., PPO or SAC) could learn deployment policies that account for long-horizon effects: fuel depot resupply, tug maintenance windows, orbital conjunctions
+- The current NN-guided strategy uses a trained estimator with greedy optimization, not true RL policy learning. Even with a retrained deployment-regime NN, the strategy cannot outperform sequential because it evaluates individual hops, not multi-hop chains.
+- An RL agent (e.g., PPO or SAC) could learn deployment policies that discover batch-like clustering automatically by optimizing over sequences of transfers
 - Policy transfer from small (1K unit) training environments to large (100K+) deployment scenarios requires curriculum learning or hierarchical decomposition
 
 **Scalability challenges:**

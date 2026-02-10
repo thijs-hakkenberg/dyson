@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """
-Train a small MLP to estimate delta-V for orbital transfers.
+Train a small MLP to estimate delta-V for orbital transfers in the
+deployment regime (0.9-1.1 AU).
 
-Generates training data from Hohmann transfer calculations,
-then trains a 3-layer MLP and exports weight matrices as JSON
-for the browser runtime.
+The deployment regime covers transfers from L1 (0.99 AU) to heliocentric
+swarm slots (0.95-1.05 AU), where delta-V costs are 0-2000 m/s. A previous
+version trained on 0.3-3.0 AU had a ~5000 m/s output floor that made it
+useless for these small transfers. This version trains specifically on the
+narrow band relevant to collector unit deployment.
 
 Usage:
     pip install -r requirements.txt
@@ -47,26 +50,48 @@ def hohmann_transfer_time(r1_au: float, r2_au: float) -> float:
 
 
 def generate_training_data(n_samples: int = 500000, seed: int = 42):
-    """Generate training pairs: (|r1|, |r2|, tof) -> delta_V."""
+    """Generate training pairs: (|r1|, |r2|, tof) -> delta_V.
+
+    Focused on the deployment regime: 0.9-1.1 AU orbital radii,
+    with delta-V in the 0-2000 m/s range. Includes biased sampling
+    near 1.0 AU where most deployment transfers occur.
+    """
     rng = np.random.RandomState(seed)
 
-    # Random orbital radii between 0.3 and 3.0 AU
-    r1 = rng.uniform(0.3, 3.0, n_samples)
-    r2 = rng.uniform(0.3, 3.0, n_samples)
+    # 70% of samples clustered near 1.0 AU (deployment core: 0.98-1.02)
+    # 30% of samples spanning wider deployment band (0.9-1.1 AU)
+    n_core = int(n_samples * 0.7)
+    n_wide = n_samples - n_core
 
-    # Time of flight: related to Hohmann time but with variance
+    r1_core = rng.uniform(0.98, 1.02, n_core)
+    r2_core = rng.uniform(0.98, 1.02, n_core)
+    r1_wide = rng.uniform(0.90, 1.10, n_wide)
+    r2_wide = rng.uniform(0.90, 1.10, n_wide)
+
+    r1 = np.concatenate([r1_core, r1_wide])
+    r2 = np.concatenate([r2_core, r2_wide])
+
+    # Shuffle to mix core and wide samples
+    indices = rng.permutation(n_samples)
+    r1 = r1[indices]
+    r2 = r2[indices]
+
+    # Time of flight: broader range for deployment transfers
+    # Deployment TOF varies from days (nearby slots) to months (distant phasing)
     tof = np.array([hohmann_transfer_time(r1[i], r2[i]) for i in range(n_samples)])
-    # Add some noise to tof (flights can be shorter or longer than Hohmann)
-    tof = tof * rng.uniform(0.5, 2.0, n_samples)
-    tof = np.maximum(tof, 10)  # minimum 10 days
+    # Wider TOF multiplier: 0.3x to 5.0x Hohmann time
+    # (deployment may use slow phasing orbits or faster low-thrust spirals)
+    tof = tof * rng.uniform(0.3, 5.0, n_samples)
+    tof = np.maximum(tof, 1)  # minimum 1 day (nearby same-radius transfers)
 
     # Target: Hohmann delta-V (ground truth approximation)
     delta_v = np.array([hohmann_delta_v(r1[i], r2[i]) for i in range(n_samples)])
 
     # Add phasing component proportional to time deviation from ideal
     hohmann_times = np.array([hohmann_transfer_time(r1[i], r2[i]) for i in range(n_samples)])
-    time_ratio = tof / np.maximum(hohmann_times, 1)
-    phasing_penalty = np.abs(time_ratio - 1.0) * 200  # m/s penalty for non-optimal timing
+    time_ratio = tof / np.maximum(hohmann_times, 0.1)
+    # Deployment-scale phasing: 100 m/s penalty per unit deviation from optimal
+    phasing_penalty = np.abs(time_ratio - 1.0) * 100
     delta_v = delta_v + phasing_penalty
 
     X = np.column_stack([r1, r2, tof])
@@ -211,7 +236,7 @@ def main():
     )
     os.makedirs(output_dir, exist_ok=True)
 
-    print("Generating training data (500K samples)...")
+    print("Generating training data (500K deployment-regime samples, 0.9-1.1 AU)...")
     X, y = generate_training_data(n_samples=500000)
 
     # Normalize inputs to [0, 1]
@@ -236,8 +261,8 @@ def main():
           f"tof=[{x_min[2]:.0f},{x_max[2]:.0f}] days")
     print(f"Output range: dV=[{y_min:.0f},{y_max:.0f}] m/s")
 
-    print("\nTraining 3-layer MLP (3 -> 128 -> 128 -> 1)...")
-    weights, val_loss = train_model(X_train, y_train, X_val, y_val, epochs=50, batch_size=1024)
+    print("\nTraining 3-layer MLP (3 -> 128 -> 128 -> 1) on deployment regime...")
+    weights, val_loss = train_model(X_train, y_train, X_val, y_val, epochs=80, batch_size=1024)
 
     if weights is None:
         print("ERROR: Training failed to produce weights")
