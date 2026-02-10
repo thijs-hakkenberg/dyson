@@ -28,6 +28,9 @@ export const KAPTON_E = 2.5e9;
 /** Poisson's ratio for Kapton */
 export const KAPTON_NU = 0.34;
 
+/** Kapton thermal conductivity in W/(m·K) */
+export const KAPTON_K_THERMAL = 0.12;
+
 /** Phased array flatness tolerance in meters (5 mm) */
 export const PHASED_ARRAY_TOLERANCE = 0.005;
 
@@ -56,25 +59,51 @@ export function calculateEquilibriumTemp(
 }
 
 /**
- * Calculate front-to-back thermal gradient
+ * Calculate effective thermal gradient for membrane warping
  *
- * The key gradient driving warping is front-to-back temperature difference
- * caused by emissivity asymmetry and direct solar illumination geometry.
- * dT ≈ flux * absorptivity / (4 * sigma * T_eq³) * delta_emissivity
+ * Two mechanisms contribute to thermoelastic curvature in thin films:
  *
- * For a PV membrane, we model a ~5-10% emissivity difference front-to-back.
+ * 1. Through-thickness gradient (Biot-corrected): For thin membranes (Bi << 1),
+ *    the actual through-thickness dT from emissivity asymmetry is very small.
+ *
+ * 2. In-plane thermal stress / edge effects: Non-uniform temperature across
+ *    the membrane surface (center-to-edge gradient from tension member shadows,
+ *    view factor variations, and PV cell patchwork) creates in-plane stresses
+ *    that can cause buckling/warping. This is modeled as an effective gradient
+ *    proportional to the edge temperature difference scaled by a geometric
+ *    coupling factor.
+ *
+ * The effective gradient combines both, with in-plane effects typically
+ * dominating for thin space membranes.
  */
 export function calculateThermalGradient(
 	distanceAU: number,
 	absorptivity: number,
 	emissivity: number,
-	pvEfficiency: number
+	pvEfficiency: number,
+	arealDensityGsm: number = 25
 ): number {
 	const flux = solarFluxAtDistance(distanceAU);
 	const tEq = calculateEquilibriumTemp(distanceAU, absorptivity, emissivity, pvEfficiency);
-	// Assume front-back emissivity difference of ~8% of emissivity
+	const thickness = calculateThickness(arealDensityGsm);
+
+	// 1. Through-thickness gradient (conduction-limited, Biot correction)
 	const deltaEmissivity = emissivity * 0.08;
-	return (flux * absorptivity) / (4 * SIGMA_SB * Math.pow(tEq, 3)) * deltaEmissivity;
+	const qAsym = flux * absorptivity * (1 - pvEfficiency) * deltaEmissivity / (2 * emissivity);
+	const dT_through = qAsym * thickness / KAPTON_K_THERMAL;
+
+	// 2. In-plane thermal stress coupling
+	// Edge-to-center temperature difference from view factor and structural shadows
+	// Typically 1-5% of equilibrium temp for large membranes
+	const dT_inplane_surface = tEq * 0.02;
+	// Coupling factor: how much in-plane stress converts to out-of-plane curvature
+	// For a thin plate under biaxial thermal stress: kappa_effective ~ alpha * dT_inplane
+	// This acts like an equivalent through-thickness gradient:
+	// dT_effective = dT_inplane * thickness (converts stress to curvature-equivalent gradient)
+	const dT_inplane = dT_inplane_surface * 0.15; // geometric coupling (~15% for tensioned membranes)
+
+	// Combined effective gradient
+	return dT_through + dT_inplane;
 }
 
 /**
@@ -166,7 +195,8 @@ export function calculateSweepPoint(area: number, config: WarpingConfig): Warpin
 		config.orbitalDistance,
 		config.absorptivity,
 		config.emissivity,
-		config.pvEfficiency
+		config.pvEfficiency,
+		config.arealDensity
 	);
 
 	const thickness = calculateThickness(config.arealDensity);

@@ -81,7 +81,14 @@ export async function runShkadovTradeSweep(
 	let maxFeasibleThrust = 0;
 
 	if (feasiblePoints.length > 0) {
-		const best = feasiblePoints.reduce((a, b) => (a.thrust > b.thrust ? a : b));
+		// Among points with equal thrust, prefer minimum mass (closest distance)
+		const best = feasiblePoints.reduce((a, b) => {
+			if (Math.abs(a.thrust - b.thrust) / Math.max(a.thrust, 1) < 1e-6) {
+				// Equal thrust: prefer lower mass
+				return a.mirrorMass < b.mirrorMass ? a : b;
+			}
+			return a.thrust > b.thrust ? a : b;
+		});
 		optimalDistance = best.distance;
 		maxFeasibleThrust = best.thrust;
 	} else {

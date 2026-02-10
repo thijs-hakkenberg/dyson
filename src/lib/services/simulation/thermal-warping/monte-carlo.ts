@@ -106,7 +106,8 @@ function runSingleWarpingRun(
 			config.orbitalDistance,
 			config.absorptivity,
 			effectiveEmissivity,
-			config.pvEfficiency
+			config.pvEfficiency,
+			config.arealDensity
 		);
 
 		const thickness = calculateThickness(config.arealDensity);

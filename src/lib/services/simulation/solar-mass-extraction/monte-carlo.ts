@@ -93,7 +93,8 @@ export function runSingleExtractionRun(
 		const point = analyzeExtractionPoint(iterConfig, surfaces);
 
 		// Apply activity variation to stability margin
-		const adjustedPower = config.stationCount * config.beamPower * activityMultiplier;
+		// Use the energy budget (which scales with extraction rate) instead of fixed station power
+		const adjustedPower = point.energyBudget * activityMultiplier;
 		point.stabilityMargin = calculateStabilityMargin(adjustedPower);
 
 		sweepPoints.push(point);

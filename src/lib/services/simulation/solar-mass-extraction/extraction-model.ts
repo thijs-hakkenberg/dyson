@@ -36,7 +36,8 @@ const DEFAULT_BEAM_AREA = Math.PI * 1e6; // ~3.14e6 m^2
 
 /**
  * Calculate plume velocity from beam heating.
- * v = sqrt(2 * P / (rho * A))
+ * v = sqrt(2 * P / (rho * A)), capped at solar escape velocity.
+ * Energy above escape velocity is wasted (particles escape anyway).
  */
 export function calculatePlumeVelocity(
 	beamPower: number,
@@ -44,7 +45,9 @@ export function calculatePlumeVelocity(
 	density: number
 ): number {
 	if (density <= 0 || beamArea <= 0) return 0;
-	return Math.sqrt((2 * beamPower) / (density * beamArea));
+	const raw = Math.sqrt((2 * beamPower) / (density * beamArea));
+	// Cap at ~2x escape velocity (diminishing returns beyond escape)
+	return Math.min(raw, 2 * V_ESCAPE_SURFACE);
 }
 
 /**
@@ -273,27 +276,28 @@ export function analyzeExtractionPoint(
 	const density = CHROMOSPHERE_DENSITY[config.solarActivity];
 	const beamArea = DEFAULT_BEAM_AREA;
 
-	// Per-station analysis
-	const plumeVelocity = calculatePlumeVelocity(config.beamPower, beamArea, density);
-	const massFlowPerStation = calculateMassFlowPerStation(density, plumeVelocity, beamArea);
-	const efficiencyPerStation = calculateLiftingEfficiency(
-		massFlowPerStation,
-		V_ESCAPE_SURFACE,
-		config.beamPower
-	);
+	// Use configured lifting efficiency as technology parameter
+	// This represents the overall system efficiency of converting beam power
+	// to kinetic energy of extracted mass at escape velocity
+	const efficiency = config.liftingEfficiency;
 
-	// Use configured efficiency (clamped by physical limits)
-	const efficiency = Math.min(config.liftingEfficiency, efficiencyPerStation);
-
-	// Total energy budget
+	// Total energy budget required for this extraction rate
 	const energyBudget = calculateEnergyBudget(config.extractionRate, efficiency);
+
+	// Per-station beam power derived from total budget and station count
+	const perStationPower = energyBudget / Math.max(config.stationCount, 1);
+
+	// Plume velocity from per-station power (capped at 2x escape velocity)
+	const plumeVelocity = calculatePlumeVelocity(perStationPower, beamArea, density);
+
+	// Mass flow per station
+	const massFlowPerStation = calculateMassFlowPerStation(density, plumeVelocity, beamArea);
 
 	// Stations required
 	const stationsRequired = calculateStationsRequired(config.extractionRate, massFlowPerStation);
 
-	// Stability margin
-	const totalPower = config.stationCount * config.beamPower;
-	const stabilityMargin = calculateStabilityMargin(totalPower);
+	// Stability margin: total power needed scales with extraction rate
+	const stabilityMargin = calculateStabilityMargin(energyBudget);
 
 	// Luminosity perturbation
 	const luminosityPerturbation = calculateLuminosityPerturbation(
