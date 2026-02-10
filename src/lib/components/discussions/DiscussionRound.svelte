@@ -19,14 +19,15 @@
 	const concludeVotes = $derived(round.terminationVotes?.filter((v) => v.vote === 'CONCLUDE').length || 0);
 	const continueVotes = $derived(round.terminationVotes?.filter((v) => v.vote === 'CONTINUE').length || 0);
 
-	let isExpanded = $state(isLatest);
+	let localOverride: boolean | null = $state(null);
+	const isExpanded = $derived(localOverride !== null ? localOverride : isLatest);
 </script>
 
 <div class="border border-space-500 rounded-lg overflow-hidden {isLatest ? 'ring-1 ring-cosmic-cyan/30' : ''}">
 	<!-- Round Header -->
 	<button
 		class="w-full px-4 py-3 bg-space-700 hover:bg-space-600 transition-colors flex items-center justify-between"
-		onclick={() => (isExpanded = !isExpanded)}
+		onclick={() => (localOverride = !isExpanded)}
 	>
 		<div class="flex items-center gap-3">
 			<span class="text-sm font-semibold text-star-white">Round {round.roundNumber}</span>

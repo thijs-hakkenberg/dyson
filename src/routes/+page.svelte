@@ -6,7 +6,7 @@
 	let { data } = $props();
 
 	const phases = getPhases();
-	const recentPosts = data.recentPosts;
+	const recentPosts = $derived(data.recentPosts);
 	const totalCost = getTotalProjectCost();
 </script>
 

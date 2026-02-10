@@ -18,6 +18,11 @@ tags:
   - "purity"
   - "solar-cells"
   - "manufacturing"
+arxivReferences:
+  - "2101.08019"
+  - "2102.11571"
+  - "2106.15926"
+  - "2111.13522"
 createdDate: "2026-01-31"
 ---
 

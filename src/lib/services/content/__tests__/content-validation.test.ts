@@ -1,3 +1,4 @@
+// @ts-nocheck -- This test runs in Node.js via vitest, not in the SvelteKit browser context
 /**
  * Content Validation Tests
  *

@@ -4,7 +4,8 @@ slug: "water-first-resource-strategy"
 title: "Water-first resource extraction strategy for early ISRU operations"
 questionType: "engineering-decision"
 priority: "critical"
-status: "open"
+status: "answered"
+answeredDate: "2026-02-10"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-3"
 sourceBOMItemSlug: "material-processing-station"
@@ -25,6 +26,12 @@ tags:
 arxivReferences:
   - "1702.00335"
   - "1810.03836"
+  - "1808.05099"
+  - "2303.09011"
+  - "1902.03523"
+  - "2408.04936"
+  - "1812.02285"
+  - "2107.05872"
 createdDate: "2026-02-07"
 ---
 

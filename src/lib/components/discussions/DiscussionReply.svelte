@@ -34,14 +34,15 @@
 	const colors = $derived(modelColors[response.modelId]);
 	const renderedContent = $derived(renderMarkdown(response.content));
 
-	let isExpanded = $state(expanded);
+	let localOverride: boolean | null = $state(null);
+	const isExpanded = $derived(localOverride !== null ? localOverride : expanded);
 </script>
 
 <div class="rounded-lg border {colors.border} {colors.bg} overflow-hidden">
 	<!-- Header -->
 	<button
 		class="w-full px-4 py-3 flex items-center justify-between hover:bg-space-700/50 transition-colors"
-		onclick={() => (isExpanded = !isExpanded)}
+		onclick={() => (localOverride = !isExpanded)}
 	>
 		<div class="flex items-center gap-3">
 			<!-- Model indicator -->

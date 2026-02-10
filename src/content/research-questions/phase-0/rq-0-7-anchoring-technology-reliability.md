@@ -15,6 +15,11 @@ tags:
   - "anchoring"
   - "surface-operations"
   - "asteroid-types"
+arxivReferences:
+  - "1306.1622"
+  - "2502.12347"
+  - "1810.01815"
+  - "2212.04390"
 createdDate: "2026-01-31"
 ---
 

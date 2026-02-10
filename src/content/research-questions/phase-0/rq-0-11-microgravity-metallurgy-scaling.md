@@ -17,6 +17,9 @@ tags:
   - "microgravity"
   - "manufacturing"
   - "scaling"
+arxivReferences:
+  - "2109.02201"
+  - "2102.09815"
 createdDate: "2026-01-31"
 ---
 
