@@ -24,12 +24,13 @@ createdDate: "2026-02-08"
 resolutionStatus: "partially-resolved"
 resolutionDate: "2026-02-10"
 resolutionSource: "simulation"
-resolutionSummary: "1D analytical model shows extraction up to 10¹³ kg/s is feasible at 5% lifting efficiency (stability margin 0.885). Efficiency is the critical gate: at 1%, max feasible drops to 2.93×10¹² kg/s. Century-scale luminosity perturbation is negligible (<0.001%). Model accuracy is ~75-80%; follow-up 3D MHD simulation (RQ-3b-5) needed for high-rate validation."
+resolutionSummary: "1D analytical model validated by offline radial atmosphere response surface. Extraction up to 10¹³ kg/s feasible at 5% lifting efficiency (stability margin 0.885). Physics-derived efficiency from 1D radial model is only 0.13%, confirming 5% is a technology assumption requiring magnetic funneling and plume optimization beyond raw beam heating. Plume velocity capped at 2× escape velocity (1.24 Mm/s). 3D MHD validation (RQ-3b-5) still needed."
 implications:
   - "Target rate of 10¹² kg/s (1000× solar wind) is feasible at ≥3% lifting efficiency"
   - "Lifting efficiency is the engineering bottleneck, not solar stability"
-  - "Energy budget of 4.4×10²³ W at 10¹¹ kg/s is 0.1% of solar luminosity—safe operating regime"
-  - "3D MHD validation needed above 10¹² kg/s where model accuracy degrades"
+  - "Raw physics efficiency of beam-heated plumes is only 0.13% — achieving 5% requires engineered magnetic funneling and plume optimization"
+  - "1D radial atmosphere model validates analytical energy balance — plume velocity caps at 2× escape velocity as expected"
+  - "3D MHD validation needed above 10¹² kg/s where 1D model accuracy degrades"
 ---
 
 ## Background

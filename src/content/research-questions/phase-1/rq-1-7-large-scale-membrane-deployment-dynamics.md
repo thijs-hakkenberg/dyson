@@ -19,15 +19,16 @@ tags:
   - "structural-stability"
   - "flutter"
 createdDate: "2026-02-01"
-resolutionStatus: "resolved"
+resolutionStatus: "partially-resolved"
 resolutionDate: "2026-02-10"
 resolutionSource: "simulation"
-resolutionSummary: "Modal analysis and Monte Carlo simulation confirm all membrane diameters 100-1000m are flutter-stable with comfortable margins (3.3× at 1000m, 6.1× at 500m). Passive stability via boom tensioning is sufficient—no active flutter control required."
+resolutionSummary: "Pre-computed FEA eigenvalue analysis reveals tighter flutter margins than the initial analytical model predicted. At 1 N/m tension: 500m membranes are 'marginal' (1.58× margin), 1000m enters flutter regime (0.79× margin). Membranes ≥500m require ≥3 N/m tension or spin stabilization (≥0.2 RPM) for full stability. Smaller membranes (≤400m) remain stable at 1 N/m."
 implications:
-  - "1 km diameter membranes are flutter-stable at ≥1 N/m tension with 3.3× safety margin"
-  - "Spin stabilization helps but is not required (0 RPM still gives 5.9× margin at 500m)"
-  - "Natural frequencies below 0.01 Hz at large scales require slow attitude control algorithms"
-  - "Flutter boundary tension is very low (0.17 N/m at 1000m), easily exceeded by standard tensioning"
+  - "500m membranes at 1 N/m are marginal (1.58× flutter margin) — increase tension to ≥3 N/m or add spin"
+  - "1000m membranes enter flutter at 1 N/m (0.79× margin) — need ≥3 N/m tension AND/OR ≥0.2 RPM spin"
+  - "Membranes ≤400m remain comfortably stable at 1 N/m (≥2.2× margin)"
+  - "Spin stabilization at ≥0.2 RPM provides significant benefit (margin jumps from 1.58× to 2.0× at 500m)"
+  - "FEA modal grid provides ~95% accuracy; previous analytical model was systematically optimistic by 2-4×"
 ---
 
 ## Background

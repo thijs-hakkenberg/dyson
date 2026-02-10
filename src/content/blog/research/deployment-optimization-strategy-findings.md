@@ -36,7 +36,7 @@ At each decision point, the tug selects the nearest unfilled orbital slot from i
 
 ### NN-Guided (ML-Optimized)
 
-A neural network trajectory estimator predicts transfer costs between arbitrary orbit pairs, enabling smarter slot selection than the greedy heuristic. The NN can account for phasing, multi-body effects, and time-dependent geometry that Hohmann approximations miss. **Note:** The NN weights have not yet been trained. The current implementation falls back to Hohmann transfer estimates, making it functionally equivalent to sequential deployment for now.
+A neural network trajectory estimator predicts transfer costs between arbitrary orbit pairs, enabling smarter slot selection than the greedy heuristic. The NN is a trained 3-layer MLP (128 neurons per layer, trained on 500K Hohmann transfer pairs, validation MSE 0.0049). However, it has a fundamental domain mismatch: the training data spans 0.3-3.0 AU transfers with delta-V ranging from 2.88 to 28,981 m/s, while deployment transfers operate in a narrow 0.99-1.01 AU band costing only 50-500 m/s. A bias floor (~0.15 in normalized output) causes the NN to overestimate these small transfers by 50-80x. A Hohmann sanity check catches this -- if the NN estimate exceeds 3x the Hohmann baseline, the system falls back to Hohmann. In practice, this triggers for every deployment-scale transfer, making NN-guided functionally equivalent to sequential deployment.
 
 ## The Result: Batch Dominates
 
@@ -44,12 +44,12 @@ Across all Monte Carlo runs with 500 units and a 50 km/s total ΔV budget, batch
 
 | Strategy | ΔV Used (km/s) | Duration (days) | Propellant (tonnes) | Units Deployed | Completion Rate |
 |----------|----------------|-----------------|---------------------|----------------|-----------------|
-| **Batch** | **50.0** | **2,554** | **12.1** | **241** | **48%** |
-| Sequential | 50.0 | 3,212 | 12.0 | 161 | 32% |
-| Greedy | 50.0 | 3,180 | 12.0 | 163 | 33% |
-| NN-Guided | 50.0 | 3,205 | 12.0 | 162 | 32% |
+| **Batch** | **50.3** | **2,555** | **12.1** | **241** | **48%** |
+| Sequential | 50.3 | 3,218 | 12.0 | 161 | 32% |
+| Greedy | 50.2 | 3,412 | 12.0 | 200 | 40% |
+| NN-Guided | 50.3 | 3,212 | 12.0 | 161 | 32% |
 
-Batch deploys 48% of units compared to 32% for sequential -- a 50% improvement in deployment count within the same ΔV budget. It also finishes faster, completing its deployable set in 2,554 days versus 3,200+ for other strategies.
+Batch deploys 48% of units compared to 32% for sequential -- a 50% improvement in deployment count within the same ΔV budget. It also finishes faster, completing its deployable set in 2,555 days versus 3,200+ for other strategies.
 
 ## Why Batch Wins
 
@@ -102,17 +102,19 @@ Key observations:
 
 ## What About the Neural Network?
 
-The NN-guided strategy is designed to outperform greedy by using learned transfer cost estimates that account for orbital phasing, gravitational perturbations, and time-dependent geometry. A trained NN could identify non-obvious transfer windows that are invisible to Hohmann approximations.
+The NN-guided strategy was designed to outperform greedy by using learned transfer cost estimates that account for orbital phasing, gravitational perturbations, and time-dependent geometry. We trained a 3-layer MLP (128 neurons per layer) on 500K Hohmann transfer pairs spanning the full 0.3-3.0 AU range and achieved a validation MSE of 0.0049 -- an accurate estimator for general interplanetary transfers.
 
-**Current status:** The NN weights have not yet been trained. An offline Python training script is available that generates trajectory training data from the simulation's orbital mechanics model. Until trained, the NN-guided strategy falls back to Hohmann estimates, which explains why its performance matches sequential deployment almost exactly.
+**The problem:** Deployment transfers are not general interplanetary transfers. Collector units move from L1 to heliocentric orbits between 0.99 and 1.01 AU, a narrow band where actual delta-V costs are 50-500 m/s. The NN was trained on a much wider range (2.88-28,981 m/s), and its architecture has a bias floor of approximately 0.15 in normalized output space. This floor translates to a minimum prediction of roughly 5,000 m/s regardless of input, overestimating deployment-scale transfers by 50-80x.
 
-**What a trained NN could unlock:**
-- Better-than-Hohmann transfer estimates, potentially finding low-energy manifold transfers
-- Dynamic slot reordering based on current orbital geometry
-- Phasing-aware deployment that exploits planetary alignment windows
-- Performance that could approach or exceed the batch strategy
+**The fallback mechanism:** The simulator includes a Hohmann sanity check: if the NN estimate exceeds 3x the analytical Hohmann transfer cost, the system discards the NN prediction and falls back to Hohmann. For deployment-scale transfers, the NN always triggers this check. The result is that the NN-guided strategy falls back to Hohmann for 100% of deployment transfers, producing results identical to sequential deployment (32.2% completion rate, same ΔV consumption).
 
-Training the NN is one of the key next steps to fully resolve this research question. The status remains "partially-resolved" until the NN-guided strategy can be evaluated with trained weights.
+**What went wrong is instructive.** The NN is genuinely accurate for the domain it was trained on -- large-scale transfers between planets and across AU-scale distances. But deployment logistics operate in a regime where the signal is smaller than the model's noise floor. This is a domain mismatch, not a training failure.
+
+**What a domain-specific NN could unlock:**
+- An NN retrained specifically on the 0.9-1.1 AU regime with millidegree orbital element variations
+- Transfer cost predictions sensitive to the 50-500 m/s range relevant to deployment
+- Phasing-aware slot selection that exploits synodic geometry within the near-Earth band
+- Performance that could approach or exceed the batch strategy for fine-grained reordering
 
 ## Try It Yourself
 
@@ -122,6 +124,7 @@ We have published the [interactive simulator](/questions/ml-trajectory-deploymen
 
 The simulation uses:
 - **Hohmann transfer approximations** for L1-to-orbit and orbit-to-orbit ΔV calculations
+- **Trained NN trajectory estimator** (3-layer MLP, 128 neurons, 500K training pairs) with Hohmann fallback when NN estimate exceeds 3x analytical baseline
 - **Cluster assignment** via angular proximity for batch strategy
 - **Monte Carlo execution** with randomized initial orbital slot distributions
 - **Full tug lifecycle**: pickup at L1, transit to slot, deployment, return (or intra-cluster transfer)
@@ -139,9 +142,9 @@ Batch deployment from L1 should be the default planning assumption for Phase 1 c
 
 50 km/s is insufficient for 1,000-unit deployment. Phase 1 planning should budget ~100 km/s or investigate distributed assembly (multiple L-points, in-orbit assembly) to reduce per-unit transfer costs.
 
-### 3. Train the NN Trajectory Estimator
+### 3. Retrain the NN for Deployment-Scale Transfers
 
-The NN-guided strategy has untapped potential. Training the neural network on high-fidelity trajectory data could reveal transfer optimizations that break the Hohmann approximation ceiling.
+The current NN is accurate for AU-scale transfers but useless for the 0.99-1.01 AU deployment regime. Retraining specifically on near-Earth transfers (0.9-1.1 AU, delta-V range 10-1,000 m/s) with a tighter normalization scheme could unlock NN-guided optimizations that break the Hohmann approximation ceiling for fine-grained slot selection.
 
 ### 4. Standardize Tug Operations for Cluster Delivery
 
@@ -149,8 +152,8 @@ Tug fleet design should optimize for cluster delivery patterns: multi-unit paylo
 
 ## What's Next
 
-This research partially answers RQ-1-43, establishing batch deployment as the clear winner among tested strategies. Full resolution requires:
-- Training and evaluating the NN trajectory estimator
+This research partially answers RQ-1-43, establishing batch deployment as the clear winner among tested strategies. The NN trajectory estimator has been trained and evaluated, but its broad training domain (0.3-3.0 AU) renders it ineffective for deployment-scale transfers. Full resolution requires:
+- Retraining the NN specifically for the deployment regime (0.9-1.1 AU, 50-500 m/s transfers)
 - Higher-fidelity orbital mechanics (patched conics, n-body)
 - Multi-tug fleet coordination modeling
 - Integration with swarm control system architecture (bom-1-7)

@@ -28,12 +28,13 @@ createdDate: "2026-02-07"
 resolutionStatus: "partially-resolved"
 resolutionDate: "2026-02-10"
 resolutionSource: "simulation"
-resolutionSummary: "Batch deployment strategy wins 100% of Monte Carlo runs, deploying 48% of 500 units within 50 km/s ΔV budget (vs 32% for sequential). Full deployment requires ~100 km/s budget. NN trajectory estimator not yet trained—greedy and NN-guided strategies use Hohmann fallback."
+resolutionSummary: "Batch deployment strategy wins 100% of Monte Carlo runs, deploying 48% of 500 units within 50 km/s ΔV budget (vs 32% for sequential). NN trajectory estimator trained (val MSE 0.0049) but has a ~5000 m/s floor—unable to represent the small (50-500 m/s) transfers typical of deployment. NN-guided strategy falls back to Hohmann for all deployment-scale transfers, performing identically to sequential."
 implications:
   - "Batch deployment from L1 is the baseline strategy for Phase 1"
   - "50 km/s ΔV budget is insufficient for 500 units—need ~100 km/s or more tugs"
-  - "Training the NN trajectory estimator could unlock better performance for nn-guided strategy"
+  - "NN trained on 0.3-3.0 AU transfers cannot represent the 0.99-1.01 AU deployment regime—needs retraining on deployment-specific transfer geometry"
   - "Propellant use is remarkably consistent across strategies (~12 tonnes for 500 units)"
+  - "NN adds value only for large transfers (>1 AU ΔR); no benefit for near-orbit deployment hops"
 ---
 
 ## Background

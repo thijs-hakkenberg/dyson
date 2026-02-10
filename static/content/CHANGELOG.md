@@ -2,7 +2,66 @@
 
 All notable changes to Project Dyson are documented here.
 
-## [Unreleased] - 2026-02-09
+## [Unreleased] - 2026-02-10
+
+### Added
+
+#### Simulators (7 new interactive research simulators)
+- Add Shkadov Mirror Standoff Distance simulator (RQ-3b-1) — browser-only trade sweep
+- Add Thermal Warping on Large Membranes simulator (RQ-2-4) — browser-only area/tension sweep
+- Add Thermodynamic Cascade Efficiency simulator (RQ-3a-1) — browser-only shell count sweep
+- Add Self-Replication Closure Threshold simulator (RQ-3a-2) — browser-only closure ratio sweep
+- Add Membrane Deployment Dynamics simulator (RQ-1-7) — hybrid: offline FEA eigenvalue grid + browser interpolation
+- Add ML Trajectory Deployment Optimization simulator (RQ-1-43) — hybrid: offline NN training + browser inference
+- Add Solar Mass Extraction Rate simulator (RQ-3b-2) — hybrid: offline radial atmosphere model + browser interpolation
+
+#### Pre-computed Simulation Artifacts (3 offline scripts)
+- Add `scripts/simulation-prep/membrane-dynamics/` — scipy eigenvalue analysis, 1000 grid points (5 diameters × 10 tensions × 5 spins × 4 areal densities)
+- Add `scripts/simulation-prep/trajectory-estimator/` — numpy MLP training on 500K Hohmann transfer pairs (val MSE 0.0049)
+- Add `scripts/simulation-prep/solar-atmosphere/` — 1D radial atmosphere model, 500 grid points (50 extraction rates × 10 beam powers)
+- Generate `static/content/simulation-data/membrane-dynamics/modal-grid.json` (259 KB)
+- Generate `static/content/simulation-data/trajectory-estimator/nn-weights.json` (361 KB)
+- Generate `static/content/simulation-data/trajectory-estimator/reference-solutions.json`
+- Generate `static/content/simulation-data/solar-atmosphere/response-surfaces.json`
+
+#### Research Questions (3 new follow-up, 7 resolved/partially-resolved)
+- Add rq-1-47: High-fidelity 3D FEA validation of membrane flutter boundaries (low priority)
+- Add rq-1-48: Reinforcement learning deployment optimizer and 100K+ unit scalability (low priority)
+- Add rq-3b-5: 3D MHD modeling of solar chromosphere mass lifting (low priority)
+- Resolve rq-3b-1: Shkadov mirror standoff distance — optimal at 0.1 AU, 2.43×10¹⁷ N thrust
+- Resolve rq-2-4: Thermal warping — tension ≥0.5 N/m eliminates warping at all areas up to 1M m²
+- Resolve rq-3a-1: Thermodynamic cascade — 50.6% efficiency at 4 shells, up to 58.9% at 7
+- Resolve rq-3a-2: Self-replication closure — 96% closure reaches 10K foundries in 27 years
+- Partially resolve rq-1-7: Membrane dynamics — FEA shows 500m marginal at 1 N/m (1.58× margin), need ≥3 N/m
+- Partially resolve rq-1-43: Deployment optimization — NN trained but 5000 m/s floor, batch wins 48%
+- Partially resolve rq-3b-2: Solar extraction — radial model validates 10⁹-10¹³ kg/s feasible, raw efficiency 0.13%
+
+#### Blog Articles (7 new research resolution articles)
+- Add "Shkadov Mirror Standoff Distance Optimization Findings"
+- Add "Thermal Warping on Large Membranes Findings"
+- Add "Thermodynamic Cascade Efficiency Limit Findings"
+- Add "Self-Replication Closure Threshold Findings"
+- Add "FEA Validation Overturns Optimistic Flutter Results: 500m+ Membranes Need Active Stabilization"
+- Add "Batch Wins: Comparing 4 Swarm Deployment Strategies via Monte Carlo"
+- Add "Mining the Sun: How Fast Can We Extract Mass Without Breaking Anything?"
+
+### Fixed
+
+#### Simulator Physics Bugs
+- Fix solar atmosphere Python script: cap plume velocity at 2× escape velocity (was producing 196B m/s superluminal velocities)
+- Fix solar extraction response surface integration: use surface only for physics quantities (plume velocity, station count), keep configured efficiency for engineering parameters
+- Fix deployment NN inference: clamp output to [0,1] before denormalization, add 3× Hohmann sanity check for small transfers
+- Fix Phase 3a/3b slug regex in question detail page loader
+- Add fetch() polyfill in simulation runner script for Node.js/vite-node artifact loading
+
+### Changed
+- Update rq-1-7 blog article with FEA-validated flutter margins (2-4× more conservative than analytical model)
+- Update rq-1-43 blog article with NN training results and domain mismatch analysis
+- Update rq-3b-2 blog article with radial atmosphere validation and 0.13% raw efficiency finding
+
+---
+
+## [0.5.0] - 2026-02-09
 
 ### Added
 
