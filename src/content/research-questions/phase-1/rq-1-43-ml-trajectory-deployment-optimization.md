@@ -4,7 +4,7 @@ slug: "ml-trajectory-deployment-optimization"
 title: "Machine learning trajectory optimization for swarm deployment sequencing"
 questionType: "simulation"
 priority: "high"
-status: "open"
+status: "answered"
 sourcePhase: "phase-1"
 sourceBOMItemId: "bom-1-7"
 sourceBOMItemSlug: "swarm-control-system"
@@ -25,6 +25,15 @@ tags:
 arxivReferences:
   - "2205.10124"
 createdDate: "2026-02-07"
+resolutionStatus: "partially-resolved"
+resolutionDate: "2026-02-10"
+resolutionSource: "simulation"
+resolutionSummary: "Batch deployment strategy wins 100% of Monte Carlo runs, deploying 48% of 500 units within 50 km/s ΔV budget (vs 32% for sequential). Full deployment requires ~100 km/s budget. NN trajectory estimator not yet trained—greedy and NN-guided strategies use Hohmann fallback."
+implications:
+  - "Batch deployment from L1 is the baseline strategy for Phase 1"
+  - "50 km/s ΔV budget is insufficient for 500 units—need ~100 km/s or more tugs"
+  - "Training the NN trajectory estimator could unlock better performance for nn-guided strategy"
+  - "Propellant use is remarkably consistent across strategies (~12 tonnes for 500 units)"
 ---
 
 ## Background

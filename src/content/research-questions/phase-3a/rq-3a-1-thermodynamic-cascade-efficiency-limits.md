@@ -4,7 +4,7 @@ slug: "thermodynamic-cascade-efficiency-limits"
 title: "Thermodynamic cascade efficiency limits in nested Matrioshka shells"
 questionType: "simulation"
 priority: "critical"
-status: "open"
+status: "answered"
 sourcePhase: "phase-3a"
 sourceBOMItemId: "bom-3a-3"
 sourceBOMItemSlug: "thermal-management-radiator-systems"
@@ -20,6 +20,15 @@ tags:
   - "waste-heat"
   - "carnot-efficiency"
 createdDate: "2026-02-08"
+resolutionStatus: "resolved"
+resolutionDate: "2026-02-10"
+resolutionSource: "simulation"
+resolutionSummary: "Monte Carlo cascade simulation shows 4 shells achieve 50.8% total efficiency extracting 1.94×10²⁶ W. 7 shells reaches 56.5% but with diminishing returns. TPV conversion efficiency is the dominant lever: improving from 20% to 50% of Carnot doubles system efficiency from 31.6% to 65.8%."
+implications:
+  - "4 shells is the practical optimum—shells beyond 4 add <2% efficiency each while requiring enormous cryogenic radiators"
+  - "TPV conversion efficiency is the #1 R&D priority for Matrioshka brain design"
+  - "Outer shell radiator area grows to 10²⁷ m² at 40K, potentially the largest single structure"
+  - "Each shell extracts ~21% of incoming power (67.8% Carnot × 35% TPV × 90% spectral)"
 ---
 
 ## Background

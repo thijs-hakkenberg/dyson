@@ -4,7 +4,7 @@ slug: "thermal-warping-large-membranes"
 title: "Thermal warping effects on large membranes"
 questionType: "simulation"
 priority: "high"
-status: "open"
+status: "answered"
 sourcePhase: "phase-2"
 sourceBOMItemId: "bom-2-1"
 sourceBOMItemSlug: "collector-satellites"
@@ -17,6 +17,15 @@ tags:
   - "membrane"
   - "structural-integrity"
 createdDate: "2026-02-01"
+resolutionStatus: "resolved"
+resolutionDate: "2026-02-10"
+resolutionSource: "simulation"
+resolutionSummary: "Monte Carlo simulation shows thermal warping is fully suppressed at tensions ≥0.5 N/m for all membrane areas up to 1,000,000 m² at 0.5 AU. The critical tension threshold is ~0.11 N/m. Standard boom-tensioned architectures (≥1 N/m) make this a non-issue. Electrostatic stiffening is not needed."
+implications:
+  - "Thermal warping is a solved problem for Phase 2 membrane design with standard boom tensioning"
+  - "No active compensation or electrostatic stiffening required—passive tension ≥0.5 N/m is sufficient"
+  - "Membrane area can scale to 1M m² without thermal warping concerns"
+  - "Operating distance (0.3-1.0 AU) has negligible effect when tension exceeds threshold"
 ---
 
 ## Background

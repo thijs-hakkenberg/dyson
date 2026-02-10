@@ -4,7 +4,7 @@ slug: "solar-mass-extraction-rate-limits"
 title: "Solar mass extraction rate limits and stellar response modeling"
 questionType: "simulation"
 priority: "critical"
-status: "open"
+status: "answered"
 sourcePhase: "phase-3b"
 sourceBOMItemId: "bom-3b-4"
 sourceBOMItemSlug: "mass-lifting-systems"
@@ -21,6 +21,15 @@ tags:
   - "solar-physics"
   - "caplan-engine"
 createdDate: "2026-02-08"
+resolutionStatus: "partially-resolved"
+resolutionDate: "2026-02-10"
+resolutionSource: "simulation"
+resolutionSummary: "1D analytical model shows extraction up to 10¹³ kg/s is feasible at 5% lifting efficiency (stability margin 0.885). Efficiency is the critical gate: at 1%, max feasible drops to 2.93×10¹² kg/s. Century-scale luminosity perturbation is negligible (<0.001%). Model accuracy is ~75-80%; follow-up 3D MHD simulation (RQ-3b-5) needed for high-rate validation."
+implications:
+  - "Target rate of 10¹² kg/s (1000× solar wind) is feasible at ≥3% lifting efficiency"
+  - "Lifting efficiency is the engineering bottleneck, not solar stability"
+  - "Energy budget of 4.4×10²³ W at 10¹¹ kg/s is 0.1% of solar luminosity—safe operating regime"
+  - "3D MHD validation needed above 10¹² kg/s where model accuracy degrades"
 ---
 
 ## Background

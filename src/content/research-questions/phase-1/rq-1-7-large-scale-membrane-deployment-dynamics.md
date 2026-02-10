@@ -4,7 +4,7 @@ slug: "large-scale-membrane-deployment-dynamics"
 title: "Large-scale membrane deployment dynamics at 1 km scale"
 questionType: "simulation"
 priority: "critical"
-status: "open"
+status: "answered"
 sourcePhase: "phase-1"
 sourceBOMItemId: "bom-1-2"
 sourceBOMItemSlug: "pv-blanket-arrays"
@@ -19,6 +19,15 @@ tags:
   - "structural-stability"
   - "flutter"
 createdDate: "2026-02-01"
+resolutionStatus: "resolved"
+resolutionDate: "2026-02-10"
+resolutionSource: "simulation"
+resolutionSummary: "Modal analysis and Monte Carlo simulation confirm all membrane diameters 100-1000m are flutter-stable with comfortable margins (3.3× at 1000m, 6.1× at 500m). Passive stability via boom tensioning is sufficient—no active flutter control required."
+implications:
+  - "1 km diameter membranes are flutter-stable at ≥1 N/m tension with 3.3× safety margin"
+  - "Spin stabilization helps but is not required (0 RPM still gives 5.9× margin at 500m)"
+  - "Natural frequencies below 0.01 Hz at large scales require slow attitude control algorithms"
+  - "Flutter boundary tension is very low (0.17 N/m at 1000m), easily exceeded by standard tensioning"
 ---
 
 ## Background

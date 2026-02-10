@@ -4,7 +4,7 @@ slug: "self-replication-closure-threshold"
 title: "Self-replication closure threshold for autonomous manufacturing foundries"
 questionType: "simulation"
 priority: "critical"
-status: "open"
+status: "answered"
 sourcePhase: "phase-3a"
 sourceBOMItemId: "bom-3a-4"
 sourceBOMItemSlug: "self-replicating-manufacturing-foundries"
@@ -20,6 +20,15 @@ tags:
   - "closure-ratio"
   - "von-neumann"
 createdDate: "2026-02-08"
+resolutionStatus: "resolved"
+resolutionDate: "2026-02-10"
+resolutionSource: "simulation"
+resolutionSummary: "Monte Carlo replication simulation shows all closure ratios ≥85% reach 10,000 foundries with 100% probability. 99% closure is fastest (25.2 years) and cheapest (91K tonnes vitamins). Degradation rate per generation is the critical risk—5%/generation drops success to 69%."
+implications:
+  - "Manufacturing quality control (degradation <2%/gen) matters more than pushing closure above 96%"
+  - "Zero degradation cuts time-to-target from 27 years to 15 years—quality is speed"
+  - "Vitamin supply chain of 85-170K tonnes required regardless of closure ratio"
+  - "At 5% degradation, foundry population plateaus below target—a showstopper"
 ---
 
 ## Background

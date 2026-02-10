@@ -4,7 +4,7 @@ slug: "shkadov-standoff-distance-optimization"
 title: "Shkadov mirror standoff distance optimization: 0.1 AU vs 1.0 AU trade study"
 questionType: "simulation"
 priority: "critical"
-status: "open"
+status: "answered"
 sourcePhase: "phase-3b"
 sourceBOMItemId: "bom-3b-1"
 sourceBOMItemSlug: "shkadov-mirror-array"
@@ -20,6 +20,15 @@ tags:
   - "orbital-mechanics"
   - "radiation-pressure"
 createdDate: "2026-02-08"
+resolutionStatus: "resolved"
+resolutionDate: "2026-02-10"
+resolutionSource: "simulation"
+resolutionSummary: "Trade sweep simulation shows all distances 0.1-2.0 AU are thermally feasible. Thrust is constant (2.43×10¹⁷ N at 10% coverage, R=0.95). Close-in placement (0.1 AU) minimizes mass by 400× vs 1.0 AU. Refractory materials (beryllium/SiC) required at 1047K."
+implications:
+  - "Close-in (0.1-0.3 AU) placement optimal for minimum mass, requires refractory reflector materials"
+  - "Areal density has no effect on thrust—only coverage fraction and reflectivity matter"
+  - "Critical areal density for statite equilibrium is 0.77 g/m², well below practical membrane densities"
+  - "10% sky coverage produces 9.75% Earth insolation reduction—within acceptable limits for gradual deployment"
 ---
 
 ## Background
