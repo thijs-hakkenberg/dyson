@@ -75,17 +75,24 @@ export function calculateTransferCost(
 	const r1 = node.radiusAU;
 	const r2 = toSlot.orbitalRadius;
 
+	// Hohmann baseline (always compute for comparison)
+	const hohmannDV = hohmannTransferDeltaV(r1, r2);
+	const hohmannDays = hohmannTransferTime(r1, r2);
+	const radialDV = Math.abs(r1 - r2) < 0.001 ? 0 : hohmannDV;
+	const phasingDeltaV = (angDist / 180) * 500;
+	const phasingDays = (angDist / 360) * 365.25;
+
 	if (nnWeights) {
 		// Use NN for radial component, add phase adjustment
-		const baseTof = hohmannTransferTime(r1, r2);
-		const tof = Math.max(baseTof, 30); // minimum 30 days
-		const baseDeltaV = estimateDeltaV(r1, r2, tof, nnWeights);
+		const tof = Math.max(hohmannDays, 30); // minimum 30 days
+		const nnDeltaV = estimateDeltaV(r1, r2, tof, nnWeights);
 
-		if (!isNaN(baseDeltaV) && baseDeltaV > 0) {
-			// Add phasing burn proportional to angular distance
-			const phasingDeltaV = (angDist / 180) * 500; // up to 500 m/s for 180 deg
-			const totalDeltaV = baseDeltaV + phasingDeltaV;
-			const phasingDays = (angDist / 360) * 365.25; // fraction of orbital period
+		// Sanity check: NN estimate should be within 3x of Hohmann for the radial
+		// component. The NN has a high-value floor (~5000 m/s) that overestimates
+		// small transfers. Only use NN when it provides plausible refinement.
+		const hohmannRef = Math.max(radialDV, 50); // minimum reference to avoid div-by-zero
+		if (!isNaN(nnDeltaV) && nnDeltaV > 0 && nnDeltaV < hohmannRef * 3) {
+			const totalDeltaV = nnDeltaV + phasingDeltaV;
 			return {
 				deltaV: totalDeltaV,
 				travelDays: tof + phasingDays
@@ -94,14 +101,6 @@ export function calculateTransferCost(
 	}
 
 	// Hohmann fallback
-	const hohmannDV = hohmannTransferDeltaV(r1, r2);
-	const hohmannDays = hohmannTransferTime(r1, r2);
-
-	// If same radius, only phasing is needed
-	const radialDV = Math.abs(r1 - r2) < 0.001 ? 0 : hohmannDV;
-	const phasingDeltaV = (angDist / 180) * 500;
-	const phasingDays = (angDist / 360) * 365.25;
-
 	return {
 		deltaV: radialDV + phasingDeltaV,
 		travelDays: (radialDV > 0 ? hohmannDays : 0) + phasingDays

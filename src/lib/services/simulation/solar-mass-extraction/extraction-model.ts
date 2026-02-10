@@ -256,33 +256,60 @@ export function interpolateResponseSurface(
 }
 
 /**
- * Analyze a single extraction parameter point using analytical model.
+ * Analyze a single extraction parameter point.
+ *
+ * When pre-computed response surfaces are available, uses the 1D radial atmosphere
+ * model for plume velocity and luminosity perturbation (where the radial density
+ * profile adds accuracy over the flat-density analytical model). Engineering
+ * parameters (efficiency, energy budget, stability margin) always come from the
+ * configured lifting efficiency — a technology assumption, not a physics derivation.
  */
 export function analyzeExtractionPoint(
 	config: ExtractionConfig,
 	surfaces?: ResponseSurfaceData | null
 ): ExtractionPoint {
-	// Try response surface interpolation first
+	// Use configured lifting efficiency as technology parameter
+	const efficiency = config.liftingEfficiency;
+
+	// Total energy budget required for this extraction rate
+	const energyBudget = calculateEnergyBudget(config.extractionRate, efficiency);
+
+	// Stability margin from energy budget
+	const stabilityMargin = calculateStabilityMargin(energyBudget);
+
+	// Luminosity perturbation
+	const luminosityPerturbation = calculateLuminosityPerturbation(
+		config.extractionRate,
+		config.missionDuration
+	);
+
+	// Feasibility: stability margin > 0.80 and energy budget < L_SUN
+	const feasible = stabilityMargin > 0.8 && energyBudget < L_SUN;
+
+	// Try response surface for physics-derived quantities (plume velocity, station count)
 	if (surfaces) {
 		const interpolated = interpolateResponseSurface(
 			surfaces,
 			config.extractionRate,
 			config.beamPower
 		);
-		if (interpolated) return interpolated;
+		if (interpolated) {
+			return {
+				extractionRate: config.extractionRate,
+				efficiency,
+				plumeVelocity: interpolated.plumeVelocity,
+				stabilityMargin,
+				luminosityPerturbation,
+				energyBudget,
+				stationsRequired: interpolated.stationsRequired,
+				feasible
+			};
+		}
 	}
 
-	// Fall back to analytical energy balance model
+	// Analytical fallback: flat chromospheric density model
 	const density = CHROMOSPHERE_DENSITY[config.solarActivity];
 	const beamArea = DEFAULT_BEAM_AREA;
-
-	// Use configured lifting efficiency as technology parameter
-	// This represents the overall system efficiency of converting beam power
-	// to kinetic energy of extracted mass at escape velocity
-	const efficiency = config.liftingEfficiency;
-
-	// Total energy budget required for this extraction rate
-	const energyBudget = calculateEnergyBudget(config.extractionRate, efficiency);
 
 	// Per-station beam power derived from total budget and station count
 	const perStationPower = energyBudget / Math.max(config.stationCount, 1);
@@ -295,18 +322,6 @@ export function analyzeExtractionPoint(
 
 	// Stations required
 	const stationsRequired = calculateStationsRequired(config.extractionRate, massFlowPerStation);
-
-	// Stability margin: total power needed scales with extraction rate
-	const stabilityMargin = calculateStabilityMargin(energyBudget);
-
-	// Luminosity perturbation
-	const luminosityPerturbation = calculateLuminosityPerturbation(
-		config.extractionRate,
-		config.missionDuration
-	);
-
-	// Feasibility: stability margin > 0.80 and energy budget < L_SUN
-	const feasible = stabilityMargin > 0.8 && energyBudget < L_SUN;
 
 	return {
 		extractionRate: config.extractionRate,

@@ -76,11 +76,13 @@ def solar_temperature_profile(r_fraction):
 def calculate_plume_velocity(beam_power, density):
     """
     Calculate plume velocity from beam heating.
-    v = sqrt(2 * P / (rho * A_beam))
+    v = sqrt(2 * P / (rho * A_beam)), capped at 2x escape velocity.
+    Energy above escape velocity has diminishing returns.
     """
     if density <= 0:
         return 0
-    return math.sqrt(2 * beam_power / (density * BEAM_AREA))
+    raw = math.sqrt(2 * beam_power / (density * BEAM_AREA))
+    return min(raw, 2 * V_ESCAPE)
 
 
 def calculate_mass_flow_per_station(density, velocity):

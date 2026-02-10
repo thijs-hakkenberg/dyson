@@ -114,5 +114,8 @@ export function estimateDeltaV(
 	];
 
 	const rawOutput = forward(input, weights.layers);
-	return denormalize(rawOutput, weights.outputNorm.min, weights.outputNorm.max);
+	// Clamp to [0, 1] before denormalization — unclamped output layer can
+	// produce values outside the training range, yielding extreme delta-V
+	const clamped = Math.max(0, Math.min(1, rawOutput));
+	return denormalize(clamped, weights.outputNorm.min, weights.outputNorm.max);
 }

@@ -7,6 +7,25 @@
  * then outputs structured results for analysis.
  */
 
+// Polyfill fetch for Node.js: map /content/... paths to static/ directory on disk
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+
+const nativeFetch = globalThis.fetch;
+globalThis.fetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+	const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url;
+	if (url.startsWith('/content/')) {
+		const filePath = resolve('static', url.slice(1));
+		try {
+			const data = await readFile(filePath, 'utf-8');
+			return new Response(data, { status: 200, headers: { 'content-type': 'application/json' } });
+		} catch {
+			return new Response('Not found', { status: 404 });
+		}
+	}
+	return nativeFetch(input, init);
+};
+
 // ========== Shkadov Mirror (RQ-3b-1) ==========
 import {
 	DEFAULT_SHKADOV_CONFIG,
