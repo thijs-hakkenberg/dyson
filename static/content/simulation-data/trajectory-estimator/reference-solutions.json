@@ -1,0 +1,32 @@
+{
+  "100": {
+    "totalDeltaV_ms": 40004.78,
+    "avgDeltaV_ms": 400.05,
+    "minTransfer_ms": 150.05,
+    "maxTransfer_ms": 650.05
+  },
+  "500": {
+    "totalDeltaV_ms": 200023.88,
+    "avgDeltaV_ms": 400.05,
+    "minTransfer_ms": 150.05,
+    "maxTransfer_ms": 650.05
+  },
+  "1000": {
+    "totalDeltaV_ms": 400047.76,
+    "avgDeltaV_ms": 400.05,
+    "minTransfer_ms": 150.05,
+    "maxTransfer_ms": 650.05
+  },
+  "2000": {
+    "totalDeltaV_ms": 800095.52,
+    "avgDeltaV_ms": 400.05,
+    "minTransfer_ms": 150.05,
+    "maxTransfer_ms": 650.05
+  },
+  "5000": {
+    "totalDeltaV_ms": 2000238.8,
+    "avgDeltaV_ms": 400.05,
+    "minTransfer_ms": 150.05,
+    "maxTransfer_ms": 650.05
+  }
+}

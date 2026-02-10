@@ -146,7 +146,7 @@ export function calculateStationsRequired(
  */
 export async function loadResponseSurfaces(): Promise<ResponseSurfaceData | null> {
 	try {
-		const response = await fetch('/data/solar-atmosphere-response-surfaces.json');
+		const response = await fetch('/content/simulation-data/solar-atmosphere/response-surfaces.json');
 		if (!response.ok) return null;
 		return await response.json();
 	} catch {
