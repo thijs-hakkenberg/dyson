@@ -22,7 +22,7 @@ const questionFiles = import.meta.glob('/src/content/research-questions/**/*.md'
  * Check if a path is a question file (not a discussion file)
  */
 function isQuestionFile(path: string): boolean {
-	return /\/phase-\d+\/rq-\d+-\d+-[^/]+\.md$/.test(path);
+	return /\/phase-\d+[a-z]?\/rq-\d+[a-z]?-\d+-[^/]+\.md$/.test(path);
 }
 
 // Extract slugs from frontmatter of all question files

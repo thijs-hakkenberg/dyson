@@ -155,3 +155,32 @@ export * from './electrical-fault';
 
 // Payload Capture Systems (mass driver projectile capture)
 export * from './capture';
+
+// Shkadov Mirror (standoff distance trade study)
+// Import directly from '$lib/services/simulation/shkadov-mirror' to avoid name conflicts
+export type { ShkadovConfig, ShkadovTradePoint, ShkadovResult, ShkadovComparisonResult, ShkadovProgress } from './shkadov-mirror';
+export { DEFAULT_SHKADOV_CONFIG, runShkadovTradeSweep, runShkadovComparison } from './shkadov-mirror';
+
+// Thermal Warping (membrane deflection analysis)
+export type { WarpingConfig, WarpingSweepPoint, WarpingResult, WarpingOutput, WarpingComparisonResult, WarpingProgress } from './thermal-warping';
+export { DEFAULT_WARPING_CONFIG, runWarpingMonteCarlo, runWarpingComparison } from './thermal-warping';
+
+// Thermodynamic Cascade (Matrioshka brain shell efficiency)
+export type { CascadeConfig, ShellData, CascadeRunResult, CascadeResult, CascadeOutput, CascadeComparisonResult, CascadeProgress } from './thermodynamic-cascade';
+export { DEFAULT_CASCADE_CONFIG, runCascadeMonteCarlo, runCascadeComparison } from './thermodynamic-cascade';
+
+// Self-Replication (closure threshold and growth dynamics)
+export type { ReplicationConfig, CycleData, ReplicationRunResult, ReplicationResult, ReplicationOutput, ReplicationComparisonResult, ReplicationProgress } from './self-replication';
+export { DEFAULT_REPLICATION_CONFIG, runReplicationMonteCarlo, runReplicationComparison } from './self-replication';
+
+// Membrane Dynamics (deployment stability and flutter)
+export type { MembraneConfig, ModalResult, MembraneSweepPoint, MembraneResult, MembraneOutput, MembraneComparisonResult, MembraneProgress } from './membrane-dynamics';
+export { DEFAULT_MEMBRANE_CONFIG, runMembraneMonteCarlo, runMembraneComparison } from './membrane-dynamics';
+
+// Deployment Optimization (ML trajectory strategies)
+export type { DeploymentOptConfig, StrategyResult, DeploymentOptResult, DeploymentOptOutput, DeploymentOptProgress } from './deployment-optimization';
+export { DEFAULT_DEPLOYMENT_OPT_CONFIG, runDeploymentOptMonteCarlo } from './deployment-optimization';
+
+// Solar Mass Extraction (Caplan engine rate limits)
+export type { ExtractionConfig, ExtractionPoint, ExtractionResult, ExtractionOutput, ExtractionComparisonResult, ExtractionProgress } from './solar-mass-extraction';
+export { DEFAULT_EXTRACTION_CONFIG, runExtractionMonteCarlo, runExtractionComparison } from './solar-mass-extraction';

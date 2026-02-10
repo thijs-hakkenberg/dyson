@@ -16,6 +16,7 @@ relatedBOMItems:
 relatedResearchQuestions:
   - "rq-1-19"
   - "rq-1-24"
+  - "rq-1-48"
 tags:
   - "trajectory-optimization"
   - "machine-learning"

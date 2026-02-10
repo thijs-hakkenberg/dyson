@@ -13,7 +13,8 @@ relatedBOMItems:
   - "bom-3b-4"
   - "bom-3b-3"
   - "bom-3b-5"
-relatedResearchQuestions: []
+relatedResearchQuestions:
+  - "rq-3b-5"
 tags:
   - "stellar-engineering"
   - "mass-lifting"

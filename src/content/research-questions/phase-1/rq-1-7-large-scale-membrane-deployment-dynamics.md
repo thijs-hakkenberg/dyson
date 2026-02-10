@@ -12,6 +12,8 @@ sourceBOMItemName: "PV Blanket Arrays"
 relatedBOMItems:
   - "bom-1-2"
   - "bom-2-1"
+relatedResearchQuestions:
+  - "rq-1-47"
 tags:
   - "membrane-dynamics"
   - "structural-stability"

@@ -18,7 +18,9 @@
 	const phaseLabels: Record<string, string> = {
 		'phase-0': 'Phase 0 - Resource Acquisition',
 		'phase-1': 'Phase 1 - Initial Swarm Deployment',
-		'phase-2': 'Phase 2 - Swarm Expansion'
+		'phase-2': 'Phase 2 - Swarm Expansion',
+		'phase-3a': 'Phase 3a - Matrioshka Brain',
+		'phase-3b': 'Phase 3b - Stellar Engine'
 	};
 
 	const statusColors: Record<string, string> = {
@@ -54,7 +56,21 @@
 		'cluster-coordinator-duty-cycle',
 		'fleet-coordination-scale-constraints',
 		// Depot Logistics simulator
-		'depot-spacing-logistics-architecture'
+		'depot-spacing-logistics-architecture',
+		// Shkadov Mirror simulator
+		'shkadov-standoff-distance-optimization',
+		// Thermal Warping simulator
+		'thermal-warping-large-membranes',
+		// Thermodynamic Cascade simulator
+		'thermodynamic-cascade-efficiency-limits',
+		// Self-Replication simulator
+		'self-replication-closure-threshold',
+		// Membrane Dynamics simulator
+		'large-scale-membrane-deployment-dynamics',
+		// ML Deployment Optimization simulator
+		'ml-trajectory-deployment-optimization',
+		// Solar Mass Extraction simulator
+		'solar-mass-extraction-rate-limits'
 	];
 	const simulatorDescriptions: Record<string, string> = {
 		'minimum-constellation-size': 'Explore this research question with our Monte Carlo constellation coverage simulator. Adjust parameters and see real-time coverage curves.',
@@ -74,7 +90,21 @@
 		'cluster-coordinator-duty-cycle': 'Optimize coordinator duty cycles with our swarm coordination simulator. Balance power distribution and update propagation.',
 		'fleet-coordination-scale-constraints': 'Identify coordination scaling limits with our discrete event simulator. Find bottleneck thresholds for million-unit swarms.',
 		// Depot Logistics description
-		'depot-spacing-logistics-architecture': 'Optimize depot spacing for billion-unit maintenance with our discrete event simulator. Balance response time, propellant, and fleet utilization.'
+		'depot-spacing-logistics-architecture': 'Optimize depot spacing for billion-unit maintenance with our discrete event simulator. Balance response time, propellant, and fleet utilization.',
+		// Shkadov Mirror description
+		'shkadov-standoff-distance-optimization': 'Explore Shkadov mirror standoff distance trade-offs with our parametric trade study simulator. Analyze thrust, mass, temperature, and thermal feasibility across 0.1-2.0 AU.',
+		// Thermal Warping description
+		'thermal-warping-large-membranes': 'Model thermal warping effects on large membranes with our Monte Carlo simulator. Sweep membrane area and see deflection vs phased array and structural tolerances.',
+		// Thermodynamic Cascade description
+		'thermodynamic-cascade-efficiency-limits': 'Simulate energy flow through nested Matrioshka brain shells. Determine viable layer count and total system efficiency with TPV and spectral selectivity parameters.',
+		// Self-Replication description
+		'self-replication-closure-threshold': 'Model exponential growth of self-replicating foundries with our Monte Carlo simulator. Explore closure ratio, degradation, and vitamin supply constraints.',
+		// Membrane Dynamics description
+		'large-scale-membrane-deployment-dynamics': 'Analyze structural stability and flutter boundaries for large-scale membrane deployment. Map stable vs flutter regimes across diameter and tension.',
+		// ML Deployment Optimization description
+		'ml-trajectory-deployment-optimization': 'Compare deployment strategies using neural network trajectory estimation. Evaluate sequential, batch, greedy, and NN-guided approaches head-to-head.',
+		// Solar Mass Extraction description
+		'solar-mass-extraction-rate-limits': 'Model solar mass extraction rate limits and stellar response. Sweep extraction rates and visualize stability margins, efficiency, and luminosity impact.'
 	};
 
 	// Render context markdown if available
