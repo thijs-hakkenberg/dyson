@@ -2,6 +2,7 @@
 	import type { ResearchQuestion } from '$lib/types/entities';
 	import QuestionTypeBadge from './QuestionTypeBadge.svelte';
 	import PriorityIndicator from './PriorityIndicator.svelte';
+	import { TopicPill } from '$lib/components/ontology';
 
 	interface Props {
 		question: ResearchQuestion;
@@ -57,12 +58,10 @@
 	<!-- Tags -->
 	<div class="flex flex-wrap gap-1.5 mb-4">
 		{#each question.tags.slice(0, 4) as tag}
-			<span class="px-1.5 py-0.5 text-xs rounded bg-space-600 text-star-faint">
-				{tag}
-			</span>
+			<TopicPill {tag} />
 		{/each}
 		{#if question.tags.length > 4}
-			<span class="px-1.5 py-0.5 text-xs rounded bg-space-600 text-star-faint">
+			<span class="px-1.5 py-0.5 text-xs rounded-full bg-space-600 text-star-faint">
 				+{question.tags.length - 4}
 			</span>
 		{/if}

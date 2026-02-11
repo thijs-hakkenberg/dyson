@@ -2,7 +2,22 @@
 
 All notable changes to Project Dyson are documented here.
 
-## [Unreleased] - 2026-02-10
+## [Unreleased] - 2026-02-11
+
+### Added
+
+#### Ontology System (unified topic taxonomy)
+- Add ontology taxonomy with 13 domains and 52 topics (`src/content/ontology/taxonomy.yaml`)
+- Add artifact-mappings for all 33 BOM items to ontology topics (`src/content/ontology/artifact-mappings.yaml`)
+- Add ontology service with tag resolution engine — maps 90% of existing tags to topics at runtime
+- Add Topics browser page (`/topics`) with domain cards, topic pills, and artifact counts
+- Add Topic detail page (`/topics/[topic]`) with linked artifacts, sibling/related topics
+- Add TopicPill component — replaces plain tag spans with linked topic pills across the site
+- Add DomainCard, ArtifactList, and OntologyStats components
+- Add bootstrap-ontology.js script for tag coverage analysis
+- Add "Topics" nav item to site header
+- Integrate TopicPill into QuestionCard (tags now link to topic pages)
+- Add blog article: "Introducing Topics: Unified Ontology for 250+ Artifacts"
 
 ### Added
 

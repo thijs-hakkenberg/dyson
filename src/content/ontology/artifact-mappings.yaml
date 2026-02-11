@@ -1,0 +1,108 @@
+version: "1.0"
+mappings:
+  - type: "bom-item"
+    items:
+      # Phase 0
+      - id: "bom-0-1"
+        slug: "prospecting-satellites"
+        topics: ["asteroid-mining", "orbital-mechanics", "communications"]
+      - id: "bom-0-2"
+        slug: "mining-robots"
+        topics: ["asteroid-mining", "robotic-assembly", "autonomous-ops"]
+      - id: "bom-0-3"
+        slug: "material-processing-station"
+        topics: ["isru", "metals-processing", "manufacturing"]
+      - id: "bom-0-4"
+        slug: "transport-vehicles"
+        topics: ["ion-propulsion", "propellant-systems", "fleet-management"]
+      - id: "bom-0-5"
+        slug: "solar-power-arrays"
+        topics: ["photovoltaics", "power-systems", "deployment"]
+      - id: "bom-0-6"
+        slug: "ispp-systems"
+        topics: ["isru", "propellant-systems", "water-resources"]
+      - id: "bom-0-7"
+        slug: "organizational-infrastructure"
+        topics: ["project-organization", "governance", "cost-analysis"]
+      # Phase 1
+      - id: "bom-1-1"
+        slug: "collector-units"
+        topics: ["membrane-design", "photovoltaics", "deployment"]
+      - id: "bom-1-2"
+        slug: "pv-blanket-arrays"
+        topics: ["thin-film-materials", "photovoltaics", "manufacturing"]
+      - id: "bom-1-3"
+        slug: "assembly-robots"
+        topics: ["robotic-assembly", "autonomous-ops", "manufacturing"]
+      - id: "bom-1-4"
+        slug: "assembly-node"
+        topics: ["manufacturing", "depot-infrastructure", "robotic-assembly"]
+      - id: "bom-1-5"
+        slug: "mass-drivers"
+        topics: ["propulsion-general", "launch-logistics", "isru"]
+      - id: "bom-1-6"
+        slug: "orbital-tugs"
+        topics: ["ion-propulsion", "fleet-management", "propellant-systems"]
+      - id: "bom-1-7"
+        slug: "swarm-control-system"
+        topics: ["swarm-control", "software-systems", "communications"]
+      # Phase 2 (partial - only 3 items)
+      - id: "bom-2-1"
+        slug: "collector-satellites"
+        topics: ["membrane-design", "deployment", "swarm-control"]
+      - id: "bom-2-2"
+        slug: "maintenance-drones"
+        topics: ["maintenance-repair", "autonomous-ops", "robotic-assembly"]
+      - id: "bom-2-3"
+        slug: "manufacturing-expansion"
+        topics: ["self-replication", "manufacturing", "isru"]
+      # Phase 3a - Matrioshka Brain
+      - id: "bom-3a-1"
+        slug: "computational-substrate-tiles"
+        topics: ["matrioshka-brain", "thin-film-materials", "manufacturing"]
+      - id: "bom-3a-2"
+        slug: "inter-layer-optical-backbone"
+        topics: ["matrioshka-brain", "communications", "power-transmission"]
+      - id: "bom-3a-3"
+        slug: "thermal-management-radiator-systems"
+        topics: ["matrioshka-brain", "thermal-management", "thermal-energy"]
+      - id: "bom-3a-4"
+        slug: "self-replicating-manufacturing-foundries"
+        topics: ["self-replication", "manufacturing", "autonomous-ops"]
+      - id: "bom-3a-5"
+        slug: "distributed-computational-os"
+        topics: ["matrioshka-brain", "software-systems", "data-processing"]
+      - id: "bom-3a-6"
+        slug: "feedstock-supply-chain-pipeline"
+        topics: ["supply-chain", "isru", "launch-logistics"]
+      - id: "bom-3a-7"
+        slug: "inter-layer-power-distribution-network"
+        topics: ["power-systems", "matrioshka-brain", "power-transmission"]
+      - id: "bom-3a-8"
+        slug: "shell-construction-maintenance-swarm"
+        topics: ["robotic-assembly", "maintenance-repair", "swarm-control"]
+      # Phase 3b - Stellar Engine
+      - id: "bom-3b-1"
+        slug: "shkadov-mirror-array"
+        topics: ["stellar-engines", "membrane-design", "optics-reflectors"]
+      - id: "bom-3b-2"
+        slug: "thermonuclear-jet-engine"
+        topics: ["stellar-engines", "megastructure-concepts", "thermal-energy"]
+      - id: "bom-3b-3"
+        slug: "solar-wind-collectors"
+        topics: ["stellar-engines", "isru", "membrane-design"]
+      - id: "bom-3b-4"
+        slug: "mass-lifting-systems"
+        topics: ["stellar-engines", "launch-logistics", "propulsion-general"]
+      - id: "bom-3b-5"
+        slug: "helium-separation-plant"
+        topics: ["stellar-engines", "water-resources", "isru"]
+      - id: "bom-3b-6"
+        slug: "em-accelerators"
+        topics: ["propulsion-general", "stellar-engines", "power-systems"]
+      - id: "bom-3b-7"
+        slug: "dyson-integration-layer"
+        topics: ["stellar-engines", "swarm-control", "power-systems"]
+      - id: "bom-3b-8"
+        slug: "thrust-stabilization"
+        topics: ["stellar-engines", "station-keeping", "swarm-control"]
