@@ -4,7 +4,9 @@ slug: "microgravity-metallurgy-scaling"
 title: "Scaling microgravity metallurgy to industrial production"
 questionType: "experimentation"
 priority: "critical"
-status: "open"
+status: "investigating"
+resolutionStatus: "partially-resolved"
+resolutionSource: "paper"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-3"
 sourceBOMItemSlug: "material-processing-station"
@@ -20,6 +22,11 @@ tags:
 arxivReferences:
   - "2109.02201"
   - "2102.09815"
+  - "2008.04485"
+  - "2004.09683"
+  - "0401250"
+  - "2202.10792"
+  - "2301.04999"
 createdDate: "2026-01-31"
 ---
 

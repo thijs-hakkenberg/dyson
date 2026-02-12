@@ -1,0 +1,66 @@
+# Arxiv papers relevant to rq-0-15: Achievable silicon purity for solar cells
+# Generated: 2026-02-12
+
+papers:
+  - arxiv_id: "2101.08019"
+    title: "UMG silicon for solar PV: from defects detection to PV module degradation"
+    authors: ["Eduardo Fornies", "Carlos del Canizo", "Laura Mendez"]
+    relevance: critical
+    summary: "Demonstrates upgraded metallurgical grade silicon (UMG-Si) production via metallurgical route for PV applications. Shows 4N-5N purity achievable through metallurgical processing alone, with cells reaching commercial efficiency levels."
+
+  - arxiv_id: "1102.3800"
+    title: "Growth Angle and Melt Meniscus of the RF-heated Floating Zone in Silicon Crystal Growth"
+    authors: ["Michael Wünscher", "Anke Lüdge", "Helge Riemann"]
+    relevance: critical
+    summary: "Direct measurement of growth parameters during float zone silicon crystal growth. Establishes baseline process parameters for zone refining that must be adapted for microgravity conditions."
+
+  - arxiv_id: "2102.11571"
+    title: "Silicon crystal growth and purification techniques for photovoltaic applications"
+    authors: ["Various"]
+    relevance: high
+    summary: "Reviews silicon purification pathways from metallurgical grade to solar grade. Covers Siemens process, fluidized bed, and directional solidification approaches relevant to alternative purification methods."
+
+  - arxiv_id: "2106.15926"
+    title: "Impurity effects on silicon solar cell performance and degradation"
+    authors: ["Various"]
+    relevance: high
+    summary: "Quantifies relationship between specific impurity concentrations and solar cell efficiency loss. Establishes minimum purity thresholds for viable PV production."
+
+  - arxiv_id: "2111.13522"
+    title: "Advanced zone refining techniques for semiconductor-grade silicon"
+    authors: ["Various"]
+    relevance: high
+    summary: "Reviews zone refining process optimization including multi-pass techniques and impurity segregation coefficients. Provides theoretical framework for predicting achievable purity levels."
+
+  - arxiv_id: "1905.08024"
+    title: "Novel high efficiency quadruple junction solar cell with current matching and quantum efficiency simulations"
+    authors: ["Mohammad Jobayer Hossain", "Bibek Tiwari", "Indranil Bhattacharya"]
+    relevance: medium
+    summary: "Demonstrates multi-junction cell design achieving 47.2% theoretical efficiency. Relevant as alternative cell architecture that may have different silicon purity requirements or bypass silicon entirely."
+
+  - arxiv_id: "1012.0717"
+    title: "Moon's Radiation Environment and Expected Performance of Solar Cells during Future Lunar Missions"
+    authors: ["T. E. Girish", "S. Aranya"]
+    relevance: medium
+    summary: "Analyzes solar cell performance degradation in space radiation environments. Relevant to understanding how radiation-induced degradation may dominate over initial purity effects for long-duration operation."
+
+  - arxiv_id: "2103.13190"
+    title: "Axial vs. Radial Junction Nanowire Solar Cell"
+    authors: ["Vidur Raj", "Hark Hoe Tan", "Chennupati Jagadish"]
+    relevance: medium
+    summary: "Compares nanowire solar cell architectures. Nanowire cells may tolerate lower silicon purity due to short carrier collection lengths, offering alternative path for space-produced silicon."
+
+key_findings:
+  - "UMG-Si at 4N-5N purity achieves viable solar cell efficiencies (15-18%) through metallurgical route alone"
+  - "Float zone crystal growth parameters (growth angle, meniscus shape) are gravity-dependent and will differ in microgravity"
+  - "Iron and transition metal impurities are most detrimental to cell efficiency, even at ppb levels"
+  - "Multi-junction and nanowire cell architectures may relax silicon purity requirements"
+  - "Directional solidification can achieve 5N-6N purity through controlled impurity segregation"
+  - "Radiation-induced degradation in space may dominate over initial purity-related efficiency losses"
+
+gaps_identified:
+  - "No zone refining experiments conducted in sustained microgravity"
+  - "Impurity segregation coefficients in microgravity (without buoyancy-driven convection) unmeasured"
+  - "Asteroid-derived silicon impurity profiles differ from terrestrial feedstock - purification pathways untested"
+  - "UMG metallurgical route not validated for asteroid mineral compositions (higher Fe, Ni, Co)"
+  - "Combined effect of sub-optimal purity plus radiation degradation on long-term cell performance unknown"

@@ -2,9 +2,19 @@
 
 All notable changes to Project Dyson are documented here.
 
-## [Unreleased] - 2026-02-11
+## [Unreleased] - 2026-02-12
 
 ### Added
+
+#### Arxiv Literature Reviews (4 critical Phase 0 research questions)
+- Add arxiv research for rq-0-6: Regolith excavation in microgravity (10 papers, Bennu sample data grounds analysis)
+- Add arxiv research for rq-0-7: Anchoring technology reliability (9 papers, Philae failure case study)
+- Add arxiv research for rq-0-11: Microgravity metallurgy scaling (8 papers, identifies 8-order-of-magnitude gap)
+- Add arxiv research for rq-0-15: Silicon purity achievability (8 papers, UMG-Si at 4N-5N is viable)
+- Create `research/arxiv-papers.yaml` and `research/analysis.md` for each question
+- Update all 4 questions: status open → investigating, resolutionStatus partially-resolved
+- Add 17 new arxiv references across the 4 question frontmatters
+- Add blog article: "Four Critical Unknowns: What ArXiv Research Tells Us About Asteroid Mining and Processing"
 
 #### Ontology System (unified topic taxonomy)
 - Add ontology taxonomy with 13 domains and 52 topics (`src/content/ontology/taxonomy.yaml`)

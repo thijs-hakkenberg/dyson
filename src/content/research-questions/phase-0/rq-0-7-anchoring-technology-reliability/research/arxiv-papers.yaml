@@ -1,0 +1,72 @@
+# Arxiv papers relevant to rq-0-7: Anchoring technology reliability across asteroid types
+# Generated: 2026-02-12
+
+papers:
+  - arxiv_id: "1306.1622"
+    title: "The Strength of Regolith and Rubble Pile Asteroids"
+    authors: ["Paul Sanchez", "Daniel J. Scheeres"]
+    relevance: critical
+    summary: "Establishes cohesive strength model for asteroid regolith via van der Waals forces. Directly determines anchoring requirements: higher cohesion means microspines can engage, lower cohesion means harpoons may penetrate but not hold."
+
+  - arxiv_id: "2502.12347"
+    title: "Improving Grip Stability Using Passive Compliant Microspine Arrays for Soft Robots in Unstructured Terrain"
+    authors: ["Lauren Ervin", "Harish Bezawada", "Vishesh Vikas"]
+    relevance: critical
+    summary: "Demonstrates microspine array technology for grip on unstructured terrain. Shows passive compliance improves engagement reliability on irregular surfaces, directly applicable to asteroid surface anchoring."
+
+  - arxiv_id: "1810.01815"
+    title: "Rubble Pile Asteroids"
+    authors: ["Kevin J. Walsh"]
+    relevance: critical
+    summary: "Comprehensive review of rubble pile structure, porosity, and mechanical properties. Essential context for understanding what anchoring systems must grip: loosely bound, porous aggregates with significant void space."
+
+  - arxiv_id: "1604.04414"
+    title: "Partial reconstruction of the rotational motion of Philae spacecraft during its landing on comet 67P/Churyumov-Gerasimenko"
+    authors: ["Tamás Baranyai", "András Balázs", "Péter L. Várkonyi"]
+    relevance: high
+    summary: "Analyzes Philae's anchoring failure on comet 67P. The harpoon system failed to deploy, leading to uncontrolled bouncing. Provides critical real-world data on the consequences of anchoring system failure on a small body."
+
+  - arxiv_id: "2011.08479"
+    title: "Stability and Evolution of Fallen Particles Around the Surface of Asteroid (101955) Bennu"
+    authors: ["A. Amarante", "O. C. Winter", "R. Sfair"]
+    relevance: high
+    summary: "Studies particle dynamics near Bennu's surface. Demonstrates that surface stability varies significantly across asteroid topology, informing where anchoring must be strongest."
+
+  - arxiv_id: "2212.04390"
+    title: "Cohesive regolith behavior under asteroid-level gravity conditions"
+    authors: ["Various"]
+    relevance: high
+    summary: "Investigates how cohesive regolith responds at asteroid gravity levels. Relevant to predicting whether anchoring systems can maintain grip during excavation reaction forces."
+
+  - arxiv_id: "1706.03385"
+    title: "Disaggregation of Small, Cohesive Rubble Pile Asteroids due to YORP"
+    authors: ["D. J. Scheeres"]
+    relevance: medium
+    summary: "Shows that cohesive strength in rubble piles can be overcome by rotational forces. Implies anchoring systems must account for potential surface material mobility driven by thermal and rotational effects."
+
+  - arxiv_id: "1805.01750"
+    title: "DISCUS - The Deep Interior Scanning CubeSat mission to a rubble pile near-Earth asteroid"
+    authors: ["Patrick Bambach", "Jakob Deller", "Esa Vilenius"]
+    relevance: medium
+    summary: "Proposes bistatic radar to characterize rubble pile interiors. Interior structure knowledge is critical for predicting anchoring depth requirements and substrate variability."
+
+  - arxiv_id: "2503.17099"
+    title: "An Energy-Angular Momentum Phase Function for Rubble Pile Asteroids"
+    authors: ["D. J. Scheeres"]
+    relevance: medium
+    summary: "Analyzes rubble pile morphology and energy states. Informs understanding of surface stability regimes where anchoring must operate."
+
+key_findings:
+  - "Rubble pile asteroids are loosely bound aggregates with 20-40% bulk porosity, complicating mechanical anchoring"
+  - "Microspine arrays with passive compliance show improved grip on irregular, unstructured surfaces"
+  - "Philae's anchoring failure on 67P demonstrates real consequences: harpoon non-deployment led to mission compromise"
+  - "Van der Waals cohesion provides asteroid regolith with measurable but low shear strength (0.1-100 Pa)"
+  - "Surface particle dynamics vary significantly with location on asteroid, requiring adaptive anchoring strategies"
+  - "Rubble pile internal structure heterogeneity means anchoring depth and substrate type are unpredictable"
+
+gaps_identified:
+  - "No systematic comparison of microspine, harpoon, and gecko-adhesive anchoring on asteroid analog materials"
+  - "Gecko-adhesive performance in dusty, electrostatically charged environments untested"
+  - "Long-duration anchoring cycle life data (millions of engage/disengage cycles) not available"
+  - "Anchoring performance on M-type metallic asteroid surfaces not studied"
+  - "Combined anchoring + excavation reaction force testing in microgravity not conducted"

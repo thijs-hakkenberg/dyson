@@ -1,0 +1,66 @@
+# Arxiv papers relevant to rq-0-11: Scaling microgravity metallurgy to industrial production
+# Generated: 2026-02-12
+
+papers:
+  - arxiv_id: "2102.09815"
+    title: "A gravity-independent powder-based additive manufacturing process tailored for space applications"
+    authors: ["Olfa D'Angelo", "Felix Kuthe", "Szu-Jia Liu"]
+    relevance: critical
+    summary: "Demonstrates a powder-based AM process that functions independently of gravitational environment. Directly addresses the challenge of manufacturing with metals in microgravity, proving gravity-independent approaches are feasible."
+
+  - arxiv_id: "2008.04485"
+    title: "Grain refinement of stainless steel in ultrasound-assisted additive manufacturing"
+    authors: ["C. J. Todaro", "M. A. Easton", "D. Qiu"]
+    relevance: high
+    summary: "Shows ultrasound can control grain structure during metal solidification in AM. Relevant to achieving metallurgical quality without gravity-driven convection for microstructure refinement."
+
+  - arxiv_id: "2004.09683"
+    title: "Diamagnetic Levitation Using High-Temperature Superconducting Wires for Microgravity Research and Mitigation in Human Spaceflight Applications"
+    authors: ["G. Bruhaug", "L. Beveridge"]
+    relevance: high
+    summary: "Proposes HTS electromagnets for large-scale diamagnetic levitation to simulate or mitigate microgravity. Relevant to containerless processing of molten metals using electromagnetic confinement."
+
+  - arxiv_id: "0401250"
+    title: "Three-dimensional phase-field simulations of directional solidification"
+    authors: ["M. Dejmek", "R. Folch", "A. Parisi"]
+    relevance: high
+    summary: "Phase-field modeling of solidification microstructure formation. Applicable to predicting how metal alloys solidify differently in microgravity where convection is suppressed."
+
+  - arxiv_id: "2202.10792"
+    title: "Granular piston-probing in microgravity: powder compression, from densification to jamming"
+    authors: ["Olfa D'Angelo", "Anabelle Horb", "Aidan Cowley"]
+    relevance: high
+    summary: "Studies powder behavior in microgravity including compression and jamming. Relevant to feedstock handling and powder metallurgy processes at industrial scale."
+
+  - arxiv_id: "2109.02201"
+    title: "In-space manufacturing and assembly for the construction of large space structures"
+    authors: ["Various"]
+    relevance: high
+    summary: "Reviews approaches to in-space manufacturing including metal processing. Provides context for scaling laboratory demonstrations to industrial production in orbit."
+
+  - arxiv_id: "2301.04999"
+    title: "Stress Flow Guided Non-Planar Print Trajectory Optimization for Additive Manufacturing of Anisotropic Polymers"
+    authors: ["Xavier Guidetti", "Efe C. Balta", "Yannick Nagel"]
+    relevance: medium
+    summary: "Optimizes AM print trajectories for structural performance. While focused on polymers, the trajectory optimization methodology applies to metal AM in microgravity where layer adhesion may differ."
+
+  - arxiv_id: "2009.02471"
+    title: "Archaeology in a Vacuum: Obstacles to and Solutions for Developing a Real Space Archaeology"
+    authors: ["International Space Station Archaeological Project"]
+    relevance: low
+    summary: "Documents ISS operational environment and material degradation observations. Tangential context for understanding long-duration material behavior in space."
+
+key_findings:
+  - "Gravity-independent powder-based additive manufacturing has been demonstrated, proving microgravity metal processing is feasible"
+  - "Ultrasound-assisted solidification can substitute for gravity-driven convection in controlling grain structure"
+  - "Electromagnetic levitation and containment enables containerless processing of molten metals"
+  - "Phase-field simulations predict significantly different solidification microstructures when buoyancy-driven convection is absent"
+  - "Powder handling in microgravity requires fundamentally different approaches due to altered densification and jamming behavior"
+
+gaps_identified:
+  - "No demonstrations beyond gram-scale metal processing in sustained microgravity"
+  - "Industrial-scale melt containment in microgravity (tonnes of molten metal) completely unaddressed"
+  - "Slag separation without density-driven buoyancy not demonstrated at any scale"
+  - "Thermal management for megawatt-scale smelting operations in vacuum not studied"
+  - "Quality control and non-destructive testing methods for microgravity-produced metals not developed"
+  - "Scale-up path from ISS-scale experiments to 50,000 tonnes/year throughput not defined"

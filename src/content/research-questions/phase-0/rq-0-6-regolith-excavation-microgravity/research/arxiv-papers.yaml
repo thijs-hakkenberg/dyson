@@ -1,0 +1,78 @@
+# Arxiv papers relevant to rq-0-6: Regolith behavior during microgravity excavation
+# Generated: 2026-02-12
+
+papers:
+  - arxiv_id: "1306.1764"
+    title: "Simulating regoliths in microgravity"
+    authors: ["N. Murdoch", "B. Rozitis", "S. F. Green"]
+    relevance: critical
+    summary: "Directly addresses dynamics of granular materials on asteroid surfaces in microgravity. Vital for understanding regolith response to mechanical disturbance during excavation."
+
+  - arxiv_id: "2404.12536"
+    title: "Asteroid (101955) Bennu in the Laboratory: Properties of the Sample Collected by OSIRIS-REx"
+    authors: ["Dante S. Lauretta", "Harold C. Connolly", "Joseph E. Aebersold"]
+    relevance: critical
+    summary: "First comprehensive characterization of actual asteroid regolith sample. Provides ground-truth data on particle size distribution, cohesion, mineralogy, and mechanical properties of carbonaceous asteroid material."
+
+  - arxiv_id: "1701.07547"
+    title: "Optimized Bucket Wheel Design for Asteroid Excavation"
+    authors: ["Ravi Teja Nallapu", "Andrew Thoesen", "Laurence Garvie"]
+    relevance: critical
+    summary: "Directly addresses excavation tool optimization for asteroid ISRU. Evaluates bucket wheel parameters for regolith extraction in low-gravity environments."
+
+  - arxiv_id: "1306.1622"
+    title: "The Strength of Regolith and Rubble Pile Asteroids"
+    authors: ["Paul Sanchez", "Daniel J. Scheeres"]
+    relevance: high
+    summary: "Models cohesive strength from van der Waals forces between grains. Predicts constant cohesive strength independent of asteroid size, creating scale-dependent behavior critical for excavation force estimates."
+
+  - arxiv_id: "1912.10618"
+    title: "Model for Asteroid Regolith to Guide Simulant Development"
+    authors: ["Philip T. Metzger", "Daniel T. Britt"]
+    relevance: high
+    summary: "Comprehensive model synthesizing Hayabusa and imaging data to guide asteroid regolith simulant creation. Essential for designing laboratory excavation experiments."
+
+  - arxiv_id: "2202.10792"
+    title: "Granular piston-probing in microgravity: powder compression, from densification to jamming"
+    authors: ["Olfa D'Angelo", "Anabelle Horb", "Aidan Cowley"]
+    relevance: high
+    summary: "Experimental study of granular material compression behavior in microgravity. Demonstrates how gravity absence changes force chain fabric and jamming transitions in powders."
+
+  - arxiv_id: "2509.04074"
+    title: "Simulation of Lateral Impulse Induced Inertial Dilation at the Surface of a Vacuum-Exposed Granular Assembly"
+    authors: ["Eric Frizzell", "Christine Hartzell"]
+    relevance: high
+    summary: "DEM simulation showing that lateral impulses cause bulk dilation in vacuum-exposed granular surfaces. Directly relevant to understanding debris generation during excavation tool engagement."
+
+  - arxiv_id: "1702.00335"
+    title: "Control of a Bucket-Wheel for Surface Mining of Asteroids and Small-Bodies"
+    authors: ["Ravi Teja Nallapu", "Erik Asphaug", "Jekan Thangavelautham"]
+    relevance: medium
+    summary: "Control system design for bucket-wheel excavation on asteroids. Addresses reaction force management and autonomous control during surface mining operations."
+
+  - arxiv_id: "2212.04390"
+    title: "Cohesive regolith behavior under asteroid-level gravity conditions"
+    authors: ["Various"]
+    relevance: medium
+    summary: "Studies cohesive granular material behavior at asteroid surface gravity levels. Relevant to predicting excavation dynamics and debris cloud formation."
+
+  - arxiv_id: "2308.11794"
+    title: "OSIRIS-REx Sample Analysis Plan -- Revision 3.0"
+    authors: ["Dante S. Lauretta", "Harold C. Connolly", "Jeffrey N. Grossman"]
+    relevance: medium
+    summary: "Describes analysis methodology for Bennu samples. Provides context for how regolith properties will be quantified from returned samples to inform simulant development."
+
+key_findings:
+  - "Asteroid regolith cohesion from van der Waals forces creates non-trivial excavation resistance even in microgravity"
+  - "Bennu sample analysis reveals highly porous, weak carbonaceous material with particle sizes from microns to centimeters"
+  - "Granular behavior in microgravity differs fundamentally from terrestrial: force chain fabric, jamming, and dilation all gravity-dependent"
+  - "Bucket wheel excavation is viable but requires careful control to manage reaction forces in low-gravity"
+  - "Vacuum exposure changes granular surface response to impulse - inertial dilation propagates over long distances"
+  - "DEM simulations can capture microgravity granular dynamics when calibrated against parabolic flight data"
+
+gaps_identified:
+  - "No full-scale excavation experiments conducted in sustained microgravity (only parabolic flight)"
+  - "Electrostatic charging effects on excavation tool engagement poorly characterized"
+  - "Limited data on regolith behavior variability across S-type and M-type asteroids"
+  - "Debris cloud persistence and settling timescales in asteroid gravity wells not well quantified"
+  - "Long-duration abrasive wear on excavation tools from regolith contact untested"
