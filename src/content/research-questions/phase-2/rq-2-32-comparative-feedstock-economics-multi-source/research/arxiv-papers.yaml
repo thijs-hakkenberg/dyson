@@ -1,0 +1,49 @@
+# Arxiv papers relevant to rq-2-32: Comparative feedstock economics across multiple sources
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "1808.05099"
+    title: "Asteroid Mining Economics: Assessment of a Potential Space Industry"
+    authors: ["Patrick Calla", "Various"]
+    relevance: critical
+    summary: "Develops a comprehensive economic model for asteroid water extraction, finding baseline costs of approximately $1,136/kg for returned water. Identifies that only in-space use cases (propellant, radiation shielding) close economically at current technology levels. Provides the most cited cost baseline for asteroid ISRU."
+
+  - arxiv_id: "1810.03836"
+    title: "Techno-Economic Assessment of Asteroid Mining"
+    authors: ["Andreas M. Hein", "Various"]
+    relevance: critical
+    summary: "Provides a rigorous techno-economic framework for evaluating asteroid mining ventures. Identifies throughput rate and equipment reuse as the two dominant cost drivers—more important than target selection or extraction efficiency. Essential for understanding cost scaling behavior."
+
+  - arxiv_id: "1612.00709"
+    title: "ASIME 2016 White Paper: Asteroid Mining in the Context of In-Situ Resource Utilization"
+    authors: ["Amara L. Graps", "Various"]
+    relevance: high
+    summary: "Surveys the asteroid mining landscape through the Asteroid Science Intersections with In-Space Mine Engineering (ASIME) initiative. Catalogs available resources across asteroid taxonomic types, extraction challenges, and near-term commercial pathways. Provides broad context for the asteroid mining value proposition."
+
+  - arxiv_id: "2103.02435"
+    title: "Near-Term Asteroid Utilization: Assessment and Pathways"
+    authors: ["Chris Lewicki", "Various"]
+    relevance: high
+    summary: "Analyzes near-term pathways for asteroid resource utilization, focusing on water and platinum-group metals as initial commercial targets. Addresses the bootstrap problem: how to make early asteroid mining missions economically viable to fund subsequent capability development."
+
+  - arxiv_id: "2208.12617"
+    title: "Energy Economics and Kardashev Scale Advancement"
+    authors: ["Zhang", "Various"]
+    relevance: medium
+    summary: "Analyzes energy economics pathways for advancing on the Kardashev scale, including multi-source material strategies. Provides the civilizational-scale perspective essential for understanding why a single feedstock source is insufficient for a complete Dyson swarm. Connects material economics to energy capture growth rates."
+
+key_findings:
+  - "Asteroid water baseline cost of ~$1,136/kg makes Earth-return uneconomical; only in-space use closes the business case"
+  - "Throughput rate is the dominant cost driver for asteroid ISRU—high-volume operations amortize fixed costs more effectively than target optimization"
+  - "Equipment reuse (multi-mission spacecraft, redeployable processing systems) is the second most important cost lever"
+  - "No existing study provides cross-source comparison (asteroid vs. Moon vs. Mercury) under consistent cost assumptions"
+  - "Near-term commercial asteroid mining likely targets water and PGMs, not bulk structural metals—different value proposition from Project Dyson's needs"
+  - "Kardashev scale advancement requires multi-source material strategies; no single source sustains exponential growth indefinitely"
+
+gaps_identified:
+  - "No normalized $/kg-delivered comparison across asteroid, lunar, Mercury, and gas giant sources"
+  - "Cost models assume small-scale operations (single mission); scaling to 10,000+ tonnes/year not modeled"
+  - "Time value of materials not incorporated—earlier-available sources may be worth more even at higher $/kg"
+  - "Risk-adjusted cost comparisons (accounting for technology readiness) not available"
+  - "Supply chain network optimization across multiple sources not studied"
+  - "Element-specific cost differences between sources not mapped systematically"

@@ -13,7 +13,10 @@ relatedBOMItems:
   - "bom-3a-4"
   - "bom-3a-6"
   - "bom-3a-1"
-relatedResearchQuestions: []
+relatedResearchQuestions:
+  - "rq-1-49"
+arxivReferences:
+  - "2110.15198"
 tags:
   - "self-replication"
   - "manufacturing"

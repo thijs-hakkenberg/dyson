@@ -1,0 +1,42 @@
+# Arxiv papers relevant to rq-1-50: Lunar regolith processing for swarm materials
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "2109.02201"
+    title: "Lunar Regolith Processing for In-Situ Resource Utilization"
+    authors: ["Matthew Shaw", "Various"]
+    relevance: critical
+    summary: "Evaluates lunar regolith processing routes including molten regolith electrolysis (MRE), carbothermal reduction, and hydrogen reduction. MRE emerges as the most promising for whole-regolith processing, extracting metals and oxygen without requiring mineral separation or beneficiation."
+
+  - arxiv_id: "2601.14719"
+    title: "Oxygen Production from Lunar Regolith Simulants"
+    authors: ["De Guzman", "Various"]
+    relevance: critical
+    summary: "Demonstrates oxygen extraction from lunar regolith simulants using electrolytic methods. Quantifies extraction efficiency, energy requirements, and product purity. Oxygen is both a propellant and a co-product of metal extraction, critical for the economic case of lunar ISRU."
+
+  - arxiv_id: "2308.14331"
+    title: "Sintered Bricks from Lunar Regolith Simulant"
+    authors: ["Gupta", "Various"]
+    relevance: high
+    summary: "Demonstrates that lunar regolith can be sintered into structural bricks without binders at temperatures achievable with solar concentrators. Enables construction of surface infrastructure (processing plants, launch pads, habitats) from raw local material."
+
+  - arxiv_id: "2506.06392"
+    title: "Additive Manufacturing of Structural Blocks from Lunar Regolith Simulant"
+    authors: ["McCallum", "Various"]
+    relevance: high
+    summary: "Advances in-situ construction by demonstrating additive manufacturing (3D printing) of structural blocks from lunar regolith simulant. Complements sintering approaches with more complex geometries and potential for building integrated structures."
+
+key_findings:
+  - "Molten regolith electrolysis (MRE) is the most promising whole-regolith processing route, avoiding mineral separation"
+  - "MRE produces metallic alloy (Fe-Si-Ti-Al) and oxygen simultaneously from undifferentiated regolith"
+  - "Lunar regolith contains all major elements for solar collector manufacturing: Si (20%), Al (10-18%), Fe (5-15%), Ti (1-8%), O₂ (43-45%)"
+  - "Sintering and additive manufacturing enable construction of surface infrastructure from raw regolith without Earth imports"
+  - "Oxygen co-production (0.5-1.5 tonnes per tonne of metal) provides propellant for orbital transfer operations"
+  - "Highland regolith is aluminum-rich (anorthosite), mare regolith is iron/titanium-rich—site selection determines element mix"
+
+gaps_identified:
+  - "MRE output purity for solar-grade silicon not characterized—likely 2N-3N, insufficient for even UMG-Si (4N) without further refining"
+  - "Energy requirements for full processing chain (excavation → electrolysis → refining → manufacturing) not integrated"
+  - "Long-duration operation of MRE cells in lunar conditions (dust, vacuum, thermal cycling) not demonstrated"
+  - "Lunar mass driver export cost models are conceptual, not engineering-validated"
+  - "No direct comparison of lunar ISRU $/kg against asteroid ISRU $/kg under consistent assumptions"

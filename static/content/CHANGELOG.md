@@ -6,6 +6,18 @@ All notable changes to Project Dyson are documented here.
 
 ### Added
 
+#### Alternative Material Sources Literature Review (15 papers, 5 new questions)
+- Add rq-1-49: Mercury self-replicating factory pathway (medium priority, 3 papers archived)
+- Add rq-1-50: Lunar regolith processing for swarm materials (high priority, 4 papers archived)
+- Add rq-1-51: Lunar electromagnetic launch for material export (medium priority, 2 papers)
+- Add rq-2-32: Comparative feedstock economics across sources (high priority, 5 papers archived)
+- Add rq-3a-5: Gas giant atmospheric mining feasibility (low priority, gap identification)
+- Add arxiv research folders for rq-1-49, rq-1-50, rq-2-32 (arxiv-papers.yaml + analysis.md each)
+- Add Shubov (2110.15198), Calla (1808.05099), Hein (1810.03836) references to rq-1-21
+- Add Shubov (2110.15198) reference to rq-3a-2
+- Add Zhang (2208.12617), Leitgab (1311.4239) references to rq-2-20
+- Add blog article: "Beyond Asteroid ISRU: Alternative Material Sources for the Dyson Swarm"
+
 #### Three-Paper Assessment (Wright thermodynamics, Smith swarm viability, Jiang civilization trajectory)
 - Assess arxiv:2309.06564 (Wright): Landsberg efficiency limits confirm rq-3a-1 finding that nested Matrioshka shells hit diminishing returns fast
 - Assess arxiv:2109.11443 (Smith): Mars-based Dyson swarm validates swarm architecture, 50-year power timeline

@@ -14,11 +14,20 @@ relatedBOMItems:
   - "bom-0-2"
   - "bom-0-3"
   - "bom-2-3"
+relatedResearchQuestions:
+  - "rq-1-49"
+  - "rq-1-50"
+  - "rq-1-51"
+  - "rq-2-32"
 tags:
   - "ISRU"
   - "feedstock"
   - "supply-chain"
   - "timeline"
+arxivReferences:
+  - "2110.15198"
+  - "1808.05099"
+  - "1810.03836"
 createdDate: "2026-02-01"
 ---
 

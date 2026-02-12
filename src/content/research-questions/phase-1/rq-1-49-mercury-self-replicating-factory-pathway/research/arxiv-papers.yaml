@@ -1,0 +1,36 @@
+# Arxiv papers relevant to rq-1-49: Mercury as a self-replicating factory pathway
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "2110.15198"
+    title: "Grey Solar Factory Replicators on Mercury"
+    authors: ["Alex Shubov"]
+    relevance: critical
+    summary: "Proposes self-replicating factories on Mercury's surface that undergo ~50 doublings to convert planetary mass into Dyson swarm components. Analyzes exponential growth dynamics, material throughput, and the fundamental feasibility of using Mercury as the primary material source for megastructure construction."
+
+  - arxiv_id: "1712.02187"
+    title: "The Chemical Composition of Mercury"
+    authors: ["Larry R. Nittler", "Shoshana Z. Weider"]
+    relevance: critical
+    summary: "Comprehensive review of MESSENGER mission results on Mercury's surface and bulk composition. Reveals unexpectedly high sulfur content (1-4 wt%), high Mg/Si ratio, and volatile depletion. Essential for determining what materials are actually extractable from Mercury regolith and constraining processing assumptions."
+
+  - arxiv_id: "1806.02024"
+    title: "Mercury's Internal Structure"
+    authors: ["Jean-Luc Margot", "Steven A. Hauck II", "Erwan Mazarico"]
+    relevance: high
+    summary: "Constrains Mercury's interior structure using MESSENGER gravity, topography, and spin data. Confirms a large iron core (~85% of planetary radius) representing an enormous reservoir of structural metals for space manufacturing if deep extraction becomes feasible."
+
+key_findings:
+  - "Mercury's mass (3.3×10²³ kg) exceeds the entire asteroid belt by ~100×, making it the largest accessible material reservoir in the inner solar system"
+  - "Surface composition is silicon-rich but with unexpected sulfur enrichment and volatile depletion per MESSENGER data"
+  - "Self-replicating factory concept requires ~50 doublings for full planetary conversion; each doubling must maintain closure ratio >95%"
+  - "Solar flux at Mercury (6.7× Earth) provides abundant energy for processing but creates extreme thermal management challenges"
+  - "Large iron core confirms availability of structural metals, but extraction from depth requires advanced mining technology"
+  - "Surface gravity (0.38g) is low enough for electromagnetic launch but high enough to complicate self-replicating robot mobility"
+
+gaps_identified:
+  - "No experimental validation of self-replicating factory concepts at any scale"
+  - "MESSENGER composition data is surface-only; subsurface composition for deep mining is modeled, not measured"
+  - "Thermal cycling effects on surface manufacturing equipment during 176-day solar day not characterized"
+  - "Delta-v cost (~9 km/s) from Mercury to 1 AU construction zone not addressed in economic models"
+  - "Interaction between sulfur-rich composition and metal extraction processing routes not studied"
