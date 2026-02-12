@@ -19,6 +19,9 @@ tags:
   - "power-delivery"
   - "roi-analysis"
   - "civilization-scale"
+arxivReferences:
+  - "2109.11443"
+  - "2510.03249"
 createdDate: "2026-02-07"
 ---
 

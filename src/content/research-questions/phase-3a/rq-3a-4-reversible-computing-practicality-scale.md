@@ -19,6 +19,8 @@ tags:
   - "landauer-limit"
   - "thermodynamics"
   - "energy-efficiency"
+arxivReferences:
+  - "2309.06564"
 createdDate: "2026-02-08"
 ---
 

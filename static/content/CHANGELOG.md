@@ -6,6 +6,14 @@ All notable changes to Project Dyson are documented here.
 
 ### Added
 
+#### Three-Paper Assessment (Wright thermodynamics, Smith swarm viability, Jiang civilization trajectory)
+- Assess arxiv:2309.06564 (Wright): Landsberg efficiency limits confirm rq-3a-1 finding that nested Matrioshka shells hit diminishing returns fast
+- Assess arxiv:2109.11443 (Smith): Mars-based Dyson swarm validates swarm architecture, 50-year power timeline
+- Assess arxiv:2510.03249 (Jiang & Das): Type II civilization by 3200-3500 CE baseline, CDI metric
+- Add Wright (2309.06564) reference to rq-3a-1 and rq-3a-4 (thermodynamic cascade, reversible computing)
+- Add Smith (2109.11443) and Jiang (2510.03249) references to rq-2-20 (swarm ROI threshold)
+- Add blog article: "Three Papers, Three Scales: From Swarm Feasibility to Civilization Trajectories"
+
 #### Lacki Megaswarm Lifetime Analysis (2 new questions from arxiv:2504.21151)
 - Add rq-2-30: Megaswarm collisional cascade timescales and long-term survivability (high priority)
 - Add rq-2-31: Planetary gravitational perturbations on century-scale swarm stability (high priority)
