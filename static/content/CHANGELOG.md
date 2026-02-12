@@ -6,6 +6,13 @@ All notable changes to Project Dyson are documented here.
 
 ### Added
 
+#### Lacki Megaswarm Lifetime Analysis (2 new questions from arxiv:2504.21151)
+- Add rq-2-30: Megaswarm collisional cascade timescales and long-term survivability (high priority)
+- Add rq-2-31: Planetary gravitational perturbations on century-scale swarm stability (high priority)
+- Add Lacki (2504.21151) reference to rq-1-6 and rq-2-3 (existing collision avoidance questions)
+- Gap analysis: Kessler cascade, station-keeping, radiation pressure, collision avoidance already covered; long-term cascade timescales and planetary perturbation drift were gaps
+- Add blog article: "How Long Does a Dyson Swarm Last? A New Paper Says Not as Long as You'd Think"
+
 #### Arxiv Literature Reviews (4 critical Phase 0 research questions)
 - Add arxiv research for rq-0-6: Regolith excavation in microgravity (10 papers, Bennu sample data grounds analysis)
 - Add arxiv research for rq-0-7: Anchoring technology reliability (9 papers, Philae failure case study)

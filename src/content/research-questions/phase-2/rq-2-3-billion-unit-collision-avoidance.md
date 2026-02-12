@@ -17,6 +17,8 @@ tags:
   - "certification"
   - "governance"
   - "swarm"
+arxivReferences:
+  - "2504.21151"
 createdDate: "2026-02-01"
 ---
 

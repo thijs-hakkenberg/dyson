@@ -17,6 +17,8 @@ tags:
   - "collision-avoidance"
   - "swarm-coordination"
   - "formation"
+arxivReferences:
+  - "2504.21151"
 createdDate: "2026-02-01"
 answeredDate: "2026-02-03"
 ---
