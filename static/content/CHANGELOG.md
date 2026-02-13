@@ -6,6 +6,49 @@ All notable changes to Project Dyson are documented here.
 
 ### Added
 
+#### Phase 0 Feasibility Analysis Framework (Strategic Pivot)
+- **Strategic pivot from breadth-first to depth-first** — focusing on technical rigor for the critical unknowns that would make or break Phase 0
+- Add critical path data service (`src/lib/services/critical-path.ts`): maps all 49 Phase 0 research questions into 7 technology threads with dependency graph, criticality ratings, and thread statistics
+- Add TRL assessment data service (`src/lib/services/trl-assessment.ts`): rates 10 key technologies on NASA TRL 1-9 scale with gap analysis, experiments needed, risk levels, and fallback approaches
+- Add decision gates data service (`src/lib/services/decision-gates.ts`): defines 5 measurable go/no-go criteria for Phase 0 → Phase 1 transition at months 24, 30, 36, 48, and 60
+- Add Phase 0 Technical Feasibility Report page (`/analysis/feasibility`): standalone 8-section engineering document with executive summary, per-thread technology assessment, TRL summary, risk register, experimental validation roadmap, and conclusions
+- Add Critical Path Analysis page (`/analysis/critical-path`): interactive dependency graph visualization with thread cards, topological sorting, critical path view, ready/blocked question views
+- Add Technology Readiness Dashboard (`/analysis/technology-readiness`): TRL gap visualization bars, risk matrix, experiment lists, fallback approaches, cross-links to research questions
+- Add Decision Gates page (`/analysis/decision-gates`): timeline visualization, criteria checklists with pass/fail outcomes, readiness progress bars, gated architectural decisions
+- Add analysis sub-navigation bar across all 5 analysis pages (feasibility, critical-path, TRL, decision-gates, cost-reconciliation)
+- Add "Analysis" link to main site navigation header
+
+**Key findings from TRL assessment:**
+- 2 project-ending risks identified: microgravity metallurgy (TRL 2-3) and ISRU water extraction (TRL 3-4)
+- 4 architecture-change risks: cryocooler scaling, asteroid mining, silicon purification, microgravity electrolysis
+- Average TRL gap: 3.0 levels; estimated 7.5 years average to reach targets
+
+#### Literature Reviews for 3 Critical Questions (32 papers + 16 external refs)
+- Add arxiv research for rq-0-1: Spectrometer resolution tradeoff (14 papers, 4 external refs — recommends 20nm resolution for 90% mineral classification confidence)
+- Add arxiv research for rq-0-39: Subsurface mechanical characterization (12 papers, 3 external refs — van der Waals cohesion 25-80 Pa, OSIRIS-REx surface 0.2-20 Pa)
+- Add arxiv research for rq-0-49: Cryocooler scaling for space ZBO (6 papers, 9 external refs — 2-3 order of magnitude gap, reverse turbo-Brayton leading pathway)
+- Create `research/arxiv-papers.yaml` and `research/analysis.md` for each question
+- Update all 3 questions: status open → investigating
+
+#### New Organizations and Outreach Questions
+- Add 3 new organizations: Creare LLC (cryocooler development), JAXA (Hayabusa2 asteroid samples), Northrop Grumman (JWST sunshield heritage)
+- Add 7 new outreach questions linking organizations to Phase 0 critical research:
+  - NASA: GODU-LH2 ZBO data (rq-0-30, rq-0-49), ISS microgravity metallurgy (rq-0-11, rq-0-12)
+  - JPL: OVIRS spectral classification accuracy (rq-0-1, rq-0-5)
+  - Aerojet Rocketdyne: AEPS thruster lifetime and 100+ kW scaling (rq-0-16, rq-0-19)
+  - Creare: Turbo-Brayton cryocooler development timeline (rq-0-49, rq-0-30)
+  - JAXA: Ryugu returned sample mechanical properties (rq-0-39, rq-0-6, rq-0-7)
+  - Northrop Grumman: JWST sunshield lessons for depot-scale thermal protection (rq-0-47, rq-0-30)
+
+#### Ontology Updates
+- Add legacy tags for cryogenic topics: `cryocooler`, `zero-boiloff`, `sunshield`, `mli` → thermal-management
+- Add `deployable-structures` → deployment topic
+- Add `power-systems` → power systems topic
+- Add `anchoring`, `magnetic-separation`, `propellant-production` → ISRU topic
+
+#### Blog
+- Add blog article: "Strategic Pivot: From Breadth to Depth on Phase 0 Feasibility"
+
 #### Open Question Research Update (7 questions, ~30 external sources, 4 status changes)
 - Review external literature (Nature Chemistry, MDPI, NASA, ScienceDirect, industry data) across 7 research questions
 - Add research/analysis.md and research/arxiv-papers.yaml for all 7 questions

@@ -161,6 +161,64 @@ organizations:
     lastContact: null
     notes: "Essential for swarm communication frequency allocation"
 
+  - id: "org-009"
+    slug: "creare"
+    name: "Creare LLC"
+    shortName: "Creare"
+    category: "manufacturing"
+    website: "https://www.creare.com"
+    description: "Engineering R&D firm developing reverse turbo-Brayton cryocoolers for NASA. Leading candidate technology for scaling space cryocoolers from milliwatt to hundred-watt class at 20K."
+    relevantDomains:
+      - "cryocooler"
+      - "turbo-brayton"
+      - "zero-boiloff"
+      - "thermal-management"
+    contacts:
+      - name: "Cryogenics Division"
+        role: "Turbo-Brayton Development"
+        notes: "Zagarola et al. demonstrated 20W at 20K ground unit"
+    lastContact: null
+    notes: "Key technology provider for ZBO cryogenic propellant storage scaling pathway"
+
+  - id: "org-010"
+    slug: "jaxa"
+    name: "Japan Aerospace Exploration Agency"
+    shortName: "JAXA"
+    category: "space-agency"
+    website: "https://www.jaxa.jp/en/"
+    description: "Japanese space agency operating Hayabusa2 asteroid sample return mission. Returned samples from C-type asteroid Ryugu provide ground truth for subsurface mechanical properties and composition."
+    relevantDomains:
+      - "asteroid-mining"
+      - "sample-return"
+      - "asteroid-characterization"
+      - "deep-space-operations"
+    contacts:
+      - name: "Hayabusa2 Project Team"
+        role: "Asteroid Sample Analysis"
+        department: "Institute of Space and Astronautical Science"
+        notes: "Returned 5.4g of Ryugu surface material in 2020"
+    lastContact: null
+    notes: "Ryugu samples provide critical ground truth for asteroid regolith mechanical properties"
+
+  - id: "org-011"
+    slug: "northrop-grumman"
+    name: "Northrop Grumman Space Systems"
+    shortName: "Northrop Grumman"
+    category: "manufacturing"
+    website: "https://www.northropgrumman.com/space"
+    description: "Aerospace contractor that built the JWST sunshield — the largest deployable membrane structure in space. Heritage directly applicable to cryogenic depot sunshield architecture."
+    relevantDomains:
+      - "deployable-structures"
+      - "sunshield"
+      - "cryogenics"
+      - "thermal-management"
+    contacts:
+      - name: "James Webb Space Telescope Team"
+        role: "Sunshield Engineering"
+        notes: "Designed and built 21m x 14m 5-layer deployable sunshield"
+    lastContact: null
+    notes: "JWST sunshield deployment heritage is directly applicable to depot-scale thermal protection"
+
 questions:
   # NASA Questions
   - id: "oq-1-1"
@@ -288,6 +346,140 @@ questions:
       - "perovskite"
       - "radiation"
       - "solar-cells"
+
+  # NASA - New Phase 0 Feasibility Questions
+  - id: "oq-1-3"
+    organizationId: "org-001"
+    question: "What were the key results and lessons learned from the GODU-LH2 zero-boiloff ground demonstration at Kennedy Space Center?"
+    context: "GODU-LH2 demonstrated 390W of cooling at 20K using a Linde LR1620 industrial refrigerator, proving ZBO physics at the scale Project Dyson requires. Data on system efficiency, thermal cycling, and long-duration performance is critical for our cryogenic propellant architecture decision gate."
+    relatedRQs:
+      - "rq-0-30"
+      - "rq-0-49"
+    priority: "critical"
+    status: "draft"
+    dateCreated: "2026-02-13"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "cryogenics"
+      - "zero-boiloff"
+      - "godu-lh2"
+
+  - id: "oq-1-4"
+    organizationId: "org-001"
+    question: "What ISS microgravity metallurgy experiments have been conducted, and what sample quality and scale has been achieved?"
+    context: "Microgravity metallurgy at industrial scale is rated TRL 2-3 and carries project-ending risk for Project Dyson. Any ISS metal melting, solidification, or containerless processing data is critical for our materials processing viability decision gate."
+    relatedRQs:
+      - "rq-0-11"
+      - "rq-0-12"
+    priority: "critical"
+    status: "draft"
+    dateCreated: "2026-02-13"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "metallurgy"
+      - "microgravity"
+      - "isru"
+
+  # JPL - New Questions
+  - id: "oq-2-2"
+    organizationId: "org-002"
+    question: "What spectral classification accuracy was achieved by OSIRIS-REx OVIRS, and what minimum spectral resolution would JPL recommend for a multi-target asteroid survey mission?"
+    context: "Project Dyson plans a 50-satellite prospecting constellation requiring miniaturized spectrometers. Our literature review suggests 20nm resolution is optimal, but OVIRS operational data would validate this. The spectrometer resolution tradeoff is on the critical path."
+    relatedRQs:
+      - "rq-0-1"
+      - "rq-0-5"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-02-13"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "spectrometry"
+      - "asteroid-survey"
+      - "ovirs"
+
+  # Aerojet Rocketdyne - New Question
+  - id: "oq-5-1"
+    organizationId: "org-005"
+    question: "What is the current AEPS thruster lifetime test status, and what performance data exists for 100+ kW class Hall thruster arrays?"
+    context: "Project Dyson transport vehicles require 100+ kW solar electric propulsion. AEPS at 12.5 kW is the nearest flight-qualified system. Understanding the scaling pathway from 12.5 kW to 100+ kW is critical for fleet sizing and mission profile planning."
+    relatedRQs:
+      - "rq-0-16"
+      - "rq-0-19"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-02-13"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "hall-thrusters"
+      - "high-power-ep"
+      - "thruster-lifetime"
+
+  # Creare - Cryocooler Questions
+  - id: "oq-9-1"
+    organizationId: "org-009"
+    question: "What is the current state of reverse turbo-Brayton cryocooler development, and what is the realistic timeline to a 50-100W flight-qualified unit at 20K?"
+    context: "The turbo-Brayton cycle is the leading candidate for scaling space cryocoolers from milliwatt to hundred-watt class. Zagarola (2006) demonstrated 20W at 20K on the ground. Understanding the path to 100W+ flight units is critical for our cryogenic architecture decision gate at month 30."
+    relatedRQs:
+      - "rq-0-49"
+      - "rq-0-30"
+    priority: "critical"
+    status: "draft"
+    dateCreated: "2026-02-13"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "cryocooler"
+      - "turbo-brayton"
+      - "zero-boiloff"
+
+  # JAXA - Asteroid Sample Questions
+  - id: "oq-10-1"
+    organizationId: "org-010"
+    question: "What mechanical properties (shear strength, cohesion, compressive strength) have been measured from Ryugu returned samples, and how do they compare to pre-encounter predictions?"
+    context: "OSIRIS-REx TAG at Bennu revealed unexpectedly weak surface material (0.2-20 Pa bearing capacity). Ryugu sample mechanical testing provides the second ground-truth data point for asteroid subsurface characterization, which drives our bucket-wheel excavation design parameters."
+    relatedRQs:
+      - "rq-0-39"
+      - "rq-0-6"
+      - "rq-0-7"
+    priority: "critical"
+    status: "draft"
+    dateCreated: "2026-02-13"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "asteroid"
+      - "mechanical-properties"
+      - "regolith"
+      - "sample-return"
+
+  # Northrop Grumman - Sunshield Questions
+  - id: "oq-11-1"
+    organizationId: "org-011"
+    question: "What deployment reliability data and lessons learned are available from JWST sunshield, and what design simplifications would be possible for a depot-scale thermal shield without JWST's optical requirements?"
+    context: "JWST's 5-layer sunshield is the closest heritage to what Project Dyson needs for cryogenic depot thermal protection. A simpler depot sunshield (no optical surface requirements) could potentially reduce deployment risk while maintaining thermal performance."
+    relatedRQs:
+      - "rq-0-47"
+      - "rq-0-30"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-02-13"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "sunshield"
+      - "deployable-structures"
+      - "cryogenics"
 
   # MIT SSL Questions
   - id: "oq-7-1"
