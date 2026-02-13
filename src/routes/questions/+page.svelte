@@ -4,17 +4,20 @@
 	import { filterByResolutionStatus } from '$lib/services/resolution';
 	import { QuestionCard, QuestionFilters, QuestionStats } from '$lib/components/questions';
 	import type { SortOption } from '$lib/components/questions/QuestionFilters.svelte';
+	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 
 	let { data } = $props();
 
-	// Filter state
-	let selectedPhase = $state<PhaseId | ''>('');
-	let selectedType = $state<QuestionType | ''>('');
-	let selectedStatus = $state<ResearchQuestionStatus | ''>('');
-	let selectedPriority = $state<Priority | ''>('');
-	let selectedResolution = $state<ResolutionStatus | ''>('');
-	let selectedSort = $state<SortOption>('newest');
-	let searchQuery = $state('');
+	// Initialize filter state from URL params
+	const params = $page.url.searchParams;
+	let selectedPhase = $state<PhaseId | ''>(params.get('phase') as PhaseId || '');
+	let selectedType = $state<QuestionType | ''>(params.get('type') as QuestionType || '');
+	let selectedStatus = $state<ResearchQuestionStatus | ''>(params.get('status') as ResearchQuestionStatus || '');
+	let selectedPriority = $state<Priority | ''>(params.get('priority') as Priority || '');
+	let selectedResolution = $state<ResolutionStatus | ''>(params.get('resolution') as ResolutionStatus || '');
+	let selectedSort = $state<SortOption>((params.get('sort') as SortOption) || 'newest');
+	let searchQuery = $state(params.get('q') || '');
 
 	// Priority order for sorting
 	const priorityOrder: Record<Priority, number> = {
@@ -69,7 +72,17 @@
 	});
 
 	function applyFilters() {
-		// Filters are applied reactively via $derived, this is just for UI callback
+		const p = new URLSearchParams();
+		if (selectedPhase) p.set('phase', selectedPhase);
+		if (selectedType) p.set('type', selectedType);
+		if (selectedStatus) p.set('status', selectedStatus);
+		if (selectedPriority) p.set('priority', selectedPriority);
+		if (selectedResolution) p.set('resolution', selectedResolution);
+		if (selectedSort && selectedSort !== 'newest') p.set('sort', selectedSort);
+		if (searchQuery) p.set('q', searchQuery);
+
+		const qs = p.toString();
+		goto(`/questions${qs ? '?' + qs : ''}`, { replaceState: true, keepFocus: true, noScroll: true });
 	}
 </script>
 
