@@ -7,6 +7,7 @@
 		{ label: 'Home', href: '/' },
 		{ label: 'About', href: '/about' },
 		{ label: 'Plan', href: '/plan' },
+		{ label: 'Analysis', href: '/analysis/feasibility' },
 		{ label: 'Research', href: '/research' },
 		{ label: 'Questions', href: '/questions' },
 		{ label: 'Topics', href: '/topics' },

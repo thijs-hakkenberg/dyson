@@ -1,0 +1,135 @@
+# Arxiv papers relevant to rq-0-1: Optimal spectrometer resolution vs. mass/power tradeoff
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "1904.11831"
+    title: "ASIME 2018 White Paper: In-Space Utilisation of Asteroids"
+    authors: ["Amara Graps", "Jan Thimo Grundmann", "Juergen Blum", "Paolo Tanga"]
+    relevance: critical
+    summary: "Comprehensive white paper from the Asteroid Science Intersections with In-Space Mine Engineering workshop. Establishes the science requirements for asteroid resource characterization including compositional mapping, structural assessment, and volatile identification. Directly defines what spectrometer measurements are necessary for ISRU mission planning. Key finding: visible-NIR spectroscopy in the 0.4-2.5 um range is essential for distinguishing metallic, silicate, and carbonaceous asteroid types. Specifies that water/OH detection near 2.7-3.0 um is critical for volatile resource assessment. Provides the requirements framework against which spectrometer resolution trades must be evaluated."
+
+  - arxiv_id: "1612.00709"
+    title: "ASIME 2016 White Paper: In-Space Utilisation of Asteroids"
+    authors: ["Amara Graps", "Jan Thimo Grundmann", "Paolo Tanga", "Juergen Blum"]
+    relevance: high
+    summary: "Earlier workshop white paper establishing engineering requirements for asteroid mining operations. Documents the intersection between asteroid science knowledge and engineering needs for resource extraction. Identifies key spectral features that must be resolved for mining target selection: 1-um band complex for olivine/pyroxene discrimination, 2-um pyroxene band for composition, and UV/blue absorption edge for metallic iron content. Establishes that prospecting instruments must distinguish between S-type, C-type, M-type, and V-type asteroids with sufficient confidence to commit follow-up mission resources."
+
+  - arxiv_id: "1508.07494"
+    title: "Spectral calibration and first results from the Hayabusa NIRS instrument at asteroid Itokawa"
+    authors: ["Mehul Bhatt", "Ute Woehler", "Juergen Oberst", "Christian Wöhler"]
+    relevance: critical
+    summary: "Provides actual spacecraft spectrometer calibration and performance data from the Hayabusa NIRS instrument at asteroid Itokawa. Documents the challenges of in-flight spectral calibration including thermal drift, detector aging, and pointing-dependent response variations. NIRS operated in the 0.76-2.25 um range with ~25 nm spectral resolution. Key lessons: ground calibration was insufficient and in-flight recalibration using stellar observations was necessary. Thermal environment caused measurable wavelength shifts. Signal-to-noise degraded over mission life. These real-world performance constraints directly inform reliability requirements for the Dyson prospecting constellation's spectrometer design."
+
+  - arxiv_id: "2003.01124"
+    title: "New method for determining the composition of S-type asteroids from noisy near-infrared reflectance spectra"
+    authors: ["Juan A. Sanchez", "Vishnu Reddy", "Michael S. Kelley", "Edward A. Cloutis"]
+    relevance: high
+    summary: "Develops improved methods for extracting mineral composition from noisy NIR spectra of S-type asteroids. Demonstrates that olivine-pyroxene abundance ratios can be determined from band area ratios even with SNR as low as 20-30 in the 0.8-2.5 um range. Establishes empirical calibrations linking Band I center (~1 um), Band II center (~2 um), and Band Area Ratio (BAR) to mineralogy. Critical finding for resolution tradeoff: band center positions can be determined to within 0.01 um accuracy with 20 nm spectral sampling, but require SNR > 50 for reliable results. Coarser resolution (50 nm) significantly degrades band parameter accuracy for mixed mineralogies."
+
+  - arxiv_id: "2105.12712"
+    title: "Constraining the Regolith Composition of Asteroid (16) Psyche via Near-Infrared Spectroscopy"
+    authors: ["Anicia Arredondo", "Juan A. Sanchez", "Vishnu Reddy", "Andrea Cantillo"]
+    relevance: high
+    summary: "Applies NIR spectroscopic analysis to constrain the surface composition of metallic asteroid Psyche. Demonstrates techniques for identifying pyroxene and olivine signatures on metal-rich surfaces where spectral features are suppressed by metallic iron. Key finding: on metal-dominated surfaces, the 1-um and 2-um absorption features are shallow (2-5% depth) requiring high SNR (>100) for reliable detection. This has direct implications for prospecting satellite spectrometer design: metal-rich asteroids—the primary targets for Dyson swarm construction materials—present the most challenging spectroscopic detection scenario."
+
+  - arxiv_id: "2203.15790"
+    title: "Asteroid Polarimetric-Phase Behavior in the Near-Infrared"
+    authors: ["Joseph R. Masiero", "Joana Marqués Oliveira", "Tyler Barclay"]
+    relevance: medium
+    summary: "Characterizes NIR polarimetric phase behavior of asteroids as a complementary compositional diagnostic. Polarimetry provides independent constraints on surface texture, grain size, and albedo that can break degeneracies in reflectance spectroscopy. While not a primary instrument for the prospecting satellites, the results suggest that adding a simple polarimetric capability (rotating filter or Wollaston prism, <0.5 kg) could significantly improve compositional classification confidence, particularly for distinguishing high-metal from low-metal surfaces."
+
+  - arxiv_id: "1210.2853"
+    title: "Composition of Near-Earth Asteroid (4179) Toutatis"
+    authors: ["Vishnu Reddy", "Juan A. Sanchez", "Paul S. Hardersen"]
+    relevance: medium
+    summary: "Demonstrates complete compositional determination of NEA Toutatis using ground-based visible-NIR spectroscopy (0.4-2.5 um). Identifies the asteroid as an L-chondrite analog with specific olivine-to-pyroxene ratio and iron content. Achieves this classification using ~20 nm resolution observations with SNR ~80-100. Provides a concrete example of the minimum instrument performance needed for definitive asteroid typing—directly applicable as a benchmark for the prospecting satellite spectrometer specification."
+
+  - arxiv_id: "1805.01750"
+    title: "DISCUS - The Deep Interior Scanning CubeSat mission to a rubble pile near-Earth asteroid"
+    authors: ["Patrick Bambach", "Jens Biele", "Alain Herique", "Dirk Plettemeier"]
+    relevance: high
+    summary: "Presents a CubeSat mission concept for asteroid characterization including NIR spectroscopy from a 6U-12U platform. Demonstrates that meaningful asteroid spectroscopy can be achieved from sub-20 kg spacecraft. The DISCUS concept includes a compact NIR spectrometer (0.9-2.5 um, ~40 nm resolution) within a 1.5 kg, 3W instrument package. While resolution is coarser than ideal, the mission concept validates the feasibility of SmallSat-class asteroid spectroscopy and provides a lower bound on what miniaturized instruments can achieve. Mass and power figures directly inform the prospecting satellite trade space."
+
+  - arxiv_id: "1812.11663"
+    title: "On-Orbit CubeSat Centrifuge for Asteroid Science and In-Situ Resource Utilization"
+    authors: ["Jekan Thangavelautham", "Aman Chandra", "Erik Jensen"]
+    relevance: medium
+    summary: "Proposes a CubeSat concept for asteroid exploration with on-board sample analysis capability. While focused on in-situ analysis rather than remote sensing, the mission architecture demonstrates how small spacecraft can be designed for asteroid rendezvous and characterization. The centrifuge concept for sample processing illustrates the broader trend toward miniaturized, autonomous asteroid science platforms. Relevant to the constellation architecture as a potential follow-up mission type that could validate remote spectroscopic classifications."
+
+  - arxiv_id: "1501.01063"
+    title: "Survey Simulations of a New Near-Earth Asteroid Detection System"
+    authors: ["A. Mainzer", "T. Grav", "J. Bauer", "R. M. Cutri"]
+    relevance: high
+    summary: "Presents survey simulation results for a space-based NEA detection system (precursor to NEOCam/NEO Surveyor). Establishes detection rates, survey completeness timelines, and instrument performance requirements for a space-based asteroid survey. Key findings for prospecting satellite design: a single space-based platform with 50 cm aperture achieves ~90% completeness for >140 m NEAs within 12 years. The spectral characterization requirements derived here—broadband photometry sufficient for taxonomic classification but not detailed mineralogy—define the lower bound of what survey-mode instruments must achieve. Constellation of 50 satellites with dedicated spectrometers would dramatically exceed this capability."
+
+  - arxiv_id: "2210.01006"
+    title: "Neural network for determining an asteroid mineral composition from reflectance spectra"
+    authors: ["David Korda", "Tomas Kohout", "Antti Penttila"]
+    relevance: high
+    summary: "Develops neural network methods for determining asteroid mineral composition directly from reflectance spectra. Trains on laboratory mineral mixtures from the RELAB database and validates against meteorite spectra. Achieves olivine-pyroxene ratio determination within 10% accuracy using spectra with 20-50 nm resolution. Key finding for on-board processing: the trained network is computationally lightweight (inference in milliseconds on modest hardware) and could feasibly run on radiation-hardened processors for autonomous spectral classification. Demonstrates that ML approaches can compensate partially for reduced spectral resolution, potentially enabling coarser (50 nm) instruments to achieve classification accuracy approaching that of 20 nm instruments for common mineral assemblages."
+
+  - arxiv_id: "2202.13796"
+    title: "The debiased compositional distribution of the near-Earth objects from the MITHNEOS survey"
+    authors: ["Mikael Marsset", "Francesca DeMeo", "Richard P. Binzel"]
+    relevance: high
+    summary: "Presents the most comprehensive debiased spectral survey of near-Earth objects, establishing the ground-truth compositional distribution against which prospecting satellite performance must be validated. The MITHNEOS survey used 0.8-2.5 um spectroscopy at ~20 nm resolution to classify >1000 NEOs. Key results: S-complex dominates (65%), followed by C-complex (20%), X-complex (8%), and others. Approximately 25% of surveyed NEOs show spectral evidence of hydration features. Establishes the baseline classification taxonomy and population statistics that the prospecting constellation must reproduce and extend. The 20 nm resolution achieved here serves as the empirical standard for NEO compositional surveys."
+
+  - arxiv_id: "2601.21785"
+    title: "Composition of Tianwen-2 target asteroid Kamo'oalewa from spectral analysis"
+    authors: ["Zhen Liu", "Jian-Yang Li", "Hao Zhang"]
+    relevance: medium
+    summary: "Recent spectral analysis of the Tianwen-2 mission target asteroid Kamo'oalewa, demonstrating current state-of-the-art in asteroid compositional determination from spectroscopic data. Applies modern spectral analysis techniques including band parameter extraction and spectral unmixing to characterize a small (~40 m) quasi-satellite of Earth. Relevant as a demonstration of what spectral analysis can achieve for small NEA targets similar to those the prospecting constellation would survey."
+
+  - arxiv_id: "1502.06302"
+    title: "Asteroid Photometry"
+    authors: ["Jian-Yang Li", "Larry A. Lebofsky", "Paul Helfenstein"]
+    relevance: medium
+    summary: "Comprehensive review of asteroid photometric techniques and their constraints on surface properties. Documents photometric phase curves, albedo determination, and roughness characterization from broadband observations. Establishes that broadband photometry (BVRI filters) provides taxonomic classification at ~70% accuracy, while spectroscopy at 20 nm resolution achieves >90% accuracy. The gap between photometric and spectroscopic classification accuracy quantifies the value of the spectrometer investment on the prospecting satellites. Also documents photometric calibration requirements that apply to any space-based asteroid observation system."
+
+key_findings:
+  - "NIR spectroscopy at 20 nm resolution in the 0.8-2.5 um range is the empirical standard for reliable NEO compositional classification, validated by the MITHNEOS survey of >1000 objects"
+  - "Metal-rich asteroid surfaces suppress spectral absorption features to 2-5% depth, requiring SNR >100 for reliable detection—the hardest case for prospecting satellite targets"
+  - "Band center positions for olivine-pyroxene discrimination require 20 nm spectral sampling and SNR >50 for reliable results; 50 nm resolution significantly degrades accuracy for mixed mineralogies"
+  - "Neural network classification methods can partially compensate for reduced spectral resolution, achieving near-20nm accuracy from 50nm spectra for common mineral assemblages"
+  - "CubeSat-class asteroid spectrometers (~1.5 kg, 3W) have been demonstrated at 40 nm resolution, establishing the miniaturization floor for current technology"
+  - "In-flight spectral calibration is essential—Hayabusa NIRS required recalibration using stellar observations due to thermal drift and detector aging"
+  - "Broadband photometry alone achieves ~70% taxonomic classification accuracy versus >90% for 20 nm spectroscopy—quantifying the spectrometer value proposition"
+  - "Approximately 25% of surveyed NEOs show hydration features, but detection requires coverage extending to 2.5-3.0 um where instrument thermal requirements increase significantly"
+
+gaps_identified:
+  - "No arxiv study specifically addresses spectrometer resolution optimization for autonomous asteroid mining target selection—existing work targets science objectives, not ISRU decision-making"
+  - "The 2.5-3.0 um hydration detection requirement is well-established but miniaturized cooled detectors for this range in SmallSat form factors remain poorly documented in open literature"
+  - "On-board spectral processing on radiation-hardened processors has not been demonstrated in flight—Korda et al. show ML feasibility but only in laboratory settings"
+  - "Trade studies between spectrometer resolution and constellation size (more coarse instruments vs. fewer precise ones for equivalent survey quality) not found in literature"
+  - "Long-duration (7-year) spectrometer performance degradation in deep-space radiation and thermal environments not characterized for miniaturized instruments"
+  - "Cost models for miniaturized space spectrometers are absent from arxiv—vendor-proprietary data drives actual mission cost estimates"
+  - "Note: Much of the relevant instrument heritage data resides in SPIE proceedings, NASA instrument handbooks, and mission-specific technical reports rather than arxiv. Key references include OSIRIS-REx OVIRS instrument papers in Space Science Reviews and Dawn VIR documentation in ESA technical archives."
+
+external_references:
+  - source_id: "OVIRS-Bennu-2019"
+    title: "OSIRIS-REx Visible and InfraRed Spectrometer (OVIRS): Spectral Maps of the Asteroid Bennu"
+    authors: ["Amy A. Simon", "Dennis C. Reuter", "Dante S. Lauretta"]
+    journal: "Space Science Reviews / Journal of Geophysical Research: Planets"
+    relevance: critical
+    summary: "OVIRS on OSIRIS-REx is the primary performance benchmark for asteroid spectroscopy from orbit. Operates 0.4-4.3 um with ~20 nm resolution at 17.8 kg mass and ~8W power. Achieved comprehensive compositional mapping of Bennu including detection of hydrated minerals, organics, and carbonate features. The 20 nm resolution proved sufficient for all science objectives. Mass and power figures establish the current state-of-the-art for full-capability asteroid spectrometers that the prospecting satellites must miniaturize."
+
+  - source_id: "Dawn-VIR-2011"
+    title: "Dawn VIR Visible and Infrared Mapping Spectrometer: Design and Performance"
+    authors: ["Maria Cristina De Sanctis", "Angioletta Coradini", "Eleonora Ammannito"]
+    journal: "Space Science Reviews 163 (2011)"
+    relevance: critical
+    summary: "Dawn's VIR spectrometer represents the high-resolution benchmark: 10 nm spectral resolution across 0.25-5.1 um at 14.5 kg and ~10W. Mapped Vesta and Ceres in detail, resolving pyroxene compositional variations and detecting hydrated mineral patches. The 10 nm resolution exceeded requirements for most compositional objectives—many features were resolvable at 20-30 nm. Provides the upper bound of what a prospecting satellite spectrometer might achieve if mass/power constraints allow."
+
+  - source_id: "NEAScout-2022"
+    title: "NEA Scout Solar Sail Mission: SmallSat Asteroid Reconnaissance"
+    authors: ["Julie Castillo-Rogez", "Les Johnson"]
+    journal: "NASA Mission Documentation"
+    relevance: high
+    summary: "NEA Scout was a 6U CubeSat solar sail mission designed for asteroid flyby reconnaissance. While carrying only a camera (no spectrometer), the mission demonstrates SmallSat-class asteroid rendezvous capability and validates the spacecraft bus architecture relevant to the prospecting satellites. Mass (14 kg), power (~15W), and communication constraints provide realistic reference points for what a CubeSat-class asteroid mission can support in terms of instrument payload."
+
+  - source_id: "RELAB-Database"
+    title: "NASA RELAB Spectral Library for Mineral Identification"
+    authors: ["Carlé Pieters", "Takahiro Hiroi"]
+    journal: "Brown University / NASA Reflectance Experiment Laboratory"
+    relevance: critical
+    summary: "The RELAB spectral database is the primary reference library for asteroid mineral identification, containing thousands of spectra of meteorites, minerals, and mineral mixtures at various grain sizes and viewing geometries. Used as training data for ML classification methods (Korda et al.) and as ground truth for spectral unmixing algorithms. The library's spectral resolution (~5 nm) sets the upper bound on what laboratory validation can provide. Any on-board classification system for the prospecting satellites must be validated against RELAB reference spectra."

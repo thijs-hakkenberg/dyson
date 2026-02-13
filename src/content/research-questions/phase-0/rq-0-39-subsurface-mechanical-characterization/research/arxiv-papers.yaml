@@ -1,0 +1,134 @@
+# Arxiv papers relevant to rq-0-39: Target asteroid subsurface mechanical property characterization
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "1306.1622"
+    title: "The Strength of Regolith and Rubble Pile Asteroids"
+    authors: ["Paul Sanchez", "Daniel J. Scheeres"]
+    relevance: critical
+    summary: "Establishes the van der Waals cohesion model for rubble pile asteroid strength using soft-sphere discrete element method (SSDEM) simulations. Demonstrates that interparticle cohesive forces of ~25-80 Pa are sufficient to explain the spin barrier observed in small asteroids (<10 km). Shows that cohesive strength is scale-dependent: small bodies (sub-km) can sustain significantly higher spin rates than the gravitational disruption limit predicts, while large bodies behave as effectively cohesionless. Provides the foundational mechanical property model for predicting excavation resistance in rubble pile targets."
+
+  - arxiv_id: "1706.03385"
+    title: "Disaggregation of Small Cohesive Rubble Pile Asteroids due to YORP"
+    authors: ["Daniel J. Scheeres"]
+    relevance: high
+    summary: "Analyzes how YORP-induced spin-up leads to structural failure in small cohesive rubble piles. Shows that failure mode depends on cohesion magnitude: low-cohesion bodies undergo equatorial mass shedding, while higher-cohesion bodies can fracture into discrete fragments. Establishes that cohesive strength of ~25 Pa is a threshold below which rotational disruption dominates. Directly relevant to predicting how excavated material will behave when disturbed -- whether it flows granularly or breaks into cohesive chunks."
+
+  - arxiv_id: "1810.01815"
+    title: "Rubble Pile Asteroids"
+    authors: ["Kevin J. Walsh"]
+    relevance: high
+    summary: "Comprehensive review of rubble pile asteroid structure, formation, and observational evidence. Synthesizes radar, thermal, photometric, and spacecraft flyby data constraining interior structure. Documents the evidence that most asteroids larger than ~200 m are gravitational aggregates with bulk porosity of 20-60%. Discusses implications for internal strength, density distribution, and response to external forces. Provides the observational foundation for understanding the range of subsurface conditions a mining system may encounter."
+
+  - arxiv_id: "1909.11270"
+    title: "Cohesive Regolith on Fast Rotating Asteroids"
+    authors: ["Paul Sanchez", "Daniel J. Scheeres"]
+    relevance: high
+    summary: "Models regolith behavior on rapidly rotating asteroid surfaces using DEM with cohesive contacts. Shows that surface regolith can remain stable at spin rates exceeding the disruption limit when cohesive forces are present, with critical cohesion values of 25-100 Pa depending on particle size distribution. Demonstrates that surface layers behave differently from interior material due to reduced overburden pressure. Directly relevant to predicting near-surface excavation conditions where confining pressure is negligible."
+
+  - arxiv_id: "1701.07547"
+    title: "Optimized Bucket Wheel Design for Asteroid Excavation"
+    authors: ["Ravi Teja Nallapu", "Jeffrey Delaune", "Jekan Thangavelautham"]
+    relevance: critical
+    summary: "Directly addresses bucket wheel excavation system design for asteroid ISRU applications. Develops optimization framework for bucket geometry, wheel diameter, rotation speed, and penetration depth as functions of target material properties. Analyzes power consumption and throughput for regolith with cohesive strengths ranging from 0 to 1 kPa. Finds optimal wheel diameter of 0.5-1.5 m with bucket depths of 3-8 cm for typical rubble pile properties. Provides the engineering bridge between material characterization data and excavation system design parameters."
+
+  - arxiv_id: "1805.01750"
+    title: "DISCUS -- The Deep Interior Scanning CubeSat mission to a rubble pile near-Earth asteroid"
+    authors: ["Patrick Bambach", "Alain Herique", "Dirk Plettemeier", "et al."]
+    relevance: medium
+    summary: "Proposes a CubeSat mission concept using bistatic low-frequency radar to tomographically image the deep interior of a rubble pile NEA. Radar frequencies of 5-15 MHz penetrate 10-100 m into low-loss asteroid material. Would provide direct measurement of subsurface density gradients, boulder size distribution, and void fraction. While a mission concept rather than characterization data, it establishes the technical feasibility of remote subsurface characterization that could precede mining operations."
+
+  - arxiv_id: "1912.10622"
+    title: "Measuring the Fidelity of Asteroid Regolith and Cobble Simulants"
+    authors: ["Philip T. Metzger", "Daniel T. Britt", "Stephen Covey", "et al."]
+    relevance: high
+    summary: "Develops a systematic methodology for grading the fidelity of asteroid regolith simulants against returned sample and remote sensing data. Proposes multi-dimensional fidelity metrics covering particle size distribution, shape, mineralogy, density, and mechanical behavior. Evaluates existing simulants (JSC-1, CI analog, etc.) and identifies gaps where no adequate simulant exists. Critical for validating bucket-wheel excavation testing on Earth: without properly graded simulants, terrestrial excavation tests may not predict in-situ performance."
+
+  - arxiv_id: "2108.10416"
+    title: "Internal rubble properties of (101955) Bennu"
+    authors: ["Pasquale Tricarico", "et al."]
+    relevance: critical
+    summary: "Derives actual interior mechanical properties of asteroid Bennu from OSIRIS-REx gravitational, shape, and surface observations. Constrains bulk density at 1.19 g/cm3, macroporosity of ~50%, and identifies evidence for a denser core with lower porosity (25-35%). Finds that surface boulders are weaker than meteorite analogs, with compressive strengths as low as 0.2-1 MPa. Provides the most direct ground truth for rubble pile interior properties available, serving as the primary calibration point for excavation force models."
+
+  - arxiv_id: "2104.13516"
+    title: "SPH Simulations for Shape Deformation of Rubble-Pile Asteroids Through Spinup"
+    authors: ["Keisuke Sugiura", "Hiroshi Kobayashi", "Shu-ichiro Inutsuka"]
+    relevance: medium
+    summary: "Uses smoothed particle hydrodynamics (SPH) to model rubble pile deformation under rotational stress. Validates that rubble piles with bulk cohesion of 10-100 Pa deform into oblate spheroids before failure, consistent with observed asteroid shapes. The SPH approach captures large-scale deformation behavior that DEM cannot efficiently model. Relevant to understanding how excavation-induced stress redistribution may cause structural changes in the target body at scales larger than the excavation site."
+
+  - arxiv_id: "2009.12605"
+    title: "Critical spin periods of sub-km-sized cohesive rubble-pile asteroids"
+    authors: ["Shoucun Hu", "Derek C. Richardson", "et al."]
+    relevance: medium
+    summary: "Applies DEM modeling with explicit cohesive contacts to determine critical spin periods for sub-km rubble piles. Maps the relationship between body size, cohesive strength, and failure spin rate. Finds that cohesion of 25 Pa allows 200-m bodies to spin at periods as short as 2 hours. Demonstrates strong sensitivity to particle size distribution and packing geometry. The material parameter dependencies established here directly constrain the range of mechanical properties an excavation system must accommodate."
+
+  - arxiv_id: "1510.05295"
+    title: "Thermal Conductivity of Rubble Piles"
+    authors: ["Ji Luan", "Peter Goldreich"]
+    relevance: medium
+    summary: "Models thermal conductivity through rubble pile material as a function of porosity, particle size, and contact geometry. Finds effective thermal conductivity of 0.001-0.1 W/m-K for typical rubble pile structures, 100-1000x lower than solid rock. Low thermal conductivity means steep near-surface thermal gradients from solar heating, which can drive sintering and volatile migration. Relevant to predicting thermally altered zones near the surface that may have significantly different mechanical properties than deeper material."
+
+  - arxiv_id: "2209.02677"
+    title: "Reshaping and ejection processes on rubble-pile asteroids from impacts"
+    authors: ["Sabina D. Raducan", "Martin Jutzi", "et al."]
+    relevance: medium
+    summary: "Simulates impact cratering on rubble pile surfaces to understand material response to impulsive loading. Shows that rubble pile response depends strongly on porosity and cohesion: high-porosity targets absorb energy through compaction rather than ejection, while cohesive material produces larger intact fragments. Impact mechanics provide an upper bound on the forces needed to disaggregate material. The finding that compaction dominates in high-porosity material is directly relevant to excavation where bucket teeth may compress rather than cut loose material."
+
+key_findings:
+  - "Van der Waals cohesive strength of ~25-80 Pa governs rubble pile mechanical behavior at scales below ~10 km (Sanchez & Scheeres 2013)"
+  - "Bennu interior has ~50% macroporosity with a denser core (25-35% porosity), and surface boulders show compressive strength of only 0.2-1 MPa (Tricarico et al. 2021)"
+  - "Optimal bucket wheel diameter for asteroid excavation is 0.5-1.5 m with 3-8 cm bucket depth for cohesive strengths up to 1 kPa (Nallapu et al. 2017)"
+  - "Failure mode transitions from granular flow to cohesive fracture at approximately 25 Pa cohesion threshold (Scheeres 2017)"
+  - "Near-surface regolith behaves differently from interior material due to negligible overburden pressure (Sanchez & Scheeres 2019)"
+  - "Existing asteroid regolith simulants have significant fidelity gaps for mechanical property testing (Metzger et al. 2019)"
+  - "Rubble pile thermal conductivity of 0.001-0.1 W/m-K creates steep near-surface thermal gradients that drive sintering (Luan & Goldreich 2015)"
+  - "High-porosity rubble pile material absorbs energy through compaction rather than ejection — buckets may compress rather than cut (Raducan et al. 2022)"
+  - "Bistatic low-frequency radar (5-15 MHz) can tomographically image rubble pile interiors to 10-100 m depth (Bambach et al. 2018)"
+
+gaps_identified:
+  - "No direct measurement of subsurface mechanical properties below ~1 cm depth exists for any asteroid — all models are calibrated against surface observations and spin-rate statistics"
+  - "OSIRIS-REx TAG revealed Bennu surface bearing capacity of ~0.2-20 Pa, far below expectations — no model predicted this, indicating fundamental gaps in surface strength prediction"
+  - "Returned samples from Bennu and Ryugu are surface material only — no subsurface core samples exist and none are planned"
+  - "Bucket wheel excavation optimization (Nallapu et al.) assumes homogeneous material — real rubble piles are heterogeneous with boulders, voids, and varying cohesion"
+  - "No experimental validation of excavation in microgravity conditions with representative simulant materials has been performed"
+  - "Thermal processing effects on near-surface mechanical properties (sintering, volatile depletion) are modeled but not measured in asteroid-relevant conditions"
+  - "Scale-dependent strength transition between cohesion-dominated small particles and gravity-dominated large bodies is poorly constrained between 1 m and 1 km"
+  - "Note: Much of the relevant experimental data on regolith mechanics resides in Icarus, Journal of Geophysical Research - Planets, and Planetary and Space Science rather than arxiv. Key non-arxiv references include the OSIRIS-REx and Hayabusa2 mission papers in Nature and Science."
+
+external_references:
+  - source_id: "OSIRIS-REx-TAG-2020"
+    title: "Spacecraft-surface interaction during the OSIRIS-REx Touch-And-Go sample collection event"
+    authors: ["Ronald Ballouz", "Kevin Walsh", "et al."]
+    journal: "Science Advances (2020)"
+    relevance: critical
+    summary: "Documents the TAG event where OSIRIS-REx sank ~50 cm into Bennu's surface, revealing bearing capacity of only ~0.2-20 Pa — orders of magnitude below pre-mission predictions. The surface behaved more like a fluid than a granular solid. Demonstrates that remote sensing cannot reliably predict surface mechanical properties and that in-situ measurement or very conservative design margins are essential for excavation systems."
+
+  - source_id: "Hayabusa2-Ryugu-2019"
+    title: "Surface properties of asteroid Ryugu from Hayabusa2 touchdown operations"
+    authors: ["Tatsuhiro Michikami", "Eri Tatsumi", "et al."]
+    journal: "Science (2019)"
+    relevance: critical
+    summary: "Reports surface mechanical properties from Hayabusa2 touchdown on Ryugu. Surface material had very low cohesion and high porosity, consistent with loosely bound rubble pile regolith. Ejecta from the SCI impact experiment revealed a mix of fine regolith and centimeter-scale fragments. Confirms that C-type rubble pile surfaces are mechanically weak and heterogeneous at scales relevant to excavation."
+
+  - source_id: "Scheeres-2010"
+    title: "Scaling forces to asteroid surfaces: The role of cohesion"
+    authors: ["Daniel J. Scheeres", "C.M. Hartzell", "P. Sanchez", "M. Swift"]
+    journal: "Icarus 210 (2010)"
+    relevance: critical
+    summary: "Foundational paper establishing the scaling relationships between van der Waals cohesion, gravity, and solar radiation pressure on asteroid surfaces. Shows that for particles smaller than ~1 cm on sub-km asteroids, cohesive forces exceed gravitational forces by orders of magnitude. This scale-dependent force balance determines whether excavated material will behave as a cohesive solid, a granular flow, or a dispersing cloud — critical for bucket wheel design and material handling."
+
+updated_gaps:
+  - "Direct subsurface mechanical measurement remains the single largest data gap — all current models infer subsurface properties from surface observations and theoretical cohesion models"
+  - "OSIRIS-REx TAG anomaly (surface far weaker than predicted) has not been satisfactorily explained, raising uncertainty in all model-based strength predictions"
+  - "No microgravity excavation experiments with representative simulants have been conducted — terrestrial testing cannot replicate the force balance between cohesion, gravity, and inertia"
+  - "Heterogeneity at excavation-relevant scales (0.1-10 m) is essentially unconstrained — models treat rubble piles as statistically homogeneous"
+  - "Thermally altered near-surface layers (sintered crust, volatile-depleted zones) could have 10-100x higher strength than underlying material but thickness and distribution are unknown"
+
+key_findings_update:
+  - "Bennu TAG event confirms surface bearing capacity can be as low as 0.2-20 Pa — excavation system must handle material that may be essentially fluid-like under minimal disturbance"
+  - "Cohesive strength of 25-80 Pa is consistent with both spin-rate observations and DEM simulations across multiple independent studies"
+  - "Bucket wheel optimization for asteroid excavation yields practical designs (0.5-1.5 m diameter) but assumes homogeneous material properties"
+  - "Porosity gradient from ~50-60% at surface to ~25-35% at depth implies excavation resistance increases with depth — bucket wheel must accommodate factor-of-2-3 density variation"
+  - "Radar tomography (DISCUS concept) could provide subsurface characterization to 100 m depth — strongly recommended as precursor to mining operations"
+  - "Simulant fidelity for mechanical testing is inadequate — returned sample calibration of simulants is prerequisite for reliable terrestrial excavation tests"
+  - "Thermal conductivity of 0.001-0.1 W/m-K creates potential for sintered surface crust with 10-100x higher strength than bulk material"
