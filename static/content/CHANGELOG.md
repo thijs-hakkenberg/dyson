@@ -49,6 +49,13 @@ All notable changes to Project Dyson are documented here.
 #### Blog
 - Add blog article: "Strategic Pivot: From Breadth to Depth on Phase 0 Feasibility"
 
+### Fixed
+
+#### Organizations YAML Parser
+- Fix indentation-aware array handling: `tags` or `relatedRQs` at the end of an item caused all subsequent items to be silently dropped (only 1 of 15 questions was parsed)
+- Fix section transition: last organization before `questions:` section was discarded without being saved (org-011 Northrop Grumman was missing)
+- All 11 organizations and 15 outreach questions now parse and link correctly
+
 #### Open Question Research Update (7 questions, ~30 external sources, 4 status changes)
 - Review external literature (Nature Chemistry, MDPI, NASA, ScienceDirect, industry data) across 7 research questions
 - Add research/analysis.md and research/arxiv-papers.yaml for all 7 questions
