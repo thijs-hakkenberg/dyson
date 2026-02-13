@@ -4,7 +4,7 @@ slug: "slag-management-microgravity"
 title: "Slag management and recycling in microgravity"
 questionType: "engineering-decision"
 priority: "medium"
-status: "open"
+status: "investigating"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-3"
 sourceBOMItemSlug: "material-processing-station"
@@ -15,6 +15,13 @@ tags:
   - "waste-management"
   - "recycling"
   - "microgravity"
+arxivReferences:
+  - "1612.00709"
+  - "1904.11831"
+  - "1601.07673"
+  - "2002.10970"
+  - "2508.03025"
+  - "1304.7183"
 createdDate: "2026-01-31"
 ---
 

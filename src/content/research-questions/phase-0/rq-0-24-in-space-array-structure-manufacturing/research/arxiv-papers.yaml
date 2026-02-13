@@ -1,0 +1,47 @@
+# Arxiv papers relevant to rq-0-24: In-space manufacturing of array structures
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "2102.09815"
+    title: "A gravity-independent powder-based additive manufacturing process tailored for space applications"
+    authors: ["Olfa D'Angelo", "Felix Kuthe", "Szu-Jia Liu", "Raphael Wiedey", "Joe M. Bennett", "Martina Meisnar", "Andrew Barnes", "W. Till Kranz", "Thomas Voigtmann", "Andreas Meyer"]
+    relevance: critical
+    summary: "Demonstrates a powder-based 3D printing process that works independently of gravitational environment. Uses controlled pressure sequences to transport powder to print zone while maintaining uniform density. Validated through simulations and parabolic flight experiments with both free-flowing and cohesive powders. Suggests potential for recycling materials in space. Directly demonstrates the enabling technology for in-space structural manufacturing."
+
+  - arxiv_id: "2008.04485"
+    title: "Grain refinement of stainless steel in ultrasound-assisted additive manufacturing"
+    authors: ["C. J. Todaro", "M. A. Easton", "D. Qiu"]
+    relevance: critical
+    summary: "Demonstrates ultrasound-assisted control of grain structure during fusion-based metal additive manufacturing. Achieves refined, equiaxed grain structure in stainless steel—a direct candidate for array structural components. Ultrasound substitutes for gravity-driven convection in controlling solidification, making this approach inherently microgravity-compatible. Already cross-referenced in rq-0-11 metallurgy research."
+
+  - arxiv_id: "1612.00709"
+    title: "ASIME 2016 White Paper: In-Space Utilisation of Asteroids"
+    authors: ["Amara L. Graps", "Philippe Blondel", "Grant Bonin", "Daniel Britt"]
+    relevance: high
+    summary: "Documents the intersection between asteroid science and mining engineering. Addresses material processing requirements and available feedstock compositions from different asteroid types. Provides context for what raw materials are available for in-space structural manufacturing from asteroid-derived feedstock."
+
+  - arxiv_id: "2102.11571"
+    title: "Upgraded Metallurgical Grade Silicon for solar electricity production: a comparative Life Cycle Assessment"
+    authors: ["Laura Méndez", "Eduardo Forniés", "Daniel Garraín"]
+    relevance: medium
+    summary: "While focused on silicon, the life cycle assessment methodology demonstrates how to evaluate whether in-space manufacturing of any component (including structures) achieves lower total energy and mass cost than Earth launch. The 25% energy payback improvement for UMG-Si provides a benchmark for evaluating similar manufacturing shortcuts for structural materials."
+
+  - arxiv_id: "2004.09683"
+    title: "Diamagnetic Levitation Using High-Temperature Superconducting Wires for Microgravity Research and Mitigation"
+    authors: ["G. Bruhaug", "L. Beveridge"]
+    relevance: medium
+    summary: "Proposes HTS electromagnets for positioning and manipulating materials in microgravity. While designed for research applications, the electromagnetic positioning capability is directly applicable to holding and manipulating structural components during in-space manufacturing processes like welding, forming, and assembly."
+
+key_findings:
+  - "Gravity-independent powder additive manufacturing has been validated in parabolic flight, proving the fundamental feasibility of metal 3D printing in space"
+  - "Ultrasound-assisted solidification produces high-quality grain structure without gravity-driven convection, enabling structural-grade metal parts in microgravity"
+  - "Asteroid-derived feedstock includes aluminum, iron, nickel, and titanium—all suitable for structural applications after processing"
+  - "Electromagnetic positioning can substitute for gravity and fixtures during manufacturing and assembly in microgravity"
+  - "In-space manufacturing most benefits structural mass (deployment booms, frames, brackets) while high-tech components (cells, electronics) remain Earth-supplied"
+
+gaps_identified:
+  - "No structural components have been manufactured from asteroid-derived materials—all space AM demonstrations used Earth-supplied feedstock"
+  - "Mechanical property qualification of in-space manufactured structural elements not conducted to space standards"
+  - "Joining and assembly techniques for in-space manufactured components with Earth-supplied cells and electronics unexplored"
+  - "Production rate estimates for structural components using powder AM in microgravity not established"
+  - "Economic break-even analysis for in-space manufacturing infrastructure investment vs. continued Earth launch not published on arxiv"

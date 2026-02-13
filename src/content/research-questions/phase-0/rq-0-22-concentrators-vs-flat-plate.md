@@ -4,7 +4,7 @@ slug: "concentrators-vs-flat-plate"
 title: "Concentrators vs flat-plate for cell area reduction"
 questionType: "engineering-decision"
 priority: "medium"
-status: "open"
+status: "investigating"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-5"
 sourceBOMItemSlug: "solar-power-arrays"
@@ -17,6 +17,14 @@ tags:
   - "concentrators"
   - "solar-cells"
   - "design-tradeoff"
+arxivReferences:
+  - "1301.1278"
+  - "1809.07157"
+  - "2004.00308"
+  - "2007.06268"
+  - "1905.08024"
+  - "1210.6601"
+  - "1012.0717"
 createdDate: "2026-01-31"
 ---
 

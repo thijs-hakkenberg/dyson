@@ -6,6 +6,15 @@ All notable changes to Project Dyson are documented here.
 
 ### Added
 
+#### Phase 0 Engineering Questions Literature Review — Tier 2 (3 questions, 18 papers)
+- Add arxiv research for rq-0-13: Slag management in microgravity (6 papers, electromagnetic separation most promising)
+- Add arxiv research for rq-0-22: Concentrators vs flat-plate (7 papers, thermal annealing may self-heal radiation damage)
+- Add arxiv research for rq-0-24: In-space array structure manufacturing (5 papers, gravity-independent AM demonstrated)
+- Create `research/arxiv-papers.yaml` and `research/analysis.md` for each question
+- Update all 3 questions: status open → investigating
+- Add 18 new arxiv references across the 3 question frontmatters
+- Add blog article: "Slag, Sunlight, and Steel: Literature Review for Three More Phase 0 Unknowns"
+
 #### Phase 0 Engineering Questions Literature Review (4 questions, 29 papers)
 - Add arxiv research for rq-0-9: Electrostatic charging on mechanisms (8 papers, dust charging physics + mitigation techniques)
 - Add arxiv research for rq-0-12: Zero-g zone refining (6 papers, UMG-Si metallurgical route may make zone refining optional)

@@ -1,0 +1,60 @@
+# Arxiv papers relevant to rq-0-22: Concentrators vs flat-plate for cell area reduction
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "1301.1278"
+    title: "III-V Solar Cells"
+    authors: ["James P. Connolly", "Denis Mencaraglia"]
+    relevance: critical
+    summary: "Comprehensive review of III-V materials for high-efficiency solar cells covering growth methods, material properties, and heterogeneous material integration. Analyzes energy loss mechanisms across single, tandem, and triple junction designs. Key finding that nanostructured cells operate in a radiatively dominated mode closer to theoretical limits. Provides the foundational materials science context for evaluating both flat-plate and concentrator architectures."
+
+  - arxiv_id: "1809.07157"
+    title: "Effects of irradiation on Triple and Single Junction InGaP/GaAs/Ge solar cells"
+    authors: ["Roberta Campesato", "Carsten Baur", "Mariacristina Casale", "Massimo Gervasi"]
+    relevance: critical
+    summary: "Directly characterizes radiation damage to the exact cell type specified for Project Dyson (InGaP/GaAs/Ge triple junction). Uses Displacement Damage Dose methodology to establish single degradation curves for each electrical parameter. Essential for predicting end-of-life performance in the L4/L5 radiation environment for both flat-plate and concentrator configurations."
+
+  - arxiv_id: "2004.00308"
+    title: "Radiation hardness and post irradiation regeneration behavior of GaInAsP solar cells"
+    authors: ["R. Lang", "J. Schön", "J. Lefèvre", "B. Boizot", "F. Dimroth", "D. Lackner"]
+    relevance: high
+    summary: "Demonstrates post-irradiation regeneration in GaInAsP cells under satellite operating conditions (60C, AM0 illumination). Recovery strengthens with increasing InP fraction. Relevant to concentrator vs. flat-plate decision because concentrator cells operate at higher temperatures, potentially enhancing radiation damage annealing—a previously unrecognized advantage of concentrated operation."
+
+  - arxiv_id: "2007.06268"
+    title: "On the Use of Graphene to Improve the Performance of Concentrator III-V Multijunction Solar Cells"
+    authors: ["Laura Barrutia", "Iván Lombardero", "Mario Ochoa", "Carlos Algora"]
+    relevance: high
+    summary: "Demonstrates graphene integration in concentrator III-V cells reducing series resistance by 35% and improving fill factor by 4% with nearly 1% absolute efficiency gain at 1,000 suns. Directly applicable to the concentrator architecture option, showing that advanced materials can mitigate the series resistance losses that become dominant at high concentration ratios."
+
+  - arxiv_id: "1905.08024"
+    title: "Novel high efficiency quadruple junction solar cell with current matching and quantum efficiency simulations"
+    authors: ["Mohammad Jobayer Hossain", "Bibek Tiwari", "Indranil Bhattacharya"]
+    relevance: high
+    summary: "Simulates a four-junction cell achieving 47.2% theoretical efficiency under 1-sun, absorbing from UV to deep IR. While the specific cell architecture is next-generation, the current-matching methodology and quantum efficiency simulation approach apply directly to evaluating how concentrator vs. flat-plate operation affects subcell balance in the triple-junction baseline design."
+
+  - arxiv_id: "1210.6601"
+    title: "Broadband and omnidirectional anti-reflection layer for III/V multi-junction solar cells"
+    authors: ["Silke L. Diedenhofen", "Grzegorz Grzela", "Erik Haverkamp", "Gerard Bauhuis", "John Schermer", "Jaime Gómez Rivas"]
+    relevance: medium
+    summary: "Develops graded refractive index antireflection coating using tapered GaP nanowires achieving 5.9% photocurrent density increase on quadruple junction cells. Relevant to flat-plate optimization: advanced AR coatings can reduce the efficiency gap between flat-plate and concentrator operation by capturing more off-axis light, reducing the incentive for concentration."
+
+  - arxiv_id: "1012.0717"
+    title: "Moon's Radiation Environment and Expected Performance of Solar Cells during Future Lunar Missions"
+    authors: ["T. E. Girish", "S. Aranya"]
+    relevance: medium
+    summary: "Models solar cell performance degradation in the lunar radiation environment. While focused on the Moon rather than L4/L5, the radiation damage modeling methodology and cell degradation predictions provide a transferable framework. The L4/L5 environment shares the same solar particle flux and galactic cosmic ray background."
+
+key_findings:
+  - "Triple-junction InGaP/GaAs/Ge radiation degradation follows single-parameter Displacement Damage Dose curves, enabling predictable end-of-life performance estimation"
+  - "Post-irradiation regeneration occurs at elevated temperatures—concentrator cells running hotter may partially self-anneal radiation damage"
+  - "Graphene integration reduces concentrator cell series resistance by 35%, partially addressing the high-current challenge at concentration"
+  - "Advanced AR coatings can improve flat-plate performance by 5.9%, narrowing the efficiency gap with concentrators"
+  - "Four-junction cells approaching 47% theoretical efficiency may shift the cost-benefit analysis toward flat-plate designs as cell efficiency itself reduces area requirements"
+  - "Nanostructured III-V cells operate closer to radiative limits, potentially enabling high efficiency at lower concentration ratios"
+
+gaps_identified:
+  - "No direct comparison study of flat-plate vs. concentrator III-V systems for long-duration space power at 100 MW scale"
+  - "Optical element degradation rates (Fresnel lenses, mirrors) in the L4/L5 charged particle environment not characterized"
+  - "Thermal management analysis for concentrator cells in continuous 1 AU solar exposure without planetary shadow incomplete"
+  - "Cost modeling for space-grade concentrator optics at production volumes needed for 100 MW unclear"
+  - "In-space manufacturability comparison between flat-plate structures and concentrator optical systems not assessed"

@@ -4,7 +4,7 @@ slug: "in-space-array-structure-manufacturing"
 title: "In-space manufacturing of array structures"
 questionType: "experimentation"
 priority: "medium"
-status: "open"
+status: "investigating"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-5"
 sourceBOMItemSlug: "solar-power-arrays"
@@ -17,6 +17,12 @@ tags:
   - "in-space-manufacturing"
   - "structures"
   - "ISRU"
+arxivReferences:
+  - "2102.09815"
+  - "2008.04485"
+  - "1612.00709"
+  - "2102.11571"
+  - "2004.09683"
 createdDate: "2026-01-31"
 ---
 

@@ -1,0 +1,54 @@
+# Arxiv papers relevant to rq-0-13: Slag management and recycling in microgravity
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "1612.00709"
+    title: "ASIME 2016 White Paper: In-Space Utilisation of Asteroids"
+    authors: ["Amara L. Graps", "Philippe Blondel", "Grant Bonin", "Daniel Britt"]
+    relevance: critical
+    summary: "Comprehensive white paper from the Asteroid Science Intersections with In-Space Mine Engineering conference. Documents dialogue between asteroid scientists and mining companies (Planetary Resources, Deep Space Industries, TransAstra) on surface characteristics, subsurface conditions, and processing requirements. Directly addresses the practical questions of what waste streams asteroid processing generates and how compositions vary by asteroid type."
+
+  - arxiv_id: "1904.11831"
+    title: "ASIME 2018 White Paper: Asteroid Composition -- Answers to Questions from the Asteroid Miners"
+    authors: ["Amara L. Graps", "Angel Abbud-Madrid", "Paul Abell"]
+    relevance: critical
+    summary: "Follow-up workshop documenting 21 questions from asteroid mining companies about composition and processing. Covers remote-sensing limitations, meteorite-asteroid connections, in-situ measurements, and laboratory analysis. Directly informs what slag compositions to expect from different asteroid types and what valuable trace elements may be recoverable from processing waste."
+
+  - arxiv_id: "1601.07673"
+    title: "Bubble spreading during the boiling crisis: modelling and experimenting in microgravity"
+    authors: ["Vadim Nikolayev", "D. Beysens", "Y. Garrabos", "C. Lecoutre", "D. Chatain"]
+    relevance: high
+    summary: "Models and experimentally validates bubble behavior at heated surfaces in microgravity, including experiments aboard Mir space station. Vapor recoil forces cause bubble spreading and film formation. Directly applicable to understanding how gas bubbles in molten slag behave in microgravity—a key challenge for slag-metal separation where gas evolution during smelting creates buoyancy-free two-phase flows."
+
+  - arxiv_id: "2002.10970"
+    title: "Dynamic neutron imaging of argon bubble flow in liquid gallium in external magnetic field"
+    authors: ["Mihails Birjukovs", "Valters Dzelme", "Andris Jakovics", "Knud Thomsen", "Pavel Trtik"]
+    relevance: high
+    summary: "Neutron radiography of gas bubble flow in liquid metal (gallium) with and without magnetic fields. Extracts bubble characteristics, velocities, and trajectories. Demonstrates that external magnetic fields modify bubble behavior in liquid metals—directly relevant to electromagnetic separation of gas/slag from molten metal in microgravity processing, where magnetic fields may substitute for gravitational buoyancy."
+
+  - arxiv_id: "2508.03025"
+    title: "On ore-bearing asteroid remnants in lunar craters"
+    authors: ["Jayanth Chennamangalam", "Paul Brook", "Martin Elvis", "Samuel Peterson"]
+    relevance: medium
+    summary: "Estimates approximately 6,500 lunar craters contain ore-bearing asteroid remnants with platinum group metals and hydrated minerals. While focused on lunar mining economics, the probabilistic framework for estimating ore composition and valuable metal content directly informs what slag compositions to expect and what trace elements justify recovery from processing waste."
+
+  - arxiv_id: "1304.7183"
+    title: "Sessile drops in microgravity"
+    authors: ["Amelia Carolina Sparavigna"]
+    relevance: medium
+    summary: "Analyzes shape of axisymmetric drops as a function of gravity, providing results matching Bond number predictions. In microgravity, surface tension fully dominates drop shape. Relevant to understanding how molten slag droplets behave during microgravity processing—they form perfect spheres rather than spreading, affecting collection, cooling, and reprocessing strategies."
+
+key_findings:
+  - "Asteroid slag composition varies dramatically by type: C-type produces carbon/organic-rich waste, S-type yields silicate-dominated slag, M-type generates minimal slag but metal-rich residues"
+  - "Bubble behavior in molten materials is fundamentally altered in microgravity: no buoyant rise, vapor recoil forces dominate, film boiling transitions change"
+  - "External magnetic fields modify gas bubble behavior in liquid metals, offering a potential mechanism for electromagnetic slag-metal separation without gravity"
+  - "Molten droplets in microgravity form perfect spheres due to surface tension dominance, simplifying collection but complicating separation from similar-sized metal droplets"
+  - "Asteroid ore contains recoverable platinum group metals and other trace elements that may justify slag reprocessing rather than disposal"
+
+gaps_identified:
+  - "No experiments on slag-metal separation in microgravity have been conducted at any scale"
+  - "Centrifugal separation efficiency for molten silicate slag from liquid metal at smelting temperatures not characterized"
+  - "Slag ejection trajectory dynamics at L4/L5 not modeled—debris accumulation risk over 30-year station life unknown"
+  - "Economic recovery thresholds for trace elements in asteroid slag not established"
+  - "Slag solidification morphology in microgravity and implications for recycling pathways unexplored"
+  - "Note: Most slag processing literature resides in metallurgical engineering journals (Metallurgical Transactions, ISIJ International) rather than arxiv"
