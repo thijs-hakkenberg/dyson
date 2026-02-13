@@ -4,20 +4,32 @@
 	import { filterByResolutionStatus } from '$lib/services/resolution';
 	import { QuestionCard, QuestionFilters, QuestionStats } from '$lib/components/questions';
 	import type { SortOption } from '$lib/components/questions/QuestionFilters.svelte';
-	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
+	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 
 	let { data } = $props();
 
-	// Initialize filter state from URL params
-	const params = $page.url.searchParams;
-	let selectedPhase = $state<PhaseId | ''>(params.get('phase') as PhaseId || '');
-	let selectedType = $state<QuestionType | ''>(params.get('type') as QuestionType || '');
-	let selectedStatus = $state<ResearchQuestionStatus | ''>(params.get('status') as ResearchQuestionStatus || '');
-	let selectedPriority = $state<Priority | ''>(params.get('priority') as Priority || '');
-	let selectedResolution = $state<ResolutionStatus | ''>(params.get('resolution') as ResolutionStatus || '');
-	let selectedSort = $state<SortOption>((params.get('sort') as SortOption) || 'newest');
-	let searchQuery = $state(params.get('q') || '');
+	// Filter state - initialized with defaults, hydrated from URL on mount
+	let selectedPhase = $state<PhaseId | ''>('');
+	let selectedType = $state<QuestionType | ''>('');
+	let selectedStatus = $state<ResearchQuestionStatus | ''>('');
+	let selectedPriority = $state<Priority | ''>('');
+	let selectedResolution = $state<ResolutionStatus | ''>('');
+	let selectedSort = $state<SortOption>('newest');
+	let searchQuery = $state('');
+
+	// Hydrate filter state from URL params on client
+	onMount(() => {
+		const params = new URL(window.location.href).searchParams;
+		selectedPhase = (params.get('phase') as PhaseId) || '';
+		selectedType = (params.get('type') as QuestionType) || '';
+		selectedStatus = (params.get('status') as ResearchQuestionStatus) || '';
+		selectedPriority = (params.get('priority') as Priority) || '';
+		selectedResolution = (params.get('resolution') as ResolutionStatus) || '';
+		selectedSort = (params.get('sort') as SortOption) || 'newest';
+		searchQuery = params.get('q') || '';
+	});
 
 	// Priority order for sorting
 	const priorityOrder: Record<Priority, number> = {
