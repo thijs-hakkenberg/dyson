@@ -44,14 +44,28 @@ export function parseOrganizationsYaml(content: string): {
 			continue;
 		}
 		if (trimmed === 'questions:') {
+			// Push the last organization before switching sections
+			if (currentItem && currentSection === 'organizations') {
+				if (currentContact) {
+					if (!currentItem.contacts) currentItem.contacts = [];
+					(currentItem.contacts as Record<string, unknown>[]).push(currentContact);
+					currentContact = null;
+				}
+				organizations.push(parseOrganization(currentItem));
+			}
 			currentSection = 'questions';
 			currentItem = null;
+			currentArray = null;
 			continue;
 		}
 
 		// Array item start
 		if (trimmed.startsWith('- ')) {
-			if (currentArray === 'contacts' && currentItem) {
+			// Check if this is a new top-level item (same indent as parent)
+			// rather than an array value (deeper indent)
+			const isNewItem = currentItem && lineIndent <= indent;
+
+			if (!isNewItem && currentArray === 'contacts' && currentItem) {
 				// New contact in contacts array
 				if (currentContact) {
 					if (!currentItem.contacts) currentItem.contacts = [];
@@ -67,8 +81,8 @@ export function parseOrganizationsYaml(content: string): {
 				continue;
 			}
 
-			if (currentArray && currentItem) {
-				// Array value
+			if (!isNewItem && currentArray && currentItem) {
+				// Array value (indented deeper than item level)
 				const value = trimmed.slice(2).trim().replace(/^["']|["']$/g, '');
 				if (!currentItem[currentArray]) currentItem[currentArray] = [];
 				(currentItem[currentArray] as string[]).push(value);
