@@ -1,0 +1,54 @@
+# Arxiv papers relevant to rq-0-12: Optimal zone refining process in zero-g
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "1102.3800"
+    title: "Growth Angle and Melt Meniscus of the RF-heated Floating Zone in Silicon Crystal Growth"
+    authors: ["Michael Wünscher", "Anke Lüdge", "Helge Riemann"]
+    relevance: critical
+    summary: "Direct measurement of growth angle during 2-inch silicon crystal growth using RF-heated floating zone process. Evaluates growth angle at 11 plus/minus 2 degrees and characterizes free melt surface meniscus shape. Essential baseline for understanding how molten zone geometry changes when gravity is removed—the meniscus shape directly determines zone stability, impurity transport, and achievable purification efficiency."
+
+  - arxiv_id: "2101.08019"
+    title: "UMG silicon for solar PV: from defects detection to PV module degradation"
+    authors: ["Eduardo Forniés", "Carlos del Cañizo", "Laura Méndez", "Alejandro Souto", "Antonio Pérez-Vázquez", "Daniel Garraín"]
+    relevance: critical
+    summary: "Demonstrates that upgraded metallurgical grade silicon achieves 20.76% record cell efficiency in commercial production lines. Proves that the metallurgical purification route—without chemical purification or extensive zone refining—produces viable solar cells. This fundamentally reframes the zero-g zone refining question: instead of chasing 6N purity, the metallurgical route to 4N-5N may be sufficient, with zone refining as an optional enhancement step."
+
+  - arxiv_id: "2102.11571"
+    title: "Upgraded Metallurgical Grade Silicon for solar electricity production: a comparative Life Cycle Assessment"
+    authors: ["Laura Méndez", "Eduardo Forniés", "Daniel Garraín", "Antonio Pérez Vázquez", "Alejandro Souto", "Timur Vlasenko"]
+    relevance: high
+    summary: "Validates economic and environmental viability of UMG-Si: over 20% lower CO2 emissions and 25% better energy payback time versus conventional polysilicon. Achieves 12 gCO2eq/kWh and 0.52-year energy payback. While Earth-focused, confirms that the simpler metallurgical route is not just technically viable but economically superior—strengthening the case for reducing zone refining requirements in space."
+
+  - arxiv_id: "1911.08248"
+    title: "Growth of different faces in a body centered cubic lattice: a case of the phase-field-crystal modeling"
+    authors: ["Vladimir Ankudinov", "Peter K. Galenko"]
+    relevance: high
+    summary: "Uses hyperbolic phase-field crystal model to investigate crystallographic anisotropy in growth kinetics. The model accounts for atomic density and flux as separate variables, enabling growth velocity predictions under varying conditions. Applicable to predicting silicon crystal quality in microgravity where growth kinetics differ due to altered convection patterns."
+
+  - arxiv_id: "2303.10783"
+    title: "Benchmark modeling and 3D applications of solidification and macro-segregation"
+    authors: ["Xiaoyu Feng", "Huangxin Chen", "Bo Yu"]
+    relevance: high
+    summary: "Presents operator-splitting approach for modeling solidification with mass, momentum, heat, and species transport across solid-mushy-liquid phases. Directly applicable to predicting impurity segregation during zone refining, where the mushy zone behavior determines purification effectiveness. The 3D modeling capability is essential for zero-g configurations where axial symmetry is not guaranteed."
+
+  - arxiv_id: "2004.09683"
+    title: "Diamagnetic Levitation Using High-Temperature Superconducting Wires for Microgravity Research and Mitigation in Human Spaceflight Applications"
+    authors: ["G. Bruhaug", "L. Beveridge"]
+    relevance: medium
+    summary: "Proposes HTS electromagnets for levitating large diamagnetic targets in microgravity. While focused on human-scale applications, the electromagnetic containment principles apply directly to containerless processing of molten silicon in space. HTS magnets could provide the non-contact containment needed for zone refining without crucible contamination."
+
+key_findings:
+  - "Metallurgical-grade silicon at 4N-5N purity produces functional solar cells at 15-20% efficiency, potentially eliminating the need for 6N zone-refined silicon"
+  - "Float zone silicon growth angle and meniscus geometry are well-characterized at 1g, providing baseline for microgravity deviation predictions"
+  - "Phase-field and solidification modeling tools can predict impurity segregation behavior, enabling computational optimization before space experiments"
+  - "Electromagnetic containerless processing via HTS magnets offers contamination-free alternative to crucible-based zone refining"
+  - "The UMG-Si metallurgical route is economically and environmentally superior to chemical purification, favoring simpler space processing chains"
+
+gaps_identified:
+  - "No float zone silicon experiments conducted in sustained microgravity—only brief sounding rocket and parabolic flight attempts with analog materials"
+  - "Marangoni convection effects on impurity segregation during silicon zone refining not quantified in microgravity"
+  - "Zone refining effectiveness for asteroid-derived silicon (high Fe, Ni, Co impurity profile) not modeled or tested"
+  - "Optimal number of zone passes in microgravity unknown—terrestrial 10-20 pass requirement may differ significantly"
+  - "Electromagnetic containment energy requirements for industrial-scale molten silicon in space not assessed"
+  - "No comparison of achievable purity between microgravity zone refining, directional solidification, and plasma purification for asteroid feedstock"

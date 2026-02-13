@@ -1,0 +1,66 @@
+# Arxiv papers relevant to rq-0-9: Electrostatic charging effects on mechanisms
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "2405.10744"
+    title: "The Effect of Work Function on Dust Charging and Dynamics on the Airless Celestial Body"
+    authors: ["Ronghui Quan", "Zhigui Liu", "Zhiying Song"]
+    relevance: critical
+    summary: "Directly models dust charging and dynamics on airless bodies including asteroids. Computes photoelectron concentrations across illumination regions, showing dust with larger work functions reaches higher equilibrium states and levitation heights. Identifies critical solar zenith angles beyond which stable dust levitation ceases—directly relevant to predicting electrostatic contamination risk during mining operations."
+
+  - arxiv_id: "1706.09664"
+    title: "Dust levitation above the lunar surface: role of charge fluctuations"
+    authors: ["E. V. Rosenfeld", "A. V. Zakharov"]
+    relevance: critical
+    summary: "Resolves fundamental puzzle of how dust achieves sufficient charge for electrostatic lofting. Demonstrates that submicron-scale 'chaotic spots' with alternating charges exist on surfaces despite low macroscopic charge density. Photoelectron emission and recapture variations create localized double-layer fields enabling sub-0.1 micron particle levitation. Directly explains mechanism by which excavation-disturbed regolith becomes electrostatically mobilized."
+
+  - arxiv_id: "2207.13883"
+    title: "Review of research on lunar dust dynamics"
+    authors: ["Kun Yang", "Weiming Feng", "Luyuan Xu", "Xiaodong Liu"]
+    relevance: high
+    summary: "Comprehensive review of dust dynamics on airless bodies, covering micrometeoroid production, initial particle characteristics, migration mechanisms, and distribution models. Provides baseline understanding of dust behavior in the Earth-Moon system that extends to asteroid environments. Reviews space exploration missions' encounters with dust hazards."
+
+  - arxiv_id: "2204.09385"
+    title: "Electrostatic Dust Ejection From Asteroid (3200) Phaethon With the Aid of Mobile Alkali Ions at Perihelion"
+    authors: ["Hiroshi Kimura", "Katsuhito Ohtsuka", "Shota Kikuchi", "Keiji Ohtsuki", "Tomoko Arai", "Fumi Yoshida"]
+    relevance: high
+    summary: "Demonstrates asteroid-specific electrostatic dust ejection mechanism involving mobile alkali ions at elevated temperatures. Mass-loss rates match observations for micrometer-sized particles. Although Phaethon's perihelion environment is more extreme than typical mining targets, the electrostatic ejection physics applies to any asteroid where thermal gradients create differential charging."
+
+  - arxiv_id: "2505.24074"
+    title: "Removal of Lunar Dust Simulant from Cold Dielectric Surfaces with Electron Beam"
+    authors: ["Hsin-yi Hao", "Wousik Kim", "David S. Shelton", "Benjamin Farr", "Xu Wang", "Inseob Hahn"]
+    relevance: high
+    summary: "Demonstrates electron beam dust removal from surfaces at temperatures as low as -123C in vacuum. Dust lofting slowed significantly at low temperatures but was enhanced by sweeping beam energy within an optimal range. Directly applicable as a potential active mitigation technique for keeping mining robot mechanisms dust-free in the space environment."
+
+  - arxiv_id: "2101.12485"
+    title: "Derivation of a governing rule in triboelectric charging and series from thermoelectricity"
+    authors: ["Eui-Cheol Shin", "Jae-Hyeon Ko", "Ho-Ki Lyeo", "Yong-Hyun Kim"]
+    relevance: high
+    summary: "Establishes fundamental physics governing triboelectric charging through thermoelectric effects. Friction-induced heat creates temperature variations at material interfaces, generating electrostatic potentials. Derives a triboelectric factor based on Seebeck coefficient, density, specific heat, and thermal conductivity that predicts charging behavior across polymers, metals, and semiconductors. Enables material selection optimization for mining robot surfaces."
+
+  - arxiv_id: "2401.17942"
+    title: "Impact of Lunar Dust on Free Space Optical (FSO) Energy Harvesting"
+    authors: ["Mohamed Naqbi", "Sebastien Loranger", "Gunes Karabulut Kurt"]
+    relevance: medium
+    summary: "Quantifies how suspended charged dust particles degrade optical system performance. Though focused on lunar energy harvesting, the dust-optical interaction models apply to any optical system operating in dusty space environments. Finds shadowed regions experience minimal dust interference, suggesting operational scheduling strategies for mining robots."
+
+  - arxiv_id: "1206.6328"
+    title: "Toxicity of lunar dust"
+    authors: ["Dag Linnarsson", "James Carpenter", "Bice Fubini", "Per Gerde", "Lars L. Karlsson", "David J. Loftus"]
+    relevance: medium
+    summary: "Comprehensive characterization of lunar dust physical and chemical properties relevant to surface interactions. Notes that curated samples lack the surface reactivity present on the actual Moon, implying fresh regolith disturbed by excavation will be more chemically reactive and adhesive than laboratory analogs suggest. Provides context for understanding dust-mechanism interaction severity."
+
+key_findings:
+  - "Dust charging on airless bodies is dominated by photoelectron emission, with work function determining equilibrium charge state and levitation height"
+  - "Submicron-scale charge fluctuations on surfaces create localized fields sufficient to loft particles despite low average surface charge density"
+  - "Triboelectric charging follows predictable thermoelectric rules—material selection can minimize charge transfer at mechanism interfaces"
+  - "Electron beam irradiation can actively remove adhered dust from surfaces even at cryogenic temperatures, offering a viable mitigation technique"
+  - "Electrostatic dust ejection occurs naturally on asteroids through alkali ion and thermal gradient mechanisms"
+  - "Freshly disturbed regolith is more chemically reactive and adhesive than aged samples, increasing contamination risk during active excavation"
+
+gaps_identified:
+  - "No studies of triboelectric charging between regolith simulants and specific mechanism materials (titanium alloys, stainless steel, ceramics) under vacuum"
+  - "Electrostatic effects on articulated joints and bearings in space environment not characterized—existing literature focuses on surfaces, not enclosed mechanisms"
+  - "No long-duration (months to years) dust accumulation studies on operating mechanisms in representative plasma environments"
+  - "Charging behavior differences between C-type, S-type, and M-type asteroid regolith compositions unexplored"
+  - "Active mitigation power and mass budgets for electron beam or plasma-based dust removal systems not assessed for mining robot scale"

@@ -3,7 +3,7 @@ questionId: "rq-0-30"
 slug: "cryogenic-boiloff-management"
 title: "Cryogenic boiloff management at L4/L5 thermal environment"
 questionType: "engineering-decision"
-status: "open"
+status: "investigating"
 priority: "high"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-3"
@@ -19,6 +19,13 @@ tags:
   - "propellant"
   - "thermal-management"
   - "L4-L5"
+arxivReferences:
+  - "2501.18451"
+  - "2508.21802"
+  - "1303.5112"
+  - "1307.0890"
+  - "1304.1959"
+  - "1108.1332"
 createdDate: "2026-02-10"
 ---
 

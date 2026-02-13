@@ -2,9 +2,19 @@
 
 All notable changes to Project Dyson are documented here.
 
-## [Unreleased] - 2026-02-12
+## [Unreleased] - 2026-02-13
 
 ### Added
+
+#### Phase 0 Engineering Questions Literature Review (4 questions, 29 papers)
+- Add arxiv research for rq-0-9: Electrostatic charging on mechanisms (8 papers, dust charging physics + mitigation techniques)
+- Add arxiv research for rq-0-12: Zero-g zone refining (6 papers, UMG-Si metallurgical route may make zone refining optional)
+- Add arxiv research for rq-0-30: Cryogenic boiloff management (6 papers, sunshield-critical design + solid-state alternatives)
+- Add arxiv research for rq-0-5: Composition algorithm validation (9 papers, ML tools ready, validation methodology needed)
+- Create `research/arxiv-papers.yaml` and `research/analysis.md` for each question
+- Update all 4 questions: status open → investigating
+- Add 29 new arxiv references across the 4 question frontmatters
+- Add blog article: "Four More Unknowns: Electrostatic Charging, Zero-G Refining, Cryogenic Storage, and Spectral Algorithms"
 
 #### Alternative Material Sources Literature Review (15 papers, 5 new questions)
 - Add rq-1-49: Mercury self-replicating factory pathway (medium priority, 3 papers archived)

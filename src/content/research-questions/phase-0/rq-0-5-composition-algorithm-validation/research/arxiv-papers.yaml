@@ -1,0 +1,73 @@
+# Arxiv papers relevant to rq-0-5: Asteroid composition algorithm validation
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "2203.11229"
+    title: "Asteroid Taxonomy from Cluster Analysis of Spectrometry and Albedo"
+    authors: ["Max Mahlke", "Benoit Carry", "Pierre-Alexandre Mattei"]
+    relevance: critical
+    summary: "State-of-the-art asteroid classification system using spectroscopy and albedo data. Handles partial observations across visible and near-infrared wavelengths with probabilistic classifications that quantify uncertainty. Built from 2,983 observations of 2,125 asteroids—nearly 10x larger than prior datasets. Identifies 17 classes in three complexes (C, M, S) plus new Z-class. Released classification tool and designations for 6,000+ observations. Directly provides the taxonomic framework that prospecting satellite algorithms must implement."
+
+  - arxiv_id: "2210.01006"
+    title: "Neural network for determining an asteroid mineral composition from reflectance spectra"
+    authors: ["David Korda", "Antti Penttilä", "Arto Klami", "Tomáš Kohout"]
+    relevance: critical
+    summary: "Develops CNN for analyzing VNIR reflectance spectra to determine mineral and chemical compositions. Trained on RELAB and C-Tape databases with olivine, pyroxene, and meteorite samples. Individual predictions within 10 percentage-point intervals of ground truth. Applied to S-complex asteroids, predictions match ordinary chondrite compositions. Identifies apparent olivine depletion from space weathering—critical calibration factor for prospecting algorithms."
+
+  - arxiv_id: "1903.11559"
+    title: "Spectral clustering tools applied to Ceres in preparation for OSIRIS-REx color imaging of asteroid (101955) Bennu"
+    authors: ["Juan Luis Rizos", "Julia de León", "Javier Licandro", "Humberto Campins", "Marcel Popescu"]
+    relevance: critical
+    summary: "Develops spectral clustering methodology for asteroid surface composition mapping using multi-filter imaging. Validated on Dawn/Ceres data, successfully identifying hydration features at 698 plus/minus 7 nm with 3.4% depth in Occator crater. Demonstrates the image processing pipeline, K-means clustering, and spectral feature extraction workflow applicable to prospecting satellite MapCam-style instruments."
+
+  - arxiv_id: "1703.10574"
+    title: "The OSIRIS-REx Visible and InfraRed Spectrometer (OVIRS): Spectral Maps of the Asteroid Bennu"
+    authors: ["D. C. Reuter", "A. A. Simon", "J. Hair", "D. S. Lauretta"]
+    relevance: high
+    summary: "Describes OVIRS point spectrometer covering 0.4-4.3 microns for mapping Bennu's surface composition. Compact (17.8 kg), power efficient (8.8 W), and robust design provides the benchmark instrument specification for prospecting satellite spectrometers. Demonstrates spectral resolution and sensitivity achievable within tight mass/power budgets."
+
+  - arxiv_id: "1409.4704"
+    title: "The Design Reference Asteroid for the OSIRIS-REx Mission Target (101955) Bennu"
+    authors: ["Carl W. Hergenrother", "Maria Antonietta Barucci", "Olivier Barnouin", "Dante S. Lauretta"]
+    relevance: high
+    summary: "Comprehensive compilation of physical properties for asteroid Bennu from ground-based observations: orbital mechanics, bulk density, rotation, radar, photometry, spectroscopy, and thermal properties. Establishes methodology for characterizing asteroid targets from remote sensing data before spacecraft arrival—directly informing what prospecting satellite algorithms must predict and validate."
+
+  - arxiv_id: "2110.06611"
+    title: "Machine Learning applied to asteroid dynamics"
+    authors: ["V. Carruba", "S. Aljbaae", "R. C. Domingos", "M. Huaman", "W. Barletta"]
+    relevance: high
+    summary: "Reviews ML applications to asteroid science including family identification and resonance detection. Notes that ML in asteroid research is in the 'emerging phase' but anticipates rapid development with upcoming survey data from Vera Rubin Observatory. Provides context for algorithm development landscape and available training data sources."
+
+  - arxiv_id: "1406.6645"
+    title: "Main Belt Asteroids with WISE/NEOWISE: Near-Infrared Albedos"
+    authors: ["Joseph R. Masiero", "T. Grav", "A. K. Mainzer", "C. R. Nugent"]
+    relevance: high
+    summary: "Near-infrared albedo measurements of 2,835 Main Belt asteroids from WISE/NEOWISE. Identifies three distinct reflectance groupings at 3.4 microns (6%, 16%, 40%) mapping to taxonomic families. Demonstrates that NIR albedos reliably indicate composition and can guide spectroscopic investigations. Provides large-scale validation dataset for composition classification algorithms."
+
+  - arxiv_id: "1502.06302"
+    title: "Asteroid Photometry"
+    authors: ["Jian-Yang Li", "Paul Helfenstein", "Bonnie J. Buratti", "Driss Takir", "Beth Ellen Clark"]
+    relevance: medium
+    summary: "Review of asteroid photometry applications: surface physical properties inference, photometric corrections, and observation planning. Highlights that spacecraft missions have advanced the field but emerging disagreements about model interpretation persist. Provides foundation for understanding how spectral measurements translate to composition estimates and the calibration challenges involved."
+
+  - arxiv_id: "2404.12536"
+    title: "Asteroid (101955) Bennu in the Laboratory: Properties of the Sample Collected by OSIRIS-REx"
+    authors: ["Dante S. Lauretta", "Harold C. Connolly", "Joseph E. Aebersold"]
+    relevance: high
+    summary: "First ground-truth characterization of asteroid regolith sample returned to Earth. Provides the definitive validation dataset: known mineralogy, chemistry, and physical properties that can be compared against remote spectral predictions. Bulk density 1.19 g/cm3, dominant serpentine/magnetite/sulfide mineralogy. Essential for calibrating spectral-to-composition algorithms against actual asteroid material."
+
+key_findings:
+  - "Modern probabilistic asteroid taxonomy handles partial spectral data and quantifies classification uncertainty—directly usable for onboard algorithms"
+  - "CNNs can predict mineral composition from VNIR spectra within 10 percentage points of ground truth for silicate minerals"
+  - "Space weathering causes apparent olivine depletion in spectra—algorithms must correct for this systematic bias"
+  - "NIR albedo alone provides three distinct compositional groupings correlating with asteroid families, enabling coarse classification from photometry"
+  - "OSIRIS-REx OVIRS demonstrates that a 17.8 kg, 8.8 W spectrometer achieves sufficient spectral range and resolution for composition mapping"
+  - "Bennu sample return provides the first ground-truth validation of remote spectral composition predictions"
+
+gaps_identified:
+  - "No blind validation studies where spectral algorithms predict composition without access to ground truth—systematic accuracy/bias assessment lacking"
+  - "Spectral unmixing algorithms validated only for silicate-rich (S-type) asteroids; carbonaceous (C-type) and metallic (M-type) compositions poorly validated"
+  - "On-board vs ground processing algorithm comparison not conducted for asteroid composition analysis"
+  - "Algorithm performance at degraded spectral resolution (matching prospecting satellite instrument constraints) not systematically evaluated"
+  - "Training data predominantly from meteorite samples, not in-situ asteroid measurements—domain shift effects unknown"
+  - "Real-time processing requirements for autonomous 30-day operation not addressed in current ML literature"

@@ -1,0 +1,54 @@
+# Arxiv papers relevant to rq-0-30: Cryogenic boiloff management at L4/L5 thermal environment
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "2501.18451"
+    title: "Thermal performance estimation for cryogenic storage tanks: Application to liquid hydrogen"
+    authors: ["Ailo Aasen", "Sindre Stenen Blakseth", "André Massing", "Petter Nekså", "Magnus Aa. Gjennestad"]
+    relevance: critical
+    summary: "Establishes methods for estimating heat ingress in LH2 cryogenic storage from material to tank level. Shows heat ingress increases below 26% when storing LH2 at 20K compared to LN2 at 77K baseline. Thermal network models achieve approximately 1% accuracy in heat ingress estimation and cold-spot temperature predictions within 1K. Provides validated modeling approach directly applicable to designing L4/L5 propellant storage thermal protection."
+
+  - arxiv_id: "2508.21802"
+    title: "An Adaptive Real-Time Forecasting Framework for Cryogenic Fluid Management in Space Systems"
+    authors: ["Qiyun Cheng", "Huihua Yang", "Wei Ji"]
+    relevance: critical
+    summary: "Presents ARCTIC, a lightweight data-driven framework for autonomous cryogenic fluid management aboard spacecraft. Merges sensor data with precomputed simulations through correction layer for continuous adaptation. Validated against NASA experimental data. Low computational overhead suitable for onboard systems. Directly applicable to autonomous boiloff monitoring and cryocooler control at the Material Processing Station."
+
+  - arxiv_id: "1303.5112"
+    title: "Structure, microstructure and hydrogen storage properties of melt-spun V55Ti21Cr17Fe7 and V55Ti21Mn17Fe7"
+    authors: ["A. Ioannidou", "S. S. Makridis", "M. Gjoka"]
+    relevance: medium
+    summary: "Evaluates V-Ti-Cr and V-Ti-Mn alloy hydrogen storage performance including absorption kinetics. While focused on solid-state storage rather than cryogenic liquid, metal hydride storage represents a potential alternative to cryogenic LH2 that eliminates boiloff entirely. Relevant as a comparison technology for the station's hydrogen storage architecture decision."
+
+  - arxiv_id: "1307.0890"
+    title: "Metal hydride material requirements for automotive hydrogen storage systems"
+    authors: ["Jose Miguel Pasini", "Claudio Corgnale", "Bart A. van Hassel"]
+    relevance: medium
+    summary: "Systematically evaluates metal hydride storage system requirements using simplified models and interpolated database data. Establishes performance metrics for gravimetric capacity, volumetric capacity, and thermodynamic properties. While automotive-focused, the methodology for evaluating storage alternatives applies to the station's decision between cryogenic and solid-state hydrogen storage."
+
+  - arxiv_id: "1304.1959"
+    title: "Polymer Stable Magnesium Nanocomposites Prepared by Laser Ablation for Efficient Hydrogen Storage"
+    authors: ["S. S. Makridis", "E. Gkanas", "G. Panagakos"]
+    relevance: medium
+    summary: "Demonstrates MgH2 nanocomposites with improved hydrogen sorption kinetics through laser ablation preparation. Mg-based hydrides offer high gravimetric capacity (7.6 wt% theoretical). Relevant as advanced solid-state hydrogen storage alternative that could eliminate cryogenic boiloff challenge entirely, though operating temperatures (300-350C) require thermal management integration."
+
+  - arxiv_id: "1108.1332"
+    title: "Global existence for a hydrogen storage model with full energy balance"
+    authors: ["Elena Bonetti", "Pierluigi Colli", "Philippe Laurençot"]
+    relevance: low
+    summary: "Mathematical framework for thermo-mechanical modeling of metal hydride hydrogen storage including phase transition dynamics. Provides theoretical foundation for modeling the thermal behavior of solid-state storage alternatives. The energy balance approach is relevant to system-level thermal modeling of any hydrogen storage architecture."
+
+key_findings:
+  - "Thermal network models can predict LH2 tank heat ingress with approximately 1% accuracy, enabling reliable design of passive thermal protection"
+  - "Autonomous data-driven frameworks for cryogenic fluid management have been validated against NASA experimental data, enabling onboard boiloff prediction and control"
+  - "Metal hydride solid-state storage offers a zero-boiloff alternative to cryogenic LH2, though with mass and thermal management penalties"
+  - "Heat ingress at LH2 temperatures (20K) increases less than 26% compared to LN2 baseline, suggesting insulation performance scales manageably"
+  - "Mg-based hydrides achieve 7.6 wt% theoretical capacity but require 300-350C operating temperatures"
+
+gaps_identified:
+  - "No arxiv literature specifically addresses large-scale (50-100 tonne) cryogenic storage at L4/L5 Lagrange points—most work targets LEO or lunar applications"
+  - "Zero-boiloff cryocooler power requirements at station scale (100+ kW) not assessed in open literature—NASA technical reports contain this data but are not on arxiv"
+  - "Sunshield and passive thermal control designs for continuous solar exposure at 1 AU not modeled for propellant depot configurations"
+  - "Trade study between cryogenic LH2/LOX and storable propellant alternatives absent from arxiv literature"
+  - "Long-duration (years to decades) cryogenic storage performance data limited to short missions"
+  - "Note: The majority of cryogenic fluid management literature resides in AIAA journals, NASA Technical Memoranda, and Cryogenics journal rather than arxiv. Key references include NASA/TM-2006-214346 (CFM technology roadmap) and AIAA papers from the Joint Propulsion Conference series."

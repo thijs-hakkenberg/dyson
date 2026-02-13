@@ -4,7 +4,7 @@ slug: "zero-g-zone-refining-process"
 title: "Optimal zone refining process in zero-g"
 questionType: "experimentation"
 priority: "high"
-status: "open"
+status: "investigating"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-3"
 sourceBOMItemSlug: "material-processing-station"
@@ -17,6 +17,13 @@ tags:
   - "zero-gravity"
   - "silicon"
   - "purification"
+arxivReferences:
+  - "1102.3800"
+  - "2101.08019"
+  - "2102.11571"
+  - "1911.08248"
+  - "2303.10783"
+  - "2004.09683"
 createdDate: "2026-01-31"
 ---
 
