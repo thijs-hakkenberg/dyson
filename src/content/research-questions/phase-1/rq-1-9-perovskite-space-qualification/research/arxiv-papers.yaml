@@ -1,0 +1,71 @@
+# External references relevant to rq-1-9: Perovskite cell space qualification for multi-year operation
+# Generated: 2026-02-13
+
+papers: []
+
+key_findings:
+  - "Micron-thick SiO2 layer provides >99% weight reduction vs conventional radiation barriers for perovskites (NREL)"
+  - "Polyimide (PI) is best encapsulation material at all proton energy levels — aligns with Kapton substrate baseline"
+  - "Georgia Tech MISSE-21 mission sending 18 PV cells (incl. perovskite) to ISS exterior for 6-month test"
+  - "Perovskite self-healing is genuine but lattice fluidity also enables decomposition under prolonged radiation"
+  - "SiO2 barrier + polyimide substrate combination is emerging as likely baseline architecture"
+
+gaps_identified:
+  - "MISSE-21 data not yet available (expected mid-2026)"
+  - "No multi-year in-situ space exposure data for any perovskite formulation"
+  - "Combined stressor testing (UV + thermal cycling + radiation) limited"
+  - "Roll-to-roll production of SiO2-coated perovskite on polyimide not yet demonstrated at scale"
+
+external_references:
+  - source_id: "NREL-2023-sio2-radiation-barrier-perovskite"
+    title: "Thin, Lightweight Layer Provides Radiation Barrier for Perovskites in Space"
+    authors: ["NREL"]
+    journal: "NREL News Release (2023)"
+    relevance: critical
+    summary: "Micron-thick SiO2 is highly effective radiation barrier. >99% weight reduction vs conventional. No damage from low-energy protons. 19% efficiency retained."
+
+  - source_id: "MDPIEnergies-2025-perovskite-space-stability"
+    title: "Development of High-Efficiency and High-Stability Perovskite Solar Cells with Space Environmental Resistance"
+    authors: ["Multiple authors"]
+    journal: "MDPI Energies (June 2025)"
+    relevance: high
+    summary: "Genuine self-healing confirmed but lattice fluidity is double-edged. Proper testing requires stable high-efficiency devices and 50-150 keV protons."
+
+  - source_id: "GaTech-2025-misse21-pv-testing"
+    title: "Space Station Testing Will Evaluate Photovoltaic Materials"
+    authors: ["Georgia Tech Research Institute"]
+    journal: "GTRI Newsroom (2025)"
+    relevance: critical
+    summary: "18 PV cells incl. perovskite going to ISS exterior via MISSE-21. 6-month exposure. Multiple chemistries. Data expected mid-2026."
+
+  - source_id: "MooreMore-2025-polyimide-encapsulation-perovskite"
+    title: "Evaluating the protective efficacy of polymer encapsulation layer for perovskite solar cells under space radiation"
+    authors: ["Moore et al."]
+    journal: "Moore and More (Oct 2025)"
+    relevance: critical
+    summary: "Polyimide best encapsulation at all proton energy levels. Validates Kapton as dual-purpose substrate + radiation protection."
+
+  - source_id: "PMC-2022-perovskite-space-advances"
+    title: "Advances in Perovskites for Photovoltaic Applications in Space"
+    authors: ["Multiple authors"]
+    journal: "PMC (2022)"
+    relevance: medium
+    summary: "Review of perovskite PV advances for space applications. Radiation tolerance and stability assessment."
+
+  - source_id: "iScience-2018-perovskite-radiation-tolerance"
+    title: "Tolerance of Perovskite Solar Cell to High-Energy Particle Irradiations in Space Environment"
+    authors: ["Multiple authors"]
+    journal: "iScience (2018)"
+    relevance: medium
+    summary: "Early radiation tolerance data for perovskite cells. Baseline reference for subsequent studies."
+
+updated_gaps:
+  - "MISSE-21 ISS data (mid-2026) will be the most directly relevant dataset for Project Dyson PV decisions"
+  - "SiO2 barrier + polyimide substrate combination needs production-scale demonstration"
+  - "Multi-year degradation rates remain the critical unknown until flight data available"
+
+key_findings_update:
+  - "SiO2 + polyimide emerging as baseline encapsulation/protection architecture"
+  - "Self-healing mechanism confirmed but requires careful testing protocols to validate"
+  - "MISSE-21 will provide first direct ISS comparison data across multiple chemistries"
+  - "Polyimide validation aligns with existing Kapton substrate selection"

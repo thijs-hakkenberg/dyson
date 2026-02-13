@@ -1,0 +1,57 @@
+# External references relevant to rq-0-44: In-situ semiconductor fabrication feasibility from asteroid feedstock
+# Generated: 2026-02-13
+
+papers: []
+
+key_findings:
+  - "Space Forge ForgeStar-1 achieved world first: generating plasma aboard commercial satellite for semiconductor crystal growth (Dec 2025)"
+  - "NASA ODME program developing electrohydrodynamic (EHD) inkjet printing for maskless semiconductor fabrication in microgravity"
+  - "EHD printing eliminates need for lithography, etching, and complex fab process flow — additive and maskless"
+  - "Space environment vacuum is an advantage for semiconductor processing, not a challenge"
+  - "Technology has advanced from TRL 2-3 to actual orbital demonstrations in 2025"
+
+gaps_identified:
+  - "ForgeStar-1 demonstrated plasma generation, not actual semiconductor device fabrication"
+  - "No demonstration using asteroid-derived feedstock — all tests use Earth-sourced materials"
+  - "Yield, defect density, and device performance of space-fabricated semiconductors unknown"
+  - "Mass and power requirements for production-scale space fab equipment not characterized"
+  - "Path from current gram-scale demonstrations to kg-scale production undefined"
+
+external_references:
+  - source_id: "SpaceForge-2025-forgestar-1-orbital-semiconductor"
+    title: "Space Forge fires up 1st commercial semiconductor factory in space"
+    authors: ["Space Forge"]
+    journal: "Space.com / Electronics Weekly (Dec 2025 / Jan 2026)"
+    relevance: critical
+    summary: "World first orbital plasma generation for semiconductor manufacturing. 1000C furnace, GaN/SiC/AlN/diamond targets. Launched June 2025 on SpaceX Transporter-14."
+
+  - source_id: "NASA-ODME-2024-orbital-microfabrication"
+    title: "On Demand Manufacturing of Electronics - Orbital Microfabrication"
+    authors: ["NASA/Intel/NAU/Fujifilm/TEL/Axiom"]
+    journal: "Factories in Space"
+    relevance: critical
+    summary: "EHD inkjet printing for maskless semiconductor fabrication in microgravity. ISS flight testing 2024-2025. Eliminates lithography. Partners include Intel and Axiom Space."
+
+  - source_id: "NIST-2025-in-space-circular-economy"
+    title: "Second Seminar on Building an In-Space Circular Economy"
+    authors: ["NIST"]
+    journal: "NIST Events (August 2025)"
+    relevance: medium
+    summary: "Foundational technologies for in-situ resource use, recycling, and manufacturing directly relevant to semiconductor fabrication from asteroid feedstock."
+
+  - source_id: "MDPI-2025-in-space-manufacturing-review"
+    title: "In-Space Manufacturing: Technologies, Challenges, and Future Horizons"
+    authors: ["Multiple authors"]
+    journal: "MDPI JMMP (March 2025)"
+    relevance: high
+    summary: "Comprehensive review noting ISRU-to-semiconductor remains early stage but AM and EHD printing offer realistic near-term pathways."
+
+updated_gaps:
+  - "Orbital semiconductor manufacturing demonstrated but only at proof-of-concept scale"
+  - "ISRU feedstock-to-semiconductor pathway remains entirely undemonstrated"
+  - "Production rate scaling from laboratory curiosity to industrial output is the critical gap"
+
+key_findings_update:
+  - "Space semiconductor fabrication has advanced from theoretical to demonstrated in orbit (TRL 4-5)"
+  - "EHD printing pathway is particularly promising for ISRU feedstock — additive, maskless, leverages vacuum"
+  - "Multiple private companies and NASA programs converging on space semiconductor manufacturing"

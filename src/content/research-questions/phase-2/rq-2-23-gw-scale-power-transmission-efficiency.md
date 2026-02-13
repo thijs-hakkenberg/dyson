@@ -17,12 +17,19 @@ tags:
   - "microwave"
   - "efficiency"
   - "economics"
+  - "magnetron"
+  - "rectenna"
 category: "power-transmission"
 createdDate: "2026-02-09"
 arxivSources:
   - "1803.07123"
   - "2601.12386"
   - "2309.14274"
+externalReferences:
+  - "MDPIEnergies-2025-high-efficiency-magnetron-wpt"
+  - "JAXA-2025-retrodirective-beam-steering"
+  - "SciDirect-2026-microwave-wpt-efficiency"
+  - "SciDirect-2024-thin-film-ssps-wpt-analysis"
 ---
 
 ## Background

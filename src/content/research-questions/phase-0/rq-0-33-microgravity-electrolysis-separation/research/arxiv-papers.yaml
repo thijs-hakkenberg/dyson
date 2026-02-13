@@ -1,0 +1,56 @@
+# External references relevant to rq-0-33: Industrial-scale microgravity electrolysis gas-liquid separation
+# Generated: 2026-02-13
+
+papers: []
+
+key_findings:
+  - "Commercial neodymium magnets enhance water electrolysis in microgravity with current density improvements of up to 240% (Nature Chemistry, Aug 2025)"
+  - "Two complementary passive separation mechanisms: diamagnetic buoyancy guides bubbles to collection points; MHD force creates convective flow mimicking centrifugal separation"
+  - "PEM electrolyzer and MHD drive prototypes achieved near-terrestrial efficiencies in microgravity without any mechanical moving parts"
+  - "Drop tower experiments in 2022 validated dia- and paramagnetic phase separation on multiple liquid systems"
+  - "University of Stuttgart IRS developing static-water-feed PEM electrolyzer for ROMEO satellite mission (2025-2026)"
+
+gaps_identified:
+  - "No long-duration orbital demonstration of magnetic separation — 2025 Nature Chemistry results are from parabolic flight/drop tower"
+  - "Scaling from laboratory prototypes to industrial 500-750 kW electrolysis systems not assessed"
+  - "Electrode degradation rates under combined microgravity + magnetic field operation unknown"
+  - "Gas purity requirements for propellant-grade H2/O2 not validated with magnetic separation"
+
+external_references:
+  - source_id: "NatureChem-2025-romero-calvo-magnetic-electrolysis"
+    title: "Magnetically induced convection enhances water electrolysis in microgravity"
+    authors: ["Alvaro Romero-Calvo", "et al."]
+    journal: "Nature Chemistry (August 2025)"
+    relevance: critical
+    summary: "Breakthrough demonstrating 240% current density improvement using simple permanent magnets. Two mechanisms (diamagnetic buoyancy + MHD) achieve passive gas-liquid separation. Near-terrestrial efficiency with no moving parts."
+
+  - source_id: "npjMicrogravity-2022-magnetic-phase-separation"
+    title: "Magnetic phase separation in microgravity"
+    authors: ["Alvaro Romero-Calvo", "et al."]
+    journal: "npj Microgravity (2022)"
+    relevance: high
+    summary: "Drop tower validation of dia- and paramagnetic separation on multiple liquids. Foundation for the 2025 breakthrough."
+
+  - source_id: "npjMicrogravity-2022-electrolysis-reduced-gravity"
+    title: "Electrolysis in reduced gravitational environments: current research perspectives and future applications in space"
+    authors: ["Multiple authors"]
+    journal: "npj Microgravity (2022)"
+    relevance: high
+    summary: "Comprehensive review of PEM and alkaline electrolyzers in space. Covers bubble dynamics, separation challenges, and technology readiness."
+
+  - source_id: "EUCASS-2023-romeo-water-propulsion"
+    title: "Water propulsion electrolysis unit redesign for ROMEO satellite mission"
+    authors: ["University of Stuttgart IRS"]
+    journal: "EUCASS 2023"
+    relevance: medium
+    summary: "Static-water-feed PEM electrolyzer for orbital demonstration. Flight planned 2025-2026."
+
+updated_gaps:
+  - "Magnetic separation eliminates primary mechanical separation concern but orbital-duration validation still needed"
+  - "Industrial scaling (500-750 kW) from laboratory scale remains the critical unknown"
+  - "Electrode lifetime under combined magnetic field + microgravity operation requires characterization"
+
+key_findings_update:
+  - "Magnetic phase separation using permanent magnets eliminates all mechanical moving parts for gas-liquid separation"
+  - "Near-terrestrial electrolysis efficiency achievable in microgravity with passive magnetic approach"
+  - "Multiple independent research groups converging on magnetic separation as preferred architecture"

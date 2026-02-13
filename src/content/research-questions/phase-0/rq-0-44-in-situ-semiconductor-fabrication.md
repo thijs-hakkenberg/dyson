@@ -3,7 +3,7 @@ questionId: "rq-0-44"
 slug: "in-situ-semiconductor-fabrication"
 title: "In-situ semiconductor fabrication feasibility from asteroid feedstock"
 questionType: "experimentation"
-status: "open"
+status: "investigating"
 priority: "high"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-3"
@@ -22,6 +22,12 @@ tags:
   - "asteroid-feedstock"
   - "electronics"
   - "ISRU"
+  - "space-manufacturing"
+externalReferences:
+  - "SpaceForge-2025-forgestar-1-orbital-semiconductor"
+  - "NASA-ODME-2024-orbital-microfabrication"
+  - "NIST-2025-in-space-circular-economy"
+  - "MDPI-2025-in-space-manufacturing-review"
 createdDate: "2026-02-10"
 ---
 

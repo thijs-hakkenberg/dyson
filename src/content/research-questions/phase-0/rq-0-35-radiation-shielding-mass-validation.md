@@ -3,7 +3,7 @@ questionId: "rq-0-35"
 slug: "radiation-shielding-mass-validation"
 title: "Radiation shielding mass requirement validation for crew modules"
 questionType: "engineering-decision"
-status: "open"
+status: "investigating"
 priority: "high"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-4"
@@ -17,6 +17,14 @@ tags:
   - "shielding"
   - "crew-safety"
   - "mass-budget"
+  - "hybrid-shielding"
+externalReferences:
+  - "StemRad-2024-astrorad-space-radiation"
+  - "LifeSciSpace-2023-hybrid-shielding-methods"
+  - "NewSpaceEcon-2025-active-radiation-shielding"
+  - "NASA-2015-real-martians-radiation"
+  - "Frontiers-2023-deep-space-radiation-mitigation"
+  - "ANS-2025-deep-space-radiation-controls"
 createdDate: "2026-02-10"
 ---
 

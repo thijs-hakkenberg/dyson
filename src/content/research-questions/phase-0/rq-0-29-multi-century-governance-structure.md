@@ -19,6 +19,11 @@ tags:
   - "global-benefit"
   - "coordination"
   - "volunteer"
+  - "self-replication-governance"
+externalReferences:
+  - "NIST-2025-in-space-circular-economy"
+  - "OrbitalToday-2025-von-neumann-probe-governance"
+  - "Borgue-Hein-2021-self-replicating-probes"
 createdDate: "2026-02-09"
 ---
 

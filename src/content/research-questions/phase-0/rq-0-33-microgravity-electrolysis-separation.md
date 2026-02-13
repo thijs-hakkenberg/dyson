@@ -3,7 +3,7 @@ questionId: "rq-0-33"
 slug: "microgravity-electrolysis-separation"
 title: "Industrial-scale microgravity electrolysis gas-liquid separation"
 questionType: "experimentation"
-status: "open"
+status: "investigating"
 priority: "high"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-6"
@@ -18,6 +18,12 @@ tags:
   - "microgravity"
   - "gas-liquid-separation"
   - "propellant-production"
+  - "magnetic-separation"
+externalReferences:
+  - "NatureChem-2025-romero-calvo-magnetic-electrolysis"
+  - "npjMicrogravity-2022-magnetic-phase-separation"
+  - "npjMicrogravity-2022-electrolysis-reduced-gravity"
+  - "EUCASS-2023-romeo-water-propulsion"
 createdDate: "2026-02-10"
 ---
 

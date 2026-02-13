@@ -1,0 +1,71 @@
+# External references relevant to rq-0-35: Radiation shielding mass requirement validation for crew modules
+# Generated: 2026-02-13
+
+papers: []
+
+key_findings:
+  - "AstroRad HDPE vest flight-proven on ISS and Artemis I — demonstrates selective organ-specific shielding approach"
+  - "Hybrid active-passive shielding could reduce mass requirements by 20-40% vs passive-only"
+  - "Optimal hybrid configuration: active outside passive for SPEs, passive before active for GCRs"
+  - "Water as dual-use shielding is most mass-efficient approach — directly applicable with ISRU water"
+  - "MgB2 HTS superconducting magnets enable passive-cooled magnetic shielding using deep-space cold"
+
+gaps_identified:
+  - "No integrated test of hybrid active-passive shielding at full scale"
+  - "HTS magnetic shielding TRL remains low (2-3) for near-term application"
+  - "L4/L5-specific radiation environment modeling for crew modules not published"
+  - "Long-duration (multi-month) crew exposure data outside magnetosphere limited to Apollo missions"
+
+external_references:
+  - source_id: "StemRad-2024-astrorad-space-radiation"
+    title: "Radiation Shielding in Space - AstroRad Vest"
+    authors: ["StemRad"]
+    journal: "StemRad (2024)"
+    relevance: high
+    summary: "Flight-proven HDPE selective shielding. Variable thickness based on organ sensitivity. Flown on ISS and Artemis I."
+
+  - source_id: "LifeSciSpace-2023-hybrid-shielding-methods"
+    title: "Hybrid methods of radiation shielding against deep-space radiation"
+    authors: ["Multiple authors"]
+    journal: "Life Sciences in Space Research (2023)"
+    relevance: critical
+    summary: "Hybrid active-passive shielding reduces mass 20-40%. SPEs: active outside passive. GCRs: passive before active for HZE fragmentation."
+
+  - source_id: "NewSpaceEcon-2025-active-radiation-shielding"
+    title: "Active Radiation Shielding: A Comprehensive Analysis"
+    authors: ["New Space Economy"]
+    journal: "New Space Economy (Nov 2025)"
+    relevance: medium
+    summary: "MgB2 HTS from CERN LHC enables passive-cooled magnetic shielding. Eliminates cryocooler requirement. TRL still low."
+
+  - source_id: "NASA-2015-real-martians-radiation"
+    title: "Real Martians: How to Protect Astronauts from Space Radiation on Mars"
+    authors: ["NASA"]
+    journal: "NASA Science (2015)"
+    relevance: high
+    summary: "Confirms strategic water placement as most mass-efficient shielding approach for deep space."
+
+  - source_id: "Frontiers-2023-deep-space-radiation-mitigation"
+    title: "Evaluation of deep space exploration risks and mitigations against radiation and microgravity"
+    authors: ["Multiple authors"]
+    journal: "Frontiers in Nuclear Medicine (2023)"
+    relevance: medium
+    summary: "Comprehensive risk evaluation framework for deep space exploration radiation and microgravity."
+
+  - source_id: "ANS-2025-deep-space-radiation-controls"
+    title: "Deep Space: The new frontier of radiation controls"
+    authors: ["ANS Nuclear Newswire"]
+    journal: "ANS (July 2025)"
+    relevance: medium
+    summary: "Proposes lunar regolith via mass driver for spacecraft hull shielding. Relevant to Project Dyson mass driver infrastructure."
+
+updated_gaps:
+  - "Hybrid shielding approach identified but not yet demonstrated at system level"
+  - "Refined mass estimate (3-5K kg) depends on hybrid approach feasibility"
+  - "HTS magnetic shielding is promising but not yet actionable for Phase 0 timeline"
+
+key_findings_update:
+  - "Shielding mass estimate can be refined downward from 4-8K kg to 3-5K kg per module with hybrid approach"
+  - "ISRU water serves as dual-use propellant and shielding material"
+  - "AstroRad selective shielding reduces mass requirement for crew areas"
+  - "Lunar regolith shielding via mass driver connects to existing Project Dyson infrastructure"

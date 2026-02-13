@@ -1,0 +1,76 @@
+# External references relevant to rq-2-23: GW-Scale Space-to-Earth Power Transmission Efficiency
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "1803.07123"
+    title: "Space-based solar power: Possible defence applications and opportunities for Australia"
+    authors: ["Multiple authors"]
+    relevance: medium
+    summary: "Analysis of space-based solar power including power transmission technology options and efficiency considerations for large-scale systems."
+
+  - arxiv_id: "2601.12386"
+    title: "Wireless power transfer technology overview"
+    authors: ["Multiple authors"]
+    relevance: high
+    summary: "Overview of wireless power transfer technologies applicable to space-to-ground transmission at scale."
+
+  - arxiv_id: "2309.14274"
+    title: "Retrodirective beam steering and phase coherence for large transmitter arrays"
+    authors: ["Multiple authors"]
+    relevance: high
+    summary: "Analysis of retrodirective beam steering requirements for maintaining phase coherence across large transmitter arrays."
+
+key_findings:
+  - "Novel rising-sun magnetron achieves >85% DC-to-microwave efficiency at >100 kW (vs conventional ~54%)"
+  - "DARPA transmitted 800W over 8.6 km at 20% end-to-end efficiency — major improvement over prior 230W/1.7km"
+  - "NTT/MHI achieved ~152W over 1 km at 15% efficiency using laser-based WPT"
+  - "JAXA retrodirective beam control achieves 0.001-degree pointing accuracy from GEO"
+  - "Rectenna conversion efficiency >95% demonstrated in laboratory conditions"
+  - "End-to-end theoretical efficiency: DC→RF (85%) × beam (85-90%) × rectenna (95%) ≈ 68-73%"
+  - "Practical space-to-ground efficiency consensus: ~50% for full 1 GW system from GEO"
+
+gaps_identified:
+  - "No GW-scale demonstration exists — largest demos are sub-kilowatt"
+  - "Atmospheric effects at GW power density not fully characterized"
+  - "Rising-sun magnetron results are from simulation, not hardware test"
+  - "Thermal management for transmitter at GW scale unaddressed"
+
+external_references:
+  - source_id: "MDPIEnergies-2025-high-efficiency-magnetron-wpt"
+    title: "Design and Development of High-Power, High-Efficiency, and Low-Noise Microwave Sources for Wireless Power Transmission"
+    authors: ["Multiple authors"]
+    journal: "MDPI Energies (Oct 2025)"
+    relevance: critical
+    summary: "Rising-sun magnetron at 2.45 GHz: >100 kW output at >85% efficiency in simulation. Could reduce MPT cost by ~30%."
+
+  - source_id: "JAXA-2025-retrodirective-beam-steering"
+    title: "Research on Microwave Wireless Power Transmission Technology"
+    authors: ["JAXA"]
+    journal: "JAXA SSPS Research (2025)"
+    relevance: high
+    summary: "0.001-degree pointing accuracy from GEO. REV method for phase control. Software-based pilot signal tracking."
+
+  - source_id: "SciDirect-2026-microwave-wpt-efficiency"
+    title: "Discussion on the efficiency of Microwave Wireless Power Transmission"
+    authors: ["Multiple authors"]
+    journal: "ScienceDirect (Jan 2026)"
+    relevance: high
+    summary: "Introduces aperture-to-distance ratio as critical optimization parameter. Rectenna >95% lab efficiency. ~50% practical end-to-end."
+
+  - source_id: "SciDirect-2024-thin-film-ssps-wpt-analysis"
+    title: "Microwave wireless power transfer efficiency analysis framework for a thin film SSPS"
+    authors: ["Multiple authors"]
+    journal: "Advances in Space Research (2024)"
+    relevance: medium
+    summary: "Framework for thin-film SSPS WPT analysis addressing membrane-specific power conversion considerations."
+
+updated_gaps:
+  - "Magnetron simulation results need hardware validation"
+  - "GW-scale demonstration remains the fundamental gap — all current demos are 3+ orders of magnitude below"
+  - "Scaling effects from kW to GW may introduce nonlinearities not captured in component-level analysis"
+
+key_findings_update:
+  - "DC-to-microwave efficiency dramatically improved from ~54% to >85% (simulation) with new magnetron design"
+  - "End-to-end theoretical efficiency chain: ~68-73% (vs previous 52-70% estimates)"
+  - "JAXA achieving 0.001-degree pointing accuracy addresses beam steering concern"
+  - "New magnetron could reduce 1 GW SSPS cost by ~$8.4B (30% of $28B MPT subsystem)"

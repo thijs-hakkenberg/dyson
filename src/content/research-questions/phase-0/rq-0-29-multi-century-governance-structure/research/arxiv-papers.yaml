@@ -1,0 +1,54 @@
+# External references relevant to rq-0-29: Governance structure for multi-century coordination
+# Generated: 2026-02-13
+
+papers:
+  - arxiv_id: "2005.12303"
+    title: "Near-term self-replicating probes: A concept design"
+    authors: ["Olivia Borgue", "Andreas M. Hein"]
+    relevance: high
+    summary: "Concept design estimating ~70% self-replication rate achievable near-term for sub-100 kg probes. Directly relevant to governance of self-replicating systems and mass closure ratio targets."
+
+key_findings:
+  - "Artemis Accords legitimize resource extraction but are completely silent on self-replication"
+  - "Multiple 2025 authors call for new international treaties specifically addressing autonomous self-replicating systems"
+  - "NIST seminar on in-space circular economy addresses governance for multi-generational space industrial activities"
+  - "~70% self-replication rate achievable near-term, limited by AI, AM, and resource harvesting TRL"
+  - "Proposed governance elements: weaponisation ban, replication cycle limits, target selection protocols, mission termination mechanisms"
+
+gaps_identified:
+  - "No purpose-built governance framework exists for multi-century self-replicating systems"
+  - "Artemis Accords safety zone concept does not address autonomous manufacturing expansion"
+  - "Legal status of autonomous self-replicating entities in international space law undefined"
+  - "No historical precedent for voluntary governance of exponentially growing autonomous systems"
+
+external_references:
+  - source_id: "NIST-2025-in-space-circular-economy"
+    title: "Second Seminar on Building an In-Space Circular Economy"
+    authors: ["NIST"]
+    journal: "NIST Events (August 2025)"
+    relevance: high
+    summary: "Governance frameworks for multi-generational space industrial activities, public-private partnerships, and international coordination structures."
+
+  - source_id: "OrbitalToday-2025-von-neumann-probe-governance"
+    title: "Von Neumann Probe: How AI and Ethics Shape Self-Replicating Spacecraft"
+    authors: ["Orbital Today"]
+    journal: "Orbital Today (November 2025)"
+    relevance: high
+    summary: "Artemis Accords silent on self-replication. Proposed treaty elements: weaponisation ban, replication limits, target protocols, termination mechanisms."
+
+  - source_id: "Borgue-Hein-2021-self-replicating-probes"
+    title: "Near-term self-replicating probes: A concept design"
+    authors: ["Olivia Borgue", "Andreas M. Hein"]
+    journal: "Acta Astronautica (2021)"
+    relevance: high
+    summary: "~70% self-replication rate achievable near-term for sub-100 kg probes. Limited by AI, AM, resource harvesting. Directly relevant to mass closure ratio."
+
+updated_gaps:
+  - "Contextual governance frameworks emerging but no breakthrough applicable to Project Dyson timescales"
+  - "Self-replication governance is an entirely new legal frontier with no precedent"
+  - "NIST circular economy framework is closest analog but addresses decades, not centuries"
+
+key_findings_update:
+  - "Governance gap analysis for self-replicating systems published in 2025"
+  - "NIST developing frameworks for multi-generational space industrial governance"
+  - "Borgue & Hein self-replication estimates directly inform mass closure ratio targets"
