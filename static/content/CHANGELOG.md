@@ -6,6 +6,25 @@ All notable changes to Project Dyson are documented here.
 
 ### Added
 
+#### Open Question Research Update (7 questions, ~30 external sources, 4 status changes)
+- Review external literature (Nature Chemistry, MDPI, NASA, ScienceDirect, industry data) across 7 research questions
+- Add research/analysis.md and research/arxiv-papers.yaml for all 7 questions
+- Add 27 external paper metadata files across 7 new categories under `static/content/research/external-papers/`
+  - `microgravity-electrolysis/` (3 papers), `perovskite-space-pv/` (4), `space-semiconductor-fabrication/` (3), `radiation-shielding/` (6), `alternative-propellants/` (4), `power-transmission/` (4), `space-governance/` (3)
+- Update research consolidation document with new question counts, tables, and category sections
+- Add blog article: "Open Question Research Update: Magnets, Argon, and Orbital Fabs"
+
+**Status changes (4 questions):**
+- rq-0-33 (microgravity electrolysis): open → investigating — Nature Chemistry magnetic phase separation eliminates mechanical separators (240% efficiency improvement)
+- rq-0-35 (radiation shielding): open → investigating — hybrid active-passive shielding + dual-use water reduces estimate from 4-8K kg to 3-5K kg
+- rq-0-44 (semiconductor fabrication): open → investigating — Space Forge ForgeStar-1 first orbital semiconductor demo, NASA ODME EHD printing
+- rq-1-31 (alternative propellants): open → investigating + partially-resolved — SpaceX Starlink V2 operational argon Hall thrusters at constellation scale
+
+**Reference additions (all 7 questions):**
+- rq-0-29 (governance): NIST circular economy, von Neumann probe governance gap, Borgue & Hein self-replication estimates
+- rq-1-9 (perovskite): NREL SiO₂ barrier, polyimide encapsulation validation, Georgia Tech MISSE-21 ISS flight test
+- rq-2-23 (power transmission): >85% magnetron efficiency (sim), JAXA 0.001° pointing, updated efficiency chain ~68-73% theoretical
+
 #### Phase 0 Engineering Questions Literature Review — Tier 2 (3 questions, 18 papers)
 - Add arxiv research for rq-0-13: Slag management in microgravity (6 papers, electromagnetic separation most promising)
 - Add arxiv research for rq-0-22: Concentrators vs flat-plate (7 papers, thermal annealing may self-heal radiation damage)
