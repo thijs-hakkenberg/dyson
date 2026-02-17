@@ -97,8 +97,11 @@ async function queryModel(modelKey, prompt) {
   console.log(`  Querying ${model.name}...`);
   const startTime = Date.now();
 
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 900000); // 15 min timeout
   const response = await fetch(endpoint, {
     method: 'POST',
+    signal: controller.signal,
     headers: {
       'Authorization': `Bearer ${DATABRICKS_TOKEN}`,
       'Content-Type': 'application/json'
@@ -118,6 +121,7 @@ async function queryModel(modelKey, prompt) {
       temperature: 0.7
     })
   });
+  clearTimeout(timeoutId);
 
   if (!response.ok) {
     const errorText = await response.text();
