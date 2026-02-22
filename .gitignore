@@ -26,5 +26,15 @@ __pycache__
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.spl
+texput.log
+
+# Python coverage
+.coverage
+
 # Research PDFs (large binary files)
 research/*.pdf
