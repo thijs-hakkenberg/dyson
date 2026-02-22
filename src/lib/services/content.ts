@@ -242,7 +242,7 @@ export const PHASES: Phase[] = [
 			{
 				id: 'bom-1-4',
 				name: 'Assembly Node Hub',
-				description: 'Modular orbital manufacturing and assembly facility with robotic assembly cells. Located at Sun-Earth L1/L4. Earth manufacturing first 1,000-2,000 units, ISRU transition at ~3,500 units. Hierarchical coordination to 1M+ nodes',
+				description: 'Modular orbital manufacturing and assembly facility with robotic assembly cells. Located at Sun-Earth L1/L4. Earth manufacturing first 1,000-2,000 units, ISRU transition at ~4,300 units (conditional median at r=5%, 85% convergence probability). Hierarchical coordination to 1M+ nodes',
 				quantity: 1,
 				unit: 'hub',
 				unitCost: 15000000000,

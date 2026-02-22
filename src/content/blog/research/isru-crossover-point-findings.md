@@ -33,6 +33,10 @@ The answer depends on:
 - Production learning curves
 - Scale of deployment
 
+**Update (February 2026):** This post describes early results from a simplified simulator. A rigorous, peer-reviewed analysis with NPV discounting, 10,000 Monte Carlo runs, 20 stochastic parameters, copula correlations, and learning-curve saturation has since been completed. The updated paper finds a conditional median crossover of ~4,300 units at r=5% with 85% convergence probability. See [the full publication analysis](/blog/isru-economic-crossover-paper) for the definitive results.
+
+---
+
 ## The Key Finding: Crossover at ~3,500 Units
 
 **Under baseline assumptions ($1,000/kg launch, $50B ISRU capital), ISRU becomes cheaper after approximately 3,500 collector units.**

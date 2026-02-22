@@ -55,42 +55,51 @@ The manufacturing location decision cascades through nearly every aspect of Phas
 
 ## Answer
 
-**Monte Carlo analysis identifies the ISRU crossover point at approximately 2,000-5,000 units depending on launch costs and ISRU capital investment. Under baseline assumptions ($1,000/kg launch, $50B ISRU capital), crossover occurs at ~3,500 units.**
+**A rigorous NPV-based Monte Carlo analysis (10,000 runs, 20 stochastic parameters, copula correlations) finds crossover in 85% of parameter draws at r=5%, with a conditional median of ~4,300 units and Kaplan-Meier median of ~5,350 units. The result is dominated by ISRU capital cost K (63% of variance).**
 
-### Key Findings
+This answer supersedes the earlier preliminary estimate of ~3,500 units. The full analysis is described in [the publication blog post](/blog/isru-economic-crossover-paper) and in the paper "Economic Inflection Points in Space Manufacturing" (Version AM).
 
-| Scenario | Launch Cost | ISRU Capital | Crossover Point | Break-even Year |
-|----------|------------|--------------|-----------------|-----------------|
-| Conservative | $2,000/kg | $100B | 8,000 units | Year 15 |
-| Baseline | $1,000/kg | $50B | 3,500 units | Year 10 |
-| Optimistic | $500/kg | $30B | 1,500 units | Year 7 |
+### Headline Results (r = 5%, canonical configuration)
 
-### Cost Model Analysis
+| Metric | Value |
+|--------|-------|
+| Convergence probability | 85% (95% CI: [84%, 86%]) |
+| Conditional median crossover | ~4,300 units |
+| Kaplan-Meier median | ~5,350 units |
+| Phased-K baseline (deterministic) | 3,749 units |
+| Lump-sum baseline (deterministic) | 4,374 units |
+| Analytically permanent crossover | 22% of converging runs |
+| Functionally permanent (savings window ~196k units) | 78% of converging runs |
+| Variance explained by K + LR_E | ~83% |
 
-**Earth Manufacturing Path**:
-- First unit cost: $50M (manufacturing) + $50M (launch) = $100M
-- Learning curve: 85% (15% cost reduction per doubling)
-- 10,000th unit cost: ~$25M total
+### K-Conditional Crossover Surface
 
-**ISRU Path**:
-- Capital investment: $30-100B seed factory
-- Ramp-up: 3-10 years to full production
-- Operational cost: $1-5M/unit after ramp-up
-- Learning curve: 90% (slower learning in space)
+ISRU capital cost K dominates outcomes. The headline 85% convergence is conditional on K ~ LogNormal(median $65B):
 
-### Sensitivity Analysis
+| K median | Crossover probability |
+|----------|----------------------|
+| $65B (baseline) | 85% |
+| $100B | 67% |
+| $150B | 46% |
 
-The crossover point is most sensitive to:
-1. **Launch cost** (±2,000 units per $500/kg change)
-2. **ISRU capital cost** (±1,500 units per $25B change)
-3. **ISRU ramp-up time** (±500 units per year)
+### What Prevents Crossover
+
+Three factors can eliminate the ISRU advantage entirely:
+1. **Vitamin costs > ~$50,000/kg** (Earth-sourced components become dominant)
+2. **Discount rates > ~20%** (upfront capital penalty too large)
+3. **ISRU success probability < ~70%** (program failure risk dominates)
+
+### Revenue Breakeven
+
+For revenue-generating infrastructure, deployment delay offsets cost savings above ~$0.94M/unit/year. The ISRU advantage is strongest for non-revenue infrastructure.
 
 ### Recommendation
 
 1. **Begin Earth manufacturing immediately** for first 1,000-2,000 units
-2. **Deploy ISRU seed factory** in Year 3-5 of Phase 1
-3. **Transition to hybrid production** around unit 2,000
-4. **Complete ISRU transition** by unit 5,000
+2. **Deploy ISRU seed factory** in parallel (phased capital over 5 years)
+3. **Transition to hybrid production** around unit 3,700-4,300
+4. **Hybrid strategy is value-positive** at program scales >= 20,000 units
+5. **K remains the critical unknown** -- investment in reducing K uncertainty has highest decision value
 
 [Launch Interactive Simulator](/questions/isru-manufacturing-transition-point/simulator)
 
