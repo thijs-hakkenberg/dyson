@@ -52,3 +52,126 @@ gaps_identified:
   - "Trade study between cryogenic LH2/LOX and storable propellant alternatives absent from arxiv literature"
   - "Long-duration (years to decades) cryogenic storage performance data limited to short missions"
   - "Note: The majority of cryogenic fluid management literature resides in AIAA journals, NASA Technical Memoranda, and Cryogenics journal rather than arxiv. Key references include NASA/TM-2006-214346 (CFM technology roadmap) and AIAA papers from the Joint Propulsion Conference series."
+
+external_references:
+  - source_id: "Plachta-2018"
+    title: "NASA cryocooler technology developments and goals to achieve zero boil-off"
+    authors: ["David Plachta"]
+    journal: "Cryogenics Vol. 94 (2018)"
+    relevance: critical
+    summary: "Full history of ZBO concept development and reverse turbo-Brayton cryocooler progress. Largest flight cryocoolers deliver <1W at 20K and 20W at 90K—over an order of magnitude short of LH2 ZBO requirements."
+
+  - source_id: "NASA/TM-2015-0000134"
+    title: "Cryogenic Boil-Off Reduction System Testing"
+    authors: ["David Plachta", "Mark Johnson"]
+    journal: "NASA Technical Memorandum"
+    relevance: critical
+    summary: "Demonstrated 90K broad area cooling shield within MLI to reduce hot-side temperature. Carnot efficiency at LH2 temps is just 7%, making distributed cooling essential."
+
+  - source_id: "Kittel-2002"
+    title: "An overview of NASA efforts on zero boiloff storage of cryogenic propellants"
+    authors: ["Peter Kittel"]
+    journal: "Cryogenics 41 (2002)"
+    relevance: high
+    summary: "Foundational overview from the tri-center ARC/GRC/MSFC ZBO collaboration establishing the NASA roadmap."
+
+  - source_id: "NASA/TP-2017-219389"
+    title: "Zero Boil-Off Methods for Large Scale Liquid Hydrogen"
+    authors: ["William Notardonato"]
+    journal: "NASA Technical Paper"
+    relevance: critical
+    summary: "GODU-LH2 ground demo: 125,000L LH2 tank with Linde LR1620 refrigerator providing 390W at 20K achieved ZBO using three control methods. Largest scale ZBO demonstration to date."
+
+  - source_id: "AIAA-2008-7644"
+    title: "A Practical, Affordable Cryogenic Propellant Depot Based on ULA's Flight Experience"
+    authors: ["Bernard Kutter", "Frank Zegler"]
+    journal: "AIAA"
+    relevance: critical
+    summary: "Key sunshield paper. Lagrangian point depots avoid Earth heating, use JWST-like conical sunshield with slow axial spin for centrifugal liquid settling."
+
+  - source_id: "US20100187365A1"
+    title: "Cryogenic propellant depot and deployable sunshield"
+    authors: ["Bernard Kutter"]
+    journal: "US Patent"
+    relevance: high
+    summary: "At Lagrange points the sunshield cone can be significantly truncated with docking port sun-facing. Directly addresses L4/L5 thermal architecture."
+
+  - source_id: "AIAA-2009-6756"
+    title: "Realistic Near-Term Propellant Depots"
+    authors: ["Bernard Kutter"]
+    journal: "AIAA"
+    relevance: high
+    summary: "Practical layered approach: MLI + sunshield + slow spin. Thermal capacitance of propellant buys months of near-ZBO passively."
+
+  - source_id: "AIAA-2023-4620"
+    title: "Architecture Study for a Fuel Depot Supplied from Lunar Resources"
+    authors: ["Thomas Perrin", "Jay Casler"]
+    journal: "AIAA"
+    relevance: medium
+    summary: "Recommends Earth-Moon L1 for depot, establishes cryocooler performance requirements."
+
+  - source_id: "NASA/TM-2012-010675"
+    title: "Thermal Optimization of a Cryogenic Propellant Depot"
+    authors: ["NASA"]
+    journal: "NASA Technical Memorandum"
+    relevance: high
+    summary: "Thermal Desktop analysis showing LH2 module sensitivity to Earth IR/albedo through sunshield opening—a problem that largely vanishes at L4/L5."
+
+  - source_id: "NASA/TP-1999-209263"
+    title: "Multilayer Insulation Material Guidelines"
+    authors: ["Miria Finckenor"]
+    journal: "NASA Technical Paper"
+    relevance: critical
+    summary: "Canonical MLI reference. Documents UV, atomic oxygen, and micrometeorite degradation from Hubble servicing missions."
+
+  - source_id: "Johnson-MLI-Large-Tanks"
+    title: "Multilayer insulation considerations for large propellant tanks"
+    authors: ["Wesley Johnson"]
+    journal: "Conference Paper"
+    relevance: critical
+    summary: "MLI degradation factors 1.6-4x for large tanks. MLI contributes 70-90% of total heat input to cryogenic propellant tanks."
+
+  - source_id: "Johnson-2014-LBMLI"
+    title: "Design, fabrication and test of Load Bearing MLI"
+    authors: ["Wesley Johnson"]
+    journal: "Cryogenics 64 (2014)"
+    relevance: high
+    summary: "LBMLI has 51% less heat leakage per layer and 38% less mass than conventional MLI, can structurally support broad area cooled shield."
+
+  - source_id: "Johnson-MLI-Penetrations"
+    title: "Thermal Degradation of MLI Due to Penetrations"
+    authors: ["Wesley Johnson", "James Kelly"]
+    journal: "Conference Paper"
+    relevance: medium
+    summary: "Experimental and modeling study of seam and penetration effects on MLI thermal performance."
+
+  - source_id: "Zagarola-2006"
+    title: "High-capacity turbo-Brayton cryocoolers for space applications"
+    authors: ["Mark Zagarola"]
+    journal: "Cryogenics 46 (2006)"
+    relevance: high
+    summary: "Turbo-Brayton offers high reliability, negligible vibration, long lifetimes, distributed cooling capability. Current capacity orders of magnitude below station requirements."
+
+  - source_id: "Gandolfi-2024"
+    title: "Cryogenic propellant management in space: open challenges and perspectives"
+    authors: ["Matteo Gandolfi"]
+    journal: "npj Microgravity 10, 22 (2024)"
+    relevance: critical
+    summary: "Most recent comprehensive review (open access). Reviews reference missions, architectures, technology demonstrators. Reference list cites essentially every relevant AIAA/NASA/Cryogenics paper."
+
+updated_gaps:
+  - "L4/L5-specific thermal modeling remains unaddressed—all depot designs target LEO or lunar vicinity"
+  - "Cryocooler scaling from milliwatt (JWST: 0.25W at 14K) to hundred-watt class (station needs 100-500W at 20K) has no validated pathway for flight systems—GODU-LH2 used ground-based Linde refrigerator"
+  - "MLI long-duration (10-30 year) degradation at L4/L5 specific environment not modeled—Hubble data confirms degradation occurs but was in LEO"
+  - "Sunshield deployment architecture for L4/L5 not specifically designed—ULA patent addresses Lagrange simplification but not at station scale"
+  - "Trade between storable and cryogenic propellants still needs station-specific analysis"
+
+key_findings_update:
+  - "GODU-LH2 ground demo achieved ZBO at 125,000L scale with 390W at 20K—confirming feasibility but using non-flight refrigerator"
+  - "ULA sunshield patent specifically addresses Lagrange point thermal simplification with truncated cone design"
+  - "Flight cryocoolers are 2-3 orders of magnitude below station ZBO requirements (JWST: 0.25W at 14K vs need for 100-500W at 20K)"
+  - "MLI real-world degradation factors of 1.6-4x for large tanks—validates concern about lab-vs-flight performance gap"
+  - "LBMLI technology offers 51% heat leak reduction and structural support for broad area cooling shields"
+  - "90K broad area cooling within MLI layers reduces the thermal gradient the 20K cryocooler must overcome—improving effective COP"
+  - "Thermal capacitance of propellant itself provides months of near-ZBO storage passively with proper sunshield"
+  - "Earth IR/albedo through sunshield opening is a major concern for LEO/lunar depots but largely vanishes at L4/L5"

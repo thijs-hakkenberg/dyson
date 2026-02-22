@@ -26,6 +26,26 @@ arxivReferences:
   - "1307.0890"
   - "1304.1959"
   - "1108.1332"
+externalReferences:
+  - "Plachta-2018"
+  - "NASA/TM-2015-0000134"
+  - "Kittel-2002"
+  - "NASA/TP-2017-219389"
+  - "AIAA-2008-7644"
+  - "US20100187365A1"
+  - "AIAA-2009-6756"
+  - "AIAA-2023-4620"
+  - "NASA/TM-2012-010675"
+  - "NASA/TP-1999-209263"
+  - "Johnson-MLI-Large-Tanks"
+  - "Johnson-2014-LBMLI"
+  - "Johnson-MLI-Penetrations"
+  - "Zagarola-2006"
+  - "Gandolfi-2024"
+childQuestionIds:
+  - "rq-0-47"
+  - "rq-0-48"
+  - "rq-0-49"
 createdDate: "2026-02-10"
 ---
 
