@@ -1,10 +1,18 @@
 <script lang="ts">
 	import { marked } from 'marked';
 	import { sanitizeMarkdownHTML } from '$lib/utils/sanitize';
+	import { trackBlogView } from '$lib/services/mixpanel';
 
 	let { data } = $props();
 
 	const post = $derived(data.post);
+
+	// Track blog view
+	$effect(() => {
+		if (post) {
+			trackBlogView(post.slug, post.title, post.category);
+		}
+	});
 
 	const formattedDate = $derived(
 		post

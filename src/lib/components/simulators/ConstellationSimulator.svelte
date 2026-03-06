@@ -1,11 +1,15 @@
 <script lang="ts">
 	import type { SimulationConfig, SimulationOutput, SimulationProgress } from '$lib/services/simulation';
 	import { DEFAULT_CONFIG, createSimulationRunner } from '$lib/services/simulation';
+	import { trackSimulatorRun } from '$lib/services/mixpanel';
 
 	import SimulationControls from './SimulationControls.svelte';
 	import CoverageChart from './CoverageChart.svelte';
 	import SimulationResults from './SimulationResults.svelte';
 	import OrbitalVisualization from './OrbitalVisualization.svelte';
+
+	// Props
+	let { questionSlug = 'minimum-constellation-size' } = $props();
 
 	// State
 	let config: SimulationConfig = $state({ ...DEFAULT_CONFIG });
@@ -29,6 +33,16 @@
 		isRunning = true;
 		error = null;
 		progress = null;
+
+		// Track simulation run
+		trackSimulatorRun(questionSlug, 'constellation', {
+			constellation_size: config.constellationSize,
+			mission_duration: config.missionDuration,
+			failure_rate: config.annualFailureRate,
+			propulsion_type: config.propulsionType,
+			monte_carlo_runs: config.monteCarloRuns,
+			nea_population: config.neaPopulationSize
+		});
 
 		try {
 			output = await runner.run(config, (p) => {

@@ -2,6 +2,7 @@
 	import { getPhases, formatCurrency, getTotalProjectCost } from '$lib/services/content';
 	import PhaseCard from '$lib/components/phases/PhaseCard.svelte';
 	import BlogCard from '$lib/components/blog/BlogCard.svelte';
+	import { trackCTA } from '$lib/services/mixpanel';
 
 	let { data } = $props();
 
@@ -41,10 +42,18 @@
 		</p>
 
 		<div class="flex flex-wrap justify-center gap-4 mb-12">
-			<a href="/plan" class="btn-primary text-lg px-8 py-4">
+			<a
+				href="/plan"
+				class="btn-primary text-lg px-8 py-4"
+				onclick={() => trackCTA('Explore the Plan', 'Hero', '/plan')}
+			>
 				Explore the Plan
 			</a>
-			<a href="/about" class="btn-secondary text-lg px-8 py-4">
+			<a
+				href="/about"
+				class="btn-secondary text-lg px-8 py-4"
+				onclick={() => trackCTA('Learn More', 'Hero', '/about')}
+			>
 				Learn More
 			</a>
 		</div>
@@ -101,7 +110,11 @@
 						proper planning, resource allocation, and international collaboration.
 					</p>
 				</div>
-				<a href="/about" class="inline-flex items-center gap-2 mt-6 text-cosmic-cyan hover:underline">
+				<a
+					href="/about"
+					class="inline-flex items-center gap-2 mt-6 text-cosmic-cyan hover:underline"
+					onclick={() => trackCTA('Learn More About Approach', 'What is Dyson Swarm', '/about')}
+				>
 					Learn more about our approach
 					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -147,7 +160,11 @@
 		</div>
 
 		<div class="text-center">
-			<a href="/plan" class="btn-primary">
+			<a
+				href="/plan"
+				class="btn-primary"
+				onclick={() => trackCTA('View Full Plan', 'Phased Approach', '/plan')}
+			>
 				View Full Plan
 			</a>
 		</div>
@@ -194,7 +211,11 @@
 						with cross-reviews highlighting areas of consensus and divergent perspectives.
 					</p>
 				</div>
-				<a href="/plan/phase-0" class="inline-flex items-center gap-2 mt-6 text-cosmic-cyan hover:underline">
+				<a
+					href="/plan/phase-0"
+					class="inline-flex items-center gap-2 mt-6 text-cosmic-cyan hover:underline"
+					onclick={() => trackCTA('View Phase 0 LLM Analysis', 'Multi-LLM Consensus', '/plan/phase-0')}
+				>
 					View Phase 0 LLM Analysis
 					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -250,7 +271,11 @@
 		</div>
 
 		<div class="text-center">
-			<a href="/research" class="btn-secondary">
+			<a
+				href="/research"
+				class="btn-secondary"
+				onclick={() => trackCTA('Browse Research Hub', 'Research Section', '/research')}
+			>
 				Browse Research Hub
 			</a>
 		</div>
@@ -298,10 +323,18 @@
 				writers, and enthusiasts to contribute to humanity's most ambitious project.
 			</p>
 			<div class="flex flex-wrap justify-center gap-4">
-				<a href="/about" class="btn-primary">
+				<a
+					href="/about"
+					class="btn-primary"
+					onclick={() => trackCTA('Get Involved', 'Join Mission', '/about')}
+				>
 					Get Involved
 				</a>
-				<a href="/funding" class="btn-secondary">
+				<a
+					href="/funding"
+					class="btn-secondary"
+					onclick={() => trackCTA('Support Us', 'Join Mission', '/funding')}
+				>
 					Support Us
 				</a>
 			</div>

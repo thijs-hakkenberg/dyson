@@ -11,10 +11,14 @@
 		runISRUEconomicsComparison,
 		generateStandardScenarios
 	} from '$lib/services/simulation/isru-economics';
+	import { trackSimulatorRun } from '$lib/services/mixpanel';
 
 	import ISRUControls from './ISRUControls.svelte';
 	import ISRUResults from './ISRUResults.svelte';
 	import CostCurveChart from './CostCurveChart.svelte';
+
+	// Props
+	let { questionSlug = 'isru-manufacturing-transition-point' } = $props();
 
 	// State
 	let config: ISRUEconomicsConfig = $state({ ...DEFAULT_ISRU_ECONOMICS_CONFIG });
@@ -38,6 +42,16 @@
 		error = null;
 		progress = null;
 		comparison = null;
+
+		// Track simulation run
+		trackSimulatorRun(questionSlug, 'isru-economics', {
+			mode: 'single',
+			target_deployment_units: config.targetDeploymentUnits,
+			launch_cost_range: `${config.launchCostPerKgLow}-${config.launchCostPerKgHigh}`,
+			isru_capital_cost_range: `${config.isruCapitalCostBLow}-${config.isruCapitalCostBHigh}`,
+			earth_production_rate: config.earthProductionRatePerYear,
+			isru_max_production: config.isruMaxProductionRate
+		});
 
 		try {
 			output = await runISRUEconomicsMonteCarlo(
@@ -65,6 +79,16 @@
 		error = null;
 		progress = null;
 		output = null;
+
+		// Track simulation run
+		trackSimulatorRun(questionSlug, 'isru-economics', {
+			mode: 'comparison',
+			target_deployment_units: config.targetDeploymentUnits,
+			launch_cost_range: `${config.launchCostPerKgLow}-${config.launchCostPerKgHigh}`,
+			isru_capital_cost_range: `${config.isruCapitalCostBLow}-${config.isruCapitalCostBHigh}`,
+			earth_production_rate: config.earthProductionRatePerYear,
+			isru_max_production: config.isruMaxProductionRate
+		});
 
 		try {
 			const scenarios = generateStandardScenarios(config);

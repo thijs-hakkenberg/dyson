@@ -3,12 +3,22 @@
 	import { MODEL_DISPLAY_NAMES } from '$lib/types/discussion';
 	import DiscussionRound from './DiscussionRound.svelte';
 	import DiscussionConclusion from './DiscussionConclusion.svelte';
+	import { trackDiscussionView } from '$lib/services/mixpanel';
 
 	interface Props {
 		thread: DiscussionThreadType;
+		questionSlug?: string;
 	}
 
-	let { thread }: Props = $props();
+	let { thread, questionSlug = 'unknown' }: Props = $props();
+
+	// Track discussion view
+	$effect(() => {
+		if (thread && thread.rounds && thread.rounds.length > 0) {
+			const lastRound = thread.rounds.length;
+			trackDiscussionView(questionSlug, lastRound);
+		}
+	});
 
 	// Termination reason labels
 	const terminationLabels: Record<TerminationReason, string> = {

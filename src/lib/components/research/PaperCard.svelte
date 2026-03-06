@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { ArxivPaper } from '$lib/types';
 	import { formatPaperDate } from '$lib/services/arxiv';
+	import { trackPaperClick } from '$lib/services/mixpanel';
 
 	interface Props {
 		paper: ArxivPaper;
@@ -14,7 +15,13 @@
 <article class="card-glow p-5">
 	<div class="flex items-start justify-between gap-4 mb-3">
 		<h3 class="text-lg font-semibold text-star-white leading-tight">
-			<a href={paper.arxivUrl} target="_blank" rel="noopener noreferrer" class="hover:text-cosmic-cyan transition-colors">
+			<a
+				href={paper.arxivUrl}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="hover:text-cosmic-cyan transition-colors"
+				onclick={() => trackPaperClick(paper.id, paper.title, 'arXiv')}
+			>
 				{paper.title}
 			</a>
 		</h3>
@@ -23,6 +30,7 @@
 			target="_blank"
 			rel="noopener noreferrer"
 			class="flex-shrink-0 px-3 py-1.5 text-sm rounded bg-sun-orange/20 text-sun-orange hover:bg-sun-orange/30 transition-colors"
+			onclick={() => trackPaperClick(paper.id, paper.title, 'arXiv PDF')}
 		>
 			PDF
 		</a>

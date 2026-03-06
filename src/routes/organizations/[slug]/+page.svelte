@@ -1,9 +1,17 @@
 <script lang="ts">
 	import { QuestionsList } from '$lib/components/organizations';
+	import { trackOrganizationView } from '$lib/services/mixpanel';
 
 	let { data } = $props();
 
 	const org = $derived(data.organization);
+
+	// Track organization view
+	$effect(() => {
+		if (org) {
+			trackOrganizationView(org.slug, org.shortName || org.name, org.category);
+		}
+	});
 
 	const categoryLabels: Record<string, string> = {
 		'space-agency': 'Space Agency',

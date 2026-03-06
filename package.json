@@ -36,6 +36,7 @@
 		"dompurify": "^3.3.1",
 		"gray-matter": "^4.0.3",
 		"js-yaml": "^4.1.1",
-		"marked": "^17.0.1"
+		"marked": "^17.0.1",
+		"mixpanel-browser": "^2.75.0"
 	}
 }

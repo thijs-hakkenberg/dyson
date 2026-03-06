@@ -1,10 +1,18 @@
 <script lang="ts">
 	import { ValidationStatus, ValidationHistory, ValidationCard } from '$lib/components/validation';
+	import { trackValidationView } from '$lib/services/mixpanel';
 
 	let { data } = $props();
 
 	const claim = $derived(data.claim);
 	const relatedValidations = $derived(data.relatedValidations);
+
+	// Track validation view
+	$effect(() => {
+		if (claim) {
+			trackValidationView(claim.slug, claim.claim, claim.status);
+		}
+	});
 
 	const phaseLabels: Record<string, string> = {
 		'phase-0': 'Phase 0 - Resource Acquisition',

@@ -5,6 +5,7 @@
 	import { Marked } from 'marked';
 	import ConsensusView from '$lib/components/phases/ConsensusView.svelte';
 	import { sanitizeMarkdownHTML } from '$lib/utils/sanitize';
+	import { trackBOMItemView, trackModelSpecView } from '$lib/services/mixpanel';
 
 	// Get data from load function
 	let { data } = $props();
@@ -22,6 +23,25 @@
 	);
 
 	let activeTab = $state('consensus');
+
+	// Track BOM item view
+	$effect(() => {
+		if (phase && itemMeta) {
+			trackBOMItemView(phase.id, itemMeta.slug, itemMeta.name, itemMeta.cost || 'Unknown');
+		}
+	});
+
+	// Track tab changes
+	function handleTabChange(tab: string) {
+		activeTab = tab;
+		if (itemMeta) {
+			trackModelSpecView(
+				itemMeta.slug,
+				tab,
+				tab === 'consensus' ? 'consensus' : 'individual'
+			);
+		}
+	}
 
 	const modelOrder = ['consensus', 'claude-opus-4-5', 'claude-opus-4-6', 'gemini-3-pro', 'gpt-5-2'];
 
@@ -188,7 +208,7 @@
 									: hasConsensus
 										? 'bg-space-600 text-star-dim hover:bg-space-500 hover:text-star-white'
 										: 'bg-space-700 text-star-faint cursor-not-allowed'}"
-								onclick={() => hasConsensus && (activeTab = 'consensus')}
+								onclick={() => hasConsensus && handleTabChange('consensus')}
 								disabled={!hasConsensus}
 							>
 								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -208,7 +228,7 @@
 									: hasSpec
 										? 'bg-space-600 text-star-dim hover:bg-space-500 hover:text-star-white'
 										: 'bg-space-700 text-star-faint cursor-not-allowed'}"
-								onclick={() => hasSpec && (activeTab = modelId)}
+								onclick={() => hasSpec && handleTabChange(modelId)}
 								disabled={!hasSpec}
 							>
 								{model?.name || modelId}

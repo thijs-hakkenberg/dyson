@@ -7,10 +7,18 @@
 	import PhaseDAG from '$lib/components/phases/PhaseDAG.svelte';
 	import { CostRangeBar } from '$lib/components/bom';
 	import type { TimelineNode } from '$lib/types';
+	import { trackPhaseView } from '$lib/services/mixpanel';
 
 	const phaseId = $derived($page.params.phase || '');
 	const phase = $derived(getPhaseById(phaseId));
 	const timeline = $derived(getPhaseTimeline(phaseId));
+
+	// Track phase view
+	$effect(() => {
+		if (phase) {
+			trackPhaseView(phase.id, phase.title);
+		}
+	});
 
 	// Calculate cost ranges from BOM items
 	const totalCostMin = $derived(

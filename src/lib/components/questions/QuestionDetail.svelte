@@ -244,7 +244,7 @@
 
 	<!-- Discussion Thread (for discussion questions with an active thread) -->
 	{#if question.questionType === 'discussion' && discussion}
-		<DiscussionThreadComponent thread={discussion} />
+		<DiscussionThreadComponent thread={discussion} questionSlug={question.slug} />
 	{/if}
 
 	<!-- Metadata Panel -->

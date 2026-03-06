@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { OrganizationCategory } from '$lib/types/organizations';
+	import { trackFilter } from '$lib/services/mixpanel';
 
 	interface Props {
 		selectedCategory: OrganizationCategory | '';
@@ -12,6 +13,13 @@
 		searchQuery = $bindable(''),
 		onFilterChange
 	}: Props = $props();
+
+	// Track filter changes
+	$effect(() => {
+		if (selectedCategory) {
+			trackFilter('organizations', 'category', selectedCategory);
+		}
+	});
 
 	const categories: { value: OrganizationCategory | ''; label: string }[] = [
 		{ value: '', label: 'All Categories' },

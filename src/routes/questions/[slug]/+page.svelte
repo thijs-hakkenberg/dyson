@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { QuestionDetail, QuestionCard } from '$lib/components/questions';
 	import { ValidationStatus, ValidationCard } from '$lib/components/validation';
+	import { trackQuestionView } from '$lib/services/mixpanel';
 
 	let { data } = $props();
 
@@ -14,6 +15,13 @@
 		'phase-1': 'Phase 1',
 		'phase-2': 'Phase 2'
 	};
+
+	// Track question view
+	$effect(() => {
+		if (question) {
+			trackQuestionView(question.slug, question.title, question.questionType, question.status);
+		}
+	});
 </script>
 
 <svelte:head>

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { QuestionType, ResearchQuestionStatus, Priority, PhaseId, ResolutionStatus } from '$lib/types/entities';
 	import { SelectField } from '$lib/components/ui';
+	import { trackFilter } from '$lib/services/mixpanel';
 
 	export type SortOption = 'newest' | 'oldest' | 'priority' | 'title';
 
@@ -29,6 +30,38 @@
 		showResolutionFilter = true,
 		showSortOption = true
 	}: Props = $props();
+
+	// Track individual filter changes
+	function trackFilterChange(filterType: string, filterValue: string) {
+		if (filterValue) {
+			trackFilter('questions', filterType, filterValue);
+		}
+	}
+
+	// Watch for filter changes and track them
+	$effect(() => {
+		if (selectedPhase) trackFilterChange('phase', selectedPhase);
+	});
+
+	$effect(() => {
+		if (selectedType) trackFilterChange('type', selectedType);
+	});
+
+	$effect(() => {
+		if (selectedStatus) trackFilterChange('status', selectedStatus);
+	});
+
+	$effect(() => {
+		if (selectedPriority) trackFilterChange('priority', selectedPriority);
+	});
+
+	$effect(() => {
+		if (selectedResolution) trackFilterChange('resolution', selectedResolution || '');
+	});
+
+	$effect(() => {
+		if (selectedSort && selectedSort !== 'newest') trackFilterChange('sort', selectedSort);
+	});
 
 	const phases = [
 		{ value: '', label: 'All Phases' },

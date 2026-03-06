@@ -5,6 +5,7 @@
 		experimentStatusColors,
 		experimentStatusIcons
 	} from '$lib/types/roadmap';
+	import { trackEvent } from '$lib/services/mixpanel';
 
 	interface Props {
 		experiment: Experiment;
@@ -120,6 +121,13 @@
 			target="_blank"
 			rel="noopener noreferrer"
 			class="mt-3 text-sm text-cosmic-cyan hover:underline inline-flex items-center gap-1"
+			onclick={() => trackEvent('Experiment Link Clicked', {
+				experiment_name: experiment.name,
+				organization: experiment.organization,
+				status: experiment.status,
+				estimated_cost: experiment.estimatedCost,
+				reference_url: experiment.referenceUrl
+			})}
 		>
 			Learn more
 			<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
