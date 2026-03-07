@@ -364,7 +364,7 @@
 
 	.orbit-ring {
 		position: absolute;
-		border: 1px solid rgba(240,168,48,0.15);
+		border: 1px solid rgba(240,168,48,0.07);
 		border-radius: 50%;
 		top: 50%;
 		left: 50%;
@@ -381,7 +381,7 @@
 		height: 4px;
 		background: var(--color-accent-gold);
 		border-radius: 50%;
-		box-shadow: 0 0 6px rgba(240,168,48,0.6);
+		box-shadow: 0 0 4px rgba(240,168,48,0.35);
 	}
 
 	.ring-1 .orbit-dot {
