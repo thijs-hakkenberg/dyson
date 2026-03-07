@@ -2,6 +2,26 @@
 
 All notable changes to Project Dyson are documented here.
 
+## [Unreleased] - 2026-03-07
+
+### Changed
+
+#### Home Page Redesign
+- Redesign home page with editorial, minimal aesthetic: animated starfield, pulsing sun with orbiting dots, scroll-reveal animations, and full-viewport sections
+- Replace hero section with "Engineering the Largest Structure Ever Conceived" headline, animated sun visual, and CTA buttons
+- Add "The Problem" section with animated energy comparison bars (Earth vs Dyson swarm)
+- Add "The Plan" section with vertical phase timeline pulling live data from phase definitions
+- Add "Right Now" section with activity feed from recent blog posts and type badges (Blog/Resolved/Paper)
+- Add stats bar (51 Questions, 5 Resolved, 150+ Papers Cited, 23 Contributors, 7 Tech Threads)
+- Add "Join the Effort" section with role chips and Discord/GitHub/Funding links
+- Replace horizontal 11-item navigation with minimal fixed nav and full-screen overlay menu (3-column: Explore/Community/Contribute)
+- Add "Phase 0 Active" indicator in nav that appears on scroll
+- Simplify footer to single centered line
+- Update site-wide color theme from cosmic-blue/purple to gold/amber accent
+- Add Google Fonts (Space Grotesk + Inter) for editorial typography
+- Add scroll progress bar on home page
+- Update button styles site-wide: primary buttons use gold/amber gradient, secondary buttons use transparent with subtle border
+
 ## [Unreleased] - 2026-02-13
 
 ### Added
