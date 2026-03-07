@@ -69,7 +69,11 @@
 				nodeFailureRatePerYear: config.nodeFailureRatePerYear,
 				coordinatorPowerW: config.coordinatorPowerW,
 				basePowerW: config.basePowerW,
-				simulationDays: config.simulationDays
+				simulationDays: config.simulationDays,
+				phyRateKbps: config.phyRateKbps,
+				campaignDutyFactor: config.campaignDutyFactor,
+				commandProbability: config.commandProbability,
+				coordinationCyclePeriodS: config.coordinationCyclePeriodS
 			};
 
 			comparison = await runSwarmCoordinationComparison(
@@ -201,7 +205,7 @@
 				<ScalabilityChart {comparison} />
 			{/if}
 
-			<CoordinationResults {output} {progress} {isRunning} />
+			<CoordinationResults {output} {progress} {isRunning} {config} />
 		</div>
 	</div>
 

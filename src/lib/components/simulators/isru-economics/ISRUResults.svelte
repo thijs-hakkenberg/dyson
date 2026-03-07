@@ -1,13 +1,14 @@
 <script lang="ts">
-	import type { ISRUEconomicsOutput, ISRUEconomicsProgress } from '$lib/services/simulation/isru-economics';
+	import type { ISRUEconomicsOutput, ISRUEconomicsProgress, ISRUEconomicsConfig } from '$lib/services/simulation/isru-economics';
 
 	interface Props {
 		output: ISRUEconomicsOutput | null;
 		progress: ISRUEconomicsProgress | null;
 		isRunning: boolean;
+		config?: ISRUEconomicsConfig;
 	}
 
-	let { output, progress, isRunning }: Props = $props();
+	let { output, progress, isRunning, config }: Props = $props();
 
 	function formatNumber(n: number): string {
 		if (isNaN(n)) return 'N/A';
@@ -68,6 +69,11 @@
 					<p class="text-xs text-star-faint mt-2">
 						Crossover occurred in {formatPercent(output.stats.crossoverOccurrencePercent)} of runs
 					</p>
+				{#if config && (config.discountRate ?? 0) > 0}
+					<p class="text-xs text-star-dim mt-1">
+						NPV-adjusted at r={((config.discountRate ?? 0) * 100).toFixed(1)}%{(config.vitaminFraction ?? 0) > 0 ? ` | vitamin fraction: ${((config.vitaminFraction ?? 0) * 100).toFixed(0)}%` : ''}
+					</p>
+				{/if}
 				{:else}
 					<p class="text-xl font-semibold text-sun-red">
 						No crossover in simulation range

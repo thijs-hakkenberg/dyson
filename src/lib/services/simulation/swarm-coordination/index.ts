@@ -31,7 +31,8 @@ export type {
 	SwarmCoordinationResult,
 	SwarmCoordinationOutput,
 	TopologyComparisonResult,
-	SwarmCoordinationProgress
+	SwarmCoordinationProgress,
+	TDMAFeasibilityResult
 } from './types';
 
 // Monte Carlo orchestration
@@ -66,7 +67,9 @@ export {
 	calculateCommunicationOverhead,
 	estimateMessageCount,
 	createMessage,
-	MessageQueue
+	MessageQueue,
+	computeGamma,
+	computeTDMAFeasibility
 } from './message-passing';
 
 // Coordinator model utilities

@@ -19,6 +19,8 @@ relatedPhases:
 
 # Scaling to a Million Units: Why Hierarchical Coordination Wins
 
+**Update (March 2026):** This post describes results from a discrete event simulator with simplified bandwidth modeling. A peer-reviewed paper with closed-form design equations, TDMA slot-level analysis, and independent NS-3 validation has since been completed. The paper finds architecture-specific overhead of 5.6%, recommends a 35 kbps PHY rate for the coordinator link, and introduces a two-test feasibility framework (byte budget + TDMA schedulability). The "2-8% overhead" reported below aligns with the paper's 5.6% architecture-specific component. See [the full publication analysis](/blog/swarm-coordination-scaling-paper) for the definitive results.
+
 The Dyson swarm will eventually comprise millions of autonomous units. We built a discrete event simulator to answer the critical question: **What coordination architecture can scale that far?**
 
 ## The Three Questions

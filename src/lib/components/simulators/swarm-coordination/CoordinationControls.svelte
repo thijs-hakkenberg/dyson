@@ -150,6 +150,54 @@
 			</div>
 		</div>
 
+		<!-- PHY Rate -->
+		<div>
+			<label for="phy-rate" class="block text-sm text-star-dim mb-2">
+				PHY Rate:
+				<span class="text-star-white font-semibold">{config.phyRateKbps} kbps</span>
+			</label>
+			<input
+				id="phy-rate"
+				type="range"
+				min="20"
+				max="50"
+				step="1"
+				value={config.phyRateKbps}
+				oninput={(e) => updateConfig('phyRateKbps', parseInt(e.currentTarget.value))}
+				{disabled}
+				class="w-full h-2 bg-space-600 rounded-lg appearance-none cursor-pointer accent-cosmic-cyan"
+			/>
+			<div class="flex justify-between text-xs text-star-faint mt-1">
+				<span>20</span>
+				<span>35</span>
+				<span>50</span>
+			</div>
+		</div>
+
+		<!-- Campaign Duty Factor -->
+		<div>
+			<label for="duty-factor" class="block text-sm text-star-dim mb-2">
+				Campaign Duty Factor (d):
+				<span class="text-star-white font-semibold">{config.campaignDutyFactor.toFixed(2)}</span>
+			</label>
+			<input
+				id="duty-factor"
+				type="range"
+				min="0"
+				max="1"
+				step="0.01"
+				value={config.campaignDutyFactor}
+				oninput={(e) => updateConfig('campaignDutyFactor', parseFloat(e.currentTarget.value))}
+				{disabled}
+				class="w-full h-2 bg-space-600 rounded-lg appearance-none cursor-pointer accent-cosmic-cyan"
+			/>
+			<div class="flex justify-between text-xs text-star-faint mt-1">
+				<span>0 (quiescent)</span>
+				<span>0.10 (reconfig)</span>
+				<span>1.0 (stress)</span>
+			</div>
+		</div>
+
 		<!-- Failure Rate -->
 		<div>
 			<label for="failure-rate" class="block text-sm text-star-dim mb-2">

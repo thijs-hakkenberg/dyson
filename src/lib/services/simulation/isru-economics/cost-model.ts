@@ -65,6 +65,21 @@ function clamp(value: number, min: number, max: number): number {
 }
 
 /**
+ * Effective learning rate with plateau degradation
+ */
+function effectiveLearningRate(
+	lr: number,
+	cumulativeUnits: number,
+	onset: number,
+	severity: number
+): number {
+	if (onset <= 0 || severity <= 0 || cumulativeUnits <= onset) return lr;
+	const excess = Math.min((cumulativeUnits - onset) / onset, 1.0);
+	// Moves toward 1.0 (no learning) as excess grows
+	return lr + (1 - lr) * severity * excess;
+}
+
+/**
  * Calculate Earth manufacturing trajectory with sampled parameters
  *
  * @param config Simulation configuration
@@ -78,7 +93,9 @@ export function calculateEarthTrajectoryWithUncertainty(
 	const trajectory: EarthManufacturingYear[] = [];
 	let cumulativeUnits = 0;
 	let cumulativeCost = 0;
+	let cumulativeDiscountedCost = 0;
 	let year = 0;
+	const r = config.discountRate ?? 0;
 
 	// Create launch params from sampled cost
 	const launchParams: LaunchCostParams = {
@@ -96,13 +113,17 @@ export function calculateEarthTrajectoryWithUncertainty(
 			config.targetDeploymentUnits - cumulativeUnits
 		);
 
-		// Manufacturing cost with learning curve
+		// Manufacturing cost with learning curve (+ plateau)
+		const onset = config.learningPlateauOnset ?? 2000;
+		const severity = config.learningPlateauSeverity ?? 0.5;
 		let manufacturingCost = 0;
 		for (let i = 0; i < productionRate; i++) {
+			const unitNum = cumulativeUnits + i + 1;
+			const effLR = effectiveLearningRate(params.learningRateEarth, unitNum, onset, severity);
 			manufacturingCost += learningCurveCost(
 				config.firstUnitManufacturingCost,
-				cumulativeUnits + i + 1,
-				params.learningRateEarth
+				unitNum,
+				effLR
 			);
 		}
 
@@ -110,8 +131,12 @@ export function calculateEarthTrajectoryWithUncertainty(
 		const launchCost = launchCostToDeepSpace(productionRate * config.unitMassKg, launchParams);
 
 		const totalCostThisYear = manufacturingCost + launchCost;
+		const discountFactor = Math.pow(1 + r, year);
+		const discountedCostThisYear = totalCostThisYear / discountFactor;
+
 		cumulativeUnits += productionRate;
 		cumulativeCost += totalCostThisYear;
+		cumulativeDiscountedCost += discountedCostThisYear;
 
 		trajectory.push({
 			year,
@@ -120,8 +145,8 @@ export function calculateEarthTrajectoryWithUncertainty(
 			manufacturingCost,
 			launchCost,
 			totalCostThisYear,
-			cumulativeCost,
-			avgCostPerUnit: cumulativeCost / cumulativeUnits
+			cumulativeCost: r > 0 ? cumulativeDiscountedCost : cumulativeCost,
+			avgCostPerUnit: (r > 0 ? cumulativeDiscountedCost : cumulativeCost) / cumulativeUnits
 		});
 	}
 
@@ -141,14 +166,21 @@ export function calculateISRUTrajectoryWithUncertainty(
 ): ISRUProductionYear[] {
 	const trajectory: ISRUProductionYear[] = [];
 	let cumulativeUnits = 0;
-	let cumulativeCost = params.isruCapitalCostDollars; // Start with capital cost
+	let cumulativeRawCost = params.isruCapitalCostDollars; // Start with capital cost
+	let cumulativeDiscountedCost = params.isruCapitalCostDollars; // Capital at year 0
 	let year = 0;
+	const r = config.discountRate ?? 0;
+	const vitaminFrac = config.vitaminFraction ?? 0;
+	const midpoint = config.rampUpMidpointYear ?? config.isruRampUpYears / 2;
+	const onset = config.learningPlateauOnset ?? 2000;
+	const severity = config.learningPlateauSeverity ?? 0.5;
 
 	while (cumulativeUnits < config.targetDeploymentUnits) {
 		year++;
 
-		// Production rate ramps up over rampUpYears
-		const rampFactor = Math.min(1, year / config.isruRampUpYears);
+		// S-curve ramp instead of linear
+		const k = 1.5; // steepness
+		const rampFactor = 1 / (1 + Math.exp(-k * (year - midpoint)));
 		const productionRate = Math.min(
 			Math.floor(config.isruMaxProductionRate * rampFactor),
 			config.targetDeploymentUnits - cumulativeUnits
@@ -156,37 +188,52 @@ export function calculateISRUTrajectoryWithUncertainty(
 
 		// Skip year if no production (early ramp-up)
 		if (productionRate === 0) {
+			const cumCost = r > 0 ? cumulativeDiscountedCost : cumulativeRawCost;
 			trajectory.push({
 				year,
 				productionRate: 0,
 				cumulativeUnits,
 				costThisYear: 0,
-				cumulativeCost,
-				avgCostPerUnit: cumulativeUnits > 0 ? cumulativeCost / cumulativeUnits : Infinity
+				cumulativeCost: cumCost,
+				avgCostPerUnit: cumulativeUnits > 0 ? cumCost / cumulativeUnits : Infinity
 			});
 			continue;
 		}
 
-		// Calculate cost for this year's production with learning curve
+		// Calculate cost for this year's production with learning curve + plateau
 		let yearCost = 0;
 		for (let i = 0; i < productionRate; i++) {
+			const unitNum = cumulativeUnits + i + 1;
+			const effLR = effectiveLearningRate(params.learningRateISRU, unitNum, onset, severity);
 			yearCost += learningCurveCost(
 				config.isruOperationalCostPerUnit,
-				cumulativeUnits + i + 1,
-				params.learningRateISRU
+				unitNum,
+				effLR
 			);
 		}
 
-		cumulativeUnits += productionRate;
-		cumulativeCost += yearCost;
+		// Vitamin fraction: units that must be launched from Earth
+		const vitaminCost =
+			vitaminFrac > 0
+				? productionRate * vitaminFrac * config.unitMassKg * params.launchCostPerKg * 2.5
+				: 0;
 
+		const totalCostThisYear = yearCost + vitaminCost;
+		const discountFactor = Math.pow(1 + r, year);
+		const discountedCostThisYear = totalCostThisYear / discountFactor;
+
+		cumulativeUnits += productionRate;
+		cumulativeRawCost += totalCostThisYear;
+		cumulativeDiscountedCost += discountedCostThisYear;
+
+		const cumCost = r > 0 ? cumulativeDiscountedCost : cumulativeRawCost;
 		trajectory.push({
 			year,
 			productionRate,
 			cumulativeUnits,
-			costThisYear: yearCost,
-			cumulativeCost,
-			avgCostPerUnit: cumulativeCost / cumulativeUnits
+			costThisYear: totalCostThisYear,
+			cumulativeCost: cumCost,
+			avgCostPerUnit: cumCost / cumulativeUnits
 		});
 	}
 

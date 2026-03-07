@@ -5,7 +5,7 @@
  * Calculates message propagation delays and tracks queue depths.
  */
 
-import type { CoordinationTopology, Message, PropagationStats, SwarmNode, Cluster } from './types';
+import type { CoordinationTopology, Message, PropagationStats, SwarmNode, Cluster, TDMAFeasibilityResult } from './types';
 
 /**
  * Speed of light for communication delays (km/s)
@@ -338,4 +338,117 @@ export function estimateMessageCount(
 			return nodeCount * gossipFanout * gossipRounds * updates;
 		}
 	}
+}
+
+/**
+ * TDMA slot efficiency parameters (CCSDS Proximity-1)
+ */
+const TDMA_DEFAULTS = {
+	S_eph: 256, // Status report size in bytes
+	S_cmd: 512, // Command size in bytes
+	R_FEC: 7 / 8, // FEC code rate
+	O_frame: 104, // Framing overhead bits (ASM 32 + addr 8 + ctrl 16 + CRC-32 32 + HDLC 16)
+	T_guard_ms: 4.7, // Guard time ms
+	T_acq_ms: 5.0, // Acquisition time ms
+	C_node_kbps: 1.0 // Per-node bandwidth allocation
+};
+
+/**
+ * Compute TDMA slot efficiency gamma at a given PHY rate.
+ * Eq. 3 from Paper 02: gamma = T_payload / T_slot
+ */
+export function computeGamma(
+	phyRateKbps: number,
+	params: Partial<typeof TDMA_DEFAULTS> = {}
+): number {
+	const p = { ...TDMA_DEFAULTS, ...params };
+	const R_PHY = phyRateKbps * 1000; // bps
+
+	const T_payload = (p.S_eph * 8) / R_PHY;
+	const T_FEC = ((p.S_eph * 8) * (1 / p.R_FEC - 1)) / R_PHY;
+	const T_framing = p.O_frame / (p.R_FEC * R_PHY);
+	const T_guard = p.T_guard_ms / 1000;
+	const T_acq = p.T_acq_ms / 1000;
+
+	const T_slot = T_payload + T_FEC + T_framing + T_guard + T_acq;
+	return T_payload / T_slot;
+}
+
+/**
+ * Compute two-test TDMA feasibility for given configuration.
+ * Implements Paper 02 Algorithm 1.
+ */
+export function computeTDMAFeasibility(
+	clusterSize: number,
+	phyRateKbps: number,
+	campaignDutyFactor: number,
+	commandProbability: number,
+	cyclePeriodS: number = 10
+): TDMAFeasibilityResult {
+	const p = TDMA_DEFAULTS;
+	const k_c = clusterSize;
+	const T_c = cyclePeriodS;
+	const d = campaignDutyFactor;
+	const p_cmd = commandProbability;
+
+	// Gamma
+	const gamma = computeGamma(phyRateKbps);
+
+	// Test A: Byte budget
+	const etaBaseline = 0.205; // 20.5%
+	const etaArchitecture = 0.056; // 5.6% (heartbeats + summaries + elections)
+	const etaCmd = (p_cmd * p.S_cmd * 8) / (p.C_node_kbps * 1000 * T_c);
+	const etaCommand = d * etaCmd;
+	const etaTotal = etaArchitecture + etaCommand + etaBaseline;
+	const testAPasses = etaTotal <= 1.0;
+
+	// Test B: TDMA schedulability
+	const R_PHY = phyRateKbps * 1000;
+	const T_slot_s =
+		(p.S_eph * 8 + p.O_frame) / p.R_FEC / R_PHY + p.T_guard_ms / 1000 + p.T_acq_ms / 1000;
+	const T_ing = (k_c - 1) * T_slot_s;
+
+	// Egress: command + heartbeat + sync
+	const T_cmd =
+		(p.S_cmd * 8 + p.O_frame) / p.R_FEC / R_PHY + p.T_guard_ms / 1000 + p.T_acq_ms / 1000;
+	const T_hb = 0.02; // ~20ms heartbeat
+	const T_sync = 0.005; // ~5ms sync beacon
+	const T_egr = T_cmd + T_hb + T_sync;
+
+	// ARQ estimate (P95 failed members under GE channel)
+	const pi_B = 0.091; // Steady-state bad probability
+	const p_B = 0.9; // Per-packet loss in bad state
+	const expectedFailed = (k_c - 1) * pi_B * p_B;
+	const p95Failed = Math.ceil(
+		expectedFailed + 2 * Math.sqrt(expectedFailed * (1 - pi_B * p_B))
+	);
+	const M_r = 2; // Max retransmissions
+	const T_ARQ = p95Failed * M_r * T_slot_s;
+
+	const totalTime = T_ing + T_ARQ + T_egr;
+	const marginMs = (T_c - totalTime) * 1000;
+	const testBPasses = totalTime <= T_c;
+
+	// Derived quantities
+	const coordInfoRateKbps = ((k_c - 1) * p.S_eph * 8) / (T_c * 1000);
+	const alphaRX = T_ing / T_c;
+	const minPhyRateKbps = coordInfoRateKbps / (gamma * Math.min(alphaRX, 0.95));
+
+	return {
+		gamma,
+		etaTotal,
+		etaArchitecture,
+		etaCommand,
+		etaBaseline,
+		testAPasses,
+		testBPasses,
+		ingressTimeMs: T_ing * 1000,
+		egressTimeMs: T_egr * 1000,
+		arqTimeMs: T_ARQ * 1000,
+		marginMs,
+		coordInfoRateKbps,
+		minPhyRateKbps,
+		alphaRX,
+		feasible: testAPasses && testBPasses
+	};
 }

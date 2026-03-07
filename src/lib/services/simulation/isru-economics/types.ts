@@ -40,6 +40,16 @@ export interface ISRUEconomicsConfig {
 	isruMaxProductionRate: number;
 	/** ISRU operational cost per unit at first unit ($) */
 	isruOperationalCostPerUnit: number;
+	/** Annual discount rate for NPV (0-0.15, default 0.05) */
+	discountRate: number;
+	/** Fraction of each unit that must be Earth-sourced (0-0.30, default 0.10) */
+	vitaminFraction: number;
+	/** S-curve ramp midpoint year (2-10, default 5) */
+	rampUpMidpointYear: number;
+	/** Learning plateau onset in units (500-10000, default 2000) */
+	learningPlateauOnset: number;
+	/** Learning plateau severity (0-1, default 0.5) */
+	learningPlateauSeverity: number;
 	/** Random seed for reproducibility */
 	seed?: number;
 }

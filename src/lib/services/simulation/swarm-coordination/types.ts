@@ -38,8 +38,52 @@ export interface SwarmCoordinationConfig {
 	basePowerW: number;
 	/** Simulation duration in days (30-365) */
 	simulationDays: number;
+	/** PHY rate for coordinator link in kbps (20-50, default 35) */
+	phyRateKbps: number;
+	/** Campaign duty factor d (0-1, default 0.10) */
+	campaignDutyFactor: number;
+	/** Per-cycle command probability when campaign active (0-1, default 1.0) */
+	commandProbability: number;
+	/** Coordination cycle period in seconds (default 10) */
+	coordinationCyclePeriodS: number;
 	/** Random seed for reproducibility */
 	seed?: number;
+}
+
+/**
+ * TDMA feasibility analysis result (Paper 02 two-test framework)
+ */
+export interface TDMAFeasibilityResult {
+	/** TDMA slot efficiency */
+	gamma: number;
+	/** Total utilization (eta_0 + d*eta_cmd + baseline) */
+	etaTotal: number;
+	/** Architecture-specific overhead (~5.6%) */
+	etaArchitecture: number;
+	/** Command overhead (d * eta_cmd) */
+	etaCommand: number;
+	/** Baseline telemetry overhead (20.5%) */
+	etaBaseline: number;
+	/** Test A pass (byte budget) */
+	testAPasses: boolean;
+	/** Test B pass (TDMA schedulability) */
+	testBPasses: boolean;
+	/** Ingress time in ms */
+	ingressTimeMs: number;
+	/** Egress time in ms */
+	egressTimeMs: number;
+	/** ARQ time in ms (P95 estimate) */
+	arqTimeMs: number;
+	/** Margin in ms */
+	marginMs: number;
+	/** Coordinator info rate kbps */
+	coordInfoRateKbps: number;
+	/** Minimum viable PHY rate kbps */
+	minPhyRateKbps: number;
+	/** Half-duplex RX fraction */
+	alphaRX: number;
+	/** Overall feasibility */
+	feasible: boolean;
 }
 
 /**

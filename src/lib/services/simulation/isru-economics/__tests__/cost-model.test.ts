@@ -26,6 +26,11 @@ describe('ISRU Cost Model', () => {
 		learningRateISRU: 0.90,
 		firstUnitManufacturingCost: 10_000_000,
 		isruOperationalCostPerUnit: 1_000_000,
+		discountRate: 0,
+		vitaminFraction: 0,
+		rampUpMidpointYear: 1.5,
+		learningPlateauOnset: 2000,
+		learningPlateauSeverity: 0,
 		seed: 12345
 	};
 

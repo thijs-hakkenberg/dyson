@@ -36,7 +36,11 @@ export const DEFAULT_SWARM_COORDINATION_CONFIG: SwarmCoordinationConfig = {
 	nodeFailureRatePerYear: 0.02,
 	coordinatorPowerW: 18,
 	basePowerW: 5,
-	simulationDays: 90
+	simulationDays: 90,
+	phyRateKbps: 35,
+	campaignDutyFactor: 0.10,
+	commandProbability: 1.0,
+	coordinationCyclePeriodS: 10
 };
 
 /**

@@ -66,6 +66,13 @@ export const DEFAULT_ISRU_ECONOMICS_CONFIG: ISRUEconomicsConfig = {
 	firstUnitManufacturingCost: 50_000_000, // $50M first unit
 	isruOperationalCostPerUnit: 5_000_000, // $5M operational cost per unit
 
+	// Paper 01 NPV parameters
+	discountRate: 0.05, // 5% annual discount
+	vitaminFraction: 0.10, // 10% Earth-sourced fraction
+	rampUpMidpointYear: 5, // S-curve midpoint
+	learningPlateauOnset: 2000, // Units before plateau
+	learningPlateauSeverity: 0.5, // Plateau severity
+
 	seed: 12345
 };
 

@@ -310,6 +310,118 @@
 			</div>
 		</div>
 
+		<!-- NPV & Paper Parameters -->
+		<div class="border-t border-space-600 pt-4">
+			<p class="text-xs text-star-faint uppercase tracking-wider mb-4">Paper Model Parameters</p>
+
+			<div class="space-y-4">
+				<!-- Discount Rate -->
+				<div>
+					<label for="discount-rate" class="block text-sm text-star-dim mb-2">
+						Discount Rate:
+						<span class="text-star-white font-semibold">{(config.discountRate * 100).toFixed(1)}%</span>
+					</label>
+					<input
+						id="discount-rate"
+						type="range"
+						min="0"
+						max="0.15"
+						step="0.005"
+						value={config.discountRate}
+						oninput={(e) => updateConfig('discountRate', parseFloat(e.currentTarget.value))}
+						{disabled}
+						class="w-full h-2 bg-space-600 rounded-lg appearance-none cursor-pointer accent-cosmic-cyan"
+					/>
+					<div class="flex justify-between text-xs text-star-faint mt-1">
+						<span>0%</span>
+						<span>7.5%</span>
+						<span>15%</span>
+					</div>
+				</div>
+
+				<!-- Vitamin Fraction -->
+				<div>
+					<label for="vitamin-fraction" class="block text-sm text-star-dim mb-2">
+						Vitamin Fraction:
+						<span class="text-star-white font-semibold">{(config.vitaminFraction * 100).toFixed(0)}%</span>
+					</label>
+					<input
+						id="vitamin-fraction"
+						type="range"
+						min="0"
+						max="0.30"
+						step="0.01"
+						value={config.vitaminFraction}
+						oninput={(e) => updateConfig('vitaminFraction', parseFloat(e.currentTarget.value))}
+						{disabled}
+						class="w-full h-2 bg-space-600 rounded-lg appearance-none cursor-pointer accent-cosmic-cyan"
+					/>
+					<div class="flex justify-between text-xs text-star-faint mt-1">
+						<span>0%</span>
+						<span>15%</span>
+						<span>30%</span>
+					</div>
+				</div>
+
+				<!-- S-Curve Midpoint -->
+				<div>
+					<label for="ramp-midpoint" class="block text-sm text-star-dim mb-2">
+						S-Curve Midpoint:
+						<span class="text-star-white font-semibold">{config.rampUpMidpointYear} years</span>
+					</label>
+					<input
+						id="ramp-midpoint"
+						type="range"
+						min="2"
+						max="10"
+						step="1"
+						value={config.rampUpMidpointYear}
+						oninput={(e) => updateConfig('rampUpMidpointYear', parseInt(e.currentTarget.value))}
+						{disabled}
+						class="w-full h-2 bg-space-600 rounded-lg appearance-none cursor-pointer accent-cosmic-cyan"
+					/>
+				</div>
+
+				<!-- Learning Plateau -->
+				<div class="grid grid-cols-2 gap-4">
+					<div>
+						<label for="plateau-onset" class="block text-sm text-star-dim mb-2">
+							Plateau Onset:
+							<span class="text-star-white font-semibold">{config.learningPlateauOnset}</span>
+						</label>
+						<input
+							id="plateau-onset"
+							type="range"
+							min="500"
+							max="10000"
+							step="500"
+							value={config.learningPlateauOnset}
+							oninput={(e) => updateConfig('learningPlateauOnset', parseInt(e.currentTarget.value))}
+							{disabled}
+							class="w-full h-2 bg-space-600 rounded-lg appearance-none cursor-pointer accent-cosmic-cyan"
+						/>
+					</div>
+					<div>
+						<label for="plateau-severity" class="block text-sm text-star-dim mb-2">
+							Severity:
+							<span class="text-star-white font-semibold">{(config.learningPlateauSeverity * 100).toFixed(0)}%</span>
+						</label>
+						<input
+							id="plateau-severity"
+							type="range"
+							min="0"
+							max="1"
+							step="0.05"
+							value={config.learningPlateauSeverity}
+							oninput={(e) => updateConfig('learningPlateauSeverity', parseFloat(e.currentTarget.value))}
+							{disabled}
+							class="w-full h-2 bg-space-600 rounded-lg appearance-none cursor-pointer accent-cosmic-cyan"
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<!-- Run Button -->
 		<button
 			onclick={onRun}

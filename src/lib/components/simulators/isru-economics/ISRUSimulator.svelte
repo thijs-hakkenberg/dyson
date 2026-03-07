@@ -197,7 +197,7 @@
 		<!-- Right Column: Results -->
 		<div class="lg:col-span-2 space-y-6">
 			<CostCurveChart {output} {comparison} />
-			<ISRUResults {output} {progress} {isRunning} />
+			<ISRUResults {output} {progress} {isRunning} {config} />
 		</div>
 	</div>
 
