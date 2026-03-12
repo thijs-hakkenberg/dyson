@@ -106,9 +106,9 @@
 	<div class="hero-visual reveal">
 		<div class="sun-container">
 			<div class="sun"></div>
-			<div class="orbit-ring ring-1"><div class="orbit-dot"></div></div>
-			<div class="orbit-ring ring-2"><div class="orbit-dot"></div></div>
-			<div class="orbit-ring ring-3"><div class="orbit-dot"></div></div>
+			<div class="orbit-ring orbit-1"><div class="orbit-dot"></div></div>
+			<div class="orbit-ring orbit-2"><div class="orbit-dot"></div></div>
+			<div class="orbit-ring orbit-3"><div class="orbit-dot"></div></div>
 		</div>
 	</div>
 	<h1 class="reveal reveal-delay-1">
@@ -364,16 +364,16 @@
 
 	.orbit-ring {
 		position: absolute;
-		border: 1px solid rgba(240,168,48,0.03);
+		border: 1px solid rgba(240,168,48,0.15);
 		border-radius: 50%;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
 
-	.ring-1 { width: 200px; height: 200px; }
-	.ring-2 { width: 280px; height: 280px; }
-	.ring-3 { width: 360px; height: 360px; }
+	.orbit-1 { width: 200px; height: 200px; }
+	.orbit-2 { width: 280px; height: 280px; }
+	.orbit-3 { width: 360px; height: 360px; }
 
 	.orbit-dot {
 		position: absolute;
@@ -381,20 +381,20 @@
 		height: 4px;
 		background: var(--color-accent-gold);
 		border-radius: 50%;
-		box-shadow: 0 0 3px rgba(240,168,48,0.2);
+		box-shadow: 0 0 6px rgba(240,168,48,0.6);
 	}
 
-	.ring-1 .orbit-dot {
+	.orbit-1 .orbit-dot {
 		top: -2px; left: 50%; transform: translateX(-50%);
 		animation: orbit2 12s linear infinite;
 	}
 
-	.ring-2 .orbit-dot {
+	.orbit-2 .orbit-dot {
 		top: 50%; right: -2px; transform: translateY(-50%);
 		animation: orbit3 18s linear infinite reverse;
 	}
 
-	.ring-3 .orbit-dot {
+	.orbit-3 .orbit-dot {
 		bottom: -2px; left: 50%; transform: translateX(-50%);
 		animation: orbit4 25s linear infinite;
 	}
@@ -868,9 +868,9 @@
 
 		.sun-container { width: 80px; height: 80px; }
 		.sun { width: 80px; height: 80px; }
-		.ring-1 { width: 140px; height: 140px; }
-		.ring-2 { width: 200px; height: 200px; }
-		.ring-3 { width: 260px; height: 260px; }
+		.orbit-1 { width: 140px; height: 140px; }
+		.orbit-2 { width: 200px; height: 200px; }
+		.orbit-3 { width: 260px; height: 260px; }
 
 		.stats-bar { gap: 1.5rem; }
 		.stat-value { font-size: 1.5rem; }
