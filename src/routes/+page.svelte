@@ -11,6 +11,7 @@
 
 	let scrollProgress = $state(0);
 	let starfieldEl: HTMLDivElement;
+	let flareWrapperEl: HTMLDivElement;
 	let energyBarsVisible = $state(false);
 
 	onMount(() => {
@@ -64,6 +65,122 @@
 		const energySection = document.querySelector('.energy-comparison');
 		if (energySection) energyObserver.observe(energySection);
 
+		// Solar flare — ported from reference CodePen (blur+contrast metaball)
+		// Each "fire" orbits the center; its inner child oscillates radially + self-rotates
+		if (flareWrapperEl) {
+			// Layer 1: Dense thin corona — many small elements hugging the edge
+			const coronaCount = 100;
+			for (let i = 0; i < coronaCount; i++) {
+				const fire = document.createElement('div');
+				fire.className = 'flare-fire';
+				const inner = document.createElement('div');
+				inner.className = 'flare-fire-inner';
+
+				const size = 20 + Math.random() * 35;
+				const bw = 4 + Math.random() * 6;
+				const br = [
+					(20 + Math.random() * 60) + '%',
+					(20 + Math.random() * 60) + '%',
+					(20 + Math.random() * 60) + '%',
+					(20 + Math.random() * 60) + '%'
+				].join(' ');
+
+				inner.style.cssText = `
+					width: ${size}px; height: ${size}px;
+					border: ${bw}px solid orange;
+					border-radius: ${br};
+					box-sizing: border-box;
+				`;
+
+				fire.appendChild(inner);
+				flareWrapperEl.appendChild(fire);
+
+				const orbitDuration = 40000 + Math.random() * 80000;
+				fire.animate([
+					{ transform: 'rotateZ(0deg)' },
+					{ transform: 'rotateZ(360deg)' }
+				], {
+					duration: orbitDuration,
+					iterations: Infinity,
+					easing: 'linear',
+					delay: -Math.random() * orbitDuration
+				});
+
+				// Tight radial range — stay close to the edge
+				const innerDuration = 30000 + Math.random() * 40000;
+				inner.animate([
+					{ transform: 'translate(175px, -50%) rotateZ(0deg)' },
+					{ transform: 'translate(195px, -50%) rotateZ(180deg)' },
+					{ transform: 'translate(175px, -50%) rotateZ(360deg)' }
+				], {
+					duration: innerDuration,
+					iterations: Infinity,
+					direction: 'alternate',
+					easing: 'linear',
+					delay: -Math.random() * innerDuration
+				});
+			}
+
+			// Layer 2: Prominence arcs — few large elements that flare out far
+			const flareCount = 8;
+			for (let i = 0; i < flareCount; i++) {
+				const fire = document.createElement('div');
+				fire.className = 'flare-fire';
+				const inner = document.createElement('div');
+				inner.className = 'flare-fire-inner';
+
+				const size = 80 + Math.random() * 120;
+				const bTop = 6 + Math.random() * 12;
+				const bRight = 6 + Math.random() * 12;
+				const bBottom = 6 + Math.random() * 12;
+				const bLeft = 6 + Math.random() * 12;
+				const br = [
+					(10 + Math.random() * 70) + '%',
+					(10 + Math.random() * 70) + '%',
+					(10 + Math.random() * 70) + '%',
+					(10 + Math.random() * 70) + '%'
+				].join(' ');
+
+				inner.style.cssText = `
+					width: ${size}px; height: ${size}px;
+					border-top: ${bTop}px solid orange;
+					border-right: ${bRight}px solid orange;
+					border-bottom: ${bBottom}px solid orange;
+					border-left: ${bLeft}px solid orange;
+					border-radius: ${br};
+					box-sizing: border-box;
+				`;
+
+				fire.appendChild(inner);
+				flareWrapperEl.appendChild(fire);
+
+				const orbitDuration = 60000 + Math.random() * 120000;
+				fire.animate([
+					{ transform: 'rotateZ(0deg)' },
+					{ transform: 'rotateZ(360deg)' }
+				], {
+					duration: orbitDuration,
+					iterations: Infinity,
+					easing: 'linear',
+					delay: -Math.random() * orbitDuration
+				});
+
+				// Wide radial sweep — from near the edge out to dramatic arcs
+				const innerDuration = 40000 + Math.random() * 60000;
+				inner.animate([
+					{ transform: 'translate(160px, -50%) rotateZ(0deg)' },
+					{ transform: 'translate(240px, -50%) rotateZ(180deg)' },
+					{ transform: 'translate(160px, -50%) rotateZ(360deg)' }
+				], {
+					duration: innerDuration,
+					iterations: Infinity,
+					direction: 'alternate',
+					easing: 'linear',
+					delay: -Math.random() * innerDuration
+				});
+			}
+		}
+
 		return () => {
 			window.removeEventListener('scroll', handleScroll);
 			revealObserver.disconnect();
@@ -100,11 +217,39 @@
 <!-- Scroll Progress -->
 <div class="scroll-progress" style="width: {scrollProgress}%"></div>
 
+<!-- SVG Filters -->
+<svg class="svg-filters" aria-hidden="true">
+	<defs>
+		<filter id="sun-surface" x="-10%" y="-10%" width="120%" height="120%">
+			<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" seed="2" result="noise">
+				<animate attributeName="seed" from="0" to="100" dur="120s" repeatCount="indefinite" />
+			</feTurbulence>
+			<feColorMatrix type="saturate" values="0" in="noise" result="gray" />
+			<feComponentTransfer in="gray" result="spots">
+				<feFuncR type="linear" slope="0.6" intercept="0.3" />
+				<feFuncG type="linear" slope="0.5" intercept="0.25" />
+				<feFuncB type="linear" slope="0.2" intercept="0.1" />
+			</feComponentTransfer>
+			<feBlend in="SourceGraphic" in2="spots" mode="multiply" result="darkened" />
+			<feComponentTransfer in="noise" result="bright">
+				<feFuncR type="linear" slope="1.2" intercept="0" />
+				<feFuncG type="linear" slope="0.8" intercept="0" />
+				<feFuncB type="linear" slope="0.1" intercept="0" />
+			</feComponentTransfer>
+			<feBlend in="darkened" in2="bright" mode="screen" result="surface" />
+			<feComposite in="surface" in2="SourceGraphic" operator="in" />
+		</filter>
+	</defs>
+</svg>
+
 <!-- ═══ HERO ═══ -->
 <section class="hero">
 	<div class="starfield" bind:this={starfieldEl}></div>
 	<div class="hero-visual reveal">
 		<div class="sun-container">
+			<div class="flare-wrapper" bind:this={flareWrapperEl}>
+				<div class="flare-body"></div>
+			</div>
 			<div class="sun"></div>
 			<div class="orbit-ring orbit-1"><div class="orbit-dot"></div></div>
 			<div class="orbit-ring orbit-2"><div class="orbit-dot"></div></div>
@@ -340,26 +485,75 @@
 		justify-content: center;
 	}
 
-	.sun-container {
-		position: relative;
-		width: 120px;
-		height: 120px;
+	.svg-filters {
+		position: absolute;
+		width: 0;
+		height: 0;
+		overflow: hidden;
 	}
 
 	.sun {
-		width: 120px;
-		height: 120px;
+		position: relative;
+		z-index: 1;
+		width: 400px;
+		height: 400px;
 		border-radius: 50%;
-		background: radial-gradient(circle at 40% 40%, #ffd97d, var(--color-accent-gold), #c47a15);
+		background: radial-gradient(circle at 40% 40%, #8a6010, #c89520, #e8b830, #ffe040);
+		filter: url(#sun-surface);
+		box-shadow: inset 0 0 40px 10px yellow;
+	}
+
+	.sun-container {
+		position: relative;
+		width: 400px;
+		height: 400px;
 		box-shadow:
-			0 0 60px rgba(240,168,48,0.4),
-			0 0 120px rgba(240,168,48,0.15);
+			0 0 80px rgba(240,168,48,0.3),
+			0 0 200px rgba(240,168,48,0.1);
+		border-radius: 50%;
 		animation: sun-pulse 4s ease-in-out infinite;
 	}
 
 	@keyframes sun-pulse {
-		0%, 100% { box-shadow: 0 0 60px rgba(240,168,48,0.4), 0 0 120px rgba(240,168,48,0.15); }
-		50% { box-shadow: 0 0 80px rgba(240,168,48,0.5), 0 0 160px rgba(240,168,48,0.2); }
+		0%, 100% { box-shadow: 0 0 80px rgba(240,168,48,0.3), 0 0 200px rgba(240,168,48,0.1); }
+		50% { box-shadow: 0 0 120px rgba(240,168,48,0.4), 0 0 260px rgba(240,168,48,0.15); }
+	}
+
+	.flare-wrapper {
+		position: absolute;
+		width: 1000px;
+		height: 1000px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: #000;
+		filter: blur(10px) contrast(15);
+		z-index: 0;
+		pointer-events: none;
+	}
+
+	.flare-body {
+		position: absolute;
+		width: 400px;
+		height: 400px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: 50%;
+		background: transparent;
+		border: 15px solid yellow;
+		box-sizing: border-box;
+	}
+
+	:global(.flare-fire) {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform-origin: 0 0;
+	}
+
+	:global(.flare-fire-inner) {
+		box-sizing: border-box;
 	}
 
 	.orbit-ring {
@@ -371,9 +565,9 @@
 		transform: translate(-50%, -50%);
 	}
 
-	.orbit-1 { width: 200px; height: 200px; }
-	.orbit-2 { width: 280px; height: 280px; }
-	.orbit-3 { width: 360px; height: 360px; }
+	.orbit-1 { width: 520px; height: 520px; }
+	.orbit-2 { width: 640px; height: 640px; }
+	.orbit-3 { width: 760px; height: 760px; }
 
 	.orbit-dot {
 		position: absolute;
@@ -400,16 +594,16 @@
 	}
 
 	@keyframes orbit2 {
-		from { transform: rotate(0deg) translateX(100px) rotate(0deg); }
-		to { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+		from { transform: rotate(0deg) translateX(260px) rotate(0deg); }
+		to { transform: rotate(360deg) translateX(260px) rotate(-360deg); }
 	}
 	@keyframes orbit3 {
-		from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
-		to { transform: rotate(360deg) translateX(140px) rotate(-360deg); }
+		from { transform: rotate(0deg) translateX(320px) rotate(0deg); }
+		to { transform: rotate(360deg) translateX(320px) rotate(-360deg); }
 	}
 	@keyframes orbit4 {
-		from { transform: rotate(0deg) translateX(180px) rotate(0deg); }
-		to { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+		from { transform: rotate(0deg) translateX(380px) rotate(0deg); }
+		to { transform: rotate(360deg) translateX(380px) rotate(-360deg); }
 	}
 
 	.hero h1 {
@@ -866,11 +1060,13 @@
 			align-items: center;
 		}
 
-		.sun-container { width: 80px; height: 80px; }
-		.sun { width: 80px; height: 80px; }
-		.orbit-1 { width: 140px; height: 140px; }
-		.orbit-2 { width: 200px; height: 200px; }
-		.orbit-3 { width: 260px; height: 260px; }
+		.sun-container { width: 200px; height: 200px; }
+		.sun { width: 200px; height: 200px; }
+		.flare-wrapper { width: 500px; height: 500px; transform: translate(-50%, -50%) scale(0.5); }
+		.flare-body { width: 400px; height: 400px; }
+		.orbit-1 { width: 280px; height: 280px; }
+		.orbit-2 { width: 360px; height: 360px; }
+		.orbit-3 { width: 440px; height: 440px; }
 
 		.stats-bar { gap: 1.5rem; }
 		.stat-value { font-size: 1.5rem; }
