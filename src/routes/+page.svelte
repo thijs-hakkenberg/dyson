@@ -457,7 +457,7 @@
 	/* ── Hero ── */
 	.hero {
 		text-align: center;
-		overflow: hidden;
+		overflow: visible;
 	}
 
 	.starfield {
@@ -500,7 +500,9 @@
 		border-radius: 50%;
 		background: radial-gradient(circle at 40% 40%, #8a6010, #c89520, #e8b830, #ffe040);
 		filter: url(#sun-surface);
-		box-shadow: inset 0 0 40px 10px yellow;
+		box-shadow:
+			inset 0 0 60px 20px yellow,
+			0 0 12px 4px rgba(255, 255, 0, 0.9);
 	}
 
 	.sun-container {
