@@ -1,0 +1,94 @@
+# Arxiv papers relevant to rq-0-16: Thruster lifetime vs Isp tradeoff
+# Generated: 2026-03-17
+# Note: Hall/ion thruster engineering is primarily published through AIAA, IEPC, and
+# Journal of Propulsion and Power. Arxiv has limited but relevant coverage.
+
+papers:
+  - arxiv_id: "2304.06563"
+    title: "Reduced-order particle-in-cell simulations of a high-power magnetically shielded Hall thruster"
+    authors: ["Maryam Reza", "Farbod Faraji", "Aaron Knoll"]
+    relevance: critical
+    summary: "Simulates plasma behavior in high-power magnetically shielded Hall thrusters using reduced-order PIC methods. Magnetically shielded designs dramatically reduce channel wall erosion, potentially extending thruster lifetime by 10x or more. Directly addresses the erosion-lifetime challenge central to rq-0-16."
+
+  - arxiv_id: "1005.0592"
+    title: "Development of a cavity ring-down spectroscopy sensor for boron nitride sputter erosion in Hall thrusters"
+    authors: ["Lei Tao", "Naoji Yamamoto", "Alec D Gallimore"]
+    relevance: critical
+    summary: "Develops in-situ monitoring of BN sputtering from Hall thruster channel walls using CRDS. BN erosion is the primary lifetime-limiting mechanism in conventional Hall thrusters. Provides quantitative erosion rate measurement methodology essential for lifetime prediction."
+
+  - arxiv_id: "0410170"
+    title: "Plasma Diagnostic and Performance of a Permanent Magnet Hall Thruster"
+    authors: ["Jose Leonardo Ferreira", "Joao Henrique Campos De Souza", "Israel Da Silveira Rego"]
+    relevance: high
+    summary: "Characterizes plasma diagnostics and performance of a permanent magnet Hall thruster. Permanent magnet designs simplify thruster architecture and may affect erosion patterns differently than electromagnetic coil designs. Provides baseline performance data for Hall thruster operation."
+
+  - arxiv_id: "0310080"
+    title: "Effect of Anode Dielectric Coating on Hall Thruster Operation"
+    authors: ["L. Dorf", "Y. Raitses", "N. J. Fisch"]
+    relevance: high
+    summary: "Studies how dielectric coating on the anode affects Hall thruster operation, including anode fall voltage changes. Dielectric coatings form naturally during operation and affect performance and potentially lifetime. Relevant to understanding long-duration operational changes in Hall thrusters."
+
+  - arxiv_id: "2509.26567"
+    title: "AI-assisted Advanced Propellant Development for Electric Propulsion"
+    authors: ["Angel Pan Du", "Miguel Arana-Catania", "Enric Grustan Gutiérrez"]
+    relevance: medium
+    summary: "Uses AI to predict performance of alternative propellants for electric propulsion, focusing on ionization and fragmentation patterns. Alternative propellants may offer different erosion characteristics and Isp tradeoffs compared to xenon, relevant to lifetime optimization."
+
+key_findings:
+  - "Magnetically shielded Hall thruster designs dramatically reduce channel wall erosion, the primary lifetime-limiting mechanism"
+  - "Boron nitride sputtering from channel walls is measurable in-situ using optical spectroscopy techniques"
+  - "Anode surface chemistry evolves during operation, affecting long-term performance characteristics"
+  - "Alternative propellants to xenon are being explored, which may change the Isp-lifetime tradeoff landscape"
+
+gaps_identified:
+  - "Starlink Hall thruster operational data (largest fleet dataset) not publicly available"
+  - "High-power (>20 kW) thruster lifetime scaling laws completely absent from arxiv"
+
+# External references obtained 2026-03-18
+external_references:
+  - source_id: "AIAA-2019-3895-HERMeS-completion"
+    title: "Completion of the Long Duration Wear Test of the NASA HERMeS Hall Thruster"
+    authors: ["Frieman, J.D.", "Kamhawi, H.", "Mackey, J.A.", "Peterson, P.Y.", "Herman, D.A.", "Gilland, J.H.", "Hofer, R.R."]
+    source: "AIAA-2019-3895"
+    url: "https://ntrs.nasa.gov/citations/20190030504"
+    relevance: critical
+    summary: "3,570-hour wear test showing magnetic shielding eliminates channel erosion. Inner front pole cover identified as life limiter."
+
+  - source_id: "IEPC-2019-193-HERMeS-overview"
+    title: "Completing the Development of the 12.5 kW Hall Effect Rocket with Magnetic Shielding"
+    authors: ["Hofer, R.R.", "Kamhawi, H.", "Mikellides, I.G.", "Herman, D.A.", "et al."]
+    source: "IEPC-2019-193"
+    url: "https://electricrocket.org/2019/193.pdf"
+    relevance: critical
+    summary: "Most complete single HERMeS/AEPS reference: 300-800V, 12.5 kW, 3,600h+ data, accelerated testing."
+
+  - source_id: "JAP-2014-Mikellides-shielding"
+    title: "Magnetic Shielding of a Laboratory Hall Thruster"
+    authors: ["Mikellides, I.G.", "Katz, I.", "Hofer, R.R.", "Goebel, D.M."]
+    source: "J. Applied Physics 115(4), 043303, 2014"
+    url: "https://doi.org/10.1063/1.4862313"
+    relevance: critical
+    summary: "Physics basis for magnetic shielding — B-field topology reduces ion bombardment below sputtering threshold."
+
+  - source_id: "AIAA-2003-4558-NSTAR-life"
+    title: "Status of the Extended Life Test of the Deep Space 1 Flight Spare Ion Engine after 30,352 Hours"
+    authors: ["Sengupta, A.", "Brophy, J.R.", "Goodfellow, K.D."]
+    source: "AIAA-2003-4558"
+    url: "https://doi.org/10.2514/6.2003-4558"
+    relevance: high
+    summary: "30,000+ hour NSTAR gridded ion thruster life test — longest single-thruster dataset."
+
+  - source_id: "JPL-Goebel-Katz-textbook"
+    title: "Fundamentals of Electric Propulsion: Ion and Hall Thrusters"
+    authors: ["Goebel, D.M.", "Katz, I."]
+    source: "Wiley/JPL, 2008"
+    url: "https://descanso.jpl.nasa.gov/SciTechBook/series1/Goebel__cmprsd_opt.pdf"
+    relevance: high
+    summary: "Freely available standard reference. Chapter 7 covers Hall thruster lifetime physics."
+
+key_findings_update:
+  - "HERMeS 3,570-hour wear test confirms magnetic shielding eliminates channel wall erosion (external: AIAA-2019-3895)"
+  - "Inner front pole cover becomes the new life-limiting component, not channel walls"
+  - "Upstream cathode positioning reduces keeper erosion by 84%"
+  - "NEXT ion thruster demonstrated >50,000 hours in ground testing"
+  - "AEPS/Gateway program brings magnetically shielded Hall thrusters to TRL 8-9"

@@ -56,6 +56,18 @@ papers:
     relevance: medium
     summary: "Analyzes rubble pile morphology and energy states. Informs understanding of surface stability regimes where anchoring must operate."
 
+  - arxiv_id: "2209.00856"
+    title: "Characterization of the MASCOT landing area by Hayabusa2"
+    authors: ["Stefan Schröder", "Naoya Sakatani", "Rie Honda"]
+    relevance: high
+    summary: "Characterizes the MASCOT landing area on Ryugu using Hayabusa2 data, including surface texture and composition at the landing site. Provides ground-truth data on C-type asteroid surface conditions that anchoring systems must accommodate."
+
+  - arxiv_id: "2104.08660"
+    title: "Hayabusa2 Extended Mission: New Voyage to Rendezvous with a Small Asteroid Rotating with a Short Period"
+    authors: ["M. Hirabayashi", "Y. Mimasu", "N. Sakatani"]
+    relevance: medium
+    summary: "Describes Hayabusa2's extended mission to a fast-rotating small asteroid. Fast rotation creates challenging surface stability conditions for anchoring, as centrifugal acceleration may approach or exceed surface gravity."
+
 key_findings:
   - "Rubble pile asteroids are loosely bound aggregates with 20-40% bulk porosity, complicating mechanical anchoring"
   - "Microspine arrays with passive compliance show improved grip on irregular, unstructured surfaces"

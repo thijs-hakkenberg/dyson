@@ -62,6 +62,12 @@ papers:
     relevance: medium
     summary: "Describes analysis methodology for Bennu samples. Provides context for how regolith properties will be quantified from returned samples to inform simulant development."
 
+  - arxiv_id: "1511.02713"
+    title: "Thermophysical Characteristics of OSIRIS-REx Target Asteroid (101955) Bennu"
+    authors: ["LiangLiang Yu", "Jianghui Ji"]
+    relevance: high
+    summary: "Investigates thermal inertia, roughness fraction, and surface grain size of Bennu using thermophysical modeling. Provides constraints on surface material properties that directly affect excavation resistance and regolith thermal response during disturbance."
+
 key_findings:
   - "Asteroid regolith cohesion from van der Waals forces creates non-trivial excavation resistance even in microgravity"
   - "Bennu sample analysis reveals highly porous, weak carbonaceous material with particle sizes from microns to centimeters"

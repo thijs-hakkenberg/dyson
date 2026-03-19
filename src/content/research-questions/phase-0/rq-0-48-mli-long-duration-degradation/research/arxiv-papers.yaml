@@ -1,0 +1,36 @@
+# Arxiv papers relevant to rq-0-48: MLI long-duration performance and degradation at L4/L5
+# Generated: 2026-03-17
+# Note: MLI performance and degradation literature is predominantly in NASA TRS, AIAA,
+# Cryogenics journal, and spacecraft thermal engineering conferences. Arxiv coverage is minimal.
+
+papers:
+  - arxiv_id: "2601.23168"
+    title: "The Simons Observatory: On-sky performance of radio-transparent multi-layer insulation (RT-MLI) using Styroace-II Styrofoam"
+    authors: ["Samuel Day-Weiss", "Nicholas Galitzki", "Atsuto Takeuchi"]
+    relevance: medium
+    summary: "Reports on-sky performance of radio-transparent MLI filtering ambient thermal radiation from a 0.42m aperture to sub-100mK detectors. While designed for ground-based telescopes, demonstrates MLI thermal performance measurement methodology and validates thermal models against real-world data. The design principles for minimizing radiative heat transfer through layered insulation are applicable."
+
+  - arxiv_id: "1306.5040"
+    title: "Radio-transparent multi-layer insulation for radiowave receivers"
+    authors: ["J. Choi", "H. Ishitsuka", "S. Mima"]
+    relevance: low
+    summary: "Describes MLI design for radio receivers that must balance thermal insulation with radio transparency. Tangentially relevant for understanding MLI design tradeoffs and thermal performance optimization in constrained environments."
+
+  - arxiv_id: "2305.10959"
+    title: "Protocols for healing radiation-damaged single-photon detectors suitable for space environment"
+    authors: ["Joanna Krynski", "Nigar Sultana", "Youn Seok Lee"]
+    relevance: low
+    summary: "While focused on detector radiation damage, provides context for radiation environment effects on space hardware at various orbits. Relevant tangentially to understanding the radiation environment MLI must withstand at L4/L5."
+
+key_findings:
+  - "MLI thermal performance can be accurately modeled and validated against measurements, suggesting ground-based qualification is viable"
+  - "Arxiv literature on MLI in space applications is essentially absent — this is a specialized spacecraft thermal engineering domain"
+  - "Radiation damage to spacecraft materials is studied on arxiv but MLI-specific degradation data is not"
+
+gaps_identified:
+  - "No arxiv papers address MLI degradation mechanisms in the space environment (atomic oxygen, UV, micrometeoroid damage)"
+  - "Long-duration MLI performance data (years to decades) is entirely in NASA/ESA mission reports"
+  - "MLI performance at L4/L5 specifically (radiation environment, thermal cycling profile) not addressed"
+  - "Effective emissivity degradation rates over mission lifetime not found on arxiv"
+  - "MLI repair or replacement strategies for long-duration missions completely absent"
+  - "Comparison of MLI performance between LEO, GEO, and deep space environments not found"

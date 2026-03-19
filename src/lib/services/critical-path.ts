@@ -340,13 +340,13 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-40',
 		slug: 'excavation-thermal-volatile-preservation',
 		title: 'Thermal management for volatile preservation during excavation',
-		status: 'open',
+		status: 'investigating',
 		priority: 'high',
 		threadId: 'mining-operations',
 		dependsOn: ['rq-0-26'],
 		blocks: [],
 		criticalPath: false,
-		hasLiteratureReview: false,
+		hasLiteratureReview: true,
 		hasConclusion: false
 	},
 	{
@@ -381,14 +381,14 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-11',
 		slug: 'microgravity-metallurgy-scaling',
 		title: 'Scaling microgravity metallurgy to industrial production',
-		status: 'investigating',
+		status: 'answered',
 		priority: 'critical',
 		threadId: 'isru-materials',
 		dependsOn: [],
 		blocks: ['rq-0-12', 'rq-0-15', 'rq-0-24', 'rq-0-10'],
 		criticalPath: true,
 		hasLiteratureReview: true,
-		hasConclusion: false,
+		hasConclusion: true,
 		gateDescription: 'Core feasibility question — can we do metallurgy at industrial scale in microgravity?'
 	},
 	{
@@ -477,13 +477,13 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-43',
 		slug: 'mass-closure-ratio-validation',
 		title: 'Mass closure ratio validation for ISRU economics',
-		status: 'open',
+		status: 'investigating',
 		priority: 'high',
 		threadId: 'isru-materials',
 		dependsOn: ['rq-0-28'],
 		blocks: [],
 		criticalPath: false,
-		hasLiteratureReview: false,
+		hasLiteratureReview: true,
 		hasConclusion: false
 	},
 	{
@@ -538,7 +538,7 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		dependsOn: [],
 		blocks: ['rq-0-19'],
 		criticalPath: false,
-		hasLiteratureReview: false,
+		hasLiteratureReview: true,
 		hasConclusion: false
 	},
 	{
@@ -598,13 +598,13 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-31',
 		slug: 'propellant-demand-modeling-precision',
 		title: 'Propellant demand modeling precision',
-		status: 'open',
+		status: 'investigating',
 		priority: 'high',
 		threadId: 'propulsion-transport',
 		dependsOn: ['rq-0-14'],
 		blocks: [],
 		criticalPath: false,
-		hasLiteratureReview: false,
+		hasLiteratureReview: true,
 		hasConclusion: false
 	},
 	{
@@ -637,14 +637,15 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-34',
 		slug: 'storable-propellant-alternatives',
 		title: 'Storable propellant alternatives from asteroid organics',
-		status: 'open',
-		priority: 'medium',
+		status: 'answered',
+		priority: 'low',
 		threadId: 'propulsion-transport',
 		dependsOn: ['rq-0-14'],
 		blocks: [],
 		criticalPath: false,
 		hasLiteratureReview: false,
-		hasConclusion: false
+		hasConclusion: false,
+		gateDescription: 'Deprioritized: rq-0-30 deliberation concluded storable propellants carry 30-40% Isp penalty, making them a last-resort fallback only'
 	},
 	{
 		questionId: 'rq-0-35',
@@ -704,14 +705,14 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-30',
 		slug: 'cryogenic-boiloff-management',
 		title: 'Cryogenic boiloff management at L4/L5 thermal environment',
-		status: 'investigating',
+		status: 'answered',
 		priority: 'high',
 		threadId: 'cryogenic-storage',
 		dependsOn: ['rq-0-14'],
 		blocks: ['rq-0-47', 'rq-0-48', 'rq-0-49'],
 		criticalPath: true,
 		hasLiteratureReview: true,
-		hasConclusion: false,
+		hasConclusion: true,
 		gateDescription:
 			'Boiloff rate determines propellant overproduction factor and station power budget allocation'
 	},
@@ -719,27 +720,27 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-47',
 		slug: 'sunshield-deployment-architecture',
 		title: 'Sunshield deployment architecture for L4/L5 cryogenic storage',
-		status: 'open',
+		status: 'answered',
 		priority: 'high',
 		threadId: 'cryogenic-storage',
 		dependsOn: ['rq-0-30'],
 		blocks: [],
 		criticalPath: false,
-		hasLiteratureReview: false,
-		hasConclusion: false
+		hasLiteratureReview: true,
+		hasConclusion: true
 	},
 	{
 		questionId: 'rq-0-48',
 		slug: 'mli-long-duration-degradation',
 		title: 'MLI long-duration performance and degradation at L4/L5',
-		status: 'open',
+		status: 'answered',
 		priority: 'high',
 		threadId: 'cryogenic-storage',
 		dependsOn: ['rq-0-30'],
 		blocks: [],
 		criticalPath: false,
-		hasLiteratureReview: false,
-		hasConclusion: false
+		hasLiteratureReview: true,
+		hasConclusion: true
 	},
 	{
 		questionId: 'rq-0-49',
@@ -814,7 +815,7 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-29',
 		slug: 'multi-century-governance-structure',
 		title: 'Multi-century governance structure',
-		status: 'open',
+		status: 'answered',
 		priority: 'critical',
 		threadId: 'governance-integration',
 		dependsOn: [],

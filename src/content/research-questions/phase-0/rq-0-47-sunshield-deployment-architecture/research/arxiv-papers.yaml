@@ -1,0 +1,30 @@
+# Arxiv papers relevant to rq-0-47: Sunshield deployment architecture for L4/L5 cryogenic storage
+# Generated: 2026-03-17
+# Note: Sunshield and cryogenic depot design literature is overwhelmingly in NASA TRS,
+# AIAA, and journal databases rather than arxiv. See handover file for external sources.
+
+papers:
+  - arxiv_id: "2512.04609"
+    title: "Strategies for zero boil-off liquid hydrogen transfer: an export terminal case-study"
+    authors: ["Halvor Aarnes Krog", "David Berstad"]
+    relevance: medium
+    summary: "Demonstrates two strategies for achieving zero boil-off during LH2 transfer using centrifugal pumps with variable speed drives and split-range control. While focused on terrestrial export terminals, the thermal management principles (subcooling, pressure control, heat leak minimization) are directly applicable to space-based cryogenic depot design."
+
+  - arxiv_id: "2508.21802"
+    title: "An Adaptive Real-Time Forecasting Framework for Cryogenic Fluid Management in Space Systems"
+    authors: ["Qiyun Cheng", "Huihua Yang", "Wei Ji"]
+    relevance: high
+    summary: "Develops an adaptive forecasting framework for cryogenic tank behavior in deep-space missions. Addresses autonomous cryogenic fluid management (CFM) capabilities needed for long-duration storage. Directly relevant to monitoring and controlling boil-off in L4/L5 propellant depots with sunshield thermal protection."
+
+key_findings:
+  - "Zero boil-off strategies for liquid hydrogen exist and have been validated in terrestrial contexts, but space-specific implementations remain primarily in NASA/AIAA literature"
+  - "Autonomous cryogenic fluid management is an active research area, with machine learning approaches being developed for real-time tank state forecasting"
+  - "Sunshield deployment architecture for cryogenic applications is almost entirely absent from arxiv — this is a NASA/AIAA/ESA domain"
+
+gaps_identified:
+  - "No arxiv papers directly address deployable sunshield design for cryogenic storage at Lagrange points"
+  - "JWST sunshield thermal performance data exists but is published through NASA/STScI channels, not arxiv"
+  - "Cryogenic depot conceptual designs (ULA ACES, Lockheed Martin cryogenic depot) are in AIAA conference papers"
+  - "Thermal modeling of multi-layer sunshield configurations for varying solar distances not found on arxiv"
+  - "Deployment mechanism reliability for large membrane structures in deep space not addressed"
+  - "Long-term thermal performance degradation of deployed sunshields completely unaddressed on arxiv"

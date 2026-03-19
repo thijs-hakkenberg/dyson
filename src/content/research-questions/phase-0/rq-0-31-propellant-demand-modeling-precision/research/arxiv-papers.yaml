@@ -1,0 +1,43 @@
+# Arxiv papers relevant to rq-0-31: Propellant demand modeling precision for Phase 0-1 operations
+# Generated: 2026-03-17
+# Note: Propellant depot sizing and logistics modeling is primarily published through
+# AIAA Space conferences, IAC, and Journal of Spacecraft and Rockets. Arxiv coverage is minimal.
+
+papers:
+  - arxiv_id: "2508.21802"
+    title: "An Adaptive Real-Time Forecasting Framework for Cryogenic Fluid Management in Space Systems"
+    authors: ["Qiyun Cheng", "Huihua Yang", "Wei Ji"]
+    relevance: high
+    summary: "Develops ML-based forecasting for cryogenic tank behavior in deep-space missions. Relevant to predicting propellant boil-off rates and remaining usable propellant, which directly affects demand modeling precision. Autonomous CFM capabilities are essential for long-duration propellant storage."
+
+  - arxiv_id: "2509.26567"
+    title: "AI-assisted Advanced Propellant Development for Electric Propulsion"
+    authors: ["Angel Pan Du", "Miguel Arana-Catania", "Enric Grustan Gutiérrez"]
+    relevance: medium
+    summary: "Explores alternative propellants for electric propulsion using AI prediction of ionization characteristics. Alternative propellants could significantly change demand modeling if xenon is replaced. Relevant to understanding the propellant options space for Phase 0-1."
+
+  - arxiv_id: "2110.07323"
+    title: "Multidisciplinary Design Optimization Approach to Integrated Space Mission Planning and Spacecraft Design"
+    authors: ["Masafumi Isaji", "Yuji Takubo", "Koki Ho"]
+    relevance: medium
+    summary: "Develops MDO framework for integrated mission planning and spacecraft design. The methodology for coupling mission trajectory optimization with vehicle sizing is applicable to propellant demand modeling, where vehicle mass, trajectory, and depot locations are interdependent."
+
+  - arxiv_id: "1404.7430"
+    title: "Coulomb drag devices: electric solar wind sail propulsion and ionospheric deorbiting"
+    authors: ["Pekka Janhunen"]
+    relevance: low
+    summary: "Describes propellantless propulsion concepts (electric sail). Relevant as a potential propellant demand reducer if applicable to certain transfer segments, reducing overall propellant logistics requirements."
+
+key_findings:
+  - "Cryogenic propellant management is an active area with ML/AI approaches being developed for autonomous operations"
+  - "Propellant demand modeling requires integrated mission/vehicle optimization — MDO frameworks exist but are not propellant-depot-specific"
+  - "Alternative propellants and propellantless propulsion concepts could fundamentally change demand models"
+  - "Arxiv coverage of propellant depot logistics and sizing is essentially absent — this is an AIAA/IAC domain"
+
+gaps_identified:
+  - "No arxiv papers model propellant depot network sizing and logistics for cislunar operations"
+  - "Delta-v budgets for asteroid mining mission profiles not found on arxiv"
+  - "Propellant demand sensitivity analysis (mission rate, vehicle mass, Isp variations) absent"
+  - "Economic models for propellant pricing in space economy not on arxiv"
+  - "Multi-depot network optimization for minimizing total propellant mass not found"
+  - "Boil-off loss integration into demand models over multi-year operations not addressed"

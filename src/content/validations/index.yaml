@@ -159,13 +159,13 @@ validations:
       - "space-environment"
     claimSource: "Phase 0 Solar Power Arrays Consensus Document"
 
-  # Outdated claim - needs re-validation
+  # Re-validated with HERMeS and NEXT data
   - id: "val-006"
     slug: "hall-thruster-lifetime"
     claim: "Hall thrusters can achieve 50,000+ hours of operational lifetime"
     bomItemId: "bom-0-5"
     questionId: "rq-0-20"
-    status: "outdated"
+    status: "validated"
     validations:
       - id: "val-006-1"
         date: "2024-06-15"
@@ -187,7 +187,29 @@ validations:
           - "rq-0-20"
         validator: "Literature Review Team"
         notes: "Marked as outdated pending Starlink operational data release"
-    lastUpdated: "2025-03-10"
+      - id: "val-006-3"
+        date: "2026-03-17"
+        source: "literature"
+        sourceDetails: "Arxiv literature review for rq-0-16: magnetically shielded Hall thruster PIC simulations (arxiv:2304.06563) and BN erosion diagnostics (arxiv:1005.0592)"
+        conclusion: "Magnetically shielded Hall thruster designs reduce channel wall erosion by 2-3 orders of magnitude, potentially enabling 50,000+ hour lifetimes at high power. However, long-duration validation data (>5,000 hours) for magnetically shielded designs is in AIAA/IEPC literature, not yet obtained. Cathode lifetime may become the new limiting factor."
+        confidence: 55
+        relatedRQs:
+          - "rq-0-16"
+          - "rq-0-20"
+        validator: "Literature Review (arxiv)"
+        notes: "Key non-arxiv data needed: HERMeS life test results (NASA GRC), H6MS thruster data (JPL). See publications/handover/rq-0-16-thruster-lifetime-isp-tradeoff-handover.md"
+      - id: "val-006-4"
+        date: "2026-03-18"
+        source: "literature"
+        sourceDetails: "External literature search obtained HERMeS wear test series (AIAA-2019-3895, AIAA-2018-4645, AIAA-2017-4647), magnetic shielding physics (Mikellides J.Appl.Phys. 2014), NSTAR 30,000h life test (AIAA-2003-4558), NEXT >50,000h ground test"
+        conclusion: "Magnetically shielded Hall thrusters (HERMeS) demonstrated 3,570 hours with zero channel wall erosion. Inner front pole cover is the new life limiter (not walls). NEXT ion thruster exceeded 50,000 hours in ground testing. 50,000+ hour Hall thruster lifetime is credible with magnetic shielding, supported by AEPS/Gateway flight program at TRL 8-9."
+        confidence: 80
+        relatedRQs:
+          - "rq-0-16"
+          - "rq-0-20"
+        validator: "Literature Review (external + arxiv)"
+        notes: "HERMeS 3,570h test data, Mikellides shielding physics, NSTAR/NEXT comparative data. See updated handover at publications/handover/rq-0-16-thruster-lifetime-isp-tradeoff-handover.md"
+    lastUpdated: "2026-03-18"
     phaseId: "phase-0"
     tags:
       - "hall-thruster"
@@ -260,3 +282,89 @@ validations:
       - "safety"
       - "orbital-mechanics"
     claimSource: "Phase 1 Swarm Control System Consensus Document"
+
+  # New claims from 2026-03-19 deliberations and simulations
+
+  - id: "val-009"
+    slug: "zbo-cryogenic-storage-l4l5"
+    claim: "Zero boil-off cryogenic LH2/LOX storage at L4/L5 requires less than 1% of station power budget"
+    bomItemId: "bom-0-3"
+    questionId: "rq-0-30"
+    status: "validated"
+    validations:
+      - id: "val-009-1"
+        date: "2026-03-19"
+        source: "deliberation"
+        sourceDetails: "Multi-model deliberation rq-0-30 (unanimous, 1 round). Plachta ZBO series, Notardonato 125kL LH2 demo, ULA ACES depot concept"
+        conclusion: "Sunshield reduces 204kW solar input to 40-135W. Two-stage active cooling at 10-20kW achieves ZBO for full tank farm. Less than 1% of 2.5-3.25MW station power."
+        confidence: 85
+        relatedRQs:
+          - "rq-0-30"
+          - "rq-0-47"
+          - "rq-0-48"
+        validator: "Multi-Model Deliberation"
+        notes: "Backed by NASA GRC ZBO test data"
+    lastUpdated: "2026-03-19"
+    phaseId: "phase-0"
+    tags:
+      - "cryogenic"
+      - "zero-boil-off"
+      - "propellant"
+      - "thermal"
+    claimSource: "rq-0-30 Deliberation Conclusion"
+
+  - id: "val-010"
+    slug: "hybrid-gravity-metallurgy-architecture"
+    claim: "Hybrid multi-gravity-zone station (0.05-0.15g smelting + 0g refining) fits within 400-500k kg mass envelope"
+    bomItemId: "bom-0-3"
+    questionId: "rq-0-11"
+    status: "partially-validated"
+    validations:
+      - id: "val-010-1"
+        date: "2026-03-19"
+        source: "deliberation"
+        sourceDetails: "Multi-model deliberation rq-0-11 (unanimous, 2 rounds). Ratke & Diefenbach review, ISS EML data, D'Angelo AM"
+        conclusion: "Pure microgravity smelting not viable at industrial scale. Rotating arm (~50m, 1.4 RPM) provides 0.1g for smelting. Mass 340-430k kg. Reduces risk from TRL 2-3 to TRL 3-4."
+        confidence: 65
+        relatedRQs:
+          - "rq-0-11"
+          - "rq-0-12"
+          - "rq-0-15"
+        validator: "Multi-Model Deliberation"
+        notes: "Gravity thresholds based on dimensional analysis only. Needs 0.01-0.2g experiment data."
+    lastUpdated: "2026-03-19"
+    phaseId: "phase-0"
+    tags:
+      - "metallurgy"
+      - "microgravity"
+      - "artificial-gravity"
+      - "architecture"
+    claimSource: "rq-0-11 Deliberation Conclusion"
+
+  - id: "val-011"
+    slug: "asteroid-water-cost-advantage"
+    claim: "C-type NEA water delivered to L4/L5 is cheaper than lunar polar ice in 90%+ of scenarios"
+    bomItemId: "bom-0-4"
+    questionId: "rq-0-6"
+    status: "partially-validated"
+    validations:
+      - id: "val-011-1"
+        date: "2026-03-19"
+        source: "simulation"
+        sourceDetails: "Paper 05 Monte Carlo (10,000 trials, physics-derived transport). Calibrated on OSIRIS-REx Bennu data."
+        conclusion: "NEA median $3,333/kg vs Lunar $4,845/kg. P(NEA cheaper)=90.4%. EP payload fraction 83% vs chemical 57% is the dominant driver."
+        confidence: 60
+        relatedRQs:
+          - "rq-0-6"
+          - "rq-0-40"
+          - "rq-0-31"
+        validator: "Paper 05 Simulation"
+        notes: "Model uncalibrated against real extraction data. Bennu is one data point."
+    lastUpdated: "2026-03-19"
+    phaseId: "phase-0"
+    tags:
+      - "isru"
+      - "water"
+      - "asteroid"
+      - "economics"
+    claimSource: "Paper 05 ISRU Water Extraction Simulation"

@@ -1,0 +1,52 @@
+# Arxiv papers relevant to rq-0-43: Mass closure ratio validation for ISRU economics
+# Generated: 2026-03-17
+# Note: Self-replicating manufacturing and ISRU mass closure analysis is a niche topic
+# with very limited arxiv presence. Key literature is in NASA technical reports,
+# the Journal of the British Interplanetary Society, and IAC proceedings.
+
+papers:
+  - arxiv_id: "2109.02201"
+    title: "In-space manufacturing and assembly for the construction of large space structures"
+    authors: ["Various"]
+    relevance: critical
+    summary: "Reviews approaches to in-space manufacturing including material processing, assembly techniques, and manufacturing system architecture. Provides context for what fraction of a space manufacturing system can be produced from in-situ resources vs. what must be supplied from Earth, directly relevant to mass closure ratio analysis."
+
+  - arxiv_id: "2408.04936"
+    title: "Hybrid lunar ISRU plant: a comparative analysis with carbothermal reduction and water extraction"
+    authors: ["Kosuke Ikeya", "Francisco J. Guerrero-Gonzalez", "Luca Kiewiet"]
+    relevance: high
+    summary: "Compares ISRU processing approaches with mass and energy budgets. The mass flow analysis (input regolith vs. output products) provides a foundation for mass closure ratio calculations, showing what fraction of processing plant mass could eventually be sourced from ISRU products."
+
+  - arxiv_id: "2301.04999"
+    title: "Stress Flow Guided Non-Planar Print Trajectory Optimization for Additive Manufacturing of Anisotropic Polymers"
+    authors: ["Xavier Guidetti", "Efe C. Balta", "Yannick Nagel"]
+    relevance: medium
+    summary: "Optimizes AM trajectories for structural performance. Relevant to understanding manufacturing capabilities that could be replicated in-situ, affecting which components contribute to mass closure and which remain Earth-dependent."
+
+  - arxiv_id: "2102.09815"
+    title: "A gravity-independent powder-based additive manufacturing process tailored for space applications"
+    authors: ["Olfa D'Angelo", "Felix Kuthe", "Szu-Jia Liu"]
+    relevance: medium
+    summary: "Demonstrates gravity-independent metal AM for space. The ability to manufacture metal parts in-situ is a key enabler for mass closure — each component that can be manufactured rather than imported from Earth improves the closure ratio."
+
+  - arxiv_id: "1612.03238"
+    title: "Affordable, Rapid Bootstrapping of the Space Industry and Solar System Civilization"
+    authors: ["Philip T. Metzger", "Anthony Muscatello", "Robert P. Mueller", "James Mantovani"]
+    relevance: critical
+    summary: "Arxiv preprint of the Journal of Aerospace Engineering paper. Models show bootstrapping of space industry achievable with as little as 12 metric tons landed on the Moon over ~20 years, evolving from sub-replicating to full closure via an in-situ technology spiral. Defines the key parameters (closure ratio, technology spiral) for industrial bootstrapping analysis. Most directly relevant paper for rq-0-43."
+
+key_findings:
+  - "In-space manufacturing capabilities are advancing but remain at laboratory scale"
+  - "Metzger et al. show bootstrapping achievable with ~12 MT initial landed mass via technology spiral approach"
+  - "ISRU mass and energy budgets can be estimated from process engineering models"
+  - "Additive manufacturing in microgravity enables production of some structural components from in-situ materials"
+  - "The concept of mass closure ratio (fraction of system mass producible from local resources) is not formalized on arxiv"
+
+gaps_identified:
+  - "No arxiv papers formally define or validate mass closure ratio as a metric"
+  - "Self-replicating machine theory (Freitas, NASA 1980 study) is entirely in NASA/JBIS literature"
+  - "Component-level analysis of what can vs. cannot be produced from asteroid/lunar materials not found"
+  - "Electronics and precision components as the bottleneck for mass closure not analyzed on arxiv"
+  - "Bootstrapping sequences (which components to manufacture first) not modeled"
+  - "Economic crossover analysis relating mass closure ratio to break-even point absent from arxiv"
+  - "Required production precision vs. available in-situ manufacturing precision not compared"

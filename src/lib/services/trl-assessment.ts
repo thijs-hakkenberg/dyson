@@ -66,53 +66,54 @@ export const RISK_LABELS: Record<string, { label: string; color: string }> = {
 export const TRL_ASSESSMENTS: TRLAssessment[] = [
 	{
 		id: 'microgravity-metallurgy',
-		technology: 'Microgravity Metallurgy at Industrial Scale',
+		technology: 'Hybrid Gravity Metallurgy at Industrial Scale',
 		description:
-			'Smelting, casting, and forming metals from asteroid feedstock in microgravity. Includes iron/nickel separation, alloy production, and structural member fabrication.',
-		currentTRL: 2,
-		currentTRLMax: 3,
+			'Smelting and slag separation in a rotating module (0.05-0.15g), with zone refining and thin-film deposition in microgravity. Hybrid multi-gravity-zone architecture per rq-0-11 deliberation.',
+		currentTRL: 3,
+		currentTRLMax: 4,
 		targetTRL: 7,
 		evidence:
-			'ISS experiments have demonstrated small-scale metal melting and solidification (TRL 2-3). No industrial-scale microgravity metallurgy has been attempted. Containerless processing of small samples demonstrated.',
+			'ISS EML demonstrated gram-scale containerless melting (TRL 2-3). Multi-model deliberation (rq-0-11, 2026) concluded pure microgravity smelting is not viable but hybrid gravity architecture resolves scaling. Gravity-independent AM demonstrated (D\'Angelo 2021). UMG-Si at 4N-5N achieves viable solar cells. Magnetic electrolysis breakthrough (Nature Chemistry 2025). Architectural concept defined but partial-gravity metallurgy experiments in 0.01-0.2g regime not yet conducted.',
 		experimentsNeeded: [
-			'ISS pathfinder: 100g metal melting and casting in microgravity',
-			'ISS follow-up: 1-10kg structural member fabrication',
-			'Free-flyer demo: 100kg batch processing with quality validation',
-			'Prototype facility: Continuous processing at 1 tonne/month rate'
+			'Terrestrial analog facility with EM levitation and asteroid simulant ($50-80M, Years 1-2)',
+			'Dedicated partial-gravity platform: smelting/slag separation at 0.01-0.2g, 1-10kg batches ($300-400M, Years 2-4)',
+			'ISS microgravity zone refining: 100g to 1kg silicon batches ($150-250M, Years 2-4)',
+			'Rotating smelting module engineering development unit ($150-250M, Years 4-6)',
+			'Gate 1 decision at month 36: slag separation >95%, zone refining <1ppmw Fe+Cr+Cu'
 		],
-		yearsToTarget: 12,
-		yearsToTargetMax: 18,
-		relatedQuestionIds: ['rq-0-11', 'rq-0-12', 'rq-0-13', 'rq-0-15'],
+		yearsToTarget: 8,
+		yearsToTargetMax: 12,
+		relatedQuestionIds: ['rq-0-11', 'rq-0-12', 'rq-0-13', 'rq-0-15', 'rq-0-33'],
 		relatedBOMIds: ['bom-0-3'],
 		threadId: 'isru-materials',
 		riskIfFail: 'project-ending',
 		fallbackApproach:
-			'Add artificial gravity via rotation to processing station. Increases station mass and complexity significantly but enables terrestrial metallurgical processes.'
+			'Increase rotation rate for higher gravity (0.3-0.5g), approaching terrestrial metallurgical conditions. Increases Coriolis effects and structural loads but further reduces process uncertainty.'
 	},
 	{
 		id: 'cryocooler-scaling',
 		technology: 'Flight Cryocoolers at 100-500W Cooling (20K)',
 		description:
-			'Active cryogenic cooling at the hundred-watt scale for zero-boiloff LH2 storage. Current flight cryocoolers operate at milliwatt to single-watt scale.',
+			'Active cryogenic cooling at the hundred-watt scale for zero-boiloff LH2 storage. Two-stage architecture (80K intercept + 20K cold stage) per rq-0-30 deliberation.',
 		currentTRL: 4,
 		currentTRLMax: 5,
 		targetTRL: 7,
 		evidence:
-			'NASA GODU-LH2 demonstrated ground-based ZBO with 20W-class Turbo-Brayton cooler. JWST uses 6K cryocoolers at ~milliwatt scale. No flight demonstration at 100W+ scale exists.',
+			'NASA GRC ZBO series: Plachta 2003/2004/2017 demonstrated ground-based ZBO. Notardonato 2017: 13+ months ZBO on 125,000L LH2 tank at KSC. Plachta 2018: 20K cryocooler development. rq-0-30 deliberation (2026): 10-20kW total for full tank farm is <1% of station power. Ross JPL Cryocooler Compendium provides flight heritage database.',
 		experimentsNeeded: [
 			'Ground demo: 50-100W reverse-Brayton at 20K with flight-like interfaces',
-			'Thermal-vacuum qualification of 100W-class system',
+			'Two-stage system integration (80K + 20K) at depot scale',
 			'LEO flight demonstration on dedicated cryogenic testbed',
 			'Long-duration (2+ year) performance characterization in space'
 		],
-		yearsToTarget: 6,
-		yearsToTargetMax: 10,
-		relatedQuestionIds: ['rq-0-49', 'rq-0-30'],
+		yearsToTarget: 5,
+		yearsToTargetMax: 8,
+		relatedQuestionIds: ['rq-0-49', 'rq-0-30', 'rq-0-48'],
 		relatedBOMIds: ['bom-0-3', 'bom-0-6'],
 		threadId: 'cryogenic-storage',
 		riskIfFail: 'architecture-change',
 		fallbackApproach:
-			'Switch to storable propellants (MMH/NTO or alternatives from asteroid organics). Eliminates cryogenic complexity but reduces Isp and requires different ISRU chemistry.'
+			'Oversize sunshield to further reduce heat leak, reducing cryocooler requirements. rq-0-30 deliberation concluded storable propellants carry unacceptable 30-40% Isp penalty.'
 	},
 	{
 		id: 'asteroid-mining-bucket-wheel',
@@ -143,12 +144,12 @@ export const TRL_ASSESSMENTS: TRLAssessment[] = [
 		id: 'solar-electric-propulsion',
 		technology: 'High-Power Solar Electric Propulsion (100+ kW)',
 		description:
-			'Hall-effect or ion thrusters at 100+ kW array power for cargo transport between asteroid belt and L4/L5 construction site.',
+			'Magnetically shielded Hall thrusters at 100+ kW array power for cargo transport between NEAs and L4/L5. HERMeS/AEPS program provides flight development path.',
 		currentTRL: 6,
 		currentTRLMax: 7,
 		targetTRL: 8,
 		evidence:
-			'NASA AEPS (Advanced Electric Propulsion System) 12.5 kW Hall thruster qualified. Starlink uses low-power Hall thrusters operationally. Gateway PPE targets 60 kW. 100+ kW cargo vehicles not yet demonstrated.',
+			'HERMeS 12.5 kW magnetically shielded Hall thruster: 3,570-hour wear test with zero channel erosion (Frieman AIAA-2019-3895). Mikellides 2014: magnetic shielding physics validated. AEPS flight program for Gateway PPE at TRL 8-9. NEXT ion thruster: >50,000 hours ground test. Goebel & Katz textbook: lifetime physics. Starlink fleet provides operational Hall thruster statistics.',
 		experimentsNeeded: [
 			'100+ kW array power demonstration in cislunar space',
 			'Long-duration Hall thruster operation (10,000+ hours) at 50+ kW',
@@ -168,27 +169,27 @@ export const TRL_ASSESSMENTS: TRLAssessment[] = [
 		id: 'isru-water-extraction',
 		technology: 'ISRU Water Extraction from Asteroid Regolith',
 		description:
-			'Heating asteroid regolith to extract water (ice and hydrated minerals), then purifying for electrolysis into LH2/LOX propellant.',
+			'Thermal extraction of water from C-type NEA regolith (CI/CM chondrite, ~10% water). Two approaches: mechanical excavation + thermal processing, or optical mining (concentrated solar). Paper 05 Monte Carlo: NEA preferred over lunar in 90% of scenarios.',
 		currentTRL: 3,
 		currentTRLMax: 4,
 		targetTRL: 7,
 		evidence:
-			'OSIRIS-REx confirmed hydrated minerals on Bennu. Lab demonstrations of water extraction from meteorite analogs. NASA ISRU programs targeting lunar water extraction (PRIME-1, VIPER cancelled). No asteroid-specific extraction demo.',
+			'OSIRIS-REx Bennu sample (2024): CI-chondrite composition with abundant hydrated phyllosilicates, 10%+ water. Glavin 2025: more volatile-rich than Ryugu. McCoy 2025: evaporite minerals from ancient brine. Sercel NIAC: 8kW optical mining demo on CI simulant. Metzger et al.: physics-based thermal extraction model. Paper 05 simulation: NEA median $3,333/kg vs Lunar $4,845/kg to L4/L5.',
 		experimentsNeeded: [
-			'Lab extraction from CI/CM carbonaceous chondrite samples',
-			'Microwave/thermal extraction efficiency characterization',
-			'Microgravity water collection and separation demo',
-			'Prototype ISRU plant processing 1+ kg/day of simulant',
+			'Lab extraction from actual Bennu sample material (coordinate with OSIRIS-REx team)',
+			'Optical vs mechanical extraction efficiency comparison at 10+ kg scale',
+			'Microgravity volatile capture and water purification demo',
+			'Prototype ISRU plant processing 1+ kg/day of CI chondrite simulant',
 			'Asteroid proximity mission with in-situ extraction experiment'
 		],
 		yearsToTarget: 8,
 		yearsToTargetMax: 12,
-		relatedQuestionIds: ['rq-0-27', 'rq-0-33', 'rq-0-40'],
+		relatedQuestionIds: ['rq-0-27', 'rq-0-33', 'rq-0-40', 'rq-0-6'],
 		relatedBOMIds: ['bom-0-6', 'bom-0-3'],
 		threadId: 'isru-materials',
 		riskIfFail: 'project-ending',
 		fallbackApproach:
-			'Source water from lunar poles (higher TRL extraction from known deposits). Significantly increases transport cost but avoids asteroid extraction uncertainty.'
+			'Source water from lunar poles. Paper 05 shows lunar is 34% more expensive but viable. Maintains hedge capability per recommended strategy.'
 	},
 	{
 		id: 'in-space-silicon-purification',
@@ -243,19 +244,19 @@ export const TRL_ASSESSMENTS: TRLAssessment[] = [
 	},
 	{
 		id: 'sunshield-deployment',
-		technology: 'Large Deployable Sunshields for Cryogenic Storage',
+		technology: 'Modular Deployable Sunshield for Cryogenic Depot',
 		description:
-			'Multi-layer deployable sunshield (JWST-heritage) scaled to protect propellant depot tanks, providing passive thermal control to reduce cryocooler load.',
+			'3-layer membrane sunshield, ~60m class, assembled incrementally from 12 gore-shaped segments over 3-4 deliveries. Per rq-0-47 deliberation: reduces solar input by 3 orders of magnitude.',
 		currentTRL: 6,
 		currentTRLMax: 7,
 		targetTRL: 8,
 		evidence:
-			'JWST successfully deployed a 21m x 14m 5-layer sunshield at L2. Scaled designs for propellant depots proposed by ULA and Lockheed Martin. No depot-specific sunshield has been built.',
+			'JWST 21m x 14m 5-layer sunshield at L2 (flight heritage). ULA ACES depot concept with deployable sunshield (Kutter AIAA-2008-7644). ULA patent US20100187365A1 provides engineering specs. rq-0-47 deliberation (2026): modular 3-layer, 10-13 tonnes, >99.99% flux blockage even with micrometeoroid damage. 10-year membrane replacement cycle.',
 		experimentsNeeded: [
-			'Design trade study for depot-scale sunshield (simplified vs JWST-heritage)',
-			'Prototype deployment testing at relevant scale',
-			'Thermal performance characterization in simulated L4/L5 environment',
-			'Long-duration material degradation assessment'
+			'Cone vs planar disk geometry trade study with FEA at 60m scale',
+			'Gore-segment robotic assembly demonstration',
+			'Thermal performance with 3-layer configuration in simulated L4/L5',
+			'UV degradation characterization of polyimide membranes over 10+ years'
 		],
 		yearsToTarget: 4,
 		yearsToTargetMax: 6,
@@ -264,58 +265,59 @@ export const TRL_ASSESSMENTS: TRLAssessment[] = [
 		threadId: 'cryogenic-storage',
 		riskIfFail: 'cost-increase',
 		fallbackApproach:
-			'Rely entirely on active cooling (larger cryocoolers). Increases power budget but eliminates mechanical deployment risk.'
+			'Rely more heavily on active cooling. rq-0-30 showed 10-20kW is sufficient even with modest sunshield.'
 	},
 	{
 		id: 'mli-long-duration',
-		technology: 'MLI Performance over 10+ Year Missions',
+		technology: 'LBMLI with Active Cooling for 20+ Year Depot Life',
 		description:
-			'Multi-layer insulation maintaining thermal performance over decade-plus missions in the L4/L5 radiation and micrometeorite environment.',
+			'Load-Bearing MLI with 2-3 actively cooled intermediate shields, designed for 7-10 year replacement cycles. Per rq-0-48 deliberation: accepts 2-3.5x degradation over 20 years and designs around it.',
 		currentTRL: 5,
 		currentTRLMax: 6,
 		targetTRL: 7,
 		evidence:
-			'MLI extensively used on spacecraft. Hubble MLI showed significant degradation after 15+ years. Limited data on MLI performance at L4/L5 specifically. Atomic oxygen not a concern at L4/L5 (unlike LEO).',
+			'LDEF: 5.7-year space exposure dataset (NASA SP-3134/3141/3154). MISSE: current-era ISS materials data. Fesmire (NASA KSC): MLI testing methodology. de Groh (NASA GRC): polymer degradation models. Gilmore textbook Ch.4: effective emissivity data. rq-0-48 deliberation (2026): LBMLI preferred for structural consistency and active cooling integration; 3-regime degradation model defined; design for maintainability with embedded monitoring.',
 		experimentsNeeded: [
-			'Accelerated aging tests of MLI in simulated L4/L5 environment',
-			'Micrometeorite impact effects on MLI thermal performance',
-			'Long-duration space exposure experiment at L4/L5 or equivalent',
-			'Self-healing or replaceable MLI concept development'
+			'LBMLI polymer spacer column testing under L4/L5-representative UV + radiation',
+			'Active intermediate shield integration with LBMLI stack',
+			'Micrometeoroid penetration thermal impact characterization through LBMLI',
+			'Robotic outer-layer replacement demonstration',
+			'Embedded thermal monitoring sensor array validation'
 		],
 		yearsToTarget: 4,
-		yearsToTargetMax: 7,
+		yearsToTargetMax: 6,
 		relatedQuestionIds: ['rq-0-48', 'rq-0-30'],
 		relatedBOMIds: ['bom-0-3'],
 		threadId: 'cryogenic-storage',
 		riskIfFail: 'cost-increase',
 		fallbackApproach:
-			'Plan for periodic MLI replacement using in-situ manufactured replacements. Adds operational complexity and ISRU requirements.'
+			'Size cryocoolers to 4x lab performance and accept higher power draw. Power is more readily augmented on-orbit than MLI mechanical hardware.'
 	},
 	{
 		id: 'electrolysis-microgravity',
 		technology: 'Industrial Microgravity Water Electrolysis',
 		description:
-			'Splitting water into hydrogen and oxygen at industrial rates (tonnes/year) in microgravity, with reliable gas-liquid separation.',
-		currentTRL: 3,
-		currentTRLMax: 4,
+			'Splitting water into hydrogen and oxygen at industrial rates (tonnes/year) in microgravity, using permanent magnet passive phase separation (Nature Chemistry 2025 breakthrough).',
+		currentTRL: 4,
+		currentTRLMax: 5,
 		targetTRL: 7,
 		evidence:
-			'ISS ECLSS uses small-scale electrolysis for crew oxygen. No industrial-scale microgravity electrolysis demonstrated. Gas-liquid separation in microgravity is a known challenge (capillary effects, bubble management).',
+			'Akay/Romero-Calvo 2025 (Nature Chemistry): permanent magnets achieve 240% current density improvement via diamagnetic buoyancy + MHD forces, with passive gas-liquid separation. Romero-Calvo 2022 (npj Microgravity): drop tower validation. Stuttgart IRS ROMEO satellite PEM electrolyzer for orbital demo (2025-2026). ISS ECLSS provides baseline small-scale electrolysis heritage.',
 		experimentsNeeded: [
-			'Scaled electrolysis cell testing in parabolic flight',
-			'ISS experiment: magnetic/centrifugal gas-liquid separator',
-			'Prototype system processing 10+ kg/day water',
-			'Long-duration (1+ year) continuous operation demo',
-			'Integration with water extraction and propellant storage systems'
+			'ROMEO satellite orbital demo: PEM electrolyzer with magnetic separation',
+			'Scale-up from lab prototype to 1kW system with magnetic phase separation',
+			'Prototype system processing 10+ kg/day water with magnet-assisted separation',
+			'Long-duration (1+ year) electrode degradation under magnetic field',
+			'Integration with water extraction and cryogenic propellant storage'
 		],
-		yearsToTarget: 8,
-		yearsToTargetMax: 12,
+		yearsToTarget: 6,
+		yearsToTargetMax: 9,
 		relatedQuestionIds: ['rq-0-33', 'rq-0-14', 'rq-0-27'],
 		relatedBOMIds: ['bom-0-6'],
 		threadId: 'propulsion-transport',
 		riskIfFail: 'architecture-change',
 		fallbackApproach:
-			'Add centrifuge or rotation to electrolysis module for gravity-assisted separation. Proven approach but adds mass, power, and mechanical complexity.'
+			'Add centrifuge or rotation to electrolysis module. Now less likely to be needed given magnetic separation breakthrough eliminates primary barrier.'
 	}
 ];
 

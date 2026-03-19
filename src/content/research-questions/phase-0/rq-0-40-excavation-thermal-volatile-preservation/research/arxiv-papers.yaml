@@ -1,0 +1,54 @@
+# Arxiv papers relevant to rq-0-40: Thermal management for volatile preservation during excavation
+# Generated: 2026-03-17
+
+papers:
+  - arxiv_id: "2306.03776"
+    title: "Thermal Extraction of Volatiles from Lunar and Asteroid Regolith in Axisymmetric Crank-Nicholson Modeling"
+    authors: ["Philip T. Metzger", "Kris Zacny", "Phillip Morrison"]
+    relevance: critical
+    summary: "Develops a physics-based model for volatile extraction from regolith of the Moon and asteroids. Uses empirical data for thermal conductivity, heat capacity, and sublimation kinetics. Directly models the thermal front propagation during heating and the volatile release profile. Foundational for understanding how excavation-induced thermal disturbances affect volatile retention."
+
+  - arxiv_id: "2505.00423"
+    title: "Thermal evolution model from cometary nuclei to asteroids considering contraction associated with ice sublimation"
+    authors: ["Hitoshi Miura", "Takumi Yasuda"]
+    relevance: critical
+    summary: "Models the thermal evolution of small bodies as they lose volatiles due to solar heating, including structural contraction from ice sublimation. Provides sublimation timescales and depth-dependent volatile distribution models. Critical for understanding pre-excavation volatile distribution and how thermal disturbances propagate through ice-bearing regolith."
+
+  - arxiv_id: "1701.07547"
+    title: "Optimized Bucket Wheel Design for Asteroid Excavation"
+    authors: ["Ravi Teja Nallapu", "Andrew Thoesen", "Laurence Garvie"]
+    relevance: high
+    summary: "Designs and optimizes bucket wheel excavation systems for asteroid regolith. While focused on mechanical design, addresses the physical interaction between excavation equipment and regolith, including energy input that may cause localized heating and volatile loss."
+
+  - arxiv_id: "2212.09534"
+    title: "Mid-IR Observations of IRAS, AKARI, WISE/NEOWISE and Subaru for Large Icy Asteroid (704) Interamnia"
+    authors: ["Haoxuan Jiang", "Jianghui Ji", "Liangliang Yu"]
+    relevance: high
+    summary: "Uses thermophysical modeling to constrain water ice fraction beneath the surface of large asteroid Interamnia. Demonstrates that significant water ice can persist at shallow depths on outer main-belt asteroids. Provides observational constraints on subsurface ice stability relevant to excavation planning."
+
+  - arxiv_id: "2408.04936"
+    title: "Hybrid lunar ISRU plant: a comparative analysis with carbothermal reduction and water extraction"
+    authors: ["Kosuke Ikeya", "Francisco J. Guerrero-Gonzalez", "Luca Kiewiet"]
+    relevance: high
+    summary: "Compares carbothermal reduction and water extraction ISRU approaches for lunar regolith. Includes thermal energy budgets for volatile extraction processes. Relevant for understanding energy requirements and thermal management strategies during resource extraction."
+
+  - arxiv_id: "1103.0225"
+    title: "Water ice at low to midlatitudes on Mars"
+    authors: ["Mathieu Vincendon", "François Forget", "John Mustard"]
+    relevance: medium
+    summary: "Analyzes water ice occurrence and stability on Mars using climate models and IR observations. While Mars-specific, the ice stability physics (sublimation rates vs. temperature, depth-dependent thermal wave penetration) provides analogous frameworks for asteroid volatile preservation analysis."
+
+key_findings:
+  - "Physics-based thermal models for volatile extraction from regolith are available and validated against simulants"
+  - "Ice sublimation timescales depend strongly on depth, thermal conductivity, and solar distance"
+  - "Subsurface ice can persist on asteroids at surprisingly shallow depths in the outer main belt"
+  - "Excavation energy input creates localized thermal disturbances that propagate through regolith on predictable timescales"
+  - "Hybrid ISRU approaches combining different extraction methods may optimize volatile recovery"
+
+gaps_identified:
+  - "No studies specifically model volatile loss during mechanical excavation processes"
+  - "Thermal management strategies to minimize volatile loss during excavation (shading, timing, cooling) not studied"
+  - "Interaction between excavation rate and volatile preservation fraction not modeled"
+  - "NEA-specific volatile distribution models (vs. main belt or lunar) are sparse"
+  - "Real-time monitoring of volatile loss during excavation operations not addressed"
+  - "Scale-up from laboratory simulant tests to full asteroid excavation operations not bridged"

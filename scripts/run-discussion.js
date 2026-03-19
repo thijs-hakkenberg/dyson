@@ -142,7 +142,8 @@ async function loadQuestion(slug) {
 		const dir = path.join(PROJECT_ROOT, 'src/content/research-questions', phase);
 		try {
 			const files = await fs.readdir(dir);
-			const matchingFile = files.find(f => f.endsWith(`-${slug}.md`) || f.includes(slug));
+			const mdFiles = files.filter(f => f.endsWith('.md'));
+			const matchingFile = mdFiles.find(f => f.endsWith(`-${slug}.md`) || f.includes(slug));
 
 			if (matchingFile) {
 				const filePath = path.join(dir, matchingFile);
@@ -274,7 +275,7 @@ function countWords(text) {
 /**
  * Generate response prompt for a model
  */
-function generateResponsePrompt(question, thread, roundNumber) {
+function generateResponsePrompt(question, thread, roundNumber, { hiddenWinner = false } = {}) {
 	let context = `# Discussion: ${question.title}
 
 ## Question Background
@@ -297,13 +298,19 @@ ${question.context}
 
 			for (const response of round.responses) {
 				const model = MODELS[response.modelId];
+				if (!hiddenWinner) {
 				const isWinner = response.modelId === round.winnerId;
 				context += `**${model.name}**${isWinner ? ' (Winning Response)' : ''}:\n`;
+			} else {
+				context += `**${model.name}**:\n`;
+			}
 				context += response.content.substring(0, 1000) + (response.content.length > 1000 ? '...' : '');
 				context += '\n\n';
 			}
 
-			context += `Winner: ${MODELS[round.winnerId].name} (Score: ${round.winnerScore.toFixed(1)})\n\n`;
+			if (!hiddenWinner) {
+				context += `Winner: ${MODELS[round.winnerId].name} (Score: ${round.winnerScore.toFixed(1)})\n\n`;
+			}
 		}
 	}
 
@@ -514,7 +521,7 @@ function checkTermination(currentRound, previousRounds, config = DEFAULT_CONFIG)
 /**
  * Run a single discussion round
  */
-async function runRound(question, thread, roundNumber) {
+async function runRound(question, thread, roundNumber, { hiddenWinner = false } = {}) {
 	console.log(`\n  Round ${roundNumber}:`);
 
 	// Phase 1: Collect responses from all models
@@ -525,7 +532,7 @@ async function runRound(question, thread, roundNumber) {
 		const model = MODELS[modelKey];
 		console.log(`      Querying ${model.name}...`);
 
-		const prompt = generateResponsePrompt(question, thread, roundNumber);
+		const prompt = generateResponsePrompt(question, thread, roundNumber, { hiddenWinner });
 		const content = await queryDatabricks(modelKey, prompt, {
 			systemPrompt: 'You are a space systems engineering expert participating in a multi-stakeholder discussion about Project Dyson specifications.'
 		});
@@ -786,6 +793,7 @@ async function main() {
 	const targetRound = args.find(a => a.startsWith('--round='))?.split('=')[1];
 	const autoMode = args.includes('--auto');
 	const forceConclusion = args.includes('--conclude');
+	const hiddenWinner = args.includes('--hidden-winner');
 
 	if (!questionSlug) {
 		console.error('Usage: node scripts/run-discussion.js --question=<slug> [--round=N] [--auto] [--conclude]');
@@ -873,7 +881,7 @@ async function main() {
 	const endRound = targetRound ? parseInt(targetRound) : (autoMode ? DEFAULT_CONFIG.maxRounds : startRound);
 
 	for (let roundNum = startRound; roundNum <= endRound; roundNum++) {
-		const round = await runRound(question, thread, roundNum);
+		const round = await runRound(question, thread, roundNum, { hiddenWinner });
 
 		// Check termination
 		const termCheck = checkTermination(round, thread.rounds);
