@@ -1,0 +1,436 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 950" width="1000" height="950">
+  <defs>
+    <style>
+      .bg { fill: #0a1628; }
+      .grid { stroke: #1a2d4a; stroke-width: 0.5; }
+      .grid-major { stroke: #1e3654; stroke-width: 1; }
+      .outline { fill: none; stroke: #4a9eff; stroke-width: 1.5; }
+      .outline-thin { fill: none; stroke: #4a9eff; stroke-width: 0.75; }
+      .outline-detail { fill: none; stroke: #3a7acc; stroke-width: 0.5; }
+      .outline-accent { fill: none; stroke: #ff9f43; stroke-width: 1; }
+      .fill-panel { fill: #1a3a6a; fill-opacity: 0.4; stroke: #4a9eff; stroke-width: 0.75; }
+      .fill-body { fill: #0d2240; fill-opacity: 0.6; stroke: #4a9eff; stroke-width: 1.5; }
+      .fill-process { fill: #2d1a0a; fill-opacity: 0.4; stroke: #e67e22; stroke-width: 1; }
+      .fill-cryo { fill: #0a1a2d; fill-opacity: 0.5; stroke: #3498db; stroke-width: 0.75; }
+      .fill-instrument { fill: #1a3a2a; fill-opacity: 0.4; stroke: #2ecc71; stroke-width: 0.75; }
+      .fill-rotate { fill: #1a1a2d; fill-opacity: 0.4; stroke: #9b59b6; stroke-width: 1; }
+      .fill-reflector { fill: #2a3a4a; fill-opacity: 0.3; stroke: #c0d0e0; stroke-width: 0.75; }
+      .dim { stroke: #6ab0ff; stroke-width: 0.5; fill: none; marker-end: url(#arrowBlue); marker-start: url(#arrowBlueRev); }
+      .dim-line { stroke: #6ab0ff; stroke-width: 0.5; stroke-dasharray: 4,3; }
+      .label { font-family: 'Courier New', monospace; fill: #8ec8ff; font-size: 9px; }
+      .label-sm { font-family: 'Courier New', monospace; fill: #6a9fd4; font-size: 7px; }
+      .label-lg { font-family: 'Courier New', monospace; fill: #4a9eff; font-size: 11px; font-weight: bold; }
+      .label-title { font-family: 'Courier New', monospace; fill: #ffffff; font-size: 15px; font-weight: bold; letter-spacing: 2px; }
+      .label-subtitle { font-family: 'Courier New', monospace; fill: #6ab0ff; font-size: 10px; letter-spacing: 1px; }
+      .label-accent { font-family: 'Courier New', monospace; fill: #ff9f43; font-size: 9px; }
+      .label-green { font-family: 'Courier New', monospace; fill: #2ecc71; font-size: 8px; }
+      .label-red { font-family: 'Courier New', monospace; fill: #e74c3c; font-size: 8px; }
+      .label-orange { font-family: 'Courier New', monospace; fill: #e67e22; font-size: 8px; }
+      .label-purple { font-family: 'Courier New', monospace; fill: #9b59b6; font-size: 8px; }
+      .label-cyan { font-family: 'Courier New', monospace; fill: #3498db; font-size: 8px; }
+      .label-silver { font-family: 'Courier New', monospace; fill: #c0d0e0; font-size: 8px; }
+      .label-spec { font-family: 'Courier New', monospace; fill: #8ec8ff; font-size: 8px; }
+      .callout { stroke: #4a6a8f; stroke-width: 0.5; fill: none; }
+    </style>
+    <marker id="arrowBlue" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <path d="M0,0 L6,2 L0,4" fill="none" stroke="#6ab0ff" stroke-width="0.5"/>
+    </marker>
+    <marker id="arrowBlueRev" markerWidth="6" markerHeight="4" refX="1" refY="2" orient="auto">
+      <path d="M6,0 L0,2 L6,4" fill="none" stroke="#6ab0ff" stroke-width="0.5"/>
+    </marker>
+    <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="20" class="grid"/>
+      <line x1="0" y1="0" x2="20" y2="0" class="grid"/>
+    </pattern>
+    <pattern id="gridMajor" width="100" height="100" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="100" class="grid-major"/>
+      <line x1="0" y1="0" x2="100" y2="0" class="grid-major"/>
+    </pattern>
+  </defs>
+
+  <rect class="bg" width="1000" height="950"/>
+  <rect fill="url(#gridPattern)" width="1000" height="950" opacity="0.3"/>
+  <rect fill="url(#gridMajor)" width="1000" height="950" opacity="0.3"/>
+
+  <!-- Title block -->
+  <rect x="20" y="15" width="500" height="55" fill="none" stroke="#4a9eff" stroke-width="1"/>
+  <text class="label-title" x="35" y="38">MATERIAL PROCESSING STATION</text>
+  <text class="label-subtitle" x="35" y="55">PROJECT DYSON · BOM-0-3 · PHASE 0 · HYBRID GRAVITY ARCHITECTURE</text>
+  <text class="label-sm" x="540" y="30">SCALE: NOT TO SCALE</text>
+  <text class="label-sm" x="540" y="42">DATE: 2026-03-19</text>
+  <text class="label-sm" x="540" y="54">UPDATED PER rq-0-11 DELIBERATION</text>
+
+  <!-- ============================================ -->
+  <!-- STATION — SIDE VIEW (main drawing)          -->
+  <!-- ============================================ -->
+
+  <text class="label-lg" x="350" y="90" text-anchor="middle">STATION OVERVIEW — SIDE VIEW (HYBRID GRAVITY ARCHITECTURE)</text>
+
+  <!-- Wrap station drawing in a group, shifted down 40px for smelter headroom -->
+  <g transform="translate(0, 40)">
+
+  <!-- ===== CENTRAL TRUSS (backbone) ===== -->
+  <rect x="100" y="218" width="600" height="14" fill="#0d1a30" fill-opacity="0.8" stroke="#4a9eff" stroke-width="1.5" rx="1"/>
+  <g opacity="0.2" stroke="#4a9eff" stroke-width="0.5">
+    <line x1="100" y1="218" x2="130" y2="232"/><line x1="130" y1="218" x2="100" y2="232"/>
+    <line x1="130" y1="218" x2="160" y2="232"/><line x1="160" y1="218" x2="130" y2="232"/>
+    <line x1="160" y1="218" x2="190" y2="232"/><line x1="190" y1="218" x2="160" y2="232"/>
+    <line x1="190" y1="218" x2="220" y2="232"/><line x1="220" y1="218" x2="190" y2="232"/>
+    <line x1="220" y1="218" x2="250" y2="232"/><line x1="250" y1="218" x2="220" y2="232"/>
+    <line x1="250" y1="218" x2="280" y2="232"/><line x1="280" y1="218" x2="250" y2="232"/>
+    <line x1="280" y1="218" x2="310" y2="232"/><line x1="310" y1="218" x2="280" y2="232"/>
+    <line x1="310" y1="218" x2="340" y2="232"/><line x1="340" y1="218" x2="310" y2="232"/>
+    <line x1="340" y1="218" x2="370" y2="232"/><line x1="370" y1="218" x2="340" y2="232"/>
+    <line x1="370" y1="218" x2="400" y2="232"/><line x1="400" y1="218" x2="370" y2="232"/>
+    <line x1="400" y1="218" x2="430" y2="232"/><line x1="430" y1="218" x2="400" y2="232"/>
+    <line x1="430" y1="218" x2="460" y2="232"/><line x1="460" y1="218" x2="430" y2="232"/>
+    <line x1="460" y1="218" x2="490" y2="232"/><line x1="490" y1="218" x2="460" y2="232"/>
+    <line x1="490" y1="218" x2="520" y2="232"/><line x1="520" y1="218" x2="490" y2="232"/>
+    <line x1="520" y1="218" x2="550" y2="232"/><line x1="550" y1="218" x2="520" y2="232"/>
+    <line x1="550" y1="218" x2="580" y2="232"/><line x1="580" y1="218" x2="550" y2="232"/>
+    <line x1="580" y1="218" x2="610" y2="232"/><line x1="610" y1="218" x2="580" y2="232"/>
+    <line x1="610" y1="218" x2="640" y2="232"/><line x1="640" y1="218" x2="610" y2="232"/>
+    <line x1="640" y1="218" x2="670" y2="232"/><line x1="670" y1="218" x2="640" y2="232"/>
+    <line x1="670" y1="218" x2="700" y2="232"/><line x1="700" y1="218" x2="670" y2="232"/>
+  </g>
+  <text class="label-sm" x="400" y="214" text-anchor="middle">CENTRAL TRUSS · 500 m · 10×10 m CROSS-SECTION · 200 t</text>
+
+  <!-- ===== FEEDSTOCK RECEIVING (left end) ===== -->
+  <rect class="fill-body" x="100" y="170" width="60" height="48" rx="3"/>
+  <line class="outline-thin" x1="100" y1="218" x2="100" y2="170"/>
+  <line class="outline-thin" x1="160" y1="218" x2="160" y2="170"/>
+  <rect class="fill-body" x="100" y="232" width="60" height="40" rx="3"/>
+  <line class="outline-thin" x1="100" y1="232" x2="100" y2="272"/>
+  <line class="outline-thin" x1="160" y1="232" x2="160" y2="272"/>
+  <text class="label-accent" x="130" y="192" text-anchor="middle" font-size="6">FRP</text>
+  <text class="label-accent" x="130" y="200" text-anchor="middle" font-size="5">FEEDSTOCK</text>
+  <text class="label-accent" x="130" y="255" text-anchor="middle" font-size="6">DOCKING</text>
+  <text class="label-accent" x="130" y="263" text-anchor="middle" font-size="5">PORT × 2</text>
+
+  <!-- Incoming transport arrow -->
+  <line x1="60" y1="260" x2="95" y2="260" stroke="#ff9f43" stroke-width="1" marker-end="url(#arrowBlue)"/>
+  <text class="label-accent" x="55" y="258" text-anchor="end" font-size="6">RAW MATERIAL</text>
+  <text class="label-accent" x="55" y="268" text-anchor="end" font-size="6">FROM TUGS</text>
+
+  <!-- ===== PROCESSING MODULES (center, on truss) ===== -->
+
+  <!-- PM-1 (above truss) -->
+  <rect class="fill-process" x="200" y="145" width="70" height="73" rx="3"/>
+  <line class="outline-thin" x1="220" y1="218" x2="220" y2="145"/>
+  <line class="outline-thin" x1="250" y1="218" x2="250" y2="145"/>
+  <text class="label-orange" x="235" y="168" text-anchor="middle" font-size="6">PM-1</text>
+  <text class="label-orange" x="235" y="178" text-anchor="middle" font-size="5">SMELTING</text>
+  <text class="label-orange" x="235" y="188" text-anchor="middle" font-size="5">CAVITY RX</text>
+  <text class="label-orange" x="235" y="198" text-anchor="middle" font-size="5">2800-3200K</text>
+
+  <!-- PM-2 (below truss) -->
+  <rect class="fill-process" x="200" y="232" width="70" height="73" rx="3"/>
+  <line class="outline-thin" x1="220" y1="232" x2="220" y2="305"/>
+  <line class="outline-thin" x1="250" y1="232" x2="250" y2="305"/>
+  <text class="label-orange" x="235" y="260" text-anchor="middle" font-size="6">PM-2</text>
+  <text class="label-orange" x="235" y="270" text-anchor="middle" font-size="5">FRACTIONAL</text>
+  <text class="label-orange" x="235" y="280" text-anchor="middle" font-size="5">CONDENSER</text>
+
+  <!-- PM-3 (above truss, further right) -->
+  <rect class="fill-process" x="290" y="145" width="70" height="73" rx="3"/>
+  <line class="outline-thin" x1="310" y1="218" x2="310" y2="145"/>
+  <line class="outline-thin" x1="340" y1="218" x2="340" y2="145"/>
+  <text class="label-orange" x="325" y="168" text-anchor="middle" font-size="6">PM-3</text>
+  <text class="label-orange" x="325" y="178" text-anchor="middle" font-size="5">REDUCTION</text>
+  <text class="label-orange" x="325" y="188" text-anchor="middle" font-size="5">FURNACES</text>
+
+  <!-- PM-4 (below truss) -->
+  <rect class="fill-process" x="290" y="232" width="70" height="73" rx="3"/>
+  <line class="outline-thin" x1="310" y1="232" x2="310" y2="305"/>
+  <line class="outline-thin" x1="340" y1="232" x2="340" y2="305"/>
+  <text class="label-orange" x="325" y="260" text-anchor="middle" font-size="6">PM-4</text>
+  <text class="label-orange" x="325" y="270" text-anchor="middle" font-size="5">ELECTROLYSIS</text>
+  <text class="label-orange" x="325" y="280" text-anchor="middle" font-size="5">&amp; REFINING</text>
+
+  <!-- Concentrators (parabolic dishes, connected to PM-1 and PM-3) -->
+  <path d="M185,100 Q235,120 185,140" fill="none" stroke="#c0d0e0" stroke-width="1.5"/>
+  <text class="label-silver" x="175" y="118" text-anchor="end">130m</text>
+  <text class="label-silver" x="175" y="128" text-anchor="end">CONC.</text>
+  <!-- Light beam -->
+  <line x1="188" y1="120" x2="205" y2="155" stroke="#ffaa22" stroke-width="0.5" opacity="0.4"/>
+
+  <path d="M275,100 Q325,120 275,140" fill="none" stroke="#c0d0e0" stroke-width="1.5"/>
+  <text class="label-silver" x="265" y="118" text-anchor="end">130m</text>
+  <line x1="278" y1="120" x2="295" y2="155" stroke="#ffaa22" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- ===== ROTATING SMELTING ARM (the rq-0-11 hybrid gravity addition) ===== -->
+
+  <!-- Rotation bearing (on truss) -->
+  <circle cx="430" cy="225" r="10" fill="#1a1a2d" fill-opacity="0.6" stroke="#9b59b6" stroke-width="1.5"/>
+  <circle cx="430" cy="225" r="5" fill="none" stroke="#9b59b6" stroke-width="0.5"/>
+  <text class="label-purple" x="445" y="215" font-size="6">ROTATION</text>
+  <text class="label-purple" x="445" y="223" font-size="6">BEARING</text>
+
+  <!-- Arm extending upward (50m radius) -->
+  <line x1="430" y1="215" x2="430" y2="105" stroke="#9b59b6" stroke-width="2"/>
+  <!-- Counter-mass arm extending downward -->
+  <line x1="430" y1="235" x2="430" y2="310" stroke="#9b59b6" stroke-width="1.5" stroke-dasharray="4,2"/>
+
+  <!-- Smelting module at arm tip (enlarged for clarity) -->
+  <rect class="fill-rotate" x="395" y="80" width="70" height="55" rx="3"/>
+  <!-- Arc furnaces inside (top half) -->
+  <rect x="402" y="86" width="16" height="12" fill="#2a1a1a" fill-opacity="0.3" stroke="#e74c3c" stroke-width="0.5" rx="1"/>
+  <rect x="422" y="86" width="16" height="12" fill="#2a1a1a" fill-opacity="0.3" stroke="#e74c3c" stroke-width="0.5" rx="1"/>
+  <rect x="442" y="86" width="16" height="12" fill="#2a1a1a" fill-opacity="0.3" stroke="#e74c3c" stroke-width="0.5" rx="1"/>
+  <text class="label-red" x="430" y="108" text-anchor="middle" font-size="5">ARC FURNACES</text>
+  <!-- Labels below furnaces -->
+  <text class="label-purple" x="430" y="120" text-anchor="middle" font-size="6">SMELTING MODULE</text>
+  <text class="label-purple" x="430" y="130" text-anchor="middle" font-size="5">0.05-0.15g</text>
+
+  <!-- Counterweight -->
+  <rect x="415" y="310" width="30" height="15" fill="#1a1a2d" fill-opacity="0.4" stroke="#9b59b6" stroke-width="0.75" rx="2"/>
+  <text class="label-purple" x="430" y="320" text-anchor="middle" font-size="5">CTR-WT</text>
+
+  <!-- Rotation arrow -->
+  <path d="M460,130 Q475,145 465,160" fill="none" stroke="#9b59b6" stroke-width="0.75" marker-end="url(#arrowBlue)"/>
+  <text class="label-purple" x="478" y="145" font-size="6">1.4 RPM</text>
+  <text class="label-purple" x="478" y="153" font-size="6">~50m radius</text>
+
+  <!-- Material elevator along arm -->
+  <rect x="425" y="140" width="10" height="70" fill="none" stroke="#ff9f43" stroke-width="0.5" stroke-dasharray="2,2"/>
+  <text class="label-accent" x="440" y="178" font-size="5">ELEVATOR</text>
+
+  <!-- ===== ZERO-G REFINING MODULE ===== -->
+  <rect class="fill-instrument" x="500" y="160" width="60" height="58" rx="3"/>
+  <line class="outline-thin" x1="520" y1="218" x2="520" y2="160"/>
+  <line class="outline-thin" x1="540" y1="218" x2="540" y2="160"/>
+  <text class="label-green" x="530" y="182" text-anchor="middle" font-size="6">0g REFINING</text>
+  <text class="label-green" x="530" y="192" text-anchor="middle" font-size="5">ZONE REFINE</text>
+  <text class="label-green" x="530" y="202" text-anchor="middle" font-size="5">THIN FILM</text>
+  <text class="label-green" x="530" y="212" text-anchor="middle" font-size="5">CVD</text>
+
+  <!-- ===== CRYOGENIC DEPOT (right of truss) ===== -->
+  <g transform="translate(580, 148)">
+    <!-- Sunshield (above depot) -->
+    <line x1="-10" y1="0" x2="80" y2="0" stroke="#c0d0e0" stroke-width="1"/>
+    <line x1="-10" y1="4" x2="80" y2="4" stroke="#c0d0e0" stroke-width="0.75" opacity="0.5"/>
+    <line x1="-10" y1="8" x2="80" y2="8" stroke="#c0d0e0" stroke-width="0.5" opacity="0.3"/>
+    <text class="label-silver" x="35" y="-5" text-anchor="middle" font-size="6">SUNSHIELD (3-LAYER)</text>
+
+    <!-- LH2 tank -->
+    <ellipse cx="20" cy="40" rx="18" ry="25" class="fill-cryo"/>
+    <text class="label-cyan" x="20" y="38" text-anchor="middle" font-size="5">LH₂</text>
+    <text class="label-cyan" x="20" y="46" text-anchor="middle" font-size="4">20K</text>
+
+    <!-- LOX tank -->
+    <ellipse cx="55" cy="40" rx="18" ry="25" class="fill-cryo"/>
+    <text class="label-cyan" x="55" y="38" text-anchor="middle" font-size="5">LOX</text>
+    <text class="label-cyan" x="55" y="46" text-anchor="middle" font-size="4">90K</text>
+
+    <!-- Cryocooler -->
+    <rect x="10" y="68" width="50" height="12" fill="#0a1a2d" fill-opacity="0.5" stroke="#3498db" stroke-width="0.5" rx="1"/>
+    <text class="label-cyan" x="35" y="77" text-anchor="middle" font-size="4">CRYOCOOLER 10-20kW</text>
+
+    <!-- Mounting struts to truss -->
+    <line class="outline-thin" x1="20" y1="65" x2="20" y2="70"/>
+    <line class="outline-thin" x1="55" y1="65" x2="55" y2="70"/>
+  </g>
+
+  <!-- Struts from depot to truss -->
+  <line class="outline-thin" x1="600" y1="218" x2="600" y2="148"/>
+  <line class="outline-thin" x1="635" y1="218" x2="635" y2="148"/>
+
+  <!-- ===== HABITAT (right end) ===== -->
+  <rect class="fill-body" x="660" y="175" width="40" height="43" rx="8"/>
+  <line class="outline-thin" x1="670" y1="218" x2="670" y2="175"/>
+  <line class="outline-thin" x1="690" y1="218" x2="690" y2="175"/>
+  <rect class="fill-body" x="660" y="232" width="40" height="35" rx="8"/>
+  <line class="outline-thin" x1="670" y1="232" x2="670" y2="267"/>
+  <line class="outline-thin" x1="690" y1="232" x2="690" y2="267"/>
+  <text class="label" x="680" y="198" text-anchor="middle" font-size="5">HABITAT</text>
+  <text class="label" x="680" y="206" text-anchor="middle" font-size="4">CREW × 4</text>
+  <text class="label" x="680" y="250" text-anchor="middle" font-size="5">RMSD</text>
+  <text class="label" x="680" y="258" text-anchor="middle" font-size="4">STORAGE</text>
+
+  <!-- Docking port (right end) -->
+  <rect x="700" y="220" width="15" height="10" fill="none" stroke="#ff9f43" stroke-width="0.75" rx="1"/>
+  <text class="label-accent" x="720" y="228" font-size="5">DOCK</text>
+
+  <!-- ===== THERMAL RADIATORS ===== -->
+  <g opacity="0.5">
+    <line x1="235" y1="305" x2="235" y2="340" stroke="#e67e22" stroke-width="1"/>
+    <line x1="225" y1="340" x2="245" y2="340" stroke="#e67e22" stroke-width="0.5"/>
+    <line x1="225" y1="335" x2="245" y2="335" stroke="#e67e22" stroke-width="0.5"/>
+    <line x1="225" y1="330" x2="245" y2="330" stroke="#e67e22" stroke-width="0.5"/>
+    <line x1="325" y1="305" x2="325" y2="340" stroke="#e67e22" stroke-width="1"/>
+    <line x1="315" y1="340" x2="335" y2="340" stroke="#e67e22" stroke-width="0.5"/>
+    <line x1="315" y1="335" x2="335" y2="335" stroke="#e67e22" stroke-width="0.5"/>
+    <line x1="315" y1="330" x2="335" y2="330" stroke="#e67e22" stroke-width="0.5"/>
+  </g>
+  <text class="label-orange" x="280" y="350" text-anchor="middle" font-size="6">THERMAL RADIATORS</text>
+
+  <!-- Dimensions -->
+  <line class="dim" x1="100" y1="365" x2="700" y2="365"/>
+  <line class="dim-line" x1="100" y1="275" x2="100" y2="370"/>
+  <line class="dim-line" x1="700" y1="270" x2="700" y2="370"/>
+  <text class="label" x="400" y="380" text-anchor="middle">~500 m TOTAL LENGTH</text>
+
+  <text class="label-lg" x="400" y="400" text-anchor="middle">IOC CONFIGURATION · 4 PROCESSING MODULES + ROTATING SMELTER</text>
+
+  </g><!-- end station view shift group -->
+
+  <!-- ============================================ -->
+  <!-- PROCESS FLOW DIAGRAM (bottom left)          -->
+  <!-- ============================================ -->
+
+  <g transform="translate(30, 490)">
+    <text class="label-lg" x="280" y="0" text-anchor="middle">MATERIAL PROCESSING FLOW</text>
+
+    <!-- Flow boxes -->
+    <rect x="0" y="15" width="80" height="35" fill="#0d1a30" fill-opacity="0.3" stroke="#ff9f43" stroke-width="0.75" rx="3"/>
+    <text class="label-accent" x="40" y="30" text-anchor="middle" font-size="6">FEEDSTOCK</text>
+    <text class="label-accent" x="40" y="40" text-anchor="middle" font-size="5">RECEIVE/CRUSH</text>
+
+    <line x1="80" y1="32" x2="100" y2="32" stroke="#ff9f43" stroke-width="0.5" marker-end="url(#arrowBlue)"/>
+
+    <rect x="100" y="15" width="80" height="35" fill="#2d1a0a" fill-opacity="0.3" stroke="#e67e22" stroke-width="0.75" rx="3"/>
+    <text class="label-orange" x="140" y="30" text-anchor="middle" font-size="6">SOLAR SMELT</text>
+    <text class="label-orange" x="140" y="40" text-anchor="middle" font-size="5">3,000K CAVITY</text>
+
+    <line x1="180" y1="32" x2="200" y2="32" stroke="#ff9f43" stroke-width="0.5" marker-end="url(#arrowBlue)"/>
+
+    <rect x="200" y="15" width="80" height="35" fill="#2d1a0a" fill-opacity="0.3" stroke="#e67e22" stroke-width="0.75" rx="3"/>
+    <text class="label-orange" x="240" y="30" text-anchor="middle" font-size="6">FRACTIONAL</text>
+    <text class="label-orange" x="240" y="40" text-anchor="middle" font-size="5">CONDENSATION</text>
+
+    <line x1="280" y1="32" x2="300" y2="32" stroke="#ff9f43" stroke-width="0.5" marker-end="url(#arrowBlue)"/>
+
+    <rect x="300" y="15" width="80" height="35" fill="#1a1a2d" fill-opacity="0.3" stroke="#9b59b6" stroke-width="0.75" rx="3"/>
+    <text class="label-purple" x="340" y="30" text-anchor="middle" font-size="6">SLAG SEP.</text>
+    <text class="label-purple" x="340" y="40" text-anchor="middle" font-size="5">0.05-0.15g</text>
+
+    <line x1="380" y1="32" x2="400" y2="32" stroke="#ff9f43" stroke-width="0.5" marker-end="url(#arrowBlue)"/>
+
+    <rect x="400" y="15" width="80" height="35" fill="#1a3a2a" fill-opacity="0.3" stroke="#2ecc71" stroke-width="0.75" rx="3"/>
+    <text class="label-green" x="440" y="30" text-anchor="middle" font-size="6">ZONE REFINE</text>
+    <text class="label-green" x="440" y="40" text-anchor="middle" font-size="5">0g (Si, Fe-Ni)</text>
+
+    <!-- Output branches -->
+    <line x1="480" y1="25" x2="500" y2="15" stroke="#ff9f43" stroke-width="0.5" marker-end="url(#arrowBlue)"/>
+    <line x1="480" y1="40" x2="500" y2="50" stroke="#ff9f43" stroke-width="0.5" marker-end="url(#arrowBlue)"/>
+
+    <text class="label-spec" x="505" y="18">STRUCTURAL METALS (Fe, Ni, Al)</text>
+    <text class="label-spec" x="505" y="53">SOLAR-GRADE SILICON (4N-5N)</text>
+
+    <!-- Condensation zones detail -->
+    <text class="label-sm" x="240" y="60" text-anchor="middle">Fe,Ni @ 2800K → SiO₂ @ 2300K → Al₂O₃ @ 1800K → CaO @ 1200K → H₂O @ 200K</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- GRAVITY ZONES (bottom center)               -->
+  <!-- ============================================ -->
+
+  <g transform="translate(30, 590)">
+    <text class="label-lg" x="280" y="0" text-anchor="middle">GRAVITY ZONE ARCHITECTURE (rq-0-11 CONSENSUS)</text>
+
+    <!-- Zone boxes side by side -->
+    <rect x="0" y="15" width="130" height="65" fill="#0d1a30" fill-opacity="0.3" stroke="#4a9eff" stroke-width="0.75" rx="3"/>
+    <text class="label-lg" x="65" y="30" text-anchor="middle" font-size="8">0g CORE</text>
+    <text class="label-spec" x="10" y="44">Zone refining (Si)</text>
+    <text class="label-spec" x="10" y="55">Thin-film CVD</text>
+    <text class="label-spec" x="10" y="66">Electrolysis (magnetic)</text>
+    <text class="label-spec" x="10" y="77">Containerless processing</text>
+
+    <rect x="145" y="15" width="130" height="65" fill="#1a1a2d" fill-opacity="0.3" stroke="#9b59b6" stroke-width="1" rx="3"/>
+    <text class="label-lg" x="210" y="30" text-anchor="middle" font-size="8" fill="#9b59b6">0.05-0.15g</text>
+    <text class="label-spec" x="155" y="44">Primary smelting</text>
+    <text class="label-spec" x="155" y="55">Slag separation</text>
+    <text class="label-spec" x="155" y="66">Casting / forming</text>
+    <text class="label-spec" x="155" y="77">~50m arm, 1.4 RPM</text>
+
+    <rect x="290" y="15" width="130" height="65" fill="#0d1a30" fill-opacity="0.3" stroke="#4a9eff" stroke-width="0.75" rx="3"/>
+    <text class="label-lg" x="355" y="30" text-anchor="middle" font-size="8">HABITAT</text>
+    <text class="label-spec" x="300" y="44">Crew quarters × 4</text>
+    <text class="label-spec" x="300" y="55">Quarterly visits</text>
+    <text class="label-spec" x="300" y="66">Life support ECLSS</text>
+    <text class="label-spec" x="300" y="77">EVA airlock</text>
+
+    <rect x="435" y="15" width="130" height="65" fill="#0a1a2d" fill-opacity="0.3" stroke="#3498db" stroke-width="0.75" rx="3"/>
+    <text class="label-lg" x="500" y="30" text-anchor="middle" font-size="8" fill="#3498db">CRYO DEPOT</text>
+    <text class="label-spec" x="445" y="44">LH₂ + LOX storage</text>
+    <text class="label-spec" x="445" y="55">ZBO @ 10-20 kW</text>
+    <text class="label-spec" x="445" y="66">3-layer sunshield</text>
+    <text class="label-spec" x="445" y="77">Per rq-0-30</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- SPECS TABLE (bottom right)                  -->
+  <!-- ============================================ -->
+
+  <g transform="translate(700, 490)">
+    <text class="label-lg" x="270" y="0" text-anchor="end">STATION SPECS (IOC)</text>
+    <line class="outline-thin" x1="0" y1="5" x2="270" y2="5"/>
+
+    <text class="label-spec" x="0" y="20">Total mass (IOC) . ~2,500 t</text>
+    <text class="label-spec" x="0" y="31">Truss length ..... 500 m</text>
+    <text class="label-spec" x="0" y="42">Truss section .... 10×10 m</text>
+    <text class="label-spec" x="0" y="53">Processing modules  4</text>
+    <text class="label-spec" x="0" y="64">Throughput ....... 10,000 t/yr</text>
+    <text class="label-spec" x="0" y="75">Concentrators .... 4× 130m</text>
+    <text class="label-spec" x="0" y="86">Thermal power .... 45 MW</text>
+    <text class="label-spec" x="0" y="97">Electrical power . 2.5 MW</text>
+    <text class="label-spec" x="0" y="108">Smelting arm ..... 50m, 1.4 RPM</text>
+    <text class="label-spec" x="0" y="119">Smelting gravity .. 0.05-0.15g</text>
+    <text class="label-spec" x="0" y="130">Design life ...... 30 years</text>
+    <text class="label-spec" x="0" y="141">Crew ............. 4 (quarterly)</text>
+    <text class="label-spec" x="0" y="152">Autonomy ......... Level 4</text>
+    <text class="label-spec" x="0" y="163">Location ......... Sun-Earth L4/L5</text>
+
+    <line class="outline-thin" x1="0" y1="172" x2="270" y2="172"/>
+    <text class="label-lg" x="0" y="188">MASS BUDGET</text>
+    <text class="label-spec" x="0" y="202">Concentrators .... 26 t</text>
+    <text class="label-spec" x="0" y="213">Processing mods .. 1,400 t</text>
+    <text class="label-spec" x="0" y="224">Feedstock prep ... 120 t</text>
+    <text class="label-spec" x="0" y="235">Structure (truss). 200 t</text>
+    <text class="label-spec" x="0" y="246">Solar PV arrays .. 84 t</text>
+    <text class="label-spec" x="0" y="257">Robotics ......... 80 t</text>
+    <text class="label-spec" x="0" y="268">Storage + waste .. 120 t</text>
+    <text class="label-spec" x="0" y="279">Rotating arm ..... 25 t</text>
+    <text class="label-spec" x="0" y="290">Cryo depot ....... 30 t</text>
+    <text class="label-spec" x="0" y="301">Margin (20%) ..... 413 t</text>
+    <text class="label-spec" x="0" y="316" font-size="9" fill="#4a9eff">TOTAL ............ ~2,500 t</text>
+
+    <line class="outline-thin" x1="0" y1="324" x2="270" y2="324"/>
+    <text class="label-lg" x="0" y="340">BUDGET</text>
+    <text class="label-spec" x="0" y="354">Station capital ... ~$10B</text>
+    <text class="label-spec" x="0" y="365">Contingency ...... 15-20%</text>
+    <text class="label-spec" x="0" y="376">Reduced from 30-40%</text>
+    <text class="label-spec" x="0" y="387">per rq-0-11 hybrid</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- LEGEND                                      -->
+  <!-- ============================================ -->
+
+  <g transform="translate(50, 910)">
+    <rect x="0" y="-8" width="8" height="8" fill="#0d2240" stroke="#4a9eff" stroke-width="0.75" rx="1"/>
+    <text class="label" x="12" y="0">STRUCTURE</text>
+
+    <rect x="90" y="-8" width="8" height="8" fill="#2d1a0a" stroke="#e67e22" stroke-width="0.75" rx="1"/>
+    <text class="label-orange" x="102" y="0">PROCESSING</text>
+
+    <rect x="190" y="-8" width="8" height="8" fill="#1a1a2d" stroke="#9b59b6" stroke-width="0.75" rx="1"/>
+    <text class="label-purple" x="202" y="0">ROTATING ARM</text>
+
+    <rect x="305" y="-8" width="8" height="8" fill="#1a3a2a" stroke="#2ecc71" stroke-width="0.75" rx="1"/>
+    <text class="label-green" x="317" y="0">0g REFINING</text>
+
+    <rect x="400" y="-8" width="8" height="8" fill="#0a1a2d" stroke="#3498db" stroke-width="0.75" rx="1"/>
+    <text class="label-cyan" x="412" y="0">CRYOGENIC</text>
+
+    <rect x="490" y="-8" width="8" height="8" fill="#2a3a4a" stroke="#c0d0e0" stroke-width="0.75" rx="1"/>
+    <text class="label-silver" x="502" y="0">CONCENTRATORS</text>
+
+    <text class="label-sm" x="610" y="0">CONSENSUS + rq-0-11 DELIBERATION</text>
+  </g>
+
+  <!-- Border -->
+  <rect x="5" y="5" width="990" height="940" fill="none" stroke="#4a9eff" stroke-width="2" rx="2"/>
+  <rect x="8" y="8" width="984" height="934" fill="none" stroke="#1e3654" stroke-width="0.5" rx="1"/>
+
+</svg>

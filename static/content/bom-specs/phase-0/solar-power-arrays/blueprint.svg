@@ -1,0 +1,445 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 950" width="1000" height="950">
+  <defs>
+    <style>
+      .bg { fill: #0a1628; }
+      .grid { stroke: #1a2d4a; stroke-width: 0.5; }
+      .grid-major { stroke: #1e3654; stroke-width: 1; }
+      .outline { fill: none; stroke: #4a9eff; stroke-width: 1.5; }
+      .outline-thin { fill: none; stroke: #4a9eff; stroke-width: 0.75; }
+      .outline-detail { fill: none; stroke: #3a7acc; stroke-width: 0.5; }
+      .outline-accent { fill: none; stroke: #ff9f43; stroke-width: 1; }
+      .fill-panel { fill: #1a3a6a; fill-opacity: 0.4; stroke: #4a9eff; stroke-width: 0.75; }
+      .fill-body { fill: #0d2240; fill-opacity: 0.6; stroke: #4a9eff; stroke-width: 1.5; }
+      .fill-reflector { fill: #2a3a4a; fill-opacity: 0.3; stroke: #c0d0e0; stroke-width: 0.75; }
+      .fill-pv { fill: #1a2a5a; fill-opacity: 0.6; stroke: #6a8aff; stroke-width: 1; }
+      .fill-thermal { fill: #2d1a0a; fill-opacity: 0.4; stroke: #e67e22; stroke-width: 0.75; }
+      .fill-instrument { fill: #1a3a2a; fill-opacity: 0.4; stroke: #2ecc71; stroke-width: 0.75; }
+      .dim { stroke: #6ab0ff; stroke-width: 0.5; fill: none; marker-end: url(#arrowBlue); marker-start: url(#arrowBlueRev); }
+      .dim-line { stroke: #6ab0ff; stroke-width: 0.5; stroke-dasharray: 4,3; }
+      .label { font-family: 'Courier New', monospace; fill: #8ec8ff; font-size: 9px; }
+      .label-sm { font-family: 'Courier New', monospace; fill: #6a9fd4; font-size: 7px; }
+      .label-lg { font-family: 'Courier New', monospace; fill: #4a9eff; font-size: 11px; font-weight: bold; }
+      .label-title { font-family: 'Courier New', monospace; fill: #ffffff; font-size: 16px; font-weight: bold; letter-spacing: 2px; }
+      .label-subtitle { font-family: 'Courier New', monospace; fill: #6ab0ff; font-size: 10px; letter-spacing: 1px; }
+      .label-accent { font-family: 'Courier New', monospace; fill: #ff9f43; font-size: 9px; }
+      .label-green { font-family: 'Courier New', monospace; fill: #2ecc71; font-size: 8px; }
+      .label-red { font-family: 'Courier New', monospace; fill: #e74c3c; font-size: 8px; }
+      .label-silver { font-family: 'Courier New', monospace; fill: #c0d0e0; font-size: 8px; }
+      .label-blue { font-family: 'Courier New', monospace; fill: #6a8aff; font-size: 8px; }
+      .label-orange { font-family: 'Courier New', monospace; fill: #e67e22; font-size: 8px; }
+      .label-spec { font-family: 'Courier New', monospace; fill: #8ec8ff; font-size: 8px; }
+      .callout { stroke: #4a6a8f; stroke-width: 0.5; fill: none; }
+    </style>
+    <marker id="arrowBlue" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <path d="M0,0 L6,2 L0,4" fill="none" stroke="#6ab0ff" stroke-width="0.5"/>
+    </marker>
+    <marker id="arrowBlueRev" markerWidth="6" markerHeight="4" refX="1" refY="2" orient="auto">
+      <path d="M6,0 L0,2 L6,4" fill="none" stroke="#6ab0ff" stroke-width="0.5"/>
+    </marker>
+    <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="20" class="grid"/>
+      <line x1="0" y1="0" x2="20" y2="0" class="grid"/>
+    </pattern>
+    <pattern id="gridMajor" width="100" height="100" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="100" class="grid-major"/>
+      <line x1="0" y1="0" x2="100" y2="0" class="grid-major"/>
+    </pattern>
+  </defs>
+
+  <rect class="bg" width="1000" height="950"/>
+  <rect fill="url(#gridPattern)" width="1000" height="950" opacity="0.3"/>
+  <rect fill="url(#gridMajor)" width="1000" height="950" opacity="0.3"/>
+
+  <!-- Title block -->
+  <rect x="20" y="15" width="480" height="55" fill="none" stroke="#4a9eff" stroke-width="1"/>
+  <text class="label-title" x="35" y="38">SOLAR POWER ARRAY — 25 kW MODULE</text>
+  <text class="label-subtitle" x="35" y="55">PROJECT DYSON · BOM-0-5 · PHASE 0 · MULTI-MODEL CONSENSUS</text>
+  <text class="label-sm" x="520" y="30">SCALE: NOT TO SCALE</text>
+  <text class="label-sm" x="520" y="42">DATE: 2026-03-19</text>
+  <text class="label-sm" x="520" y="54">CONCENTRATOR DESIGN · 10× RATIO</text>
+
+  <!-- ============================================ -->
+  <!-- ARRAY MODULE — CROSS-SECTION / SIDE VIEW    -->
+  <!-- ============================================ -->
+
+  <text class="label-lg" x="300" y="95" text-anchor="middle">ARRAY MODULE — SIDE VIEW (CROSS-SECTION)</text>
+
+  <!-- Sunlight arrows (incoming from top-left) -->
+  <g opacity="0.35" stroke="#ffdd44" stroke-width="0.5">
+    <line x1="60" y1="105" x2="140" y2="165"/>
+    <line x1="100" y1="105" x2="180" y2="165"/>
+    <line x1="140" y1="105" x2="220" y2="165"/>
+    <line x1="180" y1="105" x2="260" y2="165"/>
+    <line x1="220" y1="105" x2="300" y2="165"/>
+    <line x1="260" y1="105" x2="340" y2="165"/>
+    <line x1="300" y1="105" x2="380" y2="165"/>
+    <line x1="340" y1="105" x2="420" y2="165"/>
+    <line x1="380" y1="105" x2="460" y2="165"/>
+  </g>
+  <text class="label-sm" x="50" y="103" fill="#ffdd44">INCOMING SUNLIGHT · 1,361 W/m²</text>
+
+  <!-- Reflector A (left, angled ~15° inward) -->
+  <line x1="80" y1="140" x2="280" y2="220" stroke="#c0d0e0" stroke-width="2"/>
+  <!-- Reflective surface shimmer -->
+  <g opacity="0.15" stroke="#ffffff" stroke-width="4">
+    <line x1="90" y1="145" x2="270" y2="215"/>
+  </g>
+  <!-- Reflector backing detail -->
+  <line x1="80" y1="143" x2="280" y2="223" stroke="#3a4a5a" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text class="label-silver" x="130" y="165">REFLECTOR A</text>
+  <text class="label-silver" x="130" y="175">20m × 10m</text>
+  <text class="label-silver" x="130" y="185">Al on Kapton</text>
+
+  <!-- Reflector B (right, angled ~15° inward) -->
+  <line x1="520" y1="140" x2="320" y2="220" stroke="#c0d0e0" stroke-width="2"/>
+  <g opacity="0.15" stroke="#ffffff" stroke-width="4">
+    <line x1="510" y1="145" x2="330" y2="215"/>
+  </g>
+  <line x1="520" y1="143" x2="320" y2="223" stroke="#3a4a5a" stroke-width="0.5" stroke-dasharray="3,3"/>
+  <text class="label-silver" x="420" y="165">REFLECTOR B</text>
+  <text class="label-silver" x="420" y="175">20m × 10m</text>
+  <text class="label-silver" x="420" y="185">85% specular</text>
+
+  <!-- Concentrated light beams (converging on receiver) -->
+  <g opacity="0.25" stroke="#ffaa22" stroke-width="0.75">
+    <line x1="150" y1="175" x2="290" y2="228"/>
+    <line x1="180" y1="185" x2="293" y2="228"/>
+    <line x1="210" y1="195" x2="296" y2="228"/>
+    <line x1="240" y1="205" x2="298" y2="228"/>
+    <line x1="450" y1="175" x2="310" y2="228"/>
+    <line x1="420" y1="185" x2="307" y2="228"/>
+    <line x1="390" y1="195" x2="304" y2="228"/>
+    <line x1="360" y1="205" x2="302" y2="228"/>
+  </g>
+  <text class="label-orange" x="300" y="218" text-anchor="middle" font-size="6">10× CONCENTRATED</text>
+
+  <!-- PV Receiver Strip -->
+  <rect class="fill-pv" x="265" y="225" width="70" height="14" rx="2"/>
+  <text class="label-blue" x="300" y="235" text-anchor="middle" font-size="6">PV RECEIVER STRIP</text>
+
+  <!-- Thermal radiator (back of receiver) -->
+  <g transform="translate(265, 239)">
+    <line class="outline-detail" x1="5" y1="0" x2="5" y2="10" stroke="#e67e22" stroke-width="0.5"/>
+    <line class="outline-detail" x1="15" y1="0" x2="15" y2="10" stroke="#e67e22" stroke-width="0.5"/>
+    <line class="outline-detail" x1="25" y1="0" x2="25" y2="10" stroke="#e67e22" stroke-width="0.5"/>
+    <line class="outline-detail" x1="35" y1="0" x2="35" y2="10" stroke="#e67e22" stroke-width="0.5"/>
+    <line class="outline-detail" x1="45" y1="0" x2="45" y2="10" stroke="#e67e22" stroke-width="0.5"/>
+    <line class="outline-detail" x1="55" y1="0" x2="55" y2="10" stroke="#e67e22" stroke-width="0.5"/>
+    <line class="outline-detail" x1="65" y1="0" x2="65" y2="10" stroke="#e67e22" stroke-width="0.5"/>
+  </g>
+  <text class="label-orange" x="345" y="248">THERMAL RADIATOR</text>
+  <text class="label-orange" x="345" y="258">ε > 0.9 · 12.5 kW/m² reject</text>
+  <text class="label-orange" x="345" y="268">Eq. temp ~117°C</text>
+
+  <!-- Structural truss (connecting reflectors to receiver) -->
+  <!-- Left truss members -->
+  <line class="outline-thin" x1="80" y1="140" x2="265" y2="225"/>
+  <line class="outline-thin" x1="80" y1="143" x2="265" y2="250"/>
+  <line class="outline-detail" x1="130" y1="200" x2="265" y2="230"/>
+  <!-- Right truss members -->
+  <line class="outline-thin" x1="520" y1="140" x2="335" y2="225"/>
+  <line class="outline-thin" x1="520" y1="143" x2="335" y2="250"/>
+  <line class="outline-detail" x1="470" y1="200" x2="335" y2="230"/>
+
+  <!-- Structural hub / PMU (below receiver) -->
+  <rect class="fill-body" x="270" y="260" width="60" height="35" rx="3"/>
+  <text class="label" x="300" y="276" text-anchor="middle" font-size="6">PMU + HUB</text>
+  <text class="label" x="300" y="286" text-anchor="middle" font-size="5">DC-DC · POINTING</text>
+
+  <!-- Inflatable booms (edge stiffeners on reflectors) -->
+  <circle cx="80" cy="140" r="3" fill="none" stroke="#ff9f43" stroke-width="0.75"/>
+  <circle cx="520" cy="140" r="3" fill="none" stroke="#ff9f43" stroke-width="0.75"/>
+  <text class="label-accent" x="50" y="135" text-anchor="end">INFLATABLE</text>
+  <text class="label-accent" x="50" y="145" text-anchor="end">BOOM</text>
+  <text class="label-accent" x="530" y="135">INFLATABLE</text>
+  <text class="label-accent" x="530" y="145">BOOM</text>
+
+  <!-- Attachment point -->
+  <line class="outline" x1="300" y1="295" x2="300" y2="315"/>
+  <circle cx="300" cy="318" r="4" fill="#0d2240" stroke="#4a9eff" stroke-width="1"/>
+  <text class="label" x="315" y="318">ATTACHMENT TO STRING BUS</text>
+
+  <!-- Dimensions -->
+  <line class="dim" x1="80" y1="330" x2="520" y2="330"/>
+  <line class="dim-line" x1="80" y1="145" x2="80" y2="335"/>
+  <line class="dim-line" x1="520" y1="145" x2="520" y2="335"/>
+  <text class="label" x="300" y="345" text-anchor="middle">~20 m REFLECTOR SPAN</text>
+
+  <!-- View label -->
+  <text class="label-lg" x="300" y="365" text-anchor="middle">SINGLE ARRAY MODULE · 25 kW · 123 kg</text>
+
+  <!-- ============================================ -->
+  <!-- TOP VIEW — MODULE                           -->
+  <!-- ============================================ -->
+
+  <g transform="translate(560, 90)">
+    <text class="label-lg" x="190" y="0" text-anchor="middle">TOP VIEW</text>
+
+    <!-- Reflector A (top) -->
+    <rect class="fill-reflector" x="30" y="15" width="320" height="70" rx="2"/>
+    <g opacity="0.15" stroke="#ffffff" stroke-width="0.3">
+      <line x1="30" y1="35" x2="350" y2="35"/>
+      <line x1="30" y1="55" x2="350" y2="55"/>
+      <line x1="30" y1="75" x2="350" y2="75"/>
+    </g>
+    <text class="label-silver" x="190" y="50" text-anchor="middle">REFLECTOR A · 20m × 10m · Al/Kapton</text>
+
+    <!-- PV Receiver strip (center) -->
+    <rect class="fill-pv" x="30" y="92" width="320" height="16" rx="1"/>
+    <!-- Cell grid lines -->
+    <g opacity="0.3" stroke="#6a8aff" stroke-width="0.3">
+      <line x1="60" y1="92" x2="60" y2="108"/>
+      <line x1="90" y1="92" x2="90" y2="108"/>
+      <line x1="120" y1="92" x2="120" y2="108"/>
+      <line x1="150" y1="92" x2="150" y2="108"/>
+      <line x1="180" y1="92" x2="180" y2="108"/>
+      <line x1="210" y1="92" x2="210" y2="108"/>
+      <line x1="240" y1="92" x2="240" y2="108"/>
+      <line x1="270" y1="92" x2="270" y2="108"/>
+      <line x1="300" y1="92" x2="300" y2="108"/>
+      <line x1="330" y1="92" x2="330" y2="108"/>
+    </g>
+    <!-- Bypass diode markers -->
+    <g opacity="0.5">
+      <circle cx="75" cy="100" r="1.5" fill="#2ecc71"/>
+      <circle cx="135" cy="100" r="1.5" fill="#2ecc71"/>
+      <circle cx="195" cy="100" r="1.5" fill="#2ecc71"/>
+      <circle cx="255" cy="100" r="1.5" fill="#2ecc71"/>
+      <circle cx="315" cy="100" r="1.5" fill="#2ecc71"/>
+    </g>
+    <text class="label-blue" x="190" y="103" text-anchor="middle" font-size="5">PV RECEIVER · 20m × 1m · a-Si · BYPASS DIODES /10cm</text>
+
+    <!-- Reflector B (bottom) -->
+    <rect class="fill-reflector" x="30" y="115" width="320" height="70" rx="2"/>
+    <g opacity="0.15" stroke="#ffffff" stroke-width="0.3">
+      <line x1="30" y1="135" x2="350" y2="135"/>
+      <line x1="30" y1="155" x2="350" y2="155"/>
+      <line x1="30" y1="175" x2="350" y2="175"/>
+    </g>
+    <text class="label-silver" x="190" y="150" text-anchor="middle">REFLECTOR B · 20m × 10m · Al/Kapton</text>
+
+    <!-- Structural booms (edges) -->
+    <line x1="28" y1="15" x2="28" y2="185" stroke="#ff9f43" stroke-width="1.5"/>
+    <line x1="352" y1="15" x2="352" y2="185" stroke="#ff9f43" stroke-width="1.5"/>
+    <line x1="30" y1="13" x2="350" y2="13" stroke="#ff9f43" stroke-width="1"/>
+    <line x1="30" y1="187" x2="350" y2="187" stroke="#ff9f43" stroke-width="1"/>
+    <!-- Diagonal stiffeners -->
+    <line x1="30" y1="15" x2="350" y2="100" stroke="#ff9f43" stroke-width="0.5" opacity="0.3"/>
+    <line x1="30" y1="185" x2="350" y2="100" stroke="#ff9f43" stroke-width="0.5" opacity="0.3"/>
+
+    <!-- PMU hub (center of receiver strip) -->
+    <rect class="fill-body" x="170" y="88" width="40" height="24" rx="2"/>
+    <text class="label" x="190" y="103" text-anchor="middle" font-size="5">PMU</text>
+
+    <!-- Dimensions -->
+    <line class="dim" x1="30" y1="200" x2="350" y2="200"/>
+    <text class="label" x="190" y="212" text-anchor="middle">20 m</text>
+    <line class="dim" x1="365" y1="15" x2="365" y2="185"/>
+    <text class="label" x="375" y="100" font-size="7">~21 m</text>
+
+    <text class="label-sm" x="190" y="225" text-anchor="middle">400 m² TOTAL REFLECTOR · 20 m² RECEIVER</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- POWER HIERARCHY (bottom left)               -->
+  <!-- ============================================ -->
+
+  <g transform="translate(40, 410)">
+    <text class="label-lg" x="240" y="0" text-anchor="middle">POWER SYSTEM HIERARCHY</text>
+
+    <!-- Power Station level -->
+    <rect x="155" y="15" width="170" height="28" fill="#0d2240" fill-opacity="0.4" stroke="#4a9eff" stroke-width="1" rx="3"/>
+    <text class="label" x="240" y="33" text-anchor="middle">POWER STATION · 500 MW</text>
+
+    <line class="outline-detail" x1="240" y1="43" x2="240" y2="55"/>
+
+    <!-- Cluster level -->
+    <rect x="135" y="55" width="210" height="28" fill="#0d2240" fill-opacity="0.4" stroke="#4a9eff" stroke-width="0.75" rx="3"/>
+    <text class="label" x="240" y="73" text-anchor="middle">POWER CLUSTER × 10 · 50 MW each</text>
+
+    <line class="outline-detail" x1="240" y1="83" x2="240" y2="95"/>
+
+    <!-- String level -->
+    <rect x="120" y="95" width="240" height="28" fill="#0d2240" fill-opacity="0.4" stroke="#4a9eff" stroke-width="0.75" rx="3"/>
+    <text class="label" x="240" y="113" text-anchor="middle">POWER STRING × 20 · 2.5 MW each</text>
+
+    <line class="outline-detail" x1="240" y1="123" x2="240" y2="135"/>
+
+    <!-- Module level (highlighted) -->
+    <rect x="100" y="135" width="280" height="35" fill="#0d2240" fill-opacity="0.4" stroke="#ff9f43" stroke-width="1.5" rx="3"/>
+    <text class="label-accent" x="240" y="150" text-anchor="middle" font-size="9">ARRAY MODULE × 100 · 25 kW each</text>
+    <text class="label-accent" x="240" y="162" text-anchor="middle" font-size="7">← THIS BLUEPRINT</text>
+
+    <!-- Module internals -->
+    <g transform="translate(80, 180)">
+      <line class="outline-detail" x1="160" y1="0" x2="40" y2="10"/>
+      <line class="outline-detail" x1="160" y1="0" x2="110" y2="10"/>
+      <line class="outline-detail" x1="160" y1="0" x2="190" y2="10"/>
+      <line class="outline-detail" x1="160" y1="0" x2="270" y2="10"/>
+      <line class="outline-detail" x1="160" y1="0" x2="330" y2="10"/>
+
+      <rect x="5" y="12" width="70" height="20" fill="#2a3a4a" fill-opacity="0.3" stroke="#c0d0e0" stroke-width="0.5" rx="2"/>
+      <text class="label-silver" x="40" y="25" text-anchor="middle" font-size="5">CONCENTRATOR</text>
+
+      <rect x="85" y="12" width="50" height="20" fill="#1a2a5a" fill-opacity="0.4" stroke="#6a8aff" stroke-width="0.5" rx="2"/>
+      <text class="label-blue" x="110" y="25" text-anchor="middle" font-size="5">PV CELLS</text>
+
+      <rect x="145" y="12" width="50" height="20" fill="#0d2240" fill-opacity="0.4" stroke="#4a9eff" stroke-width="0.5" rx="2"/>
+      <text class="label" x="170" y="25" text-anchor="middle" font-size="5">PMU</text>
+
+      <rect x="205" y="12" width="50" height="20" fill="#0d2240" fill-opacity="0.4" stroke="#ff9f43" stroke-width="0.5" rx="2"/>
+      <text class="label-accent" x="230" y="25" text-anchor="middle" font-size="5">FRAME</text>
+
+      <rect x="265" y="12" width="60" height="20" fill="#0d2240" fill-opacity="0.4" stroke="#e67e22" stroke-width="0.5" rx="2"/>
+      <text class="label-orange" x="295" y="25" text-anchor="middle" font-size="5">POINTING</text>
+    </g>
+
+    <!-- Total counts -->
+    <text class="label-sm" x="240" y="230" text-anchor="middle">TOTAL: 20,000 MODULES · 500 MW · ~2,500 tonnes</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- END VIEW (structural frame)                 -->
+  <!-- ============================================ -->
+
+  <g transform="translate(530, 410)">
+    <text class="label-lg" x="180" y="0" text-anchor="middle">STRUCTURAL FRAME — END VIEW</text>
+
+    <!-- Top truss node -->
+    <circle cx="180" cy="30" r="4" fill="#0d2240" stroke="#ff9f43" stroke-width="1"/>
+
+    <!-- Reflector attachment lines (V-shape up from top) -->
+    <line x1="180" y1="30" x2="60" y2="55" stroke="#c0d0e0" stroke-width="1.5"/>
+    <line x1="180" y1="30" x2="300" y2="55" stroke="#c0d0e0" stroke-width="1.5"/>
+    <text class="label-silver" x="55" y="52" text-anchor="end">REFL A</text>
+    <text class="label-silver" x="305" y="52">REFL B</text>
+
+    <!-- Truss diagonal members -->
+    <line x1="180" y1="30" x2="130" y2="100" stroke="#ff9f43" stroke-width="0.75"/>
+    <line x1="180" y1="30" x2="230" y2="100" stroke="#ff9f43" stroke-width="0.75"/>
+
+    <!-- Mid truss nodes -->
+    <circle cx="130" cy="100" r="3" fill="#0d2240" stroke="#ff9f43" stroke-width="0.75"/>
+    <circle cx="230" cy="100" r="3" fill="#0d2240" stroke="#ff9f43" stroke-width="0.75"/>
+
+    <!-- PV receiver between mid nodes -->
+    <rect class="fill-pv" x="130" y="95" width="100" height="10" rx="1"/>
+    <text class="label-blue" x="180" y="103" text-anchor="middle" font-size="5">PV RECEIVER</text>
+
+    <!-- Lower truss members -->
+    <line x1="130" y1="100" x2="100" y2="150" stroke="#ff9f43" stroke-width="0.75"/>
+    <line x1="230" y1="100" x2="260" y2="150" stroke="#ff9f43" stroke-width="0.75"/>
+    <line x1="130" y1="100" x2="260" y2="150" stroke="#ff9f43" stroke-width="0.5" opacity="0.5"/>
+    <line x1="230" y1="100" x2="100" y2="150" stroke="#ff9f43" stroke-width="0.5" opacity="0.5"/>
+
+    <!-- Bottom truss nodes -->
+    <circle cx="100" cy="150" r="3" fill="#0d2240" stroke="#ff9f43" stroke-width="0.75"/>
+    <circle cx="260" cy="150" r="3" fill="#0d2240" stroke="#ff9f43" stroke-width="0.75"/>
+
+    <!-- Bottom cross member -->
+    <line x1="100" y1="150" x2="260" y2="150" stroke="#ff9f43" stroke-width="1"/>
+
+    <!-- PMU/Hub -->
+    <rect class="fill-body" x="150" y="155" width="60" height="25" rx="2"/>
+    <text class="label" x="180" y="170" text-anchor="middle" font-size="6">PMU / HUB</text>
+
+    <!-- Attachment -->
+    <line class="outline" x1="180" y1="180" x2="180" y2="195"/>
+    <circle cx="180" cy="198" r="3" fill="#0d2240" stroke="#4a9eff" stroke-width="0.75"/>
+
+    <!-- Truss specs -->
+    <text class="label-accent" x="180" y="220" text-anchor="middle">25 mm OD CFRP TUBES</text>
+    <text class="label-accent" x="180" y="230" text-anchor="middle" font-size="7">3D-PRINTED Al JOINTS · 60 kg TOTAL</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- SPECS TABLE (bottom right)                  -->
+  <!-- ============================================ -->
+
+  <g transform="translate(700, 650)">
+    <text class="label-lg" x="270" y="0" text-anchor="end">MODULE SPECS</text>
+    <line class="outline-thin" x1="0" y1="5" x2="270" y2="5"/>
+
+    <text class="label-spec" x="0" y="20">Reflector area ... 400 m² (2×200)</text>
+    <text class="label-spec" x="0" y="31">Reflector mass ... 10 kg</text>
+    <text class="label-spec" x="0" y="42">PV receiver ...... 20 m² (20×1 m)</text>
+    <text class="label-spec" x="0" y="53">PV mass .......... 6 kg</text>
+    <text class="label-spec" x="0" y="64">Cell type ........ a-Si thin film</text>
+    <text class="label-spec" x="0" y="75">Efficiency ....... 8% (10-sun)</text>
+    <text class="label-spec" x="0" y="86">Concentration .... 10×</text>
+    <text class="label-spec" x="0" y="97">Output ........... 25 kW BOL</text>
+    <text class="label-spec" x="0" y="108">Specific power ... 203 W/kg</text>
+    <text class="label-spec" x="0" y="119">Frame mass ....... 60 kg (CFRP)</text>
+    <text class="label-spec" x="0" y="130">PMU + cable ...... 15 kg</text>
+    <text class="label-spec" x="0" y="141">Pointing ......... 8 kg (CMG)</text>
+    <text class="label-spec" x="0" y="152">Thermal .......... 8 kg</text>
+    <text class="label-spec" x="0" y="163">Total mass ....... 123 kg</text>
+    <text class="label-spec" x="0" y="174">Degradation ...... 2%/yr (a-Si)</text>
+    <text class="label-spec" x="0" y="185">Life ............. 15 years</text>
+    <text class="label-spec" x="0" y="196">Voltage .......... 600V DC</text>
+
+    <line class="outline-thin" x1="0" y1="204" x2="270" y2="204"/>
+    <text class="label-lg" x="0" y="220">STATION TOTAL</text>
+    <text class="label-spec" x="0" y="234">Modules .......... 20,000</text>
+    <text class="label-spec" x="0" y="245">Total power ...... 500 MW</text>
+    <text class="label-spec" x="0" y="256">Total mass ....... ~2,500 t</text>
+    <text class="label-spec" x="0" y="267">Storage .......... 500 MWh Li-ion</text>
+    <text class="label-spec" x="0" y="278">Budget ........... ~$500M ($1/W)</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- IN-SITU PATHWAY (bottom center-left)        -->
+  <!-- ============================================ -->
+
+  <g transform="translate(40, 680)">
+    <text class="label-lg" x="220" y="0" text-anchor="middle">IN-SITU MANUFACTURING PATHWAY</text>
+
+    <!-- Gen 1 -->
+    <rect x="0" y="15" width="150" height="55" fill="#0d1a30" fill-opacity="0.3" stroke="#4a9eff" stroke-width="0.75" rx="3"/>
+    <text class="label-lg" x="75" y="32" text-anchor="middle">GEN 1</text>
+    <text class="label-sm" x="75" y="42" text-anchor="middle">EARTH-LAUNCHED</text>
+    <text class="label-spec" x="10" y="56">a-Si on steel foil</text>
+    <text class="label-spec" x="10" y="66">Kapton reflectors</text>
+
+    <!-- Arrow -->
+    <line x1="155" y1="42" x2="175" y2="42" stroke="#4a9eff" stroke-width="1" marker-end="url(#arrowBlue)"/>
+
+    <!-- Gen 2 -->
+    <rect x="180" y="15" width="150" height="55" fill="#0d1a30" fill-opacity="0.3" stroke="#ff9f43" stroke-width="1" rx="3"/>
+    <text class="label-lg" x="255" y="32" text-anchor="middle" fill="#ff9f43">GEN 2</text>
+    <text class="label-sm" x="255" y="42" text-anchor="middle" fill="#ff9f43">IN-SITU MANUFACTURED</text>
+    <text class="label-spec" x="190" y="56">FeS₂ or a-Si from asteroid</text>
+    <text class="label-spec" x="190" y="66">Al foil reflectors</text>
+
+    <!-- Material sources -->
+    <text class="label-sm" x="220" y="85" text-anchor="middle">Fe, S, Si, Al — all from asteroid regolith</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- LEGEND                                      -->
+  <!-- ============================================ -->
+
+  <g transform="translate(50, 910)">
+    <rect x="0" y="-8" width="8" height="8" fill="#2a3a4a" stroke="#c0d0e0" stroke-width="0.75" rx="1"/>
+    <text class="label-silver" x="12" y="0">REFLECTORS</text>
+
+    <rect x="100" y="-8" width="8" height="8" fill="#1a2a5a" stroke="#6a8aff" stroke-width="0.75" rx="1"/>
+    <text class="label-blue" x="112" y="0">PV CELLS</text>
+
+    <rect x="185" y="-8" width="8" height="8" fill="#0d2240" stroke="#ff9f43" stroke-width="0.75" rx="1"/>
+    <text class="label-accent" x="197" y="0">STRUCTURE</text>
+
+    <rect x="275" y="-8" width="8" height="8" fill="#2d1a0a" stroke="#e67e22" stroke-width="0.75" rx="1"/>
+    <text class="label-orange" x="287" y="0">THERMAL</text>
+
+    <rect x="355" y="-8" width="8" height="8" fill="#0d2240" stroke="#4a9eff" stroke-width="0.75" rx="1"/>
+    <text class="label" x="367" y="0">ELECTRONICS</text>
+
+    <text class="label-sm" x="470" y="0">MULTI-MODEL CONSENSUS · CLAUDE 4.6 / GEMINI 3 PRO / GPT-5.2</text>
+  </g>
+
+  <!-- Border -->
+  <rect x="5" y="5" width="990" height="940" fill="none" stroke="#4a9eff" stroke-width="2" rx="2"/>
+  <rect x="8" y="8" width="984" height="934" fill="none" stroke="#1e3654" stroke-width="0.5" rx="1"/>
+
+</svg>

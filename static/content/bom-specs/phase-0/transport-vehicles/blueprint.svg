@@ -1,0 +1,475 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 950" width="1000" height="950">
+  <defs>
+    <style>
+      .bg { fill: #0a1628; }
+      .grid { stroke: #1a2d4a; stroke-width: 0.5; }
+      .grid-major { stroke: #1e3654; stroke-width: 1; }
+      .outline { fill: none; stroke: #4a9eff; stroke-width: 1.5; }
+      .outline-thin { fill: none; stroke: #4a9eff; stroke-width: 0.75; }
+      .outline-detail { fill: none; stroke: #3a7acc; stroke-width: 0.5; }
+      .outline-accent { fill: none; stroke: #ff9f43; stroke-width: 1; }
+      .fill-panel { fill: #1a3a6a; fill-opacity: 0.4; stroke: #4a9eff; stroke-width: 0.75; }
+      .fill-body { fill: #0d2240; fill-opacity: 0.6; stroke: #4a9eff; stroke-width: 1.5; }
+      .fill-cargo { fill: #1a2d4a; fill-opacity: 0.5; stroke: #ff9f43; stroke-width: 0.75; }
+      .fill-thruster { fill: #2a1a1a; fill-opacity: 0.5; stroke: #e74c3c; stroke-width: 1; }
+      .fill-tank { fill: #1a1a2d; fill-opacity: 0.5; stroke: #9b59b6; stroke-width: 0.75; }
+      .fill-instrument { fill: #1a3a2a; fill-opacity: 0.4; stroke: #2ecc71; stroke-width: 0.75; }
+      .dim { stroke: #6ab0ff; stroke-width: 0.5; fill: none; marker-end: url(#arrowBlue); marker-start: url(#arrowBlueRev); }
+      .dim-line { stroke: #6ab0ff; stroke-width: 0.5; stroke-dasharray: 4,3; }
+      .label { font-family: 'Courier New', monospace; fill: #8ec8ff; font-size: 9px; }
+      .label-sm { font-family: 'Courier New', monospace; fill: #6a9fd4; font-size: 7px; }
+      .label-lg { font-family: 'Courier New', monospace; fill: #4a9eff; font-size: 11px; font-weight: bold; }
+      .label-title { font-family: 'Courier New', monospace; fill: #ffffff; font-size: 16px; font-weight: bold; letter-spacing: 2px; }
+      .label-subtitle { font-family: 'Courier New', monospace; fill: #6ab0ff; font-size: 10px; letter-spacing: 1px; }
+      .label-accent { font-family: 'Courier New', monospace; fill: #ff9f43; font-size: 9px; }
+      .label-green { font-family: 'Courier New', monospace; fill: #2ecc71; font-size: 8px; }
+      .label-red { font-family: 'Courier New', monospace; fill: #e74c3c; font-size: 8px; }
+      .label-purple { font-family: 'Courier New', monospace; fill: #9b59b6; font-size: 8px; }
+      .label-spec { font-family: 'Courier New', monospace; fill: #8ec8ff; font-size: 8px; }
+      .callout { stroke: #4a6a8f; stroke-width: 0.5; fill: none; }
+    </style>
+    <marker id="arrowBlue" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <path d="M0,0 L6,2 L0,4" fill="none" stroke="#6ab0ff" stroke-width="0.5"/>
+    </marker>
+    <marker id="arrowBlueRev" markerWidth="6" markerHeight="4" refX="1" refY="2" orient="auto">
+      <path d="M6,0 L0,2 L6,4" fill="none" stroke="#6ab0ff" stroke-width="0.5"/>
+    </marker>
+    <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="20" class="grid"/>
+      <line x1="0" y1="0" x2="20" y2="0" class="grid"/>
+    </pattern>
+    <pattern id="gridMajor" width="100" height="100" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="100" class="grid-major"/>
+      <line x1="0" y1="0" x2="100" y2="0" class="grid-major"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect class="bg" width="1000" height="950"/>
+  <rect fill="url(#gridPattern)" width="1000" height="950" opacity="0.3"/>
+  <rect fill="url(#gridMajor)" width="1000" height="950" opacity="0.3"/>
+
+  <!-- Title block -->
+  <rect x="20" y="15" width="460" height="55" fill="none" stroke="#4a9eff" stroke-width="1"/>
+  <text class="label-title" x="35" y="38">TRANSPORT VEHICLES — TV-1 "MULE"</text>
+  <text class="label-subtitle" x="35" y="55">PROJECT DYSON · BOM-0-4 · PHASE 0 · MULTI-MODEL CONSENSUS</text>
+  <text class="label-sm" x="500" y="30">SCALE: NOT TO SCALE</text>
+  <text class="label-sm" x="500" y="42">DATE: 2026-03-19</text>
+  <text class="label-sm" x="500" y="54">VEHICLE FAMILY: 3 CLASSES</text>
+
+  <!-- ============================================ -->
+  <!-- TV-1 "MULE" — SIDE VIEW (main drawing)     -->
+  <!-- ============================================ -->
+
+  <text class="label-lg" x="330" y="95" text-anchor="middle">TV-1 "MULE" — SIDE VIEW · BULK TRANSPORT</text>
+
+  <!-- ======= STRUCTURAL BACKBONE TRUSS (the spine connecting everything) ======= -->
+  <rect x="60" y="213" width="540" height="14" fill="#0d1a30" fill-opacity="0.8" stroke="#4a9eff" stroke-width="1" rx="1"/>
+  <!-- Truss cross-bracing pattern inside backbone -->
+  <g opacity="0.25" stroke="#4a9eff" stroke-width="0.5">
+    <line x1="60" y1="213" x2="90" y2="227"/><line x1="90" y1="213" x2="60" y2="227"/>
+    <line x1="90" y1="213" x2="120" y2="227"/><line x1="120" y1="213" x2="90" y2="227"/>
+    <line x1="120" y1="213" x2="150" y2="227"/><line x1="150" y1="213" x2="120" y2="227"/>
+    <line x1="150" y1="213" x2="180" y2="227"/><line x1="180" y1="213" x2="150" y2="227"/>
+    <line x1="180" y1="213" x2="210" y2="227"/><line x1="210" y1="213" x2="180" y2="227"/>
+    <line x1="210" y1="213" x2="240" y2="227"/><line x1="240" y1="213" x2="210" y2="227"/>
+    <line x1="240" y1="213" x2="270" y2="227"/><line x1="270" y1="213" x2="240" y2="227"/>
+    <line x1="270" y1="213" x2="300" y2="227"/><line x1="300" y1="213" x2="270" y2="227"/>
+    <line x1="300" y1="213" x2="330" y2="227"/><line x1="330" y1="213" x2="300" y2="227"/>
+    <line x1="330" y1="213" x2="360" y2="227"/><line x1="360" y1="213" x2="330" y2="227"/>
+    <line x1="360" y1="213" x2="390" y2="227"/><line x1="390" y1="213" x2="360" y2="227"/>
+    <line x1="390" y1="213" x2="420" y2="227"/><line x1="420" y1="213" x2="390" y2="227"/>
+    <line x1="420" y1="213" x2="450" y2="227"/><line x1="450" y1="213" x2="420" y2="227"/>
+    <line x1="450" y1="213" x2="480" y2="227"/><line x1="480" y1="213" x2="450" y2="227"/>
+    <line x1="480" y1="213" x2="510" y2="227"/><line x1="510" y1="213" x2="480" y2="227"/>
+    <line x1="510" y1="213" x2="540" y2="227"/><line x1="540" y1="213" x2="510" y2="227"/>
+    <line x1="540" y1="213" x2="570" y2="227"/><line x1="570" y1="213" x2="540" y2="227"/>
+    <line x1="570" y1="213" x2="600" y2="227"/><line x1="600" y1="213" x2="570" y2="227"/>
+  </g>
+  <text class="label-sm" x="300" y="210" text-anchor="middle">STRUCTURAL BACKBONE TRUSS (Al/Steel)</text>
+
+  <!-- Solar array boom — port (connects backbone to array) -->
+  <rect x="195" y="155" width="6" height="58" fill="none" stroke="#4a9eff" stroke-width="0.75" rx="1"/>
+  <text class="label-sm" x="208" y="185" font-size="6">BOOM</text>
+
+  <!-- Solar array — port -->
+  <rect class="fill-panel" x="100" y="110" width="200" height="42" rx="2"/>
+  <line class="outline-detail" x1="150" y1="110" x2="150" y2="152"/>
+  <line class="outline-detail" x1="200" y1="110" x2="200" y2="152"/>
+  <line class="outline-detail" x1="250" y1="110" x2="250" y2="152"/>
+  <g opacity="0.3">
+    <line class="outline-detail" x1="100" y1="124" x2="300" y2="124"/>
+    <line class="outline-detail" x1="100" y1="138" x2="300" y2="138"/>
+  </g>
+  <text class="label-sm" x="200" y="106" text-anchor="middle">SOLAR ARRAY (PORT) · 200 m² · 100 kW</text>
+
+  <!-- Solar array boom — starboard -->
+  <rect x="195" y="227" width="6" height="58" fill="none" stroke="#4a9eff" stroke-width="0.75" rx="1"/>
+
+  <!-- Solar array — starboard -->
+  <rect class="fill-panel" x="100" y="288" width="200" height="42" rx="2"/>
+  <line class="outline-detail" x1="150" y1="288" x2="150" y2="330"/>
+  <line class="outline-detail" x1="200" y1="288" x2="200" y2="330"/>
+  <line class="outline-detail" x1="250" y1="288" x2="250" y2="330"/>
+  <g opacity="0.3">
+    <line class="outline-detail" x1="100" y1="302" x2="300" y2="302"/>
+    <line class="outline-detail" x1="100" y1="316" x2="300" y2="316"/>
+  </g>
+  <text class="label-sm" x="200" y="345" text-anchor="middle">SOLAR ARRAY (STBD) · 200 m² · 100 kW</text>
+  <text class="label-sm" x="200" y="356" text-anchor="middle">TOTAL: 200 kW BOL @1AU · 32 kW @2.5AU</text>
+
+  <!-- Propellant tanks (mounted ON backbone, between arrays and bus) -->
+  <ellipse class="fill-tank" cx="120" cy="195" rx="18" ry="14"/>
+  <ellipse class="fill-tank" cx="160" cy="195" rx="18" ry="14"/>
+  <ellipse class="fill-tank" cx="120" cy="247" rx="18" ry="14"/>
+  <ellipse class="fill-tank" cx="160" cy="247" rx="18" ry="14"/>
+  <!-- Tank mounting brackets to backbone -->
+  <line class="outline-detail" x1="120" y1="209" x2="120" y2="213"/>
+  <line class="outline-detail" x1="160" y1="209" x2="160" y2="213"/>
+  <line class="outline-detail" x1="120" y1="233" x2="120" y2="227"/>
+  <line class="outline-detail" x1="160" y1="233" x2="160" y2="227"/>
+  <text class="label-purple" x="70" y="195" text-anchor="end">KRYPTON</text>
+  <text class="label-purple" x="70" y="205" text-anchor="end">8-15t · 4× COPV</text>
+
+  <!-- CPAB Core bus (mounted on backbone) -->
+  <rect class="fill-body" x="290" y="155" width="80" height="55" rx="4"/>
+  <text class="label" x="330" y="172" text-anchor="middle" font-size="7">CPAB CORE</text>
+  <!-- Avionics -->
+  <rect class="fill-instrument" x="296" y="180" width="22" height="14" rx="1"/>
+  <text class="label-green" x="307" y="190" text-anchor="middle" font-size="4">AVIONICS</text>
+  <!-- PMAD -->
+  <rect class="fill-panel" x="322" y="180" width="22" height="14" rx="1"/>
+  <text class="label-sm" x="333" y="190" text-anchor="middle" font-size="4">PMAD</text>
+  <!-- PPUs -->
+  <rect class="fill-body" x="348" y="180" width="16" height="14" rx="1"/>
+  <text class="label-sm" x="356" y="190" text-anchor="middle" font-size="4">PPU</text>
+  <!-- Bus connects down to backbone -->
+  <line class="outline-thin" x1="310" y1="210" x2="310" y2="213"/>
+  <line class="outline-thin" x1="350" y1="210" x2="350" y2="213"/>
+
+  <!-- Bus also has lower section below backbone -->
+  <rect class="fill-body" x="290" y="227" width="80" height="45" rx="4"/>
+  <text class="label" x="330" y="245" text-anchor="middle" font-size="6">PPU BANK</text>
+  <text class="label" x="330" y="255" text-anchor="middle" font-size="6">× 3</text>
+
+  <!-- HGA antenna (on bus) -->
+  <line class="outline" x1="330" y1="155" x2="330" y2="140"/>
+  <circle class="outline-thin" cx="330" cy="135" r="6"/>
+  <circle class="outline-detail" cx="330" cy="135" r="3"/>
+  <text class="label-sm" x="342" y="133">HGA</text>
+  <text class="label-sm" x="342" y="141">X-band</text>
+
+  <!-- Thruster array (right end of backbone) -->
+  <g transform="translate(390, 178)">
+    <rect class="fill-thruster" x="0" y="0" width="12" height="8" rx="2"/>
+    <rect class="fill-thruster" x="0" y="11" width="12" height="8" rx="2"/>
+    <rect class="fill-thruster" x="0" y="22" width="12" height="8" rx="2"/>
+    <rect class="fill-thruster" x="0" y="40" width="12" height="8" rx="2"/>
+    <rect class="fill-thruster" x="0" y="51" width="12" height="8" rx="2"/>
+    <rect class="fill-thruster" x="0" y="62" width="12" height="8" rx="2"/>
+    <!-- Thrust plumes -->
+    <g opacity="0.25" stroke="#e74c3c" stroke-width="0.5" fill="none">
+      <path d="M12,4 L28,1 L28,7 Z"/>
+      <path d="M12,15 L28,12 L28,18 Z"/>
+      <path d="M12,26 L28,23 L28,29 Z"/>
+      <path d="M12,44 L28,41 L28,47 Z"/>
+    </g>
+    <!-- Thruster mounting plate connects to backbone -->
+    <line class="outline-thin" x1="-2" y1="35" x2="14" y2="35"/>
+  </g>
+  <text class="label-red" x="440" y="195">6× HALL-EFFECT</text>
+  <text class="label-red" x="440" y="205">2.5 N · Isp 2-3 ks</text>
+  <text class="label-red" x="440" y="215">4 active + 2 spare</text>
+  <text class="label-red" x="440" y="225">2-axis gimbals</text>
+
+  <!-- Cargo frame (extending right from backbone, BELOW) -->
+  <g transform="translate(370, 270)">
+    <!-- Structural truss connecting to backbone above -->
+    <line class="outline-thin" x1="0" y1="-43" x2="0" y2="0"/>
+    <line class="outline-thin" x1="230" y1="-43" x2="230" y2="0"/>
+    <!-- Truss frame -->
+    <rect x="0" y="0" width="230" height="60" fill="none" stroke="#ff9f43" stroke-width="1" stroke-dasharray="5,3" rx="2"/>
+    <!-- Truss diagonals -->
+    <g opacity="0.2" stroke="#ff9f43" stroke-width="0.5">
+      <line x1="0" y1="0" x2="38" y2="60"/><line x1="38" y1="0" x2="0" y2="60"/>
+      <line x1="38" y1="0" x2="76" y2="60"/><line x1="76" y1="0" x2="38" y2="60"/>
+      <line x1="76" y1="0" x2="114" y2="60"/><line x1="114" y1="0" x2="76" y2="60"/>
+      <line x1="114" y1="0" x2="152" y2="60"/><line x1="152" y1="0" x2="114" y2="60"/>
+      <line x1="152" y1="0" x2="190" y2="60"/><line x1="190" y1="0" x2="152" y2="60"/>
+      <line x1="190" y1="0" x2="230" y2="60"/><line x1="230" y1="0" x2="190" y2="60"/>
+    </g>
+    <!-- Cargo containers -->
+    <rect class="fill-cargo" x="5" y="8" width="33" height="44" rx="2"/>
+    <rect class="fill-cargo" x="42" y="8" width="33" height="44" rx="2"/>
+    <rect class="fill-cargo" x="79" y="8" width="33" height="44" rx="2"/>
+    <rect class="fill-cargo" x="116" y="8" width="33" height="44" rx="2"/>
+    <rect class="fill-cargo" x="153" y="8" width="33" height="44" rx="2"/>
+    <rect class="fill-cargo" x="192" y="8" width="33" height="44" rx="2"/>
+    <text class="label-accent" x="21" y="34" text-anchor="middle" font-size="5">C1</text>
+    <text class="label-accent" x="58" y="34" text-anchor="middle" font-size="5">C2</text>
+    <text class="label-accent" x="95" y="34" text-anchor="middle" font-size="5">C3</text>
+    <text class="label-accent" x="132" y="34" text-anchor="middle" font-size="5">C4</text>
+    <text class="label-accent" x="169" y="34" text-anchor="middle" font-size="5">C5</text>
+    <text class="label-accent" x="208" y="34" text-anchor="middle" font-size="5">C6</text>
+    <text class="label-accent" x="115" y="-8" text-anchor="middle">CARGO FRAME · 20 m · 6× CONTAINERS</text>
+    <text class="label-accent" x="115" y="72" text-anchor="middle">50,000-100,000 kg PAYLOAD</text>
+  </g>
+
+  <!-- Dimension — overall length -->
+  <line class="dim" x1="55" y1="370" x2="600" y2="370"/>
+  <line class="dim-line" x1="55" y1="265" x2="55" y2="375"/>
+  <line class="dim-line" x1="600" y1="340" x2="600" y2="375"/>
+  <text class="label" x="325" y="385" text-anchor="middle">~25 m OVERALL LENGTH</text>
+
+  <!-- Dimension — array span -->
+  <line class="dim" x1="35" y1="110" x2="35" y2="330"/>
+  <line class="dim-line" x1="35" y1="110" x2="100" y2="110"/>
+  <line class="dim-line" x1="35" y1="330" x2="100" y2="330"/>
+  <text class="label" x="28" y="220" transform="rotate(-90, 28, 220)" text-anchor="middle">55 m SPAN</text>
+
+  <!-- ============================================ -->
+  <!-- TV-2 "COURIER" — small side view            -->
+  <!-- ============================================ -->
+
+  <g transform="translate(30, 440)">
+    <text class="label-lg" x="170" y="0" text-anchor="middle">TV-2 "COURIER" — PRIORITY TRANSPORT</text>
+
+    <!-- Backbone truss -->
+    <rect x="55" y="63" width="200" height="8" fill="#0d1a30" fill-opacity="0.8" stroke="#4a9eff" stroke-width="0.75" rx="1"/>
+    <g opacity="0.2" stroke="#4a9eff" stroke-width="0.4">
+      <line x1="55" y1="63" x2="75" y2="71"/><line x1="75" y1="63" x2="55" y2="71"/>
+      <line x1="75" y1="63" x2="95" y2="71"/><line x1="95" y1="63" x2="75" y2="71"/>
+      <line x1="95" y1="63" x2="115" y2="71"/><line x1="115" y1="63" x2="95" y2="71"/>
+      <line x1="115" y1="63" x2="135" y2="71"/><line x1="135" y1="63" x2="115" y2="71"/>
+      <line x1="135" y1="63" x2="155" y2="71"/><line x1="155" y1="63" x2="135" y2="71"/>
+      <line x1="155" y1="63" x2="175" y2="71"/><line x1="175" y1="63" x2="155" y2="71"/>
+      <line x1="175" y1="63" x2="195" y2="71"/><line x1="195" y1="63" x2="175" y2="71"/>
+      <line x1="195" y1="63" x2="215" y2="71"/><line x1="215" y1="63" x2="195" y2="71"/>
+      <line x1="215" y1="63" x2="235" y2="71"/><line x1="235" y1="63" x2="215" y2="71"/>
+      <line x1="235" y1="63" x2="255" y2="71"/><line x1="255" y1="63" x2="235" y2="71"/>
+    </g>
+
+    <!-- Solar array booms -->
+    <rect x="105" y="15" width="4" height="48" fill="none" stroke="#4a9eff" stroke-width="0.5" rx="1"/>
+    <rect x="105" y="71" width="4" height="24" fill="none" stroke="#4a9eff" stroke-width="0.5" rx="1"/>
+
+    <!-- Solar arrays -->
+    <rect class="fill-panel" x="55" y="12" width="100" height="20" rx="1"/>
+    <rect class="fill-panel" x="55" y="98" width="100" height="20" rx="1"/>
+    <g opacity="0.3">
+      <line class="outline-detail" x1="55" y1="22" x2="155" y2="22"/>
+      <line class="outline-detail" x1="55" y1="108" x2="155" y2="108"/>
+    </g>
+    <text class="label-sm" x="105" y="9" text-anchor="middle">80 m² · 40 kW @1AU</text>
+
+    <!-- CPAB bus (on backbone) -->
+    <rect class="fill-body" x="140" y="38" width="40" height="24" rx="2"/>
+    <text class="label" x="160" y="53" text-anchor="middle" font-size="5">CPAB</text>
+    <rect class="fill-body" x="140" y="72" width="40" height="24" rx="2"/>
+    <text class="label" x="160" y="87" text-anchor="middle" font-size="5">PPU</text>
+
+    <!-- Propellant tank (on backbone) -->
+    <ellipse class="fill-tank" cx="85" cy="55" rx="14" ry="8"/>
+    <ellipse class="fill-tank" cx="85" cy="80" rx="14" ry="8"/>
+    <line class="outline-detail" x1="85" y1="63" x2="85" y2="63"/>
+    <text class="label-purple" x="60" y="68" text-anchor="end" font-size="6">1.5t Kr</text>
+
+    <!-- Thrusters (end of backbone) -->
+    <rect class="fill-thruster" x="255" y="55" width="8" height="5" rx="1"/>
+    <rect class="fill-thruster" x="255" y="63" width="8" height="5" rx="1"/>
+    <rect class="fill-thruster" x="255" y="71" width="8" height="5" rx="1"/>
+    <text class="label-red" x="268" y="65" font-size="6">3× HALL</text>
+
+    <!-- Pressurized cargo (hanging below backbone) -->
+    <line class="outline-thin" x1="190" y1="71" x2="190" y2="78"/>
+    <line class="outline-thin" x1="240" y1="71" x2="240" y2="78"/>
+    <rect x="185" y="78" width="60" height="25" fill="#1a2d3a" fill-opacity="0.4" stroke="#ff9f43" stroke-width="0.75" rx="6"/>
+    <text class="label-accent" x="215" y="94" text-anchor="middle" font-size="5">PRESSURIZED CARGO</text>
+    <text class="label-accent" x="215" y="116" text-anchor="middle" font-size="6">1-5 t PAYLOAD</text>
+
+    <!-- Specs -->
+    <text class="label-spec" x="310" y="20">Dry mass ...... 800 kg</text>
+    <text class="label-spec" x="310" y="31">Payload ...... 1-5 t</text>
+    <text class="label-spec" x="310" y="42">Power ........ 40 kW</text>
+    <text class="label-spec" x="310" y="53">Thrusters .... 3× Hall</text>
+    <text class="label-spec" x="310" y="64">ΔV ........... 8-20 km/s</text>
+    <text class="label-spec" x="310" y="75">Span ......... 25×12 m</text>
+    <text class="label-spec" x="310" y="86">Life ......... 10 years</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- TV-3 "SHEPHERD" — small side view           -->
+  <!-- ============================================ -->
+
+  <g transform="translate(30, 590)">
+    <text class="label-lg" x="170" y="0" text-anchor="middle">TV-3 "SHEPHERD" — ASTEROID REDIRECT</text>
+
+    <!-- Backbone truss (heavier for Shepherd) -->
+    <rect x="35" y="73" width="185" height="10" fill="#0d1a30" fill-opacity="0.8" stroke="#4a9eff" stroke-width="1" rx="1"/>
+    <g opacity="0.2" stroke="#4a9eff" stroke-width="0.4">
+      <line x1="35" y1="73" x2="55" y2="83"/><line x1="55" y1="73" x2="35" y2="83"/>
+      <line x1="55" y1="73" x2="75" y2="83"/><line x1="75" y1="73" x2="55" y2="83"/>
+      <line x1="75" y1="73" x2="95" y2="83"/><line x1="95" y1="73" x2="75" y2="83"/>
+      <line x1="95" y1="73" x2="115" y2="83"/><line x1="115" y1="73" x2="95" y2="83"/>
+      <line x1="115" y1="73" x2="135" y2="83"/><line x1="135" y1="73" x2="115" y2="83"/>
+      <line x1="135" y1="73" x2="155" y2="83"/><line x1="155" y1="73" x2="135" y2="83"/>
+      <line x1="155" y1="73" x2="175" y2="83"/><line x1="175" y1="73" x2="155" y2="83"/>
+      <line x1="175" y1="73" x2="195" y2="83"/><line x1="195" y1="73" x2="175" y2="83"/>
+      <line x1="195" y1="73" x2="220" y2="83"/><line x1="220" y1="73" x2="195" y2="83"/>
+    </g>
+
+    <!-- Solar array booms (4 wings = 2 boom pairs) -->
+    <rect x="75" y="15" width="4" height="58" fill="none" stroke="#4a9eff" stroke-width="0.5" rx="1"/>
+    <rect x="115" y="15" width="4" height="58" fill="none" stroke="#4a9eff" stroke-width="0.5" rx="1"/>
+    <rect x="75" y="83" width="4" height="32" fill="none" stroke="#4a9eff" stroke-width="0.5" rx="1"/>
+    <rect x="115" y="83" width="4" height="32" fill="none" stroke="#4a9eff" stroke-width="0.5" rx="1"/>
+
+    <!-- Mega solar arrays (4 wings) -->
+    <rect class="fill-panel" x="35" y="10" width="50" height="22" rx="1"/>
+    <rect class="fill-panel" x="95" y="10" width="50" height="22" rx="1"/>
+    <rect class="fill-panel" x="35" y="118" width="50" height="22" rx="1"/>
+    <rect class="fill-panel" x="95" y="118" width="50" height="22" rx="1"/>
+    <text class="label-sm" x="90" y="7" text-anchor="middle">4 WINGS · 2,000 m² · 1 MW @1AU</text>
+
+    <!-- Core bus (on backbone) -->
+    <rect class="fill-body" x="145" y="45" width="45" height="28" rx="3"/>
+    <text class="label" x="167" y="62" text-anchor="middle" font-size="5">CPAB</text>
+    <rect class="fill-body" x="145" y="83" width="45" height="28" rx="3"/>
+    <text class="label" x="167" y="100" text-anchor="middle" font-size="5">12× PPU</text>
+
+    <!-- Propellant tanks (large, on backbone) -->
+    <ellipse class="fill-tank" cx="60" cy="60" rx="18" ry="10"/>
+    <ellipse class="fill-tank" cx="60" cy="96" rx="18" ry="10"/>
+    <ellipse class="fill-tank" cx="110" cy="60" rx="12" ry="8"/>
+    <ellipse class="fill-tank" cx="110" cy="96" rx="12" ry="8"/>
+    <text class="label-purple" x="25" y="78" text-anchor="end" font-size="6">50t Kr</text>
+
+    <!-- Thruster array (12 thrusters at end of backbone) -->
+    <g transform="translate(195, 50)">
+      <rect class="fill-thruster" x="0" y="0" width="8" height="5" rx="1"/>
+      <rect class="fill-thruster" x="0" y="7" width="8" height="5" rx="1"/>
+      <rect class="fill-thruster" x="0" y="14" width="8" height="5" rx="1"/>
+      <rect class="fill-thruster" x="0" y="21" width="8" height="5" rx="1"/>
+      <rect class="fill-thruster" x="10" y="0" width="8" height="5" rx="1"/>
+      <rect class="fill-thruster" x="10" y="7" width="8" height="5" rx="1"/>
+      <rect class="fill-thruster" x="10" y="14" width="8" height="5" rx="1"/>
+      <rect class="fill-thruster" x="10" y="21" width="8" height="5" rx="1"/>
+      <rect class="fill-thruster" x="0" y="30" width="8" height="5" rx="1"/>
+      <rect class="fill-thruster" x="0" y="37" width="8" height="5" rx="1"/>
+      <rect class="fill-thruster" x="10" y="30" width="8" height="5" rx="1"/>
+      <rect class="fill-thruster" x="10" y="37" width="8" height="5" rx="1"/>
+    </g>
+    <text class="label-red" x="230" y="68" font-size="6">12× HALL</text>
+    <text class="label-red" x="230" y="76" font-size="6">20 N total</text>
+
+    <!-- Grapple boom extending from backbone -->
+    <line class="outline-accent" x1="220" y1="78" x2="260" y2="78" stroke-width="1.5"/>
+
+    <!-- Grapple/net system -->
+    <g transform="translate(260, 40)">
+      <line class="outline-accent" x1="0" y1="20" x2="10" y2="0"/>
+      <line class="outline-accent" x1="0" y1="56" x2="10" y2="76"/>
+      <line class="outline-accent" x1="10" y1="0" x2="70" y2="0"/>
+      <line class="outline-accent" x1="10" y1="76" x2="70" y2="76"/>
+      <line class="outline-accent" x1="70" y1="0" x2="70" y2="76"/>
+      <!-- Cable net -->
+      <g opacity="0.3" stroke="#ff9f43" stroke-width="0.3">
+        <line x1="15" y1="8" x2="70" y2="8"/><line x1="15" y1="19" x2="70" y2="19"/>
+        <line x1="15" y1="30" x2="70" y2="30"/><line x1="15" y1="41" x2="70" y2="41"/>
+        <line x1="15" y1="52" x2="70" y2="52"/><line x1="15" y1="63" x2="70" y2="63"/>
+        <line x1="25" y1="0" x2="25" y2="76"/><line x1="40" y1="0" x2="40" y2="76"/>
+        <line x1="55" y1="0" x2="55" y2="76"/>
+      </g>
+      <!-- Captured asteroid -->
+      <ellipse cx="42" cy="38" rx="20" ry="25" fill="#2a2a1a" fill-opacity="0.4" stroke="#888" stroke-width="0.75"/>
+      <g opacity="0.3" fill="#555">
+        <circle cx="35" cy="28" r="3"/><circle cx="50" cy="42" r="3.5"/><circle cx="38" cy="50" r="2"/>
+      </g>
+      <text class="label-sm" x="42" y="40" text-anchor="middle" fill="#aaa">10-50m</text>
+      <!-- Anchor points -->
+      <circle cx="15" cy="5" r="2" fill="#ff9f43" fill-opacity="0.5" stroke="#ff9f43" stroke-width="0.5"/>
+      <circle cx="15" cy="70" r="2" fill="#ff9f43" fill-opacity="0.5" stroke="#ff9f43" stroke-width="0.5"/>
+      <circle cx="65" cy="5" r="2" fill="#ff9f43" fill-opacity="0.5" stroke="#ff9f43" stroke-width="0.5"/>
+      <circle cx="65" cy="70" r="2" fill="#ff9f43" fill-opacity="0.5" stroke="#ff9f43" stroke-width="0.5"/>
+    </g>
+
+    <!-- Specs -->
+    <text class="label-spec" x="370" y="20">Dry mass ...... 15,000 kg</text>
+    <text class="label-spec" x="370" y="31">Propellant ... 50t Kr</text>
+    <text class="label-spec" x="370" y="42">Target ....... 500-2,000 t</text>
+    <text class="label-spec" x="370" y="53">Power ........ 1 MW</text>
+    <text class="label-spec" x="370" y="64">Thrusters .... 12× Hall</text>
+    <text class="label-spec" x="370" y="75">ΔV ........... 1-3 km/s</text>
+    <text class="label-spec" x="370" y="86">Duration ..... 2-5 years</text>
+    <text class="label-spec" x="370" y="97">Grapple: 6 drills</text>
+    <text class="label-spec" x="370" y="108">+ 100m cable net</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- TV-1 SPECS TABLE (right side)               -->
+  <!-- ============================================ -->
+
+  <g transform="translate(700, 530)">
+    <text class="label-lg" x="270" y="0" text-anchor="end">TV-1 "MULE" SPECS</text>
+    <line class="outline-thin" x1="0" y1="5" x2="270" y2="5"/>
+
+    <text class="label-spec" x="0" y="20">Dry mass ......... 4,500 kg</text>
+    <text class="label-spec" x="0" y="31">Payload .......... 50-100 t</text>
+    <text class="label-spec" x="0" y="42">Propellant ....... 8-15t Kr</text>
+    <text class="label-spec" x="0" y="53">Wet mass (loaded). 62-120 t</text>
+    <text class="label-spec" x="0" y="64">Solar array ...... 400 m²</text>
+    <text class="label-spec" x="0" y="75">Power @1AU ....... 200 kW</text>
+    <text class="label-spec" x="0" y="86">Thrusters ........ 6× Hall</text>
+    <text class="label-spec" x="0" y="97">Total thrust ..... 10 N</text>
+    <text class="label-spec" x="0" y="108">Isp .............. 2-3 ks</text>
+    <text class="label-spec" x="0" y="119">ΔV ............... 5-15 km/s</text>
+    <text class="label-spec" x="0" y="130">Cargo frame ...... 20 m</text>
+    <text class="label-spec" x="0" y="141">Span ............. 55 m</text>
+    <text class="label-spec" x="0" y="152">Life ............. 15 yr/50+</text>
+    <text class="label-spec" x="0" y="163">Autonomy ......... Level 5</text>
+
+    <line class="outline-thin" x1="0" y1="172" x2="270" y2="172"/>
+    <text class="label-lg" x="0" y="188">FLEET</text>
+    <text class="label-spec" x="0" y="202">TV-1 Mules ....... 10 units</text>
+    <text class="label-spec" x="0" y="213">TV-2 Couriers .... 5 units</text>
+    <text class="label-spec" x="0" y="224">TV-3 Shepherds ... 3 units</text>
+    <text class="label-spec" x="0" y="235">Total fleet ...... 18 units</text>
+    <text class="label-spec" x="0" y="246">Budget ........... ~$2B</text>
+
+    <line class="outline-thin" x1="0" y1="254" x2="270" y2="254"/>
+    <text class="label-lg" x="0" y="270">MISSION PROFILE</text>
+    <text class="label-spec" x="0" y="284">Route: LEO → NEA → L4/L5</text>
+    <text class="label-spec" x="0" y="295">Outbound ΔV ...... ~3 km/s</text>
+    <text class="label-spec" x="0" y="306">Return ΔV ........ ~4 km/s</text>
+    <text class="label-spec" x="0" y="317">Trip time ........ 6-18 mo</text>
+    <text class="label-spec" x="0" y="328">Per trip ......... 50-80 t</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- LEGEND                                      -->
+  <!-- ============================================ -->
+
+  <g transform="translate(50, 910)">
+    <rect x="0" y="-8" width="8" height="8" fill="#1a3a6a" stroke="#4a9eff" stroke-width="0.75" rx="1"/>
+    <text class="label" x="12" y="0">SOLAR ARRAYS</text>
+
+    <rect x="110" y="-8" width="8" height="8" fill="#2a1a1a" stroke="#e74c3c" stroke-width="0.75" rx="1"/>
+    <text class="label-red" x="122" y="0">PROPULSION</text>
+
+    <rect x="210" y="-8" width="8" height="8" fill="#1a2d4a" stroke="#ff9f43" stroke-width="0.75" rx="1"/>
+    <text class="label-accent" x="222" y="0">CARGO / STRUCTURE</text>
+
+    <rect x="360" y="-8" width="8" height="8" fill="#1a1a2d" stroke="#9b59b6" stroke-width="0.75" rx="1"/>
+    <text class="label-purple" x="372" y="0">PROPELLANT</text>
+
+    <rect x="460" y="-8" width="8" height="8" fill="#1a3a2a" stroke="#2ecc71" stroke-width="0.75" rx="1"/>
+    <text class="label-green" x="472" y="0">AVIONICS</text>
+
+    <text class="label-sm" x="560" y="0">MULTI-MODEL CONSENSUS · CLAUDE 4.6 / GEMINI 3 PRO / GPT-5.2</text>
+  </g>
+
+  <!-- Border -->
+  <rect x="5" y="5" width="990" height="940" fill="none" stroke="#4a9eff" stroke-width="2" rx="2"/>
+  <rect x="8" y="8" width="984" height="934" fill="none" stroke="#1e3654" stroke-width="0.5" rx="1"/>
+
+</svg>

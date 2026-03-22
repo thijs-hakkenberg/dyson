@@ -1,0 +1,463 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 950" width="1000" height="950">
+  <defs>
+    <style>
+      .bg { fill: #0a1628; }
+      .grid { stroke: #1a2d4a; stroke-width: 0.5; }
+      .grid-major { stroke: #1e3654; stroke-width: 1; }
+      .outline { fill: none; stroke: #4a9eff; stroke-width: 1.5; }
+      .outline-thin { fill: none; stroke: #4a9eff; stroke-width: 0.75; }
+      .outline-detail { fill: none; stroke: #3a7acc; stroke-width: 0.5; }
+      .outline-accent { fill: none; stroke: #ff9f43; stroke-width: 1; }
+      .fill-panel { fill: #1a3a6a; fill-opacity: 0.4; stroke: #4a9eff; stroke-width: 0.75; }
+      .fill-body { fill: #0d2240; fill-opacity: 0.6; stroke: #4a9eff; stroke-width: 1.5; }
+      .fill-cargo { fill: #1a2d4a; fill-opacity: 0.5; stroke: #ff9f43; stroke-width: 0.75; }
+      .fill-thruster { fill: #2a1a1a; fill-opacity: 0.5; stroke: #e74c3c; stroke-width: 1; }
+      .fill-tank { fill: #1a1a2d; fill-opacity: 0.5; stroke: #9b59b6; stroke-width: 0.75; }
+      .fill-instrument { fill: #1a3a2a; fill-opacity: 0.4; stroke: #2ecc71; stroke-width: 0.75; }
+      .fill-thermal { fill: #2d1a0a; fill-opacity: 0.4; stroke: #e67e22; stroke-width: 0.75; }
+      .dim { stroke: #6ab0ff; stroke-width: 0.5; fill: none; marker-end: url(#arrowBlue); marker-start: url(#arrowBlueRev); }
+      .dim-line { stroke: #6ab0ff; stroke-width: 0.5; stroke-dasharray: 4,3; }
+      .label { font-family: 'Courier New', monospace; fill: #8ec8ff; font-size: 9px; }
+      .label-sm { font-family: 'Courier New', monospace; fill: #6a9fd4; font-size: 7px; }
+      .label-lg { font-family: 'Courier New', monospace; fill: #4a9eff; font-size: 11px; font-weight: bold; }
+      .label-title { font-family: 'Courier New', monospace; fill: #ffffff; font-size: 16px; font-weight: bold; letter-spacing: 2px; }
+      .label-subtitle { font-family: 'Courier New', monospace; fill: #6ab0ff; font-size: 10px; letter-spacing: 1px; }
+      .label-accent { font-family: 'Courier New', monospace; fill: #ff9f43; font-size: 9px; }
+      .label-green { font-family: 'Courier New', monospace; fill: #2ecc71; font-size: 8px; }
+      .label-red { font-family: 'Courier New', monospace; fill: #e74c3c; font-size: 8px; }
+      .label-purple { font-family: 'Courier New', monospace; fill: #9b59b6; font-size: 8px; }
+      .label-orange { font-family: 'Courier New', monospace; fill: #e67e22; font-size: 8px; }
+      .label-spec { font-family: 'Courier New', monospace; fill: #8ec8ff; font-size: 8px; }
+      .callout { stroke: #4a6a8f; stroke-width: 0.5; fill: none; }
+    </style>
+    <marker id="arrowBlue" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <path d="M0,0 L6,2 L0,4" fill="none" stroke="#6ab0ff" stroke-width="0.5"/>
+    </marker>
+    <marker id="arrowBlueRev" markerWidth="6" markerHeight="4" refX="1" refY="2" orient="auto">
+      <path d="M6,0 L0,2 L6,4" fill="none" stroke="#6ab0ff" stroke-width="0.5"/>
+    </marker>
+    <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="20" class="grid"/>
+      <line x1="0" y1="0" x2="20" y2="0" class="grid"/>
+    </pattern>
+    <pattern id="gridMajor" width="100" height="100" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="100" class="grid-major"/>
+      <line x1="0" y1="0" x2="100" y2="0" class="grid-major"/>
+    </pattern>
+  </defs>
+
+  <rect class="bg" width="1000" height="950"/>
+  <rect fill="url(#gridPattern)" width="1000" height="950" opacity="0.3"/>
+  <rect fill="url(#gridMajor)" width="1000" height="950" opacity="0.3"/>
+
+  <!-- Title block -->
+  <rect x="20" y="15" width="480" height="55" fill="none" stroke="#4a9eff" stroke-width="1"/>
+  <text class="label-title" x="35" y="38">MINING ROBOT — SCARAB-A (C-TYPE)</text>
+  <text class="label-subtitle" x="35" y="55">PROJECT DYSON · BOM-0-2 · PHASE 0 · MULTI-MODEL CONSENSUS</text>
+  <text class="label-sm" x="520" y="30">SCALE: NOT TO SCALE</text>
+  <text class="label-sm" x="520" y="42">DATE: 2026-03-19</text>
+  <text class="label-sm" x="520" y="54">SCARAB FAMILY: 3 VARIANTS</text>
+
+  <!-- ============================================ -->
+  <!-- SCARAB-A SIDE VIEW (main drawing)           -->
+  <!-- ============================================ -->
+
+  <text class="label-lg" x="300" y="95" text-anchor="middle">SCARAB-A — SIDE VIEW · C-TYPE ASTEROID VARIANT</text>
+
+  <!-- === Chassis body === -->
+  <rect class="fill-body" x="195" y="140" width="200" height="110" rx="5"/>
+
+  <!-- Solar panels (deployable, on top) -->
+  <rect class="fill-panel" x="120" y="108" width="170" height="28" rx="2"/>
+  <line class="outline-detail" x1="160" y1="108" x2="160" y2="136"/>
+  <line class="outline-detail" x1="200" y1="108" x2="200" y2="136"/>
+  <line class="outline-detail" x1="240" y1="108" x2="240" y2="136"/>
+  <g opacity="0.3">
+    <line class="outline-detail" x1="120" y1="118" x2="290" y2="118"/>
+    <line class="outline-detail" x1="120" y1="128" x2="290" y2="128"/>
+  </g>
+  <!-- Panel hinge to chassis -->
+  <rect x="205" y="133" width="8" height="10" fill="none" stroke="#ff9f43" stroke-width="0.5" rx="1"/>
+  <rect x="280" y="133" width="8" height="10" fill="none" stroke="#ff9f43" stroke-width="0.5" rx="1"/>
+  <text class="label-sm" x="205" y="104" text-anchor="middle">DEPLOYABLE SOLAR PANELS · 1.5 m²</text>
+  <text class="label-sm" x="205" y="98">100 W peak @2.5AU</text>
+
+  <!-- Avionics bay (inside chassis, top) -->
+  <rect class="fill-instrument" x="205" y="148" width="70" height="30" rx="2"/>
+  <text class="label-green" x="240" y="160" text-anchor="middle" font-size="6">AVIONICS BAY</text>
+  <text class="label-green" x="240" y="170" text-anchor="middle" font-size="5">RISC-V · MRAM · RAD-HARD</text>
+
+  <!-- Sensor suite on chassis -->
+  <circle class="fill-instrument" cx="200" cy="148" r="5"/>
+  <text class="label-green" x="190" y="143" text-anchor="end" font-size="5">STEREO CAM</text>
+  <circle class="fill-instrument" cx="390" cy="148" r="5"/>
+  <text class="label-green" x="400" y="143" font-size="5">LIDAR</text>
+  <rect class="fill-instrument" x="285" y="148" width="30" height="12" rx="1"/>
+  <text class="label-green" x="300" y="157" text-anchor="middle" font-size="4">NIR SPEC</text>
+
+  <!-- Material bay / hopper (inside chassis, middle) -->
+  <rect class="fill-cargo" x="225" y="185" width="80" height="40" rx="2"/>
+  <text class="label-accent" x="265" y="203" text-anchor="middle" font-size="6">MATERIAL BAY</text>
+  <text class="label-accent" x="265" y="213" text-anchor="middle" font-size="5">40 L · ~60 kg regolith</text>
+
+  <!-- Battery pack (left of material bay) -->
+  <rect class="fill-tank" x="205" y="192" width="16" height="26" rx="1"/>
+  <!-- Battery label via callout to left -->
+  <line class="callout" x1="205" y1="205" x2="170" y2="215"/>
+  <text class="label-purple" x="168" y="214" text-anchor="end" font-size="7">BAT 300Wh</text>
+
+  <!-- MMRTG module (right of material bay) -->
+  <rect class="fill-thermal" x="310" y="192" width="18" height="22" rx="2"/>
+  <!-- RTG label via callout to right -->
+  <line class="callout" x1="328" y1="203" x2="360" y2="215"/>
+  <text class="label-orange" x="362" y="214" font-size="7">RTG 10We</text>
+
+  <!-- UHF antenna (top) -->
+  <line class="outline-thin" x1="350" y1="140" x2="350" y2="115"/>
+  <line class="outline-thin" x1="342" y1="118" x2="358" y2="118"/>
+  <text class="label-sm" x="362" y="115">UHF MESH</text>
+  <text class="label-sm" x="362" y="123">1 kbps DTN</text>
+
+  <!-- Tool interface (bottom center of chassis) -->
+  <rect x="250" y="245" width="50" height="12" fill="#1a2a3a" fill-opacity="0.5" stroke="#4a9eff" stroke-width="1" rx="1"/>
+  <!-- Label via callout to the right to avoid leg overlap -->
+  <line class="callout" x1="300" y1="251" x2="350" y2="260"/>
+  <text class="label" x="353" y="258" font-size="7">TOOL INTERFACE</text>
+  <text class="label-sm" x="353" y="268">200W + data bus</text>
+
+  <!-- === Legs (3× with gecko pads) === -->
+
+  <!-- Leg 1 (front-left) -->
+  <g>
+    <!-- Hip joint on chassis -->
+    <circle cx="200" cy="250" r="4" fill="#1a2d4a" stroke="#4a9eff" stroke-width="0.75"/>
+    <!-- Upper leg -->
+    <line x1="200" y1="254" x2="155" y2="310" stroke="#4a9eff" stroke-width="1.5"/>
+    <!-- Knee joint -->
+    <circle cx="155" cy="310" r="3" fill="#1a2d4a" stroke="#4a9eff" stroke-width="0.75"/>
+    <!-- Lower leg -->
+    <line x1="155" y1="313" x2="130" y2="370" stroke="#4a9eff" stroke-width="1.5"/>
+    <!-- Ankle joint -->
+    <circle cx="130" cy="370" r="3" fill="#1a2d4a" stroke="#4a9eff" stroke-width="0.75"/>
+    <!-- Gecko pad foot -->
+    <rect x="115" y="373" width="30" height="8" fill="#2a2a10" fill-opacity="0.5" stroke="#ff9f43" stroke-width="1" rx="2"/>
+    <!-- Microfiber texture -->
+    <g opacity="0.4" stroke="#ff9f43" stroke-width="0.3">
+      <line x1="119" y1="375" x2="119" y2="379"/><line x1="123" y1="375" x2="123" y2="379"/>
+      <line x1="127" y1="375" x2="127" y2="379"/><line x1="131" y1="375" x2="131" y2="379"/>
+      <line x1="135" y1="375" x2="135" y2="379"/><line x1="139" y1="375" x2="139" y2="379"/>
+    </g>
+  </g>
+
+  <!-- Leg 2 (rear-left) -->
+  <g>
+    <circle cx="250" cy="250" r="4" fill="#1a2d4a" stroke="#4a9eff" stroke-width="0.75"/>
+    <line x1="250" y1="254" x2="210" y2="310" stroke="#4a9eff" stroke-width="1.5"/>
+    <circle cx="210" cy="310" r="3" fill="#1a2d4a" stroke="#4a9eff" stroke-width="0.75"/>
+    <line x1="210" y1="313" x2="185" y2="370" stroke="#4a9eff" stroke-width="1.5"/>
+    <circle cx="185" cy="370" r="3" fill="#1a2d4a" stroke="#4a9eff" stroke-width="0.75"/>
+    <rect x="170" y="373" width="30" height="8" fill="#2a2a10" fill-opacity="0.5" stroke="#ff9f43" stroke-width="1" rx="2"/>
+    <g opacity="0.4" stroke="#ff9f43" stroke-width="0.3">
+      <line x1="174" y1="375" x2="174" y2="379"/><line x1="178" y1="375" x2="178" y2="379"/>
+      <line x1="182" y1="375" x2="182" y2="379"/><line x1="186" y1="375" x2="186" y2="379"/>
+      <line x1="190" y1="375" x2="190" y2="379"/><line x1="194" y1="375" x2="194" y2="379"/>
+    </g>
+  </g>
+
+  <!-- Leg 3 (right side, visible) -->
+  <g>
+    <circle cx="345" cy="250" r="4" fill="#1a2d4a" stroke="#4a9eff" stroke-width="0.75"/>
+    <line x1="345" y1="254" x2="385" y2="310" stroke="#4a9eff" stroke-width="1.5"/>
+    <circle cx="385" cy="310" r="3" fill="#1a2d4a" stroke="#4a9eff" stroke-width="0.75"/>
+    <line x1="385" y1="313" x2="410" y2="370" stroke="#4a9eff" stroke-width="1.5"/>
+    <circle cx="410" cy="370" r="3" fill="#1a2d4a" stroke="#4a9eff" stroke-width="0.75"/>
+    <rect x="395" y="373" width="30" height="8" fill="#2a2a10" fill-opacity="0.5" stroke="#ff9f43" stroke-width="1" rx="2"/>
+    <g opacity="0.4" stroke="#ff9f43" stroke-width="0.3">
+      <line x1="399" y1="375" x2="399" y2="379"/><line x1="403" y1="375" x2="403" y2="379"/>
+      <line x1="407" y1="375" x2="407" y2="379"/><line x1="411" y1="375" x2="411" y2="379"/>
+      <line x1="415" y1="375" x2="415" y2="379"/><line x1="419" y1="375" x2="419" y2="379"/>
+    </g>
+  </g>
+
+  <!-- Central anchor auger -->
+  <g>
+    <line x1="275" y1="257" x2="275" y2="340" stroke="#e74c3c" stroke-width="2"/>
+    <!-- Auger spiral (simplified) -->
+    <g opacity="0.5" stroke="#e74c3c" stroke-width="0.75" fill="none">
+      <path d="M270,270 Q275,265 280,270"/>
+      <path d="M270,280 Q275,275 280,280"/>
+      <path d="M270,290 Q275,285 280,290"/>
+      <path d="M270,300 Q275,295 280,300"/>
+      <path d="M270,310 Q275,305 280,310"/>
+      <path d="M270,320 Q275,315 280,320"/>
+      <path d="M270,330 Q275,325 280,330"/>
+    </g>
+    <!-- Auger tip -->
+    <polygon points="270,340 275,355 280,340" fill="#2a1a1a" fill-opacity="0.5" stroke="#e74c3c" stroke-width="0.75"/>
+  </g>
+
+  <!-- Callout labels for legs/anchor -->
+  <text class="label" x="90" y="358">3× LEGS (3-DOF)</text>
+  <text class="label" x="90" y="368">INCHWORM GAIT</text>
+  <text class="label" x="90" y="378">0.01 m/s</text>
+  <text class="label-accent" x="90" y="393">GECKO-PAD GRIPPERS</text>
+  <text class="label-accent" x="90" y="403">10 N per pad</text>
+  <text class="label-red" x="285" y="350">CENTRAL ANCHOR</text>
+  <text class="label-red" x="285" y="360">AUGER · 50 N</text>
+  <text class="label-red" x="285" y="370">+ SOIL SAMPLING</text>
+
+  <!-- Asteroid surface (ground line) -->
+  <path d="M70,385 Q120,380 170,383 Q220,387 275,382 Q330,378 380,384 Q430,388 480,383 Q530,379 570,385" fill="none" stroke="#555" stroke-width="1" stroke-dasharray="3,3"/>
+  <text class="label-sm" x="490" y="392" fill="#555">ASTEROID SURFACE</text>
+
+  <!-- Dimension — chassis -->
+  <line class="dim" x1="195" y1="415" x2="395" y2="415"/>
+  <line class="dim-line" x1="195" y1="255" x2="195" y2="420"/>
+  <line class="dim-line" x1="395" y1="255" x2="395" y2="420"/>
+  <text class="label" x="295" y="428" text-anchor="middle">600 × 500 mm CHASSIS</text>
+
+  <!-- ============================================ -->
+  <!-- THERMAL MINING DETAIL (right side)          -->
+  <!-- ============================================ -->
+
+  <g transform="translate(530, 95)">
+    <text class="label-lg" x="200" y="0" text-anchor="middle">THERMAL MINING PROCESS</text>
+
+    <!-- Solar concentrator (Fresnel lens) -->
+    <ellipse cx="200" cy="30" rx="80" ry="12" fill="#1a3a6a" fill-opacity="0.2" stroke="#4a9eff" stroke-width="0.75"/>
+    <g opacity="0.3" stroke="#4a9eff" stroke-width="0.3">
+      <ellipse cx="200" cy="30" rx="60" ry="8"/>
+      <ellipse cx="200" cy="30" rx="40" ry="5"/>
+      <ellipse cx="200" cy="30" rx="20" ry="3"/>
+    </g>
+    <text class="label" x="200" y="32" text-anchor="middle" font-size="6">FRESNEL LENS</text>
+    <text class="label-sm" x="295" y="28">0.8 m dia</text>
+    <text class="label-sm" x="295" y="38">500× concentration</text>
+
+    <!-- Focused beam -->
+    <line x1="160" y1="42" x2="195" y2="95" stroke="#e67e22" stroke-width="0.5" opacity="0.5"/>
+    <line x1="240" y1="42" x2="205" y2="95" stroke="#e67e22" stroke-width="0.5" opacity="0.5"/>
+    <line x1="200" y1="42" x2="200" y2="95" stroke="#e67e22" stroke-width="0.75" opacity="0.6"/>
+
+    <!-- Containment tent -->
+    <path d="M140,155 Q145,70 200,65 Q255,70 260,155" fill="#2d1a0a" fill-opacity="0.15" stroke="#e67e22" stroke-width="1" stroke-dasharray="4,2"/>
+    <text class="label-orange" x="200" y="82" text-anchor="middle">KAPTON DOME</text>
+    <text class="label-orange" x="200" y="92" text-anchor="middle" font-size="6">CONTAINMENT TENT</text>
+
+    <!-- Heated regolith zone -->
+    <rect x="170" y="130" width="60" height="25" fill="#3a1a0a" fill-opacity="0.5" stroke="#e67e22" stroke-width="0.75" rx="2"/>
+    <text class="label-orange" x="200" y="143" text-anchor="middle" font-size="6">200-700°C</text>
+    <text class="label-orange" x="200" y="152" text-anchor="middle" font-size="5">VOLATILES SUBLIME</text>
+
+    <!-- Gas flow arrows -->
+    <g opacity="0.5" stroke="#e67e22" stroke-width="0.5">
+      <line x1="200" y1="128" x2="200" y2="105"/>
+      <line x1="185" y1="128" x2="175" y2="108"/>
+      <line x1="215" y1="128" x2="225" y2="108"/>
+    </g>
+
+    <!-- Asteroid surface -->
+    <path d="M130,155 Q165,152 200,155 Q235,158 270,155" fill="none" stroke="#555" stroke-width="1"/>
+
+    <!-- Cold trap / condenser (connected via pipe) -->
+    <line class="outline-detail" x1="260" y1="140" x2="310" y2="140"/>
+    <line class="outline-detail" x1="310" y1="140" x2="310" y2="175"/>
+    <rect x="280" y="175" width="60" height="40" fill="#0a1a2d" fill-opacity="0.5" stroke="#4a9eff" stroke-width="1" rx="3"/>
+    <!-- Radiator fins -->
+    <line class="outline-thin" x1="280" y1="180" x2="270" y2="175"/>
+    <line class="outline-thin" x1="280" y1="190" x2="270" y2="185"/>
+    <line class="outline-thin" x1="280" y1="200" x2="270" y2="195"/>
+    <line class="outline-thin" x1="340" y1="180" x2="350" y2="175"/>
+    <line class="outline-thin" x1="340" y1="190" x2="350" y2="185"/>
+    <line class="outline-thin" x1="340" y1="200" x2="350" y2="195"/>
+    <text class="label" x="310" y="192" text-anchor="middle" font-size="6">COLD TRAP</text>
+    <text class="label" x="310" y="202" text-anchor="middle" font-size="5">~100 K</text>
+    <text class="label" x="310" y="212" text-anchor="middle" font-size="5">H₂O CO₂ NH₃</text>
+
+    <!-- Collection tank -->
+    <rect class="fill-tank" x="295" y="220" width="30" height="20" rx="3"/>
+    <text class="label-purple" x="310" y="233" text-anchor="middle" font-size="5">10 L TANK</text>
+
+    <!-- Process labels -->
+    <text class="label-orange" x="200" y="175" text-anchor="middle">200 W CONCENTRATED SOLAR</text>
+    <text class="label-orange" x="200" y="185" text-anchor="middle" font-size="6">YIELD: 5-20% H₂O by mass</text>
+    <text class="label-orange" x="200" y="195" text-anchor="middle" font-size="6">RATE: ~0.5 kg/hr water</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- DUAL BUCKET-WHEEL DETAIL (bottom left)      -->
+  <!-- ============================================ -->
+
+  <g transform="translate(40, 460)">
+    <text class="label-lg" x="180" y="0" text-anchor="middle">DUAL BUCKET-WHEEL EXCAVATION (rq-0-26)</text>
+    <text class="label-sm" x="180" y="12" text-anchor="middle">RESOLVED: UNANIMOUS CONSENSUS 2026-02-08</text>
+
+    <!-- Housing -->
+    <rect x="60" y="30" width="240" height="100" fill="#0d1a30" fill-opacity="0.4" stroke="#4a9eff" stroke-width="1" rx="3"/>
+
+    <!-- Wheel 1 (larger, 100%) -->
+    <circle cx="140" cy="80" r="35" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+    <circle cx="140" cy="80" r="28" fill="none" stroke="#e74c3c" stroke-width="0.5" opacity="0.3"/>
+    <!-- Bucket teeth -->
+    <g stroke="#e74c3c" stroke-width="0.75" fill="none" opacity="0.6">
+      <rect x="170" y="74" width="6" height="4" rx="0.5"/>
+      <rect x="168" y="64" width="6" height="4" rx="0.5"/>
+      <rect x="162" y="55" width="6" height="4" rx="0.5"/>
+      <rect x="152" y="48" width="6" height="4" rx="0.5"/>
+      <rect x="140" y="44" width="6" height="4" rx="0.5"/>
+      <rect x="128" y="48" width="6" height="4" rx="0.5"/>
+    </g>
+    <!-- Rotation arrow -->
+    <path d="M165,55 Q175,65 170,78" fill="none" stroke="#e74c3c" stroke-width="0.5" marker-end="url(#arrowBlue)"/>
+    <!-- label moved below drive shaft -->
+
+    <!-- Wheel 2 (smaller, 80%, counter-rotating) -->
+    <circle cx="240" cy="80" r="28" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+    <circle cx="240" cy="80" r="22" fill="none" stroke="#e74c3c" stroke-width="0.5" opacity="0.3"/>
+    <g stroke="#e74c3c" stroke-width="0.75" fill="none" opacity="0.6">
+      <rect x="263" y="74" width="5" height="4" rx="0.5"/>
+      <rect x="261" y="65" width="5" height="4" rx="0.5"/>
+      <rect x="256" y="57" width="5" height="4" rx="0.5"/>
+      <rect x="248" y="52" width="5" height="4" rx="0.5"/>
+    </g>
+    <!-- Counter-rotation arrow -->
+    <path d="M255,60 Q245,68 250,78" fill="none" stroke="#e74c3c" stroke-width="0.5" marker-end="url(#arrowBlue)"/>
+    <!-- label moved below drive shaft -->
+
+    <!-- Drive shafts connecting to housing (drawn BEFORE labels) -->
+    <circle cx="140" cy="80" r="5" fill="#2a1a1a" stroke="#e74c3c" stroke-width="0.75"/>
+    <circle cx="240" cy="80" r="5" fill="#2a1a1a" stroke="#e74c3c" stroke-width="0.75"/>
+    <!-- Labels ON TOP of drive shafts -->
+    <text class="label-red" x="140" y="100" text-anchor="middle" font-size="7">100%</text>
+    <text class="label-red" x="240" y="100" text-anchor="middle" font-size="7">80%</text>
+
+    <!-- Sealed auger output (top) -->
+    <rect x="165" y="25" width="30" height="12" fill="#1a2d3a" fill-opacity="0.5" stroke="#ff9f43" stroke-width="0.75" rx="1"/>
+    <line class="outline-accent" x1="180" y1="25" x2="180" y2="15"/>
+    <text class="label-accent" x="200" y="20" font-size="6">TO ISPP / MATERIAL BAY</text>
+    <text class="label-accent" x="200" y="30" font-size="6">SEALED SCREW AUGER</text>
+
+    <!-- Flexible seals at cutting face -->
+    <path d="M68,120 Q100,135 140,138 Q180,135 220,138 Q260,135 292,120" fill="none" stroke="#2ecc71" stroke-width="1" stroke-dasharray="3,2"/>
+    <text class="label-green" x="180" y="150" text-anchor="middle" font-size="6">FLEXIBLE SEALS · >99% PARTICLE CONTAINMENT</text>
+
+    <!-- Specs alongside -->
+    <text class="label-red" x="310" y="40">COUNTER-ROTATING</text>
+    <text class="label-red" x="310" y="50">BUCKET WHEELS</text>
+    <text class="label-spec" x="310" y="65">Power ........ 20-50 kW</text>
+    <text class="label-spec" x="310" y="76">Rate ......... 2-5 t/hr</text>
+    <text class="label-spec" x="310" y="87">Mass ......... 60-80 kg</text>
+    <text class="label-spec" x="310" y="98">Torque cancel. 90-95%</text>
+    <text class="label-spec" x="310" y="109">Asymmetric sizing</text>
+    <text class="label-spec" x="310" y="120">100 Hz differential</text>
+    <text class="label-spec" x="310" y="131">speed control</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- SCARAB FAMILY (bottom center)               -->
+  <!-- ============================================ -->
+
+  <g transform="translate(40, 650)">
+    <text class="label-lg" x="220" y="0" text-anchor="middle">SCARAB FAMILY — 3 VARIANTS FROM COMMON CHASSIS</text>
+
+    <!-- SCARAB-L -->
+    <rect x="0" y="15" width="140" height="80" fill="#0d1a30" fill-opacity="0.3" stroke="#4a9eff" stroke-width="0.75" rx="3"/>
+    <text class="label-lg" x="70" y="32" text-anchor="middle">SCARAB-L</text>
+    <text class="label-sm" x="70" y="42" text-anchor="middle">LUNAR</text>
+    <text class="label-spec" x="10" y="56">4× wheels · rocker-bogie</text>
+    <text class="label-spec" x="10" y="67">Drill + scoop · 350 W</text>
+    <text class="label-spec" x="10" y="78">50 kg/hr regolith</text>
+    <text class="label-spec" x="10" y="89">5 yr life · 85 kg tools</text>
+
+    <!-- SCARAB-A -->
+    <rect x="155" y="15" width="140" height="80" fill="#0d1a30" fill-opacity="0.3" stroke="#ff9f43" stroke-width="1" rx="3"/>
+    <text class="label-lg" x="225" y="32" text-anchor="middle" fill="#ff9f43">SCARAB-A</text>
+    <text class="label-sm" x="225" y="42" text-anchor="middle" fill="#ff9f43">C-TYPE ASTEROID</text>
+    <text class="label-spec" x="165" y="56">3× legs + anchor</text>
+    <text class="label-spec" x="165" y="67">Thermal mining · 100 W</text>
+    <text class="label-spec" x="165" y="78">0.5 kg/hr water</text>
+    <text class="label-spec" x="165" y="89">3 yr life · 45 kg tools</text>
+
+    <!-- SCARAB-M -->
+    <rect x="310" y="15" width="140" height="80" fill="#0d1a30" fill-opacity="0.3" stroke="#4a9eff" stroke-width="0.75" rx="3"/>
+    <text class="label-lg" x="380" y="32" text-anchor="middle">SCARAB-M</text>
+    <text class="label-sm" x="380" y="42" text-anchor="middle">METALLIC ASTEROID</text>
+    <text class="label-spec" x="320" y="56">3× legs + anchor</text>
+    <text class="label-spec" x="320" y="67">Wire saw · 300 W</text>
+    <text class="label-spec" x="320" y="78">2 cm²/min cutting</text>
+    <text class="label-spec" x="320" y="89">3 yr life · 65 kg tools</text>
+
+    <!-- Common chassis label -->
+    <line class="outline-detail" x1="70" y1="95" x2="70" y2="110"/>
+    <line class="outline-detail" x1="225" y1="95" x2="225" y2="110"/>
+    <line class="outline-detail" x1="380" y1="95" x2="380" y2="110"/>
+    <line class="outline-detail" x1="70" y1="110" x2="380" y2="110"/>
+    <line class="outline-detail" x1="225" y1="110" x2="225" y2="120"/>
+    <rect x="155" y="120" width="140" height="25" fill="#0d1a30" fill-opacity="0.3" stroke="#4a9eff" stroke-width="0.75" rx="3"/>
+    <text class="label" x="225" y="136" text-anchor="middle" font-size="7">COMMON CHASSIS (SCARAB-C) · 22 kg · Al-Li</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- SPECS TABLE (bottom right)                  -->
+  <!-- ============================================ -->
+
+  <g transform="translate(700, 530)">
+    <text class="label-lg" x="270" y="0" text-anchor="end">SCARAB-A SPECS</text>
+    <line class="outline-thin" x1="0" y1="5" x2="270" y2="5"/>
+
+    <text class="label-spec" x="0" y="20">Chassis .......... 600×500×400 mm</text>
+    <text class="label-spec" x="0" y="31">Chassis mass ..... 22 kg (Al-Li)</text>
+    <text class="label-spec" x="0" y="42">Tool mass ........ 45 kg</text>
+    <text class="label-spec" x="0" y="53">Total mass ....... ~80 kg</text>
+    <text class="label-spec" x="0" y="64">Power (solar) .... 100 W @2.5AU</text>
+    <text class="label-spec" x="0" y="75">Power (RTG) ...... 10 We cont.</text>
+    <text class="label-spec" x="0" y="86">Battery .......... 300 Wh Li-ion</text>
+    <text class="label-spec" x="0" y="97">Mobility ......... 3-leg inchworm</text>
+    <text class="label-spec" x="0" y="108">Anchor force ..... 50 N (auger)</text>
+    <text class="label-spec" x="0" y="119">Grip force ....... 10 N/pad</text>
+    <text class="label-spec" x="0" y="130">Mining method .... thermal</text>
+    <text class="label-spec" x="0" y="141">Water rate ....... 0.5 kg/hr</text>
+    <text class="label-spec" x="0" y="152">Design life ...... 3 years</text>
+    <text class="label-spec" x="0" y="163">Processor ........ RISC-V rad-hard</text>
+    <text class="label-spec" x="0" y="174">Comms ............ UHF mesh DTN</text>
+
+    <line class="outline-thin" x1="0" y1="182" x2="270" y2="182"/>
+    <text class="label-lg" x="0" y="198">FLEET</text>
+    <text class="label-spec" x="0" y="212">Initial fleet .... 20 robots</text>
+    <text class="label-spec" x="0" y="223">Cost per unit .... ~$50M</text>
+    <text class="label-spec" x="0" y="234">Budget ........... ~$1B</text>
+    <text class="label-spec" x="0" y="245">Target rate ...... 1,000+ t/yr/bot</text>
+    <text class="label-spec" x="0" y="256">Dev cost ......... $300-400M</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- LEGEND                                      -->
+  <!-- ============================================ -->
+
+  <g transform="translate(50, 910)">
+    <rect x="0" y="-8" width="8" height="8" fill="#1a3a6a" stroke="#4a9eff" stroke-width="0.75" rx="1"/>
+    <text class="label" x="12" y="0">STRUCTURE</text>
+
+    <rect x="90" y="-8" width="8" height="8" fill="#2a1a1a" stroke="#e74c3c" stroke-width="0.75" rx="1"/>
+    <text class="label-red" x="102" y="0">EXCAVATION</text>
+
+    <rect x="190" y="-8" width="8" height="8" fill="#2d1a0a" stroke="#e67e22" stroke-width="0.75" rx="1"/>
+    <text class="label-orange" x="202" y="0">THERMAL</text>
+
+    <rect x="270" y="-8" width="8" height="8" fill="#1a2d4a" stroke="#ff9f43" stroke-width="0.75" rx="1"/>
+    <text class="label-accent" x="282" y="0">CARGO / GRIP</text>
+
+    <rect x="375" y="-8" width="8" height="8" fill="#1a3a2a" stroke="#2ecc71" stroke-width="0.75" rx="1"/>
+    <text class="label-green" x="387" y="0">SENSORS</text>
+
+    <rect x="450" y="-8" width="8" height="8" fill="#1a1a2d" stroke="#9b59b6" stroke-width="0.75" rx="1"/>
+    <text class="label-purple" x="462" y="0">POWER</text>
+
+    <text class="label-sm" x="530" y="0">MULTI-MODEL CONSENSUS · CLAUDE 4.6 / GEMINI 3 PRO / GPT-5.2</text>
+  </g>
+
+  <!-- Border -->
+  <rect x="5" y="5" width="990" height="940" fill="none" stroke="#4a9eff" stroke-width="2" rx="2"/>
+  <rect x="8" y="8" width="984" height="934" fill="none" stroke="#1e3654" stroke-width="0.5" rx="1"/>
+
+</svg>

@@ -1,0 +1,373 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 950" width="1000" height="950">
+  <defs>
+    <style>
+      .bg { fill: #0a1628; }
+      .grid { stroke: #1a2d4a; stroke-width: 0.5; }
+      .grid-major { stroke: #1e3654; stroke-width: 1; }
+      .outline { fill: none; stroke: #4a9eff; stroke-width: 1.5; }
+      .outline-thin { fill: none; stroke: #4a9eff; stroke-width: 0.75; }
+      .outline-detail { fill: none; stroke: #3a7acc; stroke-width: 0.5; }
+      .fill-body { fill: #0d2240; fill-opacity: 0.6; stroke: #4a9eff; stroke-width: 1.5; }
+      .fill-hot { fill: #3d1a0a; fill-opacity: 0.5; stroke: #e74c3c; stroke-width: 1; }
+      .fill-warm { fill: #2d1a0a; fill-opacity: 0.4; stroke: #e67e22; stroke-width: 0.75; }
+      .fill-cold { fill: #0a1a2d; fill-opacity: 0.5; stroke: #3498db; stroke-width: 1; }
+      .fill-cryo { fill: #0a0a2d; fill-opacity: 0.6; stroke: #2980b9; stroke-width: 1; }
+      .fill-electro { fill: #1a2a1a; fill-opacity: 0.4; stroke: #2ecc71; stroke-width: 1; }
+      .fill-process { fill: #1a1a2d; fill-opacity: 0.4; stroke: #9b59b6; stroke-width: 0.75; }
+      .fill-panel { fill: #1a3a6a; fill-opacity: 0.4; stroke: #4a9eff; stroke-width: 0.75; }
+      .dim { stroke: #6ab0ff; stroke-width: 0.5; fill: none; marker-end: url(#arr); marker-start: url(#arrR); }
+      .dim-line { stroke: #6ab0ff; stroke-width: 0.5; stroke-dasharray: 4,3; }
+      .label { font-family: 'Courier New', monospace; fill: #8ec8ff; font-size: 9px; }
+      .label-sm { font-family: 'Courier New', monospace; fill: #6a9fd4; font-size: 7px; }
+      .label-lg { font-family: 'Courier New', monospace; fill: #4a9eff; font-size: 11px; font-weight: bold; }
+      .label-title { font-family: 'Courier New', monospace; fill: #ffffff; font-size: 15px; font-weight: bold; letter-spacing: 2px; }
+      .label-subtitle { font-family: 'Courier New', monospace; fill: #6ab0ff; font-size: 10px; letter-spacing: 1px; }
+      .label-accent { font-family: 'Courier New', monospace; fill: #ff9f43; font-size: 9px; }
+      .label-green { font-family: 'Courier New', monospace; fill: #2ecc71; font-size: 8px; }
+      .label-red { font-family: 'Courier New', monospace; fill: #e74c3c; font-size: 8px; }
+      .label-orange { font-family: 'Courier New', monospace; fill: #e67e22; font-size: 8px; }
+      .label-cyan { font-family: 'Courier New', monospace; fill: #3498db; font-size: 8px; }
+      .label-purple { font-family: 'Courier New', monospace; fill: #9b59b6; font-size: 8px; }
+      .label-spec { font-family: 'Courier New', monospace; fill: #8ec8ff; font-size: 8px; }
+      .flow { stroke: #ff9f43; stroke-width: 1; fill: none; marker-end: url(#arrO); }
+      .flow-water { stroke: #3498db; stroke-width: 1; fill: none; marker-end: url(#arrC); }
+      .flow-gas { stroke: #2ecc71; stroke-width: 0.75; fill: none; marker-end: url(#arrG); stroke-dasharray: 4,2; }
+      .callout { stroke: #4a6a8f; stroke-width: 0.5; fill: none; }
+    </style>
+    <marker id="arr" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4" fill="none" stroke="#6ab0ff" stroke-width="0.5"/></marker>
+    <marker id="arrR" markerWidth="6" markerHeight="4" refX="1" refY="2" orient="auto"><path d="M6,0 L0,2 L6,4" fill="none" stroke="#6ab0ff" stroke-width="0.5"/></marker>
+    <marker id="arrO" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4" fill="none" stroke="#ff9f43" stroke-width="0.5"/></marker>
+    <marker id="arrC" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4" fill="none" stroke="#3498db" stroke-width="0.5"/></marker>
+    <marker id="arrG" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto"><path d="M0,0 L6,2 L0,4" fill="none" stroke="#2ecc71" stroke-width="0.5"/></marker>
+    <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="20" class="grid"/><line x1="0" y1="0" x2="20" y2="0" class="grid"/>
+    </pattern>
+    <pattern id="gridMajor" width="100" height="100" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="100" class="grid-major"/><line x1="0" y1="0" x2="100" y2="0" class="grid-major"/>
+    </pattern>
+  </defs>
+
+  <rect class="bg" width="1000" height="950"/>
+  <rect fill="url(#gridPattern)" width="1000" height="950" opacity="0.3"/>
+  <rect fill="url(#gridMajor)" width="1000" height="950" opacity="0.3"/>
+
+  <!-- Title -->
+  <rect x="20" y="15" width="500" height="55" fill="none" stroke="#4a9eff" stroke-width="1"/>
+  <text class="label-title" x="35" y="38">ISPP SYSTEMS — PROPELLANT PRODUCTION</text>
+  <text class="label-subtitle" x="35" y="55">PROJECT DYSON · BOM-0-6 · PHASE 0 · MULTI-MODEL CONSENSUS</text>
+  <text class="label-sm" x="540" y="30">SCALE: NOT TO SCALE</text>
+  <text class="label-sm" x="540" y="42">DATE: 2026-03-19</text>
+  <text class="label-sm" x="540" y="54">WATER-TO-PROPELLANT CHAIN</text>
+
+  <!-- ============================================ -->
+  <!-- MAIN: WATER EXTRACTION → PROPELLANT FLOW    -->
+  <!-- ============================================ -->
+
+  <text class="label-lg" x="400" y="95" text-anchor="middle">WATER-TO-PROPELLANT PROCESS CHAIN</text>
+
+  <!-- Step 1: Excavation / Thermal Extraction -->
+  <rect class="fill-warm" x="40" y="115" width="110" height="80" rx="4"/>
+  <text class="label-orange" x="95" y="135" text-anchor="middle" font-size="7">THERMAL</text>
+  <text class="label-orange" x="95" y="145" text-anchor="middle" font-size="7">EXTRACTION</text>
+  <text class="label-orange" x="95" y="160" text-anchor="middle" font-size="5">200-700°C</text>
+  <text class="label-orange" x="95" y="170" text-anchor="middle" font-size="5">Solar concentrator</text>
+  <text class="label-orange" x="95" y="180" text-anchor="middle" font-size="5">or resistive heat</text>
+
+  <!-- Regolith input -->
+  <text class="label-accent" x="95" y="110" text-anchor="middle" font-size="6">ICE-BEARING REGOLITH</text>
+  <line class="flow" x1="95" y1="112" x2="95" y2="115"/>
+
+  <!-- Flow: vapor to cold trap -->
+  <line class="flow-gas" x1="150" y1="155" x2="190" y2="155"/>
+  <text class="label-sm" x="170" y="148" text-anchor="middle">H₂O</text>
+  <text class="label-sm" x="170" y="140" text-anchor="middle">vapor</text>
+
+  <!-- Step 2: Cold Trap / Condenser -->
+  <rect class="fill-cold" x="190" y="120" width="90" height="70" rx="4"/>
+  <text class="label-cyan" x="235" y="142" text-anchor="middle" font-size="7">COLD TRAP</text>
+  <text class="label-cyan" x="235" y="152" text-anchor="middle" font-size="7">CONDENSER</text>
+  <text class="label-cyan" x="235" y="167" text-anchor="middle" font-size="5">~100 K (-170°C)</text>
+  <text class="label-cyan" x="235" y="177" text-anchor="middle" font-size="5">Passive radiator</text>
+  <!-- Radiator fins -->
+  <g opacity="0.4">
+    <line x1="190" y1="130" x2="182" y2="125" stroke="#3498db" stroke-width="0.5"/>
+    <line x1="190" y1="140" x2="182" y2="135" stroke="#3498db" stroke-width="0.5"/>
+    <line x1="190" y1="150" x2="182" y2="145" stroke="#3498db" stroke-width="0.5"/>
+    <line x1="190" y1="160" x2="182" y2="155" stroke="#3498db" stroke-width="0.5"/>
+  </g>
+
+  <!-- Flow: liquid water to electrolyzer -->
+  <line class="flow-water" x1="280" y1="155" x2="320" y2="155"/>
+  <text class="label-sm" x="300" y="148" text-anchor="middle">liquid</text>
+  <text class="label-sm" x="300" y="140" text-anchor="middle">H₂O</text>
+
+  <!-- Step 3: Electrolyzer (the big one) -->
+  <rect class="fill-electro" x="320" y="110" width="120" height="90" rx="4"/>
+  <text class="label-green" x="380" y="132" text-anchor="middle" font-size="8">PEM / SOEC</text>
+  <text class="label-green" x="380" y="142" text-anchor="middle" font-size="8">ELECTROLYZER</text>
+  <!-- Electrolysis equation -->
+  <text class="label-green" x="380" y="162" text-anchor="middle" font-size="6">H₂O → H₂ + ½O₂</text>
+  <text class="label-green" x="380" y="175" text-anchor="middle" font-size="5">4-8 kWh/kg H₂O</text>
+  <text class="label-green" x="380" y="185" text-anchor="middle" font-size="5">Magnetic phase sep.</text>
+  <text class="label-green" x="380" y="195" text-anchor="middle" font-size="5">(Nature Chem. 2025)</text>
+  <!-- Permanent magnet symbol -->
+  <rect x="370" y="152" width="20" height="6" fill="#2ecc71" fill-opacity="0.3" stroke="#2ecc71" stroke-width="0.5" rx="1"/>
+  <text x="375" y="157" fill="#2ecc71" font-size="4" font-family="monospace">N S</text>
+
+  <!-- Flow: H2 output (up) -->
+  <line class="flow-gas" x1="360" y1="110" x2="360" y2="80"/>
+  <line class="flow-gas" x1="360" y1="80" x2="490" y2="80"/>
+  <text class="label-sm" x="425" y="75" text-anchor="middle">H₂ gas</text>
+
+  <!-- Flow: O2 output (down) -->
+  <line class="flow-gas" x1="400" y1="200" x2="400" y2="230"/>
+  <line class="flow-gas" x1="400" y1="230" x2="490" y2="230"/>
+  <text class="label-sm" x="445" y="225" text-anchor="middle">O₂ gas</text>
+
+  <!-- Step 4a: H2 Liquefaction -->
+  <rect class="fill-cryo" x="490" y="55" width="100" height="55" rx="4"/>
+  <text class="label-cyan" x="540" y="75" text-anchor="middle" font-size="7">H₂ LIQUEFACTION</text>
+  <text class="label-cyan" x="540" y="87" text-anchor="middle" font-size="5">Cryocooler → 20 K</text>
+  <text class="label-cyan" x="540" y="97" text-anchor="middle" font-size="5">25 kWe per module</text>
+  <text class="label-cyan" x="540" y="107" text-anchor="middle" font-size="4">HIGHEST RISK SUBSYSTEM</text>
+
+  <!-- Step 4b: O2 Liquefaction -->
+  <rect class="fill-cryo" x="490" y="210" width="100" height="50" rx="4"/>
+  <text class="label-cyan" x="540" y="230" text-anchor="middle" font-size="7">O₂ LIQUEFACTION</text>
+  <text class="label-cyan" x="540" y="242" text-anchor="middle" font-size="5">Cryocooler → 90 K</text>
+  <text class="label-cyan" x="540" y="252" text-anchor="middle" font-size="5">Simpler than LH₂</text>
+
+  <!-- Flow to storage tanks -->
+  <line class="flow-water" x1="590" y1="82" x2="640" y2="82"/>
+  <line class="flow-water" x1="590" y1="235" x2="640" y2="235"/>
+
+  <!-- Step 5: Storage tanks -->
+  <ellipse cx="680" cy="82" rx="35" ry="28" class="fill-cryo"/>
+  <text class="label-cyan" x="680" y="78" text-anchor="middle" font-size="7">LH₂</text>
+  <text class="label-cyan" x="680" y="90" text-anchor="middle" font-size="5">20 K · ZBO</text>
+
+  <ellipse cx="680" cy="235" rx="35" ry="28" class="fill-cryo"/>
+  <text class="label-cyan" x="680" y="231" text-anchor="middle" font-size="7">LOX</text>
+  <text class="label-cyan" x="680" y="243" text-anchor="middle" font-size="5">90 K · ZBO</text>
+
+  <!-- Sunshield over LH2 -->
+  <line x1="635" y1="48" x2="725" y2="48" stroke="#c0d0e0" stroke-width="0.75"/>
+  <line x1="635" y1="51" x2="725" y2="51" stroke="#c0d0e0" stroke-width="0.5" opacity="0.4"/>
+  <text class="label-sm" x="680" y="44" text-anchor="middle" fill="#c0d0e0">SUNSHIELD</text>
+
+  <!-- Flow to depot -->
+  <line class="flow" x1="715" y1="82" x2="760" y2="155"/>
+  <line class="flow" x1="715" y1="235" x2="760" y2="165"/>
+
+  <!-- Depot output -->
+  <rect class="fill-body" x="760" y="130" width="80" height="55" rx="5"/>
+  <text class="label" x="800" y="150" text-anchor="middle" font-size="7">PROPELLANT</text>
+  <text class="label" x="800" y="160" text-anchor="middle" font-size="7">DEPOT</text>
+  <text class="label" x="800" y="175" text-anchor="middle" font-size="5">EML1 / L4/L5</text>
+
+  <!-- Output arrow -->
+  <line class="flow" x1="840" y1="157" x2="880" y2="157"/>
+  <text class="label-accent" x="885" y="152" font-size="6">TO TRANSPORT</text>
+  <text class="label-accent" x="885" y="162" font-size="6">VEHICLES</text>
+
+  <!-- Power input -->
+  <rect class="fill-panel" x="340" y="210" width="80" height="30" rx="3"/>
+  <text class="label" x="380" y="228" text-anchor="middle" font-size="6">250 kWe POWER</text>
+  <line class="callout" x1="380" y1="210" x2="380" y2="200"/>
+
+  <!-- ============================================ -->
+  <!-- MRE ALTERNATIVE PATH (left side, below)     -->
+  <!-- ============================================ -->
+
+  <g transform="translate(30, 290)">
+    <text class="label-lg" x="250" y="0" text-anchor="middle">ALTERNATIVE: MOLTEN REGOLITH ELECTROLYSIS (MRE)</text>
+    <text class="label-sm" x="250" y="12" text-anchor="middle">FOR ANHYDROUS REGOLITH (NO WATER ICE REQUIRED)</text>
+
+    <!-- MRE Cell -->
+    <rect class="fill-hot" x="0" y="25" width="130" height="80" rx="4"/>
+    <text class="label-red" x="65" y="45" text-anchor="middle" font-size="7">MRE CELL STACK</text>
+    <text class="label-red" x="65" y="57" text-anchor="middle" font-size="5">1600-1700°C</text>
+    <!-- Electrodes -->
+    <rect x="15" y="62" width="8" height="30" fill="#555" fill-opacity="0.5" stroke="#aaa" stroke-width="0.5"/>
+    <rect x="107" y="62" width="8" height="30" fill="#555" fill-opacity="0.5" stroke="#e74c3c" stroke-width="0.5"/>
+    <text class="label-sm" x="19" y="60" text-anchor="middle" fill="#aaa" font-size="4">Mo/W</text>
+    <text class="label-red" x="111" y="60" text-anchor="middle" font-size="4">Ir</text>
+    <!-- Molten regolith inside -->
+    <rect x="28" y="65" width="74" height="25" fill="#3d1a0a" fill-opacity="0.3" stroke="#e74c3c" stroke-width="0.3" rx="1"/>
+    <text class="label-red" x="65" y="80" text-anchor="middle" font-size="4">MOLTEN REGOLITH</text>
+
+    <!-- Regolith input -->
+    <text class="label-accent" x="65" y="22" text-anchor="middle" font-size="6">CRUSHED REGOLITH (ANY TYPE)</text>
+    <line class="flow" x1="65" y1="23" x2="65" y2="25"/>
+
+    <!-- Outputs -->
+    <line class="flow-gas" x1="130" y1="50" x2="180" y2="35"/>
+    <text class="label-green" x="185" y="33" font-size="6">O₂ GAS → LIQUEFACTION</text>
+    <text class="label-green" x="185" y="43" font-size="5">20-30 wt% yield</text>
+
+    <line class="flow" x1="130" y1="85" x2="180" y2="85"/>
+    <text class="label-accent" x="185" y="83" font-size="6">METAL ALLOY (Fe-Si-Ti-Al)</text>
+    <text class="label-accent" x="185" y="93" font-size="5">→ Casting → structural use</text>
+
+    <!-- Specs -->
+    <text class="label-spec" x="370" y="30">MRE CELL SPECS:</text>
+    <text class="label-spec" x="370" y="42">Cell voltage ...... 2.5-3.5 V</text>
+    <text class="label-spec" x="370" y="53">Current density ... 0.5-1.0 A/cm²</text>
+    <text class="label-spec" x="370" y="64">Electrode area .... 0.5 m²/cell</text>
+    <text class="label-spec" x="370" y="75">Cells per module .. 8</text>
+    <text class="label-spec" x="370" y="86">Module power ...... 250 kWe</text>
+    <text class="label-spec" x="370" y="97">Module mass ....... 2,500 kg</text>
+    <text class="label-spec" x="370" y="108">Anode life ........ 500-2000 hr</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- TIER ARCHITECTURE (bottom left)             -->
+  <!-- ============================================ -->
+
+  <g transform="translate(30, 430)">
+    <text class="label-lg" x="250" y="0" text-anchor="middle">THREE-TIER DEPLOYMENT ARCHITECTURE</text>
+
+    <!-- Tier 1 -->
+    <rect x="0" y="15" width="155" height="75" fill="#0d1a30" fill-opacity="0.3" stroke="#4a9eff" stroke-width="0.75" rx="3"/>
+    <text class="label-lg" x="77" y="32" text-anchor="middle" font-size="8">TIER 1: LUNAR</text>
+    <text class="label-spec" x="10" y="46">South pole PSR</text>
+    <text class="label-spec" x="10" y="57">MRE + water ice</text>
+    <text class="label-spec" x="10" y="68">100 t LOX/yr (IOC)</text>
+    <text class="label-spec" x="10" y="79">Nuclear powered</text>
+    <text class="label-spec" x="10" y="90">Year 0-5 · TRL 5→9</text>
+
+    <!-- Arrow -->
+    <line x1="160" y1="52" x2="175" y2="52" stroke="#4a9eff" stroke-width="0.75" marker-end="url(#arr)"/>
+
+    <!-- Tier 2 -->
+    <rect x="180" y="15" width="155" height="75" fill="#0d1a30" fill-opacity="0.3" stroke="#ff9f43" stroke-width="1" rx="3"/>
+    <text class="label-lg" x="257" y="32" text-anchor="middle" font-size="8" fill="#ff9f43">TIER 2: ASTEROID</text>
+    <text class="label-spec" x="190" y="46">C-type NEAs</text>
+    <text class="label-spec" x="190" y="57">Thermal extraction</text>
+    <text class="label-spec" x="190" y="68">500+ t H₂O/yr</text>
+    <text class="label-spec" x="190" y="79">Solar powered</text>
+    <text class="label-spec" x="190" y="90">Year 3-10 · TRL 3→8</text>
+
+    <!-- Arrow -->
+    <line x1="340" y1="52" x2="355" y2="52" stroke="#4a9eff" stroke-width="0.75" marker-end="url(#arr)"/>
+
+    <!-- Tier 3 -->
+    <rect x="360" y="15" width="155" height="75" fill="#0d1a30" fill-opacity="0.3" stroke="#4a9eff" stroke-width="0.75" rx="3"/>
+    <text class="label-lg" x="437" y="32" text-anchor="middle" font-size="8">TIER 3: MERCURY</text>
+    <text class="label-spec" x="370" y="46">PSR water ice</text>
+    <text class="label-spec" x="370" y="57">MRE + Na/S propellant</text>
+    <text class="label-spec" x="370" y="68">Long-term scaling</text>
+    <text class="label-spec" x="370" y="79">Nuclear + solar</text>
+    <text class="label-spec" x="370" y="90">Year 8-20+ · TRL 2→7</text>
+
+    <!-- Depot network below -->
+    <line class="outline-detail" x1="77" y1="90" x2="77" y2="110"/>
+    <line class="outline-detail" x1="257" y1="90" x2="257" y2="110"/>
+    <line class="outline-detail" x1="437" y1="90" x2="437" y2="110"/>
+    <line class="outline-detail" x1="77" y1="110" x2="437" y2="110"/>
+    <line class="outline-detail" x1="257" y1="110" x2="257" y2="120"/>
+
+    <rect x="180" y="120" width="155" height="30" fill="#0d1a30" fill-opacity="0.3" stroke="#4a9eff" stroke-width="1" rx="3"/>
+    <text class="label" x="257" y="140" text-anchor="middle">PROPELLANT DEPOT NETWORK</text>
+    <text class="label-sm" x="257" y="152" text-anchor="middle">EML1 · L2 · LEO · HELIO DEPOTS</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- ENERGY BUDGET (bottom center)               -->
+  <!-- ============================================ -->
+
+  <g transform="translate(30, 610)">
+    <text class="label-lg" x="250" y="0" text-anchor="middle">ENERGY BUDGET (PER MODULE, 250 kWe)</text>
+
+    <!-- Stacked bar representation -->
+    <rect x="0" y="18" width="300" height="16" fill="#3d1a0a" fill-opacity="0.3" stroke="#e74c3c" stroke-width="0.5" rx="1"/>
+    <rect x="0" y="18" width="180" height="16" fill="#e74c3c" fill-opacity="0.15" rx="1"/>
+    <text class="label-red" x="90" y="30" text-anchor="middle" font-size="6">MRE ELECTROLYSIS · 150 kWe (60%)</text>
+
+    <rect x="0" y="38" width="300" height="16" fill="#2d1a0a" fill-opacity="0.3" stroke="#e67e22" stroke-width="0.5" rx="1"/>
+    <rect x="0" y="38" width="48" height="16" fill="#e67e22" fill-opacity="0.15" rx="1"/>
+    <text class="label-orange" x="150" y="50" text-anchor="middle" font-size="6">PREHEAT 40 kWe (16%) · COMPRESS 25 kWe (10%) · EXCAVATE 15 kWe (6%)</text>
+
+    <rect x="0" y="58" width="300" height="16" fill="#0d2240" fill-opacity="0.3" stroke="#4a9eff" stroke-width="0.5" rx="1"/>
+    <rect x="0" y="58" width="24" height="16" fill="#4a9eff" fill-opacity="0.15" rx="1"/>
+    <text class="label" x="150" y="70" text-anchor="middle" font-size="6">THERMAL MGMT 10 kWe (4%) · C&amp;DH 10 kWe (4%)</text>
+
+    <text class="label-spec" x="310" y="30">Total: 13-22 kWh</text>
+    <text class="label-spec" x="310" y="42">per kg H₂O processed</text>
+    <text class="label-spec" x="310" y="56">Breakeven: $200-500/kg</text>
+    <text class="label-spec" x="310" y="68">propellant to cislunar</text>
+  </g>
+
+  <!-- ============================================ -->
+  <!-- SPECS TABLE (bottom right)                  -->
+  <!-- ============================================ -->
+
+  <g transform="translate(700, 430)">
+    <text class="label-lg" x="270" y="0" text-anchor="end">ISPP SYSTEM SPECS</text>
+    <line class="outline-thin" x1="0" y1="5" x2="270" y2="5"/>
+
+    <text class="label-lg" x="0" y="22">WATER EXTRACTION</text>
+    <text class="label-spec" x="0" y="36">Rate ............. 500 kg/day</text>
+    <text class="label-spec" x="0" y="47">Regolith throughput 50 t/day</text>
+    <text class="label-spec" x="0" y="58">Energy ........... 4-8 kWh/kg</text>
+    <text class="label-spec" x="0" y="69">System mass ...... 4,000 kg</text>
+    <text class="label-spec" x="0" y="80">Power ............ 150 kWe</text>
+
+    <line class="outline-thin" x1="0" y1="88" x2="270" y2="88"/>
+    <text class="label-lg" x="0" y="104">MRE MODULE</text>
+    <text class="label-spec" x="0" y="118">LOX output ....... 100 t/yr</text>
+    <text class="label-spec" x="0" y="129">Regolith ......... 500 t/yr</text>
+    <text class="label-spec" x="0" y="140">Temperature ...... 1600-1700°C</text>
+    <text class="label-spec" x="0" y="151">Module mass ...... 2,500 kg</text>
+    <text class="label-spec" x="0" y="162">Module power ..... 250 kWe</text>
+    <text class="label-spec" x="0" y="173">O₂ yield ......... 20-30 wt%</text>
+    <text class="label-spec" x="0" y="184">Byproduct ........ Fe-Si-Ti-Al</text>
+
+    <line class="outline-thin" x1="0" y1="192" x2="270" y2="192"/>
+    <text class="label-lg" x="0" y="208">STORAGE</text>
+    <text class="label-spec" x="0" y="222">LH₂ ............. 20 K · ZBO</text>
+    <text class="label-spec" x="0" y="233">LOX .............. 90 K · ZBO</text>
+    <text class="label-spec" x="0" y="244">Tank material .... Al-Li 2195</text>
+    <text class="label-spec" x="0" y="255">Boiloff (passive). &lt;0.1%/day</text>
+    <text class="label-spec" x="0" y="266">Cryocooler ....... 10-20 kW</text>
+
+    <line class="outline-thin" x1="0" y1="274" x2="270" y2="274"/>
+    <text class="label-lg" x="0" y="290">ECONOMICS</text>
+    <text class="label-spec" x="0" y="304">Propellant cost .. $200-500/kg</text>
+    <text class="label-spec" x="0" y="315">Earth launch ..... $1,000+/kg</text>
+    <text class="label-spec" x="0" y="326">Savings .......... 10-50×</text>
+    <text class="label-spec" x="0" y="337">Breakeven ........ 5-10 years</text>
+    <text class="label-spec" x="0" y="348">Phase 0 budget ... ~$6.6B</text>
+
+    <line class="outline-thin" x1="0" y1="356" x2="270" y2="356"/>
+    <text class="label-lg" x="0" y="372">AUTONOMY</text>
+    <text class="label-spec" x="0" y="386">Level ............ 3-4</text>
+    <text class="label-spec" x="0" y="397">Unattended ops ... 30+ days</text>
+    <text class="label-spec" x="0" y="408">Comms latency .... 1.3s-24min</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(50, 910)">
+    <rect x="0" y="-8" width="8" height="8" fill="#2d1a0a" stroke="#e67e22" stroke-width="0.75" rx="1"/>
+    <text class="label-orange" x="12" y="0">THERMAL</text>
+
+    <rect x="80" y="-8" width="8" height="8" fill="#3d1a0a" stroke="#e74c3c" stroke-width="0.75" rx="1"/>
+    <text class="label-red" x="92" y="0">MRE (HIGH-T)</text>
+
+    <rect x="190" y="-8" width="8" height="8" fill="#1a2a1a" stroke="#2ecc71" stroke-width="0.75" rx="1"/>
+    <text class="label-green" x="202" y="0">ELECTROLYSIS</text>
+
+    <rect x="290" y="-8" width="8" height="8" fill="#0a1a2d" stroke="#3498db" stroke-width="0.75" rx="1"/>
+    <text class="label-cyan" x="302" y="0">CRYOGENIC</text>
+
+    <rect x="375" y="-8" width="8" height="8" fill="#0d2240" stroke="#4a9eff" stroke-width="0.75" rx="1"/>
+    <text class="label" x="387" y="0">DEPOT</text>
+
+    <text class="label-sm" x="440" y="0">MULTI-MODEL CONSENSUS · CLAUDE 4.6 / GEMINI 3 PRO / GPT-5.2</text>
+  </g>
+
+  <!-- Border -->
+  <rect x="5" y="5" width="990" height="940" fill="none" stroke="#4a9eff" stroke-width="2" rx="2"/>
+  <rect x="8" y="8" width="984" height="934" fill="none" stroke="#1e3654" stroke-width="0.5" rx="1"/>
+
+</svg>
