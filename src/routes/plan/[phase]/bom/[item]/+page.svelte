@@ -10,6 +10,28 @@
 	// Get data from load function
 	let { data } = $props();
 
+	// Blueprint lightbox state
+	let blueprintOpen = $state(false);
+	const blueprintUrl = $derived(
+		`/content/bom-specs/${data.phaseId}/${data.itemSlug}/blueprint.svg`
+	);
+	let blueprintExists = $state(false);
+
+	// Check if blueprint exists
+	$effect(() => {
+		if (data.phaseId && data.itemSlug) {
+			fetch(blueprintUrl, { method: 'HEAD' })
+				.then((res) => { blueprintExists = res.ok; })
+				.catch(() => { blueprintExists = false; });
+		}
+	});
+
+	function openBlueprint() { blueprintOpen = true; }
+	function closeBlueprint() { blueprintOpen = false; }
+	function handleKeydown(e: KeyboardEvent) {
+		if (e.key === 'Escape' && blueprintOpen) closeBlueprint();
+	}
+
 	const phase = $derived(data.phase);
 	const itemMeta = $derived(data.itemMeta);
 	const specs = $derived<BOMItemSpec | null>(data.specs);
@@ -67,6 +89,8 @@
 		return sanitizeMarkdownHTML(html);
 	}
 </script>
+
+<svelte:window onkeydown={handleKeydown} />
 
 <svelte:head>
 	<title
@@ -244,7 +268,7 @@
 				<div class="card-glow p-6 md:p-8">
 					{#if activeTab === 'consensus'}
 						{#if specs?.consensus && specs.consensus.keySpecs.length > 0}
-							<ConsensusView consensus={specs.consensus} divergentViewsData={specs.divergentViewsData} itemName={itemMeta?.name || 'Item'} />
+							<ConsensusView consensus={specs.consensus} divergentViewsData={specs.divergentViewsData} itemName={itemMeta?.name || 'Item'} {blueprintUrl} {blueprintExists} onOpenBlueprint={openBlueprint} />
 						{:else}
 							<div class="text-center py-12">
 								<svg
@@ -442,6 +466,50 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+{/if}
+
+<!-- Blueprint Lightbox Overlay -->
+{#if blueprintOpen}
+	<div
+		class="fixed inset-0 z-50 flex items-center justify-center"
+		role="dialog"
+		aria-modal="true"
+		aria-label="Technical blueprint"
+	>
+		<!-- Backdrop -->
+		<button
+			class="absolute inset-0 bg-black/90 cursor-pointer"
+			onclick={closeBlueprint}
+			aria-label="Close blueprint"
+		></button>
+
+		<!-- Content -->
+		<div class="relative z-10 w-[95vw] h-[95vh] flex flex-col">
+			<div class="flex justify-end mb-2">
+				<button
+					onclick={closeBlueprint}
+					class="text-star-dim hover:text-white transition-colors p-2 rounded-lg hover:bg-space-600"
+					aria-label="Close"
+				>
+					<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+			</div>
+
+			<div class="flex-1 overflow-auto rounded-lg border border-space-600 bg-space-900">
+				<img
+					src={blueprintUrl}
+					alt="Technical blueprint for {itemMeta?.name}"
+					class="w-full min-w-[800px]"
+				/>
+			</div>
+
+			<p class="text-center text-star-faint text-xs mt-2">
+				{itemMeta?.name} — Technical Blueprint · Multi-Model Consensus Design · Press ESC to close
+			</p>
 		</div>
 	</div>
 {/if}
