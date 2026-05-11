@@ -240,6 +240,38 @@ function httpsPostJsonStream(urlStr, headers, bodyBuf, socketTimeoutMs, onEvent)
   });
 }
 
+// Recursively inline \input{path} and \include{path} directives so that
+// modular papers (master + sections/ + tables/) are flattened into a single
+// string for the LLM. LaTeX semantics: paths in \input{} are resolved
+// relative to the MAIN document's directory (the master), not the file
+// containing the directive — so masterDir is threaded through unchanged.
+async function flattenInputs(content, masterDir, depth = 0) {
+  if (depth > 6) return content;
+  const inputRe = /^([^%\n]*?)\\(?:input|include)\{([^}]+)\}/gm;
+  const matches = [];
+  let m;
+  while ((m = inputRe.exec(content)) !== null) {
+    matches.push({ full: m[0], prefix: m[1], target: m[2], index: m.index });
+  }
+  if (matches.length === 0) return content;
+  let out = content;
+  for (let i = matches.length - 1; i >= 0; i--) {
+    const { full, prefix, target, index } = matches[i];
+    let resolved = target;
+    if (!resolved.endsWith('.tex')) resolved += '.tex';
+    const candidate = path.isAbsolute(resolved) ? resolved : path.join(masterDir, resolved);
+    let included;
+    try {
+      included = await fs.readFile(candidate, 'utf-8');
+    } catch {
+      continue; // leave directive as-is if the file isn't found
+    }
+    const inlined = await flattenInputs(included, masterDir, depth + 1);
+    out = out.slice(0, index) + prefix + `% --- inlined: ${target} ---\n` + inlined + `\n% --- end inlined: ${target} ---\n` + out.slice(index + full.length);
+  }
+  return out;
+}
+
 function getAccessToken(profile) {
   try {
     const raw = execFileSync(
@@ -557,8 +589,10 @@ async function main() {
 
   const paperPath = path.join(PROJECT_ROOT, config.dir, `${config.texPrefix}-${version}.tex`);
   console.log(`Loading paper: ${path.relative(PROJECT_ROOT, paperPath)}`);
-  const paperContent = await fs.readFile(paperPath, 'utf-8');
-  console.log(`  Paper: ${paperContent.length} chars, ${paperContent.split('\n').length} lines\n`);
+  const rawContent = await fs.readFile(paperPath, 'utf-8');
+  const paperContent = await flattenInputs(rawContent, path.dirname(paperPath));
+  const flattened = paperContent.length !== rawContent.length;
+  console.log(`  Paper: ${paperContent.length} chars, ${paperContent.split('\n').length} lines${flattened ? ` (flattened from ${rawContent.length} chars; modular master)` : ''}\n`);
 
   const userPrompt = buildReviewPrompt(paperContent, version, opts.paper);
   console.log(`Final prompt: ${userPrompt.length} chars\n`);
