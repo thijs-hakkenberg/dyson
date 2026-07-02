@@ -9,12 +9,19 @@
 		consensus: BOMItemSpec['consensus'];
 		divergentViewsData?: DivergentViewsData | null;
 		itemName: string;
+		/** Models that actually produced specs for this item (authoritative per-item provenance). */
+		models?: { modelId: string; modelName: string }[];
 		blueprintUrl?: string;
 		blueprintExists?: boolean;
 		onOpenBlueprint?: () => void;
 	}
 
-	let { consensus, divergentViewsData = null, itemName, blueprintUrl, blueprintExists = false, onOpenBlueprint }: Props = $props();
+	let { consensus, divergentViewsData = null, itemName, models = [], blueprintUrl, blueprintExists = false, onOpenBlueprint }: Props = $props();
+
+	// Deduplicate + preserve order of the models that synthesized this item's consensus.
+	const synthModels = $derived(
+		models.filter((m, i) => m && m.modelName && models.findIndex((x) => x.modelId === m.modelId) === i)
+	);
 
 	const marked = new Marked({
 		gfm: true,
@@ -74,9 +81,7 @@
 			<div>
 				<h2 class="text-xl font-bold text-star-white mb-2">Multi-Model Consensus Analysis</h2>
 				<p class="text-star-dim text-sm">
-					This synthesis combines insights from <span class="text-orange-400 font-medium">Claude Opus 4.5</span>,
-					<span class="text-purple-400 font-medium">Gemini 3 Pro</span>, and
-					<span class="text-blue-400 font-medium">GPT-5.2</span> to identify areas of agreement,
+					This synthesis combines insights from {#if synthModels.length > 0}{#each synthModels as m, i}<span class="{getModelColor(m.modelName).text} font-medium">{m.modelName}</span>{#if i < synthModels.length - 2}, {:else if i === synthModels.length - 2}{synthModels.length === 2 ? ' and ' : ', and '}{/if}{/each}{:else}multiple frontier AI models{/if} to identify areas of agreement,
 					highlight divergent perspectives, and surface open research questions for <span class="text-star-white font-medium">{itemName}</span>.
 				</p>
 			</div>

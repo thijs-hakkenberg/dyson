@@ -268,7 +268,7 @@
 				<div class="card-glow p-6 md:p-8">
 					{#if activeTab === 'consensus'}
 						{#if specs?.consensus && specs.consensus.keySpecs.length > 0}
-							<ConsensusView consensus={specs.consensus} divergentViewsData={specs.divergentViewsData} itemName={itemMeta?.name || 'Item'} {blueprintUrl} {blueprintExists} onOpenBlueprint={openBlueprint} />
+							<ConsensusView consensus={specs.consensus} divergentViewsData={specs.divergentViewsData} itemName={itemMeta?.name || 'Item'} models={specs.specs.map((s) => ({ modelId: s.modelId, modelName: s.modelName }))} {blueprintUrl} {blueprintExists} onOpenBlueprint={openBlueprint} />
 						{:else}
 							<div class="text-center py-12">
 								<svg

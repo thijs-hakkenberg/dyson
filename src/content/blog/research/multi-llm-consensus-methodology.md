@@ -22,7 +22,7 @@ Our analysis process involves three frontier AI models:
 
 - **Gemini 3 Pro**: Google's advanced reasoning model
 - **GPT-5.2**: OpenAI's latest generation
-- **Claude Opus 4.5**: Anthropic's most capable model
+- **Claude Opus 4.8**: Anthropic's most capable model
 
 ## Why Multiple Models?
 
