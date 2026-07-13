@@ -34,6 +34,5 @@
       "scheme": "url"
     }
   ],
-  "notes": "License note: the repository root LICENSE is GPL-3.0; the analysis-scripts pyproject.toml currently declares MIT. Reconcile before minting the DOI. Metadata here defaults to the repository-level GPL-3.0-or-later.",
   "version": "<FILL: git release tag, e.g. v0.1.0-wave-a>"
 }
