@@ -49,3 +49,7 @@ By consulting multiple models and having them review each other's work, we can:
 ## Limitations
 
 It's important to note that AI analysis supplements, but doesn't replace, expert human judgment. All LLM opinions are reviewed by domain experts before being incorporated into our plans.
+
+## A Note on Model Versions Across Papers
+
+The panel above reflects the models currently in use for BOM specs and deliberations. Several published papers were drafted and reviewed over a period spanning multiple model generations, so their reproducibility appendices name the specific models used at each stage rather than the current panel: most were reviewed by a February 2026 trio (Claude Opus 4.6, Gemini 3 Pro, GPT-5.2), with one paper's later revision rounds reviewed by a May 2026 trio (Claude Opus 4.7, Gemini 3.1 Pro, GPT-5.5 Pro). Each paper's own disclosure and appendix are the authoritative record for which models produced its results.
