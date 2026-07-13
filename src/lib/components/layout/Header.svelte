@@ -32,6 +32,7 @@
 			links: [
 				{ label: 'The Plan', href: '/plan' },
 				{ label: 'Research Hub', href: '/research' },
+				{ label: 'Publications', href: '/publications' },
 				{ label: 'Analysis', href: '/analysis/feasibility' },
 				{ label: 'Open Questions', href: '/questions' },
 				{ label: 'Topics', href: '/topics' }
