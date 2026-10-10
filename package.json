@@ -42,5 +42,8 @@
 		"marked": "^17.0.1",
 		"mixpanel-browser": "^2.75.0",
 		"three": "^0.186.1"
+	},
+	"engines": {
+		"node": ">=22"
 	}
 }
