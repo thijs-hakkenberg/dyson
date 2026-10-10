@@ -115,3 +115,24 @@ Shkadov cap. *Explorer:* thrust axis = ecliptic north, labelled illustrative.
 `phase-0/transport-vehicles/consensus.md`: "Fleet of 10 vehicles for initial
 operations". content.ts / BOM: quantity 15 ($133M each).
 *Explorer:* uses the BOM quantity.
+
+## Planning data inconsistencies
+
+### CI-18 · Decision gates scheduled before their technologies are ready · open
+Combining `decision-gates.ts` (decision month from Phase 0 start, assumed 2030)
+with `trl-assessment.ts` (`yearsToTarget` from today, Oct 2026), 6 gate→technology
+dependencies reach target TRL after the gate decides:
+
+| Gate (decision) | Technology | TRL | Target reached ~ |
+|---|---|---|---|
+| gate-4 Asteroid Target Selection (M24 ≈ 2032.0) | autonomous-asteroid-prospecting | 5→8, 6 y | 2032.8 |
+| gate-1 Microgravity Materials Processing (M36 ≈ 2033.0) | microgravity-metallurgy | 3→7, 8 y | 2034.8 |
+| gate-1 (M36) | in-space-silicon-purification | 2→6, 10 y | 2036.8 |
+| gate-3 ISRU Water Extraction Rate (M48 ≈ 2034.0) | isru-water-extraction | 3→7, 8 y | 2034.8 |
+| gate-5 Phase 0 PDR (M60 ≈ 2035.0) | asteroid-mining-bucket-wheel | 3→6, 10 y | 2036.8 |
+| gate-5 (M60) | in-space-silicon-purification | 2→6, 10 y | 2036.8 |
+
+Possible readings: gates decide on partial evidence (target TRL not required
+at the gate), the Phase 0 start is later than 2030, or the gate months/TRL
+timelines need reconciling. Sensitive to `ASSUMED_PHASE0_START` (CI-15).
+*Explorer:* Gate Tunnel draws these links in red and counts them per gate.

@@ -77,7 +77,7 @@
 			<div class="eyebrow">New here?</div>
 			<div class="it">Take a guided tour</div>
 		</div>
-		{#each TOURS as x (x.id)}
+		{#each TOURS.slice(0, 2) as x (x.id)}
 			<button
 				type="button"
 				class="hud-btn"
@@ -89,6 +89,7 @@
 				▶ {x.title}
 			</button>
 		{/each}
+		<span class="more">+{TOURS.length - 2} phase deep-dives in ▶ Tours</span>
 		<button type="button" class="x" onclick={dismissInvite} aria-label="Dismiss">✕</button>
 	</section>
 {/if}
@@ -184,6 +185,10 @@
 		gap: 10px;
 		padding: 10px 12px 10px 16px;
 		z-index: 5;
+	}
+	.more {
+		font-size: 10px;
+		color: var(--hud-dim);
 	}
 	.it {
 		font-family: var(--font-cond);

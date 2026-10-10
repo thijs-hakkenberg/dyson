@@ -18,6 +18,9 @@
 	import RqInspector from './hud/RqInspector.svelte';
 	import { nebula } from './core/nebulastore.svelte';
 	import TourOverlay from './hud/TourOverlay.svelte';
+	import GateTunnelScene from './scene/gates/GateTunnelScene.svelte';
+	import GatePanel from './hud/GatePanel.svelte';
+	import GateInspector from './hud/GateInspector.svelte';
 	import { tour } from './core/tour.svelte';
 	import { getTour } from './core/tours';
 	import ScaleBar from './hud/ScaleBar.svelte';
@@ -70,6 +73,7 @@
 		void explorer.workbenchId;
 		void explorer.lens;
 		void explorer.rqId;
+		void explorer.gateSel;
 		if (!ready) return;
 		clearTimeout(urlTimer);
 		urlTimer = setTimeout(() => explorer.writeUrl(), 400);
@@ -108,7 +112,11 @@
 				else if (explorer.workbenchId && explorer.wbSelection) explorer.wbSelection = null;
 				else if (explorer.workbenchId) explorer.closeWorkbench();
 				else if (explorer.lens === 'knowledge' && explorer.rqId) explorer.rqId = null;
+				else if (explorer.lens === 'gates' && explorer.gateSel) explorer.gateSel = null;
 				else explorer.selectedId = null;
+				break;
+			case 'g':
+				explorer.setLens(explorer.lens === 'gates' ? 'physical' : 'gates');
 				break;
 			case 'k':
 				explorer.setLens(explorer.lens === 'knowledge' ? 'physical' : 'knowledge');
@@ -160,6 +168,8 @@
 					<WorkbenchScene />
 				{:else if explorer.lens === 'knowledge'}
 					<NebulaScene />
+				{:else if explorer.lens === 'gates'}
+					<GateTunnelScene />
 				{:else}
 					<ExploreScene />
 				{/if}
@@ -174,6 +184,13 @@
 				<LayerPanel />
 			</div>
 			<WorkbenchInspector />
+		{:else if explorer.hudVisible && explorer.lens === 'gates'}
+			<TopBar />
+			<div class="leftcol">
+				<GatePanel />
+				<LayerPanel />
+			</div>
+			<GateInspector />
 		{:else if explorer.hudVisible && explorer.lens === 'knowledge'}
 			<TopBar />
 			<div class="leftcol">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { explorer } from '../core/state.svelte';
+	import { explorer, type Lens } from '../core/state.svelte';
 	import { TIMELINE } from '../core/timeline';
 	import { deploymentFraction } from '../core/timeline';
 	import { formatYear } from '../core/units';
@@ -10,6 +10,11 @@
 	import { tour } from '../core/tour.svelte';
 
 	let toursOpen = $state(false);
+	const LENS_TITLES: Record<string, string> = {
+		physical: 'Orrery',
+		knowledge: 'Research Nebula (K)',
+		gates: 'Gate Tunnel (G)'
+	};
 
 	const rq = getOverallStats();
 	const gates = getGateStats();
@@ -19,6 +24,7 @@
 		{ id: 'physical', label: 'Physical', ready: true },
 		{ id: 'logistics', label: 'Logistics', ready: false },
 		{ id: 'knowledge', label: 'Knowledge', ready: true },
+		{ id: 'gates', label: 'Gates', ready: true },
 		{ id: 'consensus', label: 'Consensus', ready: false },
 		{ id: 'risk', label: 'Risk', ready: false }
 	];
@@ -36,7 +42,7 @@
 		<div class="mark" aria-hidden="true">◈</div>
 		<div>
 			<div class="title">Project Dyson</div>
-			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : 'Orrery'}</div>
+			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : explorer.lens === 'gates' ? 'Gate tunnel' : 'Orrery'}</div>
 		</div>
 	</div>
 
@@ -71,8 +77,8 @@
 				class="hud-btn"
 				class:on={!explorer.workbenchId && l.id === explorer.lens}
 				disabled={!l.ready}
-				onclick={() => (l.id === 'physical' || l.id === 'knowledge') && explorer.setLens(l.id)}
-				title={l.ready ? (l.id === 'knowledge' ? 'Research Nebula (K)' : 'Orrery') : 'Coming in a later milestone'}
+				onclick={() => l.ready && explorer.setLens(l.id as Lens)}
+				title={l.ready ? LENS_TITLES[l.id] : 'Coming in a later milestone'}
 				>{l.label}</button
 			>
 		{/each}

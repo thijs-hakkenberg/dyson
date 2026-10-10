@@ -19,7 +19,7 @@ export const SPEEDS = [
 	{ label: '50 yr/s', yps: 50 }
 ] as const;
 
-export type Lens = 'physical' | 'knowledge';
+export type Lens = 'physical' | 'knowledge' | 'gates';
 
 export interface CameraCommand {
 	seq: number;
@@ -68,6 +68,8 @@ class ExplorerState {
 	});
 	/** Lens: 'physical' = orrery, 'knowledge' = Research Nebula */
 	lens = $state<Lens>('physical');
+	/** Gate Tunnel selection: a gate id or 'trl:<id>' */
+	gateSel = $state<string | null>(null);
 	/** Research question selected in the Nebula */
 	rqId = $state<string | null>(null);
 	/** BOM item open in the Workbench (null = orrery) */
@@ -156,7 +158,10 @@ class ExplorerState {
 		if (f && getEntity(f)) this.focusId = f;
 		const s = url.searchParams.get('s');
 		if (s && getEntity(s)) this.selectedId = s;
-		if (url.searchParams.get('lens') === 'knowledge') this.lens = 'knowledge';
+		const lens = url.searchParams.get('lens');
+		if (lens === 'knowledge' || lens === 'gates') this.lens = lens;
+		const gate = url.searchParams.get('gate');
+		if (gate) this.gateSel = gate;
 		const rq = url.searchParams.get('rq');
 		if (rq) this.rqId = rq;
 		const wb = url.searchParams.get('wb');
@@ -172,6 +177,8 @@ class ExplorerState {
 		else url.searchParams.delete('s');
 		if (this.lens !== 'physical') url.searchParams.set('lens', this.lens);
 		else url.searchParams.delete('lens');
+		if (this.gateSel && this.lens === 'gates') url.searchParams.set('gate', this.gateSel);
+		else url.searchParams.delete('gate');
 		if (this.rqId && this.lens === 'knowledge') url.searchParams.set('rq', this.rqId);
 		else url.searchParams.delete('rq');
 		if (this.workbenchId) url.searchParams.set('wb', this.workbenchId);

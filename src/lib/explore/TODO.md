@@ -12,6 +12,13 @@
 - [ ] **Prettier UI** — open; user to give feedback on what feels off
 - [ ] Crisp point stars from a real catalogue (HYG / Gaia bright stars) layered over the Milky Way image
 
+## Detailed element models (after the remaining views)
+
+- [ ] Detailed 3D models for BOM elements (collector units/satellites, assembly node, processing station,
+      mass drivers, tugs, foundries, mirror statites, …) shown at close range / in the Workbench,
+      built from the consensus specs (dimensions, masses) with divergent variants as ghosts
+- [ ] **Then revisit all tours** to fly up to these models — more cinematic and engaging
+
 ## Optimisations / spin-offs
 
 - [ ] **Sun as a separate repo** — extract `src/lib/explore/sun/` into its own package
@@ -27,7 +34,11 @@
 5. [x] Tour engine + chapters "Why build a Dyson swarm?" and "From asteroid to swarm" (`?tour=` deep links, pause on interaction)
    - [x] "Phase 1 in depth" — all seven P1 items, node forks, hand-off to the nebula
    - [x] In-depth tours for P0, P2, P3a (Matrioshka), P3b (Stellar engine)
-6. Gate Tunnel, Topology, Risk lens, sim sandboxes, Deliberation Chamber
+6. [x] Gate Tunnel (Gates lens, G) — gates as criteria rings on a P0 month axis, TRL columns at projected arrival, late-dependency links
+   - [ ] Network Topology
+   - [ ] Risk & Validation lens
+   - [ ] Simulation sandboxes
+   - [ ] Deliberation Chamber
 
 ## Consensus issues
 
