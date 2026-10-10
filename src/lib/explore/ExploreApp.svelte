@@ -23,6 +23,7 @@
 	import GateInspector from './hud/GateInspector.svelte';
 	import NetworkPanel from './hud/NetworkPanel.svelte';
 	import RiskPanel from './hud/RiskPanel.svelte';
+	import SandboxDrawer from './hud/SandboxDrawer.svelte';
 	import ChamberScene from './scene/chamber/ChamberScene.svelte';
 	import ChamberPanel from './hud/ChamberPanel.svelte';
 	import ChamberInspector from './hud/ChamberInspector.svelte';
@@ -220,6 +221,7 @@
 				<LayerPanel />
 			</div>
 			<WorkbenchInspector />
+			<SandboxDrawer />
 		{:else if explorer.hudVisible && explorer.lens === 'consensus'}
 			<TopBar />
 			<div class="leftcol">

@@ -2,6 +2,7 @@
 	/** Lower-third captions and transport controls for the active tour; first-visit invitation otherwise. */
 	import { onMount } from 'svelte';
 	import { tour } from '../core/tour.svelte';
+	import { explorer } from '../core/state.svelte';
 	import { TOURS } from '../core/tours';
 	import { renderMarkdown } from '../core/wbstore.svelte';
 
@@ -71,7 +72,7 @@
 			<span class="keys">Space pause · ←/→ step · Esc exit</span>
 		</div>
 	</section>
-{:else if invite}
+{:else if invite && explorer.lens === 'physical' && !explorer.workbenchId}
 	<section class="invite panel" aria-label="Guided tours">
 		<div>
 			<div class="eyebrow">New here?</div>

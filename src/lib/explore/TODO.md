@@ -37,7 +37,7 @@
 6. [x] Gate Tunnel (Gates lens, G) — gates as criteria rings on a P0 month axis, TRL columns at projected arrival, late-dependency links
    - [x] Network Topology (Network lens, N) — P0 ops links, swarm authority → Shepherd hierarchy (consensus ratio), inter-shell trunks; true light-time, pulses at 60× c
    - [x] Risk & Validation lens (R) — heuristic risk halos with breakdown, validation beacons, ranked list, claims
-   - [ ] Simulation sandboxes
+   - [x] Simulation sandboxes (Workbench drawer) — radiation degradation per model orbit, self-replication per model cycle/closure, Shkadov standoff trade; more modules can register in `core/sandboxes.ts`
    - [x] Deliberation Chamber (Consensus lens, C) — 20 discussions replayed round by round: response beams, vote arcs, winners, termination votes, conclusion crystal
 
 ## Consensus issues
