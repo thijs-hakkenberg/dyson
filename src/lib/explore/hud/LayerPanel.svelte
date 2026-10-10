@@ -54,7 +54,7 @@
 				{/each}
 			</ul>
 		{/if}
-		<p class="foot">Bodies and distances true scale. Markers and swarm points are fixed screen size. Matrioshka layers below 1000 K false-coloured.</p>
+		<p class="foot">Bodies and distances true scale. Markers and swarm points are fixed screen size. Matrioshka layers below 1000 K false-coloured. Sun shown Hα-style (false colour); prominences and corona illustrative.</p>
 		<p class="foot">
 			Planet textures: <a href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noopener">Solar System Scope</a>,
 			<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. Milky Way:

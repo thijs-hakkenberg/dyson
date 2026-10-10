@@ -27,6 +27,8 @@ export interface SunSurface {
 export interface SunSurfaceOptions {
 	/** Photospheric radius in scene units (AU) */
 	radius: number;
+	/** 'halpha': false-colour chromosphere look (default); 'white': white-light photosphere */
+	style?: 'halpha' | 'white';
 }
 
 export type SunSurfaceFactory = (options: SunSurfaceOptions) => SunSurface;

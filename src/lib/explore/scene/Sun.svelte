@@ -18,10 +18,10 @@
 		c.width = c.height = 256;
 		const ctx = c.getContext('2d')!;
 		const grd = ctx.createRadialGradient(128, 128, 0, 128, 128, 128);
-		grd.addColorStop(0, 'rgba(255,244,224,1)');
-		grd.addColorStop(0.08, 'rgba(255,220,160,0.55)');
-		grd.addColorStop(0.3, 'rgba(255,170,80,0.12)');
-		grd.addColorStop(1, 'rgba(255,140,40,0)');
+		grd.addColorStop(0, 'rgba(255,240,200,1)');
+		grd.addColorStop(0.07, 'rgba(255,190,90,0.7)');
+		grd.addColorStop(0.25, 'rgba(255,120,30,0.18)');
+		grd.addColorStop(1, 'rgba(255,90,10,0)');
 		ctx.fillStyle = grd;
 		ctx.fillRect(0, 0, 256, 256);
 		const tex = new CanvasTexture(c);
@@ -48,7 +48,7 @@
 <T is={surface.object} />
 
 <!-- Screen-space glow so the Sun reads at any distance; not a physical size -->
-<T.Sprite scale={[0.09, 0.09, 1]}>
+<T.Sprite scale={[0.12, 0.12, 1]}>
 	<T.SpriteMaterial
 		map={glow}
 		sizeAttenuation={false}

@@ -5,6 +5,8 @@
 - [x] Programme telemetry HUD (spend, power, production, fleet, compute, thrust)
 - [x] Planet textures (Solar System Scope, CC BY 4.0)
 - [x] Procedural Sun v1 — granulation, solar-cycle sunspots, limb darkening, differential rotation (`sun/`)
+- [x] Sun v1.1 — Hα-style false-colour look (default), prominences scaled by solar activity, spicule fringe, corona streamers
+- [ ] Expose Sun style toggle (Hα-style ↔ white light) in the Layers panel (`style` option already in `SunSurfaceOptions`)
 - [x] Milky Way background sphere (ESO/S. Brunier, CC BY 4.0) in galactic → ecliptic frame
 - [ ] **Prettier UI** — open; user to give feedback on what feels off
 - [ ] Crisp point stars from a real catalogue (HYG / Gaia bright stars) layered over the Milky Way image

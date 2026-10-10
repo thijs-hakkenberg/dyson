@@ -17,10 +17,21 @@
  * ~10 min). Everything else follows simulated time.
  */
 
-import { Color, Group, Mesh, ShaderMaterial, SphereGeometry, Vector4, type IUniform } from 'three';
+import {
+	AdditiveBlending,
+	Color,
+	PlaneGeometry,
+	Vector3,
+	Group,
+	Mesh,
+	ShaderMaterial,
+	SphereGeometry,
+	Vector4,
+	type IUniform
+} from 'three';
 import { blackbodyRGB } from '../core/units';
 import { spinAngle } from '../core/bodies';
-import { CARRINGTON_PERIOD_HOURS, spotsAt } from './cycle';
+import { CARRINGTON_PERIOD_HOURS, activity, spotsAt } from './cycle';
 import type { SunFrame, SunSurface, SunSurfaceFactory } from './types';
 
 const MAX_SPOTS = 48;
@@ -116,6 +127,7 @@ uniform vec3 uUmbraTint;
 uniform vec3 uLaneTint;
 uniform vec3 uLimb;
 uniform float uExposure;
+uniform float uHalpha;
 varying vec3 vBody;
 varying vec3 vNormalView;
 varying vec3 vViewPos;
@@ -139,6 +151,20 @@ vec3 worley(vec3 p, float t) {
 		if (d < d1) { d2 = d1; d1 = d; id = h.x; } else if (d < d2) { d2 = d; }
 	}
 	return vec3(sqrt(d1), sqrt(d2), id);
+}
+
+// False-colour ramp for the Hα look: dark red → orange → yellow-white
+vec3 ramp(float x) {
+	x = clamp(x, 0.0, 1.45);
+	vec3 c0 = vec3(0.16, 0.03, 0.0);
+	vec3 c1 = vec3(0.78, 0.24, 0.02);
+	vec3 c2 = vec3(0.98, 0.52, 0.08);
+	vec3 c3 = vec3(1.0, 0.8, 0.32);
+	vec3 c4 = vec3(1.0, 0.97, 0.82);
+	if (x < 0.45) return mix(c0, c1, x / 0.45);
+	if (x < 0.85) return mix(c1, c2, (x - 0.45) / 0.4);
+	if (x < 1.1) return mix(c2, c3, (x - 0.85) / 0.25);
+	return mix(c3, c4, (x - 1.1) / 0.35);
 }
 
 void main() {
@@ -167,6 +193,11 @@ void main() {
 	float meso = snoise(n * 60.0 + vec3(0.0, uTime * 0.01, 0.0)) * 0.025;
 	float sup = snoise(n * 11.0) * 0.02;
 	float I = gran + meso + sup;
+	// Chromospheric fibril network (the "furry" Hα texture): ridged, warped noise
+	vec3 fw = vec3(snoise(n * 7.0), snoise(n * 7.0 + 5.0), snoise(n * 7.0 + 9.0)) * 0.6;
+	float fib = pow(1.0 - abs(snoise(n * 95.0 + fw * 3.0)), 5.0);
+	float fib2 = pow(1.0 - abs(snoise(n * 38.0 - fw * 2.0 + 3.0)), 4.0);
+	I += uHalpha * ((fib - 0.2) * 0.18 + (fib2 - 0.2) * 0.1);
 
 	// ── Sunspots and faculae ────────────────────────────────────
 	// Intergranular lanes are cooler (~300 K) downflows: redder as well as darker
@@ -178,7 +209,7 @@ void main() {
 		float d = acos(clamp(dot(n, s.xyz), -1.0, 1.0));
 		float r = s.w;
 		if (d > r * 3.5) continue;
-		facula = max(facula, smoothstep(r * 3.5, r * 1.2, d));
+		facula = max(facula, 1.0 - smoothstep(r * 1.2, r * 3.5, d));
 		if (d > r * 1.1) continue;
 		// Radial penumbral filaments: angle around the spot centre
 		vec3 t1 = normalize(cross(s.xyz, abs(s.y) < 0.9 ? vec3(0.0, 1.0, 0.0) : vec3(1.0, 0.0, 0.0)));
@@ -200,15 +231,73 @@ void main() {
 	vec3 limb = 1.0 - uLimb * (1.0 - mu);
 	I *= 1.0 + facula * 0.35 * pow(1.0 - mu, 2.0);
 
-	// Shade in display space (as a white-light photograph is presented), then
-	// linearise so the renderer's output encoding reproduces those values
-	vec3 display = clamp(uPhotosphere * tint * I * limb * uExposure, 0.0, 1.0);
+	// White light: shade in display space (as a photograph is presented)
+	vec3 white = clamp(uPhotosphere * tint * I * limb * uExposure, 0.0, 1.0);
+	// Hα style: brightness through an orange ramp, mild limb darkening and the
+	// bright chromospheric rim seen in Hα images
+	float x = I * (0.8 + 0.2 * mu) + 0.55 * pow(1.0 - mu, 5.0);
+	vec3 halpha = ramp(x * uExposure);
+	vec3 display = mix(white, halpha, uHalpha);
 	gl_FragColor = vec4(pow(display, vec3(2.2)), 1.0);
 	#include <colorspace_fragment>
 }
 `;
 
-export const createProceduralSun: SunSurfaceFactory = ({ radius }) => {
+// Limb effects on a camera-facing quad through the Sun's centre (the sphere
+// occludes its inner part). Coordinates are in solar radii.
+const CORONA_EXTENT = 4;
+const CORONA_VERT = /* glsl */ `
+#include <common>
+#include <logdepthbuf_pars_vertex>
+uniform float uRadius;
+varying vec2 vP;
+void main() {
+	vP = position.xy / uRadius;
+	gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+	#include <logdepthbuf_vertex>
+}
+`;
+const CORONA_FRAG = /* glsl */ `
+#include <common>
+#include <logdepthbuf_pars_fragment>
+uniform float uTime;
+uniform float uDay;
+uniform float uLimbR;
+uniform float uActivity;
+uniform float uHalpha;
+varying vec2 vP;
+${NOISE}
+void main() {
+	#include <logdepthbuf_fragment>
+	float r = length(vP);
+	float h = r - uLimbR;
+	if (h < -0.01) discard;
+	h = max(h, 0.0);
+	vec2 a = vP / r;
+	vec3 ad = vec3(a, 0.0);
+
+	// Warm halo hugging the limb
+	float halo = exp(-h / 0.06) * 0.9 + exp(-h / 0.6) * 0.42 + 0.1 / pow(1.0 + h * 2.5, 2.0);
+	// Spicule fringe: a thin, jagged bright edge
+	float fringe = (1.0 - smoothstep(0.0, 0.025, h)) * (0.55 + 0.45 * snoise(vec3(ad.xy * 140.0, uTime * 0.4)));
+	// Prominences: a few sites around the limb, more and taller near solar maximum
+	float site = smoothstep(0.5 - 0.2 * uActivity, 0.85, snoise(vec3(ad.xy * 2.2, uDay * 0.03)));
+	float flame = snoise(vec3(ad.xy * 9.0, h * 6.0 - uTime * 0.05)) * 0.65 + snoise(vec3(ad.xy * 28.0, h * 16.0 + uTime * 0.08)) * 0.35;
+	float height = 0.06 + 0.1 * uActivity;
+	float prom = site * exp(-h / height) * smoothstep(0.0, 0.6, flame) * 3.5;
+	// Coronal streamers: faint radial rays falling off with height
+	float rays = pow(0.5 + 0.5 * snoise(vec3(ad.xy * 7.0, 1.7)), 3.0) * 0.6 + pow(0.5 + 0.5 * snoise(vec3(ad.xy * 34.0, 4.1)), 6.0) * 0.5;
+	float corona = rays * 0.8 / pow(1.0 + h * 1.6, 2.0);
+
+	float fade = 1.0 - smoothstep(float(${CORONA_EXTENT}) * 0.6, float(${CORONA_EXTENT}), r);
+	vec3 orange = mix(vec3(1.0, 0.85, 0.65), vec3(1.0, 0.45, 0.1), uHalpha);
+	vec3 col = orange * halo + vec3(1.0, 0.42, 0.1) * prom * uHalpha + vec3(1.0, 0.7, 0.35) * fringe * 1.2 * uHalpha
+		+ mix(vec3(0.85, 0.85, 0.9), vec3(0.95, 0.65, 0.4), uHalpha) * corona;
+	gl_FragColor = vec4(col * fade, 1.0);
+}
+`;
+
+export const createProceduralSun: SunSurfaceFactory = ({ radius, style = 'halpha' }) => {
 	const base = bbLinear(5772);
 	const photo = base.clone().multiplyScalar(1 / Math.max(base.r, base.g, base.b));
 	/** Colour of a cooler region relative to the photosphere, brightest channel = 1 */
@@ -233,20 +322,59 @@ export const createProceduralSun: SunSurfaceFactory = ({ radius }) => {
 		uLaneTint: { value: rel(4600) },
 		// Linear limb-darkening coefficients ~650 / 550 / 450 nm (approximate)
 		uLimb: { value: new Color(0.5, 0.6, 0.74) },
-		uExposure: { value: 0.97 }
+		uExposure: { value: 1.04 },
+		// 1 = Hα-style false colour (default look), 0 = white light
+		uHalpha: { value: style === 'halpha' ? 1 : 0 }
 	};
 
 	const material = new ShaderMaterial({ uniforms, vertexShader: VERT, fragmentShader: FRAG, toneMapped: false });
 	const geometry = new SphereGeometry(radius, 128, 64);
 	const mesh = new Mesh(geometry, material);
 	const root = new Group();
-	root.rotation.z = -(OBLIQUITY_DEG * Math.PI) / 180;
-	root.add(mesh);
+	const tilt = new Group();
+	tilt.rotation.z = -(OBLIQUITY_DEG * Math.PI) / 180;
+	tilt.add(mesh);
+	root.add(tilt);
+
+	const coronaUniforms = {
+		uRadius: { value: radius },
+		uTime: { value: 0 },
+		uDay: { value: 0 },
+		uLimbR: { value: 1 },
+		uActivity: { value: 0.5 },
+		uHalpha: uniforms.uHalpha
+	};
+	const coronaMat = new ShaderMaterial({
+		uniforms: coronaUniforms,
+		vertexShader: CORONA_VERT,
+		fragmentShader: CORONA_FRAG,
+		transparent: true,
+		blending: AdditiveBlending,
+		depthWrite: false,
+		toneMapped: false
+	});
+	const coronaGeo = new PlaneGeometry(2 * CORONA_EXTENT * radius, 2 * CORONA_EXTENT * radius);
+	const corona = new Mesh(coronaGeo, coronaMat);
+	corona.frustumCulled = false;
+	root.add(corona);
+	const camPos = new Vector3();
+	const sunPos = new Vector3();
 
 	let lastSpotYear = Number.NaN;
-	const update = ({ year, elapsed }: SunFrame) => {
+	const update = ({ year, elapsed, camera }: SunFrame) => {
 		mesh.rotation.y = spinAngle(CARRINGTON_PERIOD_HOURS, year);
 		uniforms.uTime.value = elapsed * 0.25;
+
+		// Face the camera; the host only translates the Sun, so world rotation is the camera's
+		corona.quaternion.copy(camera.quaternion);
+		camera.getWorldPosition(camPos);
+		root.getWorldPosition(sunPos);
+		const D = Math.max(camPos.distanceTo(sunPos), radius * 1.0001);
+		// Silhouette radius in the centre plane, in solar radii
+		coronaUniforms.uLimbR.value = D / Math.sqrt(D * D - radius * radius);
+		coronaUniforms.uTime.value = elapsed;
+		coronaUniforms.uDay.value = (year - 2000) * 365.25;
+		coronaUniforms.uActivity.value = activity(year);
 		// Recompute spots every ~0.2 simulated days
 		if (!(Math.abs(year - lastSpotYear) < 0.2 / 365.25)) {
 			lastSpotYear = year;
@@ -265,6 +393,8 @@ export const createProceduralSun: SunSurfaceFactory = ({ radius }) => {
 		dispose() {
 			geometry.dispose();
 			material.dispose();
+			coronaGeo.dispose();
+			coronaMat.dispose();
 		}
 	} satisfies SunSurface;
 };
