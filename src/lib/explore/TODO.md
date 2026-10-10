@@ -26,7 +26,7 @@
 4. [x] Research Nebula — all 142 RQs on a phase axis, status materials, P0 dependency conduits + critical-path artery, decision gates, BOM tracing, cross-links to orrery/workbench, ⌘K search
 5. [x] Tour engine + chapters "Why build a Dyson swarm?" and "From asteroid to swarm" (`?tour=` deep links, pause on interaction)
    - [x] "Phase 1 in depth" — all seven P1 items, node forks, hand-off to the nebula
-   - [ ] In-depth tours for P0, P2, P3a, P3b
+   - [x] In-depth tours for P0, P2, P3a (Matrioshka), P3b (Stellar engine)
 6. Gate Tunnel, Topology, Risk lens, sim sandboxes, Deliberation Chamber
 
 ## Consensus issues

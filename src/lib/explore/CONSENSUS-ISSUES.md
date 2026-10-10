@@ -110,3 +110,8 @@ Shkadov cap. *Explorer:* thrust axis = ecliptic north, labelled illustrative.
 ### CI-15 · Phase 0 start date · open
 `content.ts` gives durations but no absolute start. *Explorer:* assumes 2030
 (`ASSUMED_PHASE0_START`).
+
+### CI-17 · Transport vehicle fleet size — `bom-0-4` · open
+`phase-0/transport-vehicles/consensus.md`: "Fleet of 10 vehicles for initial
+operations". content.ts / BOM: quantity 15 ($133M each).
+*Explorer:* uses the BOM quantity.
