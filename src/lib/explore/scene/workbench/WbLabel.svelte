@@ -33,6 +33,7 @@
 		<button
 			type="button"
 			class="lb"
+			data-lbl={selected ? 'selected' : quiet ? 'minor' : 'major'}
 			class:dashed
 			class:quiet
 			class:selected
@@ -115,5 +116,14 @@
 	}
 	.selected b {
 		color: #fff;
+	}
+	.lb .txt {
+		transition: opacity 0.2s;
+	}
+	.lb:global([data-occluded]) .txt {
+		opacity: 0;
+	}
+	.lb:global([data-occluded]):hover .txt {
+		opacity: 1;
 	}
 </style>

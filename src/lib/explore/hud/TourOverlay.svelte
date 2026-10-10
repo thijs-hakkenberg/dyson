@@ -72,7 +72,7 @@
 			<span class="keys">Space pause · ←/→ step · Esc exit</span>
 		</div>
 	</section>
-{:else if invite && explorer.lens === 'physical' && !explorer.workbenchId}
+{:else if invite && explorer.lens === 'physical' && !explorer.workbenchId && !explorer.selectedId}
 	<section class="invite panel" aria-label="Guided tours">
 		<div>
 			<div class="eyebrow">New here?</div>

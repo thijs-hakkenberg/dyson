@@ -193,8 +193,16 @@
 		font-weight: 500;
 	}
 	@media (max-width: 900px) {
+		/* Lenses stay reachable: a horizontally scrolling strip */
 		.lenses {
-			display: none;
+			order: 5;
+			width: 100%;
+			overflow-x: auto;
+			scrollbar-width: none;
+			box-sizing: border-box;
+		}
+		.lenses .hud-btn {
+			flex: none;
 		}
 		.top {
 			flex-wrap: wrap;
@@ -206,6 +214,13 @@
 		.clock {
 			flex: 1;
 			min-width: 0;
+			padding: 5px 8px;
+		}
+		.clock .time {
+			font-size: 15px;
+		}
+		.brand .eyebrow {
+			display: none;
 		}
 	}
 	.tours {

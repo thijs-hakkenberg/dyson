@@ -5,7 +5,28 @@
 	import { PHASE_COLORS } from '../core/theme';
 	import DeepTime from './DeepTime.svelte';
 
-	let open = $state(true);
+	// Collapsed by default on phones so the scene stays visible
+	let open = $state(typeof window === 'undefined' || window.innerWidth > 700);
+
+	// Collapsible sections, remembered per viewer (convenience only)
+	const KEY = 'explore:telemetry-collapsed';
+	let collapsed = $state<Record<string, boolean>>(
+		(() => {
+			try {
+				return JSON.parse(localStorage.getItem(KEY) ?? '') ?? { production: true };
+			} catch {
+				return { production: true };
+			}
+		})()
+	);
+	function toggle(id: string) {
+		collapsed[id] = !collapsed[id];
+		try {
+			localStorage.setItem(KEY, JSON.stringify(collapsed));
+		} catch {
+			/* storage unavailable: state just isn't remembered */
+		}
+	}
 	let expanded = $state<string | null>(null);
 
 	// Hundredth-of-a-year resolution is plenty for the readouts
@@ -70,8 +91,11 @@
 
 		{#if t.thrust.base > 0}
 			<div class="block">
-				<div class="lbl">Stellar engine thrust</div>
+				<button type="button" class="lbl sect" onclick={() => toggle('thrust')} aria-expanded={!collapsed.thrust}>
+					Stellar engine thrust <span class="chev">{collapsed.thrust ? '+' : '−'}</span>
+				</button>
 				<div class="mid thr">{formatSci(t.thrust.base)} N</div>
+				{#if !collapsed.thrust}
 				{#if spread(t.thrust, (n) => formatSci(n, 1))}
 					<div class="rng">{spread(t.thrust, (n) => formatSci(n, 1))} N</div>
 				{/if}
@@ -85,12 +109,16 @@
 					<dt>Sun Δv so far</dt><dd>{formatSci(t.sunDeltaV)} m/s</dd>
 					<dt>Sun displaced</dt><dd>{formatDisplacement(t.sunDisplacement)}</dd>
 				</dl>
+				{/if}
 			</div>
 		{/if}
 
 		{#if t.throughput.length}
 			<div class="block">
-				<div class="lbl">Production rate</div>
+				<button type="button" class="lbl sect" onclick={() => toggle('production')} aria-expanded={!collapsed.production}>
+					Production rate · {t.throughput.length} streams <span class="chev">{collapsed.production ? '+' : '−'}</span>
+				</button>
+				{#if !collapsed.production}
 				<ul class="rows">
 					{#each t.throughput as r (r.unit)}
 						<li title={spread(r.perHour, formatRate) ? `model range ${spread(r.perHour, formatRate)} per hour` : ''}>
@@ -99,14 +127,18 @@
 						</li>
 					{/each}
 				</ul>
+				{/if}
 			</div>
 		{/if}
 
 		<div class="block">
-			<div class="lbl">Fleet · units by type <span class="hint">build rate</span></div>
+			<button type="button" class="lbl sect" onclick={() => toggle('fleet')} aria-expanded={!collapsed.fleet}>
+				Fleet · units by type <span class="chev">{collapsed.fleet ? '+' : '−'}</span><span class="hint">build rate</span>
+			</button>
 			{#if t.groups.length === 0}
 				<div class="sub">No hardware deployed yet. Scrub the timeline forward.</div>
 			{/if}
+			{#if !collapsed.fleet}
 			<ul class="rows groups">
 				{#each t.groups as g (g.group)}
 					<li>
@@ -137,6 +169,7 @@
 					</li>
 				{/each}
 			</ul>
+			{/if}
 		</div>
 
 		<DeepTime />
@@ -175,6 +208,22 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 10px;
+	}
+	.sect {
+		display: block;
+		width: 100%;
+		background: none;
+		border: 0;
+		padding: 0;
+		text-align: left;
+		cursor: pointer;
+	}
+	.sect:hover {
+		color: var(--hud-text);
+	}
+	.chev {
+		color: var(--hud-faint);
+		margin-left: 4px;
 	}
 	.lbl {
 		font-family: var(--font-cond);

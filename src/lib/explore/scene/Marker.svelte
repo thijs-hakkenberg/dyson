@@ -34,6 +34,7 @@
 			<button
 				type="button"
 				class="mk"
+				data-lbl={selected ? 'selected' : minor || ghost ? 'minor' : 'major'}
 				class:ghost
 				class:minor
 				class:selected
@@ -136,5 +137,14 @@
 	}
 	.selected .ret {
 		box-shadow: 0 0 8px var(--c);
+	}
+	.mk .txt {
+		transition: opacity 0.2s;
+	}
+	.mk:global([data-occluded]) .txt {
+		opacity: 0;
+	}
+	.mk:global([data-occluded]):hover .txt {
+		opacity: 1;
 	}
 </style>

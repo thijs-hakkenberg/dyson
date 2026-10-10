@@ -25,8 +25,10 @@
 	import RiskPanel from './hud/RiskPanel.svelte';
 	import SandboxDrawer from './hud/SandboxDrawer.svelte';
 	import ShortcutHelp from './hud/ShortcutHelp.svelte';
+	import { startDeclutter } from './hud/declutter';
 
 	let helpOpen = $state(false);
+	let rootEl = $state<HTMLElement>();
 	import ChamberScene from './scene/chamber/ChamberScene.svelte';
 	import ChamberPanel from './hud/ChamberPanel.svelte';
 	import ChamberInspector from './hud/ChamberInspector.svelte';
@@ -58,8 +60,10 @@
 		}
 		explorer.readUrl(page.url);
 		ready = true;
+		const stop = rootEl ? startDeclutter(rootEl) : () => {};
 		const t = getTour(page.url.searchParams.get('tour'));
 		if (t) queueMicrotask(() => tour.start(t));
+		return stop;
 	});
 
 	// Load Workbench material when an item opens; flash a short warp on every switch
@@ -191,7 +195,7 @@
 
 <svelte:window onkeydown={onKey} />
 
-<div class="explore-root">
+<div class="explore-root" bind:this={rootEl}>
 	{#if webgl === false}
 		<div class="nowebgl">
 			<p>The immersive explorer needs WebGL, which isn't available in this browser.</p>
@@ -277,8 +281,8 @@
 		position: absolute;
 		inset: 0;
 		pointer-events: none;
-		background: radial-gradient(circle at 50% 50%, rgba(125, 211, 252, 0.35), rgba(2, 6, 12, 0.95) 70%);
-		animation: warp 0.7s ease-out forwards;
+		background: #02060c;
+		animation: warp 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
 	}
 	@keyframes warp {
 		from {
@@ -323,9 +327,13 @@
 		.hint {
 			display: none;
 		}
+		/* Phones: one compact column below the top bar; panels start collapsed */
 		.leftcol {
+			top: 232px;
+			right: 12px;
+			width: auto;
 			bottom: auto;
-			max-height: 40vh;
+			max-height: 38vh;
 		}
 	}
 </style>
