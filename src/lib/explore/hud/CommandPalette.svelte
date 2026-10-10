@@ -3,26 +3,52 @@
 	import { explorer } from '../core/state.svelte';
 	import { searchEntities } from '../core/registry';
 	import { PHASE_COLORS } from '../core/theme';
+	import { nebula } from '../core/nebulastore.svelte';
 
 	let query = $state('');
 	let index = $state(0);
 	let input = $state<HTMLInputElement>();
 
-	const results = $derived(searchEntities(query));
+	interface Result {
+		id: string;
+		kind: string;
+		name: string;
+		subtitle: string;
+		phaseId?: string;
+		rq?: boolean;
+	}
+
+	/** Research questions match on id, title or slug (all phases once the Nebula has loaded). */
+	function searchQuestions(q: string, limit: number): Result[] {
+		const s = q.trim().toLowerCase();
+		if (s.length < 2) return [];
+		return (nebula.layout?.rqs ?? [])
+			.filter((r) => r.id.includes(s) || r.title.toLowerCase().includes(s) || r.slug.includes(s))
+			.slice(0, limit)
+			.map((r) => ({ id: r.id, kind: 'rq', name: `${r.id.toUpperCase()} ${r.title}`, subtitle: r.status, phaseId: r.phaseId, rq: true }));
+	}
+
+	const results = $derived<Result[]>([...searchEntities(query, 10), ...searchQuestions(query, 8)]);
 
 	$effect(() => {
 		if (explorer.paletteOpen) {
 			query = '';
 			index = 0;
+			nebula.ensure();
 			queueMicrotask(() => input?.focus());
 		}
 	});
 
 	function choose(id: string, workbench = false) {
+		if (results.find((r) => r.id === id)?.rq) {
+			explorer.showQuestion(id);
+			explorer.paletteOpen = false;
+			return;
+		}
 		const e = getEntity(id);
 		if (workbench && e?.kind === 'bom') explorer.openWorkbench(id);
 		else {
-			if (explorer.workbenchId) explorer.closeWorkbench();
+			if (explorer.workbenchId || explorer.lens !== 'physical') explorer.setLens('physical');
 			explorer.select(id);
 		}
 		explorer.paletteOpen = false;
@@ -47,7 +73,7 @@
 			bind:value={query}
 			oninput={() => (index = 0)}
 			onkeydown={key}
-			placeholder="Go to body, phase, BOM item… (⇧↵ opens BOM in workbench)"
+			placeholder="Go to body, phase, BOM item, research question… (⇧↵ BOM → workbench)"
 			aria-label="Search"
 			role="combobox"
 			aria-expanded="true"

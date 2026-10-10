@@ -108,6 +108,8 @@
 				<h2>{rq.questionId.toUpperCase()} · {rq.title}</h2>
 			</header>
 			<div class="body">
+				<button type="button" class="hud-btn" onclick={() => explorer.showQuestion(rq.questionId)}>Show in Research Nebula</button>
+				<br />
 				<a class="out" href="/questions/{rq.slug}">Open question page →</a>
 			</div>
 		{:else if view.kind === 'trl' && trl}

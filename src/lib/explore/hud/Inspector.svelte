@@ -225,6 +225,9 @@
 				<button type="button" class="wb-open" onclick={() => explorer.openWorkbench(e.id)}>
 					Open in workbench <kbd>W</kbd>
 				</button>
+				<button type="button" class="wb-open alt" onclick={() => explorer.setLens('knowledge')}>
+					Trace research in nebula <kbd>K</kbd>
+				</button>
 				<p><a href="/plan/{e.phaseId}/bom/{b.slug}">Full specs, consensus &amp; blueprint →</a></p>
 			{/if}
 		</div>
@@ -326,6 +329,11 @@
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		cursor: pointer;
+	}
+	.wb-open.alt {
+		margin-top: 0;
+		background: transparent;
+		border-color: var(--hud-line);
 	}
 	.wb-open:hover {
 		background: rgba(125, 211, 252, 0.16);

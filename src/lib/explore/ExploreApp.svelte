@@ -13,6 +13,10 @@
 	import WorkbenchPanel from './hud/WorkbenchPanel.svelte';
 	import WorkbenchInspector from './hud/WorkbenchInspector.svelte';
 	import { wb } from './core/wbstore.svelte';
+	import NebulaScene from './scene/nebula/NebulaScene.svelte';
+	import NebulaPanel from './hud/NebulaPanel.svelte';
+	import RqInspector from './hud/RqInspector.svelte';
+	import { nebula } from './core/nebulastore.svelte';
 	import ScaleBar from './hud/ScaleBar.svelte';
 	import CommandPalette from './hud/CommandPalette.svelte';
 	import { explorer, SPEEDS, TODAY_YEAR } from './core/state.svelte';
@@ -43,9 +47,11 @@
 	let warp = $state(0);
 	$effect(() => {
 		const id = explorer.workbenchId;
+		const lens = explorer.lens;
 		const isReady = ready;
 		untrack(() => {
 			if (id) void wb.ensure(id);
+			if (lens === 'knowledge') nebula.ensure();
 			if (isReady) warp++;
 		});
 	});
@@ -57,6 +63,8 @@
 		void explorer.focusId;
 		void explorer.selectedId;
 		void explorer.workbenchId;
+		void explorer.lens;
+		void explorer.rqId;
 		if (!ready) return;
 		clearTimeout(urlTimer);
 		urlTimer = setTimeout(() => explorer.writeUrl(), 400);
@@ -81,7 +89,11 @@
 				if (explorer.paletteOpen) explorer.paletteOpen = false;
 				else if (explorer.workbenchId && explorer.wbSelection) explorer.wbSelection = null;
 				else if (explorer.workbenchId) explorer.closeWorkbench();
+				else if (explorer.lens === 'knowledge' && explorer.rqId) explorer.rqId = null;
 				else explorer.selectedId = null;
+				break;
+			case 'k':
+				explorer.setLens(explorer.lens === 'knowledge' ? 'physical' : 'knowledge');
 				break;
 			case 'w':
 				if (explorer.workbenchId) explorer.closeWorkbench();
@@ -125,7 +137,13 @@
 				toneMapping={NoToneMapping}
 				dpr={[1, 2]}
 			>
-				{#if explorer.workbenchId}<WorkbenchScene />{:else}<ExploreScene />{/if}
+				{#if explorer.workbenchId}
+					<WorkbenchScene />
+				{:else if explorer.lens === 'knowledge'}
+					<NebulaScene />
+				{:else}
+					<ExploreScene />
+				{/if}
 			</Canvas>
 		</div>
 		{#key warp}<div class="warp" aria-hidden="true"></div>{/key}
@@ -137,6 +155,13 @@
 				<LayerPanel />
 			</div>
 			<WorkbenchInspector />
+		{:else if explorer.hudVisible && explorer.lens === 'knowledge'}
+			<TopBar />
+			<div class="leftcol">
+				<NebulaPanel />
+				<LayerPanel />
+			</div>
+			<RqInspector />
 		{:else if explorer.hudVisible}
 			<TopBar />
 			<div class="leftcol">

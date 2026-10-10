@@ -9,10 +9,23 @@
 		sub = '',
 		color = '#7dd3fc',
 		dashed = false,
-		quiet = false
-	}: { id: string; label: string; sub?: string; color?: string; dashed?: boolean; quiet?: boolean } = $props();
+		quiet = false,
+		selected: selectedProp,
+		onpick
+	}: {
+		id: string;
+		label: string;
+		sub?: string;
+		color?: string;
+		dashed?: boolean;
+		quiet?: boolean;
+		/** Override selection state (defaults to the Workbench selection) */
+		selected?: boolean;
+		/** Override click behaviour (defaults to toggling the Workbench selection) */
+		onpick?: () => void;
+	} = $props();
 
-	const selected = $derived(explorer.wbSelection === id);
+	const selected = $derived(selectedProp ?? explorer.wbSelection === id);
 </script>
 
 <HTML pointerEvents="none" zIndexRange={[40, 0]}>
@@ -23,7 +36,7 @@
 			class:dashed
 			class:quiet
 			class:selected
-			onclick={() => (explorer.wbSelection = selected ? null : id)}
+			onclick={() => (onpick ? onpick() : (explorer.wbSelection = selected ? null : id))}
 			aria-label={label}
 			title={quiet ? label : ''}
 		>

@@ -19,6 +19,8 @@ export const SPEEDS = [
 	{ label: '50 yr/s', yps: 50 }
 ] as const;
 
+export type Lens = 'physical' | 'knowledge';
+
 export type LayerId =
 	'sky' | 'orbits' | 'labels' | 'nea' | 'divergence' | 'phase-0' | 'phase-1' | 'phase-2' | 'phase-3a' | 'phase-3b';
 
@@ -55,6 +57,10 @@ class ExplorerState {
 		'phase-3a': true,
 		'phase-3b': true
 	});
+	/** Lens: 'physical' = orrery, 'knowledge' = Research Nebula */
+	lens = $state<Lens>('physical');
+	/** Research question selected in the Nebula */
+	rqId = $state<string | null>(null);
 	/** BOM item open in the Workbench (null = orrery) */
 	workbenchId = $state<string | null>(null);
 	/** Selected node inside the Workbench (e.g. 'model:gpt-5-2', a fork id) */
@@ -103,6 +109,19 @@ class ExplorerState {
 		this.playing = false;
 	}
 
+	setLens(lens: Lens) {
+		this.closeWorkbench();
+		this.lens = lens;
+		this.playing = false;
+	}
+
+	/** Jump to a research question in the Nebula. */
+	showQuestion(id: string) {
+		this.closeWorkbench();
+		this.lens = 'knowledge';
+		this.rqId = id;
+	}
+
 	closeWorkbench() {
 		this.workbenchId = null;
 		this.wbSelection = null;
@@ -120,6 +139,9 @@ class ExplorerState {
 		if (f && getEntity(f)) this.focusId = f;
 		const s = url.searchParams.get('s');
 		if (s && getEntity(s)) this.selectedId = s;
+		if (url.searchParams.get('lens') === 'knowledge') this.lens = 'knowledge';
+		const rq = url.searchParams.get('rq');
+		if (rq) this.rqId = rq;
 		const wb = url.searchParams.get('wb');
 		if (wb) this.openWorkbench(wb);
 	}
@@ -131,6 +153,10 @@ class ExplorerState {
 		url.searchParams.set('f', this.focusId);
 		if (this.selectedId) url.searchParams.set('s', this.selectedId);
 		else url.searchParams.delete('s');
+		if (this.lens !== 'physical') url.searchParams.set('lens', this.lens);
+		else url.searchParams.delete('lens');
+		if (this.rqId && this.lens === 'knowledge') url.searchParams.set('rq', this.rqId);
+		else url.searchParams.delete('rq');
 		if (this.workbenchId) url.searchParams.set('wb', this.workbenchId);
 		else url.searchParams.delete('wb');
 		replaceState(url, {});

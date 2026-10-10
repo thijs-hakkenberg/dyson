@@ -14,7 +14,7 @@
 	const LENSES = [
 		{ id: 'physical', label: 'Physical', ready: true },
 		{ id: 'logistics', label: 'Logistics', ready: false },
-		{ id: 'knowledge', label: 'Knowledge', ready: false },
+		{ id: 'knowledge', label: 'Knowledge', ready: true },
 		{ id: 'consensus', label: 'Consensus', ready: false },
 		{ id: 'risk', label: 'Risk', ready: false }
 	];
@@ -32,7 +32,7 @@
 		<div class="mark" aria-hidden="true">◈</div>
 		<div>
 			<div class="title">Project Dyson</div>
-			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : 'Orrery'}</div>
+			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : 'Orrery'}</div>
 		</div>
 	</div>
 
@@ -41,9 +41,11 @@
 			<button
 				type="button"
 				class="hud-btn"
-				class:on={l.id === 'physical'}
+				class:on={!explorer.workbenchId && l.id === explorer.lens}
 				disabled={!l.ready}
-				title={l.ready ? '' : 'Coming in a later milestone'}>{l.label}</button
+				onclick={() => (l.id === 'physical' || l.id === 'knowledge') && explorer.setLens(l.id)}
+				title={l.ready ? (l.id === 'knowledge' ? 'Research Nebula (K)' : 'Orrery') : 'Coming in a later milestone'}
+				>{l.label}</button
 			>
 		{/each}
 	</nav>
