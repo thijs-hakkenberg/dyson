@@ -15,7 +15,8 @@
 	import Divergences from './Divergences.svelte';
 	import { explorer, MAX_YEAR } from '../core/state.svelte';
 	import { getEntity, type Vec3 } from '../core/registry';
-	import { phaseStarted } from '../core/progress';
+	import { phaseEmphasis, phaseStarted } from '../core/progress';
+	import FadeGroup from './FadeGroup.svelte';
 
 	const { size } = useThrelte();
 	let camera = $state.raw<PerspectiveCamera>();
@@ -101,6 +102,11 @@
 		}
 	});
 
+	// Superseded phases recede so the construction frontier stays readable
+	const selectedPhase = $derived(explorer.selected?.phaseId ?? (explorer.selected?.kind === 'phase' ? explorer.selected.id : undefined));
+	const emphasis = (id: string) =>
+		explorer.layers.fade ? phaseEmphasis(id, explorer.year, selectedPhase) : 1;
+
 	const show = (id: 'phase-0' | 'phase-1' | 'phase-2' | 'phase-3a' | 'phase-3b') =>
 		explorer.layers[id] && phaseStarted(id, explorer.year);
 </script>
@@ -116,10 +122,10 @@
 	<Bodies />
 	{#if explorer.layers.orbits}<Orbits />{/if}
 	{#if explorer.layers.nea}<NeaBelt />{/if}
-	{#if show('phase-0')}<Phase0Layer />{/if}
-	{#if show('phase-1')}<Phase1Layer />{/if}
-	{#if show('phase-2')}<Phase2Layer />{/if}
-	{#if show('phase-3a')}<MatrioshkaLayer />{/if}
-	{#if show('phase-3b')}<StellarEngineLayer />{/if}
+	{#if show('phase-0')}<FadeGroup factor={emphasis('phase-0')}><Phase0Layer /></FadeGroup>{/if}
+	{#if show('phase-1')}<FadeGroup factor={emphasis('phase-1')}><Phase1Layer /></FadeGroup>{/if}
+	{#if show('phase-2')}<FadeGroup factor={emphasis('phase-2')}><Phase2Layer /></FadeGroup>{/if}
+	{#if show('phase-3a')}<FadeGroup factor={emphasis('phase-3a')}><MatrioshkaLayer /></FadeGroup>{/if}
+	{#if show('phase-3b')}<FadeGroup factor={emphasis('phase-3b')}><StellarEngineLayer /></FadeGroup>{/if}
 	<Divergences />
 </T.Group>

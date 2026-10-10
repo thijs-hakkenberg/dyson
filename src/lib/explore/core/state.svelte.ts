@@ -29,10 +29,11 @@ export interface CameraCommand {
 }
 
 export type LayerId =
-	'sky' | 'orbits' | 'labels' | 'nea' | 'divergence' | 'phase-0' | 'phase-1' | 'phase-2' | 'phase-3a' | 'phase-3b';
+	'sky' | 'fade' | 'orbits' | 'labels' | 'nea' | 'divergence' | 'phase-0' | 'phase-1' | 'phase-2' | 'phase-3a' | 'phase-3b';
 
 export const LAYER_LABELS: Record<LayerId, string> = {
 	sky: 'Milky Way',
+	fade: 'Fade completed phases',
 	orbits: 'Orbits',
 	labels: 'Labels',
 	nea: 'NEA population',
@@ -54,6 +55,7 @@ class ExplorerState {
 	hudVisible = $state(true);
 	layers = $state<Record<LayerId, boolean>>({
 		sky: true,
+		fade: true,
 		orbits: true,
 		labels: true,
 		nea: true,

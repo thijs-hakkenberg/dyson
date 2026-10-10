@@ -182,3 +182,26 @@ describe('placements', () => {
 		expect(cascadeTemperature(2.5)).toBeLessThan(cascadeTemperature(1));
 	});
 });
+
+describe('phase emphasis', async () => {
+	const { phaseEmphasis, SUPERSEDED_OPACITY } = await import('../progress');
+	const { phaseWindow } = await import('../timeline');
+	const p2 = phaseWindow('phase-2')!;
+	const p3a = phaseWindow('phase-3a')!;
+
+	it('keeps the frontier at full strength and fades superseded phases', () => {
+		expect(phaseEmphasis('phase-1', (p2.start + p2.end) / 2)).toBeCloseTo(SUPERSEDED_OPACITY, 6);
+		expect(phaseEmphasis('phase-2', (p2.start + p2.end) / 2)).toBe(1);
+		expect(phaseEmphasis('phase-2', p3a.start + 0.5 * (p3a.end - p3a.start))).toBeCloseTo(SUPERSEDED_OPACITY, 6);
+	});
+
+	it('eases in, never fades parallel phases, and honours selection', () => {
+		const early = phaseEmphasis('phase-2', p3a.start + 0.02 * (p3a.end - p3a.start));
+		expect(early).toBeGreaterThan(SUPERSEDED_OPACITY);
+		expect(early).toBeLessThan(1);
+		const late = p3a.start + 0.6 * (p3a.end - p3a.start);
+		expect(phaseEmphasis('phase-3a', late)).toBe(1);
+		expect(phaseEmphasis('phase-3b', late)).toBe(1);
+		expect(phaseEmphasis('phase-1', late, 'phase-1')).toBe(1);
+	});
+});

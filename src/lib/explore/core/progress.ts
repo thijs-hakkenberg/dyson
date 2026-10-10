@@ -4,7 +4,7 @@
  * an ordering assumption for visualisation, not a schedule.
  */
 
-import { deploymentFraction, phaseWindow } from './timeline';
+import { TIMELINE, deploymentFraction, phaseWindow } from './timeline';
 
 /** Sub-window [from, to] as fractions of the phase window. */
 const STAGES: Record<string, [number, number]> = {
@@ -55,4 +55,26 @@ export function phaseInFocus(phaseId: string, year: number, selectedPhaseId?: st
 	const w = phaseWindow(phaseId);
 	if (!w) return false;
 	return selectedPhaseId === phaseId || (year >= w.start && year < w.end);
+}
+
+/** Opacity factor for superseded phases once a later phase is under way. */
+export const SUPERSEDED_OPACITY = 0.18;
+
+/**
+ * Emphasis (0..1) for a phase layer: full while it is the construction
+ * frontier, easing down to SUPERSEDED_OPACITY over the first 15% of the next
+ * phase to start. Parallel phases (equal start) don't fade each other, and a
+ * phase containing the selected item always stays at full strength.
+ */
+export function phaseEmphasis(phaseId: string, year: number, selectedPhaseId?: string): number {
+	if (selectedPhaseId === phaseId) return 1;
+	const w = phaseWindow(phaseId);
+	if (!w || year < w.start) return 1;
+	let k = 0;
+	for (const t of TIMELINE) {
+		if (t.start <= w.start || year < t.start) continue;
+		const x = Math.min(1, (year - t.start) / (0.15 * (t.end - t.start)));
+		k = Math.max(k, x * x * (3 - 2 * x));
+	}
+	return 1 - (1 - SUPERSEDED_OPACITY) * k;
 }

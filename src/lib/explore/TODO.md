@@ -8,6 +8,7 @@
 - [x] Sun v1.1 — Hα-style false-colour look (default), prominences scaled by solar activity, spicule fringe, corona streamers
 - [ ] Expose Sun style toggle (Hα-style ↔ white light) in the Layers panel (`style` option already in `SunSurfaceOptions`)
 - [x] Milky Way background sphere (ESO/S. Brunier, CC BY 4.0) in galactic → ecliptic frame
+- [x] Superseded phases fade (to 18%) once the next phase is under way; selection restores a phase; toggle in Layers
 - [ ] **Prettier UI** — open; user to give feedback on what feels off
 - [ ] Crisp point stars from a real catalogue (HYG / Gaia bright stars) layered over the Milky Way image
 
@@ -24,6 +25,8 @@
 3. [x] BOM Workbench — consensus core, model satellites, divergence forks, TRL gauges, linked RQs, blueprint hologram
 4. [x] Research Nebula — all 142 RQs on a phase axis, status materials, P0 dependency conduits + critical-path artery, decision gates, BOM tracing, cross-links to orrery/workbench, ⌘K search
 5. [x] Tour engine + chapters "Why build a Dyson swarm?" and "From asteroid to swarm" (`?tour=` deep links, pause on interaction)
+   - [x] "Phase 1 in depth" — all seven P1 items, node forks, hand-off to the nebula
+   - [ ] In-depth tours for P0, P2, P3a, P3b
 6. Gate Tunnel, Topology, Risk lens, sim sandboxes, Deliberation Chamber
 
 ## Consensus issues

@@ -8,6 +8,12 @@
 import type { Tour } from './tour.svelte';
 import { phaseWindow } from './timeline';
 import { TODAY_YEAR } from './state.svelte';
+import { PHASES } from '$lib/services/content';
+import { formatUSD } from './units';
+
+const P1 = PHASES.find((p) => p.id === 'phase-1')!;
+const P1_YEARS = Math.round(phaseWindow('phase-1')!.end - phaseWindow('phase-1')!.start);
+const P1_COST = formatUSD(P1.bom.reduce((s, b) => s + b.totalCost, 0));
 
 /** Year at a fraction of a phase's nominal window. */
 function at(phaseId: string, f: number): number {
@@ -161,6 +167,108 @@ export const TOURS: Tour[] = [
 				body: 'Research questions settle these forks. Open the **Knowledge** lens to see what’s answered — and what’s still open.',
 				duration: 10,
 				wbSelection: null
+			}
+		]
+	},
+	{
+		id: 'phase-1',
+		title: 'Phase 1 in depth',
+		subtitle: 'Seven BOM items that build the first swarm — 3 min',
+		steps: [
+			{
+				title: 'Phase 1 · Initial swarm deployment',
+				body: `Seven bill-of-materials items, about **${P1_COST}** and **~${P1_YEARS} years** (nominal) to put the first collectors in orbit. Here is how they fit together.`,
+				duration: 9,
+				lens: 'physical',
+				workbench: null,
+				year: at('phase-1', 0.02),
+				focus: 'sun',
+				select: 'phase-1',
+				layers: { divergence: true },
+				camera: { distance: 2.4, polar: 60 }
+			},
+			{
+				title: 'The assembly node',
+				body: 'First comes the **assembly node**: a modular hub of 120–450 t with 1.5–2 MW of power and 4–8 robot arms. It is shown at Sun–Earth L1 (Claude’s choice); Gemini prefers Mercury’s L1, GPT a 0.7–1.0 AU orbit.',
+				duration: 11,
+				year: { to: at('phase-1', 0.12), over: 3 },
+				focus: 'bom-1-4',
+				select: 'bom-1-4'
+			},
+			{
+				title: 'Mass drivers on the Moon',
+				body: 'Feedstock leaves the Moon on **mass drivers**: coilguns with 650 m–3.4 km tracks, accelerating cargo at 100–1,000 g. How often they fire is disputed — from 5 launches an hour (Claude) to 6 a minute (Gemini).',
+				duration: 11,
+				year: { to: at('phase-1', 0.22), over: 3 },
+				focus: 'bom-1-5',
+				select: 'bom-1-5',
+				camera: { distance: 0.004, polar: 65 }
+			},
+			{
+				title: 'Orbital tugs',
+				body: '**20 orbital tugs** — 50 kW solar-electric craft with Hall thrusters — haul 2–8 t payloads from the catch points to the node.',
+				duration: 9,
+				year: { to: at('phase-1', 0.3), over: 3 },
+				focus: 'earth',
+				select: 'bom-1-6',
+				camera: { distance: 0.02, polar: 60 }
+			},
+			{
+				title: 'Assembly robots',
+				body: 'At the node, **assembly robots** in specialised classes — heavy manipulators down to ±0.1 mm precision assemblers — build the collectors. How many are needed is wide open: the BOM lists 50, Claude 350, Gemini 10,000 a month at full rate.',
+				duration: 11,
+				focus: 'bom-1-3',
+				select: 'bom-1-3'
+			},
+			{
+				title: 'Collectors roll out',
+				body: 'Finished **collector units** are released at 1 AU, at 1–1.7 MW of collecting capacity per month. The consensus: start at 1 AU to limit thermal and radiation risk, move inward in Phase 2.',
+				duration: 11,
+				year: { to: at('phase-1', 0.6), over: 4 },
+				focus: 'sun',
+				select: 'bom-1-1',
+				camera: { distance: 2.2, polar: 58 }
+			},
+			{
+				title: 'PV blanket arrays',
+				body: 'Each collector carries **PV blankets**: 35–50 g/m² thin film, unrolled by spin or booms, 15–28% efficient, with segment-level fault isolation so a hit dims a patch, not the unit.',
+				duration: 10,
+				select: 'bom-1-2'
+			},
+			{
+				title: 'Swarm control',
+				body: 'The **swarm control system** ties it together: node → cluster → swarm authority, 1550 nm laser links, under 20 W of control power per satellite. Even the swarm’s size is disputed — 1,000 (GPT) or 10,000 (Claude, Gemini).',
+				duration: 11,
+				select: 'bom-1-7'
+			},
+			{
+				title: 'End of Phase 1',
+				body: 'By the end of the phase the telemetry panel shows the result: spend, power, production and fleet counts, all derived from these seven items.',
+				duration: 9,
+				year: { to: at('phase-1', 0.99), over: 4 },
+				select: null,
+				camera: { distance: 2.6, polar: 60 }
+			},
+			{
+				title: 'Inside the node',
+				body: 'Fly into the assembly node. Six forks mark where the models split — starting with **where to put it**.',
+				duration: 10,
+				workbench: 'bom-1-4',
+				wbSelection: 'orbital-location'
+			},
+			{
+				title: 'Nuclear or solar?',
+				body: 'Claude proposes **four 500 kW Kilopower-derived reactors**; Gemini solar PV plus concentrators near Mercury; GPT **1.5 MW of solar PV** at 1 AU. All three positions are kept on record.',
+				duration: 11,
+				wbSelection: 'primary-power-source'
+			},
+			{
+				title: 'What would settle it',
+				body: 'Phase 1 has **51 research questions** behind these choices. The Knowledge lens shows which are answered — and lights up the ones behind the node.',
+				duration: 11,
+				workbench: null,
+				lens: 'knowledge',
+				select: 'bom-1-4'
 			}
 		]
 	}
