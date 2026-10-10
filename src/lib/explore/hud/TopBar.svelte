@@ -32,7 +32,7 @@
 		<div class="mark" aria-hidden="true">◈</div>
 		<div>
 			<div class="title">Project Dyson</div>
-			<div class="eyebrow">System operations · Orrery</div>
+			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : 'Orrery'}</div>
 		</div>
 	</div>
 

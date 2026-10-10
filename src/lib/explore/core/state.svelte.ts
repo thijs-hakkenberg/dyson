@@ -55,6 +55,10 @@ class ExplorerState {
 		'phase-3a': true,
 		'phase-3b': true
 	});
+	/** BOM item open in the Workbench (null = orrery) */
+	workbenchId = $state<string | null>(null);
+	/** Selected node inside the Workbench (e.g. 'model:gpt-5-2', a fork id) */
+	wbSelection = $state<string | null>(null);
 	/** Updated by the scene each frame for the scale bar */
 	cameraDistance = $state(3);
 	/** World-space size (AU) of one screen pixel at the focus point */
@@ -90,6 +94,20 @@ class ExplorerState {
 		}
 	}
 
+	openWorkbench(id: string | null | undefined) {
+		const e = getEntity(id);
+		if (!e || e.kind !== 'bom') return;
+		this.selectedId = e.id;
+		this.wbSelection = null;
+		this.workbenchId = e.id;
+		this.playing = false;
+	}
+
+	closeWorkbench() {
+		this.workbenchId = null;
+		this.wbSelection = null;
+	}
+
 	toggleLayer(id: LayerId) {
 		this.layers[id] = !this.layers[id];
 	}
@@ -102,6 +120,8 @@ class ExplorerState {
 		if (f && getEntity(f)) this.focusId = f;
 		const s = url.searchParams.get('s');
 		if (s && getEntity(s)) this.selectedId = s;
+		const wb = url.searchParams.get('wb');
+		if (wb) this.openWorkbench(wb);
 	}
 
 	writeUrl() {
@@ -111,6 +131,8 @@ class ExplorerState {
 		url.searchParams.set('f', this.focusId);
 		if (this.selectedId) url.searchParams.set('s', this.selectedId);
 		else url.searchParams.delete('s');
+		if (this.workbenchId) url.searchParams.set('wb', this.workbenchId);
+		else url.searchParams.delete('wb');
 		replaceState(url, {});
 	}
 }

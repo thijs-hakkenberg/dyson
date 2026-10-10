@@ -222,6 +222,9 @@
 					</ul>
 				{/if}
 
+				<button type="button" class="wb-open" onclick={() => explorer.openWorkbench(e.id)}>
+					Open in workbench <kbd>W</kbd>
+				</button>
 				<p><a href="/plan/{e.phaseId}/bom/{b.slug}">Full specs, consensus &amp; blueprint →</a></p>
 			{/if}
 		</div>
@@ -308,6 +311,30 @@
 	}
 	.dim {
 		color: var(--hud-dim);
+	}
+	.wb-open {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+		margin: 12px 0 6px;
+		padding: 8px 10px;
+		background: rgba(125, 211, 252, 0.08);
+		border: 1px solid var(--hud-line-strong);
+		color: var(--hud-accent);
+		font-family: var(--font-mono);
+		font-size: 11px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		cursor: pointer;
+	}
+	.wb-open:hover {
+		background: rgba(125, 211, 252, 0.16);
+		color: #fff;
+	}
+	.wb-open kbd {
+		font-family: inherit;
+		font-size: 9px;
+		opacity: 0.6;
 	}
 	.src {
 		color: var(--hud-faint);

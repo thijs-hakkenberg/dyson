@@ -21,7 +21,7 @@
 
 ## Later phases (agreed build order)
 
-3. BOM Workbench — consensus core, model satellites, divergence forks
+3. [x] BOM Workbench — consensus core, model satellites, divergence forks, TRL gauges, linked RQs, blueprint hologram
 4. Research Nebula, cross-linked
 5. Tour engine + first two chapters
 6. Gate Tunnel, Topology, Risk lens, sim sandboxes, Deliberation Chamber

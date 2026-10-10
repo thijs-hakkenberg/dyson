@@ -55,3 +55,18 @@ export function cascadeColor(tempK: number, blackbody: (t: number) => [number, n
 	const hue = 12 + u * (235 - 12);
 	return `hsl(${hue.toFixed(0)}, 85%, ${(58 - u * 8).toFixed(0)}%)`;
 }
+
+/** Divergent-view priority (matches the inspector tags). */
+export const PRIORITY_COLORS: Record<string, string> = {
+	critical: '#f87171',
+	high: '#fb923c',
+	medium: '#fbbf24',
+	low: '#94a3b8'
+};
+
+/** Research question status: answered = solid, investigating = live, open = haze. */
+export const RQ_STATUS_COLORS: Record<string, string> = {
+	answered: '#34d399',
+	investigating: '#fbbf24',
+	open: '#64748b'
+};

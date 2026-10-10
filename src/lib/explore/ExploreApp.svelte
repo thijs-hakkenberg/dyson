@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { Canvas } from '@threlte/core';
 	import { NoToneMapping, WebGLRenderer } from 'three';
-	import { onMount } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import { page } from '$app/state';
 	import ExploreScene from './scene/ExploreScene.svelte';
 	import TopBar from './hud/TopBar.svelte';
@@ -9,6 +9,10 @@
 	import Inspector from './hud/Inspector.svelte';
 	import LayerPanel from './hud/LayerPanel.svelte';
 	import Telemetry from './hud/Telemetry.svelte';
+	import WorkbenchScene from './scene/workbench/WorkbenchScene.svelte';
+	import WorkbenchPanel from './hud/WorkbenchPanel.svelte';
+	import WorkbenchInspector from './hud/WorkbenchInspector.svelte';
+	import { wb } from './core/wbstore.svelte';
 	import ScaleBar from './hud/ScaleBar.svelte';
 	import CommandPalette from './hud/CommandPalette.svelte';
 	import { explorer, SPEEDS, TODAY_YEAR } from './core/state.svelte';
@@ -35,12 +39,24 @@
 		ready = true;
 	});
 
+	// Load Workbench material when an item opens; flash a short warp on every switch
+	let warp = $state(0);
+	$effect(() => {
+		const id = explorer.workbenchId;
+		const isReady = ready;
+		untrack(() => {
+			if (id) void wb.ensure(id);
+			if (isReady) warp++;
+		});
+	});
+
 	// Keep the URL shareable without spamming history
 	let urlTimer: ReturnType<typeof setTimeout> | undefined;
 	$effect(() => {
 		void Math.round(explorer.year * 10);
 		void explorer.focusId;
 		void explorer.selectedId;
+		void explorer.workbenchId;
 		if (!ready) return;
 		clearTimeout(urlTimer);
 		urlTimer = setTimeout(() => explorer.writeUrl(), 400);
@@ -63,7 +79,13 @@
 				break;
 			case 'Escape':
 				if (explorer.paletteOpen) explorer.paletteOpen = false;
+				else if (explorer.workbenchId && explorer.wbSelection) explorer.wbSelection = null;
+				else if (explorer.workbenchId) explorer.closeWorkbench();
 				else explorer.selectedId = null;
+				break;
+			case 'w':
+				if (explorer.workbenchId) explorer.closeWorkbench();
+				else explorer.openWorkbench(explorer.selectedId);
 				break;
 			case 'h':
 				explorer.hudVisible = !explorer.hudVisible;
@@ -103,11 +125,19 @@
 				toneMapping={NoToneMapping}
 				dpr={[1, 2]}
 			>
-				<ExploreScene />
+				{#if explorer.workbenchId}<WorkbenchScene />{:else}<ExploreScene />{/if}
 			</Canvas>
 		</div>
+		{#key warp}<div class="warp" aria-hidden="true"></div>{/key}
 
-		{#if explorer.hudVisible}
+		{#if explorer.hudVisible && explorer.workbenchId}
+			<TopBar />
+			<div class="leftcol">
+				<WorkbenchPanel />
+				<LayerPanel />
+			</div>
+			<WorkbenchInspector />
+		{:else if explorer.hudVisible}
 			<TopBar />
 			<div class="leftcol">
 				<Telemetry />
@@ -127,6 +157,21 @@
 		position: absolute;
 		inset: 0;
 		z-index: 0;
+	}
+	.warp {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background: radial-gradient(circle at 50% 50%, rgba(125, 211, 252, 0.35), rgba(2, 6, 12, 0.95) 70%);
+		animation: warp 0.7s ease-out forwards;
+	}
+	@keyframes warp {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
 	}
 	.leftcol {
 		position: absolute;

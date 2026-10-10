@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getEntity } from '../core/registry';
 	import { explorer } from '../core/state.svelte';
 	import { searchEntities } from '../core/registry';
 	import { PHASE_COLORS } from '../core/theme';
@@ -17,15 +18,20 @@
 		}
 	});
 
-	function choose(id: string) {
-		explorer.select(id);
+	function choose(id: string, workbench = false) {
+		const e = getEntity(id);
+		if (workbench && e?.kind === 'bom') explorer.openWorkbench(id);
+		else {
+			if (explorer.workbenchId) explorer.closeWorkbench();
+			explorer.select(id);
+		}
 		explorer.paletteOpen = false;
 	}
 
 	function key(e: KeyboardEvent) {
 		if (e.key === 'ArrowDown') index = Math.min(results.length - 1, index + 1);
 		else if (e.key === 'ArrowUp') index = Math.max(0, index - 1);
-		else if (e.key === 'Enter' && results[index]) choose(results[index].id);
+		else if (e.key === 'Enter' && results[index]) choose(results[index].id, e.shiftKey);
 		else if (e.key === 'Escape') explorer.paletteOpen = false;
 		else return;
 		e.preventDefault();
@@ -41,7 +47,7 @@
 			bind:value={query}
 			oninput={() => (index = 0)}
 			onkeydown={key}
-			placeholder="Go to body, phase, BOM item…"
+			placeholder="Go to body, phase, BOM item… (⇧↵ opens BOM in workbench)"
 			aria-label="Search"
 			role="combobox"
 			aria-expanded="true"
