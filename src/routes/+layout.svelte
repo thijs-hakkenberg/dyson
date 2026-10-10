@@ -3,7 +3,7 @@
 	import Header from '$lib/components/layout/Header.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import { initMixpanel, trackPageView, trackTimeOnPage } from '$lib/services/mixpanel';
-	import { onMount } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import { page } from '$app/stores';
 
 	let { children } = $props();
@@ -16,9 +16,13 @@
 		initMixpanel();
 	});
 
+	// Only the pathname drives page views; query-string updates (e.g. the
+	// explorer's shareable state) must not count as new views.
+	const pathname = $derived($page.url.pathname);
+
 	// Track page views and time on page
 	$effect(() => {
-		const path = $page.url.pathname;
+		const path = pathname;
 
 		// Track time on previous page if exists
 		if (currentPath && pageStartTime) {
@@ -29,7 +33,7 @@
 		// Track new page view
 		if (path) {
 			trackPageView(path, {
-				url: $page.url.href,
+				url: untrack(() => $page.url.href),
 				referrer: document.referrer
 			});
 
@@ -51,12 +55,17 @@
 	<title>Project Dyson</title>
 </svelte:head>
 
-<div class="min-h-screen flex flex-col">
-	<Header />
+{#if $page.url.pathname.startsWith('/explore')}
+	<!-- Full-screen immersive explorer: no site chrome -->
+	{@render children()}
+{:else}
+	<div class="min-h-screen flex flex-col">
+		<Header />
 
-	<main class="flex-1 pt-16">
-		{@render children()}
-	</main>
+		<main class="flex-1 pt-16">
+			{@render children()}
+		</main>
 
-	<Footer />
-</div>
+		<Footer />
+	</div>
+{/if}

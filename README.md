@@ -123,6 +123,17 @@ terraform apply
 
 See `terraform/` directory for configuration details.
 
+Builds require **Node 22+** (`.node-version`; `NODE_VERSION=22` in the Pages project).
+
+## Immersive Explorer
+
+`/explore` is a 3D (Threlte/three.js) view of the project: true-scale orrery with
+the phase timeline, BOM Workbench, Research Nebula, Gate Tunnel, network,
+logistics, risk and deliberation lenses, and narrated tours. Code lives in
+`src/lib/explore/`; see `src/lib/explore/TODO.md` for the roadmap and
+`src/lib/explore/CONSENSUS-ISSUES.md` for spec inconsistencies found while
+building it.
+
 ## Content Files
 
 ### Specification Files (`static/content/bom-specs/`)
