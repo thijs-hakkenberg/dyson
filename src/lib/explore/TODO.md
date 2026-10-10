@@ -38,7 +38,7 @@
    - [x] Network Topology (Network lens, N) — P0 ops links, swarm authority → Shepherd hierarchy (consensus ratio), inter-shell trunks; true light-time, pulses at 60× c
    - [x] Risk & Validation lens (R) — heuristic risk halos with breakdown, validation beacons, ranked list, claims
    - [ ] Simulation sandboxes
-   - [ ] Deliberation Chamber
+   - [x] Deliberation Chamber (Consensus lens, C) — 20 discussions replayed round by round: response beams, vote arcs, winners, termination votes, conclusion crystal
 
 ## Consensus issues
 

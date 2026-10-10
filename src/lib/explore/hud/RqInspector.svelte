@@ -102,6 +102,10 @@
 				<h3>Question</h3>
 				<div class="md">{@html renderMarkdown(full.context)}</div>
 			{/if}
+			{#if q.hasConclusion}
+				<button type="button" class="hud-btn" onclick={() => explorer.openDeliberation(q.slug)}>Replay deliberation in the Chamber</button>
+				<br />
+			{/if}
 			<a class="out" href="/questions/{q.slug}">Open question page →</a>
 		</div>
 	</aside>

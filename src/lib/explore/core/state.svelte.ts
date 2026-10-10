@@ -19,7 +19,7 @@ export const SPEEDS = [
 	{ label: '50 yr/s', yps: 50 }
 ] as const;
 
-export type Lens = 'physical' | 'knowledge' | 'gates' | 'network' | 'risk';
+export type Lens = 'physical' | 'knowledge' | 'gates' | 'network' | 'risk' | 'consensus';
 
 export interface CameraCommand {
 	seq: number;
@@ -68,6 +68,10 @@ class ExplorerState {
 	});
 	/** Lens: 'physical' = orrery, 'knowledge' = Research Nebula */
 	lens = $state<Lens>('physical');
+	/** Deliberation Chamber: open discussion slug, visible round (1-based; rounds+1 = conclusion), picked element */
+	delibSlug = $state<string | null>(null);
+	delibRound = $state(1);
+	delibPick = $state<string | null>(null);
 	/** Gate Tunnel selection: a gate id or 'trl:<id>' */
 	gateSel = $state<string | null>(null);
 	/** Research question selected in the Nebula */
@@ -141,6 +145,15 @@ class ExplorerState {
 		this.rqId = id;
 	}
 
+	/** Open a discussion in the Deliberation Chamber at round 1. */
+	openDeliberation(slug: string) {
+		this.closeWorkbench();
+		this.lens = 'consensus';
+		this.delibSlug = slug;
+		this.delibRound = 1;
+		this.delibPick = null;
+	}
+
 	closeWorkbench() {
 		this.workbenchId = null;
 		this.wbSelection = null;
@@ -159,7 +172,10 @@ class ExplorerState {
 		const s = url.searchParams.get('s');
 		if (s && getEntity(s)) this.selectedId = s;
 		const lens = url.searchParams.get('lens');
-		if (lens === 'knowledge' || lens === 'gates' || lens === 'network' || lens === 'risk') this.lens = lens;
+		if (lens === 'knowledge' || lens === 'gates' || lens === 'network' || lens === 'risk' || lens === 'consensus')
+			this.lens = lens;
+		const dl = url.searchParams.get('dl');
+		if (dl) this.delibSlug = dl;
 		const gate = url.searchParams.get('gate');
 		if (gate) this.gateSel = gate;
 		const rq = url.searchParams.get('rq');
@@ -177,6 +193,8 @@ class ExplorerState {
 		else url.searchParams.delete('s');
 		if (this.lens !== 'physical') url.searchParams.set('lens', this.lens);
 		else url.searchParams.delete('lens');
+		if (this.delibSlug && this.lens === 'consensus') url.searchParams.set('dl', this.delibSlug);
+		else url.searchParams.delete('dl');
 		if (this.gateSel && this.lens === 'gates') url.searchParams.set('gate', this.gateSel);
 		else url.searchParams.delete('gate');
 		if (this.rqId && this.lens === 'knowledge') url.searchParams.set('rq', this.rqId);

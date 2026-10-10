@@ -23,6 +23,10 @@
 	import GateInspector from './hud/GateInspector.svelte';
 	import NetworkPanel from './hud/NetworkPanel.svelte';
 	import RiskPanel from './hud/RiskPanel.svelte';
+	import ChamberScene from './scene/chamber/ChamberScene.svelte';
+	import ChamberPanel from './hud/ChamberPanel.svelte';
+	import ChamberInspector from './hud/ChamberInspector.svelte';
+	import { delib } from './core/delibstore.svelte';
 	import { riskStore } from './core/riskstore.svelte';
 	import { tour } from './core/tour.svelte';
 	import { getTour } from './core/tours';
@@ -64,8 +68,23 @@
 			if (id) void wb.ensure(id);
 			if (lens === 'knowledge') nebula.ensure();
 			if (lens === 'risk') riskStore.ensure();
+			if (lens === 'consensus') delib.ensureList();
 			if (isReady) warp++;
 		});
+	});
+
+	// Load the selected deliberation; default to the first concluded one
+	$effect(() => {
+		const slug = explorer.delibSlug;
+		const lens = explorer.lens;
+		untrack(() => {
+			if (lens !== 'consensus') return;
+			if (slug) void delib.open(slug);
+		});
+	});
+	$effect(() => {
+		const first = delib.list.find((d) => d.status === 'concluded') ?? delib.list[0];
+		if (explorer.lens === 'consensus' && !explorer.delibSlug && first) untrack(() => explorer.openDeliberation(first.slug));
 	});
 
 	// Keep the URL shareable without spamming history
@@ -78,6 +97,7 @@
 		void explorer.lens;
 		void explorer.rqId;
 		void explorer.gateSel;
+		void explorer.delibSlug;
 		if (!ready) return;
 		clearTimeout(urlTimer);
 		urlTimer = setTimeout(() => explorer.writeUrl(), 400);
@@ -117,7 +137,11 @@
 				else if (explorer.workbenchId) explorer.closeWorkbench();
 				else if (explorer.lens === 'knowledge' && explorer.rqId) explorer.rqId = null;
 				else if (explorer.lens === 'gates' && explorer.gateSel) explorer.gateSel = null;
+				else if (explorer.lens === 'consensus' && explorer.delibPick) explorer.delibPick = null;
 				else explorer.selectedId = null;
+				break;
+			case 'c':
+				explorer.setLens(explorer.lens === 'consensus' ? 'physical' : 'consensus');
 				break;
 			case 'r':
 				explorer.setLens(explorer.lens === 'risk' ? 'physical' : 'risk');
@@ -180,6 +204,8 @@
 					<NebulaScene />
 				{:else if explorer.lens === 'gates'}
 					<GateTunnelScene />
+				{:else if explorer.lens === 'consensus'}
+					<ChamberScene />
 				{:else}
 					<ExploreScene />
 				{/if}
@@ -194,6 +220,13 @@
 				<LayerPanel />
 			</div>
 			<WorkbenchInspector />
+		{:else if explorer.hudVisible && explorer.lens === 'consensus'}
+			<TopBar />
+			<div class="leftcol">
+				<ChamberPanel />
+				<LayerPanel />
+			</div>
+			<ChamberInspector />
 		{:else if explorer.hudVisible && explorer.lens === 'gates'}
 			<TopBar />
 			<div class="leftcol">

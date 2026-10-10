@@ -15,7 +15,8 @@
 		knowledge: 'Research Nebula (K)',
 		gates: 'Gate Tunnel (G)',
 		network: 'Network topology & light-time (N)',
-		risk: 'Risk & validation (R)'
+		risk: 'Risk & validation (R)',
+		consensus: 'Deliberation chamber (C)'
 	};
 
 	const rq = getOverallStats();
@@ -28,7 +29,7 @@
 		{ id: 'logistics', label: 'Logistics', ready: false },
 		{ id: 'knowledge', label: 'Knowledge', ready: true },
 		{ id: 'gates', label: 'Gates', ready: true },
-		{ id: 'consensus', label: 'Consensus', ready: false },
+		{ id: 'consensus', label: 'Consensus', ready: true },
 		{ id: 'risk', label: 'Risk', ready: true }
 	];
 
@@ -45,7 +46,7 @@
 		<div class="mark" aria-hidden="true">◈</div>
 		<div>
 			<div class="title">Project Dyson</div>
-			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : explorer.lens === 'gates' ? 'Gate tunnel' : explorer.lens === 'network' ? 'Network topology' : explorer.lens === 'risk' ? 'Risk & validation' : 'Orrery'}</div>
+			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : explorer.lens === 'gates' ? 'Gate tunnel' : explorer.lens === 'network' ? 'Network topology' : explorer.lens === 'risk' ? 'Risk & validation' : explorer.lens === 'consensus' ? 'Deliberation chamber' : 'Orrery'}</div>
 		</div>
 	</div>
 
