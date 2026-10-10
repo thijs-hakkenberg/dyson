@@ -24,6 +24,9 @@
 	import NetworkPanel from './hud/NetworkPanel.svelte';
 	import RiskPanel from './hud/RiskPanel.svelte';
 	import SandboxDrawer from './hud/SandboxDrawer.svelte';
+	import ShortcutHelp from './hud/ShortcutHelp.svelte';
+
+	let helpOpen = $state(false);
 	import ChamberScene from './scene/chamber/ChamberScene.svelte';
 	import ChamberPanel from './hud/ChamberPanel.svelte';
 	import ChamberInspector from './hud/ChamberInspector.svelte';
@@ -133,13 +136,17 @@
 				explorer.paletteOpen = true;
 				break;
 			case 'Escape':
-				if (explorer.paletteOpen) explorer.paletteOpen = false;
+				if (helpOpen) helpOpen = false;
+				else if (explorer.paletteOpen) explorer.paletteOpen = false;
 				else if (explorer.workbenchId && explorer.wbSelection) explorer.wbSelection = null;
 				else if (explorer.workbenchId) explorer.closeWorkbench();
 				else if (explorer.lens === 'knowledge' && explorer.rqId) explorer.rqId = null;
 				else if (explorer.lens === 'gates' && explorer.gateSel) explorer.gateSel = null;
 				else if (explorer.lens === 'consensus' && explorer.delibPick) explorer.delibPick = null;
 				else explorer.selectedId = null;
+				break;
+			case '?':
+				helpOpen = !helpOpen;
 				break;
 			case 'c':
 				explorer.setLens(explorer.lens === 'consensus' ? 'physical' : 'consensus');
@@ -252,10 +259,11 @@
 			<ScaleBar />
 			{#if !tour.active || tour.paused}<Inspector />{/if}
 			<Timeline />
-			<div class="hint">⌘K go to · Space play · H hide HUD · drag orbit · scroll zoom</div>
+			<div class="hint">⌘K go to · Space play · ? shortcuts · drag orbit · scroll zoom</div>
 		{/if}
 		{#if explorer.hudVisible}<TourOverlay />{/if}
 		<CommandPalette />
+		<ShortcutHelp bind:open={helpOpen} />
 	{/if}
 </div>
 
