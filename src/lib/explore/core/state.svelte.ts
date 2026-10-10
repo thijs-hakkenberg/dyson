@@ -21,6 +21,13 @@ export const SPEEDS = [
 
 export type Lens = 'physical' | 'knowledge';
 
+export interface CameraCommand {
+	seq: number;
+	distance?: number;
+	azimuth?: number;
+	polar?: number;
+}
+
 export type LayerId =
 	'sky' | 'orbits' | 'labels' | 'nea' | 'divergence' | 'phase-0' | 'phase-1' | 'phase-2' | 'phase-3a' | 'phase-3b';
 
@@ -65,6 +72,9 @@ class ExplorerState {
 	workbenchId = $state<string | null>(null);
 	/** Selected node inside the Workbench (e.g. 'model:gpt-5-2', a fork id) */
 	wbSelection = $state<string | null>(null);
+	/** One-shot camera command for scripted moves (tours); scenes apply each seq once */
+	cameraCmd: CameraCommand | null = null;
+	private cmdSeq = 0;
 	/** Updated by the scene each frame for the scale bar */
 	cameraDistance = $state(3);
 	/** World-space size (AU) of one screen pixel at the focus point */
@@ -107,6 +117,11 @@ class ExplorerState {
 		this.wbSelection = null;
 		this.workbenchId = e.id;
 		this.playing = false;
+	}
+
+	/** Queue a camera move: distance in scene units, azimuth/polar in degrees. */
+	commandCamera(cmd: Omit<CameraCommand, 'seq'>) {
+		this.cameraCmd = { ...cmd, seq: ++this.cmdSeq };
 	}
 
 	setLens(lens: Lens) {

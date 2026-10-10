@@ -41,6 +41,7 @@
 	let lastFocus = '';
 	let transition = -1;
 	let notify = 0;
+	let appliedCmd = -1;
 
 	const ease = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 
@@ -74,6 +75,21 @@
 			current = target;
 		}
 		world?.position.set(-current[0], -current[1], -current[2]);
+
+		// Scripted camera moves (tours), applied after any focus dolly this frame
+		const cmd = explorer.cameraCmd;
+		if (cmd && cmd.seq !== appliedCmd && controls) {
+			appliedCmd = cmd.seq;
+			explorer.cameraCmd = null;
+			const d2r = Math.PI / 180;
+			if (cmd.azimuth !== undefined || cmd.polar !== undefined)
+				controls.rotateTo(
+					cmd.azimuth !== undefined ? cmd.azimuth * d2r : controls.azimuthAngle,
+					cmd.polar !== undefined ? cmd.polar * d2r : controls.polarAngle,
+					true
+				);
+			if (cmd.distance !== undefined) controls.dollyTo(cmd.distance, true);
+		}
 
 		// Scale-bar telemetry, throttled
 		notify += dt;

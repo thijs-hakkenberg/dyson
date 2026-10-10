@@ -75,6 +75,11 @@ recommendation (~0.5–5 MW tiles) sits between; unit cost is $100M in the BOM.
 Divergence is legitimate, but the BOM unit cost implicitly picks a size.
 *Explorer:* base = geometric mid of the recommended 0.5–5 MW.
 
+### CI-16 · Prospecting fleet size — `bom-0-1` · open
+`phase-0/prospecting-satellites/consensus.md`: "Fleet size of 50 satellites is
+appropriate for comprehensive NEA survey". content.ts / BOM: quantity 32.
+*Explorer:* uses the BOM quantity (32), including in the "From asteroid to swarm" tour.
+
 ## Sign / meaning disagreements
 
 ### CI-11 · Solar wind collectors: producer or consumer? — `bom-3b-3` · open

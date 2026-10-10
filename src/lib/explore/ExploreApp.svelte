@@ -17,6 +17,9 @@
 	import NebulaPanel from './hud/NebulaPanel.svelte';
 	import RqInspector from './hud/RqInspector.svelte';
 	import { nebula } from './core/nebulastore.svelte';
+	import TourOverlay from './hud/TourOverlay.svelte';
+	import { tour } from './core/tour.svelte';
+	import { getTour } from './core/tours';
 	import ScaleBar from './hud/ScaleBar.svelte';
 	import CommandPalette from './hud/CommandPalette.svelte';
 	import { explorer, SPEEDS, TODAY_YEAR } from './core/state.svelte';
@@ -41,6 +44,8 @@
 		}
 		explorer.readUrl(page.url);
 		ready = true;
+		const t = getTour(page.url.searchParams.get('tour'));
+		if (t) queueMicrotask(() => tour.start(t));
 	});
 
 	// Load Workbench material when an item opens; flash a short warp on every switch
@@ -78,6 +83,19 @@
 			return;
 		}
 		if (typing) return;
+		if (tour.active) {
+			const handled: Record<string, () => void> = {
+				' ': () => (tour.paused ? tour.resume() : tour.pause()),
+				ArrowRight: () => tour.next(),
+				ArrowLeft: () => tour.prev(),
+				Escape: () => tour.exit()
+			};
+			if (handled[e.key]) {
+				handled[e.key]();
+				e.preventDefault();
+				return;
+			}
+		}
 		switch (e.key) {
 			case ' ':
 				explorer.playing = !explorer.playing;
@@ -130,7 +148,8 @@
 			<a href="/plan">Browse the plan instead →</a>
 		</div>
 	{:else if ready}
-		<div class="canvas">
+		<!-- Any direct interaction with the scene pauses a running tour -->
+		<div class="canvas" onpointerdown={() => tour.pause()} onwheel={() => tour.pause()} role="presentation">
 			<Canvas
 				createRenderer={(canvas) =>
 					new WebGLRenderer({ canvas, antialias: true, logarithmicDepthBuffer: true, powerPreference: 'high-performance' })}
@@ -166,13 +185,14 @@
 			<TopBar />
 			<div class="leftcol">
 				<Telemetry />
-				<LayerPanel />
+				{#if !tour.active}<LayerPanel />{/if}
 			</div>
 			<ScaleBar />
-			<Inspector />
+			{#if !tour.active || tour.paused}<Inspector />{/if}
 			<Timeline />
 			<div class="hint">⌘K go to · Space play · H hide HUD · drag orbit · scroll zoom</div>
 		{/if}
+		{#if explorer.hudVisible}<TourOverlay />{/if}
 		<CommandPalette />
 	{/if}
 </div>

@@ -6,6 +6,10 @@
 	import { PHASE_COLORS } from '../core/theme';
 	import { getOverallStats } from '$lib/services/critical-path';
 	import { getGateStats } from '$lib/services/decision-gates';
+	import { TOURS } from '../core/tours';
+	import { tour } from '../core/tour.svelte';
+
+	let toursOpen = $state(false);
 
 	const rq = getOverallStats();
 	const gates = getGateStats();
@@ -34,6 +38,30 @@
 			<div class="title">Project Dyson</div>
 			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : 'Orrery'}</div>
 		</div>
+	</div>
+
+	<div class="tours">
+		<button type="button" class="hud-btn tours-btn panel" class:on={tour.active} onclick={() => (toursOpen = !toursOpen)} aria-expanded={toursOpen}>
+			▶ Tours
+		</button>
+		{#if toursOpen}
+			<ul class="menu panel">
+				{#each TOURS as t (t.id)}
+					<li>
+						<button
+							type="button"
+							onclick={() => {
+								toursOpen = false;
+								tour.start(t);
+							}}
+						>
+							<b>{t.title}</b>
+							<i>{t.subtitle}</i>
+						</button>
+					</li>
+				{/each}
+			</ul>
+		{/if}
 	</div>
 
 	<nav class="lenses panel" aria-label="Lenses">
@@ -169,5 +197,49 @@
 			flex: 1;
 			min-width: 0;
 		}
+	}
+	.tours {
+		position: relative;
+	}
+	.tours-btn {
+		height: 100%;
+		padding: 0 14px;
+		color: var(--hud-accent);
+		background: var(--hud-bg);
+	}
+	.menu {
+		position: absolute;
+		top: calc(100% + 6px);
+		left: 0;
+		list-style: none;
+		margin: 0;
+		padding: 6px;
+		width: 300px;
+		z-index: 20;
+	}
+	.menu button {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
+		width: 100%;
+		background: none;
+		border: 0;
+		padding: 8px;
+		text-align: left;
+		cursor: pointer;
+		color: var(--hud-text);
+	}
+	.menu button:hover {
+		background: rgba(125, 211, 252, 0.08);
+	}
+	.menu b {
+		font-family: var(--font-cond);
+		font-size: 15px;
+		font-weight: 600;
+	}
+	.menu i {
+		font-style: normal;
+		font-size: 10.5px;
+		color: var(--hud-dim);
 	}
 </style>

@@ -23,7 +23,7 @@
 
 3. [x] BOM Workbench — consensus core, model satellites, divergence forks, TRL gauges, linked RQs, blueprint hologram
 4. [x] Research Nebula — all 142 RQs on a phase axis, status materials, P0 dependency conduits + critical-path artery, decision gates, BOM tracing, cross-links to orrery/workbench, ⌘K search
-5. Tour engine + first two chapters
+5. [x] Tour engine + chapters "Why build a Dyson swarm?" and "From asteroid to swarm" (`?tour=` deep links, pause on interaction)
 6. Gate Tunnel, Topology, Risk lens, sim sandboxes, Deliberation Chamber
 
 ## Consensus issues
