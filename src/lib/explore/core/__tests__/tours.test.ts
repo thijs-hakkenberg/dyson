@@ -2,12 +2,12 @@ import { describe, expect, it } from 'vitest';
 import { TOURS } from '../tours';
 import { getEntity } from '../registry';
 import { MAX_YEAR, TODAY_YEAR } from '../state.svelte';
-import { readFileSync } from 'node:fs';
+import fs from 'fs';
 
 /** Fork ids available for a BOM item's workbench (from its divergent-views.yaml). */
 function forkIds(bomId: string): string[] {
 	const e = getEntity(bomId)!;
-	const yaml = readFileSync(`static/content/bom-specs/${e.phaseId}/${e.bom!.slug}/divergent-views.yaml`, 'utf8');
+	const yaml = fs.readFileSync(`static/content/bom-specs/${e.phaseId}/${e.bom!.slug}/divergent-views.yaml`, 'utf8');
 	return [...yaml.matchAll(/^\s*- id: "([^"]+)"/gm)].map((m) => m[1]);
 }
 
