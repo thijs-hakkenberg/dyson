@@ -136,3 +136,9 @@ Possible readings: gates decide on partial evidence (target TRL not required
 at the gate), the Phase 0 start is later than 2030, or the gate months/TRL
 timelines need reconciling. Sensitive to `ASSUMED_PHASE0_START` (CI-15).
 *Explorer:* Gate Tunnel draws these links in red and counts them per gate.
+
+### CI-19 · TRL assessments cover only 6 of 33 BOM items · open
+`trl-assessment.ts` links technologies to bom-0-2, 0-3, 0-4, 0-5, 0-6 and a few
+others; 27 items (all of Phases 1–3b except where linked) have no technology
+readiness or risk-if-fail rating. *Explorer:* Risk lens marks them
+"unassessed" (grey halo, technology term unknown, not zero).

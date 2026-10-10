@@ -14,7 +14,8 @@
 		physical: 'Orrery',
 		knowledge: 'Research Nebula (K)',
 		gates: 'Gate Tunnel (G)',
-		network: 'Network topology & light-time (N)'
+		network: 'Network topology & light-time (N)',
+		risk: 'Risk & validation (R)'
 	};
 
 	const rq = getOverallStats();
@@ -28,7 +29,7 @@
 		{ id: 'knowledge', label: 'Knowledge', ready: true },
 		{ id: 'gates', label: 'Gates', ready: true },
 		{ id: 'consensus', label: 'Consensus', ready: false },
-		{ id: 'risk', label: 'Risk', ready: false }
+		{ id: 'risk', label: 'Risk', ready: true }
 	];
 
 	const active = $derived(
@@ -44,7 +45,7 @@
 		<div class="mark" aria-hidden="true">◈</div>
 		<div>
 			<div class="title">Project Dyson</div>
-			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : explorer.lens === 'gates' ? 'Gate tunnel' : explorer.lens === 'network' ? 'Network topology' : 'Orrery'}</div>
+			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : explorer.lens === 'gates' ? 'Gate tunnel' : explorer.lens === 'network' ? 'Network topology' : explorer.lens === 'risk' ? 'Risk & validation' : 'Orrery'}</div>
 		</div>
 	</div>
 

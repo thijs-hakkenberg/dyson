@@ -18,6 +18,7 @@
 	import { phaseEmphasis, phaseStarted } from '../core/progress';
 	import FadeGroup from './FadeGroup.svelte';
 	import NetworkLayer from './network/NetworkLayer.svelte';
+	import RiskLayer from './risk/RiskLayer.svelte';
 
 	const { size } = useThrelte();
 	let camera = $state.raw<PerspectiveCamera>();
@@ -130,4 +131,5 @@
 	{#if show('phase-3b')}<FadeGroup factor={emphasis('phase-3b')}><StellarEngineLayer /></FadeGroup>{/if}
 	<Divergences />
 	{#if explorer.lens === 'network'}<NetworkLayer />{/if}
+	{#if explorer.lens === 'risk'}<RiskLayer />{/if}
 </T.Group>

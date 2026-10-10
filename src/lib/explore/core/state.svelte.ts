@@ -19,7 +19,7 @@ export const SPEEDS = [
 	{ label: '50 yr/s', yps: 50 }
 ] as const;
 
-export type Lens = 'physical' | 'knowledge' | 'gates' | 'network';
+export type Lens = 'physical' | 'knowledge' | 'gates' | 'network' | 'risk';
 
 export interface CameraCommand {
 	seq: number;
@@ -159,7 +159,7 @@ class ExplorerState {
 		const s = url.searchParams.get('s');
 		if (s && getEntity(s)) this.selectedId = s;
 		const lens = url.searchParams.get('lens');
-		if (lens === 'knowledge' || lens === 'gates' || lens === 'network') this.lens = lens;
+		if (lens === 'knowledge' || lens === 'gates' || lens === 'network' || lens === 'risk') this.lens = lens;
 		const gate = url.searchParams.get('gate');
 		if (gate) this.gateSel = gate;
 		const rq = url.searchParams.get('rq');

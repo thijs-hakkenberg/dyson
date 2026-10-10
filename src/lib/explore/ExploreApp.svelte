@@ -22,6 +22,8 @@
 	import GatePanel from './hud/GatePanel.svelte';
 	import GateInspector from './hud/GateInspector.svelte';
 	import NetworkPanel from './hud/NetworkPanel.svelte';
+	import RiskPanel from './hud/RiskPanel.svelte';
+	import { riskStore } from './core/riskstore.svelte';
 	import { tour } from './core/tour.svelte';
 	import { getTour } from './core/tours';
 	import ScaleBar from './hud/ScaleBar.svelte';
@@ -61,6 +63,7 @@
 		untrack(() => {
 			if (id) void wb.ensure(id);
 			if (lens === 'knowledge') nebula.ensure();
+			if (lens === 'risk') riskStore.ensure();
 			if (isReady) warp++;
 		});
 	});
@@ -115,6 +118,9 @@
 				else if (explorer.lens === 'knowledge' && explorer.rqId) explorer.rqId = null;
 				else if (explorer.lens === 'gates' && explorer.gateSel) explorer.gateSel = null;
 				else explorer.selectedId = null;
+				break;
+			case 'r':
+				explorer.setLens(explorer.lens === 'risk' ? 'physical' : 'risk');
 				break;
 			case 'n':
 				explorer.setLens(explorer.lens === 'network' ? 'physical' : 'network');
@@ -205,7 +211,7 @@
 		{:else if explorer.hudVisible}
 			<TopBar />
 			<div class="leftcol">
-				{#if explorer.lens === 'network'}<NetworkPanel />{:else}<Telemetry />{/if}
+				{#if explorer.lens === 'network'}<NetworkPanel />{:else if explorer.lens === 'risk'}<RiskPanel />{:else}<Telemetry />{/if}
 				{#if !tour.active}<LayerPanel />{/if}
 			</div>
 			<ScaleBar />
