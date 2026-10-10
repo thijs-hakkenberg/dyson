@@ -54,12 +54,15 @@
 		const focus = getEntity(explorer.focusId) ?? getEntity('sun')!;
 		const target = focus.position(explorer.year);
 
-		if (focus.id !== lastFocus) {
+		if (focus.id !== lastFocus && controls) {
 			const first = lastFocus === '';
 			lastFocus = focus.id;
 			from = [...current];
 			transition = first ? -1 : 0;
-			if (!first) controls?.dollyTo(focus.focusDistance, true);
+			// Never let the camera dolly inside the focused body
+			controls.minDistance = Math.max(1e-6, (focus.radiusAU ?? 0) * 1.1);
+			// Deep links (?f=earth) arrive at the body; the default view stays wide
+			if (!first || focus.id !== 'sun') controls.dollyTo(focus.focusDistance, true);
 		}
 
 		if (transition >= 0) {

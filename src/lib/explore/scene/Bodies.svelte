@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { T } from '@threlte/core';
 	import Tracked from './Tracked.svelte';
 	import Marker from './Marker.svelte';
+	import Planet from './Planet.svelte';
 	import { ENTITIES } from '../core/registry';
 	import { PLANET_COLORS } from '../core/theme';
 	import { explorer } from '../core/state.svelte';
@@ -24,10 +24,7 @@
 
 {#each bodies as b (b.id)}
 	<Tracked position={b.position}>
-		<T.Mesh>
-			<T.SphereGeometry args={[b.radiusAU, 48, 24]} />
-			<T.MeshStandardMaterial color={PLANET_COLORS[b.id]} roughness={0.9} metalness={0} />
-		</T.Mesh>
+		<Planet body={b} />
 		{#if b.kind !== 'moon' || explorer.cameraDistance < 0.05 || explorer.selectedId === 'moon'}
 		<Marker
 			id={b.id}

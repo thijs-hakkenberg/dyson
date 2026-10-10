@@ -8,6 +8,7 @@
 	import Timeline from './hud/Timeline.svelte';
 	import Inspector from './hud/Inspector.svelte';
 	import LayerPanel from './hud/LayerPanel.svelte';
+	import Telemetry from './hud/Telemetry.svelte';
 	import ScaleBar from './hud/ScaleBar.svelte';
 	import CommandPalette from './hud/CommandPalette.svelte';
 	import { explorer, SPEEDS, TODAY_YEAR } from './core/state.svelte';
@@ -101,7 +102,10 @@
 
 		{#if explorer.hudVisible}
 			<TopBar />
-			<LayerPanel />
+			<div class="leftcol">
+				<Telemetry />
+				<LayerPanel />
+			</div>
 			<ScaleBar />
 			<Inspector />
 			<Timeline />
@@ -116,6 +120,22 @@
 		position: absolute;
 		inset: 0;
 		z-index: 0;
+	}
+	.leftcol {
+		position: absolute;
+		top: 92px;
+		left: 12px;
+		bottom: 150px;
+		width: 264px;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+		overflow-y: auto;
+		scrollbar-width: thin;
+		pointer-events: none;
+	}
+	.leftcol > :global(*) {
+		pointer-events: auto;
 	}
 	.hint {
 		position: absolute;
@@ -135,6 +155,10 @@
 	@media (max-width: 900px) {
 		.hint {
 			display: none;
+		}
+		.leftcol {
+			bottom: auto;
+			max-height: 40vh;
 		}
 	}
 </style>

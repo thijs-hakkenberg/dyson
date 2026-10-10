@@ -6,7 +6,7 @@
 	import { NEA_COUNT } from '../core/nea';
 	import { formatCount } from '../core/units';
 
-	let open = $state(true);
+	let open = $state(false);
 
 	const layerIds = Object.keys(LAYER_LABELS) as LayerId[];
 	const coarseYear = $derived(Math.round(explorer.year * 4) / 4);
@@ -55,19 +55,17 @@
 			</ul>
 		{/if}
 		<p class="foot">Bodies and distances true scale. Markers and swarm points are fixed screen size. Matrioshka layers below 1000 K false-coloured.</p>
+		<p class="foot">
+			Planet textures: <a href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noopener">Solar System Scope</a>,
+			<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.
+		</p>
 	{/if}
 </aside>
 
 <style>
 	.layers {
-		position: absolute;
-		top: 92px;
-		left: 12px;
-		width: 232px;
 		padding: 8px 12px 10px;
-		max-height: calc(100vh - 250px);
-		overflow-y: auto;
-		scrollbar-width: thin;
+		flex: none;
 	}
 	.layers.closed {
 		width: auto;
@@ -154,16 +152,13 @@
 		max-width: 150px;
 		color: var(--hud-dim);
 	}
+	.foot a {
+		color: var(--hud-dim);
+	}
 	.foot {
 		margin: 10px 0 0;
 		font-size: 10px;
 		color: var(--hud-faint);
 		line-height: 1.45;
-	}
-	@media (max-width: 900px) {
-		.layers {
-			top: auto;
-			bottom: 150px;
-		}
 	}
 </style>

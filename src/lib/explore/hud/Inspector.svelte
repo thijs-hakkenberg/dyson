@@ -4,6 +4,7 @@
 	import { planetElements, orbitalPeriodYears, type PlanetId } from '../core/ephemeris';
 	import { phaseWindow } from '../core/timeline';
 	import { itemProgress } from '../core/progress';
+	import { metricsFor, formatPower, formatRate, type Range } from '../core/metrics';
 	import { MODEL_COLORS, PHASE_COLORS, HUD } from '../core/theme';
 	import { formatCount, formatDistance, formatLightTime, formatUSD, yearToJD } from '../core/units';
 	import type { ModelName } from '../core/placements';
@@ -118,6 +119,7 @@
 			{#if e.kind === 'bom' && e.bom}
 				{@const b = e.bom}
 				{@const prog = itemProgress(e.id, e.phaseId!, explorer.year)}
+				{@const m = metricsFor(e.id)}
 				<p>{b.description}</p>
 				<dl>
 					<dt>Quantity</dt><dd>{formatCount(b.quantity)} {b.unit}</dd>
@@ -134,6 +136,24 @@
 						{Math.round(prog * 100)}% <span class="dim">(projection)</span>
 					</dd>
 				</dl>
+
+				{#if m && (m.genW || m.useW || m.throughput || m.unresolved)}
+					<h3>Operations · per unit</h3>
+					<dl>
+						{#if m.genW}<dt>Output</dt><dd>{@render rng(m.genW, formatPower)}</dd>{/if}
+						{#if m.useW}<dt>Consumption</dt><dd>{@render rng(m.useW, formatPower)}</dd>{/if}
+						{#if m.throughput}
+							<dt>Throughput</dt>
+							<dd>{@render rng(m.throughput.perHour, formatRate)} <span class="dim">{m.throughput.unit} /h</span></dd>
+							{#if prog > 0}
+								<dt>Fleet at T</dt>
+								<dd>{formatRate(m.throughput.perHour.base * b.quantity * prog)} <span class="dim">{m.throughput.unit} /h</span></dd>
+							{/if}
+						{/if}
+					</dl>
+					{#if m.unresolved}<p class="src warn">Unresolved: {m.unresolved}</p>{/if}
+					<p class="src">{m.source}</p>
+				{/if}
 
 				{#if e.placement}
 					<h3>Placement</h3>
@@ -207,6 +227,11 @@
 		</div>
 	</aside>
 {/if}
+
+{#snippet rng(r: Range, fmt: (n: number) => string)}
+	{fmt(r.base)}{#if r.derived}<span class="dim" title="Geometric mean of divergent model values; no consensus baseline">*</span>{/if}
+	{#if r.max > r.min * 1.01}<br /><span class="dim">{fmt(r.min)} – {fmt(r.max)}</span>{/if}
+{/snippet}
 
 <style>
 	.inspector {
@@ -287,6 +312,9 @@
 	.src {
 		color: var(--hud-faint);
 		font-size: 11px;
+	}
+	.warn {
+		color: var(--hud-warn);
 	}
 	.bar {
 		height: 4px;

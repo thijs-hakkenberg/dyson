@@ -1,6 +1,18 @@
 <script lang="ts">
 	import { T } from '@threlte/core';
-	import { AdditiveBlending, CanvasTexture, SRGBColorSpace } from 'three';
+	import {
+		AdditiveBlending,
+		CanvasTexture,
+		Color,
+		MeshBasicMaterial,
+		SRGBColorSpace,
+		TextureLoader,
+		type Mesh,
+		type Texture
+	} from 'three';
+	import { useTask } from '@threlte/core';
+	import { explorer } from '../core/state.svelte';
+	import { BODY_LOOK, spinAngle } from '../core/bodies';
 	import Marker from './Marker.svelte';
 	import { BODY_RADIUS_KM, kmToAU, blackbodyRGB } from '../core/units';
 
@@ -24,14 +36,31 @@
 		return tex;
 	}
 	const glow = glowTexture();
+
+	// Photosphere texture only matters once the disc is resolved; load it on approach
+	let map = $state.raw<Texture>();
+	let requested = false;
+	$effect(() => {
+		if (requested || explorer.focusId !== 'sun' || explorer.cameraDistance > 0.2) return;
+		requested = true;
+		new TextureLoader().load(BODY_LOOK.sun.map, (t) => {
+			t.colorSpace = SRGBColorSpace;
+			map = t;
+		});
+	});
+	const flatMat = new MeshBasicMaterial({ color: new Color(r, g, b), toneMapped: false });
+	const texMat = $derived(map ? new MeshBasicMaterial({ map, color: new Color(1.15, 1.1, 1.05), toneMapped: false }) : undefined);
+	let disc = $state.raw<Mesh>();
+	useTask(() => {
+		if (disc) disc.rotation.y = spinAngle(BODY_LOOK.sun.rotationHours, explorer.year);
+	});
 </script>
 
 <T.PointLight intensity={2.2} decay={0} color="#fff4e6" />
 <T.AmbientLight intensity={0.06} />
 
-<T.Mesh>
+<T.Mesh bind:ref={disc} material={texMat ?? flatMat}>
 	<T.SphereGeometry args={[R, 64, 32]} />
-	<T.MeshBasicMaterial color={[r, g, b]} toneMapped={false} />
 </T.Mesh>
 
 <!-- Screen-space glow so the Sun reads at any distance; not a physical size -->
