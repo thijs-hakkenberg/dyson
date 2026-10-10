@@ -57,7 +57,8 @@
 		<p class="foot">Bodies and distances true scale. Markers and swarm points are fixed screen size. Matrioshka layers below 1000 K false-coloured.</p>
 		<p class="foot">
 			Planet textures: <a href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noopener">Solar System Scope</a>,
-			<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.
+			<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. Milky Way:
+			<a href="https://www.eso.org/public/images/eso0932a/" target="_blank" rel="noopener">ESO/S. Brunier</a>, CC BY 4.0.
 		</p>
 	{/if}
 </aside>

@@ -20,9 +20,10 @@ export const SPEEDS = [
 ] as const;
 
 export type LayerId =
-	'orbits' | 'labels' | 'nea' | 'divergence' | 'phase-0' | 'phase-1' | 'phase-2' | 'phase-3a' | 'phase-3b';
+	'sky' | 'orbits' | 'labels' | 'nea' | 'divergence' | 'phase-0' | 'phase-1' | 'phase-2' | 'phase-3a' | 'phase-3b';
 
 export const LAYER_LABELS: Record<LayerId, string> = {
+	sky: 'Milky Way',
 	orbits: 'Orbits',
 	labels: 'Labels',
 	nea: 'NEA population',
@@ -43,6 +44,7 @@ class ExplorerState {
 	paletteOpen = $state(false);
 	hudVisible = $state(true);
 	layers = $state<Record<LayerId, boolean>>({
+		sky: true,
 		orbits: true,
 		labels: true,
 		nea: true,

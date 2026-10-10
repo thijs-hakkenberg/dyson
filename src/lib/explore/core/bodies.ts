@@ -24,7 +24,6 @@ export interface BodyLook {
 const tex = (n: string) => `${TEXTURE_BASE}/2k_${n}.webp`;
 
 export const BODY_LOOK: Record<string, BodyLook> = {
-	sun: { map: tex('sun'), obliquity: 7.25, rotationHours: 609.12 },
 	mercury: { map: tex('mercury'), obliquity: 0.03, rotationHours: 1407.6 },
 	venus: { map: tex('venus_atmosphere'), obliquity: 177.4, rotationHours: -5832.5 },
 	earth: {

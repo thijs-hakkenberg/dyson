@@ -2,7 +2,7 @@
 	import { T, useTask, useThrelte } from '@threlte/core';
 	import { CameraControls, type CameraControlsRef } from '@threlte/extras';
 	import type { Group, PerspectiveCamera } from 'three';
-	import Starfield from './Starfield.svelte';
+	import MilkyWay from './MilkyWay.svelte';
 	import Sun from './Sun.svelte';
 	import Bodies from './Bodies.svelte';
 	import Orbits from './Orbits.svelte';
@@ -93,7 +93,7 @@
 	<CameraControls bind:ref={controls} />
 </T.PerspectiveCamera>
 
-<Starfield />
+{#if explorer.layers.sky}<MilkyWay />{/if}
 
 <T.Group bind:ref={world}>
 	<Sun />

@@ -13,6 +13,13 @@
 	import CommandPalette from './hud/CommandPalette.svelte';
 	import { explorer, SPEEDS, TODAY_YEAR } from './core/state.svelte';
 	import './hud/hud.css';
+	import { provideSunSurface } from './sun/context';
+	import type { SunSurfaceFactory } from './sun/types';
+
+	/** Optional external Sun surface renderer (dependency injection; see sun/types.ts) */
+	let { sunSurface }: { sunSurface?: SunSurfaceFactory } = $props();
+	// svelte-ignore state_referenced_locally
+	provideSunSurface(sunSurface);
 
 	let webgl = $state<boolean | null>(null);
 	let ready = $state(false);

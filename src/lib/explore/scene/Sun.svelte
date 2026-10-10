@@ -1,24 +1,17 @@
 <script lang="ts">
-	import { T } from '@threlte/core';
-	import {
-		AdditiveBlending,
-		CanvasTexture,
-		Color,
-		MeshBasicMaterial,
-		SRGBColorSpace,
-		TextureLoader,
-		type Mesh,
-		type Texture
-	} from 'three';
-	import { useTask } from '@threlte/core';
+	import { T, useTask, useThrelte } from '@threlte/core';
+	import { onDestroy } from 'svelte';
+	import { AdditiveBlending, CanvasTexture, SRGBColorSpace } from 'three';
 	import { explorer } from '../core/state.svelte';
-	import { BODY_LOOK, spinAngle } from '../core/bodies';
 	import Marker from './Marker.svelte';
-	import { BODY_RADIUS_KM, kmToAU, blackbodyRGB } from '../core/units';
+	import { BODY_RADIUS_KM, kmToAU } from '../core/units';
+	import { useSunSurface } from '../sun/context';
 
 	const R = kmToAU(BODY_RADIUS_KM.sun);
-	// Photosphere colour from its effective temperature (5772 K)
-	const [r, g, b] = blackbodyRGB(5772);
+
+	// Surface renderer is injected (see sun/types.ts); default is the procedural photosphere
+	const surface = useSunSurface()({ radius: R });
+	onDestroy(() => surface.dispose());
 
 	function glowTexture() {
 		const c = document.createElement('canvas');
@@ -37,31 +30,22 @@
 	}
 	const glow = glowTexture();
 
-	// Photosphere texture only matters once the disc is resolved; load it on approach
-	let map = $state.raw<Texture>();
-	let requested = false;
-	$effect(() => {
-		if (requested || explorer.focusId !== 'sun' || explorer.cameraDistance > 0.2) return;
-		requested = true;
-		new TextureLoader().load(BODY_LOOK.sun.map, (t) => {
-			t.colorSpace = SRGBColorSpace;
-			map = t;
-		});
-	});
-	const flatMat = new MeshBasicMaterial({ color: new Color(r, g, b), toneMapped: false });
-	const texMat = $derived(map ? new MeshBasicMaterial({ map, color: new Color(1.15, 1.1, 1.05), toneMapped: false }) : undefined);
-	let disc = $state.raw<Mesh>();
+	// The screen-space glow would wash out the resolved disc; fade it on approach
+	const glowOpacity = $derived(
+		explorer.focusId === 'sun' ? Math.min(1, Math.max(0, (explorer.cameraDistance - 0.03) / 0.15)) : 1
+	);
+
+	const { camera } = useThrelte();
+	const start = performance.now();
 	useTask(() => {
-		if (disc) disc.rotation.y = spinAngle(BODY_LOOK.sun.rotationHours, explorer.year);
+		surface.update({ year: explorer.year, elapsed: (performance.now() - start) / 1000, camera: camera.current });
 	});
 </script>
 
 <T.PointLight intensity={2.2} decay={0} color="#fff4e6" />
 <T.AmbientLight intensity={0.06} />
 
-<T.Mesh bind:ref={disc} material={texMat ?? flatMat}>
-	<T.SphereGeometry args={[R, 64, 32]} />
-</T.Mesh>
+<T is={surface.object} />
 
 <!-- Screen-space glow so the Sun reads at any distance; not a physical size -->
 <T.Sprite scale={[0.09, 0.09, 1]}>
@@ -71,6 +55,7 @@
 		blending={AdditiveBlending}
 		depthWrite={false}
 		transparent
+		opacity={glowOpacity}
 		toneMapped={false}
 	/>
 </T.Sprite>
