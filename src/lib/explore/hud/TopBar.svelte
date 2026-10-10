@@ -13,7 +13,8 @@
 	const LENS_TITLES: Record<string, string> = {
 		physical: 'Orrery',
 		knowledge: 'Research Nebula (K)',
-		gates: 'Gate Tunnel (G)'
+		gates: 'Gate Tunnel (G)',
+		network: 'Network topology & light-time (N)'
 	};
 
 	const rq = getOverallStats();
@@ -22,6 +23,7 @@
 
 	const LENSES = [
 		{ id: 'physical', label: 'Physical', ready: true },
+		{ id: 'network', label: 'Network', ready: true },
 		{ id: 'logistics', label: 'Logistics', ready: false },
 		{ id: 'knowledge', label: 'Knowledge', ready: true },
 		{ id: 'gates', label: 'Gates', ready: true },
@@ -42,7 +44,7 @@
 		<div class="mark" aria-hidden="true">◈</div>
 		<div>
 			<div class="title">Project Dyson</div>
-			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : explorer.lens === 'gates' ? 'Gate tunnel' : 'Orrery'}</div>
+			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : explorer.lens === 'gates' ? 'Gate tunnel' : explorer.lens === 'network' ? 'Network topology' : 'Orrery'}</div>
 		</div>
 	</div>
 

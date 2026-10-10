@@ -21,6 +21,7 @@
 	import GateTunnelScene from './scene/gates/GateTunnelScene.svelte';
 	import GatePanel from './hud/GatePanel.svelte';
 	import GateInspector from './hud/GateInspector.svelte';
+	import NetworkPanel from './hud/NetworkPanel.svelte';
 	import { tour } from './core/tour.svelte';
 	import { getTour } from './core/tours';
 	import ScaleBar from './hud/ScaleBar.svelte';
@@ -115,6 +116,9 @@
 				else if (explorer.lens === 'gates' && explorer.gateSel) explorer.gateSel = null;
 				else explorer.selectedId = null;
 				break;
+			case 'n':
+				explorer.setLens(explorer.lens === 'network' ? 'physical' : 'network');
+				break;
 			case 'g':
 				explorer.setLens(explorer.lens === 'gates' ? 'physical' : 'gates');
 				break;
@@ -201,7 +205,7 @@
 		{:else if explorer.hudVisible}
 			<TopBar />
 			<div class="leftcol">
-				<Telemetry />
+				{#if explorer.lens === 'network'}<NetworkPanel />{:else}<Telemetry />{/if}
 				{#if !tour.active}<LayerPanel />{/if}
 			</div>
 			<ScaleBar />

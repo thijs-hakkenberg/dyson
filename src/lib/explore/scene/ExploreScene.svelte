@@ -17,6 +17,7 @@
 	import { getEntity, type Vec3 } from '../core/registry';
 	import { phaseEmphasis, phaseStarted } from '../core/progress';
 	import FadeGroup from './FadeGroup.svelte';
+	import NetworkLayer from './network/NetworkLayer.svelte';
 
 	const { size } = useThrelte();
 	let camera = $state.raw<PerspectiveCamera>();
@@ -128,4 +129,5 @@
 	{#if show('phase-3a')}<FadeGroup factor={emphasis('phase-3a')}><MatrioshkaLayer /></FadeGroup>{/if}
 	{#if show('phase-3b')}<FadeGroup factor={emphasis('phase-3b')}><StellarEngineLayer /></FadeGroup>{/if}
 	<Divergences />
+	{#if explorer.lens === 'network'}<NetworkLayer />{/if}
 </T.Group>

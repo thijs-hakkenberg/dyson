@@ -35,7 +35,7 @@
    - [x] "Phase 1 in depth" — all seven P1 items, node forks, hand-off to the nebula
    - [x] In-depth tours for P0, P2, P3a (Matrioshka), P3b (Stellar engine)
 6. [x] Gate Tunnel (Gates lens, G) — gates as criteria rings on a P0 month axis, TRL columns at projected arrival, late-dependency links
-   - [ ] Network Topology
+   - [x] Network Topology (Network lens, N) — P0 ops links, swarm authority → Shepherd hierarchy (consensus ratio), inter-shell trunks; true light-time, pulses at 60× c
    - [ ] Risk & Validation lens
    - [ ] Simulation sandboxes
    - [ ] Deliberation Chamber
