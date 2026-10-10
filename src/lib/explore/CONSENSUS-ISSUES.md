@@ -142,3 +142,11 @@ timelines need reconciling. Sensitive to `ASSUMED_PHASE0_START` (CI-15).
 others; 27 items (all of Phases 1–3b except where linked) have no technology
 readiness or risk-if-fail rating. *Explorer:* Risk lens marks them
 "unassessed" (grey halo, technology term unknown, not zero).
+
+### CI-20 · Phase 0 mining capacity is ~12× the station's processing capacity · open
+`phase-0/mining-robots`: 20 robots × 2–5 t/h continuous excavation ≈ 350–880 kt/yr.
+`phase-0/material-processing-station`: 50,000 t/yr at full capacity. Either the
+mining fleet is oversized, the robots run at a low duty cycle (not stated), or
+concentration on board removes ~90% of mass before transport (consensus mentions
+"on-board material processing for initial concentration" but gives no ratio).
+*Explorer:* Logistics lens shows the station as the ore chain's bottleneck.

@@ -16,6 +16,7 @@
 		gates: 'Gate Tunnel (G)',
 		network: 'Network topology & light-time (N)',
 		risk: 'Risk & validation (R)',
+		logistics: 'Logistics · mass flow (L)',
 		consensus: 'Deliberation chamber (C)'
 	};
 
@@ -26,7 +27,7 @@
 	const LENSES = [
 		{ id: 'physical', label: 'Physical', ready: true },
 		{ id: 'network', label: 'Network', ready: true },
-		{ id: 'logistics', label: 'Logistics', ready: false },
+		{ id: 'logistics', label: 'Logistics', ready: true },
 		{ id: 'knowledge', label: 'Knowledge', ready: true },
 		{ id: 'gates', label: 'Gates', ready: true },
 		{ id: 'consensus', label: 'Consensus', ready: true },
@@ -46,7 +47,7 @@
 		<div class="mark" aria-hidden="true">◈</div>
 		<div>
 			<div class="title">Project Dyson</div>
-			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : explorer.lens === 'gates' ? 'Gate tunnel' : explorer.lens === 'network' ? 'Network topology' : explorer.lens === 'risk' ? 'Risk & validation' : explorer.lens === 'consensus' ? 'Deliberation chamber' : 'Orrery'}</div>
+			<div class="eyebrow">System operations · {explorer.workbenchId ? 'BOM workbench' : explorer.lens === 'knowledge' ? 'Research nebula' : explorer.lens === 'gates' ? 'Gate tunnel' : explorer.lens === 'network' ? 'Network topology' : explorer.lens === 'risk' ? 'Risk & validation' : explorer.lens === 'logistics' ? 'Logistics' : explorer.lens === 'consensus' ? 'Deliberation chamber' : 'Orrery'}</div>
 		</div>
 	</div>
 

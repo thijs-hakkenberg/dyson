@@ -23,6 +23,7 @@
 	import GateInspector from './hud/GateInspector.svelte';
 	import NetworkPanel from './hud/NetworkPanel.svelte';
 	import RiskPanel from './hud/RiskPanel.svelte';
+	import LogisticsPanel from './hud/LogisticsPanel.svelte';
 	import SandboxDrawer from './hud/SandboxDrawer.svelte';
 	import ShortcutHelp from './hud/ShortcutHelp.svelte';
 	import { startDeclutter } from './hud/declutter';
@@ -158,6 +159,9 @@
 			case 'r':
 				explorer.setLens(explorer.lens === 'risk' ? 'physical' : 'risk');
 				break;
+			case 'l':
+				explorer.setLens(explorer.lens === 'logistics' ? 'physical' : 'logistics');
+				break;
 			case 'n':
 				explorer.setLens(explorer.lens === 'network' ? 'physical' : 'network');
 				break;
@@ -257,7 +261,7 @@
 		{:else if explorer.hudVisible}
 			<TopBar />
 			<div class="leftcol">
-				{#if explorer.lens === 'network'}<NetworkPanel />{:else if explorer.lens === 'risk'}<RiskPanel />{:else}<Telemetry />{/if}
+				{#if explorer.lens === 'network'}<NetworkPanel />{:else if explorer.lens === 'risk'}<RiskPanel />{:else if explorer.lens === 'logistics'}<LogisticsPanel />{:else}<Telemetry />{/if}
 				{#if !tour.active}<LayerPanel />{/if}
 			</div>
 			<ScaleBar />

@@ -19,6 +19,7 @@
 	import FadeGroup from './FadeGroup.svelte';
 	import NetworkLayer from './network/NetworkLayer.svelte';
 	import RiskLayer from './risk/RiskLayer.svelte';
+	import LogisticsLayer from './logistics/LogisticsLayer.svelte';
 
 	const { size } = useThrelte();
 	let camera = $state.raw<PerspectiveCamera>();
@@ -132,4 +133,5 @@
 	<Divergences />
 	{#if explorer.lens === 'network'}<NetworkLayer />{/if}
 	{#if explorer.lens === 'risk'}<RiskLayer />{/if}
+	{#if explorer.lens === 'logistics'}<LogisticsLayer />{/if}
 </T.Group>

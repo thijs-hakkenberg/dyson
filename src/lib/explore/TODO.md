@@ -14,6 +14,9 @@
 
 - [x] Galactic motion: sky re-orients with the Sun's galactic orbit in every view; deep-time projection (0–250 Myr) with/without the stellar engine, galactic inset map
 
+- [x] Logistics lens (L) — mass-flow chains (ore, lunar launch, swarm manufacturing, shell feedstock, stellar fuel) with bottlenecks
+- [x] UI polish pass 1 — label declutter, collapsible telemetry, mobile layout, calmer transitions
+
 ## Detailed element models (after the remaining views)
 
 - [ ] Detailed 3D models for BOM elements (collector units/satellites, assembly node, processing station,

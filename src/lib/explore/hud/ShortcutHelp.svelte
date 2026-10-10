@@ -26,6 +26,7 @@
 				['K', 'Knowledge · Research Nebula'],
 				['G', 'Gates · Gate Tunnel'],
 				['N', 'Network · topology & light-time'],
+				['L', 'Logistics · mass flow & bottlenecks'],
 				['R', 'Risk & validation'],
 				['C', 'Consensus · Deliberation Chamber']
 			]

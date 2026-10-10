@@ -19,7 +19,7 @@ export const SPEEDS = [
 	{ label: '50 yr/s', yps: 50 }
 ] as const;
 
-export type Lens = 'physical' | 'knowledge' | 'gates' | 'network' | 'risk' | 'consensus';
+export type Lens = 'physical' | 'knowledge' | 'gates' | 'network' | 'risk' | 'consensus' | 'logistics';
 
 export interface CameraCommand {
 	seq: number;
@@ -174,8 +174,8 @@ class ExplorerState {
 		const s = url.searchParams.get('s');
 		if (s && getEntity(s)) this.selectedId = s;
 		const lens = url.searchParams.get('lens');
-		if (lens === 'knowledge' || lens === 'gates' || lens === 'network' || lens === 'risk' || lens === 'consensus')
-			this.lens = lens;
+		if (['knowledge', 'gates', 'network', 'risk', 'consensus', 'logistics'].includes(lens ?? ''))
+			this.lens = lens as Lens;
 		const dt = Number(url.searchParams.get('deep'));
 		if (Number.isFinite(dt) && dt > 0) this.deepMyrFromUrl = Math.min(250, dt);
 		const dl = url.searchParams.get('dl');
