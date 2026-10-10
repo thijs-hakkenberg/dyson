@@ -17,11 +17,20 @@
 		TextureLoader
 	} from 'three';
 	import { SCENE_TO_GAL, toMat3Elements } from '../core/sky';
+	import { useTask } from '@threlte/core';
+	import { deepTime } from '../core/deeptime.svelte';
 	import { TEXTURE_BASE } from '../core/bodies';
 
 	let { intensity = 0.45 }: { intensity?: number } = $props();
 
 	const sceneToGal = new Matrix3().fromArray(toMat3Elements(SCENE_TO_GAL));
+	const base = new Matrix3().fromArray(toMat3Elements(SCENE_TO_GAL));
+	const rot = new Matrix3();
+	// Re-orient the sky for the Sun's galactic motion (tiny within the timeline, large in deep time)
+	useTask(() => {
+		rot.fromArray(toMat3Elements(deepTime.matrix));
+		sceneToGal.multiplyMatrices(rot, base);
+	});
 
 	// svelte-ignore state_referenced_locally
 	const material = new ShaderMaterial({

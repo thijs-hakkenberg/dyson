@@ -12,6 +12,8 @@
 - [ ] **Prettier UI** — open; user to give feedback on what feels off
 - [ ] Crisp point stars from a real catalogue (HYG / Gaia bright stars) layered over the Milky Way image
 
+- [x] Galactic motion: sky re-orients with the Sun's galactic orbit in every view; deep-time projection (0–250 Myr) with/without the stellar engine, galactic inset map
+
 ## Detailed element models (after the remaining views)
 
 - [ ] Detailed 3D models for BOM elements (collector units/satellites, assembly node, processing station,

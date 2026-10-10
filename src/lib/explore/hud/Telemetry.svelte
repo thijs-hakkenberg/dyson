@@ -3,6 +3,7 @@
 	import { telemetryAt, formatPower, formatRate, formatPerHour, formatFlops, formatSci, formatDisplacement, L_SUN_W, type Sum } from '../core/metrics';
 	import { formatCount, formatUSD } from '../core/units';
 	import { PHASE_COLORS } from '../core/theme';
+	import DeepTime from './DeepTime.svelte';
 
 	let open = $state(true);
 	let expanded = $state<string | null>(null);
@@ -137,6 +138,8 @@
 				{/each}
 			</ul>
 		</div>
+
+		<DeepTime />
 
 		{#if t.unresolved.length}
 			<p class="warn">

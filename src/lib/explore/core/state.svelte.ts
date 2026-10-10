@@ -68,6 +68,8 @@ class ExplorerState {
 	});
 	/** Lens: 'physical' = orrery, 'knowledge' = Research Nebula */
 	lens = $state<Lens>('physical');
+	/** Deep-time value requested by the URL (applied by the deep-time store) */
+	deepMyrFromUrl = 0;
 	/** Deliberation Chamber: open discussion slug, visible round (1-based; rounds+1 = conclusion), picked element */
 	delibSlug = $state<string | null>(null);
 	delibRound = $state(1);
@@ -174,6 +176,8 @@ class ExplorerState {
 		const lens = url.searchParams.get('lens');
 		if (lens === 'knowledge' || lens === 'gates' || lens === 'network' || lens === 'risk' || lens === 'consensus')
 			this.lens = lens;
+		const dt = Number(url.searchParams.get('deep'));
+		if (Number.isFinite(dt) && dt > 0) this.deepMyrFromUrl = Math.min(250, dt);
 		const dl = url.searchParams.get('dl');
 		if (dl) this.delibSlug = dl;
 		const gate = url.searchParams.get('gate');
