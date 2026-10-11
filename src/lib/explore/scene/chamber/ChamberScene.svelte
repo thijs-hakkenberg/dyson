@@ -22,14 +22,17 @@
 		familyOf,
 		roundScores,
 		roundVotes,
+		participants,
 		seatPosition
 	} from '../../core/deliberation';
 	import { MODEL_COLORS } from '../../core/theme';
-	import { DISCUSSION_MODELS, MODEL_DISPLAY_NAMES, type DiscussionModelId } from '$lib/types/discussion';
+	import { MODEL_DISPLAY_NAMES, type DiscussionModelId } from '$lib/types/discussion';
 
 	interactivity();
 
 	const thread = $derived(delib.thread);
+	const seats = $derived(participants(thread));
+	const seat = (id: DiscussionModelId, round: number) => seatPosition(id, round, seats);
 	const rounds = $derived(thread?.rounds ?? []);
 	const shown = $derived(Math.min(explorer.delibRound, rounds.length));
 	const concluded = $derived(!!thread && explorer.delibRound > rounds.length && thread.status === 'concluded');
@@ -39,8 +42,8 @@
 
 	/** Vote arc between two seats on a round's layer, bowing toward the centre and up. */
 	function arcGeo(voter: DiscussionModelId, target: DiscussionModelId, round: number, k: number) {
-		const a = v(seatPosition(voter, round - 1)).add(new Vector3(0, 0.8, 0));
-		const b = v(seatPosition(target, round - 1)).add(new Vector3(0, 0.8, 0));
+		const a = v(seat(voter, round - 1)).add(new Vector3(0, 0.8, 0));
+		const b = v(seat(target, round - 1)).add(new Vector3(0, 0.8, 0));
 		const mid = a.clone().lerp(b, 0.5).multiplyScalar(0.35 + 0.08 * k);
 		mid.y = (round - 1) * ROUND_HEIGHT + 1.6 + 0.25 * k;
 		return new TubeGeometry(new CatmullRomCurve3([a, mid, b]), 32, 0.045, 6);
@@ -129,8 +132,8 @@
 	{/each}
 
 	<!-- Seats -->
-	{#each DISCUSSION_MODELS as m (m)}
-		{@const p = seatPosition(m, 0)}
+	{#each seats as m (m)}
+		{@const p = seat(m, 0)}
 		{@const c = MODEL_COLORS[familyOf(m)]}
 		<T.Group position={p}>
 			<T.Mesh position.y={0.6}>
@@ -159,7 +162,7 @@
 		{@const i = ra.r.roundNumber - 1}
 		{@const active = ra.r.roundNumber === explorer.delibRound}
 		{#each ra.r.responses as resp (resp.modelId)}
-			{@const p = seatPosition(resp.modelId, i)}
+			{@const p = seat(resp.modelId, i)}
 			{@const h = 0.4 + 1.6 * (words(resp) / maxWords)}
 			{@const c = MODEL_COLORS[familyOf(resp.modelId)]}
 			<T.Mesh
@@ -211,7 +214,7 @@
 					}}
 				/>
 			{:else}
-				{@const p = seatPosition(a.voter, i)}
+				{@const p = seat(a.voter, i)}
 				<T.Mesh position={[p[0], p[1] + 1.15, p[2]]} rotation.x={Math.PI / 2}>
 					<T.TorusGeometry args={[0.8, 0.03, 6, 40]} />
 					<T.MeshBasicMaterial color={VOTE_COLORS[a.vote]} transparent opacity={active ? 0.7 : 0.15} />

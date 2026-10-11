@@ -20,47 +20,34 @@
  *   # Force conclude and generate summary
  *   node scripts/run-discussion.js --question=swarm-power-architecture-end-use --conclude
  *
- * Environment variables:
- *   DATABRICKS_TOKEN - API token for Databricks
- *   DATABRICKS_HOST - Databricks host URL (optional, has default)
+ *   # Choose the panel (default: feb = Claude Opus 4.6, Gemini 3 Pro, GPT-5.2)
+ *   node scripts/run-discussion.js --question=<slug> --auto --panel=may
+ *   node scripts/run-discussion.js --question=<slug> --auto --panel=latest --synthesizer=claude-opus-4-7
+ *   node scripts/run-discussion.js --question=<slug> --models=claude-opus-4-7,gemini-3-1-pro,gpt-5-5-pro
+ *   node scripts/run-discussion.js --list-models | --discover
+ *
+ * Environment variables (see scripts/lib/llm.js):
+ *   DATABRICKS_TOKEN or --profile=<databricks CLI profile>
+ *   DATABRICKS_HOST / DATABRICKS_GATEWAY_HOST - workspaces (optional, have defaults)
+ *
+ * Every exchange is archived as JSON under data/raw-exchanges/discussions/<slug>/.
  */
 
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
+import { MODELS, PANELS, archiveRaw, handleInfoFlags, panelArgs, queryModel, resolvePanel } from './lib/llm.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 
-// Configuration
-const DATABRICKS_HOST = process.env.DATABRICKS_HOST || process.env.DATABRICKS_WORKSPACE || 'https://adb-6239133969168510.10.azuredatabricks.net';
-const DATABRICKS_TOKEN = process.env.DATABRICKS_TOKEN;
-
-// Model configurations (reused from query-bom-specs.js)
-const MODELS = {
-	'claude-opus-4-6': {
-		id: 'databricks-claude-opus-4-6',
-		name: 'Claude Opus 4.6',
-		filename: 'claude-opus-4-6.md',
-		endpoint: '/serving-endpoints/databricks-claude-opus-4-6/invocations'
-	},
-	'gemini-3-pro': {
-		id: 'databricks-gemini-3-pro',
-		name: 'Gemini 3 Pro',
-		filename: 'gemini-3-pro.md',
-		endpoint: '/serving-endpoints/databricks-gemini-3-pro/invocations'
-	},
-	'gpt-5-2': {
-		id: 'databricks-gpt-5-2',
-		name: 'GPT-5.2',
-		filename: 'gpt-5-2.md',
-		endpoint: '/serving-endpoints/databricks-gpt-5-2/invocations'
-	}
-};
-
-const DISCUSSION_MODELS = ['claude-opus-4-6', 'gemini-3-pro', 'gpt-5-2'];
+// Models and panel (scripts/lib/llm.js). The panel is chosen in main(); feb by default
+// so existing discussions continue with the models that started them.
+let DISCUSSION_MODELS = [...PANELS.feb];
+let SYNTHESIZER = 'claude-opus-4-6';
+let RAW_DIR = path.join(PROJECT_ROOT, 'data/raw-exchanges/discussions');
 
 // Default discussion configuration
 const DEFAULT_CONFIG = {
@@ -83,51 +70,15 @@ const VOTE_SCORES = {
  * Query Databricks LLM API
  */
 async function queryDatabricks(modelKey, prompt, options = {}) {
-	if (!DATABRICKS_TOKEN) {
-		throw new Error('DATABRICKS_TOKEN environment variable is required');
-	}
-
-	const { maxTokens = 16000, systemPrompt } = options;
-	const model = MODELS[modelKey];
-	const endpoint = `${DATABRICKS_HOST}${model.endpoint}`;
-
-	const messages = [];
-	if (systemPrompt) {
-		messages.push({ role: 'system', content: systemPrompt });
-	}
-	messages.push({ role: 'user', content: prompt });
-
+	const { maxTokens = 16000, systemPrompt, label = 'exchange' } = options;
 	try {
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Authorization': `Bearer ${DATABRICKS_TOKEN}`,
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				messages,
-				max_tokens: maxTokens,
-				temperature: 0.7
-			})
-		});
-
-		if (!response.ok) {
-			const error = await response.text();
-			throw new Error(`API error: ${response.status} - ${error}`);
-		}
-
-		const data = await response.json();
-		const content = data.choices?.[0]?.message?.content;
-
-		// Handle Gemini's array format where content is [{type: 'text', text: '...'}]
-		if (Array.isArray(content)) {
-			const textContent = content.find(c => c.type === 'text');
-			return textContent?.text || null;
-		}
-
-		return content || data.content;
+		const ex = await queryModel(modelKey, { system: systemPrompt, prompt, maxTokens });
+		await archiveRaw(path.join(RAW_DIR, modelKey), `${label}-${Date.now()}`, ex).catch((e) =>
+			console.warn(`  (raw archive failed: ${e.message})`)
+		);
+		return ex.text;
 	} catch (error) {
-		console.error(`Error querying ${model.name}:`, error.message);
+		console.error(`Error querying ${MODELS[modelKey]?.name ?? modelKey}:`, error.message);
 		return null;
 	}
 }
@@ -534,6 +485,7 @@ async function runRound(question, thread, roundNumber, { hiddenWinner = false } 
 
 		const prompt = generateResponsePrompt(question, thread, roundNumber, { hiddenWinner });
 		const content = await queryDatabricks(modelKey, prompt, {
+			label: `round-${roundNumber}-response`,
 			systemPrompt: 'You are a space systems engineering expert participating in a multi-stakeholder discussion about Project Dyson specifications.'
 		});
 
@@ -569,6 +521,7 @@ async function runRound(question, thread, roundNumber, { hiddenWinner = false } 
 
 		const votingPrompt = generateVotingPrompt(question, responses, modelKey);
 		const voteContent = await queryDatabricks(modelKey, votingPrompt, {
+			label: `round-${roundNumber}-vote`,
 			systemPrompt: 'You are evaluating responses in a structured discussion. Respond only with valid JSON.',
 			maxTokens: 2000
 		});
@@ -670,7 +623,8 @@ Synthesize the discussion into a conclusion document with:
 
 Format your response in markdown.`;
 
-	const content = await queryDatabricks('claude-opus-4-6', context, {
+	const content = await queryDatabricks(SYNTHESIZER, context, {
+		label: 'conclusion',
 		systemPrompt: 'You are synthesizing a multi-model discussion into actionable conclusions.',
 		maxTokens: 8000
 	});
@@ -681,7 +635,7 @@ Format your response in markdown.`;
 			keyPoints: [],
 			unresolvedQuestions: [],
 			recommendedActions: [],
-			generatedBy: 'claude-opus-4-6',
+			generatedBy: SYNTHESIZER,
 			generatedAt: new Date().toISOString()
 		};
 	}
@@ -692,7 +646,7 @@ Format your response in markdown.`;
 		keyPoints: [],
 		unresolvedQuestions: [],
 		recommendedActions: [],
-		generatedBy: 'claude-opus-4-6',
+		generatedBy: SYNTHESIZER,
 		generatedAt: new Date().toISOString()
 	};
 
@@ -730,7 +684,7 @@ Format your response in markdown.`;
 questionId: "${question.id}"
 questionSlug: "${question.slug}"
 type: "discussion-conclusion"
-generatedBy: "claude-opus-4-6"
+generatedBy: "${SYNTHESIZER}"
 generated: "${date}"
 roundCount: ${thread.rounds.length}
 terminationReason: "${thread.terminationReason || 'unknown'}"
@@ -748,11 +702,8 @@ terminationReason: "${thread.terminationReason || 'unknown'}"
  * Compute discussion statistics
  */
 function computeStats(rounds) {
-	const roundWinners = {
-		'claude-opus-4-6': 0,
-		'gemini-3-pro': 0,
-		'gpt-5-2': 0
-	};
+	const roundWinners = Object.fromEntries(DISCUSSION_MODELS.map((m) => [m, 0]));
+	for (const r of rounds) if (r.winnerId && !(r.winnerId in roundWinners)) roundWinners[r.winnerId] = 0;
 
 	let totalVotes = 0;
 	let approveVotes = 0;
@@ -795,15 +746,18 @@ async function main() {
 	const forceConclusion = args.includes('--conclude');
 	const hiddenWinner = args.includes('--hidden-winner');
 
-	if (!questionSlug) {
-		console.error('Usage: node scripts/run-discussion.js --question=<slug> [--round=N] [--auto] [--conclude]');
+	if (!questionSlug && !args.includes('--list-models') && !args.includes('--discover')) {
+		console.error('Usage: node scripts/run-discussion.js --question=<slug> [--round=N] [--auto] [--conclude] [--panel=feb|may|latest | --models=a,b,c] [--synthesizer=key]');
 		process.exit(1);
 	}
 
-	if (!DATABRICKS_TOKEN) {
-		console.error('Error: DATABRICKS_TOKEN environment variable is required');
-		process.exit(1);
-	}
+	const flags = panelArgs(args);
+	if (await handleInfoFlags(flags)) return;
+	DISCUSSION_MODELS = await resolvePanel(flags);
+	const synth = args.find((a) => a.startsWith('--synthesizer='))?.split('=')[1];
+	SYNTHESIZER = synth ? (await resolvePanel({ models: synth }))[0] : DISCUSSION_MODELS.find((m) => MODELS[m].family === 'claude') ?? DISCUSSION_MODELS[0];
+	RAW_DIR = path.join(PROJECT_ROOT, 'data/raw-exchanges/discussions', questionSlug);
+	console.log(`Panel: ${DISCUSSION_MODELS.map((m) => MODELS[m].name).join(', ')} · synthesizer: ${MODELS[SYNTHESIZER].name}`);
 
 	console.log('='.repeat(60));
 	console.log('LLM Discussion System');
@@ -843,7 +797,7 @@ async function main() {
 			currentRound: 0,
 			stats: {
 				totalRounds: 0,
-				roundWinners: { 'claude-opus-4-6': 0, 'gemini-3-pro': 0, 'gpt-5-2': 0 },
+				roundWinners: Object.fromEntries(DISCUSSION_MODELS.map((m) => [m, 0])),
 				totalVotes: 0,
 				approvalRate: 0,
 				averageResponseWords: 0

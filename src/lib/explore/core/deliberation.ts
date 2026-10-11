@@ -12,6 +12,7 @@ import type { DiscussionModelId, DiscussionRound, DiscussionThread, VoteValue } 
 import { DISCUSSION_MODELS } from '$lib/types/discussion';
 import type { ModelName } from '$lib/types/divergent-views';
 import type { Vec3 } from './registry';
+import { modelFamily } from '$lib/services/models';
 
 export const SEAT_RADIUS = 6;
 export const ROUND_HEIGHT = 2.4;
@@ -24,12 +25,20 @@ export const VOTE_COLORS: Record<VoteValue, string> = {
 const VOTE_SCORE: Record<VoteValue, number> = { APPROVE: 2, NEUTRAL: 1, REJECT: 0 };
 
 export function familyOf(id: DiscussionModelId): ModelName {
-	return id.startsWith('claude') ? 'Claude' : id.startsWith('gemini') ? 'Gemini' : 'GPT';
+	const f = modelFamily(id);
+	return f === 'claude' ? 'Claude' : f === 'gemini' ? 'Gemini' : 'GPT';
 }
 
-export function seatPosition(id: DiscussionModelId, round = 0): Vec3 {
-	const k = Math.max(0, DISCUSSION_MODELS.indexOf(id));
-	const a = (k / DISCUSSION_MODELS.length) * Math.PI * 2 - Math.PI / 2;
+/** Everyone who spoke in a thread, Claude → Gemini → GPT; the default panel if none yet. */
+export function participants(thread: DiscussionThread | null | undefined): DiscussionModelId[] {
+	const ids = [...new Set(thread?.rounds.flatMap((r) => r.responses.map((x) => x.modelId)) ?? [])];
+	const order = { claude: 0, gemini: 1, gpt: 2, other: 3 };
+	return ids.length ? ids.sort((a, b) => order[modelFamily(a)] - order[modelFamily(b)] || a.localeCompare(b)) : [...DISCUSSION_MODELS];
+}
+
+export function seatPosition(id: DiscussionModelId, round = 0, seats: DiscussionModelId[] = DISCUSSION_MODELS): Vec3 {
+	const k = Math.max(0, seats.indexOf(id));
+	const a = (k / seats.length) * Math.PI * 2 - Math.PI / 2;
 	return [Math.cos(a) * SEAT_RADIUS, round * ROUND_HEIGHT, Math.sin(a) * SEAT_RADIUS];
 }
 

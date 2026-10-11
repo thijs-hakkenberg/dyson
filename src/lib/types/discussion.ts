@@ -7,17 +7,18 @@
  */
 
 import type { ResearchQuestionId, QuestionSlug, PhaseId } from './entities';
+import { modelName } from '$lib/services/models';
 
-// Model identifiers for discussions
-export type DiscussionModelId = 'claude-opus-4-6' | 'gemini-3-pro' | 'gpt-5-2';
+// Model identifiers for discussions: registry keys (see $lib/services/models). Panels can
+// change between discussions, so any key is valid; the original panel is the default.
+export type DiscussionModelId = string;
 
 export const DISCUSSION_MODELS: DiscussionModelId[] = ['claude-opus-4-6', 'gemini-3-pro', 'gpt-5-2'];
 
-export const MODEL_DISPLAY_NAMES: Record<DiscussionModelId, string> = {
-	'claude-opus-4-6': 'Claude Opus 4.6',
-	'gemini-3-pro': 'Gemini 3 Pro',
-	'gpt-5-2': 'GPT-5.2'
-};
+/** Display name for any model key, including ones added after this file was written. */
+export const MODEL_DISPLAY_NAMES: Record<DiscussionModelId, string> = new Proxy({} as Record<string, string>, {
+	get: (_t, k) => (typeof k === 'string' ? modelName(k) : undefined)
+});
 
 // Vote types
 export type VoteValue = 'APPROVE' | 'NEUTRAL' | 'REJECT';
@@ -308,11 +309,7 @@ export function checkTermination(
  * Compute discussion statistics
  */
 export function computeDiscussionStats(rounds: DiscussionRound[]): DiscussionStats {
-	const roundWinners: Record<DiscussionModelId, number> = {
-		'claude-opus-4-6': 0,
-		'gemini-3-pro': 0,
-		'gpt-5-2': 0
-	};
+	const roundWinners: Record<DiscussionModelId, number> = Object.fromEntries(DISCUSSION_MODELS.map((m) => [m, 0]));
 
 	let totalVotes = 0;
 	let approveVotes = 0;
@@ -320,7 +317,7 @@ export function computeDiscussionStats(rounds: DiscussionRound[]): DiscussionSta
 	let responseCount = 0;
 
 	for (const round of rounds) {
-		roundWinners[round.winnerId]++;
+		roundWinners[round.winnerId] = (roundWinners[round.winnerId] ?? 0) + 1;
 
 		for (const voteResult of round.votes) {
 			for (const vote of voteResult.votes) {
