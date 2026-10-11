@@ -13,7 +13,10 @@ export const KNOWN_MODELS: Record<string, { name: string; family: ModelFamily; g
 	'gpt-5-2': { name: 'GPT-5.2', family: 'gpt', generation: '2026-02' },
 	'claude-opus-4-7': { name: 'Claude Opus 4.7', family: 'claude', generation: '2026-05' },
 	'gemini-3-1-pro': { name: 'Gemini 3.1 Pro', family: 'gemini', generation: '2026-05' },
-	'gpt-5-5-pro': { name: 'GPT-5.5 Pro', family: 'gpt', generation: '2026-05' }
+	'gpt-5-5-pro': { name: 'GPT-5.5 Pro', family: 'gpt', generation: '2026-05' },
+	'claude-opus-5-5': { name: 'Claude Opus 5.5', family: 'claude', generation: '2026-10' },
+	'gemini-3-8-flash': { name: 'Gemini 3.8 Flash', family: 'gemini', generation: '2026-10' },
+	'gpt-6-1-sol': { name: 'GPT-6.1 Sol', family: 'gpt', generation: '2026-10' }
 };
 
 export function modelFamily(id: string): ModelFamily {

@@ -9,6 +9,8 @@
  * Panels:
  *   feb     Claude Opus 4.6 · Gemini 3 Pro · GPT-5.2   (original BOM + deliberations)
  *   may     Claude Opus 4.7 · Gemini 3.1 Pro · GPT-5.5 Pro (holistic and paper reviews)
+ *   oct     Claude Opus 5.5 · Gemini 3.8 Flash · GPT-6.1 Sol (dev workspace adb-1355704782079007;
+ *           it serves no Gemini Pro, so Flash stands in)
  *   latest  newest Claude / Gemini / GPT endpoint found in the workspace (needs discovery)
  * or a comma list of registry keys or raw endpoint names, e.g.
  *   --models=claude-opus-4-7,databricks-gemini-3-5-pro
@@ -42,12 +44,17 @@ export const MODELS = {
 	// May 2026
 	'claude-opus-4-7': { id: 'databricks-claude-opus-4-7', name: 'Claude Opus 4.7', family: 'claude', generation: '2026-05', transport: 'gateway-chat' },
 	'gemini-3-1-pro': { id: 'databricks-gemini-3-1-pro', name: 'Gemini 3.1 Pro', family: 'gemini', generation: '2026-05', transport: 'gateway-chat' },
-	'gpt-5-5-pro': { id: 'databricks-gpt-5-5-pro', name: 'GPT-5.5 Pro', family: 'gpt', generation: '2026-05', transport: 'gateway-responses' }
+	'gpt-5-5-pro': { id: 'databricks-gpt-5-5-pro', name: 'GPT-5.5 Pro', family: 'gpt', generation: '2026-05', transport: 'gateway-responses' },
+	// October 2026
+	'claude-opus-5-5': { id: 'databricks-claude-opus-5-5', name: 'Claude Opus 5.5', family: 'claude', generation: '2026-10', transport: 'gateway-chat' },
+	'gemini-3-8-flash': { id: 'databricks-gemini-3-8-flash', name: 'Gemini 3.8 Flash', family: 'gemini', generation: '2026-10', transport: 'gateway-chat' },
+	'gpt-6-1-sol': { id: 'databricks-gpt-6-1-sol', name: 'GPT-6.1 Sol', family: 'gpt', generation: '2026-10', transport: 'gateway-responses' }
 };
 
 export const PANELS = {
 	feb: ['claude-opus-4-6', 'gemini-3-pro', 'gpt-5-2'],
-	may: ['claude-opus-4-7', 'gemini-3-1-pro', 'gpt-5-5-pro']
+	may: ['claude-opus-4-7', 'gemini-3-1-pro', 'gpt-5-5-pro'],
+	oct: ['claude-opus-5-5', 'gemini-3-8-flash', 'gpt-6-1-sol']
 };
 
 for (const [key, m] of Object.entries(MODELS)) m.filename = `${key}.md`;
@@ -150,22 +157,25 @@ function newer(a, b) {
 }
 
 /**
- * Newest ready endpoint per family. Restrict Claude to Opus and Gemini to Pro by
- * default (the debate's flagship tier); pass {anyTier:true} to allow others.
+ * Newest ready endpoint per family. Prefer Claude Opus and Gemini Pro (the debate's
+ * flagship tier) and skip small GPTs; a family with no flagship endpoint falls back to
+ * its newest of any tier. Pass {anyTier:true} to ignore tiers altogether.
  */
 export async function discoverLatest({ anyTier = false } = {}) {
 	const eps = (await listEndpoints()).filter((e) => e.ready === 'READY' || e.ready === undefined);
+	const flagship = (family, key) =>
+		family === 'claude' ? /opus/.test(key) : family === 'gemini' ? /pro/.test(key) : !/mini|nano|oss|lite/.test(key);
 	const best = {};
+	const fallback = {};
 	for (const e of eps) {
 		const key = keyFor(e.id);
-		if (!anyTier) {
-			if (e.family === 'claude' && !/opus/.test(key)) continue;
-			if (e.family === 'gemini' && !/pro/.test(key)) continue;
-			if (e.family === 'gpt' && /mini|nano|oss/.test(key)) continue;
-		}
-		if (!best[e.family] || newer(key, keyFor(best[e.family]))) best[e.family] = e.id;
+		const pool = anyTier || flagship(e.family, key) ? best : fallback;
+		if (!pool[e.family] || newer(key, keyFor(pool[e.family]))) pool[e.family] = e.id;
 	}
-	return ['claude', 'gemini', 'gpt'].filter((f) => best[f]).map((f) => registerEndpoint(best[f]));
+	return ['claude', 'gemini', 'gpt']
+		.map((f) => best[f] ?? fallback[f])
+		.filter(Boolean)
+		.map((id) => registerEndpoint(id));
 }
 
 /** Resolve --panel / --models into registry keys. */
@@ -176,7 +186,7 @@ export async function resolvePanel({ panel, models } = {}) {
 	if (!panel || panel === 'feb') return [...PANELS.feb];
 	if (PANELS[panel]) return [...PANELS[panel]];
 	if (panel === 'latest') return discoverLatest();
-	throw new Error(`Unknown panel "${panel}". Use feb, may, latest or --models=a,b,c`);
+	throw new Error(`Unknown panel "${panel}". Use feb, may, oct, latest or --models=a,b,c`);
 }
 
 // ── Query ──────────────────────────────────────────────────────────────────

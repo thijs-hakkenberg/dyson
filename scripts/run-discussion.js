@@ -747,7 +747,7 @@ async function main() {
 	const hiddenWinner = args.includes('--hidden-winner');
 
 	if (!questionSlug && !args.includes('--list-models') && !args.includes('--discover')) {
-		console.error('Usage: node scripts/run-discussion.js --question=<slug> [--round=N] [--auto] [--conclude] [--panel=feb|may|latest | --models=a,b,c] [--synthesizer=key]');
+		console.error('Usage: node scripts/run-discussion.js --question=<slug> [--round=N] [--auto] [--conclude] [--panel=feb|may|oct|latest | --models=a,b,c] [--synthesizer=key]');
 		process.exit(1);
 	}
 

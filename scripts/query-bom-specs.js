@@ -27,7 +27,7 @@
  *   DATABRICKS_TOKEN - API token for Databricks (or --profile=<databricks CLI profile>)
  *   DATABRICKS_HOST / DATABRICKS_GATEWAY_HOST - workspaces (optional, have defaults)
  *
- * Panel (scripts/lib/llm.js): --panel=feb|may|latest or --models=a,b,c; --synthesizer=<key>
+ * Panel (scripts/lib/llm.js): --panel=feb|may|oct|latest or --models=a,b,c; --synthesizer=<key>
  * for consensus/proposal synthesis; --list-models, --discover. Raw exchanges are archived
  * under data/raw-exchanges/bom-specs/.
  *

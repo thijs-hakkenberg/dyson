@@ -39,6 +39,28 @@ describe('model registry', () => {
 		expect(MODELS[b].transport).toBe('gateway-responses');
 	});
 
+	it('oct panel is the 2026-10 dev-workspace generation', async () => {
+		expect(await resolvePanel({ panel: 'oct' })).toEqual(['claude-opus-5-5', 'gemini-3-8-flash', 'gpt-6-1-sol']);
+		expect(MODELS['claude-opus-5-5'].name).toBe('Claude Opus 5.5');
+		expect(MODELS['gemini-3-8-flash'].transport).toBe('gateway-chat');
+		expect(MODELS['gpt-6-1-sol']).toMatchObject({ name: 'GPT-6.1 Sol', family: 'gpt', transport: 'gateway-responses' });
+	});
+
+	it('latest falls back to a lower tier when a family has no flagship endpoint', async () => {
+		const names = ['databricks-claude-opus-5-5', 'databricks-claude-sonnet-5-5', 'databricks-gemini-3-7-flash', 'databricks-gemini-3-8-flash', 'databricks-gemini-3-1-flash-lite', 'databricks-gpt-6-sol', 'databricks-gpt-6-1-sol', 'databricks-gpt-oss-120b'];
+		const realFetch = globalThis.fetch;
+		const realToken = process.env.DATABRICKS_TOKEN;
+		process.env.DATABRICKS_TOKEN = 'test';
+		globalThis.fetch = (async () => ({ ok: true, json: async () => ({ endpoints: names.map((name) => ({ name, state: { ready: 'READY' } })) }) })) as never;
+		try {
+			expect(await resolvePanel({ panel: 'latest' })).toEqual(['claude-opus-5-5', 'gemini-3-8-flash', 'gpt-6-1-sol']);
+		} finally {
+			globalThis.fetch = realFetch;
+			if (realToken === undefined) delete process.env.DATABRICKS_TOKEN;
+			else process.env.DATABRICKS_TOKEN = realToken;
+		}
+	});
+
 	it('discussion stats count winners from any panel', () => {
 		const stats = computeDiscussionStats([{ winnerId: 'claude-opus-4-7', votes: [], responses: [] } as never]);
 		expect(stats.roundWinners['claude-opus-4-7']).toBe(1);

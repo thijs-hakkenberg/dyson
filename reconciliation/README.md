@@ -53,7 +53,13 @@ All scripts share [`scripts/lib/llm.js`](../scripts/lib/llm.js):
 |---|---|---|
 | `feb` (default for existing debates) | Claude Opus 4.6, Gemini 3 Pro, GPT-5.2 | serving endpoints |
 | `may` | Claude Opus 4.7, Gemini 3.1 Pro, GPT-5.5 Pro | AI Gateway |
-| `latest` | newest Claude Opus / Gemini Pro / GPT found by `--discover` | AI Gateway |
+| `oct` | Claude Opus 5.5, Gemini 3.8 Flash, GPT-6.1 Sol | AI Gateway (dev workspace) |
+| `latest` | newest Claude Opus / Gemini Pro / GPT found by `--discover`; a family with no flagship falls back to its newest tier | AI Gateway |
+
+The `oct` panel lives on the dev workspace `adb-1355704782079007`, which serves no
+Gemini Pro, so Gemini 3.8 Flash takes that seat. Point the scripts at it with
+`DATABRICKS_HOST=https://adb-1355704782079007.7.azuredatabricks.net` and either a PAT in
+`DATABRICKS_TOKEN` or `--profile=eva`.
 
 Any endpoint can be named directly: `--models=databricks-claude-opus-5-5,gemini-3-5-pro`.
 Unregistered endpoints are added on the fly (name derived from the endpoint, GPT on the

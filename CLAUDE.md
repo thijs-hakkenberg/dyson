@@ -102,7 +102,7 @@ node scripts/run-peer-review.js --paper=<NN> --version=<v> --model=<model-id>
 node scripts/run-reassessment.js --phase=phase-0 --panel=may [--dry-run]
 node scripts/run-reassessment.js --phase=phase-0 --synthesize
 
-# Model panels for discussions/specs/re-assessment: --panel=feb|may|latest or --models=a,b,c
+# Model panels for discussions/specs/re-assessment: --panel=feb|may|oct|latest or --models=a,b,c
 # (shared registry: scripts/lib/llm.js; --list-models, --discover)
 
 # Run controlled baselines for Paper 03
