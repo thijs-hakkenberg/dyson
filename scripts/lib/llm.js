@@ -211,8 +211,9 @@ function responsesText(data) {
 /**
  * Send one prompt. Returns { text, data, request, meta } or throws.
  * maxTokens/temperature apply to chat transports; reasoning models ignore temperature.
+ * retries/backoffMs: 429/503 and dropped connections back off 20s, 40s, 80s… (up to 5 retries by default).
  */
-export async function queryModel(key, { system, prompt, maxTokens = 16000, temperature = 0.7, timeoutMs = 900_000 } = {}) {
+export async function queryModel(key, { system, prompt, maxTokens = 16000, temperature = 0.7, timeoutMs = 900_000, retries = 5, backoffMs = 20_000 } = {}) {
 	const m = MODELS[key];
 	if (!m) throw new Error(`Unknown model "${key}". Known: ${Object.keys(MODELS).join(', ')}`);
 	let url, body;
@@ -228,20 +229,34 @@ export async function queryModel(key, { system, prompt, maxTokens = 16000, tempe
 	} else throw new Error(`Unknown transport ${m.transport}`);
 
 	const started = new Date();
-	const ctl = new AbortController();
-	const timer = setTimeout(() => ctl.abort(), timeoutMs);
 	let res;
-	try {
-		res = await fetch(url, {
-			method: 'POST',
-			signal: ctl.signal,
-			headers: { Authorization: `Bearer ${getToken()}`, 'Content-Type': 'application/json' },
-			body: JSON.stringify(body)
-		});
-	} finally {
-		clearTimeout(timer);
+	// Capacity errors (429/503) and dropped connections are retried with exponential
+	// backoff; timeouts and other HTTP errors are not.
+	for (let attempt = 0; ; attempt++) {
+		const ctl = new AbortController();
+		const timer = setTimeout(() => ctl.abort(), timeoutMs);
+		let retryable;
+		try {
+			res = await fetch(url, {
+				method: 'POST',
+				signal: ctl.signal,
+				headers: { Authorization: `Bearer ${getToken()}`, 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
+			});
+			if (res.ok) break;
+			retryable = new Error(`${m.name} ${res.status}: ${(await res.text()).slice(0, 1000)}`);
+			if (![429, 503].includes(res.status)) throw retryable;
+		} catch (e) {
+			if (e === retryable || e.name === 'AbortError') throw e;
+			retryable = e;
+		} finally {
+			clearTimeout(timer);
+		}
+		if (attempt >= retries) throw retryable;
+		const wait = backoffMs * 2 ** attempt;
+		console.warn(`  ${m.name}: ${retryable.message.slice(0, 80)} — retry ${attempt + 1}/${retries} in ${Math.round(wait / 1000)}s`);
+		await new Promise((r) => setTimeout(r, wait));
 	}
-	if (!res.ok) throw new Error(`${m.name} ${res.status}: ${(await res.text()).slice(0, 1000)}`);
 	const data = await res.json();
 	const text = m.transport === 'gateway-responses' ? responsesText(data) : chatText(data);
 	return {

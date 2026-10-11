@@ -4,7 +4,7 @@ import yaml from 'js-yaml';
 import { KNOWN_MODELS, modelFamily, modelName } from '../models';
 import { MODEL_DISPLAY_NAMES, computeDiscussionStats } from '$lib/types/discussion';
 // The scripts' registry must agree with the site's
-import { MODELS as SCRIPT_MODELS, PANELS, nameFor, familyOf, resolvePanel } from '../../../../scripts/lib/llm.js';
+import { MODELS as SCRIPT_MODELS, PANELS, nameFor, familyOf, resolvePanel, queryModel } from '../../../../scripts/lib/llm.js';
 
 const MODELS = SCRIPT_MODELS as Record<string, { name: string; family: string; transport: string }>;
 const FINDINGS = Object.values(
@@ -54,6 +54,40 @@ describe('model registry', () => {
 		globalThis.fetch = (async () => ({ ok: true, json: async () => ({ endpoints: names.map((name) => ({ name, state: { ready: 'READY' } })) }) })) as never;
 		try {
 			expect(await resolvePanel({ panel: 'latest' })).toEqual(['claude-opus-5-5', 'gemini-3-8-flash', 'gpt-6-1-sol']);
+		} finally {
+			globalThis.fetch = realFetch;
+			if (realToken === undefined) delete process.env.DATABRICKS_TOKEN;
+			else process.env.DATABRICKS_TOKEN = realToken;
+		}
+	});
+
+	it('queryModel retries capacity errors and dropped connections, but not other failures', async () => {
+		const realFetch = globalThis.fetch;
+		const realToken = process.env.DATABRICKS_TOKEN;
+		process.env.DATABRICKS_TOKEN = 'test';
+		const ok = { ok: true, status: 200, json: async () => ({ choices: [{ message: { content: 'ok' } }] }) };
+		const status = (s: number) => ({ ok: false, status: s, text: async () => `{"error_code":"E${s}"}` });
+		const script = (steps: unknown[]) => {
+			let i = 0;
+			globalThis.fetch = (async () => {
+				const s = steps[i++];
+				if (s instanceof Error) throw s;
+				return s;
+			}) as never;
+			return () => i;
+		};
+		try {
+			let calls = script([status(503), new TypeError('fetch failed'), status(429), ok]);
+			expect((await queryModel('claude-opus-5-5', { prompt: 'x', backoffMs: 1 })).text).toBe('ok');
+			expect(calls()).toBe(4);
+
+			calls = script([status(400), ok]);
+			await expect(queryModel('claude-opus-5-5', { prompt: 'x', backoffMs: 1 })).rejects.toThrow(/400/);
+			expect(calls()).toBe(1);
+
+			calls = script([status(503), status(503), status(503)]);
+			await expect(queryModel('claude-opus-5-5', { prompt: 'x', backoffMs: 1, retries: 2 })).rejects.toThrow(/503/);
+			expect(calls()).toBe(3);
 		} finally {
 			globalThis.fetch = realFetch;
 			if (realToken === undefined) delete process.env.DATABRICKS_TOKEN;
