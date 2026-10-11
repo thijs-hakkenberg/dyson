@@ -17,6 +17,7 @@
 	import NebulaPanel from './hud/NebulaPanel.svelte';
 	import RqInspector from './hud/RqInspector.svelte';
 	import { nebula } from './core/nebulastore.svelte';
+	import { deepTime } from './core/deeptime.svelte';
 	import WelcomeDialog from './hud/WelcomeDialog.svelte';
 	import TourOverlay from './hud/TourOverlay.svelte';
 	import GateTunnelScene from './scene/gates/GateTunnelScene.svelte';
@@ -207,6 +208,7 @@
 				if (explorer.selectedId) explorer.select(explorer.selectedId);
 				break;
 			case 'Home':
+				deepTime.myr = 0;
 				explorer.setYear(TODAY_YEAR);
 				break;
 			default: {
@@ -362,6 +364,28 @@
 			width: auto;
 			bottom: auto;
 			max-height: 38vh;
+		}
+	}
+	/* Phones: Telemetry and Layers sit side by side as chips; an opened one becomes a
+	   full-width scrolling sheet below them */
+	@media (max-width: 700px) {
+		.leftcol {
+			top: 150px;
+			left: 8px;
+			right: 8px;
+			flex-direction: row;
+			flex-wrap: wrap;
+			align-content: flex-start;
+			gap: 6px;
+			max-height: 46vh;
+		}
+		.leftcol > :global(.closed) {
+			flex: 1 1 0;
+			min-width: 0;
+		}
+		.leftcol > :global(:not(.closed)) {
+			flex: 1 1 100%;
+			order: 2;
 		}
 	}
 </style>

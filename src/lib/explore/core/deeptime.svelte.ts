@@ -10,6 +10,28 @@ import { integrateSunOrbit, skyMatrix, skyRotation, skyRotationForYear, type Orb
 
 export const DEEP_MAX_MYR = 250;
 
+/** Playback rates once the construction timeline has run out (Myr per second), one per speed button. */
+export const DEEP_SPEEDS = [
+	{ label: '0.1 Myr/s', myrps: 0.1 },
+	{ label: '0.25 Myr/s', myrps: 0.25 },
+	{ label: '0.5 Myr/s', myrps: 0.5 },
+	{ label: '1 Myr/s', myrps: 1 },
+	{ label: '2.5 Myr/s', myrps: 2.5 },
+	{ label: '5 Myr/s', myrps: 5 }
+] as const;
+
+/** Advance playback by dt seconds: construction years first, then deep time past the build-out. */
+export function advancePlayback(dt: number) {
+	if (explorer.year < MAX_YEAR) {
+		const next = explorer.year + dt * explorer.speed.yps;
+		explorer.setYear(next);
+		return;
+	}
+	const rate = DEEP_SPEEDS[Math.min(DEEP_SPEEDS.length - 1, explorer.speedIndex)].myrps;
+	deepTime.myr = Math.min(DEEP_MAX_MYR, deepTime.myr + dt * rate);
+	if (deepTime.myr >= DEEP_MAX_MYR) explorer.playing = false;
+}
+
 class DeepTime {
 	myr = $state(0);
 	engine = $state(true);

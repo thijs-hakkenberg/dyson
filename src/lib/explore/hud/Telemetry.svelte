@@ -4,6 +4,7 @@
 	import { formatCount, formatUSD } from '../core/units';
 	import { PHASE_COLORS } from '../core/theme';
 	import DeepTime from './DeepTime.svelte';
+	import { PRICES, powerBalance, roiAt, type PriceId } from '../core/economics';
 
 	// Collapsed by default on phones so the scene stays visible
 	let open = $state(typeof window === 'undefined' || window.innerWidth > 700);
@@ -44,6 +45,40 @@
 		if (e >= -2) return `${(f * 100).toPrecision(2)}% L☉`;
 		return `${(f / 10 ** e).toFixed(1)}×10${sup(e)} L☉`;
 	}
+	// ── Power balance and return ─────────────────────────────────────────
+	const pb = $derived(powerBalance(Math.round(explorer.year * 4) / 4));
+	// Saturation bar on a log scale: 10⁻¹⁶ (empty) … 1 (every watt of the Sun)
+	const satPct = $derived(pb.saturation > 0 ? Math.max(1, ((Math.log10(pb.saturation) + 16) / 16) * 100) : 0);
+	let priceId = $state<PriceId>('mid');
+	try {
+		const p = localStorage.getItem('explore:roi-price') as PriceId | null;
+		if (p && PRICES.some((x) => x.id === p)) priceId = p;
+	} catch {
+		/* default price */
+	}
+	function setPrice(id: PriceId) {
+		priceId = id;
+		try {
+			localStorage.setItem('explore:roi-price', id);
+		} catch {
+			/* not remembered */
+		}
+	}
+	const price = $derived(PRICES.find((p) => p.id === priceId)!);
+	const roi = $derived(roiAt(Math.round(explorer.year * 4) / 4, price.usdPerKWh));
+	const money = (n: number) => {
+		const a = Math.abs(n);
+		const s = a >= 1e15 ? `$${formatSci(a, 2)}` : formatUSD(a);
+		return n < 0 ? `−${s}` : s;
+	};
+	const energy = (kwh: number) => {
+		const a = Math.abs(kwh);
+		const s = a >= 1e12 ? `${formatSci(a / 1e9, 2)} TWh` : a >= 1e9 ? `${(a / 1e9).toPrecision(3)} TWh` : `${(a / 1e6).toPrecision(3)} GWh`;
+		return kwh < 0 ? `−${s}` : s;
+	};
+	const multiple = (r: number) =>
+		r >= 0 ? `${r >= 100 ? formatSci(r, 2) : r.toFixed(r < 10 ? 1 : 0)}×` : 'net loss';
+
 	const SUP: Record<string, string> = { '-': '⁻', 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹' };
 	const sup = (n: number) => [...String(n)].map((c) => SUP[c] ?? c).join('');
 </script>
@@ -80,6 +115,20 @@
 				{/if}
 			</div>
 		</div>
+
+		{#if pb.genW > 0 || pb.useW > 0}
+			<div class="block">
+				<div class="lbl">Swarm saturation <span class="hint">share of the Sun’s output</span></div>
+				<div class="bar sat" title="Log scale: 10⁻¹⁶ to 100% of L☉"><span style="width:{satPct.toFixed(1)}%"></span></div>
+				<div class="sub">{solarFraction(pb.genW) || '0 L☉'} · a full swarm is 1 L☉</div>
+				{#if pb.netW < 0}
+					<p class="deficit">
+						<b>Power deficit −{formatPower(-pb.netW)}.</b> Consumption exceeds generation{pb.deficitFrom ? ` from ~${Math.round(pb.deficitFrom)}` : ''} and no BOM item supplies the gap (CI-24). Largest net loads:
+						{#each pb.topLoads as l, i (l.bomId)}<button type="button" onclick={() => explorer.select(l.bomId)}>{l.name}</button> {formatPower(l.w)}{i < pb.topLoads.length - 1 ? ' · ' : ''}{/each}
+					</p>
+				{/if}
+			</div>
+		{/if}
 
 		{#if t.flops.base > 0}
 			<div class="block">
@@ -171,6 +220,37 @@
 			</ul>
 			{/if}
 		</div>
+
+		{#if roi.spend > 0}
+			<div class="block">
+				<button type="button" class="lbl sect" onclick={() => toggle('roi')} aria-expanded={!collapsed.roi}>
+					Return on investment <span class="chev">{collapsed.roi ? '+' : '−'}</span><span class="hint">illustrative</span>
+				</button>
+				<div class="mid" class:neg={roi.roi < 0} class:pos={roi.roi >= 1}>{multiple(roi.roi)}</div>
+				<div class="sub">net energy value ÷ spend to date at {price.label}/kWh</div>
+				{#if !collapsed.roi}
+					<div class="prices" role="group" aria-label="Assumed electricity price">
+						{#each PRICES as p (p.id)}
+							<button type="button" class="hud-btn" class:on={p.id === priceId} onclick={() => setPrice(p.id)}>{p.label}/kWh</button>
+						{/each}
+					</div>
+					<dl class="kv">
+						<dt>Spend to date</dt><dd>{money(roi.spend)}</dd>
+						<dt>Energy generated</dt><dd>{energy(roi.grossKWh)}</dd>
+						<dt>Gross value</dt><dd>{money(roi.grossValue)}</dd>
+						<dt>Net surplus</dt><dd class:negv={roi.netKWh < 0}>{energy(roi.netKWh)}</dd>
+						<dt>Net value</dt><dd class:negv={roi.netValue < 0}>{money(roi.netValue)}</dd>
+						<dt>Payback</dt><dd>{roi.paybackYear ? `~${Math.round(roi.paybackYear)}` : 'not within the plan'}</dd>
+						<dt>Best return</dt><dd>{multiple(roi.bestRoi)} in ~{Math.round(roi.bestYear)}</dd>
+					</dl>
+					<p class="note">
+						Net = generation minus the project’s own consumption, i.e. what could leave the project. Every kWh valued at
+						one assumed price; no buyer, market or transmission loss is modelled, and none of this is in the consensus
+						specs. Compute and thrust are not valued.
+					</p>
+				{/if}
+			</div>
+		{/if}
 
 		<DeepTime />
 
@@ -296,6 +376,46 @@
 		line-height: 1.45;
 	}
 	.rng {
+		color: var(--hud-faint);
+	}
+	.bar.sat span {
+		background: linear-gradient(90deg, #f59e0b, #fde68a);
+	}
+	.deficit {
+		margin: 6px 0 0;
+		font-size: 10.5px;
+		line-height: 1.45;
+		color: var(--hud-warn);
+	}
+	.deficit button {
+		background: none;
+		border: 0;
+		padding: 0;
+		color: #fff;
+		cursor: pointer;
+		font: inherit;
+		text-decoration: underline dotted;
+	}
+	.mid.neg,
+	.negv {
+		color: var(--hud-warn);
+	}
+	.mid.pos {
+		color: var(--hud-ok);
+	}
+	.prices {
+		display: flex;
+		gap: 4px;
+		margin: 6px 0;
+	}
+	.prices .hud-btn {
+		font-size: 10px;
+		padding: 2px 6px;
+	}
+	.note {
+		margin: 6px 0 0;
+		font-size: 9.5px;
+		line-height: 1.4;
 		color: var(--hud-faint);
 	}
 	.rng.neg {

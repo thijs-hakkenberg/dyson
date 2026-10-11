@@ -71,6 +71,10 @@ class ExplorerState {
 	hudVisible = $state(true);
 	/** Layers & legend panel expanded */
 	layersOpen = $state(false);
+	/** Workbench simulation sandbox drawer expanded */
+	sandboxOpen = $state(false);
+	/** Bumped to ask the open sandbox to run (tours) */
+	sandboxRunSeq = $state(0);
 	layers = $state<Record<LayerId, boolean>>({
 		sky: true,
 		fade: true,

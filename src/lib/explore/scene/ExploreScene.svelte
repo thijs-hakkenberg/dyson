@@ -14,6 +14,7 @@
 	import StellarEngineLayer from './StellarEngineLayer.svelte';
 	import Divergences from './Divergences.svelte';
 	import { explorer, MAX_YEAR } from '../core/state.svelte';
+	import { advancePlayback, deepTime } from '../core/deeptime.svelte';
 	import { getEntity, type Vec3 } from '../core/registry';
 	import { phaseEmphasis, phaseStarted } from '../core/progress';
 	import FadeGroup from './FadeGroup.svelte';
@@ -54,11 +55,10 @@
 	const ease = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
 
 	useTask((dt) => {
-		if (explorer.playing) {
-			const next = explorer.year + dt * explorer.speed.yps;
-			if (next >= MAX_YEAR) explorer.playing = false;
-			explorer.setYear(next);
-		}
+		// Past the build-out, playback carries on in deep time (the Sun's galactic orbit)
+		if (explorer.playing) advancePlayback(dt);
+		// Deep time only exists past the build-out: any jump back in years leaves it
+		if (deepTime.myr > 0 && explorer.year < MAX_YEAR - 1e-6) deepTime.myr = 0;
 
 		const focus = getEntity(explorer.focusId) ?? getEntity('sun')!;
 		const target = focus.position(explorer.year);
