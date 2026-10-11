@@ -43,7 +43,8 @@ let pvTexture: CanvasTexture | null = null;
 /** Solar-cell grid texture (browser only). */
 function pvMap(): CanvasTexture | null {
 	if (pvTexture) return pvTexture;
-	if (typeof document === 'undefined') return null;
+	// No canvas in node or jsdom (tests)
+	if (typeof document === 'undefined' || /jsdom/.test(navigator.userAgent)) return null;
 	const c = document.createElement('canvas');
 	c.width = c.height = 128;
 	const g = c.getContext('2d');
