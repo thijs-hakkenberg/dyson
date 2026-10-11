@@ -172,3 +172,29 @@ no agreed size (e.g. tiles, PV blankets, mass-lifting coils, EM accelerators,
 jet modules, Shkadov elements). Element sizes of Phase 3b proposals span 10–200×.
 *Explorer:* `core/models.ts` marks these `sizeBasis: 'geomean'` and the panel
 flags them; it does not pick a winner.
+
+### CI-24 · Phase 3 loads have no power source; the energy balance goes negative from ~2143 · open
+Summing nominal per-unit power over deployed units (`core/metrics.ts`), Phases 1–2
+end with a surplus of ~0.4 TW (PV blankets ~276 GW, Phase 2 collectors ~130 GW).
+From the start of Phase 3 consumption exceeds generation for good:
+`phase-3b/helium-separation-plant` draws **1.5–3 PW** across 500 plants (Gemini:
+15 PW *per node*), `phase-3a/self-replicating-foundries` 0.5–2 GW each (~1 TW),
+while the 10¹² Matrioshka tiles are self-powered (their generation equals their
+compute load, ~8 PW). At full build-out generation is ~8.0 PW and consumption
+~10.3 PW: a **2.25 PW deficit** no BOM item supplies. Either the stellar engine
+draws power from the Sun directly (not stated — e.g. part of the swarm dedicated
+to it), the tiles export a surplus (not in their figures), or Phase 3b needs its
+own collector fleet that is not in the BOM. `phase-3b/em-accelerators` has a
+divergent *sign* (Claude: net producer via MHD recovery; Gemini: 45 PW consumer)
+and is not summed. *Explorer:* telemetry flags the deficit and its largest loads;
+the ROI section shows cumulative net energy turning negative.
+
+### CI-25 · The BOM never approaches a saturated swarm · open
+At full build-out (nominal, 2743) the summed generation is ~8 PW, **2×10⁻¹¹ of
+the Sun's 3.8×10²⁶ W**. Phase 2's 10⁵ collectors, even at the largest proposal
+(~1 km² each), cover ~4×10⁻¹³ of a 1 AU sphere; the 10¹² Matrioshka tiles at ~5 m
+cover ~10⁻¹⁰ of one. The project's framing ("capture the full energy output of a
+star", homepage) implies quantities some ten orders of magnitude beyond the BOM. Self-replication
+(Phases 2–3a) is the stated route to scale, but no phase lists the target count,
+the doubling time to reach it, or where the power for growth comes from (see CI-24).
+*Explorer:* telemetry shows generation as a fraction of L☉ (saturation).

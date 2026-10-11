@@ -53,3 +53,8 @@
 
 See [CONSENSUS-ISSUES.md](./CONSENSUS-ISSUES.md) — logged for assessment, not resolved.
 - [x] First-visit welcome dialog offering tours; interface tour with HUD spotlight
+- [x] Timeline continues past the build-out into deep time (Milky Way turns; engine on/off)
+- [x] Illustrative ROI (assumed $/kWh), power balance and swarm saturation in telemetry (CI-24, CI-25)
+- [x] Sandboxes in the interface and phase tours
+- [x] Phone layout: compact top bar, panel chips/sheet; homepage no longer overflows on Android
+- [ ] Power-source question for Phase 3 (CI-24): revisit once the specs say where the PW come from

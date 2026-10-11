@@ -325,7 +325,10 @@
 	/* ── Hero ── */
 	.hero {
 		text-align: center;
-		overflow: visible;
+		/* The sun's corona and the orbit rings are wider than a phone; clip sideways
+		   only, or Android Chrome widens the whole page to fit them */
+		overflow-x: hidden;
+		overflow-x: clip;
 	}
 
 	.starfield {
@@ -381,32 +384,22 @@
 		box-shadow: 0 0 6px rgba(240,168,48,0.6);
 	}
 
-	.orbit-1 .orbit-dot {
-		top: -2px; left: 50%; transform: translateX(-50%);
-		animation: orbit2 12s linear infinite;
+	/* Each ring turns with its dot on the rim, so the orbit scales with the ring */
+	.orbit-dot {
+		top: -2px;
+		left: 50%;
+		margin-left: -2px;
 	}
+	.orbit-1 { animation: ring-spin 12s linear infinite; }
+	.orbit-2 { animation: ring-spin 18s linear infinite reverse; }
+	.orbit-3 { animation: ring-spin 25s linear infinite; }
 
-	.orbit-2 .orbit-dot {
-		top: 50%; right: -2px; transform: translateY(-50%);
-		animation: orbit3 18s linear infinite reverse;
+	@keyframes ring-spin {
+		from { transform: translate(-50%, -50%) rotate(0deg); }
+		to { transform: translate(-50%, -50%) rotate(360deg); }
 	}
-
-	.orbit-3 .orbit-dot {
-		bottom: -2px; left: 50%; transform: translateX(-50%);
-		animation: orbit4 25s linear infinite;
-	}
-
-	@keyframes orbit2 {
-		from { transform: rotate(0deg) translateX(260px) rotate(0deg); }
-		to { transform: rotate(360deg) translateX(260px) rotate(-360deg); }
-	}
-	@keyframes orbit3 {
-		from { transform: rotate(0deg) translateX(320px) rotate(0deg); }
-		to { transform: rotate(360deg) translateX(320px) rotate(-360deg); }
-	}
-	@keyframes orbit4 {
-		from { transform: rotate(0deg) translateX(380px) rotate(0deg); }
-		to { transform: rotate(360deg) translateX(380px) rotate(-360deg); }
+	@media (prefers-reduced-motion: reduce) {
+		.orbit-ring { animation: none; }
 	}
 
 	.hero h1 {

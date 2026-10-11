@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { deepTime } from '../core/deeptime.svelte';
 	import { explorer, type Lens } from '../core/state.svelte';
 	import { TIMELINE } from '../core/timeline';
 	import { deploymentFraction } from '../core/timeline';
@@ -92,9 +93,13 @@
 	<div class="clocks">
 		<div class="clock panel">
 			<div class="eyebrow">Construction T <span class="tag proj">Projected</span></div>
-			<div class="time">{formatYear(explorer.year)}</div>
+			<div class="time">
+				{deepTime.myr > 0 ? `+${deepTime.myr.toFixed(deepTime.myr < 10 ? 1 : 0)} Myr` : formatYear(explorer.year)}
+			</div>
 			<div class="detail">
-				{#if active.length}
+				{#if deepTime.myr > 0}
+					<span>Deep time · after build-out · engine {deepTime.engine ? 'on' : 'off'}</span>
+				{:else if active.length}
 					{#each active as a (a.id)}
 						<span style="color:{PHASE_COLORS[a.id]}">{a.label} {a.pct}%</span>
 					{/each}
@@ -222,6 +227,65 @@
 		}
 		.brand .eyebrow {
 			display: none;
+		}
+	}
+	/* Phones: brand + Tours on one row, then a compact clock row, then the lens strip */
+	@media (max-width: 700px) {
+		.top {
+			top: 8px;
+			left: 8px;
+			right: 8px;
+			gap: 6px;
+		}
+		.brand {
+			padding: 5px 10px 5px 8px;
+			gap: 7px;
+		}
+		.mark {
+			font-size: 15px;
+		}
+		.title {
+			font-size: 13px;
+			letter-spacing: 0.14em;
+		}
+		.tours {
+			margin-left: auto;
+		}
+		.tours-btn {
+			padding: 0 10px;
+			font-size: 12px;
+		}
+		.clocks {
+			gap: 6px;
+		}
+		.clock {
+			padding: 4px 8px;
+		}
+		.clock .eyebrow {
+			font-size: 8.5px;
+			white-space: nowrap;
+		}
+		.tag {
+			font-size: 8px;
+			padding: 0 3px;
+		}
+		.clock .time {
+			font-size: 14px;
+			margin: 0;
+		}
+		.detail {
+			font-size: 9.5px;
+			gap: 6px;
+			white-space: nowrap;
+			overflow: hidden;
+		}
+		.lenses {
+			padding: 4px;
+			gap: 3px;
+		}
+		.lenses .hud-btn {
+			font-size: 11px;
+			padding: 4px 8px;
 		}
 	}
 	.tours {
