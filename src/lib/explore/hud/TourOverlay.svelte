@@ -1,20 +1,12 @@
 <script lang="ts">
-	/** Lower-third captions and transport controls for the active tour; first-visit invitation otherwise. */
+	/** Lower-third captions, transport controls and the HUD spotlight for the active tour. */
 	import { onMount } from 'svelte';
 	import { tour } from '../core/tour.svelte';
-	import { explorer } from '../core/state.svelte';
 	import { TOURS } from '../core/tours';
 	import { renderMarkdown } from '../core/wbstore.svelte';
-
-	const INVITE_KEY = 'explore:tour-invite-dismissed';
-	let invite = $state(false);
+	import TourSpotlight from './TourSpotlight.svelte';
 
 	onMount(() => {
-		try {
-			invite = !localStorage.getItem(INVITE_KEY);
-		} catch {
-			invite = true;
-		}
 		let last = performance.now();
 		let raf = 0;
 		const loop = (now: number) => {
@@ -26,15 +18,6 @@
 		return () => cancelAnimationFrame(raf);
 	});
 
-	function dismissInvite() {
-		invite = false;
-		try {
-			localStorage.setItem(INVITE_KEY, '1');
-		} catch {
-			/* storage unavailable: invitation simply shows again next visit */
-		}
-	}
-
 	const step = $derived(tour.step);
 	const t = $derived(tour.tour);
 	const progress = $derived(step ? Math.min(1, tour.elapsed / step.duration) : 0);
@@ -43,6 +26,7 @@
 </script>
 
 {#if t && step}
+	{#if step.spot && !tour.paused}<TourSpotlight selector={step.spot} />{/if}
 	<section class="tour panel" aria-live="polite" aria-label="Guided tour">
 		<div class="head">
 			<span class="eyebrow">{t.title} · {tour.index + 1}/{t.steps.length}</span>
@@ -71,27 +55,6 @@
 			{/if}
 			<span class="keys">Space pause · ←/→ step · Esc exit</span>
 		</div>
-	</section>
-{:else if invite && explorer.lens === 'physical' && !explorer.workbenchId && !explorer.selectedId}
-	<section class="invite panel" aria-label="Guided tours">
-		<div>
-			<div class="eyebrow">New here?</div>
-			<div class="it">Take a guided tour</div>
-		</div>
-		{#each TOURS.slice(0, 2) as x (x.id)}
-			<button
-				type="button"
-				class="hud-btn"
-				onclick={() => {
-					dismissInvite();
-					tour.start(x);
-				}}
-			>
-				▶ {x.title}
-			</button>
-		{/each}
-		<span class="more">+{TOURS.length - 2} phase deep-dives in ▶ Tours</span>
-		<button type="button" class="x" onclick={dismissInvite} aria-label="Dismiss">✕</button>
 	</section>
 {/if}
 
@@ -176,38 +139,12 @@
 	.next {
 		margin-left: 6px;
 	}
-	.invite {
-		position: absolute;
-		left: 50%;
-		bottom: 150px;
-		transform: translateX(-50%);
-		display: flex;
-		align-items: center;
-		gap: 10px;
-		padding: 10px 12px 10px 16px;
-		z-index: 5;
-	}
-	.more {
-		font-size: 10px;
-		color: var(--hud-dim);
-	}
-	.it {
-		font-family: var(--font-cond);
-		font-size: 16px;
-		font-weight: 600;
-		color: #fff;
-	}
 	@media (max-width: 900px) {
-		.tour,
-		.invite {
+		.tour {
 			bottom: 140px;
 		}
 		.keys {
 			display: none;
-		}
-		.invite {
-			flex-wrap: wrap;
-			width: calc(100vw - 32px);
 		}
 	}
 </style>

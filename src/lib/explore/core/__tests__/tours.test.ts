@@ -57,4 +57,15 @@ describe('model-view steps', () => {
 			}
 		}
 	});
+
+	it('opens with the interface tour, which visits every lens and spotlights the HUD', () => {
+		const ui = TOURS[0];
+		expect(ui.id).toBe('interface');
+		expect(ui.ui).toBe(true);
+		const lenses = new Set(ui.steps.map((s) => s.lens).filter(Boolean));
+		for (const l of ['physical', 'network', 'logistics', 'knowledge', 'gates', 'consensus', 'risk']) expect(lenses).toContain(l);
+		expect(ui.steps.filter((s) => s.spot).length).toBeGreaterThanOrEqual(10);
+		// Only the interface tour keeps the full HUD up
+		expect(TOURS.filter((t) => t.ui).map((t) => t.id)).toEqual(['interface']);
+	});
 });

@@ -52,3 +52,4 @@
 ## Consensus issues
 
 See [CONSENSUS-ISSUES.md](./CONSENSUS-ISSUES.md) — logged for assessment, not resolved.
+- [x] First-visit welcome dialog offering tours; interface tour with HUD spotlight

@@ -42,6 +42,145 @@ function at(phaseId: string, f: number): number {
 
 export const TOURS: Tour[] = [
 	{
+		id: 'interface',
+		title: 'Tour the interface',
+		subtitle: 'What every panel and lens shows — 3 min',
+		ui: true,
+		steps: [
+			{
+				title: 'The plan, in 3D',
+				body: 'This explorer places the whole Dyson swarm plan (every phase, component and open research question) in a live model of the Solar System. Figures come from the **multi-model consensus specs**; where the AI models disagree, every view is shown.',
+				duration: 12,
+				lens: 'physical',
+				workbench: null,
+				select: null,
+				focus: 'sun',
+				year: at('phase-1', 0.5),
+				camera: { distance: 2.6, azimuth: 30, polar: 58 }
+			},
+			{
+				title: 'The orrery',
+				body: 'Planets, moons and orbits at **true scale and true positions**. **Drag** to orbit, **scroll** to zoom, **click any label** to select it. Most hardware is far smaller than a pixel here, so reticles mark where it is.',
+				duration: 12,
+				camera: { distance: 1.8, azimuth: 60, polar: 64 }
+			},
+			{
+				title: 'Two clocks',
+				body: '**Construction T** is the projected build year you are viewing. **Knowledge T** is today: how many of the research questions are answered and how many decision-gate criteria are met.',
+				duration: 11,
+				spot: '.clocks'
+			},
+			{
+				title: 'The timeline',
+				body: 'Scrub through the centuries of construction, or press **Space** to play. Each bar is a phase at its nominal duration; hatching marks the min–max envelope.',
+				duration: 11,
+				spot: '.timeline'
+			},
+			{
+				title: 'Programme telemetry',
+				body: 'What exists at the year you are viewing: **committed spend**, power **output** and **consumption**, production rates and the fleet by type. Ranges span the model proposals.',
+				duration: 11,
+				spot: '.telemetry'
+			},
+			{
+				title: 'Layers and legend',
+				body: 'Switch orbits, labels, asteroids and individual phases on and off, and read the legend for what the colours and dashes mean.',
+				duration: 9,
+				spot: '.layers'
+			},
+			{
+				title: 'Inspect anything',
+				body: 'Selecting an item opens the **Inspector**: quantity and cost, operations per unit, where it is placed, the **divergent views** between models, and the research questions it depends on.',
+				duration: 13,
+				year: at('phase-1', 0.6),
+				focus: 'bom-1-4',
+				select: 'bom-1-4',
+				spot: '.inspector'
+			},
+			{
+				title: 'Fly to the hardware',
+				body: 'Items with a single location can be visited at **true scale**: press **Z** (or the button in the Inspector) to fly down to the model, and again to pull back.',
+				duration: 12,
+				camera: { distance: hw('bom-1-4'), azimuth: 35, polar: 62 }
+			},
+			{
+				title: 'The Workbench',
+				body: 'Press **W** to open an item in the **Workbench**. The translucent core is what the models agree on; the dashed **forks** are where they diverge, coloured by priority and leaning toward the models that hold each position.',
+				duration: 13,
+				workbench: 'bom-1-4',
+				spot: '.wbp'
+			},
+			{
+				title: '3D model view',
+				body: 'Press **M** for the detailed model, with a metric scale bar. Each model’s own size proposal stands beside it as a dashed **ghost** at true relative scale.',
+				duration: 12,
+				workbench: 'bom-1-4',
+				wbView: 'model',
+				spot: '.wbp'
+			},
+			{
+				title: 'Lenses',
+				body: 'The same plan, seen seven ways. **Physical** is the orrery you have been in. The next steps visit each of the others briefly.',
+				duration: 10,
+				workbench: null,
+				lens: 'physical',
+				select: null,
+				focus: 'sun',
+				camera: { distance: 2.6 },
+				spot: '.lenses'
+			},
+			{
+				title: 'Network',
+				body: 'How the swarm talks: link classes with their one-way **light-time**, the shepherd coordinators, and the worst round trip from Earth, which is why the swarm must decide locally.',
+				duration: 9,
+				lens: 'network',
+				spot: '.leftcol > section'
+			},
+			{
+				title: 'Logistics',
+				body: '**Mass flow** through each supply chain, from mining to deployment, at the year you are viewing. Each chain runs at the pace of its weakest stage, shown in red.',
+				duration: 9,
+				lens: 'logistics',
+				spot: '.leftcol > section'
+			},
+			{
+				title: 'Knowledge',
+				body: 'The **research nebula**: every research question, grouped by phase and technology thread and coloured by status, with the critical path to the decision gates. Click one to read it.',
+				duration: 10,
+				lens: 'knowledge',
+				spot: '.leftcol > section'
+			},
+			{
+				title: 'Gates',
+				body: 'The **gate tunnel**: decision gates in order, one arc per readiness criterion, and the technologies projected to arrive too late for their gate.',
+				duration: 10,
+				lens: 'gates',
+				spot: '.leftcol > section'
+			},
+			{
+				title: 'Consensus',
+				body: 'The **deliberation chamber**: how Claude, Gemini and GPT argued each question round by round, how they voted, and what they concluded.',
+				duration: 10,
+				lens: 'consensus',
+				spot: '.leftcol > section'
+			},
+			{
+				title: 'Risk',
+				body: 'The **highest-risk items**, scored on technology readiness, cost confidence and cost spread, and how earlier model predictions held up against **validation claims**.',
+				duration: 10,
+				lens: 'risk',
+				spot: '.leftcol > section'
+			},
+			{
+				title: 'Tours and shortcuts',
+				body: 'Story tours, from *why build a swarm* to phase-by-phase deep dives, are always under **▶ Tours**. Press **⌘K** to jump to anything and **?** for every shortcut.',
+				duration: 12,
+				lens: 'physical',
+				spot: '.tours-btn'
+			}
+		]
+	},
+	{
 		id: 'why-swarm',
 		title: 'Why build a Dyson swarm?',
 		subtitle: 'From one planet’s power budget to the Sun’s — 2 min',

@@ -33,6 +33,8 @@ export interface TourStep {
 	year?: number | YearMove;
 	camera?: { distance?: number; azimuth?: number; polar?: number };
 	layers?: Partial<Record<LayerId, boolean>>;
+	/** CSS selector of a HUD element to spotlight during the step */
+	spot?: string;
 }
 
 export interface Tour {
@@ -40,6 +42,8 @@ export interface Tour {
 	title: string;
 	subtitle: string;
 	steps: TourStep[];
+	/** Interface tour: keep the full HUD (inspector, layers) on screen while it runs */
+	ui?: boolean;
 }
 
 const ease = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
