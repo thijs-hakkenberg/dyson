@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { TOURS } from '../tours';
 import { getEntity } from '../registry';
 import { elementModel } from '../models';
-import { MAX_YEAR, TODAY_YEAR } from '../state.svelte';
+import { LAYER_KEYS, MAX_YEAR, TODAY_YEAR } from '../state.svelte';
 
 const DV = import.meta.glob('/static/content/bom-specs/**/divergent-views.yaml', {
 	query: '?raw',
@@ -67,5 +67,24 @@ describe('model-view steps', () => {
 		expect(ui.steps.filter((s) => s.spot).length).toBeGreaterThanOrEqual(10);
 		// Only the interface tour keeps the full HUD up
 		expect(TOURS.filter((t) => t.ui).map((t) => t.id)).toEqual(['interface']);
+	});
+
+	it('the interface tour opens the Layers panel and names every layer key', () => {
+		const ui = TOURS[0];
+		const layerSteps = ui.steps.filter((s) => s.spot === '.layers');
+		expect(layerSteps.length).toBeGreaterThan(0);
+		expect(layerSteps.every((s) => s.layersOpen)).toBe(true);
+		const text = layerSteps.map((s) => s.body).join(' ');
+		for (const k of Object.values(LAYER_KEYS)) expect(text).toContain(/\d/.test(k) ? '1–5' : `**${k}**`);
+	});
+});
+
+describe('layer shortcuts', () => {
+	// Keys already bound in ExploreApp's handler
+	const TAKEN = [' ', '/', '?', 'C', 'R', 'L', 'N', 'G', 'K', 'W', 'M', 'Z', 'H', 'F', '[', ']', '0'];
+	it('are unique and do not collide with other shortcuts', () => {
+		const keys = Object.values(LAYER_KEYS);
+		expect(new Set(keys).size).toBe(keys.length);
+		for (const k of keys) expect(TAKEN).not.toContain(k);
 	});
 });

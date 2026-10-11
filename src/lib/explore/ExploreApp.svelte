@@ -40,7 +40,7 @@
 	import { getTour } from './core/tours';
 	import ScaleBar from './hud/ScaleBar.svelte';
 	import CommandPalette from './hud/CommandPalette.svelte';
-	import { explorer, SPEEDS, TODAY_YEAR } from './core/state.svelte';
+	import { explorer, LAYER_KEYS, SPEEDS, TODAY_YEAR, type LayerId } from './core/state.svelte';
 	import './hud/hud.css';
 	import { provideSunSurface } from './sun/context';
 	import type { SunSurfaceFactory } from './sun/types';
@@ -113,6 +113,8 @@
 		clearTimeout(urlTimer);
 		urlTimer = setTimeout(() => explorer.writeUrl(), 400);
 	});
+
+	const LAYER_BY_KEY = Object.fromEntries(Object.entries(LAYER_KEYS).map(([id, k]) => [k, id as LayerId]));
 
 	function onKey(e: KeyboardEvent) {
 		const typing = (e.target as HTMLElement)?.closest?.('input, textarea, [contenteditable]');
@@ -189,6 +191,9 @@
 				// True-scale hardware in the orrery
 				if (explorer.lens !== 'physical' || explorer.workbenchId || !explorer.toggleHardware()) return;
 				break;
+			case '0':
+				explorer.layersOpen = !explorer.layersOpen;
+				break;
 			case 'h':
 				explorer.hudVisible = !explorer.hudVisible;
 				break;
@@ -204,8 +209,12 @@
 			case 'Home':
 				explorer.setYear(TODAY_YEAR);
 				break;
-			default:
-				return;
+			default: {
+				// Layer toggles (see LAYER_KEYS)
+				const layer = LAYER_BY_KEY[e.key.toUpperCase()];
+				if (!layer || e.metaKey || e.ctrlKey || e.altKey) return;
+				explorer.toggleLayer(layer);
+			}
 		}
 		e.preventDefault();
 	}

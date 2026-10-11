@@ -33,6 +33,8 @@ export interface TourStep {
 	year?: number | YearMove;
 	camera?: { distance?: number; azimuth?: number; polar?: number };
 	layers?: Partial<Record<LayerId, boolean>>;
+	/** Expand or collapse the Layers & legend panel */
+	layersOpen?: boolean;
 	/** CSS selector of a HUD element to spotlight during the step */
 	spot?: string;
 }
@@ -56,6 +58,7 @@ class TourPlayer {
 
 	private yearFrom = 0;
 	private savedLayers: Record<LayerId, boolean> | null = null;
+	private savedLayersOpen: boolean | null = null;
 
 	get step(): TourStep | null {
 		return this.tour?.steps[this.index] ?? null;
@@ -67,6 +70,7 @@ class TourPlayer {
 
 	start(tour: Tour) {
 		this.savedLayers ??= { ...explorer.layers };
+		this.savedLayersOpen ??= explorer.layersOpen;
 		this.tour = tour;
 		this.paused = false;
 		explorer.playing = false;
@@ -88,6 +92,7 @@ class TourPlayer {
 		} else if (s.wbView) explorer.wbView = s.wbView;
 		if (s.wbSelection !== undefined) explorer.wbSelection = s.wbSelection;
 		if (s.layers) for (const [k, v] of Object.entries(s.layers)) explorer.layers[k as LayerId] = v!;
+		if (s.layersOpen !== undefined) explorer.layersOpen = s.layersOpen;
 		if (s.select !== undefined) explorer.selectedId = s.select;
 		if (s.focus) explorer.focusId = s.focus;
 
@@ -138,6 +143,8 @@ class TourPlayer {
 	private restore() {
 		if (this.savedLayers) Object.assign(explorer.layers, this.savedLayers);
 		this.savedLayers = null;
+		if (this.savedLayersOpen !== null) explorer.layersOpen = this.savedLayersOpen;
+		this.savedLayersOpen = null;
 	}
 }
 

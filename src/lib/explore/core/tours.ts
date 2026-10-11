@@ -44,7 +44,7 @@ export const TOURS: Tour[] = [
 	{
 		id: 'interface',
 		title: 'Tour the interface',
-		subtitle: 'What every panel and lens shows — 3 min',
+		subtitle: 'What every panel, layer and lens shows — 4 min',
 		ui: true,
 		steps: [
 			{
@@ -83,13 +83,31 @@ export const TOURS: Tour[] = [
 				spot: '.telemetry'
 			},
 			{
-				title: 'Layers and legend',
-				body: 'Switch orbits, labels, asteroids and individual phases on and off, and read the legend for what the colours and dashes mean.',
-				duration: 9,
+				title: 'Layers',
+				body: 'The **Layers** panel (key **0**) switches what the orrery draws. Each layer has its own key: **O** orbits, **T** labels, **A** the asteroid population, **D** divergent views, **S** the Milky Way, **P** fades completed phases, and **1–5** each phase.',
+				duration: 13,
+				layersOpen: true,
+				spot: '.layers'
+			},
+			{
+				title: 'Watch a layer change',
+				body: 'Divergent views and the near-Earth asteroids switched off: only the consensus baseline remains. Every alternative the models proposed is one key away.',
+				duration: 10,
+				layersOpen: true,
+				layers: { divergence: false, nea: false },
+				spot: '.layers'
+			},
+			{
+				title: 'Reading the legend',
+				body: 'Below the layers, the **legend** says how sure each thing is: **solid** is observed (real ephemerides, true scale), **translucent** is the projected consensus, **dashed** is a divergent alternative in its model’s colour, **dotted** is a synthetic population.',
+				duration: 13,
+				layersOpen: true,
+				layers: { divergence: true, nea: true },
 				spot: '.layers'
 			},
 			{
 				title: 'Inspect anything',
+				layersOpen: false,
 				body: 'Selecting an item opens the **Inspector**: quantity and cost, operations per unit, where it is placed, the **divergent views** between models, and the research questions it depends on.',
 				duration: 13,
 				year: at('phase-1', 0.6),
