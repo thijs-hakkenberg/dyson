@@ -23,6 +23,7 @@
 			'Views',
 			[
 				['W', 'Open selected BOM item in the Workbench'],
+				['M', 'Detailed 3D model of the item (toggle in the Workbench)'],
 				['K', 'Knowledge · Research Nebula'],
 				['G', 'Gates · Gate Tunnel'],
 				['N', 'Network · topology & light-time'],

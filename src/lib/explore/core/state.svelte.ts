@@ -82,6 +82,8 @@ class ExplorerState {
 	workbenchId = $state<string | null>(null);
 	/** Selected node inside the Workbench (e.g. 'model:gpt-5-2', a fork id) */
 	wbSelection = $state<string | null>(null);
+	/** Workbench view: the consensus space, or the detailed element model */
+	wbView = $state<'consensus' | 'model'>('consensus');
 	/** One-shot camera command for scripted moves (tours); scenes apply each seq once */
 	cameraCmd: CameraCommand | null = null;
 	private cmdSeq = 0;
@@ -186,6 +188,7 @@ class ExplorerState {
 		if (rq) this.rqId = rq;
 		const wb = url.searchParams.get('wb');
 		if (wb) this.openWorkbench(wb);
+		if (url.searchParams.get('wbv') === 'model') this.wbView = 'model';
 	}
 
 	writeUrl() {
@@ -205,6 +208,8 @@ class ExplorerState {
 		else url.searchParams.delete('rq');
 		if (this.workbenchId) url.searchParams.set('wb', this.workbenchId);
 		else url.searchParams.delete('wb');
+		if (this.workbenchId && this.wbView === 'model') url.searchParams.set('wbv', 'model');
+		else url.searchParams.delete('wbv');
 		replaceState(url, {});
 	}
 }

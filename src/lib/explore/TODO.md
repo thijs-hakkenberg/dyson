@@ -19,10 +19,12 @@
 
 ## Detailed element models (after the remaining views)
 
-- [ ] Detailed 3D models for BOM elements (collector units/satellites, assembly node, processing station,
-      mass drivers, tugs, foundries, mirror statites, …) shown at close range / in the Workbench,
-      built from the consensus specs (dimensions, masses) with divergent variants as ghosts
-- [ ] **Then revisit all tours** to fly up to these models — more cinematic and engaging
+- [x] Detailed 3D models for all 30 physical BOM elements (`core/models.ts` data, `scene/models/build.ts`
+      nine procedural archetypes) — Workbench consensus core + "3D model" view (M, `?wbv=model`) with
+      callouts, metric scale bar and divergent sizes as ghosts at true relative scale (clamped + flagged)
+- [x] Tours revisited: up-close model steps in every phase tour + new "The hardware, up close" tour
+- [ ] Models in the orrery at close range (needs a near-field scene: km-scale objects in an AU frame)
+- [ ] Higher-fidelity models for the hero items (assembly node petals, collector sail deployment animation)
 
 ## Optimisations / spin-offs
 

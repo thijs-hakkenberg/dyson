@@ -177,10 +177,124 @@ export const TOURS: Tour[] = [
 				wbSelection: 'unit-size-power-class'
 			},
 			{
+				title: 'The split, at true scale',
+				body: 'Switch to the **3D model**. The ghosts stand at true relative scale: GPT’s **6 m tile**, Gemini’s **100 m hex sail**, Claude’s **100 m square**. The solid model is their geometric mean — no consensus size exists, and the panel says so.',
+				duration: 12,
+				wbView: 'model',
+				camera: { azimuth: 35, polar: 62 }
+			},
+			{
 				title: 'Research decides',
 				body: 'Research questions settle these forks. Open the **Knowledge** lens to see what’s answered — and what’s still open.',
 				duration: 10,
 				wbSelection: null
+			}
+		]
+	},
+	{
+		id: 'hardware',
+		title: 'The hardware, up close',
+		subtitle: 'From a 100 kg prospector to a 300 km jet — 3 min',
+		steps: [
+			{
+				title: 'The hardware, up close',
+				body: 'Every BOM item has a **3D model** built from its specification. Solid is the main model; dashed **ghosts** are the other models’ proposals at true relative scale. Press **M** in the Workbench any time.',
+				duration: 10,
+				workbench: 'bom-0-1',
+				wbView: 'model',
+				camera: { azimuth: 35, polar: 62 }
+			},
+			{
+				title: 'Prospector · 100 kg',
+				body: 'A **prospecting satellite**: 0.8 × 0.8 × 1.2 m bus, 5 m across with its 6.5 m² GaAs wings. Thirty-two of them survey near-Earth asteroids.',
+				duration: 10,
+				camera: { azimuth: 60, polar: 60 }
+			},
+			{
+				title: 'Mining robot · 3 t',
+				body: 'A **mining robot** anchors itself to the asteroid and digs with dual counter-rotating bucket wheels, 2–5 t an hour, under a dust shroud.',
+				duration: 10,
+				workbench: 'bom-0-2',
+				wbView: 'model',
+				camera: { azimuth: 40, polar: 62 }
+			},
+			{
+				title: 'Ore hauler · 65 m',
+				body: 'A **transport vehicle**: 200 t ore container up front, propellant tanks, 45 m solar wings and an electric propulsion cluster for 6–10 km/s round trips.',
+				duration: 10,
+				workbench: 'bom-0-4',
+				wbView: 'model',
+				camera: { azimuth: 55, polar: 64 }
+			},
+			{
+				title: 'Assembly node · 18–340 m',
+				body: 'The **assembly node** is where the models differ most in scale: a **19×** spread between GPT’s truss and Claude’s six-petal hub.',
+				duration: 11,
+				workbench: 'bom-1-4',
+				wbView: 'model',
+				camera: { azimuth: 40, polar: 64 }
+			},
+			{
+				title: 'Mass driver · up to 3.4 km',
+				body: 'A **lunar mass driver** throws cargo to L1 at 2.4 km/s. The ghosts mark the short, high-g and long, low-g ends of the track range.',
+				duration: 10,
+				workbench: 'bom-1-5',
+				wbView: 'model',
+				camera: { azimuth: 25, polar: 70 }
+			},
+			{
+				title: 'Collector · 5,000 m² to 1 km²',
+				body: 'A Phase 2 **collector satellite**. One design, three sizes, a **200×** spread in area and nearly **4,000×** in mass. These are kept as divergent views, not averaged away.',
+				duration: 11,
+				workbench: 'bom-2-1',
+				wbView: 'model',
+				camera: { azimuth: 30, polar: 58 }
+			},
+			{
+				title: 'Factory that copies itself',
+				body: 'A **manufacturing node**: ~2,400 t with a solar furnace, refinery bays and 12,000 m² of radiators. GPT’s 100 t seed node stands beside it, shown larger than true scale and flagged.',
+				duration: 11,
+				workbench: 'bom-2-3',
+				wbView: 'model',
+				camera: { azimuth: 35, polar: 64 }
+			},
+			{
+				title: 'Compute tile · ~5 m',
+				body: 'The building block of the **Matrioshka Brain**: a tile with a harvester on the sun side, a radiator on the back and optical links at the edges. 10¹² of them.',
+				duration: 10,
+				workbench: 'bom-3a-1',
+				wbView: 'model',
+				camera: { azimuth: 30, polar: 55 }
+			},
+			{
+				title: 'Shell crawler · 2 m',
+				body: 'Gemini’s **Weaver**, a six-legged electro-adhesive crawler, places tiles. Beside it, the heavy tugs both models add (envelopes estimated from mass) and GPT’s 0.2–2 kg patch microbots.',
+				duration: 11,
+				workbench: 'bom-3a-8',
+				wbView: 'model',
+				camera: { azimuth: 45, polar: 62 }
+			},
+			{
+				title: 'Lifting the Sun · 50–500 km',
+				body: 'A **mass-lifting station**: a stack of superconducting coils at 10–60 T drawing a plasma column off the Sun. Coil sizes run from 50 km (GPT) to a 500 km aperture (Gemini).',
+				duration: 11,
+				workbench: 'bom-3b-4',
+				wbView: 'model',
+				camera: { azimuth: 30, polar: 70 }
+			},
+			{
+				title: 'The jet · 5–300 km',
+				body: 'The **thermonuclear jet**: a magnetic nozzle, kilometres wide, that pushes the Sun. The largest single machines in the project.',
+				duration: 11,
+				workbench: 'bom-3b-2',
+				wbView: 'model',
+				camera: { azimuth: 30, polar: 66 }
+			},
+			{
+				title: 'Back to the consensus',
+				body: 'Every model is linked to its source spec. Switch back to **Consensus** to see where these designs agree and where they fork.',
+				duration: 10,
+				wbView: 'consensus'
 			}
 		]
 	},
@@ -264,10 +378,27 @@ export const TOURS: Tour[] = [
 				camera: { distance: 2.6, polar: 60 }
 			},
 			{
+				title: 'The node, up close',
+				body: 'The assembly node as a model: truss spine, process modules, radiators and a solar furnace. Beside it, the three proposals at true scale — GPT’s **18 m** truss, Gemini’s **120 m** spine, Claude’s **340 m** six-petal hub, a **19×** spread.',
+				duration: 12,
+				workbench: 'bom-1-4',
+				wbView: 'model',
+				camera: { azimuth: 40, polar: 64 }
+			},
+			{
+				title: 'Mass driver, at scale',
+				body: 'A lunar **mass driver**: coil segments on a track **650 m–3.4 km** long, capacitor banks and a solar field alongside. Short track at 1,000 g, long track at 100 g.',
+				duration: 11,
+				workbench: 'bom-1-5',
+				wbView: 'model',
+				camera: { azimuth: 25, polar: 70 }
+			},
+			{
 				title: 'Inside the node',
 				body: 'Fly into the assembly node. Six forks mark where the models split — starting with **where to put it**.',
 				duration: 10,
 				workbench: 'bom-1-4',
+				wbView: 'consensus',
 				wbSelection: 'orbital-location'
 			},
 			{
@@ -342,10 +473,19 @@ export const TOURS: Tour[] = [
 				camera: { distance: 0.03, polar: 65 }
 			},
 			{
+				title: 'The station, up close',
+				body: 'The **processing station**: 180 × 120 × 80 m, a solar-thermal concentrator for smelting, 8,000 m² of PV and 4,000 m² of radiators. Initial mass 400–500 t, growing to about 1,000 t.',
+				duration: 12,
+				workbench: 'bom-0-3',
+				wbView: 'model',
+				camera: { azimuth: 30, polar: 66 }
+			},
+			{
 				title: 'Where the processing happens',
 				body: 'Inside the station, the models split on smelting technology, silicon processing and whether to send a crew at all.',
 				duration: 10,
 				workbench: 'bom-0-3',
+				wbView: 'consensus',
 				wbSelection: 'smelting-technology'
 			},
 			{
@@ -403,11 +543,20 @@ export const TOURS: Tour[] = [
 				select: 'bom-2-2'
 			},
 			{
+				title: 'A collector, at scale',
+				body: 'The Phase 2 collector spans a **200× range** in area: GPT’s **5,000 m²** panel beside **1 km** sails from Claude and Gemini. The ghosts are drawn true to scale; the mass gap is wider still, **225 kg to 850 t**.',
+				duration: 12,
+				year: { to: at('phase-2', 0.98), over: 3 },
+				workbench: 'bom-2-1',
+				wbView: 'model',
+				camera: { azimuth: 30, polar: 58 }
+			},
+			{
 				title: 'Inside a collector',
 				body: 'The collector’s forks: where to orbit, how to convert power, how big each unit should be — from a **5,000 m²** panel to a **1 km²** sail.',
 				duration: 11,
-				year: { to: at('phase-2', 0.98), over: 3 },
 				workbench: 'bom-2-1',
+				wbView: 'consensus',
 				wbSelection: 'unit-scale'
 			},
 			{
@@ -481,10 +630,27 @@ export const TOURS: Tour[] = [
 				select: 'bom-3a-1'
 			},
 			{
+				title: 'A tile, up close',
+				body: 'One **computational tile**: sun-side harvester, compute layer, radiator face, optical links on every edge. Gemini’s 16 m² hexagon, GPT’s 10 m² CST-10 and Claude’s 50 m² membrane stand beside it.',
+				duration: 11,
+				workbench: 'bom-3a-1',
+				wbView: 'model',
+				camera: { azimuth: 30, polar: 55 }
+			},
+			{
+				title: 'A foundry, up close',
+				body: 'A **self-replicating foundry**: ~50,000 t, with 250,000–600,000 m² of membrane radiators at 450–600 K. Its size is the one thing both detailed specs agree on.',
+				duration: 11,
+				workbench: 'bom-3a-4',
+				wbView: 'model',
+				camera: { azimuth: 35, polar: 64 }
+			},
+			{
 				title: 'Inside a foundry',
 				body: 'The foundry’s forks: how to make chips in space, how to damp vibration, how to power it and shed its heat.',
 				duration: 11,
 				workbench: 'bom-3a-4',
+				wbView: 'consensus',
 				wbSelection: 'semiconductor-fabrication-strategy'
 			}
 		]
@@ -548,10 +714,27 @@ export const TOURS: Tour[] = [
 				select: 'bom-3b-8'
 			},
 			{
+				title: 'The jet, up close',
+				body: 'A **thermonuclear jet** module: a magnetic throat, superconducting nozzle coils and a plasma plume. Gemini’s **5 km** “Torch”, Claude’s **50–90 km** module, GPT’s nozzle up to **300 km** — ghosts beyond the frame are shown smaller and flagged.',
+				duration: 12,
+				workbench: 'bom-3b-2',
+				wbView: 'model',
+				camera: { azimuth: 30, polar: 66 }
+			},
+			{
+				title: 'A mirror statite',
+				body: 'One **Shkadov statite**: reflective film held where light pressure balances gravity. Element size spans **100×** — 10 km tiles, 100 km hexagons, 1,000 km segments.',
+				duration: 11,
+				workbench: 'bom-3b-1',
+				wbView: 'model',
+				camera: { azimuth: 30, polar: 55 }
+			},
+			{
 				title: 'The biggest open choice',
 				body: 'Inside the mirror: where to put it. Claude and Gemini say **0.1 AU**, GPT **1 AU** — a decision that reshapes area, mass and heat.',
 				duration: 11,
 				workbench: 'bom-3b-1',
+				wbView: 'consensus',
 				wbSelection: 'standoff-distance-heliocentric-radius'
 			}
 		]

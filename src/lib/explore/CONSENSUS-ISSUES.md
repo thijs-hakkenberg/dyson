@@ -150,3 +150,25 @@ mining fleet is oversized, the robots run at a low duty cycle (not stated), or
 concentration on board removes ~90% of mass before transport (consensus mentions
 "on-board material processing for initial concentration" but gives no ratio).
 *Explorer:* Logistics lens shows the station as the ore chain's bottleneck.
+
+### CI-21 · Phase 2 collector areal density spans ~3,800× for similar areas · open
+`phase-2/collector-satellites`: Claude 1 km² at **850 t** (850 g/m²), Gemini
+0.785 km² at **225 kg** (~0.29 g/m²), GPT 5,000 m² at 2,500 kg (500 g/m²).
+Gemini's figure is below a bare 1 µm polyimide film (~1.4 g/m²) before any PV,
+wiring or structure; Claude's is heavier than most rigid panels. The consensus
+picks GPT's class as the start point but does not comment on the mass figures.
+*Explorer:* 3D model view shows the three sizes as ghosts; the panel lists the masses.
+
+### CI-22 · Assembly node size differs 19× between models · open
+`phase-1/assembly-node`: Claude 340 m hexagonal 6-petal hub (40 m core, 150 m
+petals), Gemini 120 m linear spine, GPT 18 m truss spine — yet the consensus
+gives a single dry-mass range (120–450 t) and a single radiator area range.
+No consensus envelope exists. *Explorer:* the solid model uses the geometric
+mean (~90 m) and is flagged; the three proposals stand beside it as ghosts.
+
+### CI-23 · Many element sizes have no consensus value · open
+For 16 of 30 physical BOM items the consensus quotes per-model dimensions but
+no agreed size (e.g. tiles, PV blankets, mass-lifting coils, EM accelerators,
+jet modules, Shkadov elements). Element sizes of Phase 3b proposals span 10–200×.
+*Explorer:* `core/models.ts` marks these `sizeBasis: 'geomean'` and the panel
+flags them; it does not pick a winner.

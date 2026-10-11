@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { elementModel } from '../core/models';
 	/** Right-hand reading panel for the Workbench: long text stays in the DOM. */
 	import { explorer } from '../core/state.svelte';
 	import { wb, renderMarkdown } from '../core/wbstore.svelte';
@@ -39,7 +40,7 @@
 	const strip = (s: string) => s.replace(/\*\*/g, '');
 </script>
 
-{#if data}
+{#if data && !(explorer.wbView === 'model' && elementModel(explorer.workbenchId) && !sel)}
 	<aside class="wbi panel" aria-label="Workbench inspector">
 		{#if view.kind === 'core'}
 			<header>

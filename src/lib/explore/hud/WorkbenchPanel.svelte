@@ -7,6 +7,7 @@
 	import { MODEL_COLORS, PHASE_COLORS, PRIORITY_COLORS, RQ_STATUS_COLORS } from '../core/theme';
 	import { PRIORITY_ORDER } from '../core/workbench';
 	import { phaseLabel } from '../core/timeline';
+	import { elementModel, formatLength, NON_PHYSICAL } from '../core/models';
 
 	const e = $derived(getEntity(explorer.workbenchId));
 	const b = $derived(e?.bom);
@@ -23,6 +24,13 @@
 		for (const r of layout?.rqs ?? []) c[r.q.status] = (c[r.q.status] ?? 0) + 1;
 		return c;
 	});
+	const em = $derived(elementModel(explorer.workbenchId));
+	const nonPhysical = $derived(explorer.workbenchId ? NON_PHYSICAL[explorer.workbenchId] : undefined);
+	const BASIS: Record<string, string> = {
+		consensus: 'Consensus dimensions',
+		model: 'Follows one model’s spec (no consensus size)',
+		geomean: 'No consensus size — geometric mean of the proposals'
+	};
 	const proseOnly = $derived(!!layout?.forks.length && !wb.data?.spec?.divergentViewsData);
 </script>
 
@@ -33,6 +41,15 @@
 			{e.phase ? phaseLabel(e.phase) : ''} · {b.category} · {e.id}
 		</div>
 		<h2>{b.name}</h2>
+
+		<div class="views" role="group" aria-label="Workbench view">
+			<button type="button" class="hud-btn" class:on={explorer.wbView === 'consensus'} onclick={() => (explorer.wbView = 'consensus')}>
+				Consensus
+			</button>
+			<button type="button" class="hud-btn" class:on={explorer.wbView === 'model'} onclick={() => (explorer.wbView = 'model')}>
+				3D model <kbd>M</kbd>
+			</button>
+		</div>
 
 		<dl>
 			<dt>Quantity</dt><dd>{formatCount(b.quantity)} {b.unit}</dd>
@@ -50,7 +67,37 @@
 			{#if m?.thrustN}<dt>Thrust / unit</dt><dd>{formatSci(m.thrustN.base)} N</dd>{/if}
 		</dl>
 
-		{#if wb.loading}
+		{#if explorer.wbView === 'model'}
+			{#if em}
+				<div class="eyebrow sec">Element model</div>
+				<dl>
+					<dt>Size</dt><dd>{formatLength(em.params.size)}</dd>
+					<dt>Mass</dt><dd class="wrap">{em.mass}</dd>
+				</dl>
+				<p class="dims">{em.dims}</p>
+				<p class="basis" class:flag={em.sizeBasis !== 'consensus'}>
+					{BASIS[em.sizeBasis]}{em.after ? ` · shape after ${em.after}` : ''}
+				</p>
+				{#if em.variants.length}
+					<div class="eyebrow sec">Divergent sizes · ghosts</div>
+					<ul class="variants">
+						{#each em.variants as v (v.label + v.model)}
+							<li>
+								<i style="--c:{v.model ? MODEL_COLORS[v.model] : '#94a3b8'}">{v.model ?? 'range'}</i>
+								<span>{v.label}</span>
+								<b>{formatLength(v.size)}</b>
+							</li>
+						{/each}
+					</ul>
+				{/if}
+				<p class="foot">
+					Procedural model: proportions from the specs, fine detail representative. Ghosts stand at true scale to the main
+					model, shown smaller or larger only when flagged. Source: {em.source}.
+				</p>
+			{:else}
+				<p class="dim nm">{nonPhysical ?? 'No physical model for this item yet.'}</p>
+			{/if}
+		{:else if wb.loading}
 			<p class="dim">Loading specs…</p>
 		{:else if layout}
 			<div class="eyebrow sec">Consensus</div>
@@ -83,10 +130,10 @@
 			{/if}
 		{/if}
 
-		<p class="foot">
+		{#if explorer.wbView === 'consensus'}<p class="foot">
 			Core = consensus (translucent). Forks = divergent views (dashed), branches lean toward the models holding each
 			position, stem length and colour by priority. Click any node.
-		</p>
+		</p>{/if}
 	{/if}
 </section>
 
@@ -192,6 +239,63 @@
 		color: var(--c);
 		border: 1px solid var(--c);
 		padding: 0 4px;
+	}
+	.views {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 4px;
+		margin-bottom: 8px;
+	}
+	.views .hud-btn {
+		font-size: 10.5px;
+		display: flex;
+		justify-content: center;
+		gap: 6px;
+	}
+	dd.wrap {
+		text-align: right;
+		font-size: 10.5px;
+	}
+	.dims {
+		margin: 6px 0 0;
+		font-size: 11px;
+		line-height: 1.4;
+	}
+	.basis {
+		margin: 4px 0 0;
+		font-size: 10px;
+		color: var(--hud-dim);
+	}
+	.basis.flag {
+		color: var(--hud-warn);
+	}
+	.variants {
+		list-style: none;
+		padding: 0;
+		margin: 4px 0 0;
+		font-size: 10.5px;
+	}
+	.variants li {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		gap: 6px;
+		align-items: baseline;
+		margin: 3px 0;
+	}
+	.variants i {
+		font-style: normal;
+		font-size: 9px;
+		color: var(--c);
+		border: 1px dashed var(--c);
+		padding: 0 4px;
+	}
+	.variants b {
+		font-weight: 500;
+		font-variant-numeric: tabular-nums;
+	}
+	.nm {
+		margin-top: 10px;
+		line-height: 1.4;
 	}
 	.warn {
 		margin: 6px 0 0;
