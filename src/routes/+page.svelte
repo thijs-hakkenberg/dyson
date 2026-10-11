@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { getPhases, formatCurrency, getTotalProjectCost } from '$lib/services/content';
 	import { trackCTA } from '$lib/services/mixpanel';
+	import HeroSun from '$lib/components/home/HeroSun.svelte';
 
 	let { data } = $props();
 
@@ -11,7 +12,6 @@
 
 	let scrollProgress = $state(0);
 	let starfieldEl: HTMLDivElement;
-	let flareWrapperEl: HTMLDivElement;
 	let energyBarsVisible = $state(false);
 
 	onMount(() => {
@@ -65,122 +65,6 @@
 		const energySection = document.querySelector('.energy-comparison');
 		if (energySection) energyObserver.observe(energySection);
 
-		// Solar flare — ported from reference CodePen (blur+contrast metaball)
-		// Each "fire" orbits the center; its inner child oscillates radially + self-rotates
-		if (flareWrapperEl) {
-			// Layer 1: Dense thin corona — many small elements hugging the edge
-			const coronaCount = 100;
-			for (let i = 0; i < coronaCount; i++) {
-				const fire = document.createElement('div');
-				fire.className = 'flare-fire';
-				const inner = document.createElement('div');
-				inner.className = 'flare-fire-inner';
-
-				const size = 20 + Math.random() * 35;
-				const bw = 4 + Math.random() * 6;
-				const br = [
-					(20 + Math.random() * 60) + '%',
-					(20 + Math.random() * 60) + '%',
-					(20 + Math.random() * 60) + '%',
-					(20 + Math.random() * 60) + '%'
-				].join(' ');
-
-				inner.style.cssText = `
-					width: ${size}px; height: ${size}px;
-					border: ${bw}px solid orange;
-					border-radius: ${br};
-					box-sizing: border-box;
-				`;
-
-				fire.appendChild(inner);
-				flareWrapperEl.appendChild(fire);
-
-				const orbitDuration = 40000 + Math.random() * 80000;
-				fire.animate([
-					{ transform: 'rotateZ(0deg)' },
-					{ transform: 'rotateZ(360deg)' }
-				], {
-					duration: orbitDuration,
-					iterations: Infinity,
-					easing: 'linear',
-					delay: -Math.random() * orbitDuration
-				});
-
-				// Tight radial range — stay close to the edge
-				const innerDuration = 30000 + Math.random() * 40000;
-				inner.animate([
-					{ transform: 'translate(175px, -50%) rotateZ(0deg)' },
-					{ transform: 'translate(195px, -50%) rotateZ(180deg)' },
-					{ transform: 'translate(175px, -50%) rotateZ(360deg)' }
-				], {
-					duration: innerDuration,
-					iterations: Infinity,
-					direction: 'alternate',
-					easing: 'linear',
-					delay: -Math.random() * innerDuration
-				});
-			}
-
-			// Layer 2: Prominence arcs — few large elements that flare out far
-			const flareCount = 8;
-			for (let i = 0; i < flareCount; i++) {
-				const fire = document.createElement('div');
-				fire.className = 'flare-fire';
-				const inner = document.createElement('div');
-				inner.className = 'flare-fire-inner';
-
-				const size = 80 + Math.random() * 120;
-				const bTop = 6 + Math.random() * 12;
-				const bRight = 6 + Math.random() * 12;
-				const bBottom = 6 + Math.random() * 12;
-				const bLeft = 6 + Math.random() * 12;
-				const br = [
-					(10 + Math.random() * 70) + '%',
-					(10 + Math.random() * 70) + '%',
-					(10 + Math.random() * 70) + '%',
-					(10 + Math.random() * 70) + '%'
-				].join(' ');
-
-				inner.style.cssText = `
-					width: ${size}px; height: ${size}px;
-					border-top: ${bTop}px solid orange;
-					border-right: ${bRight}px solid orange;
-					border-bottom: ${bBottom}px solid orange;
-					border-left: ${bLeft}px solid orange;
-					border-radius: ${br};
-					box-sizing: border-box;
-				`;
-
-				fire.appendChild(inner);
-				flareWrapperEl.appendChild(fire);
-
-				const orbitDuration = 60000 + Math.random() * 120000;
-				fire.animate([
-					{ transform: 'rotateZ(0deg)' },
-					{ transform: 'rotateZ(360deg)' }
-				], {
-					duration: orbitDuration,
-					iterations: Infinity,
-					easing: 'linear',
-					delay: -Math.random() * orbitDuration
-				});
-
-				// Wide radial sweep — from near the edge out to dramatic arcs
-				const innerDuration = 40000 + Math.random() * 60000;
-				inner.animate([
-					{ transform: 'translate(160px, -50%) rotateZ(0deg)' },
-					{ transform: 'translate(240px, -50%) rotateZ(180deg)' },
-					{ transform: 'translate(160px, -50%) rotateZ(360deg)' }
-				], {
-					duration: innerDuration,
-					iterations: Infinity,
-					direction: 'alternate',
-					easing: 'linear',
-					delay: -Math.random() * innerDuration
-				});
-			}
-		}
-
 		return () => {
 			window.removeEventListener('scroll', handleScroll);
 			revealObserver.disconnect();
@@ -217,40 +101,12 @@
 <!-- Scroll Progress -->
 <div class="scroll-progress" style="width: {scrollProgress}%"></div>
 
-<!-- SVG Filters -->
-<svg class="svg-filters" aria-hidden="true">
-	<defs>
-		<filter id="sun-surface" x="-10%" y="-10%" width="120%" height="120%">
-			<feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" seed="2" result="noise">
-				<animate attributeName="seed" from="0" to="100" dur="120s" repeatCount="indefinite" />
-			</feTurbulence>
-			<feColorMatrix type="saturate" values="0" in="noise" result="gray" />
-			<feComponentTransfer in="gray" result="spots">
-				<feFuncR type="linear" slope="0.6" intercept="0.3" />
-				<feFuncG type="linear" slope="0.5" intercept="0.25" />
-				<feFuncB type="linear" slope="0.2" intercept="0.1" />
-			</feComponentTransfer>
-			<feBlend in="SourceGraphic" in2="spots" mode="multiply" result="darkened" />
-			<feComponentTransfer in="noise" result="bright">
-				<feFuncR type="linear" slope="1.2" intercept="0" />
-				<feFuncG type="linear" slope="0.8" intercept="0" />
-				<feFuncB type="linear" slope="0.1" intercept="0" />
-			</feComponentTransfer>
-			<feBlend in="darkened" in2="bright" mode="screen" result="surface" />
-			<feComposite in="surface" in2="SourceGraphic" operator="in" />
-		</filter>
-	</defs>
-</svg>
-
 <!-- ═══ HERO ═══ -->
 <section class="hero">
 	<div class="starfield" bind:this={starfieldEl}></div>
 	<div class="hero-visual reveal">
 		<div class="sun-container">
-			<div class="flare-wrapper" bind:this={flareWrapperEl}>
-				<div class="flare-body"></div>
-			</div>
-			<div class="sun"></div>
+			<HeroSun />
 			<div class="orbit-ring orbit-1"><div class="orbit-dot"></div></div>
 			<div class="orbit-ring orbit-2"><div class="orbit-dot"></div></div>
 			<div class="orbit-ring orbit-3"><div class="orbit-dot"></div></div>
@@ -264,8 +120,20 @@
 		One research question at a time.
 	</p>
 	<div class="hero-actions reveal reveal-delay-3">
-		<a href="/plan" class="btn-primary" onclick={() => trackCTA('See the Plan', 'Hero', '/plan')}>See the Plan</a>
-		<a href="#join" class="btn-secondary">Join the Effort</a>
+		<a href="/explore" class="cta-3d" onclick={() => trackCTA('Explore the Plan in 3D', 'Hero', '/explore')}>
+			<span class="cta-3d-icon" aria-hidden="true">
+				<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6" /><ellipse cx="12" cy="12" rx="10" ry="4.2" /><circle cx="21.2" cy="10.4" r="1.2" class="planet" /></svg>
+			</span>
+			<span class="cta-3d-text">
+				<b>Explore the plan in 3D</b>
+				<small>The swarm, phase by phase, in a live solar system · guided tours · every component modelled</small>
+			</span>
+			<span class="cta-3d-arrow" aria-hidden="true">&rarr;</span>
+		</a>
+		<div class="hero-secondary">
+			<a href="/plan" class="btn-secondary" onclick={() => trackCTA('See the Plan', 'Hero', '/plan')}>Read the Plan</a>
+			<a href="#join" class="btn-secondary">Join the Effort</a>
+		</div>
 	</div>
 	<div class="scroll-hint">
 		<svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
@@ -480,82 +348,15 @@
 
 	.hero-visual {
 		position: relative;
-		margin-bottom: 3rem;
+		margin-bottom: 2.25rem;
 		display: flex;
 		justify-content: center;
 	}
 
-	.svg-filters {
-		position: absolute;
-		width: 0;
-		height: 0;
-		overflow: hidden;
-	}
-
-	.sun {
-		position: relative;
-		z-index: 1;
-		width: 400px;
-		height: 400px;
-		border-radius: 50%;
-		background: radial-gradient(circle at 40% 40%, #8a6010, #c89520, #e8b830, #ffe040);
-		filter: url(#sun-surface);
-		box-shadow:
-			inset 0 0 60px 20px yellow,
-			0 0 12px 4px rgba(255, 255, 0, 0.9);
-	}
-
 	.sun-container {
 		position: relative;
-		width: 400px;
-		height: 400px;
-		box-shadow:
-			0 0 80px rgba(240,168,48,0.3),
-			0 0 200px rgba(240,168,48,0.1);
-		border-radius: 50%;
-		animation: sun-pulse 4s ease-in-out infinite;
-	}
-
-	@keyframes sun-pulse {
-		0%, 100% { box-shadow: 0 0 80px rgba(240,168,48,0.3), 0 0 200px rgba(240,168,48,0.1); }
-		50% { box-shadow: 0 0 120px rgba(240,168,48,0.4), 0 0 260px rgba(240,168,48,0.15); }
-	}
-
-	.flare-wrapper {
-		position: absolute;
-		width: 1000px;
-		height: 1000px;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		background: #000;
-		filter: blur(10px) contrast(15);
-		z-index: 0;
-		pointer-events: none;
-	}
-
-	.flare-body {
-		position: absolute;
-		width: 400px;
-		height: 400px;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		border-radius: 50%;
-		background: transparent;
-		border: 15px solid yellow;
-		box-sizing: border-box;
-	}
-
-	:global(.flare-fire) {
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform-origin: 0 0;
-	}
-
-	:global(.flare-fire-inner) {
-		box-sizing: border-box;
+		width: 340px;
+		height: 340px;
 	}
 
 	.orbit-ring {
@@ -636,9 +437,97 @@
 
 	.hero-actions {
 		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+		position: relative;
+	}
+
+	.hero-secondary {
+		display: flex;
 		gap: 1rem;
 		justify-content: center;
-		position: relative;
+	}
+
+	/* ── Primary CTA: the 3D explorer ── */
+	.cta-3d {
+		display: flex;
+		align-items: center;
+		gap: 1.1rem;
+		max-width: 560px;
+		padding: 1.1rem 1.5rem 1.1rem 1.1rem;
+		border-radius: 0.85rem;
+		text-align: left;
+		text-decoration: none;
+		color: var(--color-space-900);
+		background: linear-gradient(135deg, var(--color-accent-gold), var(--color-accent-amber));
+		box-shadow:
+			0 0 0 1px rgba(255, 220, 150, 0.35),
+			0 10px 40px rgba(240, 168, 48, 0.28),
+			0 0 90px rgba(240, 168, 48, 0.18);
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+	.cta-3d:hover {
+		transform: translateY(-2px);
+		box-shadow:
+			0 0 0 1px rgba(255, 230, 170, 0.6),
+			0 14px 50px rgba(240, 168, 48, 0.4),
+			0 0 120px rgba(240, 168, 48, 0.25);
+	}
+	.cta-3d:focus-visible {
+		outline: 2px solid var(--color-star-white);
+		outline-offset: 3px;
+	}
+	.cta-3d-icon {
+		flex: none;
+		display: grid;
+		place-items: center;
+		width: 3.25rem;
+		height: 3.25rem;
+		border-radius: 50%;
+		background: rgba(10, 14, 26, 0.88);
+	}
+	.cta-3d-icon svg {
+		width: 2rem;
+		height: 2rem;
+		fill: none;
+		stroke: var(--color-accent-gold);
+		stroke-width: 1.2;
+		transform: rotate(-14deg);
+	}
+	.cta-3d-icon circle:first-child {
+		fill: var(--color-accent-gold);
+		stroke: none;
+	}
+	.cta-3d-icon .planet {
+		fill: #7dd3fc;
+		stroke: none;
+	}
+	.cta-3d-text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+	}
+	.cta-3d-text b {
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 1.35rem;
+		font-weight: 700;
+		letter-spacing: -0.01em;
+		line-height: 1.15;
+	}
+	.cta-3d-text small {
+		font-size: 0.85rem;
+		line-height: 1.35;
+		opacity: 0.78;
+	}
+	.cta-3d-arrow {
+		flex: none;
+		margin-left: auto;
+		font-size: 1.5rem;
+		transition: transform 0.2s ease;
+	}
+	.cta-3d:hover .cta-3d-arrow {
+		transform: translateX(4px);
 	}
 
 	.scroll-hint {
@@ -1063,9 +952,10 @@
 		}
 
 		.sun-container { width: 200px; height: 200px; }
-		.sun { width: 200px; height: 200px; }
-		.flare-wrapper { width: 500px; height: 500px; transform: translate(-50%, -50%) scale(0.5); }
-		.flare-body { width: 400px; height: 400px; }
+		.cta-3d { padding: 0.9rem 1rem; gap: 0.8rem; }
+		.cta-3d-icon { width: 2.6rem; height: 2.6rem; }
+		.cta-3d-text b { font-size: 1.1rem; }
+		.cta-3d-text small { font-size: 0.78rem; }
 		.orbit-1 { width: 280px; height: 280px; }
 		.orbit-2 { width: 360px; height: 360px; }
 		.orbit-3 { width: 440px; height: 440px; }
