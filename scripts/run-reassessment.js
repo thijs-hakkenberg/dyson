@@ -25,6 +25,7 @@
  *   --prior-round=N           include round N's reconciliation in the prompts
  *   --include-specs           also include every per-model spec (long prompts)
  *   --force                   re-query even if the output exists
+ *   --max-tokens=N            output budget per response (default 24000, synthesis 16000; reasoning models spend part of it thinking)
  *   --dry-run                 write prompts to round-N/prompts/ and stop (no API calls)
  *   --panel / --models / --profile / --list-models / --discover   see scripts/lib/llm.js
  *
@@ -228,7 +229,7 @@ Attribute every claim to the model(s) that made it. Do not introduce new technic
 your own; if all models missed something obvious, list it under a final "Reviewer note".
 `;
 
-async function synthesize({ phaseId, round, keys, synthesizer }) {
+async function synthesize({ phaseId, round, keys, synthesizer, maxTokens }) {
 	const base = path.join(ROOT, `reconciliation/${phaseId}/round-${round}`);
 	const modelDirs = (await fs.readdir(base, { withFileTypes: true })).filter((d) => d.isDirectory() && MODELS[d.name]).map((d) => d.name);
 	const outDir = path.join(base, 'reconciliation');
@@ -245,7 +246,7 @@ async function synthesize({ phaseId, round, keys, synthesizer }) {
 		}
 		const prompt = `# Reconcile the panel's re-assessment of ${key} (${phaseId}, round ${round})\n\n${responses.join('\n\n---\n\n')}\n\n---\n\n${SYNTH_SPEC}`;
 		console.log(`  Synthesising ${key} from ${responses.length} responses with ${MODELS[synthesizer].name}...`);
-		const ex = await queryModel(synthesizer, { system: 'You are the neutral rapporteur of an engineering review panel. You consolidate, attribute and preserve disagreement; you do not decide.', prompt, maxTokens: 16000, temperature: 0.3 });
+		const ex = await queryModel(synthesizer, { system: 'You are the neutral rapporteur of an engineering review panel. You consolidate, attribute and preserve disagreement; you do not decide.', prompt, maxTokens, temperature: 0.3 });
 		await archiveRaw(path.join(base, 'raw', 'synthesis'), key, ex);
 		await fs.mkdir(outDir, { recursive: true });
 		await fs.writeFile(
@@ -272,10 +273,12 @@ async function main() {
 	const rows = await bomRows(phaseId);
 	const keys = (get('items') ?? [...Object.keys(F.items), 'phase'].join(',')).split(',');
 
+	const maxTokens = get('max-tokens') ? Number(get('max-tokens')) : undefined;
+
 	if (argv.includes('--synthesize')) {
 		const synthesizer = get('synthesizer', 'claude-opus-4-7');
 		if (!MODELS[synthesizer]) await resolvePanel({ models: synthesizer });
-		await synthesize({ phaseId, round, keys, synthesizer: MODELS[synthesizer] ? synthesizer : synthesizer.replace(/^databricks-/, '') });
+		await synthesize({ phaseId, round, keys, synthesizer: MODELS[synthesizer] ? synthesizer : synthesizer.replace(/^databricks-/, ''), maxTokens: maxTokens ?? 16000 });
 		return;
 	}
 
@@ -300,7 +303,7 @@ async function main() {
 				const out = path.join(base, m, `${key}.md`);
 				if (!force && (await fs.stat(out).catch(() => null))) return console.log(`  ${key} · ${m}: exists, skipping`);
 				try {
-					const ex = await queryModel(m, { system: SYSTEM, prompt, maxTokens: 24000, temperature: 0.4 });
+					const ex = await queryModel(m, { system: SYSTEM, prompt, maxTokens: maxTokens ?? 24000, temperature: 0.4 });
 					if (!ex.text) throw new Error('empty response');
 					await archiveRaw(path.join(base, 'raw', m), key, ex);
 					await fs.mkdir(path.dirname(out), { recursive: true });

@@ -280,7 +280,7 @@ findings:
 
 # Phase-level asks for the re-assessment (in addition to per-finding answers)
 phase_asks:
-  - A closed Phase 0 budget table: mass flow (t/yr per stage), power (MW per load and site), Δv and trip time per vehicle class, and cost (recurring, non-recurring, launch, operations, contingency) with ranges.
-  - A proposed BOM delta: items to add, remove, split or resize, each with quantity, unit cost range, basis and confidence.
+  - 'A closed Phase 0 budget table: mass flow (t/yr per stage), power (MW per load and site), Δv and trip time per vehicle class, and cost (recurring, non-recurring, launch, operations, contingency) with ranges.'
+  - 'A proposed BOM delta: items to add, remove, split or resize, each with quantity, unit cost range, basis and confidence.'
   - The gate criteria that should separate Phase 0A (research and pathfinders) from Phase 0B (industrial build-out).
   - Where models still disagree after reconciliation, keep both positions with their reasoning; do not force a single answer.

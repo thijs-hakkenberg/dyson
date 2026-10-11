@@ -25,6 +25,7 @@ import { execFileSync } from 'child_process';
 import { createHash } from 'crypto';
 import fs from 'fs/promises';
 import path from 'path';
+import { Agent } from 'undici';
 
 const LEGACY_HOST = 'https://adb-6239133969168510.10.azuredatabricks.net';
 const GATEWAY_HOST = 'https://adb-7405606309889705.5.azuredatabricks.net';
@@ -208,6 +209,14 @@ function responsesText(data) {
 	return parts.length ? parts.join('') : null;
 }
 
+// Node's fetch gives up after 300 s without response headers, and the gateway sends
+// none until a long generation finishes; one agent per timeout lifts that limit.
+const agents = new Map();
+export function agentFor(timeoutMs) {
+	if (!agents.has(timeoutMs)) agents.set(timeoutMs, new Agent({ headersTimeout: timeoutMs, bodyTimeout: timeoutMs }));
+	return agents.get(timeoutMs);
+}
+
 /**
  * Send one prompt. Returns { text, data, request, meta } or throws.
  * maxTokens/temperature apply to chat transports; reasoning models ignore temperature.
@@ -240,6 +249,7 @@ export async function queryModel(key, { system, prompt, maxTokens = 16000, tempe
 			res = await fetch(url, {
 				method: 'POST',
 				signal: ctl.signal,
+				dispatcher: agentFor(timeoutMs),
 				headers: { Authorization: `Bearer ${getToken()}`, 'Content-Type': 'application/json' },
 				body: JSON.stringify(body)
 			});
@@ -248,7 +258,8 @@ export async function queryModel(key, { system, prompt, maxTokens = 16000, tempe
 			if (![429, 503].includes(res.status)) throw retryable;
 		} catch (e) {
 			if (e === retryable || e.name === 'AbortError') throw e;
-			retryable = e;
+			// undici hides the reason (headers timeout, reset…) in e.cause
+			retryable = new Error(`${e.message}${e.cause?.code ? ` (${e.cause.code})` : ''}`, { cause: e });
 		} finally {
 			clearTimeout(timer);
 		}

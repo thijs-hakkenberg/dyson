@@ -4,7 +4,7 @@ import yaml from 'js-yaml';
 import { KNOWN_MODELS, modelFamily, modelName } from '../models';
 import { MODEL_DISPLAY_NAMES, computeDiscussionStats } from '$lib/types/discussion';
 // The scripts' registry must agree with the site's
-import { MODELS as SCRIPT_MODELS, PANELS, nameFor, familyOf, resolvePanel, queryModel } from '../../../../scripts/lib/llm.js';
+import { MODELS as SCRIPT_MODELS, PANELS, nameFor, familyOf, resolvePanel, queryModel, agentFor } from '../../../../scripts/lib/llm.js';
 
 const MODELS = SCRIPT_MODELS as Record<string, { name: string; family: string; transport: string }>;
 const FINDINGS = Object.values(
@@ -95,6 +95,26 @@ describe('model registry', () => {
 		}
 	});
 
+	it('queryModel lifts undici’s 300 s header timeout to its own timeoutMs', async () => {
+		const realFetch = globalThis.fetch;
+		const realToken = process.env.DATABRICKS_TOKEN;
+		process.env.DATABRICKS_TOKEN = 'test';
+		let opts: { dispatcher?: { options?: Record<string, number> } } = {};
+		globalThis.fetch = (async (_u: string, o: typeof opts) => {
+			opts = o;
+			return { ok: true, status: 200, json: async () => ({ choices: [{ message: { content: 'ok' } }] }) };
+		}) as never;
+		try {
+			await queryModel('claude-opus-5-5', { prompt: 'x', timeoutMs: 1_200_000 });
+			expect(opts.dispatcher, 'a dispatcher is passed').toBeTruthy();
+			expect(opts.dispatcher).toBe(agentFor(1_200_000));
+		} finally {
+			globalThis.fetch = realFetch;
+			if (realToken === undefined) delete process.env.DATABRICKS_TOKEN;
+			else process.env.DATABRICKS_TOKEN = realToken;
+		}
+	});
+
 	it('discussion stats count winners from any panel', () => {
 		const stats = computeDiscussionStats([{ winnerId: 'claude-opus-4-7', votes: [], responses: [] } as never]);
 		expect(stats.roundWinners['claude-opus-4-7']).toBe(1);
@@ -105,6 +125,7 @@ describe('phase 0 findings', () => {
 	const F = yaml.load(FINDINGS) as {
 		items: Record<string, string>;
 		findings: { id: string; kind: string; severity: string; items: string[]; question: string }[];
+		phase_asks: unknown[];
 	};
 	it('are well-formed and reference real items', () => {
 		const ids = new Set(F.findings.map((f) => f.id));
@@ -115,5 +136,7 @@ describe('phase 0 findings', () => {
 			expect(f.question.length).toBeGreaterThan(20);
 			for (const i of f.items) expect(i === 'phase' || i in F.items, `${f.id}: ${i}`).toBe(true);
 		}
+		// an unquoted "label: text" parses as a mapping and reaches the prompt as [object Object]
+		for (const a of F.phase_asks) expect(typeof a, JSON.stringify(a)).toBe('string');
 	});
 });
