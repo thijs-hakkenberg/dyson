@@ -6,6 +6,7 @@ import { replaceState } from '$app/navigation';
 import { dateToYear } from './units';
 import { getEntity } from './registry';
 import { TIMELINE } from './timeline';
+import { hardwareDistance, nearFieldModel, nearFieldResolved } from './nearfield';
 
 export const TODAY_YEAR = dateToYear(new Date());
 export const MAX_YEAR = Math.ceil(Math.max(...TIMELINE.map((w) => w.end)));
@@ -82,6 +83,8 @@ class ExplorerState {
 	workbenchId = $state<string | null>(null);
 	/** Selected node inside the Workbench (e.g. 'model:gpt-5-2', a fork id) */
 	wbSelection = $state<string | null>(null);
+	/** Workbench view: the consensus space, or the detailed element model */
+	wbView = $state<'consensus' | 'model'>('consensus');
 	/** One-shot camera command for scripted moves (tours); scenes apply each seq once */
 	cameraCmd: CameraCommand | null = null;
 	private cmdSeq = 0;
@@ -132,6 +135,21 @@ class ExplorerState {
 	/** Queue a camera move: distance in scene units, azimuth/polar in degrees. */
 	commandCamera(cmd: Omit<CameraCommand, 'seq'>) {
 		this.cameraCmd = { ...cmd, seq: ++this.cmdSeq };
+	}
+
+	/** Fly down to the focused item's true-scale model, or back out to the orbit view. */
+	toggleHardware(id = this.selectedId) {
+		const m = nearFieldModel(id);
+		const e = getEntity(id);
+		if (!m || !e) return false;
+		this.playing = false;
+		if (this.focusId === e.id && nearFieldResolved(m, this.cameraDistance)) {
+			this.commandCamera({ distance: e.focusDistance });
+		} else {
+			this.focusId = e.id;
+			this.commandCamera({ distance: hardwareDistance(m), polar: 62 });
+		}
+		return true;
 	}
 
 	setLens(lens: Lens) {
@@ -186,6 +204,7 @@ class ExplorerState {
 		if (rq) this.rqId = rq;
 		const wb = url.searchParams.get('wb');
 		if (wb) this.openWorkbench(wb);
+		if (url.searchParams.get('wbv') === 'model') this.wbView = 'model';
 	}
 
 	writeUrl() {
@@ -205,6 +224,8 @@ class ExplorerState {
 		else url.searchParams.delete('rq');
 		if (this.workbenchId) url.searchParams.set('wb', this.workbenchId);
 		else url.searchParams.delete('wb');
+		if (this.workbenchId && this.wbView === 'model') url.searchParams.set('wbv', 'model');
+		else url.searchParams.delete('wbv');
 		replaceState(url, {});
 	}
 }

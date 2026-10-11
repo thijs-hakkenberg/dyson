@@ -26,6 +26,8 @@ export interface TourStep {
 	/** Open a BOM item in the Workbench (null closes it) */
 	workbench?: string | null;
 	wbSelection?: string | null;
+	/** Workbench view; opening an item defaults to the consensus view */
+	wbView?: 'consensus' | 'model';
 	focus?: string;
 	select?: string | null;
 	year?: number | YearMove;
@@ -78,7 +80,8 @@ class TourPlayer {
 		if (s.workbench === null && explorer.workbenchId) explorer.closeWorkbench();
 		if (s.workbench) {
 			if (explorer.workbenchId !== s.workbench) explorer.openWorkbench(s.workbench);
-		}
+			explorer.wbView = s.wbView ?? 'consensus';
+		} else if (s.wbView) explorer.wbView = s.wbView;
 		if (s.wbSelection !== undefined) explorer.wbSelection = s.wbSelection;
 		if (s.layers) for (const [k, v] of Object.entries(s.layers)) explorer.layers[k as LayerId] = v!;
 		if (s.select !== undefined) explorer.selectedId = s.select;

@@ -7,6 +7,7 @@
 	import { itemProgress, phaseInFocus } from '../core/progress';
 	import { PHASE_COLORS } from '../core/theme';
 	import { formatCount } from '../core/units';
+	import { nearFieldModel, nearFieldResolved } from '../core/nearfield';
 
 	let { bomId, at }: { bomId: string; at?: (y: number) => Vec3 } = $props();
 
@@ -32,6 +33,9 @@
 	const labelled = $derived(
 		explorer.selectedId === bomId || phaseInFocus(e.phaseId!, explorer.year, explorer.selected?.phaseId ?? explorer.selected?.phase?.id)
 	);
+	// Once the true-scale model is resolved it carries its own label
+	const nm = nearFieldModel(bomId);
+	const resolved = $derived(!!nm && explorer.focusId === bomId && nearFieldResolved(nm, explorer.cameraDistance));
 	const sub = $derived.by(() => {
 		const q = e.bom!.quantity;
 		if (progress >= 1) return `${formatCount(q)} ${e.bom!.unit} · complete`;
@@ -40,7 +44,7 @@
 	});
 </script>
 
-{#if progress > 0 && labelled}
+{#if progress > 0 && labelled && !resolved}
 	<Tracked position={labelPoint()}>
 		<Marker id={bomId} label={e.name} {sub} color={PHASE_COLORS[e.phaseId!]} />
 	</Tracked>

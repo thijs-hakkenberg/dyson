@@ -30,11 +30,29 @@
 	import { MODEL_COLORS, PHASE_COLORS, PRIORITY_COLORS, RQ_STATUS_COLORS } from '../../core/theme';
 	import type { Vec3 } from '../../core/registry';
 	import type { WbFork } from '../../core/workbench';
+	import ElementModelView from '../models/ElementModelView.svelte';
+	import { elementModel, GHOST_MAX_RATIO } from '../../core/models';
 
 	const layout = $derived(wb.layout);
 	const data = $derived(wb.data);
 	const coreColor = $derived(data ? (PHASE_COLORS[data.phaseId] ?? '#7dd3fc') : '#7dd3fc');
 	const sel = $derived(explorer.wbSelection);
+	const em = $derived(elementModel(explorer.workbenchId));
+	const modelView = $derived(explorer.wbView === 'model' && !!em);
+	/** Scene size of the main model in model view */
+	const FULL = 6;
+	/** Look target in model view: shifted right when a ghost line-up exists */
+	const modelFrame = $derived.by(() => {
+		if (!em) return { x: 0, dist: 15 };
+		let w = FULL * 0.75;
+		for (const v of em.variants) {
+			const r = Math.min(GHOST_MAX_RATIO, Math.max(0.06, v.size / em.params.size));
+			w += Math.max(FULL * r, FULL * 0.08) + FULL * 0.15;
+		}
+		const span = em.variants.length ? FULL * 0.5 + w : FULL;
+		const x = em.variants.length ? (w - FULL * 0.5) / 2 : 0;
+		return { x, dist: Math.max(13, span * 1.25) };
+	});
 
 	const v = (p: Vec3) => new Vector3(p[0], p[1], p[2]);
 
@@ -43,13 +61,38 @@
 	let flownFor = '';
 	$effect(() => {
 		const id = explorer.workbenchId;
-		if (!controls || !id || flownFor === id) return;
-		flownFor = id;
-		controls.minDistance = 4;
+		const key = `${id}:${modelView}`;
+		if (!controls || !id || flownFor === key) return;
+		const first = !flownFor.startsWith(`${id}:`);
+		flownFor = key;
+		controls.minDistance = modelView ? 1.5 : 4;
 		controls.maxDistance = 80;
 		controls.smoothTime = 0.6;
-		controls.setLookAt(2, 9, 48, 0, 0, 0, false);
-		controls.setLookAt(4, 11, 27, 1.6, -1, 0, true);
+		if (modelView) {
+			const { x, dist } = modelFrame;
+			if (first) controls.setLookAt(x + dist * 1.2, dist * 0.7, dist * 1.6, x, 0, 0, false);
+			controls.setLookAt(x + dist * 0.55, dist * 0.38, dist * 0.85, x, 0, 0, true);
+		} else {
+			if (first) controls.setLookAt(2, 9, 48, 0, 0, 0, false);
+			controls.setLookAt(4, 11, 27, 1.6, -1, 0, true);
+		}
+	});
+
+	// Scripted camera moves (tours) around the current look target
+	let appliedCmd = 0;
+	useTask(() => {
+		const cmd = explorer.cameraCmd;
+		if (!cmd || cmd.seq === appliedCmd || !controls) return;
+		appliedCmd = cmd.seq;
+		explorer.cameraCmd = null;
+		const d2r = Math.PI / 180;
+		if (cmd.azimuth !== undefined || cmd.polar !== undefined)
+			controls.rotateTo(
+				cmd.azimuth !== undefined ? cmd.azimuth * d2r : controls.azimuthAngle,
+				cmd.polar !== undefined ? cmd.polar * d2r : controls.polarAngle,
+				true
+			);
+		if (cmd.distance !== undefined) controls.dollyTo(cmd.distance, true);
 	});
 
 	// ── Geometry built from the layout ────────────────────────────────────
@@ -155,20 +198,31 @@
 <T.PointLight position={[6, 8, 10]} intensity={60} decay={1.5} />
 
 <!-- Holographic deck grid -->
-<T.GridHelper args={[80, 80, '#1e3a5f', '#0f2238']} position.y={-9.5} />
+<T.GridHelper args={[80, 80, '#1e3a5f', '#0f2238']} position.y={modelView ? -4.6 : -9.5} />
 
-{#if layout && data}
-	<!-- Consensus core: translucent (consensus) inside a slowly turning lattice -->
-	<T.Mesh>
-		<T.SphereGeometry args={[0.72, 48, 24]} />
-		<T.MeshBasicMaterial color={coreColor} transparent opacity={0.35} blending={AdditiveBlending} depthWrite={false} />
-	</T.Mesh>
-	<T.Group bind:ref={coreWire}>
+{#if modelView && em}
+	<!-- Detailed element model with divergent ghosts and scale bar -->
+	{#key em.bomId}<ElementModelView model={em} target={FULL} mode="full" spin={0.06} />{/key}
+{:else if layout && data}
+	<!-- Consensus core: the element model (or a lattice for non-physical items) in a translucent halo -->
+	{#if em}
+		{#key em.bomId}<ElementModelView model={em} target={1.8} mode="mini" />{/key}
 		<T.Mesh>
-			<T.IcosahedronGeometry args={[1, 1]} />
-			<T.MeshBasicMaterial color={coreColor} wireframe transparent opacity={0.55} />
+			<T.SphereGeometry args={[1.15, 48, 24]} />
+			<T.MeshBasicMaterial color={coreColor} transparent opacity={0.07} blending={AdditiveBlending} depthWrite={false} />
 		</T.Mesh>
-	</T.Group>
+	{:else}
+		<T.Mesh>
+			<T.SphereGeometry args={[0.72, 48, 24]} />
+			<T.MeshBasicMaterial color={coreColor} transparent opacity={0.35} blending={AdditiveBlending} depthWrite={false} />
+		</T.Mesh>
+		<T.Group bind:ref={coreWire}>
+			<T.Mesh>
+				<T.IcosahedronGeometry args={[1, 1]} />
+				<T.MeshBasicMaterial color={coreColor} wireframe transparent opacity={0.55} />
+			</T.Mesh>
+		</T.Group>
+	{/if}
 	<T.Mesh>
 		<T.SphereGeometry args={[1.45, 48, 24]} />
 		<T.MeshBasicMaterial color={coreColor} transparent opacity={0.05} blending={AdditiveBlending} depthWrite={false} />

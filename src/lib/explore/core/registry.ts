@@ -84,6 +84,19 @@ export function anchorExtent(anchor: Anchor): number {
 	}
 }
 
+/**
+ * Surface-sited hardware stands at the body's north pole rather than its
+ * centre, so its near-field model sits on the ground with local up ≈ ecliptic
+ * north. The lunar consensus site is polar; obliquity is ignored here.
+ */
+function surfacePoint(body: PlanetId | 'moon'): (year: number) => Vec3 {
+	const r = kmToAU(body === 'moon' ? 1737.4 : BODY_RADIUS_KM[body]);
+	return (y) => {
+		const c = body === 'moon' ? moonPosition(y) : planetPosition(body, y);
+		return [c[0], c[1] + r, c[2]];
+	};
+}
+
 function buildEntities(): Entity[] {
 	const out: Entity[] = [
 		{
@@ -146,7 +159,7 @@ function buildEntities(): Entity[] {
 				bom,
 				phase,
 				placement,
-				position: anchor ? (y) => anchorPosition(anchor, y) : () => ORIGIN,
+				position: anchor ? (anchor.kind === 'body' ? surfacePoint(anchor.body) : (y) => anchorPosition(anchor, y)) : () => ORIGIN,
 				focusDistance: anchor ? anchorExtent(anchor) * 2.5 : 3,
 				keywords: `${bom.slug} ${bom.description}`
 			});

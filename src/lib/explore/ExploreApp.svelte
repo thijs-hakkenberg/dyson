@@ -103,6 +103,7 @@
 		void explorer.focusId;
 		void explorer.selectedId;
 		void explorer.workbenchId;
+		void explorer.wbView;
 		void explorer.lens;
 		void explorer.rqId;
 		void explorer.gateSel;
@@ -174,6 +175,18 @@
 			case 'w':
 				if (explorer.workbenchId) explorer.closeWorkbench();
 				else explorer.openWorkbench(explorer.selectedId);
+				break;
+			case 'm':
+				// Detailed model: toggle inside the Workbench, or open the selection straight into it
+				if (explorer.workbenchId) explorer.wbView = explorer.wbView === 'model' ? 'consensus' : 'model';
+				else if (explorer.selected?.kind === 'bom') {
+					explorer.wbView = 'model';
+					explorer.openWorkbench(explorer.selectedId);
+				} else return;
+				break;
+			case 'z':
+				// True-scale hardware in the orrery
+				if (explorer.lens !== 'physical' || explorer.workbenchId || !explorer.toggleHardware()) return;
 				break;
 			case 'h':
 				explorer.hudVisible = !explorer.hudVisible;

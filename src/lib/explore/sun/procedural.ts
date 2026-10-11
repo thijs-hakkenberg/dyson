@@ -128,6 +128,7 @@ uniform vec3 uLaneTint;
 uniform vec3 uLimb;
 uniform float uExposure;
 uniform float uHalpha;
+uniform float uFar;
 varying vec3 vBody;
 varying vec3 vNormalView;
 varying vec3 vViewPos;
@@ -237,7 +238,8 @@ void main() {
 	// bright chromospheric rim seen in Hα images
 	float x = I * (0.8 + 0.2 * mu) + 0.55 * pow(1.0 - mu, 5.0);
 	vec3 halpha = ramp(x * uExposure);
-	vec3 display = mix(white, halpha, uHalpha);
+	// Seen from afar the Sun is white: the false colour gives way to white light
+	vec3 display = mix(white, halpha, uHalpha * (1.0 - uFar));
 	gl_FragColor = vec4(pow(display, vec3(2.2)), 1.0);
 	#include <colorspace_fragment>
 }
@@ -265,6 +267,7 @@ uniform float uDay;
 uniform float uLimbR;
 uniform float uActivity;
 uniform float uHalpha;
+uniform float uFar;
 varying vec2 vP;
 ${NOISE}
 void main() {
@@ -290,10 +293,11 @@ void main() {
 	float corona = rays * 0.8 / pow(1.0 + h * 1.6, 2.0);
 
 	float fade = 1.0 - smoothstep(float(${CORONA_EXTENT}) * 0.6, float(${CORONA_EXTENT}), r);
-	vec3 orange = mix(vec3(1.0, 0.85, 0.65), vec3(1.0, 0.45, 0.1), uHalpha);
-	vec3 col = orange * halo + vec3(1.0, 0.42, 0.1) * prom * uHalpha + vec3(1.0, 0.7, 0.35) * fringe * 1.2 * uHalpha
-		+ mix(vec3(0.85, 0.85, 0.9), vec3(0.95, 0.65, 0.4), uHalpha) * corona;
-	gl_FragColor = vec4(col * fade, 1.0);
+	float ha = uHalpha * (1.0 - uFar);
+	vec3 orange = mix(vec3(1.0, 0.85, 0.65), vec3(1.0, 0.45, 0.1), ha);
+	vec3 col = orange * halo + vec3(1.0, 0.42, 0.1) * prom * ha + vec3(1.0, 0.7, 0.35) * fringe * 1.2 * ha
+		+ mix(vec3(0.85, 0.85, 0.9), vec3(0.95, 0.65, 0.4), ha) * corona;
+	gl_FragColor = vec4(col * fade * (1.0 - 0.7 * uFar), 1.0);
 }
 `;
 
@@ -324,7 +328,9 @@ export const createProceduralSun: SunSurfaceFactory = ({ radius, style = 'halpha
 		uLimb: { value: new Color(0.5, 0.6, 0.74) },
 		uExposure: { value: 1.04 },
 		// 1 = Hα-style false colour (default look), 0 = white light
-		uHalpha: { value: style === 'halpha' ? 1 : 0 }
+		uHalpha: { value: style === 'halpha' ? 1 : 0 },
+		// 0 = close view, 1 = far view (host-driven); fades the false colour to white light
+		uFar: { value: 0 }
 	};
 
 	const material = new ShaderMaterial({ uniforms, vertexShader: VERT, fragmentShader: FRAG, toneMapped: false });
@@ -342,7 +348,8 @@ export const createProceduralSun: SunSurfaceFactory = ({ radius, style = 'halpha
 		uDay: { value: 0 },
 		uLimbR: { value: 1 },
 		uActivity: { value: 0.5 },
-		uHalpha: uniforms.uHalpha
+		uHalpha: uniforms.uHalpha,
+		uFar: uniforms.uFar
 	};
 	const coronaMat = new ShaderMaterial({
 		uniforms: coronaUniforms,
@@ -361,7 +368,8 @@ export const createProceduralSun: SunSurfaceFactory = ({ radius, style = 'halpha
 	const sunPos = new Vector3();
 
 	let lastSpotYear = Number.NaN;
-	const update = ({ year, elapsed, camera }: SunFrame) => {
+	const update = ({ year, elapsed, camera, far = 0 }: SunFrame) => {
+		uniforms.uFar.value = far;
 		mesh.rotation.y = spinAngle(CARRINGTON_PERIOD_HOURS, year);
 		uniforms.uTime.value = elapsed * 0.25;
 

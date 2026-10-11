@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { TOURS } from '../tours';
 import { getEntity } from '../registry';
+import { elementModel } from '../models';
 import { MAX_YEAR, TODAY_YEAR } from '../state.svelte';
 
 const DV = import.meta.glob('/static/content/bom-specs/**/divergent-views.yaml', {
@@ -44,4 +45,16 @@ describe('tours', () => {
 			}
 		});
 	}
+});
+
+describe('model-view steps', () => {
+	it('only show items that have a 3D model', () => {
+		for (const t of TOURS) {
+			let wb: string | null = null;
+			for (const s of t.steps) {
+				if (s.workbench !== undefined) wb = s.workbench;
+				if (s.wbView === 'model') expect(elementModel(wb), `${t.id}: ${s.title}`).not.toBeNull();
+			}
+		}
+	});
 });
