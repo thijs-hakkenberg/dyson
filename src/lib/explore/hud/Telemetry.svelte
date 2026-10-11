@@ -5,6 +5,7 @@
 	import { PHASE_COLORS } from '../core/theme';
 	import DeepTime from './DeepTime.svelte';
 	import { PRICES, powerBalance, roiAt, type PriceId } from '../core/economics';
+	import { plasmaFlowAt } from '../core/plasma';
 
 	// Collapsed by default on phones so the scene stays visible
 	let open = $state(typeof window === 'undefined' || window.innerWidth > 700);
@@ -47,6 +48,7 @@
 	}
 	// ── Power balance and return ─────────────────────────────────────────
 	const pb = $derived(powerBalance(Math.round(explorer.year * 4) / 4));
+	const plasma = $derived(plasmaFlowAt(Math.round(explorer.year * 4) / 4));
 	// Saturation bar on a log scale: 10⁻¹⁶ (empty) … 1 (every watt of the Sun)
 	const satPct = $derived(pb.saturation > 0 ? Math.max(1, ((Math.log10(pb.saturation) + 16) / 16) * 100) : 0);
 	let priceId = $state<PriceId>('mid');
@@ -158,6 +160,17 @@
 					<dt>Sun Δv so far</dt><dd>{formatSci(t.sunDeltaV)} m/s</dd>
 					<dt>Sun displaced</dt><dd>{formatDisplacement(t.sunDisplacement)}</dd>
 				</dl>
+				{#if plasma.fraction > 0}
+					<div class="lbl sub2">Plasma loop <span class="hint">{Math.round(plasma.fraction * 100)}% of design{plasma.bottleneck ? ` · limited by ${plasma.bottleneck.toLowerCase()}` : ''}</span></div>
+					<dl class="kv">
+						<dt>Lifted</dt><dd>{formatSci(plasma.liftKgS, 1)} kg/s</dd>
+						<dt>He exhaust, 0.01c</dt><dd>{formatSci(plasma.heKgS, 1)} kg/s</dd>
+						<dt>H back to Sun</dt><dd>{formatSci(plasma.hKgS, 1)} kg/s</dd>
+						<dt>Net push (He only)</dt><dd>{formatSci(plasma.thrustN, 1)} N</dd>
+						<dt>Beam power</dt><dd>{formatPower(plasma.hePowerW + plasma.hPowerW)}</dd>
+					</dl>
+					<p class="note">Returned hydrogen carries no momentum out of the system, so the net push is the helium jet alone, below the summed jet figure above (CI-26). The beams’ power is not in the BOM (CI-24).</p>
+				{/if}
 				{/if}
 			</div>
 		{/if}
@@ -402,6 +415,9 @@
 	}
 	.mid.pos {
 		color: var(--hud-ok);
+	}
+	.sub2 {
+		margin-top: 8px;
 	}
 	.prices {
 		display: flex;

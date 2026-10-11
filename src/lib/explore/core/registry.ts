@@ -59,8 +59,11 @@ export function anchorPosition(anchor: Anchor, year: number): Vec3 {
 			// Label sits on the last site of the group so groups don't overlap
 			return neaPosition(NEAS_BY_VALUE[anchor.count - 1], year);
 		case 'cap':
-		case 'axis':
 			return [THRUST_AXIS[0] * anchor.rAU, THRUST_AXIS[1] * anchor.rAU, THRUST_AXIS[2] * anchor.rAU];
+		case 'axis': {
+			const r = anchor.rAU * (anchor.side ?? 1);
+			return [THRUST_AXIS[0] * r, THRUST_AXIS[1] * r, THRUST_AXIS[2] * r];
+		}
 		default:
 			return ORIGIN;
 	}

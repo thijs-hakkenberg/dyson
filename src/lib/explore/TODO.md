@@ -58,3 +58,4 @@ See [CONSENSUS-ISSUES.md](./CONSENSUS-ISSUES.md) — logged for assessment, not 
 - [x] Sandboxes in the interface and phase tours
 - [x] Phone layout: compact top bar, panel chips/sheet; homepage no longer overflows on Android
 - [ ] Power-source question for Phase 3 (CI-24): revisit once the specs say where the PW come from
+- [x] Stellar engine plasma loop: lift → ring → separation → He exhaust / H return (CI-26); jet moved to the trailing side

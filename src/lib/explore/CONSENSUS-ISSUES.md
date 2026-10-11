@@ -186,8 +186,12 @@ draws power from the Sun directly (not stated — e.g. part of the swarm dedicat
 to it), the tiles export a surplus (not in their figures), or Phase 3b needs its
 own collector fleet that is not in the BOM. `phase-3b/em-accelerators` has a
 divergent *sign* (Claude: net producer via MHD recovery; Gemini: 45 PW consumer)
-and is not summed. *Explorer:* telemetry flags the deficit and its largest loads;
-the ROI section shows cumulative net energy turning negative.
+and is not summed. The 3b consensus documents themselves expect far more: mass
+lifting assumes **~10²³ W beamed from the Phase 2 swarm**, the EM accelerators
+10²¹–10²⁷ W, and the plasma loop's two beams carry ~2×10²⁴ W of kinetic power
+(`core/plasma.ts`), while the Phase 2 BOM supplies ~1.3×10¹¹ W, twelve orders
+short. *Explorer:* telemetry flags the deficit and its largest loads; the ROI
+section shows cumulative net energy turning negative.
 
 ### CI-25 · The BOM never approaches a saturated swarm · open
 At full build-out (nominal, 2743) the summed generation is ~8 PW, **2×10⁻¹¹ of
@@ -198,3 +202,19 @@ star", homepage) implies quantities some ten orders of magnitude beyond the BOM.
 (Phases 2–3a) is the stated route to scale, but no phase lists the target count,
 the doubling time to reach it, or where the power for growth comes from (see CI-24).
 *Explorer:* telemetry shows generation as a fraction of L☉ (saturation).
+
+### CI-26 · Jet thrust assumes all lifted mass is exhausted, but hydrogen is returned · open
+`phase-3b/thermonuclear-jet-engine`: thrust ~3×10¹⁸ N from **10¹² kg/s at 0.01c**
+(all models, after Caplan 2019). `phase-3b/helium-separation-plant` and
+`em-accelerators`: the same 10¹² kg/s is split into ~2.5×10¹¹ kg/s helium exhaust
+and ~7×10¹¹ kg/s hydrogen fired back into the Sun. Hydrogen that returns to the
+Sun carries no momentum out of the system, so the net push is the helium
+momentum flux, **~7.5×10¹⁷ N**, four times below the jet figure. Either the
+exhaust includes hydrogen (contradicting the separation and return design), the
+lift rate must be ~4× higher, or the thrust is overstated. The documents also
+place the jet "on the thrust axis" without saying which side; by momentum
+conservation the exhaust must leave opposite the Sun's motion, putting the engine
+on the trailing side (opposite the Shkadov mirror).
+*Explorer:* the plasma loop shows both flows and the helium-only push; the
+telemetry thrust total still sums the consensus jet figure, flagged against it.
+

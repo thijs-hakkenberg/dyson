@@ -23,8 +23,8 @@ export type Anchor =
 	| { kind: 'shells'; layers: { rAU: number; tempK: number }[] }
 	/** Spherical cap (statite mirror) on the thrust axis */
 	| { kind: 'cap'; rAU: number; halfAngleDeg: number }
-	/** Point on the thrust axis at a distance */
-	| { kind: 'axis'; rAU: number };
+	/** Point on the thrust axis at a distance; side -1 = behind the Sun (anti-thrust) */
+	| { kind: 'axis'; rAU: number; side?: 1 | -1 };
 
 export interface Alternative {
 	anchor: Anchor;
@@ -385,9 +385,9 @@ export const PLACEMENTS: Placement[] = [
 		bomId: 'bom-3b-2',
 		slug: 'thermonuclear-jet-engine',
 		phaseId: 'phase-3b',
-		anchor: { kind: 'axis', rAU: 1.0 },
+		anchor: { kind: 'axis', rAU: 0.15, side: -1 },
 		baselineModels: [],
-		note: 'Caplan-type thermonuclear jet on the thrust axis. Position and jet geometry shown schematically.',
+		note: 'Caplan-type engine on the trailing side of the thrust axis: helium exhaust leaves opposite the direction of travel and the hydrogen return beam pushes the Sun forward. Distance schematic, at the outer edge of the 0.05–0.15 AU processing zone.',
 		alternatives: [],
 		visual: 'jet'
 	},

@@ -12,6 +12,7 @@
 	import Marker from './Marker.svelte';
 	import BomMarker from './BomMarker.svelte';
 	import SwarmCloud from './SwarmCloud.svelte';
+	import PlasmaFlow from './PlasmaFlow.svelte';
 	import { getEntity, THRUST_AXIS } from '../core/registry';
 	import { CLOUDS } from '../core/clouds';
 	import { itemProgress } from '../core/progress';
@@ -23,7 +24,8 @@
 	const engine = getEntity('bom-3b-2')!.placement!.anchor!;
 	const rMirror = mirror.kind === 'cap' ? mirror.rAU : 0.1;
 	const alphaMax = mirror.kind === 'cap' ? mirror.halfAngleDeg : 60;
-	const rEngine = engine.kind === 'axis' ? engine.rAU : 1;
+	// The engine sits on the trailing side: its exhaust leaves opposite the Sun's motion
+	const rEngine = engine.kind === 'axis' ? engine.rAU * (engine.side ?? 1) : -0.15;
 
 	const mirrorProgress = $derived(itemProgress('bom-3b-1', 'phase-3b', explorer.year));
 	const engineProgress = $derived(itemProgress('bom-3b-2', 'phase-3b', explorer.year));
@@ -64,20 +66,20 @@
 	<!-- Thrust axis: direction is an assumption (ecliptic north), labelled -->
 	<T is={axisLine} />
 	<T.Group position={axisEnd}>
-		<Marker label="Thrust axis" sub="assumed ecliptic north" {color} minor />
+		<Marker label="Thrust axis · Sun moves this way" sub="assumed ecliptic north" {color} minor />
 	</T.Group>
 {/if}
 
 {#if engineProgress > 0}
 	<BomMarker bomId="bom-3b-2" at={() => jetFrom} />
 	<T.Group position={jetFrom}>
-		<!-- Schematic jet -->
-		<T.Mesh position={[0, 1.5, 0]}>
-			<T.CylinderGeometry args={[0.004, 0.03, 3, 24, 1, true]} />
+		<!-- Schematic jet, leaving backwards along the axis -->
+		<T.Mesh position={[0, -1.5, 0]}>
+			<T.CylinderGeometry args={[0.012, 0.002, 3, 24, 1, true]} />
 			<T.MeshBasicMaterial
 				color="#93c5fd"
 				transparent
-				opacity={0.35 * engineProgress}
+				opacity={0.12 * engineProgress}
 				blending={AdditiveBlending}
 				depthWrite={false}
 				side={DoubleSide}
@@ -85,6 +87,8 @@
 		</T.Mesh>
 	</T.Group>
 {/if}
+
+<PlasmaFlow engineAt={jetFrom} />
 
 <SwarmCloud spec={CLOUDS.find((c) => c.bomId === 'bom-3b-3')!} {color} />
 <SwarmCloud spec={CLOUDS.find((c) => c.bomId === 'bom-3b-4')!} color="#fda4af" />

@@ -897,11 +897,19 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Accelerators and the jet',
-				body: 'Electromagnetic accelerators drive the helium to **~0.01c (3,000 km/s)**; the thermonuclear jet adds ~**3×10¹⁸ N**.',
-				duration: 11,
+				body: 'Electromagnetic accelerators split the stream in two: **helium** leaves at **~0.01c (3,000 km/s)**, **hydrogen** goes back. The jet sits on the Sun’s **trailing** side, so its exhaust leaves backwards and the Sun moves the other way.',
+				duration: 12,
 				year: { to: at('phase-3b', 0.9), over: 5 },
 				select: 'bom-3b-2',
 				camera: { distance: 3, polar: 65 }
+			},
+			{
+				title: 'The plasma loop',
+				body: '**10¹² kg/s** of solar plasma is lifted to a collection ring at 5–8 solar radii (violet), separated at 0.05–0.15 AU, and fed to the engine. **Helium** (amber) is the exhaust; **hydrogen** (blue) is fired back into the Sun. That beam holds the engine in place and pushes the Sun forward; net, the Sun gains the momentum the exhaust carries away.',
+				duration: 16,
+				focus: 'bom-3b-2',
+				select: null,
+				camera: { distance: 0.42, azimuth: 20, polar: 100 }
 			},
 			{
 				title: 'Thrust, live',

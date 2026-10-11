@@ -48,3 +48,22 @@ describe('deep-time playback', () => {
 		deepTime.myr = 0;
 	});
 });
+
+describe('plasma loop', async () => {
+	const { plasmaFlowAt, PLASMA } = await import('../plasma');
+	const { getEntity } = await import('../registry');
+	it('conserves mass and pushes with helium only (CI-26)', () => {
+		const f = plasmaFlowAt(3000);
+		expect(f.fraction).toBe(1);
+		expect(f.heKgS + f.hKgS).toBeLessThanOrEqual(f.liftKgS);
+		expect(f.thrustN).toBeCloseTo(PLASMA.heKgS * PLASMA.vHe, -10);
+		expect(f.thrustN).toBeLessThan(3e18);
+		expect(plasmaFlowAt(2100).fraction).toBe(0);
+	});
+	it('puts the engine on the trailing side, opposite the Shkadov mirror', () => {
+		const jet = getEntity('bom-3b-2')!.position(2500);
+		const mirror = getEntity('bom-3b-1')!.position(2500);
+		expect(jet[1]).toBeLessThan(0);
+		expect(mirror[1]).toBeGreaterThan(0);
+	});
+});
