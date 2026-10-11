@@ -17,6 +17,7 @@
 	import NebulaPanel from './hud/NebulaPanel.svelte';
 	import RqInspector from './hud/RqInspector.svelte';
 	import { nebula } from './core/nebulastore.svelte';
+	import WelcomeDialog from './hud/WelcomeDialog.svelte';
 	import TourOverlay from './hud/TourOverlay.svelte';
 	import GateTunnelScene from './scene/gates/GateTunnelScene.svelte';
 	import GatePanel from './hud/GatePanel.svelte';
@@ -275,14 +276,15 @@
 			<TopBar />
 			<div class="leftcol">
 				{#if explorer.lens === 'network'}<NetworkPanel />{:else if explorer.lens === 'risk'}<RiskPanel />{:else if explorer.lens === 'logistics'}<LogisticsPanel />{:else}<Telemetry />{/if}
-				{#if !tour.active}<LayerPanel />{/if}
+				{#if !tour.active || tour.tour?.ui}<LayerPanel />{/if}
 			</div>
 			<ScaleBar />
-			{#if !tour.active || tour.paused}<Inspector />{/if}
+			{#if !tour.active || tour.paused || tour.tour?.ui}<Inspector />{/if}
 			<Timeline />
 			<div class="hint">⌘K go to · Space play · ? shortcuts · drag orbit · scroll zoom</div>
 		{/if}
 		{#if explorer.hudVisible}<TourOverlay />{/if}
+		<WelcomeDialog />
 		<CommandPalette />
 		<ShortcutHelp bind:open={helpOpen} />
 	{/if}
