@@ -184,6 +184,10 @@
 					explorer.openWorkbench(explorer.selectedId);
 				} else return;
 				break;
+			case 'z':
+				// True-scale hardware in the orrery
+				if (explorer.lens !== 'physical' || explorer.workbenchId || !explorer.toggleHardware()) return;
+				break;
 			case 'h':
 				explorer.hudVisible = !explorer.hudVisible;
 				break;

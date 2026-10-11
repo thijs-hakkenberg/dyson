@@ -10,6 +10,10 @@ import { phaseWindow } from './timeline';
 import { TODAY_YEAR } from './state.svelte';
 import { PHASES } from '$lib/services/content';
 import { formatUSD } from './units';
+import { hardwareDistance, nearFieldModel } from './nearfield';
+
+/** Camera distance that frames an item's true-scale model in the orrery. */
+const hw = (id: string) => hardwareDistance(nearFieldModel(id)!);
 
 /** Phase facts for captions, derived from content.ts and the timeline. */
 function phaseFacts(id: string) {
@@ -295,6 +299,22 @@ export const TOURS: Tour[] = [
 				body: 'Every model is linked to its source spec. Switch back to **Consensus** to see where these designs agree and where they fork.',
 				duration: 10,
 				wbView: 'consensus'
+			},
+			{
+				title: 'In place, at true scale',
+				body: 'The same models live in the orrery. This is the **assembly node** at Sun–Earth L1, drawn at its real size and lit by the Sun. Select any located item and press **Z** to fly down to it.',
+				duration: 11,
+				workbench: null,
+				year: at('phase-1', 0.5),
+				focus: 'bom-1-4',
+				select: 'bom-1-4',
+				camera: { distance: hw('bom-1-4'), azimuth: 35, polar: 62 }
+			},
+			{
+				title: 'And pull back',
+				body: 'From a couple of hundred metres out to 7.5 million km: at orbital scale the node is far below a pixel, so the reticle marks where it is.',
+				duration: 10,
+				camera: { distance: 0.05 }
 			}
 		]
 	},

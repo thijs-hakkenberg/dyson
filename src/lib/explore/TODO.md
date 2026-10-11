@@ -23,7 +23,9 @@
       nine procedural archetypes) — Workbench consensus core + "3D model" view (M, `?wbv=model`) with
       callouts, metric scale bar and divergent sizes as ghosts at true relative scale (clamped + flagged)
 - [x] Tours revisited: up-close model steps in every phase tour + new "The hardware, up close" tour
-- [ ] Models in the orrery at close range (needs a near-field scene: km-scale objects in an AU frame)
+- [x] Models in the orrery at close range: true-scale near field for point-anchored items (Z / Inspector); surface sites at the north pole
+- [ ] Near field for band/shell items (they focus the Sun; would need a representative member to stand on)
+- [x] Sun turns into a white star as the view recedes (false colour → white light; star sprite with spikes)
 - [ ] Higher-fidelity models for the hero items (assembly node petals, collector sail deployment animation)
 
 ## Optimisations / spin-offs

@@ -20,11 +20,15 @@
 	import NetworkLayer from './network/NetworkLayer.svelte';
 	import RiskLayer from './risk/RiskLayer.svelte';
 	import LogisticsLayer from './logistics/LogisticsLayer.svelte';
+	import NearField from './models/NearField.svelte';
+	import { hardwareMinDistance, nearFieldModel } from '../core/nearfield';
 
 	const { size } = useThrelte();
 	let camera = $state.raw<PerspectiveCamera>();
 	let controls = $state.raw<CameraControlsRef>();
 	let world = $state.raw<Group>();
+	let near = $state.raw<Group>();
+	const nearModel = $derived(nearFieldModel(explorer.focusId));
 
 	const FOV = 45;
 
@@ -65,7 +69,8 @@
 			from = [...current];
 			transition = first ? -1 : 0;
 			// Never let the camera dolly inside the focused body
-			controls.minDistance = Math.max(1e-6, (focus.radiusAU ?? 0) * 1.1);
+			const nm = nearFieldModel(focus.id);
+			controls.minDistance = nm ? hardwareMinDistance(nm) : Math.max(1e-6, (focus.radiusAU ?? 0) * 1.1);
 			// Deep links (?f=earth) arrive at the body; the default view stays wide
 			if (!first || focus.id !== 'sun') controls.dollyTo(focus.focusDistance, true);
 		}
@@ -79,6 +84,8 @@
 			current = target;
 		}
 		world?.position.set(-current[0], -current[1], -current[2]);
+		// Near-field hardware rides on the focus point in the same frame as the world shift
+		near?.position.set(target[0] - current[0], target[1] - current[1], target[2] - current[2]);
 
 		// Scripted camera moves (tours), applied after any focus dolly this frame
 		const cmd = explorer.cameraCmd;
@@ -101,6 +108,12 @@
 			notify = 0;
 			const d = controls.distance;
 			explorer.cameraDistance = d;
+			// Pull the near plane in for metre-scale hardware (log depth keeps the far end)
+			const n = Math.min(1e-9, d * 0.02);
+			if (camera && Math.abs(camera.near - n) > n * 0.25) {
+				camera.near = n;
+				camera.updateProjectionMatrix();
+			}
 			explorer.auPerPixel = (2 * d * Math.tan((FOV * Math.PI) / 360)) / Math.max(1, size.current.height);
 		}
 	});
@@ -134,4 +147,10 @@
 	{#if explorer.lens === 'network'}<NetworkLayer />{/if}
 	{#if explorer.lens === 'risk'}<RiskLayer />{/if}
 	{#if explorer.lens === 'logistics'}<LogisticsLayer />{/if}
+</T.Group>
+
+<T.Group bind:ref={near}>
+	{#if nearModel}
+		{#key nearModel.bomId}<NearField model={nearModel} />{/key}
+	{/if}
 </T.Group>

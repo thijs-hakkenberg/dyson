@@ -6,6 +6,7 @@ import { replaceState } from '$app/navigation';
 import { dateToYear } from './units';
 import { getEntity } from './registry';
 import { TIMELINE } from './timeline';
+import { hardwareDistance, nearFieldModel, nearFieldResolved } from './nearfield';
 
 export const TODAY_YEAR = dateToYear(new Date());
 export const MAX_YEAR = Math.ceil(Math.max(...TIMELINE.map((w) => w.end)));
@@ -134,6 +135,21 @@ class ExplorerState {
 	/** Queue a camera move: distance in scene units, azimuth/polar in degrees. */
 	commandCamera(cmd: Omit<CameraCommand, 'seq'>) {
 		this.cameraCmd = { ...cmd, seq: ++this.cmdSeq };
+	}
+
+	/** Fly down to the focused item's true-scale model, or back out to the orbit view. */
+	toggleHardware(id = this.selectedId) {
+		const m = nearFieldModel(id);
+		const e = getEntity(id);
+		if (!m || !e) return false;
+		this.playing = false;
+		if (this.focusId === e.id && nearFieldResolved(m, this.cameraDistance)) {
+			this.commandCamera({ distance: e.focusDistance });
+		} else {
+			this.focusId = e.id;
+			this.commandCamera({ distance: hardwareDistance(m), polar: 62 });
+		}
+		return true;
 	}
 
 	setLens(lens: Lens) {

@@ -10,6 +10,7 @@
 	import type { ModelName } from '../core/placements';
 	import { getAssessmentsForBOM, RISK_LABELS } from '$lib/services/trl-assessment';
 	import { getQuestion } from '$lib/services/critical-path';
+	import { nearFieldModel, nearFieldResolved } from '../core/nearfield';
 	import { getDivergentViewsPath, parseDivergentViewsYAML } from '$lib/services/bom';
 	import type { DivergentViewsData } from '$lib/types/divergent-views';
 
@@ -222,6 +223,13 @@
 					</ul>
 				{/if}
 
+				{#if nearFieldModel(e.id)}
+					<button type="button" class="wb-open" onclick={() => explorer.toggleHardware(e.id)}>
+						{explorer.focusId === e.id && nearFieldResolved(nearFieldModel(e.id)!, explorer.cameraDistance)
+							? 'Back out to orbit'
+							: 'Fly to hardware · true scale'} <kbd>Z</kbd>
+					</button>
+				{/if}
 				<button type="button" class="wb-open" onclick={() => explorer.openWorkbench(e.id)}>
 					Open in workbench <kbd>W</kbd>
 				</button>

@@ -15,6 +15,8 @@ export interface SunFrame {
 	/** Wall-clock seconds since start (drives short-timescale animation) */
 	elapsed: number;
 	camera: Camera;
+	/** 0 = close view, 1 = far view; renderers may shift toward how the Sun looks from afar (white) */
+	far?: number;
 }
 
 export interface SunSurface {
