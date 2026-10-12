@@ -4,7 +4,7 @@ slug: "isru-cost-methodology-validation"
 title: "In-situ resource utilization cost methodology validation"
 questionType: "discussion"
 priority: "critical"
-status: "answered"
+status: "investigating"
 answeredDate: "2026-02-10"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-3"
@@ -171,3 +171,12 @@ These might represent 1-10% of current estimates, not 100%.
    - **Conservative:** Current methodology with minor ISRU adjustments (5x reduction)
    - **Moderate:** Full ISRU economics for Phase 2+ (10x reduction)
    - **Optimistic:** Mature self-replication with minimal overhead (20x reduction)
+
+## Re-assessment 2026-10 (Phase 0, round 2)
+
+**Reopened.** Claude and GPT dispute the conclusion that Phase 0 costs are "approximately correct". The round-2 panel's Phase 0 totals are $22–83B (Claude), ~$22B+ (Gemini) and $30–195B (GPT), against the BOM's $15.7B. Launch, NRE, operations and contingency were missing (findings P0-F08 to F12).
+
+**How this gets answered:**
+- **Analysis:** a delivered-cost model on one basis, in rq-0-61.
+
+Source: `reconciliation/phase-0/round-2/reconciliation/` and `reconciliation/phase-0/decisions.md`; the question register is `reconciliation/phase-0/open-questions.md`.

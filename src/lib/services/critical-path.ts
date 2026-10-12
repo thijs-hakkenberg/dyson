@@ -1,7 +1,7 @@
 /**
  * Critical Path Analysis for Phase 0 Research Questions
  *
- * Maps the 49 Phase 0 research questions into technology threads,
+ * Maps the 63 Phase 0 research questions into technology threads,
  * defines dependency relationships, and identifies critical-path blockers
  * that must be resolved before Phase 0 → Phase 1 transition.
  */
@@ -41,7 +41,7 @@ export interface QuestionDependency {
 }
 
 /**
- * Technology threads grouping the 49 Phase 0 research questions
+ * Technology threads grouping the 63 Phase 0 research questions
  * into coherent engineering areas.
  */
 export const TECHNOLOGY_THREADS: TechnologyThread[] = [
@@ -64,7 +64,9 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 			'rq-0-43',
 			'rq-0-44',
 			'rq-0-45',
-			'rq-0-46'
+			'rq-0-46',
+			'rq-0-51',
+			'rq-0-56'
 		],
 		rationale:
 			'The entire Dyson swarm concept depends on in-situ manufacturing. If microgravity metallurgy cannot scale to industrial production, or if semiconductor fabrication from asteroid feedstock is infeasible, the project architecture must fundamentally change.'
@@ -101,7 +103,12 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 			'rq-0-35',
 			'rq-0-36',
 			'rq-0-37',
-			'rq-0-38'
+			'rq-0-38',
+			'rq-0-52',
+			'rq-0-53',
+			'rq-0-54',
+			'rq-0-55',
+			'rq-0-59'
 		],
 		rationale:
 			'Transport defines the mass throughput of the entire system. Fleet size, vehicle capacity, propellant strategy, and human-rating requirements set the operating tempo and cost of Phase 0 operations.'
@@ -122,7 +129,8 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 			'rq-0-39',
 			'rq-0-40',
 			'rq-0-41',
-			'rq-0-42'
+			'rq-0-42',
+			'rq-0-60'
 		],
 		rationale:
 			'Mining is the first link in the production chain. Excavation rate determines material throughput, which sizes the processing station, which sizes the power system. Anchoring reliability and regolith behavior are existential unknowns.'
@@ -145,7 +153,7 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 			'Can we find and characterize suitable asteroid targets? Covers spectrometer design, constellation sizing, spectral analysis, and composition validation.',
 		color: '#10b981', // emerald
 		icon: '🔭',
-		questionIds: ['rq-0-1', 'rq-0-2', 'rq-0-3', 'rq-0-4', 'rq-0-5'],
+		questionIds: ['rq-0-1', 'rq-0-2', 'rq-0-3', 'rq-0-4', 'rq-0-5', 'rq-0-50'],
 		rationale:
 			'Target selection gates the entire mining campaign. Without validated composition data, mining robot design cannot be finalized, processing station throughput cannot be sized, and mission profiles cannot be planned.'
 	},
@@ -156,14 +164,14 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 			'How does it all fit together? Covers multi-century governance, cost methodology validation, and the integration challenge of combining all subsystems into a coherent station design.',
 		color: '#6366f1', // indigo
 		icon: '🏛',
-		questionIds: ['rq-0-29', 'rq-0-46'],
+		questionIds: ['rq-0-29', 'rq-0-46', 'rq-0-57', 'rq-0-58', 'rq-0-61', 'rq-0-62', 'rq-0-63'],
 		rationale:
 			'A multi-century, volunteer-driven, global project requires governance structures that do not yet exist. Cost methodology must account for ISRU economics that break traditional space program models.'
 	}
 ];
 
 /**
- * Complete dependency map for all 49 Phase 0 research questions.
+ * Complete dependency map for all 63 Phase 0 research questions.
  *
  * Dependencies encode "must be resolved before" relationships:
  * - parentQuestionId relationships from frontmatter
@@ -313,7 +321,7 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-26',
 		slug: 'dual-bucket-wheel-excavation',
 		title: 'Dual counter-rotating bucket-wheel excavation',
-		status: 'answered',
+		status: 'investigating',
 		priority: 'high',
 		threadId: 'mining-operations',
 		dependsOn: ['rq-0-6', 'rq-0-7'],
@@ -463,7 +471,7 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-28',
 		slug: 'isru-cost-methodology-validation',
 		title: 'ISRU cost methodology validation',
-		status: 'answered',
+		status: 'investigating',
 		priority: 'critical',
 		threadId: 'isru-materials',
 		dependsOn: ['rq-0-14', 'rq-0-27'],
@@ -585,7 +593,7 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-20',
 		slug: 'xenon-propellant-sourcing-scale',
 		title: 'Xenon propellant sourcing at scale',
-		status: 'answered',
+		status: 'investigating',
 		priority: 'high',
 		threadId: 'propulsion-transport',
 		dependsOn: [],
@@ -836,6 +844,203 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		criticalPath: false,
 		hasLiteratureReview: false,
 		hasConclusion: false
+	},
+	// Raised by the Phase 0 re-assessment, round 2 (2026-10-12); see reconciliation/phase-0/open-questions.md
+	{
+		questionId: 'rq-0-50',
+		slug: 'target-class-recoverable-grade',
+		title: 'Target asteroid class and recoverable product grade',
+		status: 'open',
+		priority: 'critical',
+		threadId: 'prospecting',
+		dependsOn: ['rq-0-5'],
+		blocks: ['rq-0-51', 'rq-0-55', 'rq-0-61'],
+		criticalPath: true,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Sets the target gate (D-02) and the recoverable-grade sensitivity of 0B'
+	},
+	{
+		questionId: 'rq-0-51',
+		slug: 'microgravity-beneficiation-ratio',
+		title: 'Beneficiation ratio for native Fe-Ni in microgravity',
+		status: 'open',
+		priority: 'critical',
+		threadId: 'isru-materials',
+		dependsOn: ['rq-0-50'],
+		blocks: ['rq-0-56', 'rq-0-61'],
+		criticalPath: true,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Concentration ratio decides whether co-located processing closes'
+	},
+	{
+		questionId: 'rq-0-52',
+		slug: 'low-thrust-trajectories-cadence',
+		title: 'Low-thrust trajectories and cycle cadence to candidate NEAs',
+		status: 'open',
+		priority: 'high',
+		threadId: 'propulsion-transport',
+		dependsOn: [],
+		blocks: ['rq-0-53', 'rq-0-55', 'rq-0-59', 'rq-0-61'],
+		criticalPath: true,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Cadence sets fleet size and propellant demand'
+	},
+	{
+		questionId: 'rq-0-53',
+		slug: 'ep-propellant-supply-audit',
+		title: 'Electric propulsion propellant supply audit (iodine, argon, krypton, xenon)',
+		status: 'open',
+		priority: 'high',
+		threadId: 'propulsion-transport',
+		dependsOn: ['rq-0-52'],
+		blocks: [],
+		criticalPath: false,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Propellant baseline for the tugs (D-05)'
+	},
+	{
+		questionId: 'rq-0-54',
+		slug: 'mw-class-ep-qualification',
+		title: 'MW-class electric propulsion: life, thermal load and plume compatibility',
+		status: 'open',
+		priority: 'critical',
+		threadId: 'propulsion-transport',
+		dependsOn: ['rq-0-16'],
+		blocks: [],
+		criticalPath: true,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'MW-class EP life is project-ending for the transport chain'
+	},
+	{
+		questionId: 'rq-0-55',
+		slug: 'water-ep-transport-closure',
+		title: 'Water electric propulsion: does it close Phase 0 transport?',
+		status: 'open',
+		priority: 'medium',
+		threadId: 'propulsion-transport',
+		dependsOn: ['rq-0-50', 'rq-0-52'],
+		blocks: [],
+		criticalPath: false,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Whether ISPP has a Phase 0 customer'
+	},
+	{
+		questionId: 'rq-0-56',
+		slug: 'no-melt-fe-ni-refining',
+		title: 'No-melt Fe-Ni refining routes (carbonyl, H₂ reduction): yield and reagent recycling',
+		status: 'open',
+		priority: 'high',
+		threadId: 'isru-materials',
+		dependsOn: ['rq-0-51'],
+		blocks: ['rq-0-61'],
+		criticalPath: true,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'May remove the need for an artificial-gravity module'
+	},
+	{
+		questionId: 'rq-0-57',
+		slug: 'delivered-cost-per-kg-quotes',
+		title: 'Delivered cost per kg to NEA sites and SEL1',
+		status: 'open',
+		priority: 'high',
+		threadId: 'governance-integration',
+		dependsOn: [],
+		blocks: ['rq-0-61'],
+		criticalPath: true,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Delivered price is the sensitivity point that can flip D-01'
+	},
+	{
+		questionId: 'rq-0-58',
+		slug: 'phase-1-material-demand',
+		title: 'Phase 1 material demand for Phase 0 output',
+		status: 'open',
+		priority: 'critical',
+		threadId: 'governance-integration',
+		dependsOn: [],
+		blocks: ['rq-0-59', 'rq-0-61'],
+		criticalPath: true,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Demand gate for 0B (D-01, D-02)'
+	},
+	{
+		questionId: 'rq-0-59',
+		slug: 'phase-0-delivery-node',
+		title: 'Phase 0 → Phase 1 delivery node',
+		status: 'open',
+		priority: 'high',
+		threadId: 'propulsion-transport',
+		dependsOn: ['rq-0-52', 'rq-0-58'],
+		blocks: [],
+		criticalPath: false,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Delivery node, re-decided at KDP-0B (D-04)'
+	},
+	{
+		questionId: 'rq-0-60',
+		slug: 'hv-tether-regolith-insulation',
+		title: 'High-voltage power tethers on abrasive regolith: insulation life',
+		status: 'open',
+		priority: 'medium',
+		threadId: 'mining-operations',
+		dependsOn: [],
+		blocks: [],
+		criticalPath: false,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Tethered-robot power architecture'
+	},
+	{
+		questionId: 'rq-0-61',
+		slug: 'phase-0b-cost-vs-earth-supply',
+		title: 'Phase 0B delivered cost per kg versus Earth supply',
+		status: 'open',
+		priority: 'critical',
+		threadId: 'governance-integration',
+		dependsOn: ['rq-0-50', 'rq-0-51', 'rq-0-56', 'rq-0-57', 'rq-0-58'],
+		blocks: [],
+		criticalPath: true,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Economics gate for 0B (D-02)'
+	},
+	{
+		questionId: 'rq-0-62',
+		slug: 'trl-rebaseline-revised-architecture',
+		title: 'Technology readiness re-baseline for the revised Phase 0 architecture',
+		status: 'open',
+		priority: 'critical',
+		threadId: 'governance-integration',
+		dependsOn: [],
+		blocks: ['rq-0-63'],
+		criticalPath: true,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'TRL and AD² targets for every critical technology at KDP-0B (D-02)'
+	},
+	{
+		questionId: 'rq-0-63',
+		slug: 'integrated-0a-0b-schedule',
+		title: 'Integrated schedule for Phase 0A, the gates and the 0B ramp',
+		status: 'open',
+		priority: 'high',
+		threadId: 'governance-integration',
+		dependsOn: ['rq-0-62'],
+		blocks: [],
+		criticalPath: false,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Gate timing and cost of delay'
 	}
 ];
 

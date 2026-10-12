@@ -84,3 +84,13 @@ Understanding regolith behavior is foundational to achieving the target extracti
 4. **Returned sample mechanical characterization**: Analyze actual asteroid samples from Bennu and Ryugu to measure cohesion, shear strength, and particle adhesion properties under controlled conditions, establishing ground truth for simulant development.
 
 5. **Debris mitigation prototype testing**: Design and test candidate debris containment systems—electrostatic collectors, mechanical shrouds, and gas-jet curtains—to quantify mass and power penalties for maintaining clean operational environments during excavation.
+
+## Re-assessment 2026-10 (Phase 0, round 2)
+
+Excavation power is disputed by roughly an order of magnitude. Claude: 2–15 kWe nominal and 30 kW peak, from terrestrial bucket-wheel specific energy with a 3–10× microgravity penalty (low confidence; it notes 20–50 kW may be right if clasts dominate). Gemini: 30 kW continuous (20–45). GPT: 20–50 kW mechanical, i.e. 40–100 kWe per working machine.
+
+**How this gets answered:**
+- **Simulation:** DEM of excavation at representative cohesion and clast content.
+- **Experiment:** in-situ force and torque spectra from the 0A pathfinder.
+
+Source: `reconciliation/phase-0/round-2/reconciliation/` and `reconciliation/phase-0/decisions.md`; the question register is `reconciliation/phase-0/open-questions.md`.
