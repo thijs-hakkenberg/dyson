@@ -24,8 +24,12 @@
  *   node scripts/query-bom-specs.js --phase=phase-3 --propose-bom
  *
  * Environment variables:
- *   DATABRICKS_TOKEN - API token for Databricks
- *   DATABRICKS_HOST - Databricks host URL (optional, has default)
+ *   DATABRICKS_TOKEN - API token for Databricks (or --profile=<databricks CLI profile>)
+ *   DATABRICKS_HOST / DATABRICKS_GATEWAY_HOST - workspaces (optional, have defaults)
+ *
+ * Panel (scripts/lib/llm.js): --panel=feb|may|oct|latest or --models=a,b,c; --synthesizer=<key>
+ * for consensus/proposal synthesis; --list-models, --discover. Raw exchanges are archived
+ * under data/raw-exchanges/bom-specs/.
  *
  * Models:
  *   - claude-opus-4-5: Claude Opus 4.5 (legacy specs)
@@ -37,44 +41,17 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { MODELS, PANELS, archiveRaw, familyOf, handleInfoFlags, panelArgs, queryModel, registerEndpoint, resolvePanel } from './lib/llm.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 
-// Configuration
-const DATABRICKS_HOST = process.env.DATABRICKS_HOST || process.env.DATABRICKS_WORKSPACE || 'https://adb-6239133969168510.10.azuredatabricks.net';
-const DATABRICKS_TOKEN = process.env.DATABRICKS_TOKEN;
-
-const MODELS = {
-  'claude-opus-4-5': {
-    id: 'databricks-claude-opus-4-5',
-    name: 'Claude Opus 4.5',
-    filename: 'claude-opus-4-5.md',
-    endpoint: '/serving-endpoints/databricks-claude-opus-4-5/invocations'
-  },
-  'claude-opus-4-6': {
-    id: 'databricks-claude-opus-4-6',
-    name: 'Claude Opus 4.6',
-    filename: 'claude-opus-4-6.md',
-    endpoint: '/serving-endpoints/databricks-claude-opus-4-6/invocations'
-  },
-  'gemini-3-pro': {
-    id: 'databricks-gemini-3-pro',
-    name: 'Gemini 3 Pro',
-    filename: 'gemini-3-pro.md',
-    endpoint: '/serving-endpoints/databricks-gemini-3-pro/invocations'
-  },
-  'gpt-5-2': {
-    id: 'databricks-gpt-5-2',
-    name: 'GPT-5.2',
-    filename: 'gpt-5-2.md',
-    endpoint: '/serving-endpoints/databricks-gpt-5-2/invocations'
-  }
-};
-
-// Default models for new specs (current latest versions)
-const DEFAULT_SPEC_MODELS = ['claude-opus-4-6', 'gemini-3-pro', 'gpt-5-2'];
+// Models (scripts/lib/llm.js). The spec panel defaults to the February models the
+// existing specs were written with; choose another with --panel or --models.
+let DEFAULT_SPEC_MODELS = [...PANELS.feb];
+let SYNTHESIZER = 'claude-opus-4-6';
+const RAW_DIR = path.join(PROJECT_ROOT, 'data/raw-exchanges/bom-specs');
 
 // All Claude models (for generating 4.6 alongside existing 4.5)
 const CLAUDE_MODELS = ['claude-opus-4-5', 'claude-opus-4-6'];
@@ -442,7 +419,7 @@ Key engineering questions that must be resolved for Phase 3.
 Be specific about which model holds which view when there are disagreements.`;
 
   console.log('  Generating BOM consensus...');
-  const content = await queryDatabricks('claude-opus-4-6', prompt);
+  const content = await queryDatabricks(SYNTHESIZER, prompt, { label: 'synthesis' });
 
   if (!content) {
     console.log('    Failed to generate BOM consensus - no API response');
@@ -696,54 +673,19 @@ about the best approach.`;
  * Query Databricks LLM API
  */
 async function queryDatabricks(modelKey, prompt, options = {}) {
-  if (!DATABRICKS_TOKEN) {
-    return null;
-  }
-
-  const { maxTokens = 64000 } = options;
-  const model = MODELS[modelKey];
-  const endpoint = `${DATABRICKS_HOST}${model.endpoint}`;
-
+  const { maxTokens = 64000, label = 'spec' } = options;
   try {
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${DATABRICKS_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        messages: [
-          {
-            role: 'system',
-            content: 'You are an expert space systems engineer providing detailed technical specifications.'
-          },
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
-        max_tokens: maxTokens,
-        temperature: 0.7
-      })
+    const ex = await queryModel(modelKey, {
+      system: 'You are an expert space systems engineer providing detailed technical specifications.',
+      prompt,
+      maxTokens
     });
-
-    if (!response.ok) {
-      const error = await response.text();
-      throw new Error(`API error: ${response.status} - ${error}`);
-    }
-
-    const data = await response.json();
-    const content = data.choices?.[0]?.message?.content;
-
-    // Handle Gemini's array format where content is [{type: 'text', text: '...'}]
-    if (Array.isArray(content)) {
-      const textContent = content.find(c => c.type === 'text');
-      return textContent?.text || null;
-    }
-
-    return content || data.content;
+    await archiveRaw(path.join(RAW_DIR, modelKey), `${label}-${Date.now()}`, ex).catch((e) =>
+      console.warn(`  (raw archive failed: ${e.message})`)
+    );
+    return ex.text;
   } catch (error) {
-    console.error(`Error querying ${model.name}:`, error.message);
+    console.error(`Error querying ${MODELS[modelKey]?.name ?? modelKey}:`, error.message);
     return null;
   }
 }
@@ -829,6 +771,13 @@ async function loadAllSpecs(item, phaseId = 'phase-0') {
   const specs = {};
   const itemDir = path.join(PROJECT_ROOT, 'static/content/bom-specs', phaseId, item.slug);
 
+  // Pick up spec files from models added after the registry was written
+  const files = await fs.readdir(itemDir).catch(() => []);
+  for (const f of files) {
+    if (/^[a-z0-9-]+\.md$/.test(f) && f !== 'consensus.md' && !MODELS[f.slice(0, -3)] && familyOf(f) !== 'other')
+      registerEndpoint(`databricks-${f.slice(0, -3)}`);
+  }
+
   for (const [modelKey, model] of Object.entries(MODELS)) {
     const specPath = path.join(itemDir, model.filename);
     try {
@@ -881,7 +830,7 @@ A numbered list of 5-7 synthesized recommendations.
 Be specific about which model holds which view in the Divergent Views section.`;
 
   console.log(`  Generating consensus for ${item.name}...`);
-  const content = await queryDatabricks('claude-opus-4-6', prompt);
+  const content = await queryDatabricks(SYNTHESIZER, prompt, { label: 'synthesis' });
 
   if (!content) {
     console.log('    Failed to generate consensus - no API response');
@@ -1097,6 +1046,14 @@ async function main() {
   const proposeBOMFlag = args.includes('--propose-bom');
   const addClaude46 = args.includes('--add-claude-46');
   const compactContext = args.includes('--compact-context');
+  const flags = panelArgs(args);
+  if (await handleInfoFlags(flags)) return;
+  if (flags.panel || flags.models) DEFAULT_SPEC_MODELS = await resolvePanel(flags);
+  const synth = args.find((a) => a.startsWith('--synthesizer='))?.split('=')[1];
+  SYNTHESIZER = synth
+    ? (await resolvePanel({ models: synth }))[0]
+    : DEFAULT_SPEC_MODELS.find((m) => MODELS[m].family === 'claude') ?? DEFAULT_SPEC_MODELS[0];
+  if (modelFilter && !MODELS[modelFilter]) await resolvePanel({ models: modelFilter });
 
   console.log('='.repeat(60));
   console.log('BOM Specifications Generator');
@@ -1162,7 +1119,7 @@ async function main() {
   // Determine models to process
   let modelsToProcess;
   if (modelFilter) {
-    modelsToProcess = [modelFilter].filter(m => m in MODELS);
+    modelsToProcess = [modelFilter.replace(/^databricks-/, '')].filter(m => m in MODELS);
   } else if (consensusOnly) {
     // For consensus, use all available models (check what files exist)
     modelsToProcess = Object.keys(MODELS);
@@ -1184,7 +1141,7 @@ async function main() {
 
   console.log(`Phase: ${phaseFilter}`);
   console.log(`Items: ${itemsToProcess.map(i => i.slug).join(', ')}`);
-  console.log(`Models: ${modelsToProcess.join(', ')}`);
+  console.log(`Models: ${modelsToProcess.join(', ')} · synthesizer: ${SYNTHESIZER}`);
   if (generateCons) console.log('Mode: Generate specs + consensus');
   if (consensusOnly) console.log('Mode: Consensus only (from existing specs)');
   console.log();

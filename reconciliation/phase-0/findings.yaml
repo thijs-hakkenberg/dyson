@@ -1,0 +1,286 @@
+# Phase 0 completeness and closure findings — input to the model re-assessment.
+#
+# Produced 2026-10-11 by reviewing the Phase 0 BOM (src/lib/services/content.ts),
+# the consensus documents and divergent views (static/content/bom-specs/phase-0/),
+# the concluded Phase 0 deliberations (src/content/research-questions/phase-0/*/conclusion.md),
+# the explorer's consensus-issue log (src/lib/explore/CONSENSUS-ISSUES.md, CI-15–CI-20)
+# and the 2026-05-11 holistic review (dyson-research/publications/holistic-review/).
+#
+# Findings are claims for the models to test, not decisions. Numbers marked
+# `estimate` are order-of-magnitude checks made for this review, with the
+# assumptions stated; the re-assessment should confirm or correct them.
+#
+# kind:     closure   — numbers inside the BOM do not add up across items
+#           gap       — something the phase needs is not in the BOM
+#           stale     — a document lags a later decision
+#           contradiction — two project documents state incompatible things
+#           plausibility  — a figure looks physically or economically off
+# severity: blocking  — the phase cannot work as specified
+#           major     — changes quantities, cost or architecture materially
+#           minor     — documentation or consistency
+
+phase: phase-0
+title: Space Resource Processing
+spec_generation: 'Consensus documents dated 2026-01-31, synthesised from Claude Opus 4.5, Gemini 3 Pro and GPT-5.2'
+items:
+  bom-0-1: prospecting-satellites
+  bom-0-2: mining-robots
+  bom-0-3: material-processing-station
+  bom-0-4: transport-vehicles
+  bom-0-5: solar-power-arrays
+  bom-0-6: ispp-systems
+  bom-0-7: organizational-infrastructure
+
+findings:
+  # ── Closure: the material chain ──────────────────────────────────────────
+  - id: P0-F01
+    kind: closure
+    severity: blocking
+    items: [bom-0-4, bom-0-3]
+    title: Transport capacity is one to two orders of magnitude below station throughput
+    evidence:
+      - 'transport-vehicles consensus: 10 vehicles (BOM: 15), 150–250 t payload, 6–10 km/s round trip, Hall-effect EP, 300–500 m² arrays, 15-year life with 10+ cycles'
+      - 'material-processing-station consensus: 50,000 t/yr processing throughput at full capacity'
+    analysis: >
+      estimate: 300–500 m² of III-V cells at 1 AU give ~150–250 kWe. Hall thrusters
+      deliver ~50 mN/kW, so ~8–13 N on a ~300–350 t loaded vehicle: ~2.5–4×10⁻⁵ m/s².
+      A 6–10 km/s round trip then needs ~5–10 years of continuous thrust, not the
+      ~1.5 years implied by 10 cycles in 15 years. Even at the stated cadence the
+      fleet moves 10–15 × 200 t × 0.67/yr ≈ 1.3–2 kt/yr, 25–37× short of 50 kt/yr; at
+      the power-limited cadence it is ~0.3–0.6 kt/yr, ~100× short.
+    question: >
+      Re-derive trip time and annual delivered mass from the vehicle's power, thrust and
+      Δv. Then size the fleet (or vehicle power, e.g. from the 100 MW array line, or a
+      different architecture such as co-locating processing at the asteroid) so that
+      delivered mass matches what the station processes.
+
+  - id: P0-F02
+    kind: closure
+    severity: major
+    items: [bom-0-2, bom-0-3]
+    title: Mining rate, robot target and station throughput disagree (CI-20)
+    evidence:
+      - 'mining-robots consensus: extraction target 1,000+ t per robot per year (fleet of 20 → ~20 kt/yr)'
+      - 'rq-0-26 resolution in the same document: 2–5 t/h continuous excavation per robot (17–44 kt/yr per robot if continuous)'
+      - 'station: 50 kt/yr'
+    analysis: >
+      The same document implies 17–44× different annual output per robot depending on
+      which figure is used; the duty cycle is never stated. Fleet output ranges from
+      20 kt/yr to 350–880 kt/yr against a 50 kt/yr station and a ~1 kt/yr transport fleet
+      (P0-F01). The on-robot concentration ratio, which decides how much mass has to be
+      moved, is also not given.
+    question: >
+      State duty cycle and concentration ratio, then give one consistent mass-flow chain:
+      excavated → concentrated → transported → processed → product, in t/yr, with
+      ranges.
+
+  - id: P0-F03
+    kind: closure
+    severity: major
+    items: [bom-0-3, bom-0-5]
+    title: Station power cannot refine 50 kt/yr
+    evidence:
+      - 'material-processing-station consensus: solar-powered, 1–2.5 MW; products Al, Fe, Ni and solar-grade Si'
+    analysis: >
+      estimate: melting native Fe-Ni takes ~0.3–0.5 kWh/kg; reducing oxides (Al, Si, O₂ by
+      molten-regolith electrolysis) ~10–15 kWh/kg; solar-grade Si purification more.
+      At 50 kt/yr that is ~2–90 MW average. 1–2.5 MW covers at most the melting of
+      native metal at the low end of throughput. The 100 MW array line (bom-0-5) could
+      supply this, but no document allocates it.
+    question: Give the station's energy per kg for each product and the resulting power, and say which power line supplies it.
+
+  - id: P0-F04
+    kind: closure
+    severity: major
+    items: [bom-0-5]
+    title: 100 MW of arrays with ~5 MW of identified loads, no location split, and storage where there is no night
+    evidence:
+      - 'solar-power-arrays consensus: 100 MW total, "co-located with mining and processing", 500 MWh Li-ion (Claude) / 200 MWh (Gemini)'
+      - 'identified loads: station 1–2.5 MW, 20 robots × 20–50 kW excavation, 4 ISPP × ~250 kWe; tugs carry their own arrays'
+    analysis: >
+      ~95 MW has no assigned load, and the split between the station (Sun–Earth L4/L5)
+      and the mining sites (NEAs, tens of millions of km apart) is not stated. L4/L5 has
+      no eclipse, so 200–500 MWh of batteries (~1,000–2,500 t at ~200 Wh/kg) there buys
+      little; the rotating asteroids, where robots need night-side power, get none.
+    question: Allocate the 100 MW to loads and sites (including P0-F01 and P0-F03), and size storage per site from its actual eclipse profile.
+
+  # ── Plausibility ─────────────────────────────────────────────────────────
+  - id: P0-F05
+    kind: plausibility
+    severity: major
+    items: [bom-0-5]
+    title: $5/W for space arrays is far below current prices and excludes launch
+    evidence:
+      - 'solar-power-arrays consensus: $3.50–5.00 per watt installed; $500M for 100 MW'
+    analysis: >
+      Space-qualified III-V arrays are commonly priced in the tens to hundreds of $/W
+      today, and 100 MW at ~100 W/kg is ~1,000 t to launch. The figure reads as a
+      terrestrial-utility price. (Check with current supplier and launch pricing.)
+    question: Re-estimate $/W with a stated basis (cell, array, integration, launch) and an uncertainty range.
+
+  - id: P0-F06
+    kind: plausibility
+    severity: major
+    items: [bom-0-1]
+    title: 20 asteroids per satellite per year is not reachable by a 100 kg spacecraft
+    evidence:
+      - 'prospecting-satellites consensus: 80–120 kg, green monoprop (Claude) or EP (Gemini), survey rate 20+ asteroids per satellite per year'
+    analysis: >
+      Rendezvous or flyby retargeting between NEAs costs hundreds of m/s to several km/s
+      each. A 100 kg bus carries a Δv budget for a handful of targets over its life,
+      not 20 per year. "Survey" may mean remote observation, but then the instrument,
+      aperture and vantage point differ entirely.
+    question: Define survey (rendezvous, flyby, remote); size Δv, targets per satellite and fleet size from that definition.
+
+  - id: P0-F07
+    kind: plausibility
+    severity: minor
+    items: [bom-0-2]
+    title: Robot mass and power are internally inconsistent
+    evidence:
+      - 'mining-robots consensus: 2,500–3,500 kg per robot; rq-0-26 rationale: "unmanageable for a 500 kg robot"'
+      - '20–50 kW mechanical excavation power, solar with battery backup'
+    analysis: >
+      20–50 kW of excavation from solar needs ~150–400 m² of array on a walking robot
+      that anchors to a rotating body, and night-side storage. The deliberation that
+      fixed the excavator assumed a 500 kg robot.
+    question: Reconcile robot mass and power, and say where excavation power comes from (own arrays, tether to a site power plant, or beamed).
+
+  # ── Gaps: things Phase 0 needs that are not in the BOM ───────────────────
+  - id: P0-F08
+    kind: gap
+    severity: major
+    items: [phase]
+    title: No launch / Earth-to-space transport line
+    evidence:
+      - 'station 400–1,000 t, arrays ~1,000 t (at 100 W/kg), 10–15 vehicles, 20 robots, 32–50 satellites, ISPP units'
+      - 'transport-vehicles consensus: "Launch costs are significant driver"'
+    question: Estimate total Earth-launched mass and launch cost for Phase 0 and add it as a BOM line (or fold it into each item explicitly).
+
+  - id: P0-F09
+    kind: gap
+    severity: major
+    items: [phase]
+    title: No communications, ground segment or mission-operations line
+    evidence:
+      - '~80–90 spacecraft and robots across NEAs and L4/L5 for 10–15 years; Level 3–4 autonomy assumed; no relay or ground-station capacity budgeted'
+    question: Specify the comms architecture (relays, ground stations, DSN or commercial), data rates and an operations staffing/cost line.
+
+  - id: P0-F10
+    kind: gap
+    severity: major
+    items: [bom-0-3, bom-0-4]
+    title: Crew transport and habitation for a human-tended station are not budgeted
+    evidence:
+      - 'station consensus: "human-tended with quarterly visits" (Claude, GPT); "include crew habitat"'
+      - 'rq-0-18 conclusion: design in structural human-rating now, defer crew systems'
+    question: Decide whether Phase 0 is crewed. If so, add crew vehicles, habitat, life support and safety; if not, remove crew assumptions from the station spec.
+
+  - id: P0-F11
+    kind: gap
+    severity: major
+    items: [bom-0-4, bom-0-6]
+    title: Propellant supply for the tugs is not in the BOM, and ISPP output has no Phase 0 consumer
+    evidence:
+      - 'BOM description bom-0-4: krypton/iodine electric propulsion (xenon rejected on supply)'
+      - 'ispp-systems: produces water / LOX / LH₂ (chemical propellants); recommends a lunar south pole first site and an EML1 depot'
+    analysis: >
+      estimate: 10–15 vehicles × ~100 t of propellant per round trip at Isp ~1,800 s is
+      order 10²–10³ t/yr of Kr or I, to be checked against world supply as xenon was.
+      The ISPP units make propellant that no Phase 0 vehicle burns.
+    question: Size annual Kr/I demand and its source; state who consumes ISPP output in Phase 0 (or move ISPP to Phase 0B per rq-0-14).
+
+  - id: P0-F12
+    kind: gap
+    severity: major
+    items: [phase]
+    title: No development, test, pathfinder, spares or contingency lines
+    evidence:
+      - 'mining robots: "development alone may consume $300–400M"; 2–3 pathfinder robots'
+      - 'prospecting: 5 pathfinders; station: ISS metallurgy experiments, 30–40% contingency'
+      - 'robot life 5 years, transport 15 years, phase 10–15 years → replacements'
+    question: Add non-recurring development, pathfinders, test campaigns, replacement units over the phase and contingency, each with a basis.
+
+  - id: P0-F13
+    kind: gap
+    severity: minor
+    items: [bom-0-7]
+    title: Organizational infrastructure has no specification at all
+    evidence:
+      - 'BOM: $50M, confidence low; no static/content/bom-specs/phase-0/organizational-infrastructure/'
+      - 'rq-0-29 concluded on a multi-century governance structure'
+    question: Write the spec from the rq-0-29 conclusion (legal entity, succession, licensing, liability/insurance, planetary protection, space-traffic coordination).
+
+  - id: P0-F14
+    kind: gap
+    severity: minor
+    items: [bom-0-2, phase]
+    title: Debris, contamination and regulatory compliance are unbudgeted
+    evidence:
+      - 'mining-robots: at 99% containment a 5 t/h excavator still releases ~50 kg/h of fugitive particles'
+    question: State the debris and contamination limits, the mitigation hardware and who certifies operations.
+
+  # ── Stale documents and contradictions ───────────────────────────────────
+  - id: P0-F15
+    kind: stale
+    severity: major
+    items: [bom-0-3, bom-0-4, bom-0-6, bom-0-7]
+    title: Eight of nine concluded deliberations were never written back into the specs
+    evidence:
+      - 'rq-0-26 (excavation) is in mining-robots consensus'
+      - 'not reflected in any consensus document: rq-0-11 (hybrid gravity zones 0.05–0.15 g for smelting), rq-0-14 (propellant production designed-for, deployed in Phase 0B at ≥25 kt/yr), rq-0-18 (structural human-rating of tugs), rq-0-28 (ISRU cost methodology), rq-0-29 (governance), rq-0-30 (cryogenic boil-off), rq-0-47 (sunshield), rq-0-48 (MLI degradation)'
+    question: For each conclusion, state what it changes in the item's spec (mass, power, cost, architecture) and propose the revised values.
+
+  - id: P0-F16
+    kind: stale
+    severity: minor
+    items: [bom-0-1, bom-0-4, bom-0-6]
+    title: Consensus documents disagree with the BOM they describe
+    evidence:
+      - 'prospecting: consensus 50 satellites / $250M; BOM 32 / $160M (CI-16)'
+      - 'transport: consensus 10 vehicles, "all assume xenon"; BOM 15 vehicles, krypton/iodine (CI-17)'
+      - 'ispp: consensus recommends the lunar south pole first; BOM describes NEA bucket-wheel extraction at 1,000 °C'
+      - 'consensus synthesised from Claude Opus 4.5 although claude-opus-4-6 specs exist for six items'
+    question: Regenerate each consensus from the current specs and state which figure is authoritative.
+
+  - id: P0-F17
+    kind: contradiction
+    severity: major
+    items: [phase]
+    title: '"Phase 0 is pure research" vs. $15.7B of Phase 0 hardware'
+    evidence:
+      - 'homepage: "Phase 0 is pure research — proving feasibility before spending a single dollar on hardware"'
+      - 'BOM Phase 0: 7 items, ~$15.7B, including a $10B station; decision gates (src/lib/services/decision-gates.ts) end at a Phase 0 PDR'
+    question: >
+      Split Phase 0 into a research/pathfinder stage (what the gates fund) and an
+      industrial stage (the current hardware), each with its own BOM, cost and gate.
+
+  - id: P0-F18
+    kind: gap
+    severity: major
+    items: [bom-0-3, phase]
+    title: No fallback if microgravity metallurgy does not scale
+    evidence:
+      - 'holistic review 2026-05-11: microgravity metallurgy "8 orders of magnitude (100 g lab → 50,000 t/yr) is a paradigm gap, not a maturation gap"; "no fallback architecture is publicly worked out"'
+      - 'rq-0-11: smelting needs 0.05–0.15 g, i.e. a rotating section the station spec does not have'
+    question: Specify the station with rq-0-11's gravity zones and give a costed fallback (e.g. lunar-surface processing, Earth-launched feedstock for Phase 1) with the gate that triggers it.
+
+  # ── Interface to Phase 1 ─────────────────────────────────────────────────
+  - id: P0-F19
+    kind: gap
+    severity: major
+    items: [bom-0-3, phase]
+    title: Phase 0 output is not tied to Phase 1 demand
+    evidence:
+      - 'Phase 1 collectors: 1,000 × 69–1,850 kg; PV blankets: 5,000 × 690–45,000 kg (per-model figures; see explorer core/models.ts)'
+      - 'station at Sun–Earth L4/L5; Phase 1 assembly node at Sun–Earth L1; no Phase 0 line moves product between them'
+    question: >
+      List what Phase 1 needs from Phase 0 (materials, mass per year, purity, delivery
+      point and date) and check the station's product mix and location against it.
+
+# Phase-level asks for the re-assessment (in addition to per-finding answers)
+phase_asks:
+  - 'A closed Phase 0 budget table: mass flow (t/yr per stage), power (MW per load and site), Δv and trip time per vehicle class, and cost (recurring, non-recurring, launch, operations, contingency) with ranges.'
+  - 'A proposed BOM delta: items to add, remove, split or resize, each with quantity, unit cost range, basis and confidence.'
+  - The gate criteria that should separate Phase 0A (research and pathfinders) from Phase 0B (industrial build-out).
+  - Where models still disagree after reconciliation, keep both positions with their reasoning; do not force a single answer.

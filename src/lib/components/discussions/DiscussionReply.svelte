@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { DiscussionResponse, DiscussionModelId, ResponseVoteResults } from '$lib/types/discussion';
 	import { MODEL_DISPLAY_NAMES } from '$lib/types/discussion';
+	import { modelFamily, type ModelFamily } from '$lib/services/models';
 	import { renderMarkdown } from '$lib/utils/markdown';
 
 	interface Props {
@@ -12,26 +13,15 @@
 
 	let { response, voteResults, isWinner = false, expanded = false }: Props = $props();
 
-	// Model colors for visual distinction
-	const modelColors: Record<DiscussionModelId, { bg: string; border: string; text: string }> = {
-		'claude-opus-4-6': {
-			bg: 'bg-amber-500/10',
-			border: 'border-amber-500/30',
-			text: 'text-amber-400'
-		},
-		'gemini-3-pro': {
-			bg: 'bg-blue-500/10',
-			border: 'border-blue-500/30',
-			text: 'text-blue-400'
-		},
-		'gpt-5-2': {
-			bg: 'bg-green-500/10',
-			border: 'border-green-500/30',
-			text: 'text-green-400'
-		}
+	// Colours by model family, so later generations keep their family's colour
+	const familyColors: Record<ModelFamily, { bg: string; border: string; text: string }> = {
+		claude: { bg: 'bg-amber-500/10', border: 'border-amber-500/30', text: 'text-amber-400' },
+		gemini: { bg: 'bg-blue-500/10', border: 'border-blue-500/30', text: 'text-blue-400' },
+		gpt: { bg: 'bg-green-500/10', border: 'border-green-500/30', text: 'text-green-400' },
+		other: { bg: 'bg-slate-500/10', border: 'border-slate-500/30', text: 'text-slate-300' }
 	};
 
-	const colors = $derived(modelColors[response.modelId]);
+	const colors = $derived(familyColors[modelFamily(response.modelId)]);
 	const renderedContent = $derived(renderMarkdown(response.content));
 
 	let localOverride: boolean | null = $state(null);

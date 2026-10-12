@@ -35,7 +35,8 @@
 				{ label: 'Publications', href: '/publications' },
 				{ label: 'Analysis', href: '/analysis/feasibility' },
 				{ label: 'Open Questions', href: '/questions' },
-				{ label: 'Topics', href: '/topics' }
+				{ label: 'Topics', href: '/topics' },
+				{ label: 'Methodology', href: '/methodology' }
 			]
 		},
 		{

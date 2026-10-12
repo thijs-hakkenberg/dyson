@@ -145,7 +145,7 @@ export async function computeAggregateStats(): Promise<AggregateDiscussionStats>
 		// Model win counts
 		if (discussion.stats?.roundWinners) {
 			for (const [modelId, wins] of Object.entries(discussion.stats.roundWinners)) {
-				stats.modelWinRates[modelId as DiscussionModelId] += wins;
+				stats.modelWinRates[modelId] = (stats.modelWinRates[modelId] ?? 0) + wins;
 				totalModelWins += wins;
 			}
 		}
