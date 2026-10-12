@@ -2,9 +2,9 @@
 questionId: "rq-0-41"
 slug: "fleet-contamination-threshold"
 title: "Fleet-level contamination acceptability threshold for excavation operations"
-questionType: "engineering-decision"
+questionType: "discussion"
 status: "open"
-priority: "medium"
+priority: "high"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-2"
 sourceBOMItemSlug: "mining-robots"
@@ -58,3 +58,21 @@ At fleet scale, the cumulative debris environment around a mining operation coul
 4. **Contamination impact assessment**: Quantify degradation rates for solar arrays, optical sensors, and mechanical systems as a function of particle flux exposure.
 
 5. **Mitigation hierarchy**: Define a tiered approach from source containment (housing design) to path control (electrostatic barriers) to receiver protection (self-cleaning surfaces).
+
+## Re-assessment 2026-10 (Phase 0, round 2)
+
+**Retyped as a stakeholder discussion: the limit cannot be reasoned to a number.** The panel's options are:
+- ≤10 kg/yr escaped per site (GPT);
+- ≥99.9% capture for grains >5 µm (Gemini);
+- ≤0.1–1 t/yr per site (Claude, who calls the threshold a values choice).
+
+All three reject 99% as a safety criterion. Claude adds that the **tailings stream (13–47 kt/yr) is the larger problem**.
+
+Decision D-03 adopts an **ALARP requirement** with an **interim design-sizing ceiling of ≤1 t/yr per site** and an aspiration of ≤10 kg/yr. The binding limit is set at the licence gate.
+
+**How this gets answered:**
+- **Simulation:** ejecta and tailings trajectory modelling, including whether long-lived heliocentric streams form.
+- **Experiment:** integrated containment tests at representative feed.
+- **Stakeholder discussion:** agreement with the licensing state and other operators.
+
+Source: `reconciliation/phase-0/round-2/reconciliation/` and `reconciliation/phase-0/decisions.md`; the question register is `reconciliation/phase-0/open-questions.md`.

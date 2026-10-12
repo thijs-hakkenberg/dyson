@@ -4,7 +4,7 @@ slug: "dual-bucket-wheel-excavation"
 title: "Dual counter-rotating bucket-wheel excavation for microgravity torque balancing"
 questionType: "experimentation"
 priority: "high"
-status: "answered"
+status: "investigating"
 answeredDate: "2026-02-10"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-2"
@@ -78,3 +78,19 @@ The excavation mechanism is foundational to Phase 0's ability to extract the 20,
 4. **Terrestrial analog testing at asteroid gravity**: Use underwater or inclined-plane facilities to simulate asteroid surface gravity while testing full-scale bucket-wheel prototypes, validating scaling laws from parabolic flight tests.
 
 5. **Power and thermal analysis**: Model the complete energy flow from solar arrays through excavation motors to waste heat rejection, establishing design margins for continuous daytime operation.
+
+## Re-assessment 2026-10 (Phase 0, round 2)
+
+**Reopened: the torque figures do not hold.**
+- **Claude and GPT:** 50–200 N·m at ≥10 kW implies roughly 480–1,900 rpm (P = τω), which is not a bucket wheel. At a bucket wheel's ~10 rpm, 20 kW is ~19 kN·m (GPT). Claude gives 2.5–95 kN·m, and 0.25–5 kN·m residual after counter-rotation.
+- **Subsystem mass:** 60–80 kg is disputed (Claude 150–400 kg, GPT 150–500 kg).
+- **Status of counter-rotation:**
+  - Gemini: adopted, high confidence.
+  - Claude: the corrected torque strengthens the case, but the analysis should be re-run.
+  - GPT: a candidate only; it does not cancel translation forces.
+
+**How this gets answered:**
+- **Simulation:** re-run the trade with corrected torque, using DEM.
+- **Experiment:** force and torque spectra at representative feed.
+
+Source: `reconciliation/phase-0/round-2/reconciliation/` and `reconciliation/phase-0/decisions.md`; the question register is `reconciliation/phase-0/open-questions.md`.

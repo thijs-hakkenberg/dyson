@@ -4,7 +4,7 @@ slug: "xenon-propellant-sourcing-scale"
 title: "Xenon propellant sourcing at scale"
 questionType: "meta-research"
 priority: "high"
-status: "answered"
+status: "investigating"
 answeredDate: "2026-02-03"
 sourcePhase: "phase-0"
 sourceBOMItemId: "bom-0-4"
@@ -19,7 +19,7 @@ tags:
   - "propellant"
   - "supply-chain"
 createdDate: "2026-01-31"
-resolutionStatus: "resolved"
+resolutionStatus: "partially-resolved"
 resolutionDate: "2026-02-03"
 resolutionSource: "industry-data"
 resolutionSummary: "Industry data confirms global xenon production is 40-50 tonnes/year, fundamentally inadequate for Project Dyson scale requirements of 320,000-750,000 kg/year. Alternative propellants (krypton, iodine, argon) provide viable paths forward."
@@ -112,3 +112,15 @@ $50-100M allocated for:
 - Depot infrastructure development
 
 [Read Full Research Report](/content/research/xenon-propellant-analysis.md)
+
+## Re-assessment 2026-10 (Phase 0, round 2)
+
+**Reopened.**
+- GPT calls the BOM's "xenon demand exceeds global production 15–20×" claim unsupported. The models give xenon supply as 50–100 t/yr (Claude) and 60–70 t/yr (Gemini).
+- Revised tug demand is 150–1,200 t/yr, not the 320–750 t/yr assumed here.
+- Krypton supply is poorly documented (Claude 10²–10³ t/yr, Gemini 150–180 t/yr).
+
+**How this gets answered:**
+- **Literature research:** the supply audit continues in rq-0-53. The resolution above stands only for xenon being unsuitable as a baseline.
+
+Source: `reconciliation/phase-0/round-2/reconciliation/` and `reconciliation/phase-0/decisions.md`; the question register is `reconciliation/phase-0/open-questions.md`.
