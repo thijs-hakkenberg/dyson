@@ -97,3 +97,13 @@ deliberation chamber seats whoever took part in a thread.
 4. Mirror changed figures into the explorer (`src/lib/explore/core/metrics.ts`,
    `models.ts`), and close or update the matching `CONSENSUS-ISSUES.md` entries.
 5. Write the next phase's `findings.yaml` (Phase 1 depends on Phase 0's outputs; see P0-F19).
+
+## Technology readiness (TRL) re-baseline
+
+[`phase-0/trl/WORKPACKAGE.md`](phase-0/trl/WORKPACKAGE.md) — after D-01/D-02. A panel rates
+each critical technology of the revised architecture on the NASA TRL scale with AD²
+(`scripts/run-trl-assessment.js`: inventory → assess → gates), then the apply step rebuilds
+the TRL data, gates, analysis pages and explorer lenses from the result.
+`scripts/check-stale-narratives.js` is the acceptance check (WP-A: TRL and gates;
+WP-B: the BOM and its narratives).
+

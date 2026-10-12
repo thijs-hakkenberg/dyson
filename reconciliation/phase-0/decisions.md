@@ -10,7 +10,8 @@ direction: co-located processing, a Fe-Ni product, MW-class tugs, an uncrewed ph
 walks each one through the scaffold and gives a recommendation. Each recommendation states
 the values it assumes, so you can overrule the values rather than the arithmetic.
 
-**Status of each decision: proposed, awaiting owner sign-off.** Nothing here changes the BOM
+**Status (2026-10-12): D-01 and D-02 accepted by the owner, including D-01's criteria weights.
+D-03, D-04 and D-05 are proposed, awaiting sign-off.** Nothing here changes the BOM
 until signed. Where reasoning cannot settle a question, the decision is an interim position
 and the question goes to the research-question register
 ([`open-questions.md`](open-questions.md)).
@@ -487,8 +488,8 @@ does not discriminate; the data would.**
 
 | Decision | Values assumed | Your call |
 |---|---|---|
-| D-01 | Evidence value and capital protection outweigh speed (C1 + C2 = 55%) | ☐ accept ☐ change weights ☐ choose another option |
-| D-02 | Stringency follows reversibility; partners will want TRL vocabulary | ☐ accept ☐ amend |
+| D-01 | Evidence value and capital protection outweigh speed (C1 + C2 = 55%) | ☑ **accepted 2026-10-12**, weights as proposed |
+| D-02 | Stringency follows reversibility; partners will want TRL vocabulary | ☑ **accepted 2026-10-12** → work package [`trl/WORKPACKAGE.md`](trl/WORKPACKAGE.md) |
 | D-03 | ALARP + interim ≤ 1 t/yr ceiling until licence gate | ☐ accept ☐ amend |
 | D-04 | SEL1 as reference, re-decided with Phase 1 | ☐ accept ☐ amend |
 | D-05 | Propellant-agnostic tug; iodine reference, argon alternate | ☐ accept ☐ amend |

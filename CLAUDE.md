@@ -103,6 +103,10 @@ node scripts/run-reassessment.js --phase=phase-0 --panel=may [--dry-run]
 node scripts/run-reassessment.js --phase=phase-0 --synthesize
 # Critique round: --round=2 --prior-round=1 applies src/content/methodology/decision-frameworks.md
 
+# TRL re-baseline (reconciliation/phase-0/trl/WORKPACKAGE.md): inventory → assess → gates
+node scripts/run-trl-assessment.js --phase=phase-0 --step=inventory --panel=latest [--dry-run]
+node scripts/check-stale-narratives.js [--wp=A|B]   # superseded claims on live pages
+
 # Model panels for discussions/specs/re-assessment: --panel=feb|may|oct|latest or --models=a,b,c
 # (shared registry: scripts/lib/llm.js; --list-models, --discover)
 
