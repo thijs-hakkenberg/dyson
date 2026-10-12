@@ -222,6 +222,10 @@ export function agentFor(timeoutMs) {
  * maxTokens/temperature apply to chat transports; reasoning models ignore temperature.
  * retries/backoffMs: 429/503 and dropped connections back off 20s, 40s, 80s… (up to 5 retries by default).
  */
+/**
+ * @param {string} key
+ * @param {{ system?: string, prompt: string, maxTokens?: number, temperature?: number, timeoutMs?: number, retries?: number, backoffMs?: number }} [options]
+ */
 export async function queryModel(key, { system, prompt, maxTokens = 16000, temperature = 0.7, timeoutMs = 900_000, retries = 5, backoffMs = 20_000 } = {}) {
 	const m = MODELS[key];
 	if (!m) throw new Error(`Unknown model "${key}". Known: ${Object.keys(MODELS).join(', ')}`);
