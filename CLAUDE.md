@@ -101,6 +101,7 @@ node scripts/run-peer-review.js --paper=<NN> --version=<v> --model=<model-id>
 # Re-assess a phase's BOM against reconciliation/<phase>/findings.yaml (see reconciliation/README.md)
 node scripts/run-reassessment.js --phase=phase-0 --panel=may [--dry-run]
 node scripts/run-reassessment.js --phase=phase-0 --synthesize
+# Critique round: --round=2 --prior-round=1 applies src/content/methodology/decision-frameworks.md
 
 # Model panels for discussions/specs/re-assessment: --panel=feb|may|oct|latest or --models=a,b,c
 # (shared registry: scripts/lib/llm.js; --list-models, --discover)

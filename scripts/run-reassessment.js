@@ -22,7 +22,8 @@
  * Options:
  *   --items=bom-0-1,phase     subset (default: every item in findings.yaml, plus "phase")
  *   --round=N                 output round (default 1)
- *   --prior-round=N           include round N's reconciliation in the prompts
+ *   --prior-round=N           critique round N's reconciliation, using the decision frameworks in
+ *                             src/content/methodology/decision-frameworks.md (see scripts/lib/critique.js)
  *   --include-specs           also include every per-model spec (long prompts)
  *   --force                   re-query even if the output exists
  *   --max-tokens=N            output budget per response (default 24000, synthesis 16000; reasoning models spend part of it thinking)
@@ -38,6 +39,7 @@ import { createHash } from 'crypto';
 import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
 import { MODELS, archiveRaw, handleInfoFlags, panelArgs, queryModel, resolvePanel } from './lib/llm.js';
+import { critiquePrompt, critiqueSynthSpec, loadFramework, withCritiqueOutput } from './lib/critique.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -181,15 +183,13 @@ function findingsFor(F, key) {
 	return yaml.dump(list, { lineWidth: 110 });
 }
 
-async function priorReconciliation(phaseId, round, key) {
+async function priorReconciliation(phaseId, round, key, framework) {
 	if (!round) return '';
-	const r = await read(`reconciliation/${phaseId}/round-${round}/reconciliation/${key}.md`);
-	return r
-		? `## Previous round's reconciliation (round ${round})\n\nYou are joining an ongoing review. Earlier models produced the reconciliation below. Check it as critically as the original specs: confirm what holds, correct what does not, and add what it missed. Where you disagree, say so and why; disagreements are kept, not averaged away.\n\n${r.replace(/^---[\s\S]*?---\n/, '')}`
-		: '';
+	const reconciliation = await read(`reconciliation/${phaseId}/round-${round}/reconciliation/${key}.md`);
+	return critiquePrompt({ round, reconciliation, framework });
 }
 
-async function buildPrompt({ phaseId, key, F, rows, includeSpecs, priorRound }) {
+async function buildPrompt({ phaseId, key, F, rows, includeSpecs, priorRound, framework }) {
 	const row = rows.find((r) => r.id === key);
 	const header =
 		key === 'phase'
@@ -204,8 +204,8 @@ async function buildPrompt({ phaseId, key, F, rows, includeSpecs, priorRound }) 
 		await rqContext(phaseId, key),
 		`## Findings to assess\n\n\`\`\`yaml\n${findingsFor(F, key)}\`\`\``,
 		key === 'phase' ? `## Phase-level asks\n\n${F.phase_asks.map((a) => `- ${a}`).join('\n')}` : '',
-		await priorReconciliation(phaseId, priorRound, key),
-		OUTPUT_SPEC
+		await priorReconciliation(phaseId, priorRound, key, framework),
+		priorRound ? withCritiqueOutput(OUTPUT_SPEC) : OUTPUT_SPEC
 	];
 	return sections.filter(Boolean).join('\n\n---\n\n');
 }
@@ -229,29 +229,31 @@ Attribute every claim to the model(s) that made it. Do not introduce new technic
 your own; if all models missed something obvious, list it under a final "Reviewer note".
 `;
 
-async function synthesize({ phaseId, round, keys, synthesizer, maxTokens }) {
+async function synthesize({ phaseId, round, keys, synthesizer, maxTokens, framework }) {
 	const base = path.join(ROOT, `reconciliation/${phaseId}/round-${round}`);
 	const modelDirs = (await fs.readdir(base, { withFileTypes: true })).filter((d) => d.isDirectory() && MODELS[d.name]).map((d) => d.name);
 	const outDir = path.join(base, 'reconciliation');
 	const summary = [];
 	for (const key of keys) {
 		const responses = [];
+		let critique = false;
 		for (const m of modelDirs) {
 			const t = await fs.readFile(path.join(base, m, `${key}.md`), 'utf8').catch(() => null);
+			if (t && /^priorRound: \d+$/m.test(t.match(/^---[\s\S]*?---/)?.[0] ?? '')) critique = true;
 			if (t) responses.push(`## Response from ${MODELS[m].name}\n\n${t.replace(/^---[\s\S]*?---\n/, '')}`);
 		}
 		if (responses.length < 2) {
 			console.log(`  ${key}: ${responses.length} response(s), skipping synthesis`);
 			continue;
 		}
-		const prompt = `# Reconcile the panel's re-assessment of ${key} (${phaseId}, round ${round})\n\n${responses.join('\n\n---\n\n')}\n\n---\n\n${SYNTH_SPEC}`;
+		const prompt = `# Reconcile the panel's re-assessment of ${key} (${phaseId}, round ${round})\n\n${responses.join('\n\n---\n\n')}\n\n---\n\n${critique ? SYNTH_SPEC.replace('\nAttribute every claim', `${critiqueSynthSpec()}\n\nAttribute every claim`) : SYNTH_SPEC}`;
 		console.log(`  Synthesising ${key} from ${responses.length} responses with ${MODELS[synthesizer].name}...`);
 		const ex = await queryModel(synthesizer, { system: 'You are the neutral rapporteur of an engineering review panel. You consolidate, attribute and preserve disagreement; you do not decide.', prompt, maxTokens, temperature: 0.3 });
 		await archiveRaw(path.join(base, 'raw', 'synthesis'), key, ex);
 		await fs.mkdir(outDir, { recursive: true });
 		await fs.writeFile(
 			path.join(outDir, `${key}.md`),
-			`---\nphase: ${phaseId}\nitem: ${key}\nround: ${round}\ntype: reconciliation\nsynthesizer: ${synthesizer}\npanel: [${modelDirs.join(', ')}]\ngenerated: ${new Date().toISOString()}\n---\n\n${ex.text}\n`
+			`---\nphase: ${phaseId}\nitem: ${key}\nround: ${round}\ntype: reconciliation\nsynthesizer: ${synthesizer}\npanel: [${modelDirs.join(', ')}]\n${critique ? `framework: ${framework.sha}\n` : ''}generated: ${new Date().toISOString()}\n---\n\n${ex.text}\n`
 		);
 		summary.push(`- [${key}](reconciliation/${key}.md) — ${responses.length} responses`);
 	}
@@ -271,6 +273,7 @@ async function main() {
 	const F = yaml.load(await read(`reconciliation/${phaseId}/findings.yaml`));
 	if (!F) throw new Error(`No reconciliation/${phaseId}/findings.yaml`);
 	const rows = await bomRows(phaseId);
+	const framework = await loadFramework(ROOT);
 	const keys = (get('items') ?? [...Object.keys(F.items), 'phase'].join(',')).split(',');
 
 	const maxTokens = get('max-tokens') ? Number(get('max-tokens')) : undefined;
@@ -278,7 +281,7 @@ async function main() {
 	if (argv.includes('--synthesize')) {
 		const synthesizer = get('synthesizer', 'claude-opus-4-7');
 		if (!MODELS[synthesizer]) await resolvePanel({ models: synthesizer });
-		await synthesize({ phaseId, round, keys, synthesizer: MODELS[synthesizer] ? synthesizer : synthesizer.replace(/^databricks-/, ''), maxTokens: maxTokens ?? 16000 });
+		await synthesize({ phaseId, round, keys, synthesizer: MODELS[synthesizer] ? synthesizer : synthesizer.replace(/^databricks-/, ''), maxTokens: maxTokens ?? 16000, framework });
 		return;
 	}
 
@@ -290,7 +293,7 @@ async function main() {
 	console.log(`Re-assessment ${phaseId} · round ${round} · panel: ${panel.map((k) => MODELS[k].name).join(', ') || '(dry run)'}${priorRound ? ` · reviewing round ${priorRound}` : ''}`);
 
 	for (const key of keys) {
-		const prompt = await buildPrompt({ phaseId, key, F, rows, includeSpecs: argv.includes('--include-specs'), priorRound });
+		const prompt = await buildPrompt({ phaseId, key, F, rows, includeSpecs: argv.includes('--include-specs'), priorRound, framework });
 		if (dry) {
 			await fs.mkdir(path.join(base, 'prompts'), { recursive: true });
 			await fs.writeFile(path.join(base, 'prompts', `${key}.md`), `<!-- system -->\n${SYSTEM}\n\n<!-- user -->\n${prompt}`);
@@ -309,7 +312,7 @@ async function main() {
 					await fs.mkdir(path.dirname(out), { recursive: true });
 					await fs.writeFile(
 						out,
-						`---\nphase: ${phaseId}\nitem: ${key}\nround: ${round}\ntype: reassessment\nmodelId: ${m}\nmodelName: "${MODELS[m].name}"\nendpoint: ${MODELS[m].id}\nfindings: ${findingsSha}\npriorRound: ${priorRound ?? 'null'}\ngenerated: ${ex.meta.started}\nseconds: ${ex.meta.seconds}\n---\n\n${ex.text}\n`
+						`---\nphase: ${phaseId}\nitem: ${key}\nround: ${round}\ntype: reassessment\nmodelId: ${m}\nmodelName: "${MODELS[m].name}"\nendpoint: ${MODELS[m].id}\nfindings: ${findingsSha}\npriorRound: ${priorRound ?? 'null'}\n${priorRound ? `framework: ${framework.sha}\n` : ''}generated: ${ex.meta.started}\nseconds: ${ex.meta.seconds}\n---\n\n${ex.text}\n`
 					);
 					console.log(`  ${key} · ${MODELS[m].name}: ${ex.text.length} chars in ${ex.meta.seconds.toFixed(0)}s`);
 				} catch (e) {

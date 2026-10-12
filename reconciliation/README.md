@@ -36,10 +36,20 @@ node scripts/run-reassessment.js --phase=phase-0 --dry-run
 node scripts/run-reassessment.js --phase=phase-0 --panel=may --profile=claude-code
 node scripts/run-reassessment.js --phase=phase-0 --synthesize --synthesizer=claude-opus-4-7 --profile=claude-code
 
-# 4. Round 2: newest models join and review round 1's reconciliation
+# 4. Round 2: a panel critiques round 1's reconciliation with the decision frameworks
 node scripts/run-reassessment.js --phase=phase-0 --round=2 --prior-round=1 --panel=latest --profile=claude-code
 node scripts/run-reassessment.js --phase=phase-0 --round=2 --synthesize --synthesizer=<newest claude key> --profile=claude-code
 ```
+
+Critique rounds (`--prior-round=N`) hold the previous reconciliation to
+[`src/content/methodology/decision-frameworks.md`](../src/content/methodology/decision-frameworks.md):
+each model walks the key decisions through its nine-step Composite Scaffold (frame,
+criteria before options, options incl. the null option, QOC matrix, sensitivity vs
+trade-off points, calibrated evidence certainty, falsifiable key assumptions, decision
+with warrant and accepted downside, consequences) and names the weakest link in each
+decision's Decision Quality chain. The synthesis adds a *Decision-quality audit*, and
+every critique-round output records the framework's hash (`framework:` in frontmatter).
+Edit the framework there; `scripts/lib/critique.js` builds the prompt from it.
 
 Re-running skips outputs that exist (resume after a failure); `--force` re-queries.
 `--items=bom-0-4,phase` limits the run; `--include-specs` adds every per-model spec
