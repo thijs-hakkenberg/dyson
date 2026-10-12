@@ -32,6 +32,21 @@ export interface CameraCommand {
 export type LayerId =
 	'sky' | 'fade' | 'orbits' | 'labels' | 'nea' | 'divergence' | 'phase-0' | 'phase-1' | 'phase-2' | 'phase-3a' | 'phase-3b';
 
+/** Keyboard shortcut per layer (also shown in the Layers panel and the shortcut help). */
+export const LAYER_KEYS: Record<LayerId, string> = {
+	sky: 'S',
+	fade: 'P',
+	orbits: 'O',
+	labels: 'T',
+	nea: 'A',
+	divergence: 'D',
+	'phase-0': '1',
+	'phase-1': '2',
+	'phase-2': '3',
+	'phase-3a': '4',
+	'phase-3b': '5'
+};
+
 export const LAYER_LABELS: Record<LayerId, string> = {
 	sky: 'Milky Way',
 	fade: 'Fade completed phases',
@@ -54,6 +69,12 @@ class ExplorerState {
 	selectedId = $state<string | null>(null);
 	paletteOpen = $state(false);
 	hudVisible = $state(true);
+	/** Layers & legend panel expanded */
+	layersOpen = $state(false);
+	/** Workbench simulation sandbox drawer expanded */
+	sandboxOpen = $state(false);
+	/** Bumped to ask the open sandbox to run (tours) */
+	sandboxRunSeq = $state(0);
 	layers = $state<Record<LayerId, boolean>>({
 		sky: true,
 		fade: true,

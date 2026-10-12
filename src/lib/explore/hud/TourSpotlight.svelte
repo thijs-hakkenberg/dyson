@@ -17,8 +17,20 @@
 				if (rect) rect = null;
 				return;
 			}
+			// Clip to the visible part of a scrolling panel column
+			let top = r.top,
+				bottom = r.bottom;
+			for (let p = el!.parentElement; p; p = p.parentElement) {
+				const o = getComputedStyle(p).overflowY;
+				if (o === 'auto' || o === 'scroll') {
+					const pr = p.getBoundingClientRect();
+					top = Math.max(top, pr.top);
+					bottom = Math.min(bottom, pr.bottom);
+					break;
+				}
+			}
 			const pad = 6;
-			const next = { x: r.left - pad, y: r.top - pad, w: r.width + pad * 2, h: r.height + pad * 2 };
+			const next = { x: r.left - pad, y: top - pad, w: r.width + pad * 2, h: Math.max(0, bottom - top) + pad * 2 };
 			if (!rect || Math.abs(rect.x - next.x) + Math.abs(rect.y - next.y) + Math.abs(rect.w - next.w) + Math.abs(rect.h - next.h) > 0.5)
 				rect = next;
 		};

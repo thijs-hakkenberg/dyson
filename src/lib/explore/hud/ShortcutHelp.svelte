@@ -1,5 +1,11 @@
 <script lang="ts">
+	import { LAYER_KEYS, LAYER_LABELS, type LayerId } from '../core/state.svelte';
+
 	let { open = $bindable(false) }: { open?: boolean } = $props();
+	const layerRows: [string, string][] = [
+		['0', 'Open / close the Layers & legend panel'],
+		...(Object.keys(LAYER_KEYS) as LayerId[]).map((id): [string, string] => [LAYER_KEYS[id], LAYER_LABELS[id]])
+	];
 	const GROUPS: [string, [string, string][]][] = [
 		[
 			'Navigate',
@@ -32,7 +38,8 @@
 				['R', 'Risk & validation'],
 				['C', 'Consensus · Deliberation Chamber']
 			]
-		]
+		],
+		['Layers (orrery)', layerRows]
 	];
 </script>
 

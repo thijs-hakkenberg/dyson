@@ -1,17 +1,35 @@
 <script lang="ts">
-	import { explorer, SPEEDS, TODAY_YEAR } from '../core/state.svelte';
+	import { explorer, MAX_YEAR, SPEEDS, TODAY_YEAR } from '../core/state.svelte';
+	import { deepTime, DEEP_MAX_MYR, DEEP_SPEEDS } from '../core/deeptime.svelte';
 	import { TIMELINE, ASSUMED_PHASE0_START, buildAxis, yearToAxis, axisToYear } from '../core/timeline';
 	import { PHASE_COLORS } from '../core/theme';
 	import { formatYear } from '../core/units';
 
 	const axis = buildAxis(TODAY_YEAR);
-	const pct = (y: number) => `${(yearToAxis(y, axis) * 100).toFixed(3)}%`;
-	const width = (a: number, b: number) => `${((yearToAxis(b, axis) - yearToAxis(a, axis)) * 100).toFixed(3)}%`;
+	// The right end of the track continues past the build-out into deep time (linear in Myr)
+	const DEEP = 0.1;
+	const MAIN = 1 - DEEP;
+	const pct = (y: number) => `${(yearToAxis(y, axis) * MAIN * 100).toFixed(3)}%`;
+	const width = (a: number, b: number) => `${((yearToAxis(b, axis) - yearToAxis(a, axis)) * MAIN * 100).toFixed(3)}%`;
+	const deepPct = (myr: number) => `${((MAIN + (myr / DEEP_MAX_MYR) * DEEP) * 100).toFixed(3)}%`;
+	const inDeep = $derived(deepTime.myr > 0);
+	const atEnd = $derived(explorer.year >= MAX_YEAR - 1e-6);
+	const speeds = $derived(atEnd ? DEEP_SPEEDS.map((s) => s.label) : SPEEDS.map((s) => s.label));
 
 	// 3a and 3b run in parallel: give them their own lane
 	const lane = (id: string) => (id === 'phase-3b' ? 1 : 0);
 
-	const ticks = [...new Set(axis.flatMap((s) => [s.from, s.to]).map((y) => Math.round(y)))];
+	// Drop tick labels that would collide (e.g. today and the assumed Phase 0 start) at this track width
+	let trackW = $state(1000);
+	const allTicks = [...new Set(axis.flatMap((s) => [s.from, s.to]).map((y) => Math.round(y)))];
+	const ticks = $derived.by(() => {
+		const out: number[] = [];
+		for (const y of allTicks) {
+			const last = out[out.length - 1];
+			if (last === undefined || (yearToAxis(y, axis) - yearToAxis(last, axis)) * MAIN * trackW > 34) out.push(y);
+		}
+		return out;
+	});
 
 	let track = $state<HTMLDivElement>();
 	let dragging = false;
@@ -20,7 +38,13 @@
 		if (!track) return;
 		const r = track.getBoundingClientRect();
 		const u = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
-		explorer.setYear(axisToYear(u, axis));
+		if (u > MAIN) {
+			explorer.setYear(MAX_YEAR);
+			deepTime.myr = ((u - MAIN) / DEEP) * DEEP_MAX_MYR;
+		} else {
+			deepTime.myr = 0;
+			explorer.setYear(axisToYear(u / MAIN, axis));
+		}
 	}
 	function down(e: PointerEvent) {
 		dragging = true;
@@ -36,16 +60,21 @@
 	}
 	function key(e: KeyboardEvent) {
 		const step = e.shiftKey ? 10 : 1;
-		if (e.key === 'ArrowRight') explorer.setYear(explorer.year + step);
-		else if (e.key === 'ArrowLeft') explorer.setYear(explorer.year - step);
-		else return;
+		if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+		const dir = e.key === 'ArrowRight' ? 1 : -1;
+		// Deep time steps in Myr; stepping back out of it returns to the build-out year
+		if (inDeep || (atEnd && dir > 0)) deepTime.myr = Math.min(DEEP_MAX_MYR, Math.max(0, deepTime.myr + dir * step));
+		else explorer.setYear(explorer.year + dir * step);
 		e.preventDefault();
 	}
 </script>
 
 <section class="timeline panel" aria-label="Construction timeline">
 	<div class="controls">
-		<button type="button" class="hud-btn" onclick={() => explorer.setYear(TODAY_YEAR)} title="Back to today (Home)">⇤ Now</button>
+		<button type="button" class="hud-btn" onclick={() => {
+				deepTime.myr = 0;
+				explorer.setYear(TODAY_YEAR);
+			}} title="Back to today (Home)">⇤ Now</button>
 		<button
 			type="button"
 			class="hud-btn play"
@@ -54,9 +83,9 @@
 			title="Play / pause (Space)">{explorer.playing ? '❚❚' : '▶'}</button
 		>
 		<div class="speeds" role="group" aria-label="Playback speed">
-			{#each SPEEDS as s, i (s.label)}
+			{#each speeds as label, i (i)}
 				<button type="button" class="hud-btn" class:on={explorer.speedIndex === i} onclick={() => (explorer.speedIndex = i)}
-					>{s.label}</button
+					>{label}</button
 				>
 			{/each}
 		</div>
@@ -68,6 +97,7 @@
 	<div
 		class="track"
 		bind:this={track}
+		bind:clientWidth={trackW}
 		role="slider"
 		tabindex="0"
 		aria-label="Construction year"
@@ -96,12 +126,22 @@
 
 		<div class="today" style="left:{pct(TODAY_YEAR)}" title="Today"></div>
 
+		<div
+			class="deep"
+			class:live={inDeep}
+			style="left:{deepPct(0)};width:{DEEP * 100}%"
+			title="Deep time: the Sun's galactic orbit for {DEEP_MAX_MYR} Myr after the build-out, with or without the stellar engine. Planets are held at {Math.round(MAX_YEAR)}."
+		>
+			<span>Deep time →</span>
+			<i>+{DEEP_MAX_MYR} Myr</i>
+		</div>
+
 		{#each ticks as t (t)}
 			<div class="tick" style="left:{pct(t)}"><span>{t}</span></div>
 		{/each}
 
-		<div class="head" style="left:{pct(explorer.year)}">
-			<span>{formatYear(explorer.year)}</span>
+		<div class="head" class:flip={inDeep || atEnd} style="left:{inDeep ? deepPct(deepTime.myr) : pct(explorer.year)}">
+			<span>{inDeep ? `+${deepTime.myr.toFixed(deepTime.myr < 10 ? 1 : 0)} Myr` : formatYear(explorer.year)}</span>
 		</div>
 	</div>
 </section>
@@ -188,6 +228,30 @@
 		font-size: 9.5px;
 		color: var(--hud-faint);
 	}
+	.deep {
+		position: absolute;
+		top: 8px;
+		height: 34px;
+		border-left: 1px dashed var(--hud-line-strong);
+		background: repeating-linear-gradient(90deg, rgba(125, 211, 252, 0.06) 0 2px, transparent 2px 6px);
+		color: var(--hud-dim);
+		font-size: 9.5px;
+		padding: 2px 5px;
+		overflow: hidden;
+		white-space: nowrap;
+	}
+	.deep.live {
+		background: repeating-linear-gradient(90deg, rgba(125, 211, 252, 0.16) 0 2px, transparent 2px 6px);
+		color: var(--hud-accent);
+	}
+	.deep span,
+	.deep i {
+		display: block;
+		font-style: normal;
+	}
+	.deep i {
+		color: var(--hud-faint);
+	}
 	.today {
 		position: absolute;
 		top: 0;
@@ -202,6 +266,13 @@
 		border-left: 1px solid #fff;
 		box-shadow: 0 0 6px var(--hud-accent);
 		pointer-events: none;
+	}
+	.head.flip span {
+		left: auto;
+		right: 4px;
+	}
+	.controls .hud-btn {
+		white-space: nowrap;
 	}
 	.head span {
 		position: absolute;
@@ -220,6 +291,19 @@
 		}
 		.speeds .hud-btn:nth-child(n + 5) {
 			display: none;
+		}
+	}
+	/* Phones: the plan spans centuries, so keep the faster speeds and shrink the buttons */
+	@media (max-width: 700px) {
+		.speeds .hud-btn:nth-child(n + 5) {
+			display: inline-block;
+		}
+		.speeds .hud-btn:nth-child(-n + 2) {
+			display: none;
+		}
+		.controls .hud-btn {
+			font-size: 10px;
+			padding: 3px 6px;
 		}
 	}
 </style>

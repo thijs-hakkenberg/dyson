@@ -5,7 +5,6 @@
 	import { MODEL_COLORS } from '../core/theme';
 
 	const list = $derived(explorer.workbenchId ? sandboxesFor(explorer.workbenchId) : []);
-	let open = $state(false);
 	let activeId = $state<string | null>(null);
 	const sb = $derived(list.find((s) => s.id === activeId) ?? list[0]);
 	let params = $state<Record<string, string>>({});
@@ -22,6 +21,16 @@
 		params = { ...(sb?.defaults ?? {}) };
 		result = null;
 		error = '';
+	});
+
+	// Tours ask for a run once the drawer shows a sandbox
+	let ranSeq = 0;
+	$effect(() => {
+		const seq = explorer.sandboxRunSeq;
+		if (seq > ranSeq && explorer.sandboxOpen && sb && !running) {
+			ranSeq = seq;
+			void run();
+		}
 	});
 
 	async function run() {
@@ -88,12 +97,12 @@
 </script>
 
 {#if list.length}
-	<section class="sbx panel" class:open aria-label="Simulation sandbox">
+	<section class="sbx panel" class:open={explorer.sandboxOpen} aria-label="Simulation sandbox">
 		<header>
-			<button type="button" class="tog eyebrow" onclick={() => (open = !open)} aria-expanded={open}>
-				⚗ Simulation sandbox {open ? '−' : '+'}
+			<button type="button" class="tog eyebrow" onclick={() => (explorer.sandboxOpen = !explorer.sandboxOpen)} aria-expanded={explorer.sandboxOpen}>
+				⚗ Simulation sandbox {explorer.sandboxOpen ? '−' : '+'}
 			</button>
-			{#if open && list.length > 1}
+			{#if explorer.sandboxOpen && list.length > 1}
 				<nav>
 					{#each list as s (s.id)}
 						<button type="button" class="hud-btn" class:on={s.id === sb?.id} onclick={() => (activeId = s.id)}>{s.title}</button>
@@ -101,7 +110,7 @@
 				</nav>
 			{/if}
 		</header>
-		{#if open && sb}
+		{#if explorer.sandboxOpen && sb}
 			<div class="body">
 				<div class="left">
 					<h3>{sb.title}</h3>

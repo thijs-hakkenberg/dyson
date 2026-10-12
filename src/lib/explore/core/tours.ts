@@ -44,7 +44,7 @@ export const TOURS: Tour[] = [
 	{
 		id: 'interface',
 		title: 'Tour the interface',
-		subtitle: 'What every panel and lens shows — 3 min',
+		subtitle: 'What every panel, layer and lens shows — 4 min',
 		ui: true,
 		steps: [
 			{
@@ -72,24 +72,42 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'The timeline',
-				body: 'Scrub through the centuries of construction, or press **Space** to play. Each bar is a phase at its nominal duration; hatching marks the min–max envelope.',
+				body: 'Scrub through the centuries of construction, or press **Space** to play. Each bar is a phase at its nominal duration; hatching marks the min–max envelope. The strip at the right end carries on past the build-out into **deep time**, where the Sun’s galactic orbit, and the sky, keep moving.',
 				duration: 11,
 				spot: '.timeline'
 			},
 			{
 				title: 'Programme telemetry',
-				body: 'What exists at the year you are viewing: **committed spend**, power **output** and **consumption**, production rates and the fleet by type. Ranges span the model proposals.',
-				duration: 11,
+				body: 'What exists at the year you are viewing: **committed spend**, power **output** and **consumption**, how much of the Sun’s output the swarm captures (**saturation**), an illustrative **return on investment**, production rates and the fleet by type. Ranges span the model proposals.',
+				duration: 13,
 				spot: '.telemetry'
 			},
 			{
-				title: 'Layers and legend',
-				body: 'Switch orbits, labels, asteroids and individual phases on and off, and read the legend for what the colours and dashes mean.',
-				duration: 9,
+				title: 'Layers',
+				body: 'The **Layers** panel (key **0**) switches what the orrery draws. Each layer has its own key: **O** orbits, **T** labels, **A** the asteroid population, **D** divergent views, **S** the Milky Way, **P** fades completed phases, and **1–5** each phase.',
+				duration: 13,
+				layersOpen: true,
+				spot: '.layers'
+			},
+			{
+				title: 'Watch a layer change',
+				body: 'Divergent views and the near-Earth asteroids switched off: only the consensus baseline remains. Every alternative the models proposed is one key away.',
+				duration: 10,
+				layersOpen: true,
+				layers: { divergence: false, nea: false },
+				spot: '.layers'
+			},
+			{
+				title: 'Reading the legend',
+				body: 'Below the layers, the **legend** says how sure each thing is: **solid** is observed (real ephemerides, true scale), **translucent** is the projected consensus, **dashed** is a divergent alternative in its model’s colour, **dotted** is a synthetic population.',
+				duration: 13,
+				layersOpen: true,
+				layers: { divergence: true, nea: true },
 				spot: '.layers'
 			},
 			{
 				title: 'Inspect anything',
+				layersOpen: false,
 				body: 'Selecting an item opens the **Inspector**: quantity and cost, operations per unit, where it is placed, the **divergent views** between models, and the research questions it depends on.',
 				duration: 13,
 				year: at('phase-1', 0.6),
@@ -119,7 +137,16 @@ export const TOURS: Tour[] = [
 				spot: '.wbp'
 			},
 			{
+				title: 'Simulation sandboxes',
+				body: 'Some items carry a **sandbox**: the project’s own Monte Carlo models, run on each AI model’s proposal with one curve per model. Here: how fast thin-film collectors lose power at **Gemini’s 0.3 AU**, **Claude’s 0.5 AU** and **GPT’s 1 AU**. Change the inputs and re-run.',
+				duration: 15,
+				workbench: 'bom-1-1',
+				sandbox: true,
+				spot: '.sbx'
+			},
+			{
 				title: 'Lenses',
+				sandbox: false,
 				body: 'The same plan, seen seven ways. **Physical** is the orrery you have been in. The next steps visit each of the others briefly.',
 				duration: 10,
 				workbench: null,
@@ -719,6 +746,14 @@ export const TOURS: Tour[] = [
 				wbSelection: 'unit-scale'
 			},
 			{
+				title: 'Simulated: radiation at each orbit',
+				body: 'Where the collectors orbit changes how long they last. The sandbox runs the project’s **radiation-degradation Monte Carlo** at each model’s proposed orbit: Gemini 0.3 AU, Claude 0.5 AU, GPT 1 AU.',
+				duration: 14,
+				workbench: 'bom-2-1',
+				wbSelection: null,
+				sandbox: true
+			},
+			{
 				title: 'What Phase 2 still needs to know',
 				body: '**32 research questions** sit behind Phase 2 — most still open.',
 				duration: 10,
@@ -811,13 +846,21 @@ export const TOURS: Tour[] = [
 				workbench: 'bom-3a-4',
 				wbView: 'consensus',
 				wbSelection: 'semiconductor-fabrication-strategy'
+			},
+			{
+				title: 'Simulated: how fast it copies itself',
+				body: 'The sandbox runs the **self-replication Monte Carlo** on each model’s cycle time and closure: Claude 18 months at 94%, Gemini 14 at 96%, GPT 12 at 96%. Small differences compound into very different fleets.',
+				duration: 14,
+				workbench: 'bom-3a-4',
+				wbSelection: null,
+				sandbox: true
 			}
 		]
 	},
 	{
 		id: 'phase-3b',
 		title: 'Stellar Engine in depth',
-		subtitle: 'Turning the Sun into a rocket — 2½ min',
+		subtitle: 'Turning the Sun into a rocket, and beyond — 3½ min',
 		steps: [
 			{
 				title: 'Phase 3b · Stellar engine',
@@ -895,6 +938,34 @@ export const TOURS: Tour[] = [
 				workbench: 'bom-3b-1',
 				wbView: 'consensus',
 				wbSelection: 'standoff-distance-heliocentric-radius'
+			},
+			{
+				title: 'Simulated: the standoff trade',
+				body: 'The sandbox sweeps the mirror’s standoff from 0.1 to 2 AU and shows what each choice means for **thrust, temperature and mass**, with the models’ proposals marked.',
+				duration: 14,
+				workbench: 'bom-3b-1',
+				wbSelection: null,
+				sandbox: true
+			},
+			{
+				title: 'The power problem',
+				body: 'Something doesn’t add up. The **helium separation plants** alone draw **1.5–3 PW**; at full build-out the swarm generates ~8 PW, and the Matrioshka tiles use all of theirs. No BOM item supplies the gap (**CI-24**). The swarm also never nears saturation: about **2×10⁻¹¹** of the Sun’s output (**CI-25**).',
+				duration: 15,
+				workbench: null,
+				year: { to: at('phase-3b', 1), over: 4 },
+				select: null,
+				focus: 'sun',
+				camera: { distance: 3, polar: 65 },
+				spot: '.telemetry'
+			},
+			{
+				title: 'Beyond the build-out',
+				body: 'The construction timeline ends, but the engine keeps pushing. Playback now runs on in **deep time**: the sky turns as the Sun follows its orbit around the galaxy, nudged off course by the engine. Toggle the engine in the telemetry’s deep-time panel to compare.',
+				duration: 16,
+				deep: { to: 60, over: 14 },
+				layers: { sky: true },
+				camera: { distance: 3.5, polar: 80 },
+				spot: '.timeline'
 			}
 		]
 	}

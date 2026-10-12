@@ -8,7 +8,8 @@
  * faked: every frame is the same data-driven scene the explorer shows.
  */
 
-import { explorer, type LayerId, type Lens } from './state.svelte';
+import { explorer, MAX_YEAR, type LayerId, type Lens } from './state.svelte';
+import { deepTime } from './deeptime.svelte';
 
 export interface YearMove {
 	to: number;
@@ -33,6 +34,12 @@ export interface TourStep {
 	year?: number | YearMove;
 	camera?: { distance?: number; azimuth?: number; polar?: number };
 	layers?: Partial<Record<LayerId, boolean>>;
+	/** Deep time past the build-out (Myr), set or animated; jumps the year to the end of the plan */
+	deep?: number | { to: number; over: number };
+	/** Open the Workbench simulation sandbox and run it (false closes it) */
+	sandbox?: boolean;
+	/** Expand or collapse the Layers & legend panel */
+	layersOpen?: boolean;
 	/** CSS selector of a HUD element to spotlight during the step */
 	spot?: string;
 }
@@ -56,6 +63,8 @@ class TourPlayer {
 
 	private yearFrom = 0;
 	private savedLayers: Record<LayerId, boolean> | null = null;
+	private deepFrom = 0;
+	private savedLayersOpen: boolean | null = null;
 
 	get step(): TourStep | null {
 		return this.tour?.steps[this.index] ?? null;
@@ -67,6 +76,7 @@ class TourPlayer {
 
 	start(tour: Tour) {
 		this.savedLayers ??= { ...explorer.layers };
+		this.savedLayersOpen ??= explorer.layersOpen;
 		this.tour = tour;
 		this.paused = false;
 		explorer.playing = false;
@@ -88,11 +98,23 @@ class TourPlayer {
 		} else if (s.wbView) explorer.wbView = s.wbView;
 		if (s.wbSelection !== undefined) explorer.wbSelection = s.wbSelection;
 		if (s.layers) for (const [k, v] of Object.entries(s.layers)) explorer.layers[k as LayerId] = v!;
+		if (s.layersOpen !== undefined) explorer.layersOpen = s.layersOpen;
+		// A Workbench step closes the sandbox unless it asks for it
+		if (s.workbench && s.sandbox === undefined) explorer.sandboxOpen = false;
+		if (s.sandbox !== undefined) {
+			explorer.sandboxOpen = s.sandbox;
+			if (s.sandbox) explorer.sandboxRunSeq++;
+		}
 		if (s.select !== undefined) explorer.selectedId = s.select;
 		if (s.focus) explorer.focusId = s.focus;
 
 		this.yearFrom = explorer.year;
 		if (typeof s.year === 'number') explorer.setYear(s.year);
+		this.deepFrom = deepTime.myr;
+		if (s.deep !== undefined) {
+			explorer.setYear(MAX_YEAR);
+			if (typeof s.deep === 'number') deepTime.myr = s.deep;
+		} else if (s.year !== undefined) deepTime.myr = 0;
 		if (s.camera) explorer.commandCamera(s.camera);
 	}
 
@@ -100,6 +122,10 @@ class TourPlayer {
 		const s = this.step;
 		if (!s || this.paused) return;
 		this.elapsed += dt;
+		if (s.deep && typeof s.deep === 'object') {
+			const k = ease(Math.min(1, this.elapsed / s.deep.over));
+			deepTime.myr = this.deepFrom + (s.deep.to - this.deepFrom) * k;
+		}
 		if (s.year && typeof s.year === 'object') {
 			const k = ease(Math.min(1, this.elapsed / s.year.over));
 			explorer.setYear(this.yearFrom + (s.year.to - this.yearFrom) * k);
@@ -136,8 +162,11 @@ class TourPlayer {
 	}
 
 	private restore() {
+		if (this.tour?.steps.some((x) => x.sandbox)) explorer.sandboxOpen = false;
 		if (this.savedLayers) Object.assign(explorer.layers, this.savedLayers);
 		this.savedLayers = null;
+		if (this.savedLayersOpen !== null) explorer.layersOpen = this.savedLayersOpen;
+		this.savedLayersOpen = null;
 	}
 }
 

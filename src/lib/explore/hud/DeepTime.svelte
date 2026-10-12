@@ -1,7 +1,7 @@
 <script lang="ts">
 	/** Deep-time projection: the Sun's galactic orbit with/without the stellar engine. */
 	import { deepTime, DEEP_MAX_MYR } from '../core/deeptime.svelte';
-	import { explorer } from '../core/state.svelte';
+	import { explorer, MAX_YEAR } from '../core/state.svelte';
 	import { KMS_TO_PC_PER_MYR } from '../core/galactic';
 	import { formatSci } from '../core/metrics';
 
@@ -53,7 +53,7 @@
 	</button>
 	{#if open}
 		<label class="slider">
-			<input type="range" min="0" max={DEEP_MAX_MYR} step="0.5" bind:value={deepTime.myr} aria-label="Million years after build-out" />
+			<input type="range" min="0" max={DEEP_MAX_MYR} step="0.5" bind:value={deepTime.myr} oninput={() => explorer.setYear(MAX_YEAR)} aria-label="Million years after build-out" />
 			<span>{t > 0 ? `+${t.toFixed(t < 10 ? 1 : 0)} Myr` : 'now'}</span>
 		</label>
 		<div class="row">

@@ -17,6 +17,7 @@
 	import NebulaPanel from './hud/NebulaPanel.svelte';
 	import RqInspector from './hud/RqInspector.svelte';
 	import { nebula } from './core/nebulastore.svelte';
+	import { deepTime } from './core/deeptime.svelte';
 	import WelcomeDialog from './hud/WelcomeDialog.svelte';
 	import TourOverlay from './hud/TourOverlay.svelte';
 	import GateTunnelScene from './scene/gates/GateTunnelScene.svelte';
@@ -40,7 +41,7 @@
 	import { getTour } from './core/tours';
 	import ScaleBar from './hud/ScaleBar.svelte';
 	import CommandPalette from './hud/CommandPalette.svelte';
-	import { explorer, SPEEDS, TODAY_YEAR } from './core/state.svelte';
+	import { explorer, LAYER_KEYS, SPEEDS, TODAY_YEAR, type LayerId } from './core/state.svelte';
 	import './hud/hud.css';
 	import { provideSunSurface } from './sun/context';
 	import type { SunSurfaceFactory } from './sun/types';
@@ -113,6 +114,8 @@
 		clearTimeout(urlTimer);
 		urlTimer = setTimeout(() => explorer.writeUrl(), 400);
 	});
+
+	const LAYER_BY_KEY = Object.fromEntries(Object.entries(LAYER_KEYS).map(([id, k]) => [k, id as LayerId]));
 
 	function onKey(e: KeyboardEvent) {
 		const typing = (e.target as HTMLElement)?.closest?.('input, textarea, [contenteditable]');
@@ -189,6 +192,9 @@
 				// True-scale hardware in the orrery
 				if (explorer.lens !== 'physical' || explorer.workbenchId || !explorer.toggleHardware()) return;
 				break;
+			case '0':
+				explorer.layersOpen = !explorer.layersOpen;
+				break;
 			case 'h':
 				explorer.hudVisible = !explorer.hudVisible;
 				break;
@@ -202,10 +208,15 @@
 				if (explorer.selectedId) explorer.select(explorer.selectedId);
 				break;
 			case 'Home':
+				deepTime.myr = 0;
 				explorer.setYear(TODAY_YEAR);
 				break;
-			default:
-				return;
+			default: {
+				// Layer toggles (see LAYER_KEYS)
+				const layer = LAYER_BY_KEY[e.key.toUpperCase()];
+				if (!layer || e.metaKey || e.ctrlKey || e.altKey) return;
+				explorer.toggleLayer(layer);
+			}
 		}
 		e.preventDefault();
 	}
@@ -353,6 +364,28 @@
 			width: auto;
 			bottom: auto;
 			max-height: 38vh;
+		}
+	}
+	/* Phones: Telemetry and Layers sit side by side as chips; an opened one becomes a
+	   full-width scrolling sheet below them */
+	@media (max-width: 700px) {
+		.leftcol {
+			top: 150px;
+			left: 8px;
+			right: 8px;
+			flex-direction: row;
+			flex-wrap: wrap;
+			align-content: flex-start;
+			gap: 6px;
+			max-height: 46vh;
+		}
+		.leftcol > :global(.closed) {
+			flex: 1 1 0;
+			min-width: 0;
+		}
+		.leftcol > :global(:not(.closed)) {
+			flex: 1 1 100%;
+			order: 2;
 		}
 	}
 </style>

@@ -409,6 +409,8 @@ export interface Telemetry {
 	sunDisplacement: number;
 	/** Items with power figures that are deliberately not summed */
 	unresolved: { bomId: string; note: string }[];
+	/** Items drawing more than they generate (W, nominal), largest first */
+	loads: { bomId: string; name: string; w: number }[];
 }
 
 /** Deployed units of an item at a year. */
@@ -428,6 +430,7 @@ export function telemetryAt(year: number): Telemetry {
 	const flops = zero();
 	const thrust = zero();
 	const thrustBy: Telemetry['thrustBy'] = [];
+	const loads: Telemetry['loads'] = [];
 	let costTotal = 0;
 
 	// Symmetric difference over ±0.05 yr for the instantaneous build rate
@@ -446,6 +449,8 @@ export function telemetryAt(year: number): Telemetry {
 
 		add(genW, m.genW, n);
 		add(useW, m.useW, n);
+		const netLoad = ((m.useW?.base ?? 0) - (m.genW?.base ?? 0)) * n;
+		if (netLoad > 0) loads.push({ bomId: bom.id, name: bom.name, w: netLoad });
 		add(flops, m.computeFlops, n);
 		add(thrust, m.thrustN, n);
 		if (m.thrustN && n > 0) thrustBy.push({ bomId: bom.id, name: bom.name, n: m.thrustN.base * n });
@@ -490,7 +495,8 @@ export function telemetryAt(year: number): Telemetry {
 		useW,
 		groups: [...groups.values()].filter((g) => g.items.length),
 		throughput: [...tp.values()],
-		unresolved
+		unresolved,
+		loads: loads.sort((a, b) => b.w - a.w)
 	};
 }
 

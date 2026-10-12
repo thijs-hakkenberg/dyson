@@ -1,25 +1,29 @@
 <script lang="ts">
-	import { explorer, LAYER_LABELS, type LayerId } from '../core/state.svelte';
+	import { explorer, LAYER_KEYS, LAYER_LABELS, type LayerId } from '../core/state.svelte';
 	import { CLOUDS, cloudCounts } from '../core/clouds';
 	import { getEntity } from '../core/registry';
 	import { MODEL_COLORS, PHASE_COLORS } from '../core/theme';
 	import { NEA_COUNT } from '../core/nea';
 	import { formatCount } from '../core/units';
 
-	let open = $state(false);
-
 	const layerIds = Object.keys(LAYER_LABELS) as LayerId[];
+
+	// The left column scrolls; bring the panel into view when it expands
+	let el = $state<HTMLElement>();
+	$effect(() => {
+		if (explorer.layersOpen && el) requestAnimationFrame(() => el?.scrollIntoView({ block: 'end', behavior: 'smooth' }));
+	});
 	const coarseYear = $derived(Math.round(explorer.year * 4) / 4);
 	const sampling = $derived(
 		CLOUDS.map((c) => ({ c, n: cloudCounts(c, coarseYear), e: getEntity(c.bomId)! })).filter((x) => x.n.rendered > 0)
 	);
 </script>
 
-<aside class="layers panel" class:closed={!open} aria-label="Layers and legend">
-	<button type="button" class="toggle eyebrow" onclick={() => (open = !open)} aria-expanded={open}>
-		Layers {open ? '−' : '+'}
+<aside bind:this={el} class="layers panel" class:closed={!explorer.layersOpen} aria-label="Layers and legend">
+	<button type="button" class="toggle eyebrow" onclick={() => (explorer.layersOpen = !explorer.layersOpen)} aria-expanded={explorer.layersOpen}>
+		Layers {explorer.layersOpen ? '−' : '+'} <kbd>0</kbd>
 	</button>
-	{#if open}
+	{#if explorer.layersOpen}
 		<ul>
 			{#each layerIds as id (id)}
 				<li>
@@ -27,6 +31,7 @@
 						<input type="checkbox" checked={explorer.layers[id]} onchange={() => explorer.toggleLayer(id)} />
 						<span class="sw" style="--c:{PHASE_COLORS[id] ?? 'var(--hud-accent)'}"></span>
 						{LAYER_LABELS[id]}
+						<kbd>{LAYER_KEYS[id]}</kbd>
 					</label>
 				</li>
 			{/each}
@@ -54,7 +59,7 @@
 				{/each}
 			</ul>
 		{/if}
-		<p class="foot">Bodies and distances true scale. Markers and swarm points are fixed screen size. Matrioshka layers below 1000 K false-coloured. Sun shown Hα-style (false colour); prominences and corona illustrative.</p>
+		<p class="foot">Bodies and distances true scale. Markers and swarm points are fixed screen size. Matrioshka layers below 1000 K false-coloured. Sun shown Hα-style (false colour) close up, white light from afar; prominences and corona illustrative.</p>
 		<p class="foot">
 			Planet textures: <a href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noopener">Solar System Scope</a>,
 			<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. Milky Way:
@@ -93,6 +98,19 @@
 		align-items: center;
 		gap: 6px;
 		cursor: pointer;
+	}
+	kbd {
+		margin-left: auto;
+		font-family: inherit;
+		font-size: 9px;
+		color: var(--hud-faint);
+		border: 1px solid var(--hud-line);
+		padding: 0 4px;
+	}
+	.toggle {
+		display: flex;
+		align-items: center;
+		gap: 4px;
 	}
 	input {
 		accent-color: var(--hud-accent);
