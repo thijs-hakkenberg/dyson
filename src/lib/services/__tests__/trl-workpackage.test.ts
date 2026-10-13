@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import yaml from 'js-yaml';
 import { TRL_ASSESSMENTS } from '$lib/services/trl-assessment';
-import { buildBaseline } from '../../../../scripts/run-trl-assessment.js';
+import { buildBaseline, bullets, lastYaml } from '../../../../scripts/run-trl-assessment.js';
 
 const BRIEF = Object.values(
 	import.meta.glob('/reconciliation/phase-0/trl/brief.yaml', { query: '?raw', import: 'default', eager: true })
@@ -21,6 +21,43 @@ describe('TRL work package', () => {
 			...B.deferred.map((d) => d.legacy)
 		]);
 		for (const a of TRL_ASSESSMENTS) expect(covered, a.id).toContain(a.id);
+	});
+
+	it('every rating rule is a string (an unquoted "x: y" parses as a mapping → [object Object])', () => {
+		const rules = (yaml.load(BRIEF) as { rating_rules: unknown[] }).rating_rules;
+		for (const r of rules) expect(typeof r, JSON.stringify(r)).toBe('string');
+	});
+
+	it('bullets() refuses anything that would render as [object Object]', () => {
+		expect(bullets(['a', 'b'])).toBe('- a\n- b');
+		expect(() => bullets(['a', { 'Relevant environment': 'vacuum' }])).toThrow(/not a string/);
+	});
+
+	it('lastYaml repairs the plain scalars models leave unquoted', () => {
+		const block = (y: string) => 'text\n```yaml\n' + y + '\n```\n';
+		const y = lastYaml(
+			block(
+				[
+					'technologies:',
+					'  - id: T10',
+					'    required: >=90 days unattended (GPT gate, Claude: 30)',
+					'    technology: No-melt refining (Gemini: carbonyl or H2)',
+					'    note: >-',
+					'      folded text stays folded',
+					'    rqs: [rq-0-1]',
+					"    reason: 'already: quoted'"
+				].join('\n')
+			)
+		) as { technologies: Record<string, unknown>[] };
+		expect(y.technologies[0]).toEqual({
+			id: 'T10',
+			required: '>=90 days unattended (GPT gate, Claude: 30)',
+			technology: 'No-melt refining (Gemini: carbonyl or H2)',
+			note: 'folded text stays folded',
+			rqs: ['rq-0-1'],
+			reason: 'already: quoted'
+		});
+		expect(lastYaml(block('a: [unclosed'))).toBeNull();
 	});
 
 	it('defines all nine TRL levels and unique candidate ids', () => {

@@ -47,15 +47,43 @@ const SYSTEM = [
 const read = (p) => fs.readFile(path.join(ROOT, p), 'utf8').catch(() => null);
 const strip = (s) => s?.replace(/^---[\s\S]*?---\n/, '') ?? '';
 
-/** Last fenced yaml block of a response, parsed; null if absent or invalid. */
-function lastYaml(text) {
+/** Markdown bullet list; throws on non-strings so a mis-parsed YAML item never reaches a prompt as [object Object]. */
+export function bullets(items) {
+	return items
+		.map((r) => {
+			if (typeof r !== 'string') throw new Error(`Bullet item is not a string (quote it in the YAML): ${JSON.stringify(r)}`);
+			return `- ${r}`;
+		})
+		.join('\n');
+}
+
+/**
+ * Quote plain scalars that break YAML: a value containing ": " or " #", or starting with
+ * an indicator character (">=90 days" reads as a folded block). Block indicators (">-", "|")
+ * at end of line, and values already quoted or in brackets, are left alone.
+ */
+function quotePlainScalars(src) {
+	return src.replace(/^(\s*(?:- )?[\w-]+:) (.+)$/gm, (line, key, value) => {
+		const v = value.trim();
+		if (/^[|>][-+]?$/.test(v) || /^["'[{&*!]/.test(v)) return line;
+		if (!(/: | #/.test(v) || /^[>|%@`]/.test(v))) return line;
+		return `${key} '${v.replace(/'/g, "''")}'`;
+	});
+}
+
+/** Last fenced yaml block of a response, parsed (with one repair attempt); null if absent or invalid. */
+export function lastYaml(text) {
 	const blocks = [...(text ?? '').matchAll(/```ya?ml\s*\n([\s\S]*?)```/g)];
 	if (!blocks.length) return null;
-	try {
-		return yaml.load(blocks[blocks.length - 1][1]);
-	} catch {
-		return null;
+	const src = blocks[blocks.length - 1][1];
+	for (const attempt of [src, quotePlainScalars(src)]) {
+		try {
+			return yaml.load(attempt);
+		} catch {
+			/* try the repaired text */
+		}
 	}
+	return null;
 }
 
 /** Context for one research question: the question, its conclusion and literature review. */
@@ -90,7 +118,7 @@ function briefHeader(B) {
 		`## Revised architecture\n\n${B.architecture}`,
 		`## Decisions in force\n\n${Object.entries(B.decisions_in_force).map(([k, v]) => `- **${k}:** ${v}`).join('\n')}`,
 		`## Scales\n\n\`\`\`yaml\n${yaml.dump({ trl_scale: B.trl_scale, ad2_scale: B.ad2_scale }, { lineWidth: 120 })}\`\`\``,
-		`## Rating rules\n\n${B.rating_rules.map((r) => `- ${r}`).join('\n')}`
+		`## Rating rules\n\n${bullets(B.rating_rules)}`
 	].join('\n\n---\n\n');
 }
 

@@ -75,11 +75,11 @@ rating_rules:
   - TRL evidence must be physical demonstration or validated analysis with test data. Multi-model consensus, deliberation conclusions and design studies are NOT evidence for TRL ≥3.
   - Cite each heritage claim (programme, test, paper, year). Mark claims you are unsure of as such; do not invent citations.
   - Give a range (min–max) where evidence is ambiguous, and say which exit criterion is unmet for the next level.
-  - Relevant environment for Phase 0 means, as applicable: vacuum, microgravity or the stated partial gravity, NEA thermal cycling at 0.9–1.3 AU, abrasive charged regolith, radiation over the stated duration.
-  - Target TRL follows D-02: TRL 6 at KDP-0B for anything that is project-ending for 0B; TRL 4–5 for internal 0A milestones; state the date the phase needs it.
+  - 'Relevant environment for Phase 0 means, as applicable: vacuum, microgravity or the stated partial gravity, NEA thermal cycling at 0.9–1.3 AU, abrasive charged regolith, radiation over the stated duration.'
+  - 'Target TRL follows D-02: TRL 6 at KDP-0B for anything that is project-ending for 0B; TRL 4–5 for internal 0A milestones; state the date the phase needs it.'
   - Assign AD² for the step from current to target TRL.
-  - Classify risk if the technology fails to reach target: project-ending, architecture-change, schedule-delay, cost-increase.
-  - Tag where it is needed: 0A, 0B, phase-1, or deferred.
+  - 'Classify risk if the technology fails to reach target: project-ending, architecture-change, schedule-delay, cost-increase.'
+  - 'Tag where it is needed: 0A, 0B, phase-1, or deferred.'
 
 # ── Candidate technologies ─────────────────────────────────────────────────
 # The inventory step may add, merge, split or remove candidates. `legacy` maps to the
