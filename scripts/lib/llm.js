@@ -109,8 +109,20 @@ export function registerEndpoint(endpointId, transport) {
 
 // ── Auth ───────────────────────────────────────────────────────────────────
 let cachedToken = null;
+// Test hook: a function returning a fresh token, used instead of env/CLI
+let tokenSource = null;
+export function setTokenSource(fn) {
+	tokenSource = fn;
+	cachedToken = null;
+}
+/** Drop the cached token so the next getToken() asks the CLI again (OAuth tokens last ~1 h). */
+export function refreshToken() {
+	cachedToken = null;
+	return getToken();
+}
 export function getToken({ profile = process.env.DATABRICKS_PROFILE } = {}) {
 	if (cachedToken) return cachedToken;
+	if (tokenSource) return (cachedToken = tokenSource());
 	if (process.env.DATABRICKS_TOKEN && !profile) return (cachedToken = process.env.DATABRICKS_TOKEN);
 	if (!profile && !process.env.DATABRICKS_TOKEN)
 		throw new Error('Set DATABRICKS_TOKEN, or pass --profile=<name> (databricks CLI) / DATABRICKS_PROFILE');
@@ -243,6 +255,7 @@ export async function queryModel(key, { system, prompt, maxTokens = 16000, tempe
 
 	const started = new Date();
 	let res;
+	let refreshed = false;
 	// Capacity errors (429/503) and dropped connections are retried with exponential
 	// backoff; timeouts and other HTTP errors are not.
 	for (let attempt = 0; ; attempt++) {
@@ -259,6 +272,13 @@ export async function queryModel(key, { system, prompt, maxTokens = 16000, tempe
 			});
 			if (res.ok) break;
 			retryable = new Error(`${m.name} ${res.status}: ${(await res.text()).slice(0, 1000)}`);
+			// An expired CLI token: refresh once and retry straight away (a static PAT will just fail again)
+			if (res.status === 401 && !refreshed) {
+				refreshed = true;
+				refreshToken();
+				attempt--;
+				continue;
+			}
 			if (![429, 503].includes(res.status)) throw retryable;
 		} catch (e) {
 			if (e === retryable || e.name === 'AbortError') throw e;

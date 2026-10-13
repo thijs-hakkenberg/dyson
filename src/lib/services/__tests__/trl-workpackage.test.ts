@@ -65,6 +65,24 @@ describe('TRL work package', () => {
 		expect(new Set(B.candidates.map((c) => c.id)).size).toBe(B.candidates.length);
 	});
 
+	it('baseline groups by the assessed technology, not the id each model invents', () => {
+		const r = (model: string, selfId: string, min: number, max: number) => ({
+			id: 'T01',
+			technology: 'MW-class SEP thruster and PPU cluster',
+			model,
+			y: { id: selfId, technology: 'x', current_trl: { min, max }, ad2: 6, risk_if_fail: 'project-ending', target_trl: { kdp_0b: 6 } }
+		});
+		const b = buildBaseline([r('claude', 'solar-electric-propulsion', 2, 4), r('gemini', 't01-mw-sep-cluster', 2, 3), r('gpt', 'T01', 5, 6)]);
+		expect(b.technologies).toHaveLength(1);
+		const t = b.technologies[0] as { id: string; technology: string; ratings: Record<string, { model_id?: string }>; panel: { agreement: string } };
+		expect(t.id).toBe('T01');
+		expect(t.technology).toBe('MW-class SEP thruster and PPU cluster');
+		expect(Object.keys(t.ratings)).toEqual(['claude', 'gemini', 'gpt']);
+		expect(t.ratings.claude.model_id).toBe('solar-electric-propulsion');
+		expect(t.ratings.gpt.model_id).toBeUndefined();
+		expect(t.panel.agreement).toBe('diverge');
+	});
+
 	it('baseline keeps every model and flags divergence without averaging', () => {
 		const t = (model: string, min: number, max: number, risk: string) => ({
 			model,

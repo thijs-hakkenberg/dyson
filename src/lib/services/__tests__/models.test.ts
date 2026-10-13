@@ -4,7 +4,7 @@ import yaml from 'js-yaml';
 import { KNOWN_MODELS, modelFamily, modelName } from '../models';
 import { MODEL_DISPLAY_NAMES, computeDiscussionStats } from '$lib/types/discussion';
 // The scripts' registry must agree with the site's
-import { MODELS as SCRIPT_MODELS, PANELS, nameFor, familyOf, resolvePanel, queryModel, agentFor } from '../../../../scripts/lib/llm.js';
+import { MODELS as SCRIPT_MODELS, PANELS, nameFor, familyOf, resolvePanel, queryModel, agentFor, setTokenSource } from '../../../../scripts/lib/llm.js';
 
 const MODELS = SCRIPT_MODELS as Record<string, { name: string; family: string; transport: string }>;
 const FINDINGS = Object.values(
@@ -112,6 +112,26 @@ describe('model registry', () => {
 			globalThis.fetch = realFetch;
 			if (realToken === undefined) delete process.env.DATABRICKS_TOKEN;
 			else process.env.DATABRICKS_TOKEN = realToken;
+		}
+	});
+
+	it('queryModel refreshes an expired CLI token once on 401', async () => {
+		const realFetch = globalThis.fetch;
+		const tokens = ['old', 'new'];
+		setTokenSource(() => tokens.shift() ?? 'none');
+		const seen: string[] = [];
+		globalThis.fetch = (async (_u: string, o: { headers: Record<string, string> }) => {
+			seen.push(o.headers.Authorization);
+			return seen.length === 1
+				? { ok: false, status: 401, text: async () => 'Invalid Token' }
+				: { ok: true, status: 200, json: async () => ({ choices: [{ message: { content: 'ok' } }] }) };
+		}) as never;
+		try {
+			expect((await queryModel('claude-opus-5-5', { prompt: 'x', backoffMs: 1 })).text).toBe('ok');
+			expect(seen).toEqual(['Bearer old', 'Bearer new']);
+		} finally {
+			globalThis.fetch = realFetch;
+			setTokenSource(null);
 		}
 	});
 

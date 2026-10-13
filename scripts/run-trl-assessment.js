@@ -23,6 +23,7 @@
  *   node scripts/run-trl-assessment.js --phase=phase-0 --step=gates --synthesize       # writes gates-proposal.yaml
  *
  * Options: --only=T01,T04  --round=N  --force  --dry-run  --synthesizer=<key>
+ *          --max-tokens=N (panel default 32000, synthesis 24000; reasoning models think inside it)
  *          --panel / --models / --profile / --list-models / --discover (scripts/lib/llm.js)
  */
 
@@ -273,9 +274,13 @@ async function gatesPrompt(B, phaseId, base) {
 /** Combine the panel's YAML ratings into one baseline that keeps every model's view. */
 export function buildBaseline(ratings) {
 	const byTech = {};
-	for (const { model, y } of ratings) {
-		if (!y?.id) continue;
-		(byTech[y.id] ??= { id: y.id, technology: y.technology, ratings: {} }).ratings[model] = {
+	// Group by the technology the prompt asked about (id); models label their YAML inconsistently
+	// (legacy slugs, "t01-…"), so their own id is kept only as model_id when it differs.
+	for (const { id, technology, model, y } of ratings) {
+		const key = id ?? y?.id;
+		if (!key || !y) continue;
+		(byTech[key] ??= { id: key, technology: technology ?? y.technology, ratings: {} }).ratings[model] = {
+			...(y.id && y.id !== key ? { model_id: y.id } : {}),
 			current_trl: y.current_trl,
 			target_trl: y.target_trl?.kdp_0b ?? null,
 			ad2: y.ad2 ?? null,
@@ -307,7 +312,7 @@ export function buildBaseline(ratings) {
 }
 
 // ── Run ────────────────────────────────────────────────────────────────────
-async function runPanel({ panel, items, base, step, force, dry }) {
+async function runPanel({ panel, items, base, step, force, dry, maxTokens }) {
 	for (const it of items) {
 		if (dry) {
 			await fs.mkdir(path.join(base, step, 'prompts'), { recursive: true });
@@ -320,7 +325,7 @@ async function runPanel({ panel, items, base, step, force, dry }) {
 				const out = path.join(base, step, m, `${it.key}.md`);
 				if (!force && (await fs.stat(out).catch(() => null))) return console.log(`  ${it.key} · ${m}: exists, skipping`);
 				try {
-					const ex = await queryModel(m, { system: SYSTEM, prompt: it.prompt, maxTokens: 32000, temperature: 0.3 });
+					const ex = await queryModel(m, { system: SYSTEM, prompt: it.prompt, maxTokens: maxTokens ?? 32000, temperature: 0.3 });
 					if (!ex.text) throw new Error('empty response');
 					await archiveRaw(path.join(base, step, 'raw', m), it.key, ex);
 					await fs.mkdir(path.dirname(out), { recursive: true });
@@ -351,7 +356,7 @@ const SYNTH = {
 	gates: `Consolidate the panel's gate proposals into one gate set, attributing each criterion and threshold. Where models propose different thresholds or timings, keep the range and list the positions. Finish with one fenced yaml block in the same \`gates:\` shape, adding \`proposed_by: [models]\` and \`disputed: true\` where relevant.`
 };
 
-async function synthesize({ base, step, keys, synthesizer, force }) {
+async function synthesize({ base, step, keys, synthesizer, force, maxTokens }) {
 	const outDir = path.join(base, step, 'synthesis');
 	await fs.mkdir(outDir, { recursive: true });
 	for (const key of keys) {
@@ -367,7 +372,7 @@ async function synthesize({ base, step, keys, synthesizer, force }) {
 		}
 		const prompt = `# Synthesis: ${step} · ${key}\n\n${rs.map((r) => `## ${MODELS[r.model].name}\n\n${r.text}`).join('\n\n---\n\n')}\n\n---\n\n${SYNTH[step]}`;
 		console.log(`  ${key}: synthesising ${rs.length} responses with ${MODELS[synthesizer].name}...`);
-		const ex = await queryModel(synthesizer, { system: 'You are the neutral rapporteur of a technology readiness review panel. Consolidate, attribute and preserve disagreement; do not decide and do not add technical claims of your own.', prompt, maxTokens: 24000, temperature: 0.2 });
+		const ex = await queryModel(synthesizer, { system: 'You are the neutral rapporteur of a technology readiness review panel. Consolidate, attribute and preserve disagreement; do not decide and do not add technical claims of your own.', prompt, maxTokens: maxTokens ?? 24000, temperature: 0.2 });
 		await archiveRaw(path.join(base, step, 'raw', 'synthesis'), key, ex);
 		await fs.writeFile(out, `---\nstep: ${step}\nitem: ${key}\ntype: synthesis\nsynthesizer: ${synthesizer}\npanel: [${rs.map((r) => r.model).join(', ')}]\ngenerated: ${ex.meta.started}\n---\n\n${ex.text}\n`);
 	}
@@ -387,6 +392,7 @@ async function main() {
 	const base = path.join(trlDir, `round-${round}`);
 	const B = yaml.load(await read(`reconciliation/${phaseId}/trl/brief.yaml`));
 	const force = argv.includes('--force');
+	const maxTokens = get('max-tokens') ? Number(get('max-tokens')) : undefined;
 	const dry = argv.includes('--dry-run');
 	const only = get('only')?.split(',');
 
@@ -399,7 +405,7 @@ async function main() {
 		if (!MODELS[synth]) await resolvePanel({ models: synth });
 		const key = synth.replace(/^databricks-/, '');
 		const keys = step === 'assess' ? techs.map((t) => t.id) : [step];
-		await synthesize({ base, step, keys, synthesizer: key, force });
+		await synthesize({ base, step, keys, synthesizer: key, force, maxTokens });
 		if (step === 'inventory') {
 			const y = lastYaml(await fs.readFile(path.join(base, step, 'synthesis', 'inventory.md'), 'utf8'));
 			if (y?.technologies) {
@@ -409,7 +415,7 @@ async function main() {
 		}
 		if (step === 'assess') {
 			const ratings = [];
-			for (const t of techs) for (const r of await responses(base, step, t.id)) ratings.push({ model: r.model, y: r.y });
+			for (const t of techs) for (const r of await responses(base, step, t.id)) ratings.push({ id: t.id, technology: t.technology, model: r.model, y: r.y });
 			const bl = buildBaseline(ratings);
 			await fs.writeFile(path.join(base, 'trl-baseline.yaml'), `# Panel ratings per technology; panel.* summarises without averaging away divergence.\n${yaml.dump(bl, { lineWidth: 120 })}`);
 			console.log(`  → round-${round}/trl-baseline.yaml (${bl.technologies.length} technologies)`);
@@ -432,7 +438,7 @@ async function main() {
 			: step === 'assess'
 				? await Promise.all(techs.map(async (t) => ({ key: t.id, prompt: await assessPrompt(B, phaseId, t) })))
 				: [{ key: 'gates', prompt: await gatesPrompt(B, phaseId, base) }];
-	await runPanel({ panel, items, base, step, force, dry });
+	await runPanel({ panel, items, base, step, force, dry, maxTokens });
 	if (!dry) console.log(`\nNext: node scripts/run-trl-assessment.js --phase=${phaseId} --step=${step} --round=${round} --synthesize`);
 }
 

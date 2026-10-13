@@ -1,4 +1,4 @@
-# Synthesised 2026-10-13T00:02:49.136Z from round 1. Review and edit before --step=assess.
+# Synthesised 2026-10-13T00:02:49.136Z from round 1. Reviewed and accepted by the owner 2026-10-13, unedited.
 technologies:
   - id: T01
     action: split (Claude) / keep (Gemini) / keep with propellant branches (GPT)
