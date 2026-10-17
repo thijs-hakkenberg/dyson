@@ -720,3 +720,7 @@ conclusion:
     - 'statement: Rebaseline dates from test evidence and schedule the target gate after validated mission results.'
   generatedBy: gpt-6-1-sol
   generatedAt: '2026-10-17T22:29:40.248Z'
+alternateSyntheses:
+  - synthesizer: claude-opus-5-5
+    generatedAt: '2026-10-17T22:41:12.107Z'
+    file: conclusion.claude-opus-5-5.md

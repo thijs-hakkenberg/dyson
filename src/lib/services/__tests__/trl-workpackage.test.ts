@@ -57,6 +57,8 @@ describe('TRL work package', () => {
 			rqs: ['rq-0-1'],
 			reason: 'already: quoted'
 		});
+		const q = lastYaml(block('topics:\n  - statement: "Integrated article" is underspecified; see ISO\n    note: "fully quoted"')) as { topics: Record<string, string>[] };
+		expect(q.topics[0]).toEqual({ statement: '"Integrated article" is underspecified; see ISO', note: 'fully quoted' });
 		expect(lastYaml(block('a: [unclosed'))).toBeNull();
 	});
 

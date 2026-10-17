@@ -11,7 +11,12 @@ import yaml from 'js-yaml';
 function quotePlainScalars(src) {
 	return src.replace(/^(\s*(?:- )?[\w-]+:) (.+)$/gm, (line, key, value) => {
 		const v = value.trim();
-		if (/^[|>][-+]?$/.test(v) || /^["'[{&*!]/.test(v)) return line;
+		if (/^[|>][-+]?$/.test(v)) return line;
+		// A quoted value is fine only if the quote closes at the end ('"a" b' is a plain scalar)
+		const q = v[0];
+		if ((q === '"' || q === "'") && v.length > 1 && v.indexOf(q, 1) === v.length - 1) return line;
+		if (/^[[{&*!]/.test(v)) return line;
+		if (q === '"' || q === "'") return `${key} '${v.replace(/'/g, "''")}'`;
 		if (!(/: | #/.test(v) || /^[>|%@`]/.test(v))) return line;
 		return `${key} '${v.replace(/'/g, "''")}'`;
 	});

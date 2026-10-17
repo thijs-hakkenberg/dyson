@@ -744,3 +744,7 @@ conclusion:
     - 'statement: Block authorisation as not ready and impose an explicit hold sunset.'
   generatedBy: gpt-6-1-sol
   generatedAt: '2026-10-17T22:23:48.672Z'
+alternateSyntheses:
+  - synthesizer: claude-opus-5-5
+    generatedAt: '2026-10-17T22:40:36.532Z'
+    file: conclusion.claude-opus-5-5.md
