@@ -285,6 +285,37 @@ export function buildBaseline(ratings) {
 	return { generated: new Date().toISOString(), technologies: Object.values(byTech) };
 }
 
+/**
+ * Apply owner rulings (trl/rulings.yaml) to a baseline. A ruling replaces the panel
+ * headline for one technology; every model's rating stays, and the panel summary it
+ * replaces is kept as panel_before_ruling.
+ */
+export function applyRulings(baseline, rulings = []) {
+	const unmatched = [];
+	for (const r of rulings) {
+		const t = baseline.technologies.find((x) => x.id === r.id);
+		if (!t) {
+			unmatched.push(r.id);
+			continue;
+		}
+		const h = r.headline ?? {};
+		t.panel_before_ruling = structuredClone(t.panel);
+		t.panel = {
+			...t.panel,
+			...(h.current_trl ? { current_trl: { ...h.current_trl, median: (h.current_trl.min + h.current_trl.max) / 2 } } : {}),
+			...(h.conditional_trl != null ? { conditional_trl: h.conditional_trl } : {}),
+			...(h.target_trl != null ? { target_trl: h.target_trl } : {}),
+			...(h.ad2 != null ? { ad2: { min: h.ad2, max: h.ad2 } } : {}),
+			...(h.risk_if_fail ? { risk_if_fail: h.risk_if_fail } : {}),
+			agreement: 'ruled'
+		};
+		const { headline: _h, sub_ratings, ...ruling } = r;
+		t.owner_ruling = ruling;
+		if (sub_ratings) t.sub_ratings = sub_ratings;
+	}
+	return unmatched.length ? { ...baseline, unmatched_rulings: unmatched } : baseline;
+}
+
 // ── Run ────────────────────────────────────────────────────────────────────
 async function runPanel({ panel, items, base, step, force, dry, maxTokens }) {
 	for (const it of items) {
@@ -390,7 +421,9 @@ async function main() {
 		if (step === 'assess') {
 			const ratings = [];
 			for (const t of techs) for (const r of await responses(base, step, t.id)) ratings.push({ id: t.id, technology: t.technology, model: r.model, y: r.y });
-			const bl = buildBaseline(ratings);
+			const rulings = yaml.load((await read(`reconciliation/${phaseId}/trl/rulings.yaml`)) ?? '')?.rulings ?? [];
+			const bl = applyRulings(buildBaseline(ratings), rulings);
+			if (rulings.length) console.log(`  owner rulings applied: ${rulings.map((r) => r.id).join(', ')}${bl.unmatched_rulings ? ` (unmatched: ${bl.unmatched_rulings.join(', ')})` : ''}`);
 			await fs.writeFile(path.join(base, 'trl-baseline.yaml'), `# Panel ratings per technology; panel.* summarises without averaging away divergence.\n${yaml.dump(bl, { lineWidth: 120 })}`);
 			console.log(`  → round-${round}/trl-baseline.yaml (${bl.technologies.length} technologies)`);
 		}

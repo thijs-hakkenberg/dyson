@@ -77,6 +77,18 @@ Notes:
 - `gates-proposal.yaml` exists;
 - both syntheses have been read at the checkpoints.
 
+**Owner rulings.** A checkpoint decision that changes a headline rating goes in
+[`rulings.yaml`](rulings.yaml), not into `trl-baseline.yaml` by hand. `--step=assess --synthesize`
+applies it when it rebuilds the baseline (no model calls if the syntheses exist), keeps every
+model's rating, and stores the summary it replaced as `panel_before_ruling`.
+
+**Checkpoint log (round 1, panel Claude Opus 5.5 · Gemini 3.1 Pro · GPT-6.1 Sol, claude-code workspace)**
+- 2026-10-13 · Inventory: 26 technologies accepted unedited.
+- 2026-10-17 · Assess: 24 of 26 agree within one TRL level. T24 (seals and mechanisms) stays
+  divergent. T26 (deep-space comms and command) went to a framework-mode deliberation (rq-0-64);
+  the owner accepted its decision: rate the integrated authenticated service, headline TRL 3
+  (TRL 4 conditional), AD² 4, risk architecture-change, with non-averaged sub-ratings.
+
 ## Part 2 — Apply: rebuild, don't patch
 
 Do this as one PR after Part 1 is merged. Rules:

@@ -1046,14 +1046,14 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-64',
 		slug: 't26-comms-trl-rating-object',
 		title: 'What should the TRL rating of deep-space communications and command (T26) assess?',
-		status: 'investigating',
+		status: 'answered',
 		priority: 'high',
 		threadId: 'governance-integration',
 		dependsOn: [],
 		blocks: ['rq-0-62'],
 		criticalPath: false,
 		hasLiteratureReview: false,
-		hasConclusion: false,
+		hasConclusion: true,
 		gateDescription: 'Rating object and KDP-0B criterion for T26 (D-02)'
 	}
 ];

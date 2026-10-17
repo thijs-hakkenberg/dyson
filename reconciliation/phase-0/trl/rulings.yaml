@@ -1,0 +1,51 @@
+# Owner rulings on the TRL baseline. Applied by run-trl-assessment.js when it builds
+# round-N/trl-baseline.yaml (--step=assess --synthesize). A ruling sets the headline for one
+# technology; every model's rating and the panel summary it replaces stay in the baseline.
+rulings:
+  - id: T26
+    decided: '2026-10-17'
+    decided_by: owner
+    source: rq-0-64 (src/content/research-questions/phase-0/rq-0-64-t26-comms-trl-rating-object/conclusion.md)
+    assessed_object: >-
+      The architecture-required integrated communications and authenticated command service for 15-29 deep-space
+      assets (store-and-forward through conjunction and solar-exclusion outages, key-lifecycle management), not its
+      best-demonstrated components.
+    reporting: >-
+      Integrated-service headline plus configuration-specific, cited sub-ratings, never averaged into the headline.
+    headline:
+      current_trl: { min: 3, max: 3 }
+      conditional_trl: 4
+      target_trl: 6
+      ad2: 4
+      risk_if_fail: architecture-change
+    basis: >-
+      All three models in rq-0-64 support a provisional TRL 3 headline with TRL 4 requiring integrated-breadboard
+      evidence, and architecture-change as the primary risk class, possibly project-ending if trustworthy command or
+      a licensing path cannot be shown. AD² 4 is GPT-6.1 Sol's rating of the integrated object (Claude rated key
+      management alone at 4; Claude's and Gemini's AD² 3 rated components).
+    still_open:
+      - 'TRL 3 is a working rating: verify its exit criteria against the evidence register (GPT).'
+      - 'Headline rule for composites: cap by the weakest critical sub-rating (Claude) vs integration-specific assessment (GPT).'
+      - 'When the TRL 6 obligation binds: now (Claude), via a funded path before KDP-0B (Gemini), or per the D-02 project-ending test (GPT).'
+      - 'Form of the TRL 6 demonstration: real DSN passes and a deep-space-distance link (Claude) vs relevant environment justified function by function (GPT).'
+    sub_ratings:
+      - element: Unmodified flight-proven deep-space RF equipment and operations
+        trl: 9
+        by: gpt-6-1-sol
+        note: Replacement or changed antennas, amplifiers and thermal installations are assessed separately.
+      - element: Deep-space DTN transport (DINET configuration)
+        trl: 7
+        by: gpt-6-1-sol
+        note: Does not qualify a different protocol version, implementation or security extension.
+      - element: Planned conjunction operations
+        trl: 9
+        by: gpt-6-1-sol
+        note: As an operational practice, where the spacecraft can safely execute preloaded activities.
+      - element: Project-specific authenticated fleet command and recovery integration
+        trl: 3-4
+        by: gpt-6-1-sol
+        note: Deep-space flight evidence of the full key-management lifecycle is absent or uncertain (Claude, GPT).
+      - element: Dedicated service capacity for 15-29 endpoints
+        trl: not established
+        by: gpt-6-1-sol
+        note: DSN multi-mission experience is not evidence of allocated contacts, terminals or recovery capacity.

@@ -2,7 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import yaml from 'js-yaml';
 import { TRL_ASSESSMENTS } from '$lib/services/trl-assessment';
-import { buildBaseline, bullets, lastYaml } from '../../../../scripts/run-trl-assessment.js';
+import { buildBaseline, bullets, lastYaml, applyRulings } from '../../../../scripts/run-trl-assessment.js';
 
 const BRIEF = Object.values(
 	import.meta.glob('/reconciliation/phase-0/trl/brief.yaml', { query: '?raw', import: 'default', eager: true })
@@ -81,6 +81,35 @@ describe('TRL work package', () => {
 		expect(t.ratings.claude.model_id).toBe('solar-electric-propulsion');
 		expect(t.ratings.gpt.model_id).toBeUndefined();
 		expect(t.panel.agreement).toBe('diverge');
+	});
+
+	it('an owner ruling sets the headline but keeps every model rating and the panel summary it replaces', () => {
+		const r = (model: string, min: number, max: number) => ({
+			id: 'T26',
+			technology: 'comms',
+			model,
+			y: { current_trl: { min, max }, ad2: 3, risk_if_fail: 'cost-increase', target_trl: { kdp_0b: 6 } }
+		});
+		const b = buildBaseline([r('claude', 5, 7), r('gpt', 3, 4)]);
+		const ruled = applyRulings(b, [
+			{
+				id: 'T26',
+				decided: '2026-10-17',
+				source: 'rq-0-64',
+				assessed_object: 'integrated service',
+				headline: { current_trl: { min: 3, max: 3 }, conditional_trl: 4, ad2: 4, risk_if_fail: 'architecture-change' },
+				sub_ratings: [{ element: 'RF links', trl: 9, by: 'gpt' }]
+			},
+			{ id: 'T99', decided: '2026-10-17', source: 'x', headline: {} }
+		]);
+		const t = ruled.technologies[0] as Record<string, any>;
+		expect(t.panel).toMatchObject({ current_trl: { min: 3, max: 3 }, conditional_trl: 4, ad2: { min: 4, max: 4 }, risk_if_fail: 'architecture-change', agreement: 'ruled', target_trl: 6 });
+		expect(t.panel_before_ruling.current_trl).toMatchObject({ min: 3, max: 7 });
+		expect(t.panel_before_ruling.agreement).toBe('diverge');
+		expect(Object.keys(t.ratings)).toEqual(['claude', 'gpt']);
+		expect(t.owner_ruling).toMatchObject({ source: 'rq-0-64', assessed_object: 'integrated service' });
+		expect(t.sub_ratings).toHaveLength(1);
+		expect(ruled.unmatched_rulings).toEqual(['T99']);
 	});
 
 	it('baseline keeps every model and flags divergence without averaging', () => {
