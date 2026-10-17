@@ -77,9 +77,9 @@ describe('model registry', () => {
 			return () => i;
 		};
 		try {
-			let calls = script([status(503), new TypeError('fetch failed'), status(429), ok]);
+			let calls = script([status(503), new TypeError('fetch failed'), status(429), status(502), status(504), ok]);
 			expect((await queryModel('claude-opus-5-5', { prompt: 'x', backoffMs: 1 })).text).toBe('ok');
-			expect(calls()).toBe(4);
+			expect(calls()).toBe(6);
 
 			calls = script([status(400), ok]);
 			await expect(queryModel('claude-opus-5-5', { prompt: 'x', backoffMs: 1 })).rejects.toThrow(/400/);

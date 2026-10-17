@@ -256,7 +256,7 @@ export async function queryModel(key, { system, prompt, maxTokens = 16000, tempe
 	const started = new Date();
 	let res;
 	let refreshed = false;
-	// Capacity errors (429/503) and dropped connections are retried with exponential
+	// Capacity and gateway errors (429/502/503/504) and dropped connections are retried with exponential
 	// backoff; timeouts and other HTTP errors are not.
 	for (let attempt = 0; ; attempt++) {
 		const ctl = new AbortController();
@@ -279,7 +279,7 @@ export async function queryModel(key, { system, prompt, maxTokens = 16000, tempe
 				attempt--;
 				continue;
 			}
-			if (![429, 503].includes(res.status)) throw retryable;
+			if (![429, 502, 503, 504].includes(res.status)) throw retryable;
 		} catch (e) {
 			if (e === retryable || e.name === 'AbortError') throw e;
 			// undici hides the reason (headers timeout, reset…) in e.cause

@@ -979,7 +979,12 @@ async function main() {
 					console.warn(`  ! framework changed since the run (${thread.method.framework} → ${m.framework.sha})`);
 			}
 			console.log(`\n  Alternate synthesis with ${MODELS[SYNTHESIZER].name}...`);
-			await generateConclusion(question, thread, m);
+			const c = await generateConclusion(question, thread, m);
+			if (c.summary.startsWith('Conclusion generation failed')) {
+				console.error(`  ! alternate synthesis failed; nothing recorded`);
+				process.exitCode = 1;
+				return;
+			}
 			(thread.alternateSyntheses ??= []).push({ synthesizer: SYNTHESIZER, generatedAt: new Date().toISOString(), file: conclusionFiles(SYNTHESIZER, { alternate: true }).conclusion });
 			await saveDiscussionThread(question, thread);
 			m.primarySynthesizer = thread.conclusion?.generatedBy;
