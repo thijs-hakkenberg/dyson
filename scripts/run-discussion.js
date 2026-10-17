@@ -726,6 +726,12 @@ Format your response in markdown.`;
 	return context;
 }
 
+/** Output file names; an alternate synthesis is written beside the primary one. */
+export function conclusionFiles(synthesizer, { alternate = false } = {}) {
+	const tag = alternate ? `.${synthesizer}` : '';
+	return { conclusion: `conclusion${tag}.md`, divergentViews: `divergent-views${tag}.yaml` };
+}
+
 /**
  * Generate discussion conclusion
  */
@@ -787,7 +793,8 @@ async function generateConclusion(question, thread, method = {}) {
 
 	// Save conclusion
 	const discussionDir = getDiscussionDir(question);
-	const conclusionPath = path.join(discussionDir, 'conclusion.md');
+	const files = conclusionFiles(SYNTHESIZER, { alternate: !!method.alternate });
+	const conclusionPath = path.join(discussionDir, files.conclusion);
 
 	const date = new Date().toISOString().split('T')[0];
 	const frontmatter = `---
@@ -797,7 +804,7 @@ type: "discussion-conclusion"
 generatedBy: "${SYNTHESIZER}"
 generated: "${date}"${method.framework ? `\nframework: "${method.framework.sha}"` : ''}
 roundCount: ${thread.rounds.length}
-terminationReason: "${thread.terminationReason || 'unknown'}"
+terminationReason: "${thread.terminationReason || 'unknown'}"${method.alternate ? '\nrole: "alternate synthesis"' : ''}
 ---
 
 `;
@@ -807,7 +814,7 @@ terminationReason: "${thread.terminationReason || 'unknown'}"
 
 	if (method.framework) {
 		const dv = lastYaml(content);
-		const dvPath = path.join(discussionDir, 'divergent-views.yaml');
+		const dvPath = path.join(discussionDir, files.divergentViews);
 		if (dv?.topics) {
 			await fs.writeFile(
 				dvPath,
@@ -838,7 +845,8 @@ async function writeProvenance(question, method) {
 			priorContext: method.priorContext === 'full' ? 'full' : `${method.priorContext ?? 1000} characters (head)`,
 			config: DEFAULT_CONFIG,
 			responseWords: method.framework ? FRAMEWORK_RESPONSE_WORDS : DEFAULT_CONFIG.maxResponseWords,
-			synthesizer: SYNTHESIZER
+			synthesizer: method.primarySynthesizer ?? SYNTHESIZER,
+			...(method.alternateSynthesizers ? { alternateSynthesizers: method.alternateSynthesizers } : {})
 		},
 		models: DISCUSSION_MODELS.map((k) => ({ key: k, name: MODELS[k].name, endpoint: MODELS[k].id, transport: MODELS[k].transport }))
 	});
@@ -891,6 +899,7 @@ async function main() {
 	const targetRound = args.find(a => a.startsWith('--round='))?.split('=')[1];
 	const autoMode = args.includes('--auto');
 	const forceConclusion = args.includes('--conclude');
+	const resynthesize = args.includes('--resynthesize');
 	const frameworkMode = args.includes('--framework');
 	// --framework: decision-frameworks scaffold + blind voting + full prior rounds + winner hidden
 	const method = frameworkMode
@@ -898,7 +907,7 @@ async function main() {
 		: { hiddenWinner: args.includes('--hidden-winner') };
 
 	if (!questionSlug && !args.includes('--list-models') && !args.includes('--discover')) {
-		console.error('Usage: node scripts/run-discussion.js --question=<slug> [--round=N] [--auto] [--conclude] [--framework] [--hidden-winner] [--panel=feb|may|oct|latest | --models=a,b,c] [--synthesizer=key]');
+		console.error('Usage: node scripts/run-discussion.js --question=<slug> [--round=N] [--auto] [--conclude] [--framework] [--hidden-winner] [--resynthesize] [--panel=feb|may|oct|latest | --models=a,b,c] [--synthesizer=key]');
 		process.exit(1);
 	}
 
@@ -958,6 +967,26 @@ async function main() {
 	} else {
 		console.log(`\n  Resuming discussion (${thread.rounds.length} rounds completed)`);
 
+		if (thread.status === 'concluded' && resynthesize) {
+			// Alternate synthesis: same transcript and method, another synthesizer, separate files
+			const m = { ...method, alternate: true };
+			if (thread.method?.framework) {
+				m.framework = await loadFramework(PROJECT_ROOT);
+				m.blind = true;
+				m.priorContext = 'full';
+				m.hiddenWinner = true;
+				if (m.framework.sha !== thread.method.framework)
+					console.warn(`  ! framework changed since the run (${thread.method.framework} → ${m.framework.sha})`);
+			}
+			console.log(`\n  Alternate synthesis with ${MODELS[SYNTHESIZER].name}...`);
+			await generateConclusion(question, thread, m);
+			(thread.alternateSyntheses ??= []).push({ synthesizer: SYNTHESIZER, generatedAt: new Date().toISOString(), file: conclusionFiles(SYNTHESIZER, { alternate: true }).conclusion });
+			await saveDiscussionThread(question, thread);
+			m.primarySynthesizer = thread.conclusion?.generatedBy;
+			m.alternateSynthesizers = thread.alternateSyntheses.map((x) => x.synthesizer);
+			if (thread.method?.framework) await writeProvenance(question, m);
+			return;
+		}
 		if (thread.status === 'concluded') {
 			console.log('  Discussion already concluded.');
 			if (!forceConclusion) {

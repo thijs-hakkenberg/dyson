@@ -4,7 +4,7 @@ import fs from 'fs/promises';
 import os from 'os';
 import path from 'path';
 import { createHash } from 'crypto';
-import { generateResponsePrompt, generateVotingPrompt, parseVotingResponse, setPanel, conclusionPrompt } from '../../../../scripts/run-discussion.js';
+import { generateResponsePrompt, generateVotingPrompt, parseVotingResponse, setPanel, conclusionPrompt, conclusionFiles } from '../../../../scripts/run-discussion.js';
 import { SCAFFOLD, loadFramework } from '../../../../scripts/lib/critique.js';
 import { buildProvenance } from '../../../../scripts/lib/provenance.js';
 
@@ -106,6 +106,16 @@ describe('framework-mode conclusion', () => {
 		const p = conclusionPrompt(question, voted, {});
 		expect(p).toContain('END-gpt-6-1-sol');
 		expect(p).not.toContain('END-claude-opus-5-5');
+	});
+});
+
+describe('alternate synthesis', () => {
+	it('writes next to the primary synthesis instead of replacing it', () => {
+		expect(conclusionFiles('gpt-6-1-sol')).toEqual({ conclusion: 'conclusion.md', divergentViews: 'divergent-views.yaml' });
+		expect(conclusionFiles('claude-opus-5-5', { alternate: true })).toEqual({
+			conclusion: 'conclusion.claude-opus-5-5.md',
+			divergentViews: 'divergent-views.claude-opus-5-5.yaml'
+		});
 	});
 });
 
