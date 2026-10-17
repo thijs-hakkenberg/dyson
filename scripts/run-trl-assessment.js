@@ -32,6 +32,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
 import { MODELS, archiveRaw, handleInfoFlags, panelArgs, queryModel, resolvePanel } from './lib/llm.js';
+import { lastYaml } from './lib/yaml-block.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -58,34 +59,7 @@ export function bullets(items) {
 		.join('\n');
 }
 
-/**
- * Quote plain scalars that break YAML: a value containing ": " or " #", or starting with
- * an indicator character (">=90 days" reads as a folded block). Block indicators (">-", "|")
- * at end of line, and values already quoted or in brackets, are left alone.
- */
-function quotePlainScalars(src) {
-	return src.replace(/^(\s*(?:- )?[\w-]+:) (.+)$/gm, (line, key, value) => {
-		const v = value.trim();
-		if (/^[|>][-+]?$/.test(v) || /^["'[{&*!]/.test(v)) return line;
-		if (!(/: | #/.test(v) || /^[>|%@`]/.test(v))) return line;
-		return `${key} '${v.replace(/'/g, "''")}'`;
-	});
-}
-
-/** Last fenced yaml block of a response, parsed (with one repair attempt); null if absent or invalid. */
-export function lastYaml(text) {
-	const blocks = [...(text ?? '').matchAll(/```ya?ml\s*\n([\s\S]*?)```/g)];
-	if (!blocks.length) return null;
-	const src = blocks[blocks.length - 1][1];
-	for (const attempt of [src, quotePlainScalars(src)]) {
-		try {
-			return yaml.load(attempt);
-		} catch {
-			/* try the repaired text */
-		}
-	}
-	return null;
-}
+export { lastYaml };
 
 /** Context for one research question: the question, its conclusion and literature review. */
 async function rqContext(phaseId, rqId) {

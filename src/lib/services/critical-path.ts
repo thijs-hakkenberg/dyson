@@ -164,7 +164,7 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 			'How does it all fit together? Covers multi-century governance, cost methodology validation, and the integration challenge of combining all subsystems into a coherent station design.',
 		color: '#6366f1', // indigo
 		icon: '🏛',
-		questionIds: ['rq-0-29', 'rq-0-46', 'rq-0-57', 'rq-0-58', 'rq-0-61', 'rq-0-62', 'rq-0-63'],
+		questionIds: ['rq-0-29', 'rq-0-46', 'rq-0-57', 'rq-0-58', 'rq-0-61', 'rq-0-62', 'rq-0-63', 'rq-0-64'],
 		rationale:
 			'A multi-century, volunteer-driven, global project requires governance structures that do not yet exist. Cost methodology must account for ISRU economics that break traditional space program models.'
 	}
@@ -1041,6 +1041,20 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		hasLiteratureReview: false,
 		hasConclusion: false,
 		gateDescription: 'Gate timing and cost of delay'
+	},
+	{
+		questionId: 'rq-0-64',
+		slug: 't26-comms-trl-rating-object',
+		title: 'What should the TRL rating of deep-space communications and command (T26) assess?',
+		status: 'investigating',
+		priority: 'high',
+		threadId: 'governance-integration',
+		dependsOn: [],
+		blocks: ['rq-0-62'],
+		criticalPath: false,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Rating object and KDP-0B criterion for T26 (D-02)'
 	}
 ];
 
