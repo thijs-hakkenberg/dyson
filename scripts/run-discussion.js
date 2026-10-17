@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @ts-nocheck — Node script; imported by a vitest test for its prompt builders
 
 /**
  * Run LLM Discussion for Research Questions
@@ -37,7 +38,10 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
-import { MODELS, PANELS, archiveRaw, handleInfoFlags, panelArgs, queryModel, resolvePanel } from './lib/llm.js';
+import { MODELS, PANELS, archiveRaw, familyOf, handleInfoFlags, panelArgs, queryModel, resolvePanel } from './lib/llm.js';
+import { SCAFFOLD, loadFramework } from './lib/critique.js';
+import { buildProvenance } from './lib/provenance.js';
+import { lastYaml } from './lib/yaml-block.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -48,6 +52,18 @@ const PROJECT_ROOT = path.resolve(__dirname, '..');
 let DISCUSSION_MODELS = [...PANELS.feb];
 let SYNTHESIZER = 'claude-opus-4-6';
 let RAW_DIR = path.join(PROJECT_ROOT, 'data/raw-exchanges/discussions');
+
+/** Set the panel (used by main() and by tests). */
+export function setPanel(models) {
+	DISCUSSION_MODELS = [...models];
+}
+
+// Framework mode (--framework): the decision-frameworks scaffold, blind voting, full prior
+// rounds and no winner shown, addressing paper 03's threats to validity (anchoring on the
+// winner, head truncation) and recording a provenance manifest per discussion.
+const FRAMEWORK_RESPONSE_WORDS = 3000;
+const DQ_LINKS = ['frame', 'alternatives', 'information', 'values', 'reasoning', 'commitment'];
+const label = (i) => String.fromCharCode(65 + i);
 
 // Default discussion configuration
 const DEFAULT_CONFIG = {
@@ -224,9 +240,12 @@ function countWords(text) {
 }
 
 /**
- * Generate response prompt for a model
+ * Generate response prompt for a model.
+ * method: { hiddenWinner, framework (from loadFramework) | null, priorContext: 'full' | chars }
  */
-function generateResponsePrompt(question, thread, roundNumber, { hiddenWinner = false } = {}) {
+/** @param {any} question @param {any} thread @param {number} roundNumber @param {{ hiddenWinner?: boolean, framework?: any, priorContext?: 'full' | number }} [method] */
+export function generateResponsePrompt(question, thread, roundNumber, { hiddenWinner = false, framework = null, priorContext = 1000 } = {}) {
+	const words = framework ? FRAMEWORK_RESPONSE_WORDS : DEFAULT_CONFIG.maxResponseWords;
 	let context = `# Discussion: ${question.title}
 
 ## Question Background
@@ -237,8 +256,26 @@ ${question.context}
 - Be specific and opinionated about recommended approaches
 - Consider technical feasibility, cost implications, and risk factors
 - Reference existing Project Dyson specifications where relevant
-- Keep your response under ${DEFAULT_CONFIG.maxResponseWords} words
+- Keep your response under ${words} words
 `;
+
+	if (framework) {
+		context += `
+## Decision method (required)
+Treat the question as a decision and structure your response along the Composite Scaffold of the decision-frameworks reference at the end of this prompt, using these headings:
+
+${SCAFFOLD.map((s, i) => `${i + 1}. ${s}`).join('\n')}
+
+- State the criteria and their (swing) weights **before** you list options, and say why each weight fits the range of that criterion.
+- Include the null option (do nothing / keep the status quo) and the options you reject, each with its argument.
+- Give the options × criteria matrix (QOC) as a table.
+- Name sensitivity points and trade-off points explicitly; a trade-off point is a values question, not a fact to settle.
+- Per key claim, state the certainty of the evidence (GRADE) and keep likelihood separate from confidence (IPCC/ICD 203). Cite only sources you are confident exist.
+- For each key assumption, say what evidence would falsify it; where hypotheses compete, rank them by least disconfirmed (ACH).
+- End with the decision as a Y-statement (in the context of …, facing …, we chose …, to achieve …, accepting …), its warrant and qualifier (Toulmin), and the decisions it enables or constrains.
+- In later rounds, name the weakest link in each other response's Decision Quality chain (${DQ_LINKS.join(' · ')}). Disagreements are kept, not averaged away.
+`;
+	}
 
 	// Add prior round context if not first round
 	if (thread && thread.rounds && thread.rounds.length > 0) {
@@ -255,7 +292,10 @@ ${question.context}
 			} else {
 				context += `**${model.name}**:\n`;
 			}
-				context += response.content.substring(0, 1000) + (response.content.length > 1000 ? '...' : '');
+				context +=
+					priorContext === 'full'
+						? response.content
+						: response.content.substring(0, priorContext) + (response.content.length > priorContext ? '...' : '');
 				context += '\n\n';
 			}
 
@@ -268,39 +308,47 @@ ${question.context}
 	context += `\n## Your Task (Round ${roundNumber})
 Provide your response to the research question. Build on insights from prior rounds if applicable.`;
 
+	if (framework) context += `\n\n---\n\n${framework.body}`;
+
 	return context;
 }
 
 /**
- * Generate voting prompt
+ * Generate voting prompt. The JSON template lists the panel that is voting (it used to
+ * hard-code the February models, so other panels' votes matched no response).
+ * blind: responses are labelled A, B, C and model names are withheld.
  */
-function generateVotingPrompt(question, responses, votingModelId) {
+/** @param {any} question @param {any[]} responses @param {string} votingModelId @param {{ framework?: any, blind?: boolean }} [opts] */
+export function generateVotingPrompt(question, responses, votingModelId, { framework = null, blind = false } = {}) {
+	const ids = responses.map((r, i) => (blind ? label(i) : r.modelId));
 	let prompt = `# Vote on Discussion Responses
 
 ## Question: ${question.title}
 
-You are voting on responses from three AI models. For each response:
-- APPROVE: Strong, well-reasoned response that advances the discussion
+You are voting on ${blind ? 'anonymised responses (one of them may be your own)' : 'responses from three AI models'}. For each response:
+`;
+	prompt += framework
+		? `- APPROVE: the decision chain (frame, alternatives, information, values, reasoning, commitment) has no weak link that would change the decision
+- NEUTRAL: sound in part, but at least one link is weak enough that the decision could change
+- REJECT: a link is missing (e.g. options before criteria, no null option, uncalibrated certainty, no falsifiable assumptions) or the response is off-topic
+`
+		: `- APPROVE: Strong, well-reasoned response that advances the discussion
 - NEUTRAL: Adequate response with some merit
 - REJECT: Weak, off-topic, or unhelpful response
-
-## Responses to Evaluate
-
 `;
+	prompt += '\n## Responses to Evaluate\n\n';
 
-	for (const response of responses) {
-		const model = MODELS[response.modelId];
-		prompt += `### ${model.name}\n${response.content}\n\n---\n\n`;
-	}
+	responses.forEach((response, i) => {
+		prompt += `### ${blind ? `Response ${label(i)}` : MODELS[response.modelId].name}\n${response.content}\n\n---\n\n`;
+	});
 
+	const extra = framework ? `, "weakestLink": "${DQ_LINKS.join('|')}"` : '';
 	prompt += `## Your Votes
 
 Respond in JSON format ONLY (no other text):
 {
   "votes": [
-    {"targetId": "claude-opus-4-6", "vote": "APPROVE|NEUTRAL|REJECT", "reasoning": "brief explanation"},
-    {"targetId": "gemini-3-pro", "vote": "APPROVE|NEUTRAL|REJECT", "reasoning": "brief explanation"},
-    {"targetId": "gpt-5-2", "vote": "APPROVE|NEUTRAL|REJECT", "reasoning": "brief explanation"}
+${ids.map((id) => `    {"targetId": "${id}", "vote": "APPROVE|NEUTRAL|REJECT"${extra}, "reasoning": "brief explanation"}`).join(',\n')}
   ],
   "terminationVote": "CONCLUDE|CONTINUE",
   "terminationReasoning": "brief explanation for conclude/continue vote"
@@ -312,10 +360,18 @@ Vote CONTINUE if you believe further rounds would be beneficial.`;
 	return prompt;
 }
 
+/** Map a vote's targetId onto the panel: blind label, exact id, or a same-family model. */
+function resolveTarget(targetId, { blind = false } = {}) {
+	if (blind && /^[A-Z]$/.test(targetId ?? '')) return DISCUSSION_MODELS[targetId.charCodeAt(0) - 65] ?? targetId;
+	if (DISCUSSION_MODELS.includes(targetId)) return targetId;
+	const same = DISCUSSION_MODELS.filter((m) => familyOf(m) === familyOf(targetId ?? ''));
+	return same.length === 1 ? same[0] : targetId;
+}
+
 /**
  * Parse voting response from model
  */
-function parseVotingResponse(content, voterId) {
+export function parseVotingResponse(content, voterId, { blind = false } = {}) {
 	try {
 		// Extract JSON from response (handle markdown code blocks)
 		let jsonStr = content;
@@ -335,8 +391,9 @@ function parseVotingResponse(content, voterId) {
 		return {
 			votes: parsed.votes.map(v => ({
 				voterId,
-				targetId: v.targetId,
+				targetId: resolveTarget(v.targetId, { blind }),
 				vote: v.vote,
+				...(v.weakestLink ? { weakestLink: v.weakestLink } : {}),
 				reasoning: v.reasoning
 			})),
 			terminationVote: {
@@ -472,7 +529,8 @@ function checkTermination(currentRound, previousRounds, config = DEFAULT_CONFIG)
 /**
  * Run a single discussion round
  */
-async function runRound(question, thread, roundNumber, { hiddenWinner = false } = {}) {
+async function runRound(question, thread, roundNumber, method = {}) {
+	const { framework = null, blind = false } = method;
 	console.log(`\n  Round ${roundNumber}:`);
 
 	// Phase 1: Collect responses from all models
@@ -483,9 +541,10 @@ async function runRound(question, thread, roundNumber, { hiddenWinner = false } 
 		const model = MODELS[modelKey];
 		console.log(`      Querying ${model.name}...`);
 
-		const prompt = generateResponsePrompt(question, thread, roundNumber, { hiddenWinner });
+		const prompt = generateResponsePrompt(question, thread, roundNumber, method);
 		const content = await queryDatabricks(modelKey, prompt, {
 			label: `round-${roundNumber}-response`,
+			...(framework ? { maxTokens: 32000 } : {}),
 			systemPrompt: 'You are a space systems engineering expert participating in a multi-stakeholder discussion about Project Dyson specifications.'
 		});
 
@@ -519,15 +578,16 @@ async function runRound(question, thread, roundNumber, { hiddenWinner = false } 
 		const model = MODELS[modelKey];
 		console.log(`      ${model.name} voting...`);
 
-		const votingPrompt = generateVotingPrompt(question, responses, modelKey);
+		const votingPrompt = generateVotingPrompt(question, responses, modelKey, { framework, blind });
 		const voteContent = await queryDatabricks(modelKey, votingPrompt, {
 			label: `round-${roundNumber}-vote`,
 			systemPrompt: 'You are evaluating responses in a structured discussion. Respond only with valid JSON.',
-			maxTokens: 2000
+			// reasoning models think inside the budget; 2,000 can leave no room for the JSON
+			maxTokens: framework ? 16000 : 2000
 		});
 
 		if (voteContent) {
-			const parsed = parseVotingResponse(voteContent, modelKey);
+			const parsed = parseVotingResponse(voteContent, modelKey, { blind });
 			allVotes.push(...parsed.votes);
 			terminationVotes.push(parsed.terminationVote);
 		} else {
@@ -583,11 +643,12 @@ async function runRound(question, thread, roundNumber, { hiddenWinner = false } 
 }
 
 /**
- * Generate discussion conclusion
+ * Conclusion prompt. Default: the winning responses (as published in paper 03).
+ * Framework mode: every response of every round with the votes' weakest links, a
+ * decision record, a decision-quality audit and a divergent-views YAML block.
  */
-async function generateConclusion(question, thread) {
-	console.log('\n  Generating conclusion...');
-
+/** @param {any} question @param {any} thread @param {{ framework?: any }} [method] */
+export function conclusionPrompt(question, thread, { framework = null } = {}) {
 	let context = `# Generate Discussion Conclusion
 
 ## Question: ${question.title}
@@ -604,12 +665,52 @@ This discussion ran for ${thread.rounds.length} round(s).
 
 	for (const round of thread.rounds) {
 		context += `\n**Round ${round.roundNumber}**\n`;
+		if (framework) {
+			for (const r of round.responses) context += `\n#### ${MODELS[r.modelId]?.name ?? r.modelId}\n${r.content}\n`;
+			context += '\nVotes:\n';
+			for (const vr of round.votes ?? [])
+				for (const v of vr.votes ?? [])
+					context += `- ${MODELS[v.voterId]?.name ?? v.voterId} → ${MODELS[v.targetId]?.name ?? v.targetId}: ${v.vote}${v.weakestLink ? ` (weakest link: ${v.weakestLink})` : ''} — ${v.reasoning ?? ''}\n`;
+			continue;
+		}
 		context += `Winner: ${MODELS[round.winnerId].name} (Score: ${round.winnerScore.toFixed(1)})\n`;
 
 		const winningResponse = round.responses.find(r => r.modelId === round.winnerId);
 		if (winningResponse) {
 			context += `Winning response:\n${winningResponse.content}\n`;
 		}
+	}
+
+	if (framework) {
+		context += `\n## Your Task
+
+You are the neutral rapporteur. Attribute every claim to the model(s) that made it; add no technical claims of your own; do not pick a winner where the panel did not converge. Write markdown with these sections:
+
+## Summary
+2-3 paragraphs.
+## Decision record
+If the panel converged: the decision as a Y-statement (in the context of …, facing …, we chose …, to achieve …, accepting …) with its warrant, qualifier and accepted downside. If not: one Y-statement per position, with the models holding it.
+## Decision-quality audit
+Per response and round: the weakest Decision Quality link the votes named, the Composite Scaffold steps that were missing or unsupported, and any divergence that is a trade-off point (a values question) rather than a fact to settle.
+## Key Points
+## Unresolved Questions
+## Recommended Actions
+
+Finish with one fenced \`yaml\` block of the divergent views, in exactly this schema:
+
+\`\`\`yaml
+questionId: "${question.id}"
+topics:
+  - id: <kebab-case>
+    topic: <title>
+    positions:
+      - statement: <position>
+        models: [<model names>]
+        evidence: <their evidence>
+    resolution_status: open | partially-resolved | resolved
+    priority: critical | high | medium | low
+\`\`\``;
+		return context;
 	}
 
 	context += `\n## Your Task
@@ -622,11 +723,20 @@ Synthesize the discussion into a conclusion document with:
 4. **Recommended Actions**: 3-5 specific next steps
 
 Format your response in markdown.`;
+	return context;
+}
+
+/**
+ * Generate discussion conclusion
+ */
+async function generateConclusion(question, thread, method = {}) {
+	console.log('\n  Generating conclusion...');
+	const context = conclusionPrompt(question, thread, method);
 
 	const content = await queryDatabricks(SYNTHESIZER, context, {
 		label: 'conclusion',
 		systemPrompt: 'You are synthesizing a multi-model discussion into actionable conclusions.',
-		maxTokens: 8000
+		maxTokens: method.framework ? 32000 : 8000
 	});
 
 	if (!content) {
@@ -685,7 +795,7 @@ questionId: "${question.id}"
 questionSlug: "${question.slug}"
 type: "discussion-conclusion"
 generatedBy: "${SYNTHESIZER}"
-generated: "${date}"
+generated: "${date}"${method.framework ? `\nframework: "${method.framework.sha}"` : ''}
 roundCount: ${thread.rounds.length}
 terminationReason: "${thread.terminationReason || 'unknown'}"
 ---
@@ -695,7 +805,44 @@ terminationReason: "${thread.terminationReason || 'unknown'}"
 	await fs.writeFile(conclusionPath, frontmatter + content, 'utf-8');
 	console.log(`  Saved conclusion: ${conclusionPath}`);
 
+	if (method.framework) {
+		const dv = lastYaml(content);
+		const dvPath = path.join(discussionDir, 'divergent-views.yaml');
+		if (dv?.topics) {
+			await fs.writeFile(
+				dvPath,
+				`# Extracted by ${SYNTHESIZER} from the conclusion (step 1-2 of paper 03's procedure). Human review against the transcripts (step 3) is pending.\n${yaml.dump(dv, { lineWidth: 120 })}`
+			);
+			console.log(`  Saved divergent views: ${dvPath} (${dv.topics.length} topics)`);
+		} else console.warn('  ! conclusion had no parseable divergent-views yaml');
+	}
+
 	return conclusion;
+}
+
+/** Write provenance.yaml next to the discussion, derived from the raw exchange archive. */
+async function writeProvenance(question, method) {
+	const dir = getDiscussionDir(question);
+	const outputs = [];
+	for (const e of await fs.readdir(dir, { recursive: true }).catch(() => [])) {
+		if (/\.(md|ya?ml)$/.test(e) && !e.endsWith('provenance.yaml')) outputs.push(path.join(dir, e));
+	}
+	const p = await buildProvenance({
+		root: PROJECT_ROOT,
+		rawDir: RAW_DIR,
+		outputs: outputs.sort(),
+		method: {
+			framework: method.framework ? { path: 'src/content/methodology/decision-frameworks.md', sha: method.framework.sha } : null,
+			hiddenWinner: !!method.hiddenWinner,
+			blindVoting: !!method.blind,
+			priorContext: method.priorContext === 'full' ? 'full' : `${method.priorContext ?? 1000} characters (head)`,
+			config: DEFAULT_CONFIG,
+			responseWords: method.framework ? FRAMEWORK_RESPONSE_WORDS : DEFAULT_CONFIG.maxResponseWords,
+			synthesizer: SYNTHESIZER
+		},
+		models: DISCUSSION_MODELS.map((k) => ({ key: k, name: MODELS[k].name, endpoint: MODELS[k].id, transport: MODELS[k].transport }))
+	});
+	await fs.writeFile(path.join(dir, 'provenance.yaml'), yaml.dump(p, { lineWidth: 120, noRefs: true }));
 }
 
 /**
@@ -744,10 +891,14 @@ async function main() {
 	const targetRound = args.find(a => a.startsWith('--round='))?.split('=')[1];
 	const autoMode = args.includes('--auto');
 	const forceConclusion = args.includes('--conclude');
-	const hiddenWinner = args.includes('--hidden-winner');
+	const frameworkMode = args.includes('--framework');
+	// --framework: decision-frameworks scaffold + blind voting + full prior rounds + winner hidden
+	const method = frameworkMode
+		? { framework: await loadFramework(PROJECT_ROOT), blind: true, priorContext: 'full', hiddenWinner: true }
+		: { hiddenWinner: args.includes('--hidden-winner') };
 
 	if (!questionSlug && !args.includes('--list-models') && !args.includes('--discover')) {
-		console.error('Usage: node scripts/run-discussion.js --question=<slug> [--round=N] [--auto] [--conclude] [--panel=feb|may|oct|latest | --models=a,b,c] [--synthesizer=key]');
+		console.error('Usage: node scripts/run-discussion.js --question=<slug> [--round=N] [--auto] [--conclude] [--framework] [--hidden-winner] [--panel=feb|may|oct|latest | --models=a,b,c] [--synthesizer=key]');
 		process.exit(1);
 	}
 
@@ -791,6 +942,7 @@ async function main() {
 			questionTitle: question.title,
 			phaseId: question.sourcePhaseId,
 			config: DEFAULT_CONFIG,
+			...(frameworkMode ? { method: { framework: method.framework.sha, blindVoting: true, priorContext: 'full', hiddenWinner: true } } : {}),
 			status: 'active',
 			startedAt: new Date().toISOString(),
 			rounds: [],
@@ -820,7 +972,7 @@ async function main() {
 		thread.terminationReason = 'forced';
 		thread.status = 'concluded';
 		thread.concludedAt = new Date().toISOString();
-		thread.conclusion = await generateConclusion(question, thread);
+		thread.conclusion = await generateConclusion(question, thread, method);
 		thread.stats = computeStats(thread.rounds);
 		await saveDiscussionThread(question, thread);
 
@@ -835,7 +987,7 @@ async function main() {
 	const endRound = targetRound ? parseInt(targetRound) : (autoMode ? DEFAULT_CONFIG.maxRounds : startRound);
 
 	for (let roundNum = startRound; roundNum <= endRound; roundNum++) {
-		const round = await runRound(question, thread, roundNum, { hiddenWinner });
+		const round = await runRound(question, thread, roundNum, method);
 
 		// Check termination
 		const termCheck = checkTermination(round, thread.rounds);
@@ -850,6 +1002,7 @@ async function main() {
 		// Save progress after each round
 		thread.stats = computeStats(thread.rounds);
 		await saveDiscussionThread(question, thread);
+		if (frameworkMode) await writeProvenance(question, method);
 
 		// Log termination votes
 		const concludeVotes = round.terminationVotes.filter(v => v.vote === 'CONCLUDE').length;
@@ -870,8 +1023,9 @@ async function main() {
 
 	// Generate conclusion if terminated
 	if (thread.status === 'concluded') {
-		thread.conclusion = await generateConclusion(question, thread);
+		thread.conclusion = await generateConclusion(question, thread, method);
 		await saveDiscussionThread(question, thread);
+		if (frameworkMode) await writeProvenance(question, method);
 	}
 
 	// Final summary
@@ -901,4 +1055,6 @@ async function main() {
 	console.log('\n' + '='.repeat(60));
 }
 
-main().catch(console.error);
+if (process.argv[1] && import.meta.url === `file://${process.argv[1]}`) {
+	main().catch(console.error);
+}

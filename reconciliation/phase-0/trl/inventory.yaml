@@ -1,0 +1,397 @@
+# Synthesised 2026-10-13T00:02:49.136Z from round 1. Reviewed and accepted by the owner 2026-10-13, unedited.
+technologies:
+  - id: T01
+    action: split (Claude) / keep (Gemini) / keep with propellant branches (GPT)
+    technology: MW-class SEP thruster and PPU cluster
+    required: >-
+      1.0-2.5 MWe per tug (GPT: define the electrical interface); Isp 2,000-3,000 s; 20,000-40,000 h; Claude: ~100-250
+      kW units, per-thruster life and throughput, iodine reference / argon alternate, xenon excluded on supply; GPT:
+      iodine, argon and xenon assessed as separate branches; 0.9-1.3 AU
+    phase_need: 0B
+    legacy: solar-electric-propulsion
+    rqs:
+      - rq-0-16
+      - rq-0-54
+      - rq-0-53
+      - rq-0-19
+      - rq-0-20
+    reason: All agree on a 0B transport dependency; models differ on whether propellant storage is separate and on xenon.
+    disputed: true
+    note: >-
+      Claude splits storage into T14 and excludes xenon; Gemini keeps feed inside T01; GPT keeps T01 whole and rates the
+      xenon branch.
+  - id: T02
+    action: split (Claude) / keep (Gemini, GPT)
+    technology: MW-scale deployable solar arrays (tug; site per Gemini and GPT)
+    required: >-
+      1-2.5 MWe EOL per tug; Gemini and GPT also include 2.5-8 MW site; 10-15 yr; Claude and GPT: size at the maximum
+      operating distance (GPT: or explicit derating), not a fixed 1.2 AU; Claude: proton fluence, iodine/dust
+      contamination, dynamics under thrust
+    phase_need: 0B
+    legacy: null
+    rqs:
+      - rq-0-21
+      - rq-0-22
+      - rq-0-25
+    reason: Agreed power scale; disagreement on whether site generation is a separate technology.
+    disputed: true
+    note: >-
+      Claude moves site generation to T15; Gemini sizes at 1.2 AU; Claude and GPT say 1.2 AU sizing is inconsistent with
+      1.3 AU operation.
+  - id: T03
+    action: keep
+    technology: MW-class waste-heat rejection (plant and tug)
+    required: >-
+      Plant 1-9 MWth (Gemini/GPT: 300-600 K; Claude: cap at site power plus stated solar-thermal input, temperature set
+      by route); tug 50-800 kWth (Claude: split into PPU loop vs thruster self-radiation); GPT: rate plant and tug
+      separately, specify radiator temperature, coolant, dust and leak isolation
+    phase_need: 0B
+    legacy: null
+    rqs: []
+    reason: All keep; no rq assigned (Claude asks that one be opened).
+    disputed: true
+    note: Claude finds the plant heat requirement internally inconsistent (9 MWth > 8 MW); GPT finds the ranges usable.
+  - id: T04
+    action: split (Claude) / keep (Gemini, GPT)
+    technology: Asteroid excavation (with anchoring per Gemini and GPT)
+    required: >-
+      Claude: fleet average >=1.7-6.3 t/h from rate x count x duty; Gemini and GPT: 0.5-5 t/h per machine at 9-25% duty
+      with anchoring and reaction control; >=5 yr on abrasive charged regolith
+    phase_need: 0B
+    legacy: asteroid-mining-bucket-wheel
+    rqs:
+      - rq-0-6
+      - rq-0-7
+      - rq-0-26
+      - rq-0-39
+      - rq-0-42
+    reason: All treat sustained excavation as 0B-critical.
+    disputed: true
+    note: >-
+      Claude splits anchoring to T16 and finds the low fleet corner 6-23x short; GPT says the throughput fits the
+      architecture.
+  - id: T05
+    action: keep
+    technology: Microgravity beneficiation of native Fe-Ni
+    required: >-
+      Concentration 4-15:1; Claude: restated as 15-55 kt/yr feed with sub-mm liberation, LL/L/H feed envelope, M-type
+      branch noted; Gemini: 2-8 kt/yr concentrate; GPT: 2-8 kt/yr concentrate within one reconciled balance, plus grade,
+      recovery and liberation
+    phase_need: 0B
+    legacy: null
+    rqs:
+      - rq-0-51
+      - rq-0-10
+    reason: Common to all metallurgy routes (Claude, GPT).
+    disputed: true
+    note: The models differ on whether the requirement is stated as feed (Claude) or concentrate (Gemini, GPT).
+  - id: T06
+    action: split (Claude, GPT) / keep combined (Gemini)
+    technology: 'No-melt carbonyl refining with CO recycle (Gemini: carbonyl or H2 reduction combined)'
+    required: >-
+      0.6-2.5 kt/yr product (GPT: allocated share if selected); reagent make-up imported; Claude: high-pressure Fe(CO)5
+      and near-ambient Ni(CO)4, sulfur effects; GPT: CO inventory, pressure containment, selectivity, toxic-gas handling
+    phase_need: 0B
+    legacy: microgravity-metallurgy
+    rqs:
+      - rq-0-56
+      - rq-0-13
+    reason: Claude's no-melt route depends on it.
+    disputed: true
+    note: Claude and GPT split H2 reduction out (T17); Gemini keeps both chemistries in one entry.
+  - id: T07
+    action: keep
+    technology: Partial-gravity melting and slag/metal separation in a rotating module
+    required: >-
+      0.05-0.15 g; 1-10 t batches; Claude and GPT: explicitly paired radius and rpm (the stated ranges span ~0.013-0.36
+      g); Claude: Coriolis and gradient limits, spun/despun transfer, refractory life; Gemini: 5-20 m at 1.5-4 rpm as
+      stated
+    phase_need: 0B
+    legacy: microgravity-metallurgy
+    rqs:
+      - rq-0-11
+      - rq-0-12
+      - rq-0-13
+    reason: Gemini's furnace route depends on it; GPT's route gates on it (Claude's reading).
+    disputed: true
+    note: >-
+      Requirement only: Gemini carries the radius/rpm ranges unchanged; Claude and GPT say they are inconsistent with
+      the g target.
+  - id: T08
+    action: keep
+    technology: Particle containment, escape verification and tailings management
+    required: >-
+      Escape <=1 t/yr interim, ALARP toward 10 kg/yr; 13-47 kt/yr tailings; Claude: in-situ escape measurement and
+      array/radiator contamination control; GPT: abnormal events across excavation, transfer, processing, storage and
+      docking
+    phase_need: 0B
+    legacy: null
+    rqs:
+      - rq-0-41
+      - rq-0-9
+    reason: All keep; Claude and GPT add different scope elements.
+  - id: T09
+    action: keep
+    technology: High-voltage power tethers and site distribution on regolith
+    required: >-
+      1-3 kV, tens to hundreds of kW per circuit; dust, thermal cycling; Claude: reconcile robot power with the site
+      budget, arcing/multipaction, reeling, dust-tolerant connectors; GPT: cable length, return path, coincident loads,
+      fault isolation
+    phase_need: 0B
+    legacy: null
+    rqs:
+      - rq-0-60
+    reason: All keep.
+    disputed: true
+    note: 'Heritage baseline only: Claude cites ISS 160 V; GPT cites TSS-1R several-kV.'
+  - id: T10
+    action: keep
+    technology: Long-duration autonomy for mining, processing and proximity operations
+    required: >-
+      >=90 days unattended (provenance: GPT gate; GPT defines it as no required ground intervention); fault detection
+      and recovery; light-time 1-25 min (Gemini, GPT) or seconds to ~20+ min (Claude); conjunction outages
+    phase_need: 0B
+    legacy: null
+    rqs:
+      - rq-0-42
+      - rq-0-8
+    reason: All keep as a cross-cutting enabler.
+  - id: T11
+    action: split (Claude) / keep (Gemini) / keep with separate subsystem ratings (GPT)
+    technology: Rendezvous scout spacecraft (with sampling per Gemini and GPT)
+    required: >-
+      4-10 scouts of 200-600 kg, 1-3 targets each (GPT: subject to trajectory and reuse validation); Gemini and GPT
+      include subsurface sampling for bulk grade
+    phase_need: 0A
+    legacy: autonomous-asteroid-prospecting
+    rqs:
+      - rq-0-50
+      - rq-0-1
+      - rq-0-2
+      - rq-0-3
+      - rq-0-5
+      - rq-0-39
+    reason: All agree on 0A need and that the bus is more mature than sampling.
+    disputed: true
+    note: Claude moves sampling and assay to T18; GPT keeps it in T11 but rates it separately; Gemini keeps it combined.
+  - id: T12
+    action: keep
+    technology: Autonomous handling, docking and transfer of 150-300 t payloads
+    required: >-
+      Capture and transfer at the site and SEL1; Claude: extend to internal surface/free-flyer and plant/tug transfers;
+      GPT: container vs loose material, inertia, capture velocity, contact loads
+    phase_need: 0B
+    legacy: null
+    rqs:
+      - rq-0-17
+    reason: All keep.
+    disputed: true
+    note: >-
+      Scope boundary: Claude extends T12; GPT adds separate node navigation (T25). Heritage baselines differ (Canadarm2
+      vs ATV).
+  - id: T13
+    action: keep
+    technology: Asteroid water extraction pilot
+    required: >-
+      10-100 t/yr at a C-type target; Claude: separate site from Fe-Ni, purpose to be stated; GPT: conditional, define
+      feed mineralogy, yield, purification
+    phase_need: 0B
+    legacy: isru-water-extraction
+    rqs:
+      - rq-0-27
+      - rq-0-33
+      - rq-0-40
+      - rq-0-55
+    reason: Claude and GPT treat it as conditional and not project-ending; Gemini retains it as a pilot without comment.
+  - id: T14
+    action: split
+    technology: Propellant storage and feed at hundreds of tonnes per tug
+    required: >-
+      Claude: ~145-720 t per tug lifetime; iodine solid storage with sublimation feed ~7-18 kg/h, or argon
+      high-pressure/87 K cryogenic; refuelling transfer
+    phase_need: 0B
+    legacy: solar-electric-propulsion
+    rqs: []
+    reason: 'Claude: storage is affected most by the D-05 propellant choice.'
+    disputed: true
+    note: Proposed by Claude only; Gemini and GPT keep propellant feed inside T01.
+  - id: T15
+    action: split
+    technology: Site power generation and transfer
+    required: 'Claude: 2.5-8 MW for 10-15 yr; decide surface arrays vs free-flying arrays with tethered or beamed transfer'
+    phase_need: 0B
+    legacy: null
+    rqs:
+      - rq-0-21
+      - rq-0-22
+      - rq-0-25
+    reason: 'Claude: the topology decision defines the technology given the night-side storage shortfall.'
+    disputed: true
+    note: Proposed by Claude only; Gemini and GPT keep site generation inside T02.
+  - id: T16
+    action: split
+    technology: Anchoring, hold-down and surface mobility on low-cohesion bodies
+    required: >-
+      Claude: react excavation loads (rq-0-26) for >=5 yr; plant, tether and tailings hold-down; rubble-pile and
+      monolith variants
+    phase_need: 0B
+    legacy: asteroid-mining-bucket-wheel
+    rqs:
+      - rq-0-26
+    reason: 'Claude: a shared, possibly governing function.'
+    disputed: true
+    note: Proposed by Claude only; Gemini and GPT keep anchoring inside T04.
+  - id: T17
+    action: split
+    technology: H2 reduction of the reducible feed fraction with H2 recycle
+    required: >-
+      Allocated share of 0.6-2.5 kt/yr; gas-solid contact without gravity; Claude: H2 recycle via product-water
+      electrolysis at tens to hundreds of t/yr; GPT: reducible-fraction demonstration, pretreatment, water removal, H2
+      make-up and recycle
+    phase_need: 0B
+    legacy: microgravity-metallurgy
+    rqs:
+      - rq-0-56
+      - rq-0-13
+    reason: Claude and GPT agree it differs from carbonyl in chemistry and reagent loop.
+    disputed: true
+    note: Gemini keeps it inside T06; Claude includes electrolysis within it, GPT would defer electrolysis.
+  - id: T18
+    action: split
+    technology: Subsurface sampling and in-situ bulk grade assay
+    required: >-
+      Claude: multiple depths and sites per target (proposal >=1 m, to be justified); bulk grade at stated accuracy for
+      the D-02 target gate
+    phase_need: 0A
+    legacy: autonomous-asteroid-prospecting
+    rqs:
+      - rq-0-50
+      - rq-0-39
+    reason: 'Claude: the target gate depends on it.'
+    disputed: true
+    note: Separate entry from Claude only; GPT rates sampling as a separate subsystem within T11; Gemini keeps it in T11.
+  - id: T19
+    action: add
+    technology: 'Microgravity bulk-solids handling (Claude: and comminution)'
+    required: >-
+      Claude: 15-55 kt/yr feeding, conveying, crushing/milling to sub-mm without gravity flow, >=5 yr wear; GPT:
+      enclosed transfer, metering and buffering at the reconciled balance (2-8 kt/yr concentrate, 13-47 kt/yr tailings),
+      bridging, charging, upset recovery
+    phase_need: 0B
+    legacy: null
+    rqs:
+      - rq-0-6
+      - rq-0-9
+      - rq-0-10
+      - rq-0-41
+      - rq-0-51
+    reason: 'Claude and GPT: material flow between unit operations is not covered elsewhere.'
+    disputed: true
+    note: Not proposed by Gemini; Claude includes comminution, GPT does not.
+  - id: T20
+    action: add
+    technology: 'Distributed energy storage (GPT: and microgrid power management)'
+    required: >-
+      0.5-15 MWh site plus 10-50 kWh per robot; vacuum and thermal cycling; Claude: 9,000-33,000 cycles if
+      surface-sited; GPT: discharge power, recharge profile, outage duration TBD
+    phase_need: 0B
+    legacy: null
+    rqs:
+      - rq-0-21
+      - rq-0-22
+      - rq-0-60
+    reason: Added by all three models; rqs as proposed by GPT, while Claude and Gemini assigned none.
+  - id: T21
+    action: add
+    technology: 'Robotic maintenance, repair and spares logistics (GPT: and site installation and recovery)'
+    required: >-
+      Uncrewed replacement of wear parts across mining, comminution/solids handling, tethers and refractories over 5-15
+      yr; GPT: install modules, handle 2-3.5 t robots, recover jams and failed cables
+    phase_need: 0B
+    legacy: null
+    rqs:
+      - rq-0-42
+      - rq-0-8
+      - rq-0-60
+    reason: 'Claude and GPT: an uncrewed multi-year plant requires physical maintainability.'
+    disputed: true
+    note: Not proposed by Gemini (omission, no stated objection).
+  - id: T22
+    action: add
+    technology: Product consolidation, packaging and qualification
+    required: >-
+      0.6-2.5 kt/yr; Claude: dust-tight tug-compatible form via sintering, pelletising or casting; GPT: Phase 1-accepted
+      product form with specified composition, contamination and properties
+    phase_need: 0B
+    legacy: microgravity-metallurgy
+    rqs:
+      - rq-0-10
+      - rq-0-11
+      - rq-0-13
+      - rq-0-51
+      - rq-0-56
+    reason: 'Claude and GPT: route outputs are not in shippable or usable form.'
+    disputed: true
+    note: >-
+      Not proposed by Gemini; overlaps Gemini's T23 native-metal route entry. Legacy: Claude null, GPT
+      microgravity-metallurgy.
+  - id: T23
+    action: add
+    technology: Native-metal production/consolidation in rotating modules (GPT route)
+    required: 'Gemini: 0.6-2.5 kt/yr product, narrow native-metal consolidation at 0.05-0.15 g'
+    phase_need: 0B
+    legacy: microgravity-metallurgy
+    rqs:
+      - rq-0-11
+      - rq-0-13
+    reason: 'Gemini: the third contested metallurgy route requiring separate rating.'
+    disputed: true
+    note: >-
+      Gemini only; Claude treats this route as a chain (T19-T05-T22, T07 gated); GPT gives no separate entry and says it
+      does not inherit furnace readiness.
+  - id: T24
+    action: add
+    technology: Dust-tolerant long-life mechanisms and seals
+    required: 'Claude: bearings, seals, rotary joints and connectors in abrasive charged regolith and vacuum for >=5 yr'
+    phase_need: 0B
+    legacy: null
+    rqs: []
+    reason: 'Claude: a common failure mode across T04, T07, T09 and T19, best rated once.'
+    disputed: true
+    note: Proposed by Claude only (omission by Gemini and GPT).
+  - id: T25
+    action: add
+    technology: Target-local and SEL1 cargo-node navigation and control
+    required: >-
+      GPT: repeated arrivals and departures of tugs with 150-300 t payloads; total mass, traffic rate, orbit and node
+      structure TBD; collision avoidance, stationkeeping, contact dynamics
+    phase_need: 0B
+    legacy: null
+    rqs:
+      - rq-0-17
+      - rq-0-19
+      - rq-0-20
+    reason: 'GPT: node dynamics extend beyond the docking mechanism.'
+    disputed: true
+    note: GPT only; Claude covers related internal transfers by extending T12; Gemini silent.
+  - id: T26
+    action: add
+    technology: Deep-space communications and resilient command service
+    required: >-
+      GPT: serve 4-10 scouts, 10-18 tugs and the site; 1-25 min light-time, conjunction outages, authentication, outage
+      recovery; data rates TBD
+    phase_need: 0A
+    legacy: null
+    rqs:
+      - rq-0-1
+      - rq-0-8
+      - rq-0-42
+    reason: 'GPT: flight link heritage must become a demonstrated fleet service.'
+    disputed: true
+    note: GPT adds; Claude explicitly excludes it as a DSN/optical capacity issue, not a technology gap; Gemini silent.
+deferred_ok: null
+deferred_disputed: true
+deferred_notes: >-
+  Claude and GPT say false, Gemini says true. All agree the cryocooler, sunshield, MLI and Si deferrals are correct;
+  Claude adds an argon-87 K condition on the cryo items. Claude and GPT both find the 0B electrolysis tag inconsistent:
+  Claude would fold electrolysis into T17 as conditional 0B, GPT would re-tag it as deferred.
