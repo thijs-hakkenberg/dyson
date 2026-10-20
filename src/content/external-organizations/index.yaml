@@ -219,6 +219,75 @@ organizations:
     lastContact: null
     notes: "JWST sunshield deployment heritage is directly applicable to depot-scale thermal protection"
 
+  - id: "org-012"
+    slug: "gao"
+    name: "U.S. Government Accountability Office"
+    shortName: "GAO"
+    category: "oversight-regulatory"
+    website: "https://www.gao.gov"
+    description: "Author of the Technology Readiness Assessment Guide and the Cost Estimating and Assessment Guide; annual assessments of NASA major projects relate technology maturity at PDR to cost and schedule growth."
+    relevantDomains:
+      - "technology-readiness-assessment"
+      - "cost-estimating"
+      - "program-oversight"
+    contacts:
+      - name: "Technology Readiness Assessment and Cost Guide teams"
+        role: "Methodology Authors"
+        notes: "Named contact to identify"
+    lastContact: null
+    notes: "Contact to identify through the TRA and cost-guide author teams. Feeds the gate rules in rq-0-76 and rq-0-82."
+
+  - id: "org-013"
+    slug: "crirsco"
+    name: "Committee for Mineral Reserves International Reporting Standards"
+    shortName: "CRIRSCO"
+    category: "standards-body"
+    website: "https://www.crirsco.com"
+    description: "Maintains the international template behind JORC, NI 43-101 and related codes for reporting mineral resources by confidence category."
+    relevantDomains:
+      - "resource-estimation"
+      - "sampling-standards"
+    contacts:
+      - name: "Secretariat"
+        role: "Reporting Standards"
+        notes: "Can refer to a competent person for resource estimation"
+    lastContact: null
+    notes: "Analogy for an asteroid target gate: what sampling evidence justifies committing capital (rq-0-80)."
+
+  - id: "org-014"
+    slug: "luxembourg-space-agency"
+    name: "Luxembourg Space Agency"
+    shortName: "LSA"
+    category: "oversight-regulatory"
+    website: "https://space-agency.public.lu"
+    description: "Agency of the first European state with a law on the exploration and use of space resources, including mission authorisation."
+    relevantDomains:
+      - "space-resources-law"
+      - "licensing"
+    contacts:
+      - name: "Space Resources Authorisation"
+        role: "Licensing"
+        notes: "Mission authorisation under the 2017 space resources law"
+    lastContact: null
+    notes: "Realistic authorisation review cycles and remediable deficiencies (rq-0-83, rq-0-41)."
+
+  - id: "org-015"
+    slug: "iceaa"
+    name: "International Cost Estimating and Analysis Association"
+    shortName: "ICEAA"
+    category: "standards-body"
+    website: "https://www.iceaaonline.com"
+    description: "Professional body for cost estimating and analysis; maintains a body of knowledge used across government and industry."
+    relevantDomains:
+      - "cost-estimating"
+      - "risk-analysis"
+    contacts:
+      - name: "Body of Knowledge Committee"
+        role: "Cost-Estimating Practice"
+        notes: "Named contact to identify"
+    lastContact: null
+    notes: "Cost-confidence statistics for go/no-go comparisons against a market price (rq-0-82)."
+
 questions:
   # NASA Questions
   - id: "oq-1-1"
@@ -499,3 +568,208 @@ questions:
       - "swarm"
       - "coordination"
       - "algorithms"
+
+  # Gate-ruling evidence questions (rq-0-76 … rq-0-83), 2026-10-20
+  - id: "oq-1-5"
+    organizationId: "org-001"
+    question: "In NASA technology readiness assessments, how is the TRL of a composite technology set (capped by its weakest critical element, or assessed on the integration), and what scale or fidelity must a test article have to count as a TRL 6 representative model?"
+    context: "Project Dyson's gate rules need TRL 6 with no waiver for project-ending technologies at a one-way gate. Our model panel split on composite ratings and on whether a fixed scale-extrapolation limit should apply. We want to follow NASA practice where it is explicit."
+    relatedRQs:
+      - "rq-0-76"
+      - "rq-0-72"
+      - "rq-0-71"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "trl"
+      - "technology-readiness-assessment"
+
+  - id: "oq-1-6"
+    organizationId: "org-001"
+    question: "Which NASA vacuum facilities can test high-power electric propulsion at representative background pressure, and what flow and power limits apply per propellant (xenon, krypton, argon, iodine)?"
+    context: "A MW-class SEP cluster must reach TRL 6 before Project Dyson's KDP-0B. Whether ground modules plus a cluster model can do this, or a flight subset is needed, turns on facility pumping limits."
+    relatedRQs:
+      - "rq-0-79"
+      - "rq-0-75"
+      - "rq-0-54"
+    priority: "critical"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "electric-propulsion"
+      - "test-facilities"
+
+  - id: "oq-2-3"
+    organizationId: "org-002"
+    question: "What cluster interactions (plume overlap, thermal, electromagnetic) have been observed when running several electric thrusters together, and which appeared only at flight scale?"
+    context: "Project Dyson is choosing between a ground-only and a flight-subset path to TRL 6 for a MW-class EP cluster. We need to know which effects a 2-4 module test would capture."
+    relatedRQs:
+      - "rq-0-79"
+      - "rq-0-75"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "electric-propulsion"
+      - "clusters"
+
+  - id: "oq-3-3"
+    organizationId: "org-003"
+    question: "Under ECSS-E-HB-11A and ISO 16290, how are technology-demonstration payloads treated at PDR, and does TRL 8 require prior spaceflight or only flight qualification?"
+    context: "Project Dyson's scouts and pathfinder will carry technologies as experiments. Our model panel disagreed on readiness floors for flown experiments and on the meaning of TRL 8 before launch."
+    relatedRQs:
+      - "rq-0-76"
+      - "rq-0-73"
+      - "rq-0-74"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "trl"
+      - "ecss"
+
+  - id: "oq-4-2"
+    organizationId: "org-004"
+    question: "What are the practical limits on ground-testing high-power Hall thruster clusters today, and what would a 2-4 module flight demonstration cost in hardware and host power?"
+    context: "Project Dyson needs a credible path to TRL 6 for a MW-class EP cluster. Cost and feasibility of a small flight anchor against a ground-only path is the open question."
+    relatedRQs:
+      - "rq-0-79"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "hall-thrusters"
+      - "clusters"
+
+  - id: "oq-5-2"
+    organizationId: "org-005"
+    question: "From AEPS and higher-power Hall work, how well did single-thruster ground tests predict flight performance and life, and what facility effects had to be corrected?"
+    context: "Project Dyson is setting a rule for how far TRL 6 tests may be extrapolated, and choosing a test path for a MW-class EP cluster."
+    relatedRQs:
+      - "rq-0-79"
+      - "rq-0-78"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "hall-thrusters"
+      - "scale-up"
+
+  - id: "oq-10-2"
+    organizationId: "org-010"
+    question: "How representative are the Ryugu samples of the asteroid's bulk composition, and what sampling would JAXA consider necessary to bound a rubble-pile body's bulk grade?"
+    context: "Project Dyson's target gate commits a production phase to one asteroid. We are defining what sampling evidence is enough, using Hayabusa2 as the main precedent."
+    relatedRQs:
+      - "rq-0-80"
+      - "rq-0-50"
+    priority: "critical"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "sample-return"
+      - "resource-estimation"
+
+  - id: "oq-12-1"
+    organizationId: "org-012"
+    question: "What does GAO's evidence show about technology maturity at PDR and later cost and schedule growth, and how does the TRA Guide treat composite technologies and scale-limited test articles?"
+    context: "Project Dyson's gates require TRL 6 at a one-way decision. We want the effect size behind that rule and GAO's guidance where our model panel disagreed."
+    relatedRQs:
+      - "rq-0-76"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "trl"
+      - "program-oversight"
+
+  - id: "oq-12-2"
+    organizationId: "org-012"
+    question: "When a public programme compares its own cost estimate with a market alternative at a go/no-go decision, which confidence level should be used, and how have premiums for strategic capability been authorised and capped?"
+    context: "Project Dyson's economics gate compares Phase 0B cost against Earth supply. Any premium above Earth supply needs a separate owner authorisation; we are deciding the cost statistic and when a premium is fixed."
+    relatedRQs:
+      - "rq-0-82"
+      - "rq-0-67"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "cost-estimating"
+      - "economics-gate"
+
+  - id: "oq-13-1"
+    organizationId: "org-013"
+    question: "By analogy with the CRIRSCO confidence categories, what sampling density and assay quality would a competent person need before calling a body's resource 'indicated', and could the framework apply where only a few samples are possible?"
+    context: "Project Dyson's target gate needs a data threshold for an asteroid's bulk grade, not a TRL label. Terrestrial resource reporting is the most developed practice for committing capital on sampled evidence."
+    relatedRQs:
+      - "rq-0-80"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "resource-estimation"
+      - "sampling-standards"
+
+  - id: "oq-14-1"
+    organizationId: "org-014"
+    question: "How long does a space-resources mission authorisation take to review, how are deficiencies handled, and what would make a reapplication viable after a refusal?"
+    context: "Project Dyson's licence gate allows one bounded reapplication after a remediable failure. We are setting the recovery window and need realistic review cycles."
+    relatedRQs:
+      - "rq-0-83"
+      - "rq-0-70"
+      - "rq-0-41"
+    priority: "high"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "licensing"
+      - "space-resources-law"
+
+  - id: "oq-15-1"
+    organizationId: "org-015"
+    question: "Is comparing a project's P70 cost with a market price's P50 sound practice, and what estimate-class accuracy should a go/no-go economics gate require?"
+    context: "Project Dyson's economics gate compares Phase 0B delivered cost with Earth supply. Our model panel proposed P70 against P50 with a ±30% readiness band; another model argued for equivalent expected costs."
+    relatedRQs:
+      - "rq-0-82"
+    priority: "medium"
+    status: "draft"
+    dateCreated: "2026-10-20"
+    dateSent: null
+    response: null
+    responseDate: null
+    tags:
+      - "cost-estimating"
+      - "risk-analysis"

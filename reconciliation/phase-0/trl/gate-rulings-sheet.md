@@ -8,7 +8,7 @@ Positions are attributed by model. This sheet does not recommend any of them.*
 **How to use.** Part 1 lists the points where the panel converged: confirm or amend each one.
 Part 2 lists the open choices: tick one option or write your own. Each item carries the
 question that owns it. Where neither synthesis showed convergence, the options are positions, not
-a consensus. Rulings are recorded in [`rulings.yaml`](rulings.yaml) and in each question's status.
+a consensus. Rulings are recorded in [`gate-rulings.yaml`](gate-rulings.yaml) and in each question's status.
 After that, `gates-proposal.yaml` is final and WP-A Part 2 can start.
 
 Panel: **C** Claude Opus 5.5 · **G** Gemini 3.1 Pro · **P** GPT-6.1 Sol
@@ -17,22 +17,40 @@ Panel: **C** Claude Opus 5.5 · **G** Gemini 3.1 Pro · **P** GPT-6.1 Sol
 
 ## Part 1 — Converged: confirm or amend
 
+**Owner: all eight confirmed 2026-10-20**, recorded in [`gate-rulings.yaml`](gate-rulings.yaml) (G-1.1 … G-1.8).
+
 These count as converged only where both syntheses agree and the round-1 responses bear it out.
 
 | # | Ruling | From | ☐ |
 |---|---|---|---|
-| 1.1 | **"Within 3×"** in the demand gate is a *quantity* ratio (capacity vs signed demand), not a timing tolerance. | rq-0-68 | ☐ confirm ☐ amend |
-| 1.2 | **"Signed" demand** means specified, financially backed commitments, not endorsements or planning allowances. Backing details are open (2.7). | rq-0-68 | ☐ confirm ☐ amend |
-| 1.3 | **Licence-gate failure:** at most one bounded redesign and reapplication for a remediable failure. Requirements are unchanged, nothing is authorised for production meanwhile, and the 0A-only fallback stays. | rq-0-70 | ☐ confirm ☐ amend |
-| 1.4 | **D-02 for flight projects:** TRL 4–5 can release reversible 0A funding tranches. A scout or pathfinder PDR is a separate gate needing TRL 6 for flight-critical technology. | rq-0-74 | ☐ confirm ☐ amend |
-| 1.5 | **Scout PDR:** T11 (scouts) and T18 (sampling and assay) at TRL 6. | rq-0-73 | ☐ confirm ☐ amend |
-| 1.6 | **Sunset, direction:** M180 acts automatically, not as a prompt for review. *How* it acts is open (2.9). | rq-0-69 | ☐ confirm ☐ amend |
-| 1.7 | **Economics premium:** any cost above Earth supply needs a separate, explicit owner authorisation. D-01's purpose does not authorise one by itself. | rq-0-67 | ☐ confirm ☐ amend |
-| 1.8 | **KDP-0B secondary technologies:** no blanket duplicate TRL 6 demonstration. Applicable 0A evidence is reused. | rq-0-66 | ☐ confirm ☐ amend |
+| 1.1 | **"Within 3×"** in the demand gate is a *quantity* ratio (capacity vs signed demand), not a timing tolerance. | rq-0-68 | ☑ **confirmed 2026-10-20** |
+| 1.2 | **"Signed" demand** means specified, financially backed commitments, not endorsements or planning allowances. Backing details are open (2.7). | rq-0-68 | ☑ **confirmed 2026-10-20** |
+| 1.3 | **Licence-gate failure:** at most one bounded redesign and reapplication for a remediable failure. Requirements are unchanged, nothing is authorised for production meanwhile, and the 0A-only fallback stays. | rq-0-70 | ☑ **confirmed 2026-10-20** |
+| 1.4 | **D-02 for flight projects:** TRL 4–5 can release reversible 0A funding tranches. A scout or pathfinder PDR is a separate gate needing TRL 6 for flight-critical technology. | rq-0-74 | ☑ **confirmed 2026-10-20** |
+| 1.5 | **Scout PDR:** T11 (scouts) and T18 (sampling and assay) at TRL 6. | rq-0-73 | ☑ **confirmed 2026-10-20** |
+| 1.6 | **Sunset, direction:** M180 acts automatically, not as a prompt for review. *How* it acts is open (2.9). | rq-0-69 | ☑ **confirmed 2026-10-20** |
+| 1.7 | **Economics premium:** any cost above Earth supply needs a separate, explicit owner authorisation. D-01's purpose does not authorise one by itself. | rq-0-67 | ☑ **confirmed 2026-10-20** |
+| 1.8 | **KDP-0B secondary technologies:** no blanket duplicate TRL 6 demonstration. Applicable 0A evidence is reused. | rq-0-66 | ☑ **confirmed 2026-10-20** |
 
 ---
 
 ## Part 2 — Open: choose
+
+**Status 2026-10-20: not ruled. Routed to evidence.** The owner chose not to rule from
+intuition where deliberation did not converge. Each item below is routed to an evidence question
+(rq-0-76 … rq-0-83; see [`../open-questions.md`](../open-questions.md)). When those report, this
+part is re-issued with the evidence attached, or the panel deliberates again with it.
+
+| Items | Evidence question |
+|---|---|
+| 2.1, 2.2, 2.4 | rq-0-77 fallback dossiers (+ rq-0-76 for the classification method) |
+| 2.3, 2.15, 2.16 | rq-0-80 target-grade evidence standard (+ rq-0-76 for TRL 8 wording) |
+| 2.5, 2.6 | rq-0-82 economics-gate practice |
+| 2.7, 2.8 | rq-0-81 demand qualification and capacity sizing |
+| 2.9, 2.10, 2.11 | rq-0-83 sunsets, preservation and licence recovery |
+| 2.12, 2.13 | rq-0-78 scale-up evidence base (+ rq-0-76) |
+| 2.14, 2.17, 2.18 | rq-0-76 agency practice |
+| 2.19 | rq-0-79 MW-class EP test path (+ rq-0-78) |
 
 ### rq-0-65 · Risk class of the eight split technologies
 
@@ -250,7 +268,7 @@ C and P both hold that single-module tests and a model don't close cluster-level
 
 ## After signing
 
-1. Record each ruling in `rulings.yaml` (date, `decided_by: owner`, source question, what is still open).
+1. Record each ruling in `gate-rulings.yaml` (date, `decided_by: owner`, source question, what is still open).
 2. Set each rq-0-65…75 to `answered`, or leave it `investigating` where items marked *also open* are deferred.
 3. Regenerate `round-1/gates-proposal.yaml` from the rulings, then start WP-A Part 2.
 4. Before more framework-mode runs, consider the pipeline fix from the comparison: at least two
