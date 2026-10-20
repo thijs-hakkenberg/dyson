@@ -115,16 +115,29 @@
 			</div>
 		{:else if view.kind === 'trl' && trl}
 			<header>
-				<div class="eyebrow">Technology readiness</div>
+				<div class="eyebrow">Technology readiness · {trl.id}</div>
 				<h2>{trl.technology}</h2>
-				<div class="dim">TRL {trl.currentTRL}{trl.currentTRLMax ? `–${trl.currentTRLMax}` : ''} → {trl.targetTRL} · {trl.yearsToTarget}{trl.yearsToTargetMax ? `–${trl.yearsToTargetMax}` : ''} yr</div>
+				<div class="dim">
+					TRL {trl.currentTRL}{trl.currentTRLMax ? `–${trl.currentTRLMax}` : ''} → {trl.targetTRL}{trl.ad2 ? ` · AD² ${trl.ad2.min === trl.ad2.max ? trl.ad2.max : `${trl.ad2.min}–${trl.ad2.max}`}` : ''} · {trl.yearsToTarget}{trl.yearsToTargetMax ? `–${trl.yearsToTargetMax}` : ''} yr{trl.phaseNeed ? ` · needed in ${Array.isArray(trl.phaseNeed) ? trl.phaseNeed.join('/') : trl.phaseNeed}` : ''}
+				</div>
 			</header>
 			<div class="body">
-				<p>{trl.description}</p>
-				<h3>Evidence</h3>
+				<p><span class="dim">Required:</span> {trl.description}</p>
+				{#if trl.panelRatings}
+					<h3>Panel{trl.agreement === 'diverge' ? ' (diverges)' : trl.agreement === 'ruled' ? ' (set by owner ruling)' : ''}</h3>
+					<ul class="list plain">
+						{#each trl.panelRatings as r (r.model)}
+							<li>{r.name}: TRL {r.currentTRL.min === r.currentTRL.max ? r.currentTRL.min : `${r.currentTRL.min}–${r.currentTRL.max}`}→{r.targetTRL} · AD² {r.ad2} · {r.riskIfFail}</li>
+						{/each}
+					</ul>
+				{/if}
+				{#each trl.rulingStatus?.pending ?? [] as p (p.question)}
+					<button type="button" class="hud-btn" onclick={() => explorer.showQuestion(p.question)}>⧗ Owner ruling pending: {p.question.toUpperCase()} (evidence {p.evidence.join(', ').toUpperCase()})</button>
+				{/each}
+				<h3>Where the evidence stands</h3>
 				<p>{trl.evidence}</p>
 				{#if trl.experimentsNeeded.length}
-					<h3>Experiments needed</h3>
+					<h3>Development path</h3>
 					<ul class="list plain">{#each trl.experimentsNeeded as x (x)}<li>{x}</li>{/each}</ul>
 				{/if}
 				{#if trl.fallbackApproach}<h3>Fallback</h3><p>{trl.fallbackApproach}</p>{/if}

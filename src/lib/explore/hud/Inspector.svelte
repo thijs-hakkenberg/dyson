@@ -205,7 +205,10 @@
 								{#each Array(9) as _, k (k)}
 									<i class:cur={k < a.currentTRL} class:target={k + 1 === a.targetTRL}></i>
 								{/each}
-								<span>TRL {a.currentTRL}{a.currentTRLMax ? `–${a.currentTRLMax}` : ''} → {a.targetTRL}</span>
+								<span>TRL {a.currentTRL}{a.currentTRLMax ? `–${a.currentTRLMax}` : ''} → {a.targetTRL}{a.ad2 ? ` · AD² ${a.ad2.min === a.ad2.max ? a.ad2.max : `${a.ad2.min}–${a.ad2.max}`}` : ''}</span>
+							</div>
+							<div class="trl-meta">
+								{a.id}{a.phaseNeed ? ` · needed in ${Array.isArray(a.phaseNeed) ? a.phaseNeed.join('/') : a.phaseNeed}` : ''}{a.agreement === 'diverge' ? ' · panel diverges' : a.agreement === 'ruled' ? ' · set by owner ruling' : ''}{a.rulingStatus?.pending?.length ? ' · ⧗ ruling pending' : ''}
 							</div>
 						</div>
 					{/each}
@@ -452,6 +455,11 @@
 		justify-content: space-between;
 		gap: 8px;
 		font-size: 11px;
+	}
+	.trl-meta {
+		font-size: 0.8em;
+		opacity: 0.7;
+		margin: 2px 0 4px;
 	}
 	.trl-scale {
 		display: flex;

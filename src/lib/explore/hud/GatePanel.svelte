@@ -1,12 +1,13 @@
 <script lang="ts">
 	import { explorer, TODAY_YEAR } from '../core/state.svelte';
 	import { layoutTunnel, phase0MonthToYear } from '../core/gates';
-	import { getGateStats } from '$lib/services/decision-gates';
+	import { getGateStats, gateWindow, GATE_TYPE_LABELS } from '$lib/services/decision-gates';
 	import { RISK_LABELS } from '$lib/services/trl-assessment';
 
 	const L = layoutTunnel(TODAY_YEAR);
 	const stats = getGateStats();
 	const lateTotal = L.gates.reduce((s, g) => s + g.late.length, 0);
+	const atRiskTotal = L.gates.reduce((s, g) => s + g.atRisk.length, 0);
 	const STATUS: Record<string, string> = {
 		'not-started': 'not started',
 		'in-progress': 'in progress',
@@ -19,8 +20,10 @@
 	<div class="eyebrow">Gates lens</div>
 	<h2>Gate Tunnel</h2>
 	<p class="kv">
-		{stats.passed}/{stats.totalGates} gates passed · {stats.metCriteria}/{stats.totalCriteria} criteria met
-		{#if lateTotal}<br /><span class="bad">{lateTotal} technology dependencies projected to arrive after their gate</span>{/if}
+		{stats.totalGates} gates under D-02 ({stats.byType.kdp} KDPs, {stats.byType.review} reviews, {stats.byType.discriminating} discriminating) ·
+		{stats.metCriteria}/{stats.totalCriteria} criteria met · {stats.pendingCriteria} awaiting an owner ruling
+		{#if lateTotal}<br /><span class="bad">{lateTotal} technology dependencies projected to arrive after their gate's window</span>{/if}
+		{#if atRiskTotal}<br /><span class="warn">{atRiskTotal} arrive inside the window</span>{/if}
 	</p>
 
 	<div class="eyebrow sec">Gates in decision order</div>
@@ -28,10 +31,10 @@
 		{#each L.gates as g (g.gate.id)}
 			<li>
 				<button type="button" class:on={explorer.gateSel === g.gate.id} onclick={() => (explorer.gateSel = g.gate.id)}>
-					<span class="m">M{g.gate.decisionMonth}</span>
+					<span class="m">{gateWindow(g.gate)}</span>
 					<span class="nm">
 						{g.gate.name}
-						<i>{STATUS[g.gate.status] ?? g.gate.status} · {Math.round(phase0MonthToYear(g.gate.decisionMonth))}{g.late.length ? ` · ${g.late.length} late` : ''}</i>
+						<i>{GATE_TYPE_LABELS[g.gate.type ?? 'review']} · {STATUS[g.gate.status] ?? g.gate.status} · ~{Math.round(phase0MonthToYear(g.gate.decisionMonth))}–{Math.round(phase0MonthToYear(g.gate.decisionMonthMax ?? g.gate.decisionMonth))}{g.late.length ? ` · ${g.late.length} late` : ''}{g.atRisk.length ? ` · ${g.atRisk.length} at risk` : ''}</i>
 					</span>
 					<span class="crit">
 						{#each g.gate.criteria as c (c.id)}<b class:met={c.met} class:late={!c.met && g.late.length > 0}></b>{/each}
@@ -45,13 +48,15 @@
 	<ul class="legend">
 		<li><span class="k ring"></span>Gate ring · one arc per criterion (lit = met)</li>
 		<li><span class="k col"></span>Technology · solid = current TRL, outline = target</li>
-		<li><span class="k ok"></span>Feeds gate in time · <span class="k lt"></span>arrives late</li>
+		<li><span class="k ok"></span>Feeds gate in time · <span class="k ar"></span>inside the window · <span class="k lt"></span>after it</li>
+		<li><span class="k ring"></span>Faint ring: where the decision window closes</li>
 		{#each Object.entries(RISK_LABELS) as [k, v] (k)}
 			<li><span class="k risk" style="--c:{v.color}"></span>If it fails: {v.label}</li>
 		{/each}
 	</ul>
 	<p class="foot">
-		Axis = months from Phase 0 start (assumed 2030). Columns sit at today + years-to-target; the floor strip runs to the
+		Axis = months from Phase 0 start (assumed 2030). Gate windows are the panel's proposal; KDP-0B must pass by the
+		month-180 sunset. Columns sit at today + years-to-target from the TRL re-baseline; the floor strip runs to the
 		pessimistic estimate. Labels shown for project-ending technologies; select a gate to see its dependencies.
 	</p>
 </section>
@@ -169,6 +174,13 @@
 	.lt {
 		height: 2px;
 		background: #f87171;
+	}
+	.ar {
+		height: 2px;
+		background: #fbbf24;
+	}
+	.warn {
+		color: var(--hud-warn);
 	}
 	.risk {
 		border: 1px dashed var(--c);

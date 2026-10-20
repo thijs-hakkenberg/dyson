@@ -3,7 +3,8 @@
 	import { explorer, TODAY_YEAR } from '../core/state.svelte';
 	import { layoutTunnel, phase0MonthToYear } from '../core/gates';
 	import { getQuestion } from '$lib/services/critical-path';
-	import { RISK_LABELS, TRL_LABELS } from '$lib/services/trl-assessment';
+	import { RISK_LABELS, TRL_LABELS, AGREEMENT_LABELS, type RulingStatus } from '$lib/services/trl-assessment';
+	import { gateWindow, GATE_TYPE_LABELS } from '$lib/services/decision-gates';
 	import { getEntity } from '../core/registry';
 	import { RQ_STATUS_COLORS } from '../core/theme';
 
@@ -14,6 +15,13 @@
 	);
 	const feeds = $derived(t ? L.gates.filter((x) => x.gate.relatedTRLIds.includes(t.trl.id)) : []);
 	const yr = (m: number) => Math.round(phase0MonthToYear(m));
+	const fmt = (min: number, max?: number | null) => (max != null && max !== min ? `${min}–${max}` : `${min}`);
+	const statusText = (s: RulingStatus | null | undefined) =>
+		[
+			...(s?.decided ?? []).map((d) => `✓ ${d}`),
+			...(s?.interim ?? []).map((d) => `◐ ${d} interim`),
+			...(s?.panel ? [`≠ ${s.panel}`] : [])
+		].join(' · ');
 </script>
 
 {#if g || t}
@@ -21,9 +29,9 @@
 		<button type="button" class="close" onclick={() => (explorer.gateSel = null)} aria-label="Close">×</button>
 		{#if g}
 			<header>
-				<div class="eyebrow">Decision gate · month {g.gate.decisionMonth} (~{yr(g.gate.decisionMonth)})</div>
+				<div class="eyebrow">{GATE_TYPE_LABELS[g.gate.type ?? 'review']} · {gateWindow(g.gate)} (~{yr(g.gate.decisionMonth)}–{yr(g.gate.decisionMonthMax ?? g.gate.decisionMonth)})</div>
 				<h2>{g.gate.name}</h2>
-				<div class="dim">{g.gate.status} · {Math.round(g.readiness * 100)}% of criteria met</div>
+				<div class="dim">{g.gate.status} · {g.readiness}% of criteria met{g.gate.disputed ? ' · the panel disputes parts' : ''}</div>
 			</header>
 			<div class="body">
 				<p>{g.gate.description}</p>
@@ -32,7 +40,11 @@
 					{#each g.gate.criteria as c (c.id)}
 						<li class:met={c.met}>
 							<b>{c.met ? '✓' : '○'} {c.description}</b>
-							<span>{c.metric}</span>
+							<span>{c.trlRequired ? `TRL ${c.trlRequired}. ` : ''}{c.threshold ?? c.metric}</span>
+							{#if statusText(c.rulingStatus)}<i>{statusText(c.rulingStatus)}</i>{/if}
+							{#each c.rulingStatus?.pending ?? [] as p (p.question)}
+								<button type="button" class="pend" onclick={() => explorer.showQuestion(p.question)}>⧗ ruling pending: {p.question.toUpperCase()} · evidence {p.evidence.join(', ').toUpperCase()}</button>
+							{/each}
 							{#if c.currentEvidence}<i>Evidence: {c.currentEvidence}</i>{/if}
 						</li>
 					{/each}
@@ -45,8 +57,8 @@
 							{#if tt}
 								<li>
 									<button type="button" onclick={() => (explorer.gateSel = `trl:${id}`)}>
-										<span class:late={g.late.includes(id)}>{tt.trl.technology}</span>
-										<span class="dim">TRL {tt.trl.currentTRL}→{tt.trl.targetTRL} · ~{yr(tt.arrival)}{g.late.includes(id) ? ' · late' : ''}</span>
+										<span class:late={g.late.includes(id)} class:atrisk={g.atRisk.includes(id)}>{tt.trl.id} {tt.trl.technology}</span>
+										<span class="dim">TRL {fmt(tt.trl.currentTRL, tt.trl.currentTRLMax)}→{tt.trl.targetTRL} · ~{yr(tt.arrival)}{g.late.includes(id) ? ' · late' : g.atRisk.includes(id) ? ' · inside window' : ''}</span>
 									</button>
 								</li>
 							{/if}
@@ -73,21 +85,34 @@
 			</div>
 		{:else if t}
 			<header>
-				<div class="eyebrow" style="color:{t.threadColor}">Technology readiness</div>
+				<div class="eyebrow" style="color:{t.threadColor}">Technology readiness · {t.trl.id}</div>
 				<h2>{t.trl.technology}</h2>
 				<div class="dim">
-					TRL {t.trl.currentTRL}{t.trl.currentTRLMax ? `–${t.trl.currentTRLMax}` : ''} → {t.trl.targetTRL} ·
+					TRL {fmt(t.trl.currentTRL, t.trl.currentTRLMax)} → {t.trl.targetTRL}
+					{#if t.trl.ad2}· AD² {fmt(t.trl.ad2.min, t.trl.ad2.max)}{/if}
+					{#if t.trl.phaseNeed}· needed in {Array.isArray(t.trl.phaseNeed) ? t.trl.phaseNeed.join('/') : t.trl.phaseNeed}{/if} ·
 					target ~{yr(t.arrival)}{t.arrivalMax > t.arrival ? `–${yr(t.arrivalMax)}` : ''}
 					· <span style="color:{RISK_LABELS[t.trl.riskIfFail]?.color}">if it fails: {RISK_LABELS[t.trl.riskIfFail]?.label}</span>
 				</div>
 			</header>
 			<div class="body">
-				<p>{t.trl.description}</p>
+				<p><span class="dim">Required:</span> {t.trl.description}</p>
 				<p class="dim">Now: {TRL_LABELS[t.trl.currentTRL]}. Target: {TRL_LABELS[t.trl.targetTRL]}.</p>
-				<h3>Evidence</h3>
+				{#if t.trl.panelRatings}
+					<h3>Panel · {AGREEMENT_LABELS[t.trl.agreement ?? 'agree']}</h3>
+					<ul class="plain">
+						{#each t.trl.panelRatings as r (r.model)}
+							<li>{r.name}: TRL {fmt(r.currentTRL.min, r.currentTRL.max)}→{r.targetTRL} · AD² {r.ad2} · {RISK_LABELS[r.riskIfFail]?.label ?? r.riskIfFail}</li>
+						{/each}
+					</ul>
+				{/if}
+				{#each t.trl.rulingStatus?.pending ?? [] as p (p.question)}
+					<button type="button" class="pend" onclick={() => explorer.showQuestion(p.question)}>⧗ owner ruling pending: {p.question.toUpperCase()} · evidence {p.evidence.join(', ').toUpperCase()}</button>
+				{/each}
+				<h3>Where the evidence stands</h3>
 				<p>{t.trl.evidence}</p>
 				{#if t.trl.experimentsNeeded.length}
-					<h3>Experiments needed</h3>
+					<h3>Development path</h3>
 					<ul class="plain">{#each t.trl.experimentsNeeded as x (x)}<li>{x}</li>{/each}</ul>
 				{/if}
 				{#if feeds.length}
@@ -97,7 +122,7 @@
 							<li>
 								<button type="button" onclick={() => (explorer.gateSel = f.gate.id)}>
 									<span class:late={f.late.includes(t.trl.id)}>{f.gate.name}</span>
-									<span class="dim">decides ~{yr(f.gate.decisionMonth)}{f.late.includes(t.trl.id) ? ' · this tech is late' : ''}</span>
+									<span class="dim">decides ~{yr(f.gate.decisionMonth)}–{yr(f.gate.decisionMonthMax ?? f.gate.decisionMonth)}{f.late.includes(t.trl.id) ? ' · this tech is late' : f.atRisk.includes(t.trl.id) ? ' · lands inside the window' : ''}</span>
 								</button>
 							</li>
 						{/each}
@@ -227,6 +252,22 @@
 	}
 	.links button:hover {
 		color: #fff;
+	}
+	.atrisk {
+		color: var(--hud-warn);
+	}
+	.pend {
+		display: block;
+		margin: 4px 0;
+		padding: 2px 8px;
+		border-radius: 10px;
+		border: 1px solid rgba(167, 139, 250, 0.4);
+		background: rgba(167, 139, 250, 0.12);
+		color: #ddd6fe;
+		font: inherit;
+		font-size: 0.85em;
+		text-align: left;
+		cursor: pointer;
 	}
 	.late {
 		color: var(--hud-bad);

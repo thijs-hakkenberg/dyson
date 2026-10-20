@@ -1,9 +1,11 @@
 <script lang="ts">
 	/**
-	 * Gate Tunnel: fly down Phase 0's decision timeline. Gates are rings whose
-	 * arc segments are criteria (lit = met). Technology columns stand on the
-	 * floor in thread lanes at their projected target-TRL month; links to the
-	 * gates they feed turn red when the technology arrives too late.
+	 * Gate Tunnel: fly down Phase 0's decision timeline (D-02). Gates are rings
+	 * at the start of their decision window, with a faint ring where the window
+	 * closes; arc segments are criteria (lit = met). Technology columns stand on
+	 * the floor in thread lanes at their projected target-TRL month; links to the
+	 * gates they feed turn amber when the technology lands inside the window and
+	 * red when it arrives after the window closes.
 	 */
 	import { T, useTask } from '@threlte/core';
 	import { CameraControls, interactivity, type CameraControlsRef } from '@threlte/extras';
@@ -23,6 +25,7 @@
 	import { explorer, TODAY_YEAR } from '../../core/state.svelte';
 	import { FLOOR_Y, TRL_UNIT, TUNNEL_RADIUS, layoutTunnel, monthToZ, phase0MonthToYear } from '../../core/gates';
 	import { RISK_LABELS } from '$lib/services/trl-assessment';
+	import { gateWindow } from '$lib/services/decision-gates';
 
 	interactivity();
 
@@ -77,9 +80,12 @@
 	})();
 
 	// ── Gate→technology links: arcs from the column top up to the gate ring ─
-	const linkMat = (late: boolean) =>
+	const linkMat = (late: boolean, atRisk = false) =>
 		new ShaderMaterial({
-			uniforms: { uTime: { value: 0 }, uColor: { value: late ? new Vector3(0.97, 0.3, 0.3) : new Vector3(0.2, 0.83, 0.6) } },
+			uniforms: {
+				uTime: { value: 0 },
+				uColor: { value: late ? new Vector3(0.97, 0.3, 0.3) : atRisk ? new Vector3(0.98, 0.75, 0.15) : new Vector3(0.2, 0.83, 0.6) }
+			},
 			vertexShader: /* glsl */ `
 				#include <common>
 				#include <logdepthbuf_pars_vertex>
@@ -108,7 +114,7 @@
 		return {
 			...l,
 			geo: new TubeGeometry(new CatmullRomCurve3([top, mid, ring]), 24, 0.035, 5),
-			mat: linkMat(l.late)
+			mat: linkMat(l.late, l.atRisk)
 		};
 	});
 
@@ -199,7 +205,7 @@
 			>
 				<T.TorusGeometry args={[TUNNEL_RADIUS, c.met ? 0.16 : 0.1, 8, 48, arcLen(n) * 0.92]} />
 				<T.MeshBasicMaterial
-					color={c.met ? '#34d399' : g.late.length ? '#f87171' : '#64748b'}
+					color={c.met ? '#34d399' : g.late.length ? '#f87171' : g.atRisk.length ? '#fbbf24' : '#64748b'}
 					transparent
 					opacity={active ? (c.met ? 1 : 0.75) : 0.15}
 				/>
@@ -211,11 +217,18 @@
 			<T.MeshBasicMaterial color={g.late.length ? '#f87171' : '#7dd3fc'} transparent opacity={sel === g.gate.id ? 0.08 : 0.03} depthWrite={false} side={2} />
 		</T.Mesh>
 	</T.Group>
+	<!-- Where the decision window closes -->
+	{#if g.zMax !== g.z}
+		<T.Mesh position={[0, 0, g.zMax]}>
+			<T.TorusGeometry args={[TUNNEL_RADIUS, 0.05, 6, 64]} />
+			<T.MeshBasicMaterial color={g.late.length ? '#f87171' : '#7dd3fc'} transparent opacity={active ? (sel === g.gate.id ? 0.6 : 0.2) : 0.05} />
+		</T.Mesh>
+	{/if}
 	<T.Group position={[0, TUNNEL_RADIUS + 0.6 + (gi % 3) * 2.2, g.z]}>
 		<WbLabel
 			id={g.gate.id}
 			label={g.gate.name}
-			sub="month {g.gate.decisionMonth} · {Math.round(g.readiness * 100)}% criteria met{g.late.length ? ` · ${g.late.length} tech late` : ''}"
+			sub="{gateWindow(g.gate)} · {g.readiness}% criteria met{g.late.length ? ` · ${g.late.length} late` : ''}{g.atRisk.length ? ` · ${g.atRisk.length} at risk` : ''}"
 			color={g.late.length ? '#f87171' : '#fbbf24'}
 			selected={sel === g.gate.id}
 			onpick={() => pickGate(g.gate.id)}

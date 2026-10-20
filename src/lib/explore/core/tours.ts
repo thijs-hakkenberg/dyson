@@ -11,6 +11,8 @@ import { TODAY_YEAR } from './state.svelte';
 import { PHASES } from '$lib/services/content';
 import { formatUSD } from './units';
 import { hardwareDistance, nearFieldModel } from './nearfield';
+import { QUESTION_DEPENDENCIES } from '$lib/services/critical-path';
+import { DECISION_GATES, GATE_RULINGS } from '$lib/services/decision-gates';
 
 /** Camera distance that frames an item's true-scale model in the orrery. */
 const hw = (id: string) => hardwareDistance(nearFieldModel(id)!);
@@ -676,7 +678,7 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'The open questions',
-				body: 'Phase 0 has **49 research questions** and five decision gates — the most mature graph in the project. The red artery is its critical path.',
+				body: `Phase 0 has **${QUESTION_DEPENDENCIES.length} research questions** and ${DECISION_GATES.length} decision gates under D-02, ${GATE_RULINGS.length} gate rulings confirmed and the rest waiting on evidence — the most mature graph in the project. The red artery is its critical path.`,
 				duration: 11,
 				workbench: null,
 				lens: 'knowledge',

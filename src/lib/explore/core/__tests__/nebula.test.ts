@@ -66,4 +66,13 @@ describe('research nebula', () => {
 			].sort()
 		).toEqual(['a', 'b']);
 	});
+
+	it('places every D-02 gate with readiness as a 0–1 fraction (the ring arc is 2π × readiness)', () => {
+		const L = layoutNebula(mergeQuestions({ questions: [] as never }));
+		expect(L.gates.length).toBeGreaterThan(5);
+		for (const g of L.gates) {
+			expect(g.readiness).toBeGreaterThanOrEqual(0);
+			expect(g.readiness).toBeLessThanOrEqual(1);
+		}
+	});
 });

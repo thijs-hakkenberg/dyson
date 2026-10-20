@@ -244,7 +244,8 @@ export function layoutNebula(questions: Omit<NebulaRq, 'pos'>[]): NebulaLayout {
 		const a = (threadIdx(gate.threadId) / Math.max(1, TECHNOLOGY_THREADS.length)) * Math.PI * 2;
 		return {
 			gate,
-			readiness: getGateReadiness(gate),
+			// getGateReadiness is a percentage; the nebula draws a 0–1 fraction of the ring
+			readiness: getGateReadiness(gate) / 100,
 			pos: [x, Math.cos(a) * GATE_RADIUS, Math.sin(a) * GATE_RADIUS] as Vec3
 		};
 	});
