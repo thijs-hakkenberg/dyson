@@ -1,4 +1,5 @@
 import type { Phase, BlogPost, BOMItem, TimelineNode, PhaseDependencyGraph } from '$lib/types';
+import { DECISION_GATES } from './decision-gates';
 
 /**
  * Phase data for the Dyson swarm project
@@ -9,14 +10,14 @@ export const PHASES: Phase[] = [
 		number: 0,
 		title: 'Space Resource Processing',
 		description:
-			'Establish the foundational infrastructure for asteroid mining and material processing in space. This phase focuses on developing the supply chain for raw materials needed for subsequent construction phases.',
+			'Find out whether asteroid material can supply the swarm. Phase 0A funds the research, rendezvous scouts and a pathfinder; Phase 0B, iron-nickel production at the target asteroid, is held as an option and committed only at KDP-0B (decision D-01).',
 		status: 'in-progress',
 		objectives: [
-			'Deploy asteroid prospecting satellites',
-			'Establish first mining operation on near-Earth asteroid',
-			'Build orbital material processing facility',
-			'Create initial stockpile of construction materials',
-			'Test and validate in-situ resource utilization techniques'
+			'Survey and sample candidate near-Earth asteroids with rendezvous scouts',
+			'Mature the critical technologies to the readiness the gates require (TRL 6 before KDP-0B)',
+			'Fly a pathfinder that tests excavation, processing and containment at the asteroid',
+			'Pass the target, demand, economics and licence gates before committing to production',
+			'If 0B goes ahead: process Fe-Ni at the asteroid and deliver product to the SEL1 node'
 		],
 		bom: [
 			{
@@ -774,184 +775,42 @@ export function groupBOMByCategory(items: BOMItem[]): Record<string, BOMItem[]> 
 
 /**
  * Phase 0 Timeline/DAG data
+ *
+ * Built from the D-02 decision gates (decision-gates.ts): each gate spans its proposed
+ * decision window in months from Phase 0 start. Dependencies follow the gate criteria
+ * (KDP-0B requires the four discriminating gates, the 0A mid-term review and the
+ * pathfinder results; the target gate needs scout data). The integrated activity
+ * schedule is open (rq-0-63); until it reports, this graph shows the gates only.
  */
+const PHASE_0_GATE_DEPENDENCIES: Record<string, string[]> = {
+	'kdp-0a': [],
+	'0a-scout-pdr': ['kdp-0a'],
+	'g-scout-flight': ['0a-scout-pdr'],
+	'0a-mtr': ['kdp-0a'],
+	'g-target': ['g-scout-flight'],
+	'g-demand': ['kdp-0a'],
+	'g-licence': ['kdp-0a'],
+	'g-economics': ['g-target', 'g-demand'],
+	'pf-results': ['0a-mtr'],
+	'kdp-0b': ['g-target', 'g-demand', 'g-economics', 'g-licence', '0a-mtr', 'pf-results'],
+	'g-water-pilot': ['g-target']
+};
+const PHASE_0_CRITICAL = new Set(['kdp-0a', '0a-scout-pdr', 'g-scout-flight', 'g-target', 'g-economics', 'kdp-0b']);
+
 export const PHASE_0_TIMELINE: PhaseDependencyGraph = {
 	phaseId: 'phase-0',
-	criticalPathDuration: 84,
-	nodes: [
-		{
-			id: 'site-survey',
-			name: 'NEA Site Survey',
-			type: 'activity',
-			startMonth: 0,
-			endMonth: 24,
-			dependencies: [],
-			status: 'in-progress',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/prospecting-satellites'
-		},
-		{
-			id: 'sat-design',
-			name: 'Satellite Design & Build',
-			type: 'activity',
-			startMonth: 0,
-			endMonth: 36,
-			dependencies: [],
-			status: 'in-progress',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/prospecting-satellites'
-		},
-		{
-			id: 'sat-deploy',
-			name: 'Satellite Deployment',
-			type: 'milestone',
-			startMonth: 36,
-			endMonth: 48,
-			dependencies: ['sat-design'],
-			status: 'pending',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/prospecting-satellites'
-		},
-		{
-			id: 'robot-dev',
-			name: 'Mining Robot Development',
-			type: 'activity',
-			startMonth: 12,
-			endMonth: 48,
-			dependencies: [],
-			status: 'pending',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/mining-robots'
-		},
-		{
-			id: 'target-select',
-			name: 'Target Asteroid Selection',
-			type: 'decision',
-			startMonth: 24,
-			endMonth: 30,
-			dependencies: ['site-survey'],
-			status: 'pending',
-			criticalPath: true
-		},
-		{
-			id: 'robot-deploy',
-			name: 'Mining Robot Deployment',
-			type: 'milestone',
-			startMonth: 48,
-			endMonth: 54,
-			dependencies: ['robot-dev', 'target-select', 'sat-deploy'],
-			status: 'pending',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/mining-robots'
-		},
-		{
-			id: 'station-design',
-			name: 'Processing Station Design',
-			type: 'activity',
-			startMonth: 6,
-			endMonth: 36,
-			dependencies: [],
-			status: 'pending',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/material-processing-station'
-		},
-		{
-			id: 'station-build',
-			name: 'Station Module Construction',
-			type: 'activity',
-			startMonth: 36,
-			endMonth: 60,
-			dependencies: ['station-design'],
-			status: 'pending',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/material-processing-station'
-		},
-		{
-			id: 'station-assembly',
-			name: 'On-Orbit Assembly',
-			type: 'activity',
-			startMonth: 60,
-			endMonth: 72,
-			dependencies: ['station-build'],
-			status: 'pending',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/material-processing-station'
-		},
-		{
-			id: 'transport-dev',
-			name: 'Transport Vehicle Development',
-			type: 'activity',
-			startMonth: 24,
-			endMonth: 48,
-			dependencies: [],
-			status: 'pending',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/transport-vehicles'
-		},
-		{
-			id: 'transport-fleet',
-			name: 'Transport Fleet Deployment',
-			type: 'milestone',
-			startMonth: 48,
-			endMonth: 60,
-			dependencies: ['transport-dev'],
-			status: 'pending',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/transport-vehicles'
-		},
-		{
-			id: 'power-design',
-			name: 'Solar Array Design',
-			type: 'activity',
-			startMonth: 0,
-			endMonth: 24,
-			dependencies: [],
-			status: 'in-progress',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/solar-power-arrays'
-		},
-		{
-			id: 'power-deploy',
-			name: 'Power System Deployment',
-			type: 'activity',
-			startMonth: 48,
-			endMonth: 66,
-			dependencies: ['power-design', 'station-build'],
-			status: 'pending',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/solar-power-arrays'
-		},
-		{
-			id: 'mining-ops',
-			name: 'Initial Mining Operations',
-			type: 'milestone',
-			startMonth: 54,
-			endMonth: 60,
-			dependencies: ['robot-deploy'],
-			status: 'pending',
-			criticalPath: false
-		},
-		{
-			id: 'station-ops',
-			name: 'Station Operational',
-			type: 'milestone',
-			startMonth: 72,
-			endMonth: 78,
-			dependencies: ['station-assembly', 'power-deploy'],
-			status: 'pending',
-			criticalPath: true
-		},
-		{
-			id: 'full-ops',
-			name: 'Full Phase 0 Operations',
-			type: 'milestone',
-			startMonth: 78,
-			endMonth: 84,
-			dependencies: ['station-ops', 'mining-ops', 'transport-fleet'],
-			status: 'pending',
-			criticalPath: true
-		}
-	]
+	criticalPathDuration: Math.max(...DECISION_GATES.map((g) => g.decisionMonthMax ?? g.decisionMonth)),
+	nodes: DECISION_GATES.map((g) => ({
+		id: g.id,
+		name: g.name,
+		type: g.type === 'review' ? 'milestone' : 'decision',
+		startMonth: g.decisionMonth,
+		endMonth: g.decisionMonthMax ?? g.decisionMonth,
+		dependencies: PHASE_0_GATE_DEPENDENCIES[g.id] ?? [],
+		status: 'pending',
+		criticalPath: PHASE_0_CRITICAL.has(g.id),
+		linkTo: `/analysis/decision-gates#${g.id}`
+	}))
 };
 
 /**
@@ -1676,9 +1535,11 @@ export interface ProjectMilestone {
 }
 
 export const PROJECT_MILESTONES: ProjectMilestone[] = [
+	// Phase 0 years are illustrative points inside the D-02 gate windows (target gate M48–180,
+	// KDP-0B M72–180); the integrated schedule is rq-0-63.
 	{
 		id: 'p0-mining-ops',
-		name: 'First Asteroid Mining',
+		name: 'Target asteroid selected (target gate)',
 		phase: 'phase-0',
 		targetYear: 5,
 		dependencies: [],
@@ -1686,7 +1547,7 @@ export const PROJECT_MILESTONES: ProjectMilestone[] = [
 	},
 	{
 		id: 'p0-station-ops',
-		name: 'Processing Station Operational',
+		name: 'KDP-0B: decide on Phase 0B production',
 		phase: 'phase-0',
 		targetYear: 7,
 		dependencies: ['p0-mining-ops'],

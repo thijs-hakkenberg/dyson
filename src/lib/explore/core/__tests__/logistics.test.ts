@@ -12,14 +12,14 @@ describe('logistics chains', () => {
 		expect(chainsAt(2026).every((c) => !c.active && c.flow === 0)).toBe(true);
 	});
 
-	it('ore chain: flow is the minimum stage capacity, and the station limits it once built', () => {
+	it('product chain: flow is the minimum stage capacity, and the plant at the NEA limits it once built', () => {
 		const c = chainsAt(at('phase-1', 0.5)).find((x) => x.chain.id === 'ore')!;
 		expect(c.active).toBe(true);
 		const caps = c.chain.stages.map((s) => s.capacity);
 		expect(c.flow).toBe(Math.min(...caps));
-		// 20 robots × 3.5 t/h ≈ 613 kt/yr  vs  station 50 kt/yr
-		expect(c.bottleneck?.id).toBe('station');
-		expect(c.flow).toBeCloseTo(50_000, -2);
+		// Robots mine ~100s of kt/yr of regolith; the plant ships 0.6–2.5 kt/yr of product (round 2, midpoint)
+		expect(c.bottleneck?.id).toBe('plant');
+		expect(c.flow).toBeCloseTo(1_550, -2);
 	});
 
 	it('stellar fuel reaches the 1e12 kg/s consensus target at full build-out', () => {

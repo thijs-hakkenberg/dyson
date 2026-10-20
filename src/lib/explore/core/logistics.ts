@@ -7,8 +7,12 @@
  * drawn between the stages' scene positions.
  *
  * Chains (all figures from consensus documents):
- *  - Asteroid ore (P0→P1): mining robots 2–5 t/h each → L4 processing
- *    station 50,000 t/yr → assembly node at Earth L1.
+ *  - Asteroid product (P0→P1): mining robots 2–5 t/h of regolith each →
+ *    processing plant co-located at the target NEA, 0.6–2.5 kt/yr of Fe-Ni
+ *    product across models (Phase 0 re-assessment, round 2) → tugs → delivery
+ *    node at Sun–Earth L1 (D-04 interim), where the Phase 1 assembly node is.
+ *    The mining stage is ore, the plant stage product: the plant always limits
+ *    the chain, and the gap between the two is the beneficiation ratio (CI-20).
  *  - Lunar launch (P1): mass drivers ~21,900 t/yr each (Claude; GPT
  *    8,760–26,280; Gemini 31,536) → assembly node.
  *  - Swarm manufacturing (P2): nodes refine 10–25 t/day → collector band.
@@ -83,10 +87,10 @@ export function buildChains(): Chain[] {
 	return [
 		{
 			id: 'ore',
-			label: 'Asteroid ore',
+			label: 'Asteroid Fe-Ni product',
 			phaseId: 'phase-0',
 			color: '#f0a830',
-			note: 'Mining 2–5 t/h per robot; station 50,000 t/yr at full capacity.',
+			note: 'Mining 2–5 t/h of regolith per robot; the plant at the asteroid ships 0.6–2.5 kt/yr of product across models (round 2). Product, not ore, is shipped.',
 			stages: [
 				{
 					id: 'mine',
@@ -96,15 +100,15 @@ export function buildChains(): Chain[] {
 					pos: miningSites
 				},
 				{
-					id: 'station',
-					label: 'L4 processing station',
+					id: 'plant',
+					label: 'Processing plant at the NEA',
 					bomId: 'bom-0-3',
 					capacity: 0,
-					pos: (y) => [lagrangePosition('earth', 'L4', y)]
+					pos: (y) => [anchorPosition({ kind: 'nea', count: 1 }, y)]
 				},
 				{
 					id: 'node',
-					label: 'Assembly node (L1)',
+					label: 'Delivery and assembly node (SEL1)',
 					bomId: 'bom-1-4',
 					capacity: Infinity,
 					pos: (y) => [lagrangePosition('earth', 'L1', y)]

@@ -295,7 +295,7 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Prospecting',
-				body: '**32 prospecting satellites** each survey 20+ asteroids a year to find the best targets.',
+				body: 'First Phase 0 has to find a target. The re-assessment replaced the small-prospector fleet with a **remote survey plus electric-propulsion rendezvous scouts** that sample candidates: 4–10 across the models.',
 				duration: 8,
 				year: { to: at('phase-0', 0.3), over: 3 },
 				focus: 'bom-0-1',
@@ -303,15 +303,15 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Mining',
-				body: '**20 mining robots** work the richest asteroids, each excavating **2–5 tonnes per hour**.',
+				body: 'Tether-powered **mining robots** work the target, each excavating **2–5 tonnes per hour**. How many is open: Claude 8 plus 4 replacements, Gemini 20, GPT 6 plus 6.',
 				duration: 8,
 				year: { to: at('phase-0', 0.6), over: 3 },
 				focus: 'bom-0-2',
 				select: 'bom-0-2'
 			},
 			{
-				title: 'Processing at L4',
-				body: 'Ore is refined at a **processing station at Sun–Earth L4**, up to 50,000 tonnes a year. The models agree on L4 or L5 — the dashed marker is the L5 option.',
+				title: 'Processing at the asteroid',
+				body: 'Ore is no longer shipped to a central station. All three models put the **plant at the target asteroid** and ship product: **0.6–2.5 kt a year of iron-nickel**. The dashed marker is Claude’s alternative, a central station near SEL1 fed with concentrate.',
 				duration: 9,
 				year: { to: at('phase-0', 0.8), over: 3 },
 				focus: 'bom-0-3',
@@ -320,7 +320,7 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'The assembly node',
-				body: 'Refined metal feeds the **assembly node**, where Phase 1 collectors are built.',
+				body: 'MW-class tugs carry the metal to the **delivery node at SEL1** (interim, D-04), where the Phase 1 assembly node builds collectors.',
 				duration: 8,
 				year: { to: at('phase-1', 0.3), over: 4 },
 				focus: 'bom-1-4',
@@ -640,13 +640,13 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Transport vehicles',
-				body: 'Ion-propelled freighters with **150–250 t** payloads and 6–10 km/s of Δv carry ore inward. Fleet size differs again: 10 in the consensus, 15 in the BOM (CI-17).',
+				body: '**MW-class cargo tugs**, 1–2.5 MWe each, carry 150–300 t of product per trip: Claude 12, Gemini 14, GPT 10. No propellant is selected yet; iodine is the costed reference, argon the alternate (D-05, interim).',
 				duration: 10,
 				select: 'bom-0-4'
 			},
 			{
-				title: 'Material processing station',
-				body: 'One modular station at **Sun–Earth L4**, 400–500 t growing to ~1,000 t, refining **50,000 t a year** on 1–2.5 MW of solar power.',
+				title: 'The processing plant',
+				body: 'Beneficiation and primary processing at the target asteroid, **iron-nickel only**. Plant mass: Claude 250–500 t, GPT 180–300 t. Plant power ranges from 0.5–1.5 MW average (GPT) to 8.5 MWe (Gemini).',
 				duration: 10,
 				year: { to: at('phase-0', 0.8), over: 3 },
 				focus: 'bom-0-3',
@@ -654,15 +654,15 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Power and propellant',
-				body: '**100 MW** of triple-junction arrays (32–36% efficient) power the base, and **ISPP** modules of ~250 kWe each turn water ice into 100–120 t of propellant a year.',
+				body: 'Site power differs by model: Claude 2.5–8 MW at the site (tug arrays count with the tugs), GPT 35–50 MW in total, Gemini 50 MW. There is no propellant production; **water is a pilot**, only if the target is C-type (D-05, interim).',
 				duration: 10,
 				focus: 'earth',
 				select: 'bom-0-6',
 				camera: { distance: 0.03, polar: 65 }
 			},
 			{
-				title: 'The station, up close',
-				body: 'The **processing station**: 180 × 120 × 80 m, a solar-thermal concentrator for smelting, 8,000 m² of PV and 4,000 m² of radiators. Initial mass 400–500 t, growing to about 1,000 t.',
+				title: 'The March 2026 design, up close',
+				body: 'This model is still the **March 2026 station design**: 180 × 120 × 80 m with a solar-thermal smelter. The co-located plant will be re-specified when the Phase 0 consensus is regenerated.',
 				duration: 12,
 				workbench: 'bom-0-3',
 				wbView: 'model',
@@ -670,7 +670,7 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Where the processing happens',
-				body: 'Inside the station, the models split on smelting technology, silicon processing and whether to send a crew at all.',
+				body: 'The models still split on the **metallurgy route**: no-melt carbonyl refining, hydrogen reduction or partial-gravity melting, each judged on its own at KDP-0B. Silicon is deferred, and Phase 0 is uncrewed.',
 				duration: 10,
 				workbench: 'bom-0-3',
 				wbView: 'consensus',

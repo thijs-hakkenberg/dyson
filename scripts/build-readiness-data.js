@@ -277,6 +277,14 @@ async function build() {
 		source: PHASE,
 		agreedChanges: agreed.rows.map(([change, value, attribution]) => ({ change, value, attribution })),
 		phaseCost: cost.rows.map(([model, a, b, total]) => ({ model, phase0A: a, phase0B: b, total })),
+		// Envelope of each model's headline total ($aB or $a–bB, the first figure in the cell), in USD
+		phaseCostEnvelope: (() => {
+			const xs = cost.rows.flatMap(([, , , total]) => {
+				const m = /\$(\d+(?:\.\d+)?)(?:–(\d+(?:\.\d+)?))?B/.exec(total);
+				return m ? [Number(m[1]), Number(m[2] ?? m[1])] : [];
+			});
+			return { min: Math.min(...xs) * 1e9, max: Math.max(...xs) * 1e9 };
+		})(),
 		bomDelta: delta.rows.map(([action, item, supportedBy, quantity, unitCost, confidence]) => ({ action, item, supportedBy, quantity, unitCost, confidence }))
 	};
 

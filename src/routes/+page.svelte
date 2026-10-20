@@ -3,12 +3,15 @@
 	import { getPhases, formatCurrency, getTotalProjectCost } from '$lib/services/content';
 	import { trackCTA } from '$lib/services/mixpanel';
 	import HeroSun from '$lib/components/home/HeroSun.svelte';
+	import { PHASE_0_ARCHITECTURE } from '$lib/services/phase-0-plan';
 
 	let { data } = $props();
 
 	const phases = getPhases();
 	const recentPosts = $derived(data.recentPosts);
 	const totalCost = getTotalProjectCost();
+	// Phase 0's BOM is being rebuilt after the re-assessment; until then show the panel's range
+	const phase0Cost = PHASE_0_ARCHITECTURE.phaseCostEnvelope;
 
 	let scrollProgress = $state(0);
 	let starfieldEl: HTMLDivElement;
@@ -186,7 +189,7 @@
 			{phases.length} phases. Centuries.<br>{formatCurrency(totalCost)}.
 		</h2>
 		<p class="section-desc reveal reveal-delay-2">
-			We don't start building until every question is answered. Phase 0 is pure research&mdash;proving feasibility before spending a single dollar on hardware.
+			Phase 0 is split in two. Phase 0A&mdash;research, rendezvous scouts and a pathfinder&mdash;proves what can be done. Phase 0B, production at an asteroid, is an option we exercise only at a gate, once the technology, a target, demand, cost and a licence all check out.
 		</p>
 		<div class="phase-timeline reveal reveal-delay-3">
 			{#each phases as phase, i}
@@ -202,7 +205,11 @@
 							{/if}
 						</h3>
 						<div class="phase-meta">
-							<span class="cost">{formatCurrency(phase.totalCost)}</span>
+							{#if phase.id === 'phase-0'}
+								<span class="cost" title="Range across the three re-assessment models; the Phase 0 BOM is being rebuilt">{formatCurrency(phase0Cost.min)}–{formatCurrency(phase0Cost.max)} (panel range)</span>
+							{:else}
+								<span class="cost">{formatCurrency(phase.totalCost)}</span>
+							{/if}
 							<span>{phase.estimatedDuration}</span>
 						</div>
 						<p class="phase-desc">{phase.description}</p>

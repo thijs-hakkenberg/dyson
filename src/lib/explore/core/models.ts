@@ -122,12 +122,12 @@ export const ELEMENT_MODELS: ElementModel[] = [
 		params: { size: 180, aspect: 0.66, count: 6, concentrator: true },
 		sizeBasis: 'model',
 		after: 'Claude',
-		mass: '400–500 t initial; 800–1,000 t full build',
-		dims: '180 × 120 × 80 m; 8,000 m² solar; 4,000 m² radiators',
+		mass: 'Round 2 (plant at the NEA): Claude 250–500 t, GPT 180–300 t; Gemini not stated. March 2026 station: 400–1,000 t',
+		dims: 'Shown: the March 2026 station design (180 × 120 × 80 m). The co-located plant is re-specified when the Phase 0 consensus is regenerated',
 		variants: [],
 		callouts: [
-			{ label: 'Solar-thermal concentrator (primary smelting)', at: [0, 0.32, 0.3] },
-			{ label: 'Processing modules · 50,000 t/yr', at: [0, 0, 0] },
+			{ label: 'Solar-thermal concentrator (March 2026 design)', at: [0, 0.32, 0.3] },
+			{ label: 'Processing modules (March 2026 design)', at: [0, 0, 0] },
 			{ label: 'Radiators · 4,000 m²', at: [-0.42, 0, 0] },
 			{ label: 'PV arrays · 8,000 m²', at: [0.42, 0.1, 0] }
 		],

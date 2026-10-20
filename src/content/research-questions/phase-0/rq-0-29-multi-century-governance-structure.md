@@ -29,11 +29,13 @@ createdDate: "2026-02-09"
 
 ## Background
 
+> **Update, 20 October 2026.** Under decision D-01 (accepted 2026-10-12), Phase 0 is no longer pure research: Phase 0A funds research, scouts and a pathfinder, and Phase 0B production is a gated option. The governance question is unchanged; the timeline in the background below predates the split. <!-- stale-ok -->
+
 Project Dyson faces a meta-level organizational challenge distinct from its technical governance questions (which focus on swarm node coordination, distributed consensus, and autonomous system management). Before building any physical infrastructure, the project itself needs an organizational structure capable of:
 
 1. **Temporal persistence:** Operating across 10+ human generations (200-500+ years for later phases)
 2. **Volunteer coordination:** Coordinating global non-funded contributors without traditional employment relationships
-3. **Resource acquisition:** Eventually transitioning from pure research to physical R&D requiring significant capital
+3. **Resource acquisition:** Eventually transitioning from pure research to physical R&D requiring significant capital <!-- stale-ok -->
 4. **Global benefit assurance:** Ensuring outputs benefit humanity broadly rather than concentrating power
 5. **Authority legitimacy:** Maintaining credibility and decision-making authority without state backing
 

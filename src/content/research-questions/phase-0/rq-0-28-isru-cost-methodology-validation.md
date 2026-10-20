@@ -174,7 +174,7 @@ These might represent 1-10% of current estimates, not 100%.
 
 ## Re-assessment 2026-10 (Phase 0, round 2)
 
-**Reopened.** Claude and GPT dispute the conclusion that Phase 0 costs are "approximately correct". The round-2 panel's Phase 0 totals are $22–83B (Claude), ~$22B+ (Gemini) and $30–195B (GPT), against the BOM's $15.7B. Launch, NRE, operations and contingency were missing (findings P0-F08 to F12).
+**Reopened.** Claude and GPT dispute the conclusion that Phase 0 costs are "approximately correct". The round-2 panel's Phase 0 totals are $22–83B (Claude), ~$22B+ (Gemini) and $30–195B (GPT), against the BOM's $15.7B. Launch, NRE, operations and contingency were missing (findings P0-F08 to F12). <!-- stale-ok -->
 
 **How this gets answered:**
 - **Analysis:** a delivered-cost model on one basis, in rq-0-61.

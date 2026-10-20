@@ -37,7 +37,7 @@ Sources: `reconciliation/phase-0/trl/round-1/gates/synthesis/gates.md`, `gates-p
 | Element | Claude | Gemini | GPT |
 |---|---|---|---|
 | Threshold | 0B P70 $/kg ≤ R × Earth-supply P50 $/kg at SEL1. R is set by the owner. Claude cites D-01 ("capability programme, not a cost saving") as implying R may exceed 1. | Delivered $/kg must **undercut** Earth supply | Expected delivered cost no higher than Earth supply, plus an owner-approved downside bound. A capability subsidy requires a **new explicit owner decision**, "not a relabelled economics pass." |
-| Robustness | The decision must not reverse across the launch-price range. Notes current dispersion: $22–195B from the panel against $15.7B in the BOM. | — | Sensitivity to grade, utilisation, replacement and delay |
+| Robustness | The decision must not reverse across the launch-price range. Notes current dispersion: $22–195B from the panel against $15.7B in the BOM. | — | Sensitivity to grade, utilisation, replacement and delay <!-- stale-ok --> |
 | Estimate band | ±30% or better | — | — |
 
 The models disagree on whether a premium above cost parity can pass inside this gate (Claude) or needs a separate owner decision (GPT). Gemini sets the threshold below parity.
@@ -50,7 +50,7 @@ D-01 calls Phase 0 a capability programme, not a cost saving, which Claude reads
 
 - Value of R, if any, and what it buys (capability, learning, Phase 1 option value).
 - Whether a premium belongs in the gate or in a separate decision.
-- Robustness across launch-price scenarios and the cost dispersion ($22–195B panel vs $15.7B BOM).
+- Robustness across launch-price scenarios and the cost dispersion ($22–195B panel vs $15.7B BOM). <!-- stale-ok -->
 
 ## Research Directions
 

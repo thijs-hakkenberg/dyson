@@ -81,14 +81,14 @@ export const PLACEMENTS: Placement[] = [
 		bomId: 'bom-0-3',
 		slug: 'material-processing-station',
 		phaseId: 'phase-0',
-		anchor: { kind: 'lagrange', body: 'earth', point: 'L4' },
-		baselineModels: [],
-		note: 'Consensus: site at Sun–Earth L4/L5 for stability and communication latency. Models disagree on co-location with mining.',
+		anchor: { kind: 'nea', count: 1 },
+		baselineModels: ['Claude', 'Gemini', 'GPT'],
+		note: 'Phase 0 re-assessment (round 2, 2026-10): all three models co-locate beneficiation and primary processing at the target NEA and ship product, not ore. The central 50,000 t/yr station at Sun–Earth L4/L5 is abandoned. GPT: "favoured but not universally optimal".', // stale-ok: names the superseded design
 		alternatives: [
 			{
-				anchor: { kind: 'lagrange', body: 'earth', point: 'L5' },
-				models: [],
-				note: 'Co-equal L5 option in consensus'
+				anchor: { kind: 'lagrange', body: 'earth', point: 'L1' },
+				models: ['Claude'],
+				note: 'Claude keeps a central station near SEL1 fed with ≥20:1 concentrate as an alternative; Gemini\'s own weighted scoring rates SEL1 marginally higher.'
 			}
 		],
 		visual: 'marker'
@@ -98,7 +98,7 @@ export const PLACEMENTS: Placement[] = [
 		slug: 'transport-vehicles',
 		phaseId: 'phase-0',
 		baselineModels: [],
-		note: 'SEP cargo traffic between NEA mining sites and the processing station (Kr/I propulsion).',
+		note: 'MW-class SEP cargo tugs (1–2.5 MWe each) carry product from the processing plant at the NEA to the delivery node (SEL1, D-04 interim). Propellant: none selected; iodine reference, argon alternate (D-05 interim).',
 		alternatives: [],
 		visual: 'none'
 	},
@@ -107,7 +107,7 @@ export const PLACEMENTS: Placement[] = [
 		slug: 'solar-power-arrays',
 		phaseId: 'phase-0',
 		baselineModels: [],
-		note: 'Co-located with mining and processing operations.',
+		note: 'Site power at the NEA (HV tethers to the robots, distributed storage); tug arrays belong to the tugs. Site scale differs by model (round 2).',
 		alternatives: [],
 		visual: 'none'
 	},
@@ -116,7 +116,7 @@ export const PLACEMENTS: Placement[] = [
 		slug: 'ispp-systems',
 		phaseId: 'phase-0',
 		baselineModels: [],
-		note: 'Co-located with NEA mining sites (water extraction + electrolysis).',
+		note: 'Water pilot at the NEA, only if the target is C-type (D-05 interim). No production LOX/LH₂ in Phase 0.',
 		alternatives: [],
 		visual: 'none'
 	},

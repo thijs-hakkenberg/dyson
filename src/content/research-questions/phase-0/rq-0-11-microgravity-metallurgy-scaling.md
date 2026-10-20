@@ -32,6 +32,8 @@ createdDate: "2026-01-31"
 
 ## Background
 
+> **Update, 20 October 2026.** The Phase 0 re-assessment abandoned the central station, made Phase 0 uncrewed, and co-located processing at the target asteroid. Whether gravity is needed at all is now contested: partial-gravity melting (T07) is one route alongside no-melt carbonyl refining (T06) and H₂ reduction (T17), each judged on its own at KDP-0B. The background below describes the March 2026 design. See [/analysis/technology-readiness](/analysis/technology-readiness).
+
 The Material Processing Station is a cornerstone infrastructure element for Project Dyson, designed to convert raw asteroid material into refined metals and semiconductors for swarm component manufacturing. The consensus specification calls for a modular station with initial mass of 400,000-500,000 kg, scaling to 800,000-1,000,000 kg at full build, capable of processing 50,000 tonnes of material annually. The station will produce structural metals (aluminum, iron, nickel) and potentially solar-grade silicon using either solar concentrator furnaces, electric arc furnaces, or a hybrid approach.
 
 This question arises directly from the open questions identified across all three AI models: "Can microgravity metallurgy scale from lab experiments to industrial production?" Current microgravity metallurgy experience is limited to small-scale experiments aboard the ISS and parabolic flight campaigns, typically processing samples measured in grams. The Material Processing Station requires scaling this by approximately six to eight orders of magnitude to achieve the 50,000 tonnes/year throughput target.
@@ -58,7 +60,7 @@ The consensus recommendation to "conduct ISS metallurgy experiments before commi
 
 **Zone refining in zero-g**: Producing solar-grade silicon (if included in scope) requires zone refining. The optimal process parameters—heating rate, zone travel speed, impurity segregation coefficients—may differ substantially from terrestrial values due to altered convection patterns.
 
-**Crew versus automation tradeoffs**: The divergent views on crew presence (quarterly visits versus annual) partly reflect uncertainty about how much human intervention scaling operations will require. Fully autonomous operation assumes predictable, well-characterized processes.
+**Crew versus automation tradeoffs**: The divergent views on crew presence (quarterly visits versus annual) partly reflect uncertainty about how much human intervention scaling operations will require. Fully autonomous operation assumes predictable, well-characterized processes. <!-- stale-ok -->
 
 ## Research Directions
 

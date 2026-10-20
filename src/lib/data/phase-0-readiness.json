@@ -6183,6 +6183,10 @@
 				"total": "$30–195B (central 80)"
 			}
 		],
+		"phaseCostEnvelope": {
+			"min": 22000000000,
+			"max": 195000000000
+		},
 		"bomDelta": [
 			{
 				"action": "split",

@@ -97,9 +97,10 @@ export const ITEM_METRICS: ItemMetrics[] = [
 		bomId: 'bom-0-3',
 		group: 'Facilities',
 		countable: true,
-		useW: span(1 * M, 2.5 * M),
-		throughput: { perHour: perYear(fixed(50_000)), unit: 't material processed' },
-		source: 'Throughput 50,000 t/yr at full capacity; solar-powered, 1–2.5 MW'
+		useW: span(0.5 * M, 8.5 * M),
+		throughput: { perHour: perYear(span(600, 2_500)), unit: 't Fe-Ni product' },
+		source:
+			'Phase 0 re-assessment, round 2 (plant co-located at the NEA): product 0.6–2.5 kt/yr (Claude 0.6–2.2, central 1.3; Gemini 1.0–2.5; GPT 0.67–1.33 capacity). Plant power: Claude 1–2.5 MW, GPT 0.5–1.5 MW average, Gemini 8.5 MWe. Consensus regeneration pending.'
 	},
 	{
 		bomId: 'bom-0-4',
