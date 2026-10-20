@@ -1,0 +1,166 @@
+# Phase 0 BOM structure after the round-2 re-assessment (round-2/reconciliation/phase.md §4).
+#
+# Owner decision 2026-10-20: accept the structural actions the panel supports (which items
+# exist, the 0A/0B split, removals); do NOT pick numbers from the round-2 table. Quantities and
+# costs come from Phase 0 specs regenerated with this structure as context
+# (scripts/query-bom-specs.js --phase=phase-0), with divergence kept in divergent-views.yaml.
+#
+# Existing ids and slugs are kept so links, spec directories and the explorer stay stable.
+# `delta` quotes the §4 rows each item answers; `supported_by` is from §4.
+decided: '2026-10-20'
+decided_by: owner
+source: reconciliation/phase-0/round-2/reconciliation/phase.md
+items:
+  - bomId: bom-0-1
+    slug: prospecting-satellites
+    name: Prospecting Survey and Rendezvous Scouts
+    category: Spacecraft
+    sub_phase: 0A
+    scope: >-
+      Remote survey (observing programme and survey data) plus electric-propulsion rendezvous scouts with
+      subsurface sampling and bulk assay. Replaces the monopropellant prospector fleet.
+    delta: [split/resize bom-0-1 prospecting → remote survey + rendezvous scouts, add survey data / observing programme]
+    supported_by: all
+  - bomId: bom-0-2
+    slug: mining-robots
+    name: Mining Robots
+    category: Robotics
+    sub_phase: 0B (pathfinder units in 0A)
+    scope: Tether-powered excavation robots at the target NEA, with onboard batteries for mobility and safe mode, plus replacements.
+    delta: [resize bom-0-2 mining robots]
+    supported_by: all
+  - bomId: bom-0-3
+    slug: material-processing-station
+    name: Processing Plant at the Target NEA
+    category: Infrastructure
+    sub_phase: 0B
+    scope: >-
+      Beneficiation and primary processing co-located at the target asteroid; native/reduced Fe-Ni product only
+      (solar-grade Si and oxide-derived Al/Si deferred). Ships product, not ore. Includes waste-heat rejection
+      and containment of tailings. The central SEL4/L5 station is abandoned.
+    delta: ["resize/relocate bom-0-3 processing plant, co-located"]
+    supported_by: all
+  - bomId: bom-0-4
+    slug: transport-vehicles
+    name: MW-class Cargo Tugs
+    category: Spacecraft
+    sub_phase: 0B
+    scope: Electric-propulsion cargo tugs of 1–2.5 MWe with 150–300 t payloads, carrying product from the NEA to the delivery node.
+    delta: [resize bom-0-4 cargo tugs]
+    supported_by: all
+  - bomId: bom-0-5
+    slug: solar-power-arrays
+    name: Site Power, Arrays and Storage
+    category: Power Systems
+    sub_phase: 0B
+    scope: >-
+      Site power generation and HV distribution at the NEA, with distributed storage sized per site. The
+      200–500 MWh generic battery bank is removed. Whether tug arrays are counted here or with the tugs differs
+      by model; state your choice.
+    delta: [resize bom-0-5 site power / arrays, add distributed storage, remove 200–500 MWh generic battery bank]
+    supported_by: all
+  - bomId: bom-0-6
+    slug: ispp-systems
+    name: Water Pilot (C-type target only)
+    category: Infrastructure
+    sub_phase: 0B (conditional)
+    scope: >-
+      A water-extraction pilot, flown only if the selected target is C-type (D-05, proposed). No production
+      LOX/LH₂ and no EML1 depot in Phase 0.
+    delta: [resize bom-0-6 ISPP → water pilot, remove production LOX/LH₂ and EML1 depot]
+    supported_by: all
+  - bomId: bom-0-7
+    slug: organizational-infrastructure
+    name: Organizational Infrastructure
+    category: Governance
+    sub_phase: 0A
+    scope: Legal, governance and coordination infrastructure, with a full specification (round 2 found none).
+    delta: [resize bom-0-7 organization]
+    supported_by: all
+  - bomId: bom-0-8
+    slug: launch-delivery
+    name: Earth-to-Space Launch and Delivery
+    category: Logistics
+    sub_phase: 0A+0B
+    scope: Launch and deep-space delivery of all Phase 0 hardware to its operating location; LEO price and delivered price kept separate.
+    delta: [add Earth-to-space launch/delivery]
+    supported_by: all
+  - bomId: bom-0-9
+    slug: comms-ground-segment
+    name: Communications and Ground Segment
+    category: Operations
+    sub_phase: 0A+0B
+    scope: Deep-space communications, ground stations or commercial services, and authenticated command for the fleet. DSN is not assumed free.
+    delta: [add comms / ground segment]
+    supported_by: all
+  - bomId: bom-0-10
+    slug: mission-operations
+    name: Mission Operations
+    category: Operations
+    sub_phase: 0A+0B
+    scope: Operations staff, facilities and software over the Phase 0 lifetime.
+    delta: [add mission operations]
+    supported_by: all
+  - bomId: bom-0-11
+    slug: nre-qualification
+    name: NRE, Ground R&D and Qualification
+    category: Development
+    sub_phase: 0A (and 0B)
+    scope: Non-recurring engineering, ground test facilities and qualification campaigns for the critical technologies (TRL re-baseline T01–T26).
+    delta: [add NRE / qualification, add 0A ground R&D / facilities]
+    supported_by: "all (ground R&D separately: Claude; GPT includes it in NRE)"
+  - bomId: bom-0-12
+    slug: pathfinder-demonstrator
+    name: 0A Pathfinder Demonstrator
+    category: Spacecraft
+    sub_phase: 0A
+    scope: One mission that tests excavation, processing and containment at the target before KDP-0B.
+    delta: [add 0A pathfinder demonstrator]
+    supported_by: all
+  - bomId: bom-0-13
+    slug: receiving-node
+    name: Phase 1 Receiving Node (SEL1)
+    category: Infrastructure
+    sub_phase: 0B
+    scope: Where Phase 0 delivers its product; SEL1 is the reference case (D-04, proposed), re-decided with Phase 1.
+    delta: [add Phase 1 receiving node]
+    supported_by: Claude, GPT (Gemini names an SEL1 depot in its interfaces)
+  - bomId: bom-0-14
+    slug: spares-replacements
+    name: Spares and Replacements
+    category: Logistics
+    sub_phase: 0B
+    scope: Spares programme for robots, plant, tugs and power, including precision spares imported from Earth.
+    delta: [add spares / replacements]
+    supported_by: all (Gemini as a 20% inventory buffer)
+  - bomId: bom-0-15
+    slug: debris-contamination
+    name: Debris and Contamination Control
+    category: Safety
+    sub_phase: 0A+0B
+    scope: Escaped-debris and tailings containment, verification and monitoring; ALARP with an interim ceiling (D-03, proposed).
+    delta: [add debris / contamination]
+    supported_by: all
+  - bomId: bom-0-16
+    slug: ep-propellant-supply
+    name: Electric-Propulsion Propellant Supply
+    category: Logistics
+    sub_phase: 0B
+    scope: Imported EP propellant for the tugs. No propellant selected; iodine is the costed reference and argon the alternate (D-05, proposed); xenon not baselined.
+    delta: [add imported EP propellant (commodity)]
+    supported_by: Claude, GPT (Gemini as an interface)
+  - bomId: bom-0-17
+    slug: contingency-reserve
+    name: Contingency and Reserve
+    category: Programme
+    sub_phase: 0A+0B
+    scope: Contingency on 0A and 0B separately, stated as a percentage with its basis.
+    delta: [add contingency / reserve]
+    supported_by: all
+removed:
+  - crew systems, habitat and quarterly visits (Phase 0 is uncrewed; structural reserve and docking interfaces stay)
+  - the 200–500 MWh generic battery bank (folded into site storage, bom-0-5)
+  - production LOX/LH₂ and the EML1 depot
+not_adopted:
+  - item: water-EP qualification track
+    reason: Proposed by Claude only (conditional on a C-type target); kept as a divergent view under D-05.
