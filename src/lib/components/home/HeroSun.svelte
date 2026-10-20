@@ -14,12 +14,8 @@
 		let cleanup = () => {};
 
 		(async () => {
-			const [{ WebGLRenderer, PerspectiveCamera, Scene, NoToneMapping }, { createProceduralSun }, { dateToYear }] =
-				await Promise.all([
-					import('three'),
-					import('$lib/explore/sun/procedural'),
-					import('$lib/explore/core/units')
-				]);
+			const [{ WebGLRenderer, PerspectiveCamera, Scene, NoToneMapping }, { createProceduralSun, dateToYear }] =
+				await Promise.all([import('three'), import('photosphere')]);
 			if (disposed) return;
 
 			let renderer: InstanceType<typeof WebGLRenderer>;

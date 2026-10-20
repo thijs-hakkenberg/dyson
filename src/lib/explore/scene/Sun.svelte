@@ -5,11 +5,11 @@
 	import { explorer } from '../core/state.svelte';
 	import Marker from './Marker.svelte';
 	import { BODY_RADIUS_KM, kmToAU } from '../core/units';
-	import { useSunSurface } from '../sun/context';
+	import { useSunSurface } from 'photosphere/svelte';
 
 	const R = kmToAU(BODY_RADIUS_KM.sun);
 
-	// Surface renderer is injected (see sun/types.ts); default is the procedural photosphere
+	// Surface renderer is injected (photosphere package); default is its procedural Sun
 	const surface = useSunSurface()({ radius: R });
 	onDestroy(() => surface.dispose());
 

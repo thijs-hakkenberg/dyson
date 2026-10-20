@@ -43,6 +43,7 @@
 		"js-yaml": "^4.1.1",
 		"marked": "^17.0.1",
 		"mixpanel-browser": "^2.75.0",
+		"photosphere": "^0.1.0",
 		"three": "^0.186.1"
 	},
 	"engines": {
