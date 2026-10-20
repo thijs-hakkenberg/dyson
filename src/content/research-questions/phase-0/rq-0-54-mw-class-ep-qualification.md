@@ -24,7 +24,7 @@ createdDate: "2026-10-12"
 
 ## Background
 
-The revised architecture relies on 1–2.5 MWe tugs. The panel rates high-power iodine at TRL 2–4 (the TRL table still says 6–7 for "100+ kW SEP"). Life requirements differ: Claude ≥10,000 h; Gemini 5,000 h at ≥100 kWe; GPT total-impulse qualification for the actual 20,000–40,000 h duty. How much of the thrusters' ~0.8 MW of losses the spacecraft must reject is open (Claude: PPU losses only; GPT: must be measured). Gemini raises iodine plume corrosion of arrays.
+The revised architecture relies on 1–2.5 MWe tugs. The panel rates high-power iodine at TRL 2–4 (the TRL table still says 6–7 for "100+ kW SEP"). Life requirements differ: Claude ≥10,000 h; Gemini 5,000 h at ≥100 kWe; GPT total-impulse qualification for the actual 20,000–40,000 h duty. How much of the thrusters' ~0.8 MW of losses the spacecraft must reject is open (Claude: PPU losses only; GPT: must be measured). Gemini raises iodine plume corrosion of arrays. <!-- stale-ok: quotes the superseded rating -->
 
 Raised by the Phase 0 re-assessment (round 2, 2026-10-12): `reconciliation/phase-0/round-2/reconciliation/phase.md` and `reconciliation/phase-0/decisions.md`.
 

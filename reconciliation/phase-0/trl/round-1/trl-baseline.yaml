@@ -1,0 +1,1398 @@
+# Panel ratings per technology; panel.* summarises without averaging away divergence.
+generated: '2026-10-17T21:53:59.705Z'
+technologies:
+  - id: T01
+    technology: MW-class SEP thruster and PPU cluster
+    ratings:
+      claude-opus-5-5:
+        model_id: solar-electric-propulsion
+        current_trl:
+          min: 2
+          max: 4
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 7
+          max: 12
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: t01-mw-sep-cluster
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: high
+      gpt-6-1-sol:
+        model_id: solar-electric-propulsion
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 8
+          max: 12
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 6
+        max: 6
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T02
+    technology: MW-scale deployable solar arrays (tug; site per Gemini and GPT)
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 2
+          max: 4
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: tech-02-mw-arrays
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 4
+          max: 6
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 3
+      target_trl: 6
+      ad2:
+        min: 5
+        max: 5
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T03
+    technology: MW-class waste-heat rejection (plant and tug)
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 3
+          max: 5
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 3
+          max: 5
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        current_trl:
+          min: 2
+          max: 4
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 4
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 5
+        median: 3.5
+      target_trl: 6
+      ad2:
+        min: 5
+        max: 6
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T04
+    technology: Asteroid excavation (with anchoring per Gemini and GPT)
+    ratings:
+      claude-opus-5-5:
+        model_id: asteroid-mining-bucket-wheel
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 7
+        years_to_target:
+          min: 8
+          max: 14
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: t04-asteroid-excavation
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 5
+          max: 8
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: high
+      gpt-6-1-sol:
+        model_id: asteroid-mining-bucket-wheel
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 8
+          max: 15
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 3
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 6
+        max: 7
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T05
+    technology: Microgravity beneficiation of native Fe-Ni
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 12
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 3
+          max: 5
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 5
+        max: 6
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T06
+    technology: 'No-melt carbonyl refining with CO recycle (Gemini: carbonyl or H2 reduction combined)'
+    ratings:
+      claude-opus-5-5:
+        model_id: carbonyl-refining-co-recycle
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: t06-no-melt-carbonyl
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        model_id: t06-no-melt-carbonyl-refining
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 3
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 6
+        max: 6
+      risk_if_fail: architecture-change
+      agreement: agree
+  - id: T07
+    technology: Partial-gravity melting and slag/metal separation in a rotating module
+    ratings:
+      claude-opus-5-5:
+        model_id: microgravity-metallurgy
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 8
+          max: 12
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: t07-partial-g-smelting
+        current_trl:
+          min: 2
+          max: 2
+        target_trl: 6
+        ad2: 7
+        years_to_target:
+          min: 5
+          max: 8
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: high
+      gpt-6-1-sol:
+        model_id: microgravity-metallurgy
+        current_trl:
+          min: 2
+          max: 2
+        target_trl: 6
+        ad2: 7
+        years_to_target:
+          min: 8
+          max: 12
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 3
+        median: 2
+      target_trl: 6
+      ad2:
+        min: 6
+        max: 7
+      risk_if_fail: architecture-change
+      agreement: agree
+  - id: T08
+    technology: Particle containment, escape verification and tailings management
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 7
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 7
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        current_trl:
+          min: 2
+          max: 2
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 5
+          max: 9
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 3
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 6
+        max: 7
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T09
+    technology: High-voltage power tethers and site distribution on regolith
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 5
+        ad2: 5
+        years_to_target:
+          min: 3
+          max: 6
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 3
+          max: 5
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 5
+        max: 6
+      risk_if_fail: architecture-change
+      agreement: agree
+  - id: T10
+    technology: Long-duration autonomy for mining, processing and proximity operations
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 7
+          max: 12
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: high
+      gpt-6-1-sol:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 3.5
+      target_trl: 6
+      ad2:
+        min: 6
+        max: 6
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T11
+    technology: Rendezvous scout spacecraft (with sampling per Gemini and GPT)
+    ratings:
+      claude-opus-5-5:
+        model_id: rendezvous-scout-spacecraft
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 7
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: architecture-change
+        phase_need: 0A
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: autonomous-asteroid-prospecting
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 8
+        ad2: 5
+        years_to_target:
+          min: 4
+          max: 6
+        risk_if_fail: architecture-change
+        phase_need: 0A
+        confidence: medium
+      gpt-6-1-sol:
+        model_id: autonomous-asteroid-prospecting
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 5
+          max: 9
+        risk_if_fail: project-ending
+        phase_need: 0A
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 3.5
+      target_trl: 8
+      ad2:
+        min: 5
+        max: 6
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T12
+    technology: Autonomous handling, docking and transfer of 150-300 t payloads
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 12
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 3
+          max: 5
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 7
+          max: 12
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 5
+        max: 6
+      risk_if_fail: architecture-change
+      agreement: agree
+  - id: T13
+    technology: Asteroid water extraction pilot
+    ratings:
+      claude-opus-5-5:
+        model_id: isru-water-extraction
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 5
+        ad2: 5
+        years_to_target:
+          min: 3
+          max: 6
+        risk_if_fail: cost-increase
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: isru-water-extraction
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 5
+          max: 8
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        model_id: isru-water-extraction
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 3.5
+      target_trl: 6
+      ad2:
+        min: 5
+        max: 6
+      risk_if_fail: architecture-change
+      agreement: agree
+  - id: T14
+    technology: Propellant storage and feed at hundreds of tonnes per tug
+    ratings:
+      claude-opus-5-5:
+        model_id: propellant-storage-and-feed
+        current_trl:
+          min: 2
+          max: 4
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 5
+          max: 10
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: prop-storage-feed-t14
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        model_id: t14-propellant-storage-feed
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 7
+          max: 12
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 5
+        max: 6
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T15
+    technology: Site power generation and transfer
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: t15
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: high
+      gpt-6-1-sol:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 5
+          max: 8
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 3
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 5
+        max: 6
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T16
+    technology: Anchoring, hold-down and surface mobility on low-cohesion bodies
+    ratings:
+      claude-opus-5-5:
+        model_id: asteroid-anchoring-holddown-mobility
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 7
+        years_to_target:
+          min: 8
+          max: 14
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: t16-anchoring-mobility
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 7
+        years_to_target:
+          min: 4
+          max: 8
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: high
+      gpt-6-1-sol:
+        model_id: asteroid-mining-bucket-wheel
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 7
+        years_to_target:
+          min: 7
+          max: 12
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 7
+        max: 7
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T17
+    technology: H2 reduction of the reducible feed fraction with H2 recycle
+    ratings:
+      claude-opus-5-5:
+        model_id: h2-reduction-recycle
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: t17-h2-reduction-recycle
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 7
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 3.5
+      target_trl: 6
+      ad2:
+        min: 6
+        max: 7
+      risk_if_fail: architecture-change
+      agreement: agree
+  - id: T18
+    technology: Subsurface sampling and in-situ bulk grade assay
+    ratings:
+      claude-opus-5-5:
+        model_id: subsurface-sampling-bulk-assay
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 7
+        ad2: 6
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: project-ending
+        phase_need: 0A
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 8
+        ad2: 6
+        years_to_target:
+          min: 3
+          max: 5
+        risk_if_fail: project-ending
+        phase_need: 0A
+        confidence: medium
+      gpt-6-1-sol:
+        model_id: autonomous-asteroid-prospecting
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 7
+          max: 12
+        risk_if_fail: project-ending
+        phase_need: 0A
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 3.5
+      target_trl: 8
+      ad2:
+        min: 6
+        max: 6
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T19
+    technology: 'Microgravity bulk-solids handling (Claude: and comminution)'
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 12
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: low
+      gemini-3-1-pro:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 7
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: high
+      gpt-6-1-sol:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 3
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 6
+        max: 7
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T20
+    technology: 'Distributed energy storage (GPT: and microgrid power management)'
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 3
+          max: 5
+        target_trl: 5
+        ad2: 4
+        years_to_target:
+          min: 3
+          max: 6
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 4
+        years_to_target:
+          min: 2
+          max: 4
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: high
+      gpt-6-1-sol:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 3
+          max: 6
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 3
+        max: 5
+        median: 3.5
+      target_trl: 6
+      ad2:
+        min: 4
+        max: 5
+      risk_if_fail: architecture-change
+      agreement: agree
+  - id: T21
+    technology: 'Robotic maintenance, repair and spares logistics (GPT: and site installation and recovery)'
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 12
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 6
+        max: 6
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T22
+    technology: Product consolidation, packaging and qualification
+    ratings:
+      claude-opus-5-5:
+        model_id: t22-product-consolidation-qualification
+        current_trl:
+          min: 2
+          max: 4
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: t22-product-consolidation
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        model_id: product-consolidation-packaging-qualification
+        current_trl:
+          min: 2
+          max: 2
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 10
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 5
+        max: 6
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T23
+    technology: Native-metal production/consolidation in rotating modules (GPT route)
+    ratings:
+      claude-opus-5-5:
+        model_id: native-metal-rotating-consolidation-gpt
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 6
+          max: 11
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        model_id: native-metal-rotating-gpt
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        model_id: microgravity-metallurgy
+        current_trl:
+          min: 2
+          max: 2
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 7
+          max: 12
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 3
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 6
+        max: 6
+      risk_if_fail: architecture-change
+      agreement: agree
+  - id: T24
+    technology: Dust-tolerant long-life mechanisms and seals
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 2
+          max: 4
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 5
+          max: 9
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 4
+          max: 5
+        target_trl: 6
+        ad2: 5
+        years_to_target:
+          min: 2
+          max: 4
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: high
+      gpt-6-1-sol:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 5
+          max: 8
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 5
+        median: 3.5
+      target_trl: 6
+      ad2:
+        min: 5
+        max: 6
+      risk_if_fail: project-ending
+      agreement: diverge
+  - id: T25
+    technology: Target-local and SEL1 cargo-node navigation and control
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 5
+        ad2: 5
+        years_to_target:
+          min: 4
+          max: 8
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 4
+        years_to_target:
+          min: 4
+          max: 7
+        risk_if_fail: project-ending
+        phase_need: 0B
+        confidence: medium
+      gpt-6-1-sol:
+        current_trl:
+          min: 2
+          max: 3
+        target_trl: 6
+        ad2: 6
+        years_to_target:
+          min: 5
+          max: 9
+        risk_if_fail: architecture-change
+        phase_need: 0B
+        confidence: medium
+    panel:
+      current_trl:
+        min: 2
+        max: 4
+        median: 2.5
+      target_trl: 6
+      ad2:
+        min: 4
+        max: 6
+      risk_if_fail: project-ending
+      agreement: agree
+  - id: T26
+    technology: Deep-space communications and resilient command service
+    ratings:
+      claude-opus-5-5:
+        current_trl:
+          min: 5
+          max: 7
+        target_trl: 6
+        ad2: 3
+        years_to_target:
+          min: 2
+          max: 4
+        risk_if_fail: cost-increase
+        phase_need: 0A
+        confidence: medium
+      gemini-3-1-pro:
+        current_trl:
+          min: 6
+          max: 7
+        target_trl: 6
+        ad2: 3
+        years_to_target:
+          min: 1
+          max: 2
+        risk_if_fail: cost-increase
+        phase_need: 0A
+        confidence: high
+      gpt-6-1-sol:
+        current_trl:
+          min: 3
+          max: 4
+        target_trl: 6
+        ad2: 4
+        years_to_target:
+          min: 3
+          max: 5
+        risk_if_fail: architecture-change
+        phase_need: 0A
+        confidence: medium
+    panel:
+      current_trl:
+        min: 3
+        max: 3
+        median: 3
+      target_trl: 6
+      ad2:
+        min: 4
+        max: 4
+      risk_if_fail: architecture-change
+      agreement: ruled
+      conditional_trl: 4
+    panel_before_ruling:
+      current_trl:
+        min: 3
+        max: 7
+        median: 6
+      target_trl: 6
+      ad2:
+        min: 3
+        max: 4
+      risk_if_fail: architecture-change
+      agreement: diverge
+    owner_ruling:
+      id: T26
+      decided: '2026-10-17'
+      decided_by: owner
+      source: rq-0-64 (src/content/research-questions/phase-0/rq-0-64-t26-comms-trl-rating-object/conclusion.md)
+      assessed_object: >-
+        The architecture-required integrated communications and authenticated command service for 15-29 deep-space
+        assets (store-and-forward through conjunction and solar-exclusion outages, key-lifecycle management), not its
+        best-demonstrated components.
+      reporting: Integrated-service headline plus configuration-specific, cited sub-ratings, never averaged into the headline.
+      basis: >-
+        All three models in rq-0-64 support a provisional TRL 3 headline with TRL 4 requiring integrated-breadboard
+        evidence, and architecture-change as the primary risk class, possibly project-ending if trustworthy command or a
+        licensing path cannot be shown. AD² 4 is GPT-6.1 Sol's rating of the integrated object (Claude rated key
+        management alone at 4; Claude's and Gemini's AD² 3 rated components).
+      still_open:
+        - 'TRL 3 is a working rating: verify its exit criteria against the evidence register (GPT).'
+        - >-
+          Headline rule for composites: cap by the weakest critical sub-rating (Claude) vs integration-specific
+          assessment (GPT).
+        - >-
+          When the TRL 6 obligation binds: now (Claude), via a funded path before KDP-0B (Gemini), or per the D-02
+          project-ending test (GPT).
+        - >-
+          Form of the TRL 6 demonstration: real DSN passes and a deep-space-distance link (Claude) vs relevant
+          environment justified function by function (GPT).
+    sub_ratings:
+      - element: Unmodified flight-proven deep-space RF equipment and operations
+        trl: 9
+        by: gpt-6-1-sol
+        note: Replacement or changed antennas, amplifiers and thermal installations are assessed separately.
+      - element: Deep-space DTN transport (DINET configuration)
+        trl: 7
+        by: gpt-6-1-sol
+        note: Does not qualify a different protocol version, implementation or security extension.
+      - element: Planned conjunction operations
+        trl: 9
+        by: gpt-6-1-sol
+        note: As an operational practice, where the spacecraft can safely execute preloaded activities.
+      - element: Project-specific authenticated fleet command and recovery integration
+        trl: 3-4
+        by: gpt-6-1-sol
+        note: Deep-space flight evidence of the full key-management lifecycle is absent or uncertain (Claude, GPT).
+      - element: Dedicated service capacity for 15-29 endpoints
+        trl: not established
+        by: gpt-6-1-sol
+        note: DSN multi-mission experience is not evidence of allocated contacts, terminals or recovery capacity.

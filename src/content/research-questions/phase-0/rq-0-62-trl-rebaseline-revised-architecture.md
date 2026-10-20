@@ -30,7 +30,7 @@ createdDate: "2026-10-12"
 
 ## Background
 
-The TRL table (`src/lib/services/trl-assessment.ts`) covers 6 of 33 BOM items (CI-19) and describes the original architecture. It rates "high-power SEP (100+ kW)" at TRL 6–7, while the revised design needs 1–2.5 MWe tugs the panel rates at TRL 2–4. The round-2 gates used no TRL at all because the re-assessment prompts did not include the table.
+The TRL table (`src/lib/services/trl-assessment.ts`) covers 6 of 33 BOM items (CI-19) and describes the original architecture. It rates "high-power SEP (100+ kW)" at TRL 6–7, while the revised design needs 1–2.5 MWe tugs the panel rates at TRL 2–4. The round-2 gates used no TRL at all because the re-assessment prompts did not include the table. <!-- stale-ok: quotes the superseded rating -->
 
 Raised by the Phase 0 re-assessment (round 2, 2026-10-12): `reconciliation/phase-0/round-2/reconciliation/phase.md` and `reconciliation/phase-0/decisions.md`.
 

@@ -1,0 +1,978 @@
+gates:
+  - id: kdp-0a
+    name: KDP-0A — authorise bounded Phase 0A
+    type: kdp
+    month:
+      min: 0
+      max: 3
+    proposed_by:
+      - Claude
+      - Gemini
+      - GPT
+    disputed: true
+    purpose: Authorise 0A research, survey, scouts and one pathfinder without committing to 0B production.
+    criteria:
+      - id: kdp-0a-baseline
+        description: Baseline architecture and funding approved
+        metric: Signed D-01 and D-02 decisions
+        threshold: Approved
+        technologies: []
+        trl_required: null
+        evidence_from:
+          - decisions.md
+          - D-01
+          - D-02
+        proposed_by:
+          - Gemini
+      - id: kdp-0a-evidence
+        description: Evidence register for every T-rating; panel agreement is not test evidence
+        metric: >-
+          Fraction of T01-T26 ratings with evidence entries (configuration, relevant environment, scale and duration
+          gaps, AD2)
+        threshold: >-
+          100%. Claude: unsupported ratings downgraded and planning to lower bound. GPT: unsupported ratings marked
+          provisional.
+        technologies:
+          - T01
+          - T02
+          - T03
+          - T04
+          - T05
+          - T06
+          - T07
+          - T08
+          - T09
+          - T10
+          - T11
+          - T12
+          - T13
+          - T14
+          - T15
+          - T16
+          - T17
+          - T18
+          - T19
+          - T20
+          - T21
+          - T22
+          - T23
+          - T24
+          - T25
+          - T26
+        trl_required: null
+        evidence_from:
+          - rq-0-62
+        proposed_by:
+          - Claude
+          - GPT
+        disputed: true
+      - id: kdp-0a-reclassify
+        description: Split risk classes ruled using the D-02 fallback test
+        metric: Owner ruling recorded per split classification
+        threshold: All of T02, T10, T14, T15, T22, T24, T25, T26 ruled
+        technologies:
+          - T02
+          - T10
+          - T14
+          - T15
+          - T22
+          - T24
+          - T25
+          - T26
+        trl_required: null
+        evidence_from:
+          - rq-0-62
+          - rq-0-64
+        proposed_by:
+          - Claude
+      - id: kdp-0a-plans
+        description: Funded development paths for project-ending technologies
+        metric: >-
+          Claude: approved TRL 6 plan per project-ending technology naming the relevant-environment test and scale rule;
+          AD2 >= 6 carries >= 2 funded approaches. GPT: approved work packages and test specifications; no universal TRL
+          entry floor.
+        threshold: All project-ending technologies covered
+        technologies:
+          - T01
+          - T02
+          - T03
+          - T04
+          - T05
+          - T08
+          - T10
+          - T14
+          - T15
+          - T16
+          - T19
+          - T21
+          - T22
+          - T24
+          - T25
+        trl_required: null
+        evidence_from:
+          - rq-0-62
+          - rq-0-63
+        proposed_by:
+          - Claude
+          - GPT
+        disputed: true
+      - id: kdp-0a-pathfinder-scope
+        description: Pathfinder scope traced to the technologies it must qualify
+        metric: Traceability matrix of pathfinder tests to T-IDs and TRL 6 claims
+        threshold: Covers T04, T05, T08, T16, T19, T24 (partial T10, T21)
+        technologies:
+          - T04
+          - T05
+          - T08
+          - T10
+          - T16
+          - T19
+          - T21
+          - T24
+        trl_required: null
+        evidence_from:
+          - rq-0-63
+        proposed_by:
+          - Claude
+      - id: kdp-0a-commitments
+        description: Pre-commit outcomes and threshold-setting
+        metric: >-
+          Claude: owner records failure outcomes, sunset month, economics premium R and definition of signed demand.
+          GPT: owners and deadlines approved for all four discriminating thresholds; sunset and extension limits via
+          rq-0-63.
+        threshold: All recorded or approved
+        technologies: []
+        trl_required: null
+        evidence_from:
+          - D-01
+          - D-02
+          - rq-0-63
+          - rq-0-50
+          - rq-0-58
+          - rq-0-61
+          - rq-0-41
+        proposed_by:
+          - Claude
+          - GPT
+        disputed: true
+    pass: >-
+      Fund 0A; 0B retained only as a gated option (Claude, GPT); Phase 1 carries Earth supply as baseline until KDP-0B
+      (Claude).
+    fail: >-
+      Claude: re-plan 0A, bounded to 6 months; Phase 1 assumes Earth supply. Gemini: project hold. GPT: defer, or
+      restrict to ground research and remote survey.
+  - id: 0a-scout-pdr
+    name: Rendezvous scout PDR
+    type: review
+    month:
+      min: 12
+      max: 24
+    proposed_by:
+      - Claude
+    disputed: true
+    purpose: Commit scout flight hardware with critical technologies at flight-project readiness.
+    criteria:
+      - id: scout-pdr-bus
+        description: Scout bus, EP and proximity operations ready for flight design
+        metric: TRL of scout critical technologies
+        threshold: TRL 6 (Claude; Gemini places T11 at TRL 7 in g-target; GPT requires TRL 8 actual system before launch)
+        technologies:
+          - T11
+        trl_required: 6
+        evidence_from:
+          - rq-0-62
+        proposed_by:
+          - Claude
+        disputed: true
+      - id: scout-pdr-assay
+        description: Subsurface sampling and bulk assay ready, or descoped assay adopted
+        metric: TRL of T18 payload, or approved descope (GRNS-class + surface sample + impactor exposure)
+        threshold: TRL 6, or descope with stated grade-uncertainty penalty
+        technologies:
+          - T18
+        trl_required: 6
+        evidence_from:
+          - rq-0-50
+        proposed_by:
+          - Claude
+        disputed: true
+      - id: scout-pdr-dsn
+        description: DSN-level communications for 4-10 scouts
+        metric: Allocated contact plan with DSN or equivalent
+        threshold: Signed allocation
+        technologies:
+          - T26
+        trl_required: null
+        evidence_from:
+          - rq-0-64
+        proposed_by:
+          - Claude
+    pass: Build and launch scouts.
+    fail: Fly descoped assay; g-target carries a wider uncertainty bound.
+  - id: g-scout-flight
+    name: Configuration-specific scout launch release
+    type: review
+    month:
+      min: 48
+      max: 108
+    proposed_by:
+      - GPT
+    disputed: true
+    purpose: Prevent programme-level approval from substituting for qualification of each actual scout.
+    criteria:
+      - id: scout-qualified
+        description: Qualification of the actual scout spacecraft and sampling/assay installation
+        metric: Flight-system test results verify predictions for the selected configuration
+        threshold: TRL 8 actual system before each launch (GPT; contrast Claude TRL 6 at PDR, Gemini TRL 7)
+        technologies:
+          - T11
+          - T18
+        trl_required: 8
+        evidence_from:
+          - scout flight qualification tests
+          - sampling and assay calibration tests
+        proposed_by:
+          - GPT
+        disputed: true
+      - id: scout-command-release
+        description: Command and recovery implementation for the scout mission qualified
+        metric: End-to-end acceptance tests including outages, authentication and safe recovery
+        threshold: Flight acceptance requirements met for the 0A service configuration
+        technologies:
+          - T26
+        trl_required: null
+        evidence_from:
+          - rq-0-64
+        proposed_by:
+          - GPT
+    pass: Release only qualified scout configurations for launch.
+    fail: Hold the affected launch; redesign, requalify or cancel within the approved 0A cap.
+  - id: 0a-mtr
+    name: 0A mid-term review
+    type: review
+    month:
+      min: 24
+      max: 60
+    proposed_by:
+      - Claude
+      - Gemini
+      - GPT
+    disputed: true
+    purpose: Confirm 0B paths are real, discriminate metallurgy routes, release or withhold the next demonstration tranche.
+    criteria:
+      - id: mtr-trl4
+        description: Laboratory validation of critical functions
+        metric: TRL 4 exit criteria met (lab test agrees with prediction; relevant environment documented)
+        threshold: >-
+          Claude: all project-ending 0B technologies. Gemini: T04, T06, T07, T16, T18, T23, with physical experimental
+          evidence for high-AD2 items. GPT: each retained pathfinder-critical function (adds T09, T20, T25); unmet items
+          withheld from their tranche.
+        technologies:
+          - T01
+          - T02
+          - T03
+          - T04
+          - T05
+          - T08
+          - T09
+          - T10
+          - T14
+          - T15
+          - T16
+          - T18
+          - T19
+          - T20
+          - T21
+          - T22
+          - T24
+          - T25
+        trl_required: 4
+        evidence_from:
+          - rq-0-62
+          - rq-0-54
+          - rq-0-51
+          - rq-0-6
+          - rq-0-26
+          - rq-0-60
+          - rq-0-11
+          - rq-0-56
+        proposed_by:
+          - Claude
+          - Gemini
+          - GPT
+        disputed: true
+      - id: mtr-trl5-pathfinder
+        description: Pathfinder payload or relevant-environment demonstration items validated with scaling defined
+        metric: TRL 5 exit criteria met
+        threshold: >-
+          Claude: pathfinder payload technologies at MTR. GPT: TRL 5 as a release condition before each
+          relevant-environment demonstration, not a blanket MTR criterion. Gemini: TRL 4-5 in prose.
+        technologies:
+          - T04
+          - T05
+          - T08
+          - T16
+          - T19
+          - T24
+        trl_required: 5
+        evidence_from:
+          - rq-0-6
+          - rq-0-26
+          - rq-0-51
+          - rq-0-62
+        proposed_by:
+          - Claude
+          - GPT
+        disputed: true
+      - id: mtr-ad2
+        description: Path clarity on hard technologies
+        metric: Re-assessed AD2
+        threshold: AD2 <= 5 for every project-ending technology
+        technologies:
+          - T01
+          - T04
+          - T08
+          - T10
+          - T16
+          - T19
+          - T21
+        trl_required: null
+        evidence_from:
+          - rq-0-62
+        proposed_by:
+          - Claude
+        disputed: true
+      - id: mtr-metallurgy
+        description: Metallurgy route evidence assessed separately per route
+        metric: Yield, product quality, mass balance and reagent recycle/loss data on representative feed
+        threshold: >-
+          Claude: at least 2 of T06, T17, T07, T23 at TRL 4; narrow to <= 2 on pass. Gemini: down-select route at MTR
+          (T17 not listed). GPT: TRL 4 for any route receiving further funding; routes not averaged.
+        technologies:
+          - T06
+          - T07
+          - T17
+          - T23
+        trl_required: 4
+        evidence_from:
+          - rq-0-56
+          - rq-0-11
+        proposed_by:
+          - Claude
+          - Gemini
+          - GPT
+        disputed: true
+      - id: mtr-prospecting
+        description: Novel scout sampling and assay functions validated
+        metric: Sampling disturbance, bias, depth coverage and assay uncertainty on representative materials
+        threshold: TRL 4; TRL 5 before relevant-environment prototype tranche (GPT). Gemini lists T18 at TRL 4.
+        technologies:
+          - T11
+          - T18
+        trl_required: 4
+        evidence_from:
+          - rq-0-50
+        proposed_by:
+          - Gemini
+          - GPT
+      - id: mtr-command
+        description: Integrated authenticated command and recovery breadboard
+        metric: T26 integrated-service TRL with fault injection
+        threshold: TRL 4; component heritage alone insufficient (GPT)
+        technologies:
+          - T26
+        trl_required: 4
+        evidence_from:
+          - rq-0-64
+        proposed_by:
+          - Claude
+          - GPT
+      - id: mtr-propellant
+        description: Tug propellant selected
+        metric: D-05 decision
+        threshold: Decided
+        technologies:
+          - T01
+          - T14
+        trl_required: null
+        evidence_from:
+          - rq-0-52
+          - rq-0-53
+          - rq-0-54
+          - rq-0-55
+        proposed_by:
+          - Claude
+      - id: mtr-licence-demand
+        description: Licensing state engaged and demand indicated
+        metric: Written engagement from licensing state; indicative Phase 1 demand schedule
+        threshold: Both present
+        technologies:
+          - T08
+        trl_required: null
+        evidence_from:
+          - rq-0-41
+          - rq-0-58
+        proposed_by:
+          - Claude
+    pass: >-
+      Continue toward KDP-0B. Claude: freeze pathfinder payload; narrow metallurgy to <= 2 routes. Gemini: down-select
+      metallurgy route. GPT: fund qualified tranches only; update schedule with remaining AD2.
+    fail: >-
+      Claude: one funded re-plan with KDP-0B slip inside sunset; second fail stops 0B spend (0A only, Earth supply).
+      Gemini: restructure ground R&D; delay pathfinder. GPT: stop or withhold failed routes; bounded corrective
+      programme, or complete 0A without production.
+  - id: g-target
+    name: Target gate — sampled recoverable Fe-Ni
+    type: discriminating
+    month:
+      min: 48
+      max: 180
+    proposed_by:
+      - Claude
+      - Gemini
+      - GPT
+    disputed: true
+    purpose: Confirm an accessible sampled target whose recoverable Fe-Ni supports the 0B plan.
+    criteria:
+      - id: target-grade
+        description: Sampled recoverable Fe-Ni grade
+        metric: >-
+          Claude: lower 90% CB of kg product per kg ore after beneficiation, from excavation-depth samples. Gemini:
+          Fe-Ni mass fraction. GPT: confidence-bounded recoverable grade and inventory after measured beneficiation and
+          recovery.
+        threshold: >-
+          Claude: >= KDP-0B base-case yield set by rq-0-61 via rq-0-51 (architecture implies ~4-5%; corner range
+          1.3-16%), primary and backup. Gemini: set by rq-0-50. GPT: set by rq-0-50/51 before final commitment; at least
+          one sampled primary.
+        technologies:
+          - T04
+          - T05
+          - T16
+          - T18
+        trl_required: null
+        evidence_from:
+          - rq-0-50
+          - rq-0-51
+          - rq-0-61
+        proposed_by:
+          - Claude
+          - Gemini
+          - GPT
+        disputed: true
+      - id: target-geotech
+        description: Physical/geotechnical characterisation
+        metric: Shape, spin, cohesion, boulder distribution (Claude); geotechnical properties and spatial variability (GPT)
+        threshold: Sufficient to close T04/T16 design loads
+        technologies:
+          - T04
+          - T16
+        trl_required: null
+        evidence_from:
+          - rq-0-50
+        proposed_by:
+          - Claude
+          - GPT
+      - id: target-transport
+        description: Transport feasibility to SEL1
+        metric: Round-trip delta-v, windows, power history and cycle cadence within tug envelope
+        threshold: >-
+          Claude: within envelope (1.5-5 yr round trip) for primary and backup. GPT: close 150-300 t payload and 1.5-5
+          yr cycle, or approve resized architecture before KDP-0B.
+        technologies:
+          - T01
+          - T02
+          - T14
+          - T25
+        trl_required: null
+        evidence_from:
+          - rq-0-52
+          - rq-0-59
+        proposed_by:
+          - Claude
+          - GPT
+        disputed: true
+      - id: target-scout-trl
+        description: Scout and sampling systems mature enough to produce target evidence
+        metric: TRL assessment
+        threshold: TRL 7 (Gemini; contrast Claude TRL 6 at PDR, GPT TRL 8 before launch)
+        technologies:
+          - T11
+          - T18
+        trl_required: 7
+        evidence_from:
+          - rq-0-50
+        proposed_by:
+          - Gemini
+        disputed: true
+    pass: Baseline primary (and, per Claude, backup) target; fix yield in the delivered-cost model.
+    fail: >-
+      Claude: one further scout wave (<= 36 months, inside sunset), then 0A only, Earth supply. Gemini: 0A only, Earth
+      supply. GPT: resample or change target within a prospecting cap, then 0A only, Earth supply.
+  - id: g-demand
+    name: Demand gate — signed Phase 1 schedule
+    type: discriminating
+    month:
+      min: 48
+      max: 180
+    proposed_by:
+      - Claude
+      - Gemini
+      - GPT
+    disputed: true
+    purpose: Size 0B to binding Phase 1 demand rather than projections.
+    criteria:
+      - id: demand-3x
+        description: Signed Phase 1 demand satisfies the D-02 within-3x condition
+        metric: >-
+          Claude and Gemini: ratio of signed annual demand (kt/yr) to planned 0B output. GPT: interpretation unresolved;
+          proposes accepted delivery-date span <= 3x elapsed time from a common 0A epoch.
+        threshold: >-
+          Claude: signed demand >= one third of nameplate (~0.2-0.8 kt/yr) with schedule overlap. Gemini: set by
+          rq-0-58. GPT: set by rq-0-58 once 3x is defined; not objectively passable until then.
+        technologies: []
+        trl_required: null
+        evidence_from:
+          - rq-0-58
+        proposed_by:
+          - Claude
+          - Gemini
+          - GPT
+        disputed: true
+      - id: demand-signed-definition
+        description: Definition of signed demand
+        metric: Owner definition recorded
+        threshold: >-
+          Claude: funded Phase 1 baseline line item at Phase 1's own KDP, or external offtaker; flags circularity. GPT:
+          signed specification, quantities, delivery node and dated schedule.
+        technologies: []
+        trl_required: null
+        evidence_from:
+          - rq-0-58
+          - D-02
+        proposed_by:
+          - Claude
+          - GPT
+        disputed: true
+      - id: demand-spec
+        description: Product specification agreed
+        metric: Signed specification (composition, form, tolerances)
+        threshold: Exists and is testable by T22 qualification
+        technologies:
+          - T22
+        trl_required: null
+        evidence_from:
+          - rq-0-58
+        proposed_by:
+          - Claude
+          - GPT
+    pass: Demand sets the maximum justified 0B scale; do not size above accepted demand (GPT).
+    fail: >-
+      Claude: defer 0B at minimal option-keeping spend; re-test at Phase 1 milestones. Gemini: 0A only, Earth supply.
+      GPT: reduce or defer 0B; absent adequate demand, 0A only, Earth supply.
+  - id: g-economics
+    name: Economics gate — delivered cost vs Earth supply
+    type: discriminating
+    month:
+      min: 60
+      max: 180
+    proposed_by:
+      - Claude
+      - Gemini
+      - GPT
+    disputed: true
+    purpose: Compare fully burdened delivered Fe-Ni at SEL1 with equivalent Earth supply.
+    criteria:
+      - id: eco-ratio
+        description: Delivered cost on a common basis (capital, reagents and spares, propellant, operations, delay)
+        metric: 0B $/kg at SEL1 against Earth-supply $/kg at SEL1
+        threshold: >-
+          Claude: 0B P70 <= R x Earth P50, R set by owner (may exceed 1 per D-01), numbers via rq-0-61. Gemini: must
+          undercut Earth supply. GPT: expected cost no higher than Earth supply plus owner downside bound; any
+          capability subsidy is a separate owner decision.
+        technologies:
+          - T01
+          - T05
+          - T14
+          - T22
+        trl_required: null
+        evidence_from:
+          - rq-0-61
+          - rq-0-57
+          - rq-0-53
+          - rq-0-52
+          - rq-0-28
+          - rq-0-56
+        proposed_by:
+          - Claude
+          - Gemini
+          - GPT
+        disputed: true
+      - id: eco-robustness
+        description: Decision robustness
+        metric: >-
+          Claude: sign of (ratio - R) across launch-price and yield ranges. GPT: downside exposure and sensitivity to
+          grade, utilisation, replacement and delay.
+        threshold: Does not reverse across stated ranges (Claude)
+        technologies: []
+        trl_required: null
+        evidence_from:
+          - rq-0-61
+          - rq-0-57
+          - rq-0-50
+        proposed_by:
+          - Claude
+          - GPT
+      - id: eco-confidence
+        description: Cost estimate confidence
+        metric: Estimate uncertainty band
+        threshold: +/- 30% or better
+        technologies: []
+        trl_required: null
+        evidence_from:
+          - rq-0-28
+          - rq-0-57
+        proposed_by:
+          - Claude
+    pass: Economic condition for 0B satisfied.
+    fail: >-
+      All: Earth supply. Claude: re-test on pre-set shifts in launch price or demand. GPT: subsidy only by new explicit
+      owner decision.
+  - id: g-licence
+    name: Licence gate — debris, tailings and operating envelope
+    type: discriminating
+    month:
+      min: 48
+      max: 180
+    proposed_by:
+      - Claude
+      - Gemini
+      - GPT
+    disputed: true
+    purpose: Obtain licensing-state authorisation with a numeric escape limit the system is shown to meet.
+    criteria:
+      - id: licence-limit
+        description: >-
+          Written authorisation (Claude cites OST Article VI) with escape limit, verification method and tailings
+          requirement for 13-47 kt/yr
+        metric: >-
+          Approved escaped-mass limit per site (GPT adds particle/velocity classes, confidence, averaging interval,
+          abnormal-event limits)
+        threshold: >-
+          Gemini: <= 1 t/yr. Claude: interim <= 1 t/yr ALARP; final set by rq-0-41. GPT: <= 1 t/yr is interim only, not
+          a licence; binding value from rq-0-41 and the licensing state.
+        technologies:
+          - T08
+        trl_required: null
+        evidence_from:
+          - rq-0-41
+          - D-03
+        proposed_by:
+          - Claude
+          - Gemini
+          - GPT
+        disputed: true
+      - id: licence-verification
+        description: Containment and escape verification demonstrated
+        metric: >-
+          Claude: measured pathfinder escape vs limit and detection limit. GPT: uncertainty-bounded annualised escape
+          incl. excavation, transfers, storage and credible failures. Gemini: escaped t/yr.
+        threshold: >-
+          Claude: below limit; detection limit <= 10% of limit. GPT: compliant with uncertainty included. Gemini: <= 1
+          t/yr.
+        technologies:
+          - T04
+          - T08
+          - T19
+        trl_required: 6
+        evidence_from:
+          - rq-0-41
+          - pathfinder
+          - containment tests
+        proposed_by:
+          - Claude
+          - Gemini
+          - GPT
+        disputed: true
+      - id: licence-frequency
+        description: Frequency coordination for 15-29 assets
+        metric: National filing and ITU coordination status
+        threshold: Coordinated
+        technologies:
+          - T26
+        trl_required: null
+        evidence_from:
+          - rq-0-64
+        proposed_by:
+          - Claude
+    pass: Licensed operating envelope accepted for production.
+    fail: >-
+      Claude: no waiver; no 0B production; 0A only. Gemini: 0A only, Earth supply. GPT: redesign and reapply within a
+      bounded extension, or prohibit 0B and retain Earth supply.
+  - id: pf-results
+    name: Pathfinder results review
+    type: review
+    month:
+      min: 84
+      max: 144
+    proposed_by:
+      - Claude
+    disputed: true
+    purpose: Convert pathfinder operations at the NEA into TRL 6 claims under a pre-agreed scale rule.
+    criteria:
+      - id: pf-regolith
+        description: Regolith-contact technologies demonstrated at the target
+        metric: >-
+          TRL 6 exit criterion, with extrapolation <= 10x or governing regimes preserved (Claude); GPT rejects any fixed
+          factor in favour of test-validated models
+        threshold: All pathfinder-assigned technologies
+        technologies:
+          - T04
+          - T05
+          - T08
+          - T16
+          - T19
+          - T24
+        trl_required: 6
+        evidence_from:
+          - pathfinder
+          - rq-0-6
+          - rq-0-26
+          - rq-0-51
+        proposed_by:
+          - Claude
+        disputed: true
+      - id: pf-autonomy
+        description: Autonomy and maintenance over duration-relevant operations
+        metric: Operating hours, interventions, faults recovered without ground
+        threshold: Set at MTR against 0B duty cycle
+        technologies:
+          - T10
+          - T21
+        trl_required: 6
+        evidence_from:
+          - pathfinder
+        proposed_by:
+          - Claude
+    pass: Feed TRL 6 evidence to KDP-0B.
+    fail: Re-fly or redesign if inside the sunset; otherwise 0A only, Earth supply.
+  - id: kdp-0b
+    name: KDP-0B — exercise the 0B option
+    type: kdp
+    month:
+      min: 72
+      max: 180
+    proposed_by:
+      - Claude
+      - Gemini
+      - GPT
+    disputed: true
+    purpose: Decide whether, and at what scale, to fund in-space Fe-Ni production; AND logic across all criteria (GPT, Claude).
+    criteria:
+      - id: kdp-0b-core
+        description: Agreed core project-ending technologies at TRL 6 in relevant environment
+        metric: TRL 6 exit criterion per technology
+        threshold: All, no waivers
+        technologies:
+          - T01
+          - T02
+          - T03
+          - T04
+          - T05
+          - T08
+          - T10
+          - T14
+          - T15
+          - T16
+          - T19
+          - T21
+          - T22
+          - T24
+        trl_required: 6
+        evidence_from:
+          - rq-0-62
+          - rq-0-54
+          - rq-0-51
+          - rq-0-26
+          - rq-0-41
+          - pathfinder
+        proposed_by:
+          - Claude
+          - Gemini
+          - GPT
+      - id: kdp-0b-disputed-members
+        description: Technologies whose project-ending status differs by model
+        metric: TRL and classification per owner ruling at KDP-0A
+        threshold: >-
+          T25: project-ending (Claude, Gemini) vs TRL 6 selected implementation (GPT). T26: project-ending (Claude view;
+          open in rq-0-64) vs TRL 6 integrated service (GPT); not listed by Gemini. T18: project-ending (Gemini) vs TRL
+          6 technology maturity (GPT) vs 0A flight technology (Claude). T11: Gemini prose only; TRL 6 maturity (GPT).
+        technologies:
+          - T11
+          - T18
+          - T25
+          - T26
+        trl_required: 6
+        evidence_from:
+          - rq-0-62
+          - rq-0-64
+          - rq-0-50
+        proposed_by:
+          - Claude
+          - Gemini
+          - GPT
+        disputed: true
+      - id: kdp-0b-route
+        description: At least one complete metallurgy route end-to-end, routes assessed separately
+        metric: Feed-to-qualified-product performance (recovery, throughput, reagent losses, waste)
+        threshold: >-
+          >= 1 route at TRL 6; Claude chain includes T05, T19, T22; GPT includes T05, T22. Gemini sets no KDP-0B
+          metallurgy criterion.
+        technologies:
+          - T05
+          - T06
+          - T07
+          - T17
+          - T19
+          - T22
+          - T23
+        trl_required: 6
+        evidence_from:
+          - rq-0-56
+          - rq-0-11
+        proposed_by:
+          - Claude
+          - GPT
+        disputed: true
+      - id: kdp-0b-support
+        description: Power distribution, storage, cargo handling and navigation
+        metric: TRL of selected implementations with documented scaling
+        threshold: >-
+          Claude: T09, T12, T20 at TRL >= 5, waiverable, funded path to 6 before 0B CDR. GPT: T09, T12, T20, T25 at TRL
+          6 for selected implementations; substitutions reassessed.
+        technologies:
+          - T09
+          - T12
+          - T20
+          - T25
+        trl_required: null
+        evidence_from:
+          - rq-0-60
+          - rq-0-59
+          - rq-0-62
+        proposed_by:
+          - Claude
+          - GPT
+        disputed: true
+      - id: kdp-0b-four-gates
+        description: All four discriminating gates passed for the same configuration
+        metric: Status of g-target, g-demand, g-economics, g-licence
+        threshold: All passed
+        technologies: []
+        trl_required: null
+        evidence_from:
+          - rq-0-50
+          - rq-0-58
+          - rq-0-61
+          - rq-0-41
+        proposed_by:
+          - Claude
+          - Gemini
+          - GPT
+      - id: kdp-0b-closure
+        description: Integrated design closure (mass, power, thermal, reliability, maintenance, logistics, cost, schedule)
+        metric: Budget margins and reserves
+        threshold: >-
+          Claude: >= 20% mass, >= 15% power. GPT: closure and reserve policy approved before final review; no unresolved
+          project-ending assumptions.
+        technologies:
+          - T01
+          - T02
+          - T03
+          - T04
+          - T05
+          - T08
+          - T10
+          - T14
+          - T15
+          - T16
+          - T19
+          - T20
+          - T21
+          - T22
+          - T24
+          - T26
+        trl_required: null
+        evidence_from:
+          - rq-0-62
+          - rq-0-63
+          - rq-0-52
+          - rq-0-61
+        proposed_by:
+          - Claude
+          - GPT
+        disputed: true
+      - id: kdp-0b-water
+        description: Water pilot, only if target is C-type
+        metric: TRL of water extraction pilot
+        threshold: TRL 5, else drop pilot (Claude); GPT handles in g-water-pilot at TRL 6 and not as a production veto
+        technologies:
+          - T13
+        trl_required: 5
+        evidence_from:
+          - rq-0-55
+        proposed_by:
+          - Claude
+        disputed: true
+      - id: kdp-0b-sunset
+        description: Programme sunset
+        metric: Month by which KDP-0B must pass
+        threshold: >-
+          Claude: month 180, fallback executes automatically. GPT: set via rq-0-63; M180 is a planning boundary, not an
+          automatic commitment. Gemini: none.
+        technologies: []
+        trl_required: null
+        evidence_from:
+          - rq-0-63
+        proposed_by:
+          - Claude
+          - GPT
+        disputed: true
+    pass: Fund 0B at the scale set by signed demand and the delivered-cost model.
+    fail: >-
+      Claude: one slip inside the month-180 sunset, then 0A only, Earth supply, with 0A results archived and published.
+      Gemini: 0A only, Earth supply. GPT: explicit bounded extension, or 0A only, Earth supply.
+  - id: g-water-pilot
+    name: Optional C-type water-pilot release
+    type: review
+    month:
+      min: 72
+      max: 180
+    proposed_by:
+      - GPT
+    disputed: true
+    purpose: >-
+      Authorise a water pilot only if independently justified, without making production propellant a Phase 0
+      dependency.
+    criteria:
+      - id: water-pilot-readiness
+        description: Extraction, capture, purification and containment for selected C-type feed
+        metric: Yield, purity, energy, losses and scale-up validation for a 10-100 t/yr pilot
+        threshold: TRL 6 before operational pilot commitment (GPT; Claude TRL 5 at KDP-0B)
+        technologies:
+          - T13
+        trl_required: 6
+        evidence_from:
+          - rq-0-27
+          - rq-0-33
+          - rq-0-40
+        proposed_by:
+          - GPT
+        disputed: true
+    pass: Authorise a separately budgeted pilot without production LOX/LH2 infrastructure.
+    fail: Drop or defer the pilot without blocking an otherwise qualified Fe-Ni programme.
+retired:
+  - gate-1
+  - gate-2
+  - gate-3
+  - gate-4
+  - gate-5
