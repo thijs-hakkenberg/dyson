@@ -30,11 +30,10 @@
 
 ## Optimisations / spin-offs
 
-- [ ] **Sun as a separate repo** — extract `src/lib/explore/sun/` into its own package
-      (simulation-grade photosphere: granulation evolution, sunspot emergence/decay, faculae,
-      chromosphere/corona). The explorer consumes it through the `SunSurfaceFactory` interface
-      (`sun/types.ts`), injected via `<ExploreApp sunSurface={…}>`; the in-repo implementation
-      stays as the default.
+- [x] **Sun as a separate repo** — extracted to the `photosphere` npm package
+      (github.com/thijs-hakkenberg/photosphere). The explorer consumes it through the
+      `SunSurfaceFactory` interface, injected via `<ExploreApp sunSurface={…}>`; the package's
+      `createProceduralSun` is the default.
 
 ## Later phases (agreed build order)
 

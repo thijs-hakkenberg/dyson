@@ -43,10 +43,10 @@
 	import CommandPalette from './hud/CommandPalette.svelte';
 	import { explorer, LAYER_KEYS, SPEEDS, TODAY_YEAR, type LayerId } from './core/state.svelte';
 	import './hud/hud.css';
-	import { provideSunSurface } from './sun/context';
-	import type { SunSurfaceFactory } from './sun/types';
+	import { provideSunSurface } from 'photosphere/svelte';
+	import type { SunSurfaceFactory } from 'photosphere';
 
-	/** Optional external Sun surface renderer (dependency injection; see sun/types.ts) */
+	/** Optional external Sun surface renderer (dependency injection; see the photosphere package) */
 	let { sunSurface }: { sunSurface?: SunSurfaceFactory } = $props();
 	// svelte-ignore state_referenced_locally
 	provideSunSurface(sunSurface);
