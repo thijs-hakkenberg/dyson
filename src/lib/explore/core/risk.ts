@@ -4,7 +4,10 @@
  * Risk score (0–1) per BOM item is a transparent heuristic, shown with its
  * components so nobody mistakes it for an assessment:
  *   technology  0.6 × max over linked TRL assessments of
- *                     severity(riskIfFail) × (target − current) / target
+ *                     severity(riskIfFail) × difficulty
+ *               difficulty = gap                           (no AD² rating)
+ *                          = 0.7 × gap + 0.3 × (AD² − 1) / 8 (AD² upper bound, 1–9)
+ *               gap        = (target − current) / target
  *   cost        0.25 × cost-confidence penalty (low 1, medium 0.5, high 0.2)
  *   spread      0.15 × min(1, log10(costMax / costMin))
  * Items without a TRL assessment are "unassessed" (technology term unknown),
@@ -27,6 +30,7 @@ export const SEVERITY: Record<TRLAssessment['riskIfFail'], number> = {
 
 const CONFIDENCE_PENALTY: Record<string, number> = { low: 1, medium: 0.5, high: 0.2 };
 export const W = { technology: 0.6, cost: 0.25, spread: 0.15 };
+export const W_DIFFICULTY = { gap: 0.7, ad2: 0.3 };
 
 export interface RiskBreakdown {
 	bomId: string;
@@ -39,12 +43,18 @@ export interface RiskBreakdown {
 	assessed: boolean;
 }
 
+/** TRL gap blended with AD² when the technology has an AD² rating (see header). */
+export function difficulty(t: TRLAssessment): number {
+	const gap = Math.max(0, t.targetTRL - t.currentTRL) / Math.max(1, t.targetTRL);
+	if (!t.ad2) return gap;
+	return W_DIFFICULTY.gap * gap + W_DIFFICULTY.ad2 * (Math.min(9, Math.max(1, t.ad2.max)) - 1) / 8;
+}
+
 export function riskFor(bom: BOMItem, trls: TRLAssessment[] = getAssessmentsForBOM(bom.id)): RiskBreakdown {
 	let technology: number | null = null;
 	let driver: TRLAssessment | undefined;
 	for (const t of trls) {
-		const gap = Math.max(0, t.targetTRL - t.currentTRL) / Math.max(1, t.targetTRL);
-		const v = SEVERITY[t.riskIfFail] * gap;
+		const v = SEVERITY[t.riskIfFail] * difficulty(t);
 		if (technology === null || v > technology) {
 			technology = v;
 			driver = t;

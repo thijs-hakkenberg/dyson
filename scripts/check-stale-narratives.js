@@ -8,7 +8,9 @@
  *   node scripts/check-stale-narratives.js --wp=A     # TRL and gates only
  *
  * Dated records are exempt: blog posts (they get a dated update note instead),
- * per-model specs, deliberation transcripts and rounds, and the issue log. A line that
+ * per-model specs, deliberation transcripts, rounds and syntheses (primary and
+ * alternate, with their divergent views), the March 2026 legacy data files, and
+ * the issue log. A line that
  * quotes a superseded claim on purpose carries the marker `stale-ok` (in an HTML comment
  * in Markdown).
  */
@@ -40,7 +42,9 @@ const EXEMPT = [
 	/^src\/content\/blog\//,
 	/^src\/content\/research-questions\/.*\/(round-\d+|research)\//,
 	/\/discussion\.yaml$/,
-	/conclusion\.md$/,
+	/conclusion(\.[\w-]+)?\.md$/,
+	/^src\/content\/research-questions\/.*\/divergent-views(\.[\w-]+)?\.yaml$/,
+	/-legacy\.ts$/,
 	/^static\/content\/bom-specs\/.*\/(claude|gemini|gpt)-[\w-]+\.md$/,
 	/CONSENSUS-ISSUES\.md$/,
 	/__tests__\//,

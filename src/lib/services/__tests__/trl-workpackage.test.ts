@@ -1,7 +1,9 @@
 // @vitest-environment node
 import { describe, expect, it } from 'vitest';
 import yaml from 'js-yaml';
-import { TRL_ASSESSMENTS } from '$lib/services/trl-assessment';
+import { spawnSync } from 'child_process';
+import { TRL_ASSESSMENTS, LEGACY_TRL_ASSESSMENTS } from '$lib/services/trl-assessment';
+import { DECISION_GATES, RETIRED_GATES, GATE_RULINGS, PHASE_0_DECISIONS } from '$lib/services/decision-gates';
 import { buildBaseline, bullets, lastYaml, applyRulings } from '../../../../scripts/run-trl-assessment.js';
 
 const BRIEF = Object.values(
@@ -20,7 +22,58 @@ describe('TRL work package', () => {
 			...B.candidates.map((c) => c.legacy?.replace(/\s*\(.*\)$/, '')).filter(Boolean),
 			...B.deferred.map((d) => d.legacy)
 		]);
-		for (const a of TRL_ASSESSMENTS) expect(covered, a.id).toContain(a.id);
+		for (const a of LEGACY_TRL_ASSESSMENTS) {
+			expect(covered, a.id).toContain(a.id);
+			// …and the site records what became of it
+			expect(a.supersededBy.length > 0 || (a.deferredTo && a.retiredReason), a.id).toBeTruthy();
+			for (const id of a.supersededBy) expect(TRL_ASSESSMENTS.map((t) => t.id), a.id).toContain(id);
+		}
+	});
+
+	it('current assessments come from the baseline and keep every model rating', () => {
+		expect(TRL_ASSESSMENTS).toHaveLength(26);
+		for (const a of TRL_ASSESSMENTS) {
+			expect(a.panelRatings?.length, a.id).toBe(3);
+			const lows = a.panelRatings!.map((r) => r.currentTRL.min);
+			const highs = a.panelRatings!.map((r) => r.currentTRL.max);
+			// Headline is the envelope, never an average (an owner ruling may set it instead)
+			if (a.agreement !== 'ruled') {
+				expect(a.currentTRL, a.id).toBe(Math.min(...lows));
+				expect(a.currentTRLMax ?? a.currentTRL, a.id).toBe(Math.max(...highs));
+			}
+			expect(a.source, a.id).toMatch(/synthesis\/T\d\d\.md$/);
+		}
+		expect(TRL_ASSESSMENTS.find((a) => a.id === 'T26')?.ownerRuling?.source).toMatch(/^rq-0-64\b/);
+	});
+
+	it('every March 2026 gate is retired with a reason and live replacements', () => {
+		expect(RETIRED_GATES.map((g) => g.id)).toEqual(['gate-1', 'gate-2', 'gate-3', 'gate-4', 'gate-5']);
+		const live = DECISION_GATES.map((g) => g.id);
+		for (const g of RETIRED_GATES) {
+			expect(g.retiredReason.length, g.id).toBeGreaterThan(20);
+			for (const r of g.replacedBy) expect(live, g.id).toContain(r);
+		}
+	});
+
+	it('criterion status points at real rulings, decisions and questions', () => {
+		const rulings = new Set(GATE_RULINGS.map((r) => r.id));
+		const decisions = new Set(PHASE_0_DECISIONS.map((d) => d.id));
+		const ok = (id: string) => rulings.has(id) || decisions.has(id) || /^rq-0-\d+$/.test(id);
+		const statuses = [
+			...DECISION_GATES.flatMap((g) => [g.rulingStatus, ...g.criteria.map((c) => c.rulingStatus)]),
+			...TRL_ASSESSMENTS.map((a) => a.rulingStatus)
+		].filter(Boolean);
+		expect(statuses.length).toBeGreaterThan(20);
+		for (const s of statuses) {
+			for (const id of [...(s!.decided ?? []), ...(s!.interim ?? [])]) expect(ok(id), id).toBe(true);
+			for (const p of s!.pending ?? []) for (const id of [p.question, ...p.evidence]) expect(id).toMatch(/^rq-0-(6[5-9]|7\d|8[0-3])$/);
+		}
+	});
+
+	it('the generated readiness data is up to date with the reconciliation files', () => {
+		const r = spawnSync(process.execPath, ['scripts/build-readiness-data.js', '--check'], { encoding: 'utf8' });
+		expect(r.stderr).toBe('');
+		expect(r.status).toBe(0);
 	});
 
 	it('every rating rule is a string (an unquoted "x: y" parses as a mapping → [object Object])', () => {

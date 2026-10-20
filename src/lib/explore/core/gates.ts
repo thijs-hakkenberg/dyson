@@ -2,12 +2,14 @@
  * Gate Tunnel: Phase 0 decision gates and technology readiness as a corridor.
  *
  * The tunnel axis is time in months from the (assumed) Phase 0 start. Each
- * decision gate is a ring at its decision month; its arc segments are its
- * criteria (lit = met). Each technology stands on the tunnel floor in its
- * thread's lane, at the month it is projected to reach its target TRL
- * (today + yearsToTarget, optimistic and pessimistic). A technology that a
- * gate depends on but that arrives after the gate's decision month is "late"
- * and is linked to that gate in red. This answers "what's blocking gate N?".
+ * decision gate (D-02: KDPs, reviews and discriminating gates) is a ring at the
+ * earliest month of its proposed window; the window runs to decisionMonthMax.
+ * Its arc segments are its criteria (lit = met). Each technology stands on the
+ * tunnel floor in its thread's lane, at the month it is projected to reach its
+ * target TRL (today + yearsToTarget, optimistic and pessimistic). A technology a
+ * gate depends on is "late" if it arrives after the gate's latest month (linked
+ * in red) and "at risk" if it arrives inside the window. This answers "what's
+ * blocking gate N?".
  */
 
 import { DECISION_GATES, getGateReadiness, type DecisionGate } from '$lib/services/decision-gates';
@@ -33,8 +35,12 @@ export interface TunnelGate {
 	gate: DecisionGate;
 	readiness: number;
 	z: number;
-	/** Technologies this gate depends on that arrive after its decision month */
+	/** z of the latest month in the gate's window */
+	zMax: number;
+	/** Technologies this gate depends on that arrive after its latest month */
 	late: string[];
+	/** …that arrive inside its window */
+	atRisk: string[];
 }
 
 export interface TunnelTech {
@@ -52,6 +58,7 @@ export interface TunnelLink {
 	gateId: string;
 	techId: string;
 	late: boolean;
+	atRisk: boolean;
 }
 
 export interface TunnelLayout {
@@ -109,18 +116,22 @@ export function layoutTunnel(
 	const byId = new Map(techs.map((t) => [t.trl.id, t]));
 	const links: TunnelLink[] = [];
 	const tunnelGates: TunnelGate[] = gates.map((gate) => {
+		const last = gate.decisionMonthMax ?? gate.decisionMonth;
 		const late: string[] = [];
+		const atRisk: string[] = [];
 		for (const id of gate.relatedTRLIds) {
 			const t = byId.get(id);
 			if (!t) continue;
-			const isLate = t.arrival > gate.decisionMonth;
+			const isLate = t.arrival > last;
+			const isAtRisk = !isLate && t.arrival > gate.decisionMonth;
 			if (isLate) late.push(id);
-			links.push({ gateId: gate.id, techId: id, late: isLate });
+			if (isAtRisk) atRisk.push(id);
+			links.push({ gateId: gate.id, techId: id, late: isLate, atRisk: isAtRisk });
 		}
-		return { gate, readiness: getGateReadiness(gate), z: monthToZ(gate.decisionMonth), late };
+		return { gate, readiness: getGateReadiness(gate), z: monthToZ(gate.decisionMonth), zMax: monthToZ(last), late, atRisk };
 	});
 
-	const endMonth = Math.max(...tunnelGates.map((g) => g.gate.decisionMonth), ...techs.map((t) => t.arrivalMax));
+	const endMonth = Math.max(...tunnelGates.map((g) => g.gate.decisionMonthMax ?? g.gate.decisionMonth), ...techs.map((t) => t.arrivalMax));
 	return {
 		gates: tunnelGates.sort((a, b) => a.gate.decisionMonth - b.gate.decisionMonth),
 		techs,
