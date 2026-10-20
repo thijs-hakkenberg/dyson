@@ -11,6 +11,7 @@
  *   reconciliation/phase-0/trl/criterion-status.yaml         decided / interim / pending per criterion
  *   reconciliation/phase-0/trl/gate-rulings.yaml             confirmed gate rulings
  *   reconciliation/phase-0/decisions.md                      D-01 … D-05 sign-off
+ *   reconciliation/phase-0/round-2/reconciliation/phase.md   agreed architecture, phase cost, BOM delta
  *
  * Writes src/lib/data/phase-0-readiness.json (core) and phase-0-readiness-evidence.json
  * (per-model evidence and paths, loaded only by pages that show them).
@@ -135,7 +136,10 @@ async function build() {
 	const proposal = await readYaml(`${TRL}/round-1/gates-proposal.yaml`);
 	const status = await readYaml(`${TRL}/criterion-status.yaml`);
 	const gateRulings = (await readYaml(`${TRL}/gate-rulings.yaml`)).rulings;
-	const decisionList = decisions(await read('reconciliation/phase-0/decisions.md'));
+	const decisionsMd = await read('reconciliation/phase-0/decisions.md');
+	const decisionList = decisions(decisionsMd);
+	// D-01's assumptions and what would falsify each (the first "Assumption" table)
+	const assumptions = table(decisionsMd.slice(decisionsMd.indexOf('| Assumption |')));
 
 	const technologies = [];
 	const evidence = {};
@@ -262,6 +266,20 @@ async function build() {
 
 	const retiredGates = proposal.retired.map((id) => ({ id, ...(status.retired_gates?.[id] ?? {}) }));
 
+	// Architecture from the round-2 reconciliation: agreed changes, phase cost per model, proposed BOM delta
+	const PHASE = 'reconciliation/phase-0/round-2/reconciliation/phase.md';
+	const phaseMd = await read(PHASE);
+	const sub = (md, re) => md.split(/\n### /).slice(1).find((p) => re.test(p.split('\n')[0])) ?? '';
+	const agreed = table(section(phaseMd, /^2\. Agreed changes/));
+	const cost = table(sub(phaseMd, /^3\.17 Phase cost/));
+	const delta = table(section(phaseMd, /^4\. Proposed BOM delta/));
+	const architecture = {
+		source: PHASE,
+		agreedChanges: agreed.rows.map(([change, value, attribution]) => ({ change, value, attribution })),
+		phaseCost: cost.rows.map(([model, a, b, total]) => ({ model, phase0A: a, phase0B: b, total })),
+		bomDelta: delta.rows.map(([action, item, supportedBy, quantity, unitCost, confidence]) => ({ action, item, supportedBy, quantity, unitCost, confidence }))
+	};
+
 	const core = {
 		schema: 'project-dyson/phase-0-readiness@1',
 		assessedAt: baseline.generated,
@@ -274,11 +292,13 @@ async function build() {
 			decisions: 'reconciliation/phase-0/decisions.md'
 		},
 		decisions: decisionList,
+		assumptions: assumptions.rows.map(([assumption, falsifier]) => ({ assumption, falsifier })),
 		gateRulings: gateRulings.map((r) => ({ id: r.id, question: r.question, decided: r.decided, ruling: str(r.ruling), stillOpen: r.still_open ?? [] })),
 		technologies,
 		legacyRows,
 		gates,
-		retiredGates
+		retiredGates,
+		architecture
 	};
 	return { core, evidence };
 }

@@ -50,6 +50,28 @@
 			"decided": null
 		}
 	],
+	"assumptions": [
+		{
+			"assumption": "A1: the swarm thesis needs in-space material by Phase 2",
+			"falsifier": "Phase 2 mass demand fits within plausible launch capacity and price"
+		},
+		{
+			"assumption": "A2: delivered launch price stays above ~$1,000/kg to LEO through Phase 1",
+			"falsifier": "Sustained quotes below that (rq-0-57)"
+		},
+		{
+			"assumption": "A3: an accessible NEA has ≥5% recoverable Fe-Ni",
+			"falsifier": "0A rendezvous and sampling below that (rq-0-50)"
+		},
+		{
+			"assumption": "A4: 0A ($3.5–16B) is fundable",
+			"falsifier": "No funding path; then O0 by default"
+		},
+		{
+			"assumption": "A5: beneficiation ≥3:1 in microgravity",
+			"falsifier": "Claude's falsifier: below 3:1 (rq-0-51)"
+		}
+	],
 	"gateRulings": [
 		{
 			"id": "G-1.1",
@@ -6026,5 +6048,342 @@
 			],
 			"reason": "D-02 replaces the month-60 PDR with KDP-0B, the one-way decision (TRL 6 in a relevant environment, no waivers, for project-ending technologies), and the 0A mid-term review as the internal milestone."
 		}
-	]
+	],
+	"architecture": {
+		"source": "reconciliation/phase-0/round-2/reconciliation/phase.md",
+		"agreedChanges": [
+			{
+				"change": "Split Phase 0 into 0A (research + pathfinders) and gated 0B (industrial)",
+				"value": "Structure agreed; budgets → §3",
+				"attribution": "All three"
+			},
+			{
+				"change": "Abandon 50 kt/yr central SEL4/L5 ore processing",
+				"value": "—",
+				"attribution": "All three"
+			},
+			{
+				"change": "Co-locate at least beneficiation and primary processing at the target NEA; ship product, not ore",
+				"value": "Reference architecture",
+				"attribution": "All three. GPT: \"favoured but not universally optimal\". Claude retains a central station fed with ≥20:1 concentrate as an alternative. Gemini's own weighted QOC scores SEL1 marginally higher (see §6)."
+			},
+			{
+				"change": "Narrow product to native/reduced Fe-Ni; defer solar-grade Si and oxide-derived Al/Si",
+				"value": "Fe-Ni baseline; Al/Si pilot or deferred",
+				"attribution": "All three"
+			},
+			{
+				"change": "Delivered product scale of order 1 kt/yr",
+				"value": "0.6–2.5 kt/yr",
+				"attribution": "Claude 0.6–2.2 (central 1.3); Gemini 1.0–2.5 (1.5, of which 0.3 is water); GPT 0.6–1.0 contracted (0.67–1.33 capacity)"
+			},
+			{
+				"change": "MW-class cargo tugs",
+				"value": "1.0–2.5 MWe each; 10–18 tugs; 150–300 t payload",
+				"attribution": "→ §3 for point values"
+			},
+			{
+				"change": "Robots powered by HV tether from site power, with onboard battery for mobility and safe-mode",
+				"value": "1–3 kV; battery 10–50 kWh",
+				"attribution": "Claude 2–3 kV, 10–30 kWh; Gemini 1–3 kV, 15–25 kWh; GPT 20–50 kWh, voltage unspecified"
+			},
+			{
+				"change": "Delete the 200–500 MWh Li-ion line; size storage per site",
+				"value": "0.5–15 MWh total",
+				"attribution": "Claude 0.5–3 MWh + thermal; GPT 1.3–3.3 MWh; Gemini <15 MWh (YAML 10 MWh)"
+			},
+			{
+				"change": "Reject $5/W array pricing",
+				"value": "Hardware ~$30–150/W, launch separately accounted",
+				"attribution": "Claude $30–150/W hardware ($50–230 installed incl. launch); Gemini $60–100/W (spec $75, range $50–110); GPT $30–100/W allowance ($45–220 with delivery)"
+			},
+			{
+				"change": "Replace 32–50 × 100 kg monoprop prospectors",
+				"value": "Remote survey + 4–10 EP rendezvous scouts of 200–600 kg",
+				"attribution": "All three agree a monoprop bus has ~0.5–0.8 km/s Δv. Remote-survey method differs (→ §3)."
+			},
+			{
+				"change": "Add an Earth-to-space launch/delivery line",
+				"value": "Line agreed; magnitude → §3",
+				"attribution": "All three"
+			},
+			{
+				"change": "Add a comms, ground segment and mission-operations line; DSN not assumed free",
+				"value": "Line agreed",
+				"attribution": "All three. Claude and GPT reject the round-1 2.5 TB/day (~230 Mbps) figure."
+			},
+			{
+				"change": "Phase 0 uncrewed; remove habitat and quarterly visits",
+				"value": "0 crew visits",
+				"attribution": "All three. Claude and GPT reject the \"human-rating\" label in favour of structural reserve plus docking/servicing interfaces. Gemini keeps docking ports and structural margins without commenting on the label."
+			},
+			{
+				"change": "Add an EP propellant supply line; xenon not baselined",
+				"value": "Line agreed; demand → §3",
+				"attribution": "All three"
+			},
+			{
+				"change": "No production LOX/LH₂ in Phase 0",
+				"value": "—",
+				"attribution": "All three. Claude and GPT remove the EML1 depot; Gemini \"defers\" cryo depots to 0B/Phase 1."
+			},
+			{
+				"change": "Add NRE, pathfinder, spares and contingency lines",
+				"value": "Lines agreed; values → §3",
+				"attribution": "All three"
+			},
+			{
+				"change": "Write a full organization (bom-0-7) specification",
+				"value": "~$100–350M",
+				"attribution": "Claude $100–300M; Gemini $150–250M (text $200M); GPT $150–350M"
+			},
+			{
+				"change": "Add a debris/contamination requirement and budget tighter than 99%",
+				"value": "$50–300M",
+				"attribution": "Threshold → §3"
+			},
+			{
+				"change": "Freeze one configuration-controlled baseline; mark legacy documents superseded",
+				"value": "—",
+				"attribution": "All three"
+			},
+			{
+				"change": "Earth-supplied material as a fallback if microgravity metallurgy fails",
+				"value": "—",
+				"attribution": "All three. Ranking relative to lunar → §3."
+			},
+			{
+				"change": "Tie Phase 0 output to Phase 1 demand with a material/purity/date specification",
+				"value": "—",
+				"attribution": "All three"
+			},
+			{
+				"change": "Add waste-heat rejection (radiators) explicitly",
+				"value": "Item agreed; sizing → §3",
+				"attribution": "All three"
+			}
+		],
+		"phaseCost": [
+			{
+				"model": "Claude",
+				"phase0A": "$5–15B",
+				"phase0B": "$17–68B",
+				"total": "$22–83B (central ~40); the headline says 22–85"
+			},
+			{
+				"model": "Gemini",
+				"phase0A": "$3.5–5.0B (Y-statement: $3.8B)",
+				"phase0B": "$20–35B (Y-statement: $18.5B)",
+				"total": "~$22B+"
+			},
+			{
+				"model": "GPT",
+				"phase0A": "$7–16B",
+				"phase0B": "$23–175B",
+				"total": "$30–195B (central 80)"
+			}
+		],
+		"bomDelta": [
+			{
+				"action": "split",
+				"item": "Phase 0 → 0A / 0B",
+				"supportedBy": "all",
+				"quantity": "2 sub-phases",
+				"unitCost": "totals: Claude $22–83B; Gemini $3.8B + $18.5B; GPT $30–195B",
+				"confidence": "low (Claude, GPT); high on structure (Gemini)"
+			},
+			{
+				"action": "split/resize",
+				"item": "bom-0-1 prospecting → remote survey + rendezvous scouts",
+				"supportedBy": "all",
+				"quantity": "Claude 6 (4–8); Gemini 8 scouts + 2 telescopes; GPT 4–8 scouts",
+				"unitCost": "scouts: Claude $30–80M; GPT $25–75M; Gemini $45–120M per unit (applied across 10 units incl. telescopes)",
+				"confidence": "medium (Claude); high (Gemini); low (GPT)"
+			},
+			{
+				"action": "add",
+				"item": "survey data / observing programme",
+				"supportedBy": "Claude, GPT",
+				"quantity": "1",
+				"unitCost": "Claude $20–60M; GPT $20–100M",
+				"confidence": "low"
+			},
+			{
+				"action": "resize",
+				"item": "bom-0-2 mining robots",
+				"supportedBy": "all",
+				"quantity": "Claude 8 + 4 replacements; Gemini 20 (12 + 8); GPT 6 + 6 replacements",
+				"unitCost": "Claude $30–80M; Gemini $35–55M; GPT $30–70M",
+				"confidence": "low (Claude, GPT); medium (Gemini)"
+			},
+			{
+				"action": "resize/relocate",
+				"item": "bom-0-3 processing plant, co-located",
+				"supportedBy": "all",
+				"quantity": "1",
+				"unitCost": "Claude $4–12B (250–500 t); Gemini $6.5–9.5B; GPT $3–7B (180–300 t)",
+				"confidence": "low"
+			},
+			{
+				"action": "resize",
+				"item": "bom-0-4 cargo tugs",
+				"supportedBy": "all",
+				"quantity": "Claude 12 @ 1–1.5 MWe incl. arrays; Gemini 14 @ 2 MWe; GPT 10 @ 2 MW excl. arrays",
+				"unitCost": "Claude $150–350M; Gemini $180–260M; GPT $150–350M",
+				"confidence": "medium (Claude); high (Gemini, power); low (GPT)"
+			},
+			{
+				"action": "resize",
+				"item": "bom-0-5 site power / arrays",
+				"supportedBy": "all",
+				"quantity": "Claude 2.5–8 MW site (tug arrays moved to bom-0-4); Gemini 50 MW; GPT 35–50 MW total",
+				"unitCost": "Claude $0.2–1.2B line; Gemini $60–100M per MW; GPT $30–100/W",
+				"confidence": "low–medium"
+			},
+			{
+				"action": "add",
+				"item": "distributed storage",
+				"supportedBy": "Claude (within bom-0-5), Gemini, GPT",
+				"quantity": "Claude 0.5–3 MWh + thermal; Gemini ≤10–15 MWh; GPT 1.3–3.3 MWh",
+				"unitCost": "GPT $50–140M/MWh; others not separately priced",
+				"confidence": "medium (Claude, GPT)"
+			},
+			{
+				"action": "resize",
+				"item": "bom-0-6 ISPP → water pilot",
+				"supportedBy": "all",
+				"quantity": "Claude 1 × 10–100 t/yr (C-type conditional); Gemini 2 units, 1,500 t/yr; GPT 1 × 10–30 t/yr",
+				"unitCost": "Claude $150–400M; Gemini $250–450M; GPT $100–300M",
+				"confidence": "low (Claude, GPT); high (Gemini)"
+			},
+			{
+				"action": "resize",
+				"item": "bom-0-7 organization",
+				"supportedBy": "all",
+				"quantity": "1",
+				"unitCost": "Claude $100–300M; Gemini $150–250M; GPT $150–350M",
+				"confidence": "medium (GPT)"
+			},
+			{
+				"action": "add",
+				"item": "Earth-to-space launch/delivery",
+				"supportedBy": "all",
+				"quantity": "Claude 2.5–6 kt; Gemini 2.5–3.5 kt; GPT 2.5–8 kt",
+				"unitCost": "Claude $3–15B total; Gemini $3–6B total; GPT $3,000–12,000/kg",
+				"confidence": "low"
+			},
+			{
+				"action": "add",
+				"item": "comms / ground segment",
+				"supportedBy": "all",
+				"quantity": "Claude 3 apertures or commercial; Gemini 3 × 35 m + 2 relays; GPT 1 network",
+				"unitCost": "Claude $0.15–0.5B; Gemini ~$0.6B (incl. relays); GPT $0.2–0.5B",
+				"confidence": "low"
+			},
+			{
+				"action": "add",
+				"item": "mission operations",
+				"supportedBy": "all",
+				"quantity": "10 yr",
+				"unitCost": "Claude $0.5–1.5B total; Gemini $525M (within a $1.1–1.5B comms+ops line); GPT $100–300M/yr",
+				"confidence": "low"
+			},
+			{
+				"action": "add",
+				"item": "NRE / qualification",
+				"supportedBy": "all",
+				"quantity": "1",
+				"unitCost": "Claude $3.5–10B; Gemini $4.5–7.5B; GPT $4–8B (0A) + $2–5B (0B)",
+				"confidence": "low"
+			},
+			{
+				"action": "add",
+				"item": "0A ground R&D / facilities",
+				"supportedBy": "Claude (GPT includes it in NRE)",
+				"quantity": "1",
+				"unitCost": "Claude $0.5–1.5B",
+				"confidence": "low"
+			},
+			{
+				"action": "add",
+				"item": "0A pathfinder demonstrator",
+				"supportedBy": "all",
+				"quantity": "1 mission",
+				"unitCost": "Claude $1.5–4B; Gemini $1.8–2.5B; GPT $0.6–1.5B hardware + $0.3–0.9B delivery",
+				"confidence": "low"
+			},
+			{
+				"action": "add",
+				"item": "Phase 1 receiving node",
+				"supportedBy": "Claude, GPT (Gemini names an SEL1 depot in its interfaces, not in its BOM)",
+				"quantity": "1",
+				"unitCost": "$200–600M (Claude, GPT)",
+				"confidence": "low"
+			},
+			{
+				"action": "add",
+				"item": "spares / replacements",
+				"supportedBy": "all (Gemini as a 20% inventory buffer in missing items)",
+				"quantity": "1 programme",
+				"unitCost": "Claude $0.5–1.5B; GPT $0.8–2.5B excl. robots",
+				"confidence": "low"
+			},
+			{
+				"action": "add",
+				"item": "debris / contamination",
+				"supportedBy": "all",
+				"quantity": "1",
+				"unitCost": "Claude $50–200M; Gemini $150M; GPT $100–300M (within plant/development)",
+				"confidence": "low"
+			},
+			{
+				"action": "add",
+				"item": "imported EP propellant (commodity)",
+				"supportedBy": "Claude, GPT; Gemini as an interface only",
+				"quantity": "Claude 150–450 t/yr; Gemini 900–1,200 t/yr; GPT 160–600 t/yr",
+				"unitCost": "Claude iodine $35–70/kg; GPT $30–100/kg",
+				"confidence": "low–medium"
+			},
+			{
+				"action": "add",
+				"item": "water-EP qualification track (conditional)",
+				"supportedBy": "Claude",
+				"quantity": "1",
+				"unitCost": "$0.2–0.6B",
+				"confidence": "not stated"
+			},
+			{
+				"action": "add",
+				"item": "contingency / reserve",
+				"supportedBy": "all",
+				"quantity": "Claude 30–40% (0A), 35–50% (0B); Gemini 30% / 25%; GPT 30–40% both",
+				"unitCost": "Claude $5–27B",
+				"confidence": "medium (Claude)"
+			},
+			{
+				"action": "remove",
+				"item": "crew systems, habitat, quarterly visits",
+				"supportedBy": "all",
+				"quantity": "0",
+				"unitCost": "—",
+				"confidence": "high"
+			},
+			{
+				"action": "remove",
+				"item": "200–500 MWh generic battery bank",
+				"supportedBy": "all",
+				"quantity": "0",
+				"unitCost": "—",
+				"confidence": "medium–high"
+			},
+			{
+				"action": "remove",
+				"item": "production LOX/LH₂ and EML1 depot",
+				"supportedBy": "Claude, GPT (Gemini defers)",
+				"quantity": "0",
+				"unitCost": "—",
+				"confidence": "high (GPT)"
+			}
+		]
+	}
 }

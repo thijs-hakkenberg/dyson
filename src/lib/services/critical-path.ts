@@ -49,7 +49,7 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 		id: 'isru-materials',
 		name: 'ISRU & Materials Processing',
 		description:
-			'Can we extract and process raw asteroid materials into usable engineering feedstock in microgravity? This thread covers everything from regolith handling through metallurgy to semiconductor fabrication.',
+			'Can we extract and process asteroid material into usable engineering feedstock at the asteroid? Phase 0 narrows the product to native Fe-Ni: regolith handling, beneficiation and the metallurgy routes (no-melt, H₂ reduction, partial-gravity melting). Solar-grade silicon is deferred to Phase 1.',
 		color: '#f59e0b', // amber
 		icon: '⚒',
 		questionIds: [
@@ -75,18 +75,18 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 		id: 'cryogenic-storage',
 		name: 'Cryogenic Propellant Storage',
 		description:
-			'Can we store cryogenic propellants (LH2/LOX) at L4/L5 with acceptable boiloff rates? Covers thermal management, insulation, active cooling, and sunshield architecture.',
+			'Can we store cryogenic propellants (LH2/LOX) with acceptable boiloff rates? Covers thermal management, insulation, active cooling, and sunshield architecture. Deferred from Phase 0 by the 2026 re-assessment (no production LOX/LH2; depot removed); kept for Phase 1.',
 		color: '#3b82f6', // blue
 		icon: '❄',
 		questionIds: ['rq-0-30', 'rq-0-47', 'rq-0-48', 'rq-0-49'],
 		rationale:
-			'Cryogenic propellant storage efficiency directly determines propellant production requirements, station power budget, and transport vehicle architecture. A factor-of-2 change in boiloff rate cascades through the entire mass budget.'
+			'When cryogens return in Phase 1, storage efficiency determines propellant production requirements, power budget and transport vehicle architecture. A factor-of-2 change in boiloff rate cascades through the entire mass budget.'
 	},
 	{
 		id: 'propulsion-transport',
 		name: 'Propulsion & Transport',
 		description:
-			'How do we move materials and people between asteroids, the processing station, and the construction site? Covers propellant production, fleet sizing, human-rating, and radiation protection.',
+			'How do we move product from the target asteroid to the delivery node and on to the construction site? Covers MW-class electric-propulsion cargo tugs, propellant supply, fleet sizing and heavy-cargo handling. Phase 0 is uncrewed.',
 		color: '#8b5cf6', // violet
 		icon: '🚀',
 		questionIds: [
@@ -134,7 +134,7 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 			'rq-0-60'
 		],
 		rationale:
-			'Mining is the first link in the production chain. Excavation rate determines material throughput, which sizes the processing station, which sizes the power system. Anchoring reliability and regolith behavior are existential unknowns.'
+			'Mining is the first link in the production chain. Excavation rate determines material throughput, which sizes the processing plant co-located at the asteroid, which sizes the site power system. Anchoring reliability and regolith behavior are existential unknowns.'
 	},
 	{
 		id: 'power-thermal',
@@ -145,7 +145,7 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 		icon: '⚡',
 		questionIds: ['rq-0-21', 'rq-0-22', 'rq-0-23', 'rq-0-25'],
 		rationale:
-			'Every other system draws power. Solar array degradation rate at L4/L5 determines replacement schedule. Energy storage technology limits eclipse operations. Array size drives station mass budget.'
+			'Every other system draws power. MW-class arrays drive both the tugs and the site plant; their degradation sets the replacement schedule, storage covers safe-mode and shadowing, and waste heat must be rejected. Array size drives tug and plant mass.'
 	},
 	{
 		id: 'prospecting',
@@ -156,13 +156,13 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 		icon: '🔭',
 		questionIds: ['rq-0-1', 'rq-0-2', 'rq-0-3', 'rq-0-4', 'rq-0-5', 'rq-0-50', 'rq-0-80'],
 		rationale:
-			'Target selection gates the entire mining campaign. Without validated composition data, mining robot design cannot be finalized, processing station throughput cannot be sized, and mission profiles cannot be planned.'
+			'Target selection gates the entire mining campaign. Without validated composition data, mining robot design cannot be finalized, processing plant throughput cannot be sized, and mission profiles cannot be planned.'
 	},
 	{
 		id: 'governance-integration',
-		name: 'Governance & Station Architecture',
+		name: 'Governance & Programme Integration',
 		description:
-			'How does it all fit together? Covers multi-century governance, cost methodology validation, and the integration challenge of combining all subsystems into a coherent station design.',
+			'How does it all fit together? Covers multi-century governance, cost methodology, the TRL re-baseline and decision gates, and the owner rulings that set the gate thresholds.',
 		color: '#6366f1', // indigo
 		icon: '🏛',
 		questionIds: ['rq-0-29', 'rq-0-46', 'rq-0-57', 'rq-0-58', 'rq-0-61', 'rq-0-62', 'rq-0-63', 'rq-0-64', 'rq-0-65', 'rq-0-66', 'rq-0-67', 'rq-0-68', 'rq-0-69', 'rq-0-70', 'rq-0-71', 'rq-0-72', 'rq-0-73', 'rq-0-74', 'rq-0-75', 'rq-0-76', 'rq-0-77', 'rq-0-78', 'rq-0-81', 'rq-0-82', 'rq-0-83'],
