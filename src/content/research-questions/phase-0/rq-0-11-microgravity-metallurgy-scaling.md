@@ -71,3 +71,17 @@ The consensus recommendation to "conduct ISS metallurgy experiments before commi
 4. **Slag separation mechanism prototyping**: Build and test three candidate slag separation systems—electromagnetic filtration, centrifugal separation, and flux-based chemical methods—at progressively larger scales in parabolic flight and ISS environments.
 
 5. **Terrestrial analog facility**: Establish a ground-based processing line using electromagnetic levitation to simulate containerless microgravity conditions, enabling rapid iteration on process parameters before committing to orbital experiments.
+
+## Re-assessment 2026-10 (Phase 0, round 2)
+
+The panel split on whether gravity is required at all.
+- **Gemini** baselines a rotating smelting furnace at 0.05–0.15 g.
+- **Claude** baselines no-melt routes and keeps centrifugal melting at pilot scale.
+- **GPT** treats rotating modules as an experimentally gated hypothesis ("gas/solid metallurgy is not automatically gravity-independent").
+
+The framing of the scale gap is also disputed. Claude: 4–6 orders of magnitude, mm-scale ISS melts against 1–10 t batches. GPT: the "eight orders" comparison of batch size against annual rate is dimensionally invalid.
+
+**How this gets answered:**
+- **Experiment:** ≥1 t-batch slag/metal separation at 0.05–0.15 g, compared directly with the no-melt routes in rq-0-56.
+
+Source: `reconciliation/phase-0/round-2/reconciliation/` and `reconciliation/phase-0/decisions.md`; the question register is `reconciliation/phase-0/open-questions.md`.

@@ -169,13 +169,33 @@ async function itemContext(phaseId, slug, includeSpecs) {
 }
 
 async function rqContext(phaseId, key) {
-	const ids = RQ_FOR_ITEM[phaseId]?.[key] ?? [];
+	// The phase-level prompt carries every mapped conclusion, not only its own
+	const map = RQ_FOR_ITEM[phaseId] ?? {};
+	const ids = key === 'phase' ? [...new Set(Object.values(map).flat())] : (map[key] ?? []);
 	const parts = [];
 	for (const rq of ids) {
 		const c = await read(`src/content/research-questions/${phaseId}/${rq}/conclusion.md`);
 		if (c) parts.push(`### Deliberation conclusion: ${rq}\n\n${c.replace(/^---[\s\S]*?---\n/, '')}`);
 	}
 	return parts.join('\n\n');
+}
+
+/**
+ * Technology readiness and decision gates as they stand, so gate proposals can use
+ * TRL (and say where the table is out of date) rather than invent thresholds.
+ */
+async function readinessContext() {
+	const trl = await read('src/lib/services/trl-assessment.ts');
+	const gates = await read('src/lib/services/decision-gates.ts');
+	const parts = [];
+	if (trl) parts.push(`### Technology readiness assessments (src/lib/services/trl-assessment.ts)\n\nUse TRL (NASA NPR 7123.1 scale) for gate criteria where it applies. Say where these ratings no longer match the scale or environment of the revised architecture.\n\n\`\`\`ts\n${trl}\n\`\`\``);
+	if (gates) parts.push(`### Current decision gates (src/lib/services/decision-gates.ts)\n\n\`\`\`ts\n${gates}\n\`\`\``);
+	return parts.length ? `## Readiness and gates\n\n${parts.join('\n\n')}` : '';
+}
+
+/** The model field in the answer's YAML is unreliable (models misname themselves); set it from metadata. */
+function stampModel(text, name) {
+	return text.replace(/^(\s*model:\s*).*$/m, `$1${name}`);
 }
 
 function findingsFor(F, key) {
@@ -202,6 +222,7 @@ async function buildPrompt({ phaseId, key, F, rows, includeSpecs, priorRound, fr
 			? (await Promise.all(rows.map(async (r) => `## ${r.id} ${r.name}\n\n${(await read(`static/content/bom-specs/${phaseId}/${r.slug}/consensus.md`))?.replace(/^---[\s\S]*?---\n/, '') ?? '(no specification)'}`))).join('\n\n')
 			: `## This item\n\n${await itemContext(phaseId, F.items[key] ?? row?.slug, includeSpecs)}`,
 		await rqContext(phaseId, key),
+		key === 'phase' ? await readinessContext() : '',
 		`## Findings to assess\n\n\`\`\`yaml\n${findingsFor(F, key)}\`\`\``,
 		key === 'phase' ? `## Phase-level asks\n\n${F.phase_asks.map((a) => `- ${a}`).join('\n')}` : '',
 		await priorReconciliation(phaseId, priorRound, key, framework),
@@ -312,7 +333,7 @@ async function main() {
 					await fs.mkdir(path.dirname(out), { recursive: true });
 					await fs.writeFile(
 						out,
-						`---\nphase: ${phaseId}\nitem: ${key}\nround: ${round}\ntype: reassessment\nmodelId: ${m}\nmodelName: "${MODELS[m].name}"\nendpoint: ${MODELS[m].id}\nfindings: ${findingsSha}\npriorRound: ${priorRound ?? 'null'}\n${priorRound ? `framework: ${framework.sha}\n` : ''}generated: ${ex.meta.started}\nseconds: ${ex.meta.seconds}\n---\n\n${ex.text}\n`
+						`---\nphase: ${phaseId}\nitem: ${key}\nround: ${round}\ntype: reassessment\nmodelId: ${m}\nmodelName: "${MODELS[m].name}"\nendpoint: ${MODELS[m].id}\nfindings: ${findingsSha}\npriorRound: ${priorRound ?? 'null'}\n${priorRound ? `framework: ${framework.sha}\n` : ''}generated: ${ex.meta.started}\nseconds: ${ex.meta.seconds}\n---\n\n${stampModel(ex.text, MODELS[m].name)}\n`
 					);
 					console.log(`  ${key} · ${MODELS[m].name}: ${ex.text.length} chars in ${ex.meta.seconds.toFixed(0)}s`);
 				} catch (e) {

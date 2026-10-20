@@ -81,3 +81,12 @@ The thruster lifetime-Isp tradeoff has cascading effects across multiple project
 4. **Evaluate Hybrid Propulsion Architectures**: Assess configurations using Hall-effect thrusters for primary acceleration and gridded ion for station-keeping and fine maneuvering, potentially optimizing both lifetime and propellant efficiency.
 
 5. **Conduct Trade Study on Modular Thruster Replacement**: Design thruster module interfaces enabling on-orbit replacement at the Processing Station. Compare lifecycle costs of replaceable lower-lifetime systems versus integrated higher-lifetime systems.
+
+## Re-assessment 2026-10 (Phase 0, round 2)
+
+The revised Phase 0 architecture needs 1–2.5 MWe tugs. The 30,000 h result above is for magnetically shielded Hall thrusters at kW class. It does not establish life for MW-class clusters or for iodine.
+
+**How this gets answered:**
+- **Experiment:** MW-class qualification is tracked in rq-0-54, with a total-impulse requirement for the real 20,000–40,000 h duty (GPT).
+
+Source: `reconciliation/phase-0/round-2/reconciliation/` and `reconciliation/phase-0/decisions.md`; the question register is `reconciliation/phase-0/open-questions.md`.
