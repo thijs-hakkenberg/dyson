@@ -15,6 +15,8 @@ tags:
   - "processing-station"
 ---
 
+> **Update, 20 October 2026.** The October 2026 re-assessment removed production LOX/LH₂ and the central 50,000 t/yr station from Phase 0. Water is a pilot only if the target is C-type (D-05, proposed). See the [feasibility report](/analysis/feasibility).
+
 # Resolved: Should Phase 0 Make Its Own Rocket Fuel?
 
 At $8,000-15,000/kg for Earth-launched propellant delivered to L4/L5, the Material Processing Station faces a brutal choice: build propellant production capability or watch fuel costs consume the program budget. Our multi-model discussion reached unanimous consensus in Round 1.

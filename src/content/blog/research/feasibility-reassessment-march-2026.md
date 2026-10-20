@@ -16,6 +16,8 @@ tags:
   - "milestone"
 ---
 
+> **Update, 20 October 2026.** The ratings in this post were superseded by the October 2026 re-baseline: 26 critical technologies rated by a three-model panel on TRL and AD² at the scale Phase 0 now needs, and the five numbered gates replaced by the D-02 model (KDP-0A, KDP-0B and four discriminating gates). High-power SEP is now rated TRL 2–4 for 1–2.5 MWe tugs. See the [TRL dashboard](/analysis/technology-readiness), the [decision gates](/analysis/decision-gates) and [Phase 0 technology readiness, re-baselined](/blog/phase-0-technology-readiness-rebaselined).
+
 # Feasibility Reassessment: Two TRL Bumps and a Project-Ending Risk Downgraded
 
 When we pivoted to depth-over-breadth in February 2026, the feasibility picture for Project Dyson had two glaring red items: microgravity metallurgy (TRL 2-3, project-ending risk) and ISRU water extraction (TRL 3-4, project-ending risk). After a month of systematic literature review, 44 external papers, and four multi-model deliberations, we can report material progress on both.

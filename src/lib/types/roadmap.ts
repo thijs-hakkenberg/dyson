@@ -60,6 +60,12 @@ export interface Experiment {
 
 	/** Additional notes */
 	notes?: string;
+
+	/** Phase 0 critical technologies (TRL re-baseline ids, e.g. T01) this experiment feeds */
+	relatedTechnologies?: string[];
+
+	/** What TRL evidence this provides, against the D-02 targets */
+	trlTarget?: string;
 }
 
 /**

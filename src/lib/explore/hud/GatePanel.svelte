@@ -48,7 +48,7 @@
 	<ul class="legend">
 		<li><span class="k ring"></span>Gate ring · one arc per criterion (lit = met)</li>
 		<li><span class="k col"></span>Technology · solid = current TRL, outline = target</li>
-		<li><span class="k ok"></span>Feeds gate in time · <span class="k ar"></span>inside the window · <span class="k lt"></span>after it</li>
+		<li><span class="k ok"></span>Required TRL in time · <span class="k ar"></span>inside the window · <span class="k lt"></span>after it · <span class="k nt"></span>no TRL required</li>
 		<li><span class="k ring"></span>Faint ring: where the decision window closes</li>
 		{#each Object.entries(RISK_LABELS) as [k, v] (k)}
 			<li><span class="k risk" style="--c:{v.color}"></span>If it fails: {v.label}</li>
@@ -178,6 +178,10 @@
 	.ar {
 		height: 2px;
 		background: #fbbf24;
+	}
+	.nt {
+		height: 2px;
+		background: #738094;
 	}
 	.warn {
 		color: var(--hud-warn);

@@ -118,30 +118,30 @@ operations". content.ts / BOM: quantity 15 ($133M each).
 
 ## Planning data inconsistencies
 
-### CI-18 · Decision gates scheduled before their technologies are ready · open
-Combining `decision-gates.ts` (decision month from Phase 0 start, assumed 2030)
-with `trl-assessment.ts` (`yearsToTarget` from today, Oct 2026), 6 gate→technology
-dependencies reach target TRL after the gate decides:
+### CI-18 · Decision gates scheduled before their technologies are ready · resolved (2026-10-20)
+`decision-gates.ts` (decision month from Phase 0 start, assumed 2030) combined with
+`trl-assessment.ts` (`yearsToTarget` from today) put 6 gate→technology dependencies
+after the gate decided (gate-1, gate-3, gate-4, gate-5 against the March 2026 rows).
 
-| Gate (decision) | Technology | TRL | Target reached ~ |
-|---|---|---|---|
-| gate-4 Asteroid Target Selection (M24 ≈ 2032.0) | autonomous-asteroid-prospecting | 5→8, 6 y | 2032.8 |
-| gate-1 Microgravity Materials Processing (M36 ≈ 2033.0) | microgravity-metallurgy | 3→7, 8 y | 2034.8 |
-| gate-1 (M36) | in-space-silicon-purification | 2→6, 10 y | 2036.8 |
-| gate-3 ISRU Water Extraction Rate (M48 ≈ 2034.0) | isru-water-extraction | 3→7, 8 y | 2034.8 |
-| gate-5 Phase 0 PDR (M60 ≈ 2035.0) | asteroid-mining-bucket-wheel | 3→6, 10 y | 2036.8 |
-| gate-5 (M60) | in-space-silicon-purification | 2→6, 10 y | 2036.8 |
+**Outcome.** D-02 and the WP-A re-baseline replaced the five March gates with decision
+*windows* (KDP-0A M0–3 … KDP-0B M72–180), and each criterion now states the TRL it
+requires (KDP-0A requires none; internal 0A milestones TRL 4–5; KDP-0B TRL 6). The
+Gate Tunnel times each link against that required TRL, not the target. On the panel's
+optimistic estimates no dependency is late. On the pessimistic estimates 17 technologies
+can slip into the KDP-0B window, T11/T18 into both scout gates, and 12 into the 0A
+mid-term review: shown amber ("at risk"). The old six are history (`decision-gates-legacy.ts`).
+*Explorer:* red = misses the window even optimistically; amber = pessimistic estimate
+lands inside it; grey = the gate names the technology without a TRL requirement.
 
-Possible readings: gates decide on partial evidence (target TRL not required
-at the gate), the Phase 0 start is later than 2030, or the gate months/TRL
-timelines need reconciling. Sensitive to `ASSUMED_PHASE0_START` (CI-15).
-*Explorer:* Gate Tunnel draws these links in red and counts them per gate.
+### CI-19 · TRL assessments cover only 6 of 33 BOM items · partly resolved (2026-10-20)
+`trl-assessment.ts` linked technologies to bom-0-2, 0-3, 0-4, 0-5, 0-6 and a few
+others; 27 items had no technology readiness or risk-if-fail rating.
 
-### CI-19 · TRL assessments cover only 6 of 33 BOM items · open
-`trl-assessment.ts` links technologies to bom-0-2, 0-3, 0-4, 0-5, 0-6 and a few
-others; 27 items (all of Phases 1–3b except where linked) have no technology
-readiness or risk-if-fail rating. *Explorer:* Risk lens marks them
-"unassessed" (grey halo, technology term unknown, not zero).
+**Outcome.** The Phase 0 TRL re-baseline rates 26 critical technologies, and every
+Phase 0 BOM item (bom-0-1 … bom-0-7) now has at least one. Phases 1–3b are still
+unassessed; their re-baselines follow the phase-by-phase reconciliation.
+*Explorer:* Risk lens marks them "unassessed" (grey halo, technology term unknown,
+not zero).
 
 ### CI-20 · Phase 0 mining capacity is ~12× the station's processing capacity · open
 `phase-0/mining-robots`: 20 robots × 2–5 t/h continuous excavation ≈ 350–880 kt/yr.

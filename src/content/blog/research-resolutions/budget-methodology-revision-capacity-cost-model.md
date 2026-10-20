@@ -18,6 +18,8 @@ relatedPhases:
   - "phase-3b"
 ---
 
+> **Update, 20 October 2026.** The Phase 0 cost in this post was re-estimated by the October 2026 panel at $22–195B across models (split into 0A and a gated 0B), and the BOM is being rebuilt. See the [feasibility report](/analysis/feasibility).
+
 # From $10 Quadrillion to $9 Trillion: Adopting the Capacity Cost Model
 
 Today we're announcing a **fundamental revision** to Project Dyson's budget methodology, reducing total estimated costs from ~$10.3 quadrillion to ~$9 trillion—a reduction of over 1,000x for later phases. This isn't a correction of arithmetic errors or updated material prices. It's a recognition that **our previous methodology was categorically wrong** for a self-replicating, autonomous, in-situ manufacturing architecture.

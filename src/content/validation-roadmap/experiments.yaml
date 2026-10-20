@@ -14,7 +14,7 @@ experiments:
       - "rq-0-20"
       - "rq-0-21"
     relatedBOMItems:
-      - "bom-0-5"
+      - "bom-0-4"
     tags:
       - "propulsion"
       - "hall-thruster"
@@ -28,6 +28,10 @@ experiments:
     notes: "Builds on AEPS program heritage"
 
   # LEO deployment demonstration
+    relatedTechnologies:
+      - "T01"
+    trlTarget: "Xenon module evidence for T01 (panel: Xe branch TRL 3–4). The MW-class cluster must reach TRL 6 before KDP-0B (D-02); 10–20 kW tests do not close that gap alone (rq-0-79)."
+
   - id: "exp-002"
     name: "LEO Membrane Deployment Test"
     description: "Orbital demonstration of large-area thin-film membrane deployment mechanisms in LEO. Tests deployment reliability, membrane tension control, and structural dynamics for collector unit design validation."
@@ -84,6 +88,11 @@ experiments:
     notes: "Part of Artemis III+ surface operations"
 
   # ISS PV degradation study
+    relatedTechnologies:
+      - "T04"
+      - "T18"
+    trlTarget: "Regolith-contact and sampling evidence toward TRL 4–5 for the 0A mid-term review and the target gate (D-02)."
+
   - id: "exp-004"
     name: "ISS PV Degradation Study"
     description: "Ongoing analysis of International Space Station solar array performance data spanning 25+ years. Provides long-baseline radiation damage and degradation data for validating collector unit lifetime models."
@@ -111,6 +120,11 @@ experiments:
     notes: "Utilizes existing ISS telemetry data"
 
   # Asteroid redirect demonstration
+    relatedTechnologies:
+      - "T02"
+      - "T15"
+    trlTarget: "Degradation data for MW-scale arrays, which must reach TRL 6 before KDP-0B (D-02)."
+
   - id: "exp-005"
     name: "Asteroid Redirect Demo"
     description: "Technology demonstration for asteroid capture and redirect techniques applicable to Near-Earth Object mining operations. Validates capture system designs and low-thrust trajectory optimization for material transport."
@@ -137,6 +151,11 @@ experiments:
     notes: "Builds on DART mission heritage"
 
   # Swarm coordination testbed
+    relatedTechnologies:
+      - "T11"
+      - "T12"
+    trlTarget: "Rendezvous and heavy-handling evidence; scouts need TRL 6 at their PDR (G-1.5)."
+
   - id: "exp-006"
     name: "Multi-Satellite Swarm Coordination Testbed"
     description: "Ground-based hardware-in-the-loop simulation facility for testing swarm coordination algorithms at scale. Validates distributed control architectures and inter-satellite communication protocols for million-unit swarm management."
@@ -214,6 +233,11 @@ experiments:
     notes: "Iodine offers 95-100% xenon performance at ~1% cost"
 
   # Collision avoidance demonstration
+    relatedTechnologies:
+      - "T01"
+      - "T14"
+    trlTarget: "Iodine branch evidence for T01 and T14 (panel: I₂ TRL 2–3); a small iodine flight does not validate MW scaling (rq-0-79)."
+
   - id: "exp-009"
     name: "Dense Constellation Collision Avoidance Demo"
     description: "Operational demonstration of autonomous collision avoidance in a dense satellite constellation. Tests real-time maneuver planning, inter-satellite coordination, and ground segment integration for swarm safety validation."
@@ -267,7 +291,7 @@ milestones:
   - id: "ms-001"
     name: "Propulsion Technology Validation"
     targetDate: "2027"
-    description: "Complete validation of Hall thruster specifications for transport vehicles"
+    description: "Module-level electric-propulsion evidence (xenon and iodine) toward the MW-class tug path; the cluster itself needs TRL 6 before KDP-0B (D-02, rq-0-79)"
     relatedExperiments:
       - "exp-001"
       - "exp-008"
@@ -285,7 +309,7 @@ milestones:
   - id: "ms-003"
     name: "ISRU Technology Readiness"
     targetDate: "2029"
-    description: "Achieve TRL 7 for in-situ resource utilization systems"
+    description: "ISRU critical technologies at TRL 4–5 for the 0A mid-term review; TRL 6 in a relevant environment before KDP-0B (D-02)"
     relatedExperiments:
       - "exp-003"
     criticalPath: true
@@ -300,9 +324,9 @@ milestones:
     criticalPath: false
 
   - id: "ms-005"
-    name: "Phase 0 Design Review"
-    targetDate: "2027"
-    description: "Complete Phase 0 preliminary design review with validated specifications"
+    name: "KDP-0A: authorise bounded Phase 0A"
+    targetDate: "2030"
+    description: "Replaces the March 2026 Phase 0 design review (retired under D-02). Decision window M0–3 of Phase 0; start assumed 2030"
     relatedExperiments:
       - "exp-001"
       - "exp-003"

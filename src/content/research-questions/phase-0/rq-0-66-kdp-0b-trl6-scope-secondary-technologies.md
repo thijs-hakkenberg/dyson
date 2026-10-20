@@ -45,7 +45,7 @@ Sources: `reconciliation/phase-0/trl/round-1/gates/synthesis/gates.md`, `gates-p
 | T26 | Claude's view: project-ending for integrated fleet command. Owner ruling is architecture-change, "possibly project-ending." Open in rq-0-64. | Not listed | TRL 6 integrated service at KDP-0B |
 | T18 | 0A flight technology (TRL 6 at scout PDR) | Project-ending | TRL 6 technology maturity before KDP-0B |
 | T11 | 0A flight technology | In prose list; absent from YAML | TRL 6 technology maturity before KDP-0B |
-| T09, T12, T20 | Architecture-change: TRL ≥ 5, waiverable, with a funded path to 6 | Not listed | TRL 6 for selected implementations; substitutions reassessed |
+| T09, T12, T20 | Architecture-change: TRL ≥ 5, waiverable, with a funded path to 6 | Not listed | TRL 6 for selected implementations; substitutions reassessed <!-- stale-ok: quotes a model position --> |
 
 **Split classes needing an owner ruling (Claude's list):** T02, T10, T14, T15, T22, T24, T25, T26. Claude holds these at TRL 6, no waiver, until they are ruled on.
 
@@ -59,7 +59,7 @@ Sources: `reconciliation/phase-0/trl/round-1/gates/synthesis/gates.md`, `gates-p
 
 ## Why This Matters
 
-These five sit outside the agreed project-ending core. Scouts (T11) and sampling (T18) are 0A flight technologies whose maturity is settled by their own missions; T09, T12 and T20 are supporting systems Claude would let pass at TRL ≥ 5 with a waiver and a funded path, while GPT wants TRL 6 for the selected implementations.
+These five sit outside the agreed project-ending core. Scouts (T11) and sampling (T18) are 0A flight technologies whose maturity is settled by their own missions; T09, T12 and T20 are supporting systems Claude would let pass at TRL ≥ 5 with a waiver and a funded path, while GPT wants TRL 6 for the selected implementations. <!-- stale-ok: quotes a model position -->
 
 ## Key Considerations
 

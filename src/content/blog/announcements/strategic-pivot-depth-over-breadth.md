@@ -16,6 +16,8 @@ relatedPhases:
   - "phase-0"
 ---
 
+> **Update, 20 October 2026.** The TRL assessments and decision gates this post introduced have since been rebuilt: 26 critical technologies on TRL and AD², and gates under decision D-02. See [Phase 0 technology readiness, re-baselined](/blog/phase-0-technology-readiness-rebaselined).
+
 # Strategic Pivot: From Breadth to Depth on Phase 0 Feasibility
 
 Project Dyson has built impressive breadth: 6 phases, 38 BOM items, 142 research questions, 20 Monte Carlo simulators, and multi-model AI consensus across every major system. But breadth without depth is unconvincing. A space engineer browsing the site would find interesting ideas at every turn — and insufficient rigor at most of them.

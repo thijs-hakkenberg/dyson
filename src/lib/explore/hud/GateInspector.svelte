@@ -54,11 +54,12 @@
 					<ul class="links">
 						{#each g.gate.relatedTRLIds as id (id)}
 							{@const tt = L.techs.find((x) => x.trl.id === id)}
+							{@const link = L.links.find((x) => x.gateId === g.gate.id && x.techId === id)}
 							{#if tt}
 								<li>
 									<button type="button" onclick={() => (explorer.gateSel = `trl:${id}`)}>
 										<span class:late={g.late.includes(id)} class:atrisk={g.atRisk.includes(id)}>{tt.trl.id} {tt.trl.technology}</span>
-										<span class="dim">TRL {fmt(tt.trl.currentTRL, tt.trl.currentTRLMax)}→{tt.trl.targetTRL} · ~{yr(tt.arrival)}{g.late.includes(id) ? ' · late' : g.atRisk.includes(id) ? ' · inside window' : ''}</span>
+										<span class="dim">TRL {fmt(tt.trl.currentTRL, tt.trl.currentTRLMax)} now · {link?.requiredTRL ? `needs TRL ${link.requiredTRL} here, ~${yr(link.arrivesAt ?? tt.arrival)}` : 'no TRL requirement here'}{g.late.includes(id) ? ' · late' : g.atRisk.includes(id) ? ' · inside window' : ''}</span>
 									</button>
 								</li>
 							{/if}

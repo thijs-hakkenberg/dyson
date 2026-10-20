@@ -16,6 +16,8 @@ tags:
   - "zero-boil-off"
 ---
 
+> **Update, 20 October 2026.** The October 2026 re-assessment removed the cryogenic depot from Phase 0 (no production LOX/LH₂). This analysis now applies to Phase 1. See the [feasibility report](/analysis/feasibility).
+
 # Resolved: Can We Store Cryogenic Propellant at L4/L5 Without Losing It?
 
 Cryogenic propellant (liquid hydrogen at 20K, liquid oxygen at 90K) offers the highest performance for in-space transportation, but it boils off continuously. If we can't store it, we're stuck with storable propellants that carry a devastating 30-40% specific impulse penalty. This question blocks three downstream research questions.

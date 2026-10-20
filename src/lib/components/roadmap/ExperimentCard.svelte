@@ -114,6 +114,20 @@
 		</div>
 	</div>
 
+	{#if experiment.relatedTechnologies?.length || experiment.trlTarget}
+		<div class="mt-3 text-xs">
+			{#if experiment.relatedTechnologies?.length}
+				<div class="flex flex-wrap items-center gap-1.5">
+					<span class="text-star-faint">Feeds</span>
+					{#each experiment.relatedTechnologies as t}
+						<a href="/analysis/technology-readiness#{t}" class="font-mono px-1.5 py-0.5 rounded bg-space-600 text-star-dim hover:text-cosmic-cyan">{t}</a>
+					{/each}
+				</div>
+			{/if}
+			{#if experiment.trlTarget}<p class="text-star-dim mt-1.5">{experiment.trlTarget}</p>{/if}
+		</div>
+	{/if}
+
 	<!-- Reference URL -->
 	{#if experiment.referenceUrl}
 		<a

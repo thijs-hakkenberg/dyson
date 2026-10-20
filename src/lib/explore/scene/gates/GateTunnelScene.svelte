@@ -80,11 +80,19 @@
 	})();
 
 	// ── Gate→technology links: arcs from the column top up to the gate ring ─
-	const linkMat = (late: boolean, atRisk = false) =>
+	const linkMat = (late: boolean, atRisk = false, untimed = false) =>
 		new ShaderMaterial({
 			uniforms: {
 				uTime: { value: 0 },
-				uColor: { value: late ? new Vector3(0.97, 0.3, 0.3) : atRisk ? new Vector3(0.98, 0.75, 0.15) : new Vector3(0.2, 0.83, 0.6) }
+				uColor: {
+					value: late
+						? new Vector3(0.97, 0.3, 0.3)
+						: atRisk
+							? new Vector3(0.98, 0.75, 0.15)
+							: untimed
+								? new Vector3(0.45, 0.5, 0.58)
+								: new Vector3(0.2, 0.83, 0.6)
+				}
 			},
 			vertexShader: /* glsl */ `
 				#include <common>
@@ -114,7 +122,7 @@
 		return {
 			...l,
 			geo: new TubeGeometry(new CatmullRomCurve3([top, mid, ring]), 24, 0.035, 5),
-			mat: linkMat(l.late, l.atRisk)
+			mat: linkMat(l.late, l.atRisk, l.requiredTRL === null)
 		};
 	});
 

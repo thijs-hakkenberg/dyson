@@ -16,6 +16,8 @@ tags:
   - "cryogenic"
 ---
 
+> **Update, 20 October 2026.** The October 2026 re-assessment removed the cryogenic depot from Phase 0. This analysis now applies to Phase 1. See the [feasibility report](/analysis/feasibility).
+
 # Resolved: Will Our Thermal Insulation Survive 20+ Years in Space?
 
 Multi-layer insulation (MLI) is the workhorse of spacecraft thermal control. But every flight dataset we have comes from LEO missions lasting at most a few years. The Material Processing Station needs thermal insulation that works for 20-30 years at L4/L5, an environment with no existing long-duration data.

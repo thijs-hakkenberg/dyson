@@ -14,6 +14,8 @@ tags:
   - "milestone"
 ---
 
+> **Update, 20 October 2026.** Gate 1 and the other numbered gates were retired under decision D-02 in October 2026. See the [decision gates](/analysis/decision-gates).
+
 # Pre-Outreach Preparation Complete
 
 Project Dyson pivoted to depth-over-breadth in February 2026, focusing on rigorous literature-backed analysis of the two project-ending risks before reaching out to domain specialists. That preparation is now complete.
