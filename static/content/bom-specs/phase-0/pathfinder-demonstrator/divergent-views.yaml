@@ -1,0 +1,84 @@
+# Divergent Views for pathfinder-demonstrator
+# Auto-generated from consensus document
+
+bomId: "bom-0-12"
+itemSlug: "pathfinder-demonstrator"
+generated: "2026-10-20"
+
+topics:
+  - id: "demonstrator-scale"
+    topic: "Demonstrator scale"
+    positions:
+      - statement: "Claude recommends \"full-scale units, subscale plant\": a ~24.8 t launch stack, ~16 t dry, a 75 kWe surface plant, a full 0B-size 50 kg-batch crucible, ≥40 t feed and ≥4 t Fe-Ni."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers \"end-to-end subscale\": a 2.45 t wet single spacecraft with 15 kW, a 3 kW furnace, 5 kg/batch and ~0.5 kg Fe-Ni per batch."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a middle path: 6–8.5 t dry, 60–80 kWe, 300–1,000 kg feed and 10–80 kg product, with representative (not full-scale) contact surfaces and furnace conditions."
+        models:
+          - "GPT"
+  - id: "cost-of-bom-0-12-and-treatment-of-round-2-figures"
+    topic: "Cost of bom-0-12 and treatment of round-2 figures"
+    positions:
+      - statement: "Claude recommends $1.3–3.0B (point $2.0B) for the line, including 25% project reserve. Its full-mission view is $1.7–3.8B."
+        models:
+          - "Claude"
+      - statement: "Claude calls GPT's $0.6B hardware floor too low and GPT's $0.3–0.9B delivery too high for one launch."
+        models:
+          - "Claude"
+          - "GPT"
+      - statement: "Gemini prefers $0.9–1.45B total, including launch ($150–250M) and operations, and rejects $4B as front-loading capital. Gemini's text also rejects \"Gemini's $2.5B\", which is internally inconsistent."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests $0.91–1.72B direct and $1.9–3.8B fully burdened attributable (point ~$2.7B), and rejects its own round-2 low endpoint."
+        models:
+          - "GPT"
+  - id: "mission-architecture-and-robots"
+    topic: "Mission architecture and robots"
+    positions:
+      - statement: "Claude recommends three elements: a 100 kWe carrier/orbiter, an anchored Surface Plant Module, and two flight-standard bom-0-2 robots on 2 kV, 300 m tethers with 20 kWh batteries."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a single integrated anchored spacecraft with an excavation head and no separate robots."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a single spacecraft with a 3–5 m arm and a short 1–2 kV demonstrator tether branch, explicitly avoiding \"importing an industrial robot fleet.\""
+        models:
+          - "GPT"
+  - id: "propellant-d-05"
+    topic: "Propellant (D-05)"
+    positions:
+      - statement: "Claude recommends krypton for the critical-path strings plus one iodine demo string. Claude flags this as a deliberate exception to D-05 needing owner confirmation."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers iodine Hall thrusters (2 × 5 kW) as baseline."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests costing iodine with argon as the alternate per D-05, switching to a qualified alternative if iodine is immature."
+        models:
+          - "GPT"
+  - id: "product-return"
+    topic: "Product return"
+    positions:
+      - statement: "Claude recommends a product shuttle, ~300 kg returned toward SEL1, and a 5–10 kg Earth sample capsule."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers on-board inspection of the coupon or ingot only."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests no sample return baselined. GPT would decide before PDR whether Phase 1 acceptance requires Earth-lab data."
+        models:
+          - "GPT"
+  - id: "containment-ceiling-and-processing-route"
+    topic: "Containment ceiling and processing route"
+    positions:
+      - statement: "Claude recommends an interim ceiling of ≤1×10⁻³ of mass handled, measured down to 10⁻⁴. Its process is centrifugal induction casting (~1 g at the wall, 1,550–1,600 °C) plus a subscale carbonyl cell for sulfur removal."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a qualitative ALARP electrostatic Kapton/Kevlar shroud. Its process is induction melting with electromagnetic melt centering and inertia-driven casting."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a tighter ≤1×10⁻⁴ allocation (30–100 g over the campaign). Its process is vacuum induction at 1,600–1,850 °C with an optional hot-press/sintering experiment."
+        models:
+          - "GPT"

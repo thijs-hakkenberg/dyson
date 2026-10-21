@@ -3,78 +3,78 @@
 
 bomId: "bom-0-6"
 itemSlug: "ispp-systems"
-generated: "2026-02-07"
+generated: "2026-10-20"
 
 topics:
-  - id: "primary-processing-technology"
-    topic: "Primary Processing Technology"
+  - id: "who-owns-heating-and-capture-the-integration-model"
+    topic: "Who owns heating and capture (the integration model)"
     positions:
-      - statement: "Molten Regolith Electrolysis (MRE) at 1600–1700°C as the baseline, producing oxygen from any anhydrous regolith with metal byproducts, and treats water ice as a supplementary bonus pathway"
+      - statement: "Claude recommends dedicated spun canister-retorts (2 × 330 kg batches) fed by a ≤2 mm side-stream of 600–1,000 t/yr from the bom-0-3 crusher. Pilot heating is booked in bom-0-6. The pilot also serves as the pathfinder for bom-0-3's mandatory full-stream dewatering front-end. That front-end would liberate about 280 t/yr of water at about 7 kt/yr of ore, and would be pursued later as option W-2 (100–300 t/yr, $60–150M, not baselined)."
         models:
           - "Claude"
-      - statement: "high-temperature processing entirely in favor of low-temperature (200–400°C) thermal extraction of water via a \"Thermal Worm\" auger, arguing simplicity and fewer failure modes"
+      - statement: "Gemini prefers having no pilot retorts. It would tap the bom-0-3 off-gas manifold directly, with heating provided and counted by bom-0-3."
         models:
           - "Gemini"
-      - statement: "a middle position with vacuum thermal desorption at 400–700 K focused on water-bearing regolith but does not propose anhydrous oxygen extraction at all"
+      - statement: "GPT suggests two independently isolatable 100–200 kg batch retorts with a dedicated, instrumented capture train. Feed would be 468 t/yr in sealed canisters of 1–20 mm material from bom-0-2. GPT's argument is that yield cannot be validated through an uncharacterised shared off-gas system."
         models:
-          - "Gpt"
-  - id: "propellant-type-and-propulsion-architecture"
-    topic: "Propellant Type and Propulsion Architecture"
+          - "GPT"
+  - id: "cost-split-and-where-0a-work-is-booked"
+    topic: "Cost split and where 0A work is booked"
     positions:
-      - statement: "to LOX/LH₂ as the primary high-performance propellant with LOX as the dominant mass fraction, supplemented by sodium/sulfur propellants at Mercury"
+      - statement: "Claude recommends $15–38M for 0A, unconditional and booked in bom-0-6 (excluded from bom-0-11 so the option value stays visible), plus $135–315M for 0B. Probability-weighted at P(C-type) = 20–40%, the 0B figure is about $27–126M."
         models:
           - "Claude"
-      - statement: "for water itself as the sole propellant currency, used directly in steam thermal thrusters (Isp ~190s) and water-plasma Hall thrusters (Isp ~1,500s), explicitly rejecting cryogenic chemical propulsion complexity"
+      - statement: "Gemini prefers $120–180M of 0A NRE and qualification plus $150–220M of 0B flight hardware, totalling $270–400M."
         models:
           - "Gemini"
-      - statement: "a dual-track LOX/LH₂ primary with LOX/CH₄ secondary, and pragmatically suggests deferring LH₂ liquefaction by initially storing hydrogen as high-pressure gas"
+      - statement: "GPT suggests $45–100M of 0A work, booked under the bom-0-11 NRE and bom-0-12 pathfinder lines (including a $15–35M water share of the pathfinder), plus $120–240M for 0B. That gives $165–340M direct."
         models:
-          - "Gpt"
-  - id: "target-location-and-tier-strategy"
-    topic: "Target Location and Tier Strategy"
+          - "GPT"
+  - id: "path-to-trl-6-under-d-02"
+    topic: "Path to TRL 6 under D-02"
     positions:
-      - statement: "a three-tier architecture (Lunar south pole → C-type asteroids → Mercury) with explicit timelines and the Moon as the mandatory first node"
+      - statement: "Claude recommends a full-scale EDU in thermal-vacuum testing, plus spin-rig, parabolic and suborbital microgravity tests. It also asks bom-0-12 to carry an optional 50–150 kg mini-canister experiment for TRL 7 evidence, and starts a pre-target breadboard so TRL 6 can be met by a Y5–Y6 KDP-0B."
         models:
           - "Claude"
-      - statement: "exclusively on Near-Earth Asteroids as the primary and essentially only resource node, arguing that escaping gravity wells is fundamentally wrong for megastructure logistics"
+      - statement: "Gemini prefers TRL 3→5 in 0A and TRL 5→7 in 0B. This is inconsistent with D-02, which requires TRL 6 before KDP-0B with no waiver."
         models:
           - "Gemini"
-      - statement: "site-agnostic, designing a modular plant adaptable to any ice-bearing body (lunar PSR, asteroid, Phobos, or Mercury PSR) and deferring site selection as an open question"
+      - statement: "GPT suggests that relevant-environment TRL 6 must come from the bom-0-12 pathfinder before 0B is authorised. The 0B pilot cannot serve as evidence for its own commitment gate, and a short reduced-gravity test alone does not establish full-system TRL 6."
         models:
-          - "Gpt"
-  - id: "power-source"
-    topic: "Power Source"
+          - "GPT"
+  - id: "water-inventory-and-what-happens-when-it-is-full"
+    topic: "Water inventory and what happens when it is full"
     positions:
-      - statement: "recommends nuclear fission (Kilopower-class, 10 kWe units scaling to megawatt-class) as the baseline for lunar operations, citing lunar night resilience and power density"
+      - statement: "Claude recommends 10 t of storage (range 5–20 t). Disposition in order: supply bom-0-3, hold a W2 reserve, export on signed request, then reject into tailings (never vent)."
         models:
           - "Claude"
-      - statement: "solar-only with large concentrators (2"
+      - statement: "Gemini prefers a 30 t working inventory and leaves controlled venting versus export as an open question."
         models:
           - "Gemini"
-      - statement: "a hybrid-ready architecture with solar baseline and optional nuclear plug-in for permanently shadowed regions, explicitly declining to commit until site selection"
+      - statement: "GPT suggests 1–3 t (point 2 t). Extraction pauses automatically at the high-inventory threshold, with no disposal vent and no speculative stockpile."
         models:
-          - "Gpt"
-  - id: "system-scale-and-unit-philosophy"
-    topic: "System Scale and Unit Philosophy"
+          - "GPT"
+  - id: "non-condensable-gas-and-venting-policy"
+    topic: "Non-condensable gas and venting policy"
     positions:
-      - statement: "large, fixed-site industrial plants (2,500 kg dry per MRE module, scaling to 50–100 modules at a single site producing 10,000 t/year)"
+      - statement: "Claude recommends one designated, mass-logged anti-sun vent for CO₂, CO, CH₄, N₂ and H₂, estimated at 3–13 t/yr (comparable to water output), booked against the bom-0-15 budget. Solids retention is ≥99.9% interim."
         models:
           - "Claude"
-      - statement: "small, self-propelled, swarm-deployable units (4,500 kg dry \"Hydra\" harvesters, fleet of 50+, each independently mobile)"
+      - statement: "Gemini prefers regenerative sorbent pre-purification, with venting or flaring of diagnostic PEM products."
         models:
           - "Gemini"
-      - statement: "intermediate modular skids (18,000 kg dry ISPP-10 baseline) intended for replication at a single site but not self-mobile"
+      - statement: "GPT suggests sorbent or contained collection, with no normal-process gas venting without authorisation. Escaped solids would be limited to 0.1–1 kg/yr, which is about 99.9998% or better retention."
         models:
-          - "Gpt"
-  - id: "initial-deployment-cost"
-    topic: "Initial Deployment Cost"
+          - "GPT"
+  - id: "capture-method-product-grade-and-autonomy"
+    topic: "Capture method, product grade and autonomy"
     positions:
-      - statement: "~$6"
+      - statement: "Claude recommends: Frost deposition on cold traps at 245–255 K, with a secondary trap at 185–200 K, melted in batches to avoid two-phase separation in microgravity. Two grades with numeric limits: W1 process water at ≤10 µS/cm, and W2 electrolysis/EP-test water at ≤1 µS/cm and ≤0.5 ppm TOC. Radiators of about 45 m² (25 m² cold, 20 m² main). 30 days unattended operation at ≥50% throughput."
         models:
           - "Claude"
-      - statement: "$30M per operational Hydra unit at orbit (at 50-unit production scale), with total development through first deep-space mission at ~$350M"
+      - statement: "Gemini prefers: Liquid condensation at about 5 °C, which needs capillary or centrifugal phase separation. A 10–25 kWh battery."
         models:
           - "Gemini"
-      - statement: "$250–600M for development NRE and $120–250M per ISPP-10 first-of-a-kind flight unit, with mature recurring at $60–130M each"
+      - statement: "GPT suggests: Staged condensation or cold-trapping. Utility-grade water only (≥99.5% water, ≤10 mg/L solids), with electrolysis grade not baselined. Radiators of 80–180 m² effective area. 30-day safe-storage survival only, not production."
         models:
-          - "Gpt"
+          - "GPT"

@@ -1,0 +1,80 @@
+# Divergent Views for nre-qualification
+# Auto-generated from consensus document
+
+bomId: "bom-0-11"
+itemSlug: "nre-qualification"
+generated: "2026-10-20"
+
+topics:
+  - id: "ep-ground-test-facility-scale"
+    topic: "EP ground-test facility scale"
+    positions:
+      - statement: "Claude recommends a new 10 m Ø × 25 m iodine chamber ($150–350M), plus three endurance stands ($50–120M). The chamber would hold ≤1×10⁻⁵ Torr at 1 MW using about 1,500 m² of LN₂ shrouds. Claude argues argon is untestable at MW cluster scale, because it would need about 1.7×10⁷ L/s of pumping. That makes facility feasibility a criterion for the D-05 propellant down-select."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a larger 15 m × 30 m \"Iodine Cave\" with more than 500,000 L/s of cryopumping (about $400M)."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests no full-power multi-MW endurance chamber. Instead it proposes 2–4 cells at 50–300 kW per channel, with cluster interactions confirmed in flight."
+        models:
+          - "GPT"
+  - id: "refining-and-consolidation-route"
+    topic: "Refining and consolidation route"
+    positions:
+      - statement: "Claude recommends carbonyl (Mond) refining as the primary route, in a gravity-agnostic rotating packed-bed reactor. The pilot would run at 50–200 kg/day with ≥99.5% CO recovery per pass. Melt/sinter would be a funded alternate, cut at TG-2 (month ~36)."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a micro-g metallurgy lab built around electromagnetic levitation melting and drop-tower capsules, with carbonyl and electrolytic routes both open."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests the least ambitious process Phase 1 will accept: cold compaction, then sintering (700–1,300 °C), then melting (1,400–1,650 °C) only if required. Its energy allowance is 1–5 kWh/kg."
+        models:
+          - "GPT"
+  - id: "facilities-as-a-separate-line-and-nre-consolidation"
+    topic: "Facilities as a separate line, and NRE consolidation"
+    positions:
+      - statement: "Claude recommends folding facilities into this item as visible sub-line 11.F, and consolidating all element DDT&E here. If the element lines keep their own DDT&E, 0B here falls by $1.2–2.5B."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers explicitly budgeted facility capex ($0.8–1.6B), endorsing round-2's separate $0.5–1.5B line."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests facilities stay inside NRE. Each contract would declare whether design and qualification are charged here or in the equipment contract, with no consolidation mandate."
+        models:
+          - "GPT"
+  - id: "schedule-to-kdp-0b"
+    topic: "Schedule to KDP-0B"
+    positions:
+      - statement: "Claude recommends KDP-0B at months 90–96 (2034–2035), followed by 4–5 years of 0B."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers KDP-0B at year 5, with flight qualification models complete by year 8."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 0A runs 7–10 years, followed by 3–5 years of 0B."
+        models:
+          - "GPT"
+  - id: "ep-life-evidence-required-at-the-gate"
+    topic: "EP life evidence required at the gate"
+    positions:
+      - statement: "Claude recommends ≥10 kh of wear testing plus a validated erosion model predicting ≥1.5× the 30 kh required life, with the full 30–45 kh demonstration completed in 0B."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers MW EP long-duration wear tests in years 3–4, without a numeric target."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 20,000–40,000 powered hours on representative articles, revised once duty cycles are defined."
+        models:
+          - "GPT"
+  - id: "labour-basis-and-t01-t26-register"
+    topic: "Labour basis and T01–T26 register"
+    positions:
+      - statement: "Claude recommends a basis of about 1,000 average FTE over 7 years at $0.3M per FTE-year. It uses a criticality-classed register (16 Class A technologies, targeted down to ≤12)."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers about 2,000 FTE over 5 years (about $2.5B) and offers no register."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 7,000–11,000 staff-years at $220–300k each. Its register is a different working crosswalk, ending with T26 as the integrated production chain."
+        models:
+          - "GPT"

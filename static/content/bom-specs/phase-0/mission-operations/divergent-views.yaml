@@ -9,72 +9,72 @@ topics:
   - id: "lifecycle-duration-and-phase-split"
     topic: "Lifecycle duration and phase split"
     positions:
-      - statement: "about 12 years of ops (5"
+      - statement: "Claude recommends about 12 years of ops (5.5 yr 0A + 6.5 yr 0B), arguing the first tonne reaches SEL1 at about Y10 and that ops should be priced per year so KDP-0B can resize the tail."
         models:
           - "Claude"
-      - statement: "10 years (4 yr 0A + 6 yr 0B), with its 0B gate at Y5"
+      - statement: "Gemini prefers 10 years (4 yr 0A + 6 yr 0B), with its 0B gate at Y5."
         models:
           - "Gemini"
-      - statement: "10 years (4 + 6) as an estimating convention only, with gate dates set by evidence and 0A extensions costed separately"
+      - statement: "GPT suggests 10 years (4 + 6) as an estimating convention only, with gate dates set by evidence and 0A extensions costed separately."
         models:
-          - "Gpt"
+          - "GPT"
   - id: "0a-0b-cost-split"
     topic: "0A/0B cost split"
     positions:
-      - statement: "0A $165–270M (point $210M) and 0B $400–600M (point $490M)"
+      - statement: "Claude recommends 0A $165–270M (point $210M) and 0B $400–600M (point $490M)."
         models:
           - "Claude"
-      - statement: "0A about $180–260M plus a share of $50–80M in external contracts, but only about $240–330M for 0B, front-loading $80–120M of custom software into 0A"
+      - statement: "Gemini prefers 0A about $180–260M plus a share of $50–80M in external contracts, but only about $240–330M for 0B, front-loading $80–120M of custom software into 0A."
         models:
           - "Gemini"
-      - statement: "0A $187–344M and 0B $461–865M, with mature 0B recurring cost of $75–130M/yr"
+      - statement: "GPT suggests 0A $187–344M and 0B $461–865M, with mature 0B recurring cost of $75–130M/yr."
         models:
-          - "Gpt"
+          - "GPT"
   - id: "staffing-levels"
     topic: "Staffing levels"
     positions:
-      - statement: "0A peaking at 125 FTE (about 450 FTE-yr) and 0B at about 180 FTE steady state with a 230 FTE commissioning peak (about 4 FTE per operated asset)"
+      - statement: "Claude recommends 0A peaking at 125 FTE (about 450 FTE-yr) and 0B at about 180 FTE steady state with a 230 FTE commissioning peak (about 4 FTE per operated asset)."
         models:
           - "Claude"
-      - statement: "about 60 FTE in 0A and about 120 FTE in 0B on 24/7 shifts"
+      - statement: "Gemini prefers about 60 FTE in 0A and about 120 FTE in 0B on 24/7 shifts."
         models:
           - "Gemini"
-      - statement: "80–120 FTE in 0A and 180–260 FTE in 0B, noting each continuously staffed console costs about 5–5"
+      - statement: "GPT suggests 80–120 FTE in 0A and 180–260 FTE in 0B, noting each continuously staffed console costs about 5–5.5 FTE."
         models:
-          - "Gpt"
+          - "GPT"
   - id: "unattended-operation-requirement"
     topic: "Unattended-operation requirement"
     positions:
-      - statement: "MO-01, covering ≥45 days of survival without contact and ≥50% production for ≥21 days unattended, with a ≥14-day blackout demonstrated on the pathfinder"
+      - statement: "Claude recommends MO-01, covering ≥45 days of survival without contact and ≥50% production for ≥21 days unattended, with a ≥14-day blackout demonstrated on the pathfinder."
         models:
           - "Claude"
-      - statement: "onboard \"Level 4\" safe-mode autonomy with no stated duration"
+      - statement: "Gemini prefers onboard \"Level 4\" safe-mode autonomy with no stated duration."
         models:
           - "Gemini"
-      - statement: "a ≥30-day safe-interval design objective in 0B, allowing production suspension rather than continuation, with only a 72 h minimum disconnected-survival demonstration in 0A"
+      - statement: "GPT suggests a ≥30-day safe-interval design objective in 0B, allowing production suspension rather than continuation, with only a 72 h minimum disconnected-survival demonstration in 0A."
         models:
-          - "Gpt"
+          - "GPT"
   - id: "reserve-treatment"
     topic: "Reserve treatment"
     positions:
-      - statement: "no hidden reserve in bom-0-10, carrying a named $200–300M autonomy-shortfall risk in bom-0-17"
+      - statement: "Claude recommends no hidden reserve in bom-0-10, carrying a named $200–300M autonomy-shortfall risk in bom-0-17."
         models:
           - "Claude"
-      - statement: "embedding a 30% reserve in the ops envelope ($610–870M)"
+      - statement: "Gemini prefers embedding a 30% reserve in the ops envelope ($610–870M)."
         models:
           - "Gemini"
-      - statement: "excluding all reserve from bom-0-10 and leaving it to bom-0-17"
+      - statement: "GPT suggests excluding all reserve from bom-0-10 and leaving it to bom-0-17."
         models:
-          - "Gpt"
+          - "GPT"
   - id: "digital-twin-and-autonomy-maturity"
     topic: "Digital twin and autonomy maturity"
     positions:
-      - statement: "the microgravity-metallurgy twin at TRL 2–3 and the site autonomy controller at TRL 3–4, treating both as effectively project-ending and requiring TRL 6 on the pathfinder at KDP-0B"
+      - statement: "Claude rates the microgravity-metallurgy twin at TRL 2–3 and the site autonomy controller at TRL 3–4, treating both as effectively project-ending and requiring TRL 6 on the pathfinder at KDP-0B."
         models:
           - "Claude"
-      - statement: "the twin reaching TRL 6–8 by Y4 and assumes a 15%/yr cut in human-in-the-loop effort from AI maturation"
+      - statement: "Gemini projects the twin reaching TRL 6–8 by Y4 and assumes a 15%/yr cut in human-in-the-loop effort from AI maturation."
         models:
           - "Gemini"
-      - statement: "that the twin must carry model version, calibration and uncertainty, and is never a certification substitute or a safety basis"
+      - statement: "GPT warns that the twin must carry model version, calibration and uncertainty, and is never a certification substitute or a safety basis."
         models:
-          - "Gpt"
+          - "GPT"

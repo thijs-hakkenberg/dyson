@@ -18,6 +18,7 @@
  *   # --dry-run writes every prompt to reconciliation/<phase>/bom-specs/prompts/ without API calls.
  *   node scripts/query-bom-specs.js --phase=phase-0 --panel=latest --generate-consensus --dry-run
  *   node scripts/query-bom-specs.js --phase=phase-1 --item=collector-units --consensus-only
+ *   node scripts/query-bom-specs.js --phase=phase-0 --divergent-only   # rebuild divergent-views.yaml from consensus.md, no API
  *
  *   # Add Claude 4.6 specs alongside existing 4.5 specs
  *   node scripts/query-bom-specs.js --phase=phase-0 --add-claude-46
@@ -45,6 +46,7 @@ import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import yaml from 'js-yaml';
+import { divergentViewsYaml, parseDivergentViews } from './lib/divergent-views.js';
 import { MODELS, PANELS, archiveRaw, familyOf, handleInfoFlags, panelArgs, queryModel, registerEndpoint, resolvePanel } from './lib/llm.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -874,117 +876,32 @@ Be specific about which model holds which view in the Divergent Views section.`;
 }
 
 /**
- * Parse positions from divergent views text
+ * Generate divergent views YAML from consensus content (parser: scripts/lib/divergent-views.js)
  */
-function parsePositions(text) {
-  const positions = [];
-  const modelPositions = {};
-
-  // Split by semicolons and parse each
-  const parts = text.split(/[;.]/);
-  for (const part of parts) {
-    const trimmedPart = part.trim();
-    if (!trimmedPart) continue;
-
-    // Match patterns like "Claude recommends X" or "Gemini prefers Y"
-    const match = trimmedPart.match(/^(Claude|Gemini|GPT)(?:\s+\w+)?\s+(.+)/i);
-    if (match) {
-      const model = match[1];
-      const statement = match[2].trim();
-
-      // Normalize model name
-      const normalizedModel = model.charAt(0).toUpperCase() + model.slice(1).toLowerCase();
-
-      // Group by statement similarity (simple approach)
-      if (!modelPositions[statement]) {
-        modelPositions[statement] = [];
-      }
-      modelPositions[statement].push(normalizedModel);
-    }
-  }
-
-  for (const [statement, models] of Object.entries(modelPositions)) {
-    positions.push({ statement, models });
-  }
-
-  return positions;
-}
-
-/**
- * Generate divergent views YAML from consensus content
- */
-function generateDivergentViewsYAML(consensusContent, item, phaseId = 'phase-0') {
-  // Parse the Divergent Views section from consensus
-  const dvMatch = consensusContent.match(/## Divergent Views\n([\s\S]*?)(?=\n## |$)/);
-  if (!dvMatch) {
-    console.log('    No Divergent Views section found in consensus');
-    return null;
-  }
-
-  const topics = [];
-  const lines = dvMatch[1].split('\n').filter(l => l.trim().startsWith('- **'));
-
-  for (const line of lines) {
-    const topicMatch = line.match(/\*\*([^*]+)\*\*:\s*(.+)/);
-    if (!topicMatch) continue;
-
-    const topic = topicMatch[1].trim();
-    const positionsText = topicMatch[2];
-    const positions = parsePositions(positionsText);
-
-    if (positions.length > 0) {
-      topics.push({
-        id: topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
-        topic,
-        positions
-      });
-    }
-  }
-
+function generateDivergentViewsYAML(consensusContent, item, generated = new Date().toISOString().split('T')[0]) {
+  const topics = parseDivergentViews(consensusContent);
   if (topics.length === 0) {
-    console.log('    No topics parsed from Divergent Views section');
+    console.log('    No divergent-view topics parsed from consensus');
     return null;
   }
-
-  // Generate YAML content
-  const yamlContent = generateYAMLContent({
-    bomId: item.bomId,
-    itemSlug: item.slug,
-    generated: new Date().toISOString().split('T')[0],
-    topics
-  });
-
-  return yamlContent;
+  return divergentViewsYaml({ bomId: item.bomId, itemSlug: item.slug, generated, topics });
 }
 
 /**
- * Generate YAML string from object
+ * Rebuild divergent-views.yaml from the committed consensus.md (no API calls).
  */
-function generateYAMLContent(data) {
-  let yaml = `# Divergent Views for ${data.itemSlug}\n`;
-  yaml += `# Auto-generated from consensus document\n\n`;
-  yaml += `bomId: "${data.bomId}"\n`;
-  yaml += `itemSlug: "${data.itemSlug}"\n`;
-  yaml += `generated: "${data.generated}"\n\n`;
-  yaml += `topics:\n`;
-
-  for (const topic of data.topics) {
-    yaml += `  - id: "${topic.id}"\n`;
-    yaml += `    topic: "${topic.topic}"\n`;
-    yaml += `    positions:\n`;
-
-    for (const pos of topic.positions) {
-      // Escape quotes in statement
-      const escapedStatement = pos.statement.replace(/"/g, '\\"');
-      yaml += `      - statement: "${escapedStatement}"\n`;
-      yaml += `        models:\n`;
-      for (const model of pos.models) {
-        yaml += `          - "${model}"\n`;
-      }
-    }
+async function rebuildDivergentViews(item, phaseId) {
+  const consensusPath = path.join(PROJECT_ROOT, 'static/content/bom-specs', phaseId, item.slug, 'consensus.md');
+  let content;
+  try {
+    content = await fs.readFile(consensusPath, 'utf-8');
+  } catch {
+    console.log(`  ${item.slug}: no consensus.md, skipped`);
+    return;
   }
-
-  return yaml;
+  const generated = content.match(/^generated:\s*"?([0-9-]+)"?/m)?.[1];
+  const yamlContent = generateDivergentViewsYAML(content, item, generated);
+  if (yamlContent) await saveDivergentViews(item, yamlContent, phaseId);
 }
 
 /**
@@ -1058,7 +975,7 @@ async function processItem(item, modelsToProcess, phaseId, options = {}) {
       await saveConsensus(item, consensusContent, phaseId);
 
       // Generate divergent views YAML
-      const yamlContent = generateDivergentViewsYAML(consensusContent, item, phaseId);
+      const yamlContent = generateDivergentViewsYAML(consensusContent, item);
       if (yamlContent) {
         await saveDivergentViews(item, yamlContent, phaseId);
       }
@@ -1079,6 +996,7 @@ async function main() {
   const proposeBOMFlag = args.includes('--propose-bom');
   const addClaude46 = args.includes('--add-claude-46');
   const compactContext = args.includes('--compact-context');
+  const divergentOnly = args.includes('--divergent-only');
   const flags = panelArgs(args);
   if (await handleInfoFlags(flags)) return;
   if (flags.panel || flags.models) DEFAULT_SPEC_MODELS = await resolvePanel(flags);
@@ -1148,6 +1066,12 @@ async function main() {
   const itemsToProcess = itemFilter
     ? phaseItems.filter(i => i.slug === itemFilter)
     : phaseItems;
+
+  if (divergentOnly) {
+    console.log(`Mode: rebuild divergent-views.yaml from consensus.md (${phaseFilter}, no API calls)`);
+    for (const item of itemsToProcess) await rebuildDivergentViews(item, phaseFilter);
+    return;
+  }
 
   // Determine models to process
   let modelsToProcess;

@@ -1,0 +1,80 @@
+# Divergent Views for debris-contamination
+# Auto-generated from consensus document
+
+bomId: "bom-0-15"
+itemSlug: "debris-contamination"
+generated: "2026-10-20"
+
+topics:
+  - id: "interim-ceiling-value-d-03"
+    topic: "Interim ceiling value (D-03)"
+    positions:
+      - statement: "Claude recommends ≤1×10⁻⁴ of handled mass plus an absolute cap of ≤2 t/yr per site, with an ALARP target of 1×10⁻⁵. This is derived from an array-fouling budget at an interception fraction η≈10⁻³. Objects ≥1 cm are limited to ≤10 per site-year and logged."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers <100 ppm (1×10⁻⁴) of excavated mass, i.e. <2,000 kg/yr at 20 kt/yr. It manages particles from 1 µm to 10 cm, with no separate object-count limit."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a much tighter ceiling of 1×10⁻⁶ of processed feed (5–20 kg/yr), with a 1×10⁻⁷ objective. Every detected fragment ≥1 mm is treated as an anomaly."
+        models:
+          - "GPT"
+  - id: "tailings-immobilisation"
+    topic: "Tailings immobilisation"
+    positions:
+      - statement: "Claude recommends splitting the stream at 40 µm. Fines are cold-pressed and solar-thermally sintered into about 9 kg bricks, using 2 Fines Consolidation Units of 50–70 kWt each and a 200–300 m² concentrator. Sand is backfilled at ≤2.5 cm/s into mined-out cells under a brick cap. Bags are contingency only, because baseline bagging costs 2–5 t/yr of Earth mass (about $20–60M/yr)."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers microwave sintering of waste into bricks tethered to the surface, with polymer-binder bagging as the fallback."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests anchored double-envelope cells of 250–600 t each (10–48 filled per year; 3–25 t initial inventory; $2–10M/yr recurring). Sintering is treated as an unproven option."
+        models:
+          - "GPT"
+  - id: "perimeter-monitoring-architecture"
+    topic: "Perimeter monitoring architecture"
+    positions:
+      - statement: "Claude recommends about 180–260 kg of surface instruments (12 stereo ejecta cameras on masts, flux monitors, TQCMs, witness imagers). It adds one sentinel free-flyer held sunward at 2–10 km on a repurposed bom-0-1 scout bus. A dedicated free-flyer would add $25–45M."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 4–6 nanosatellites (12U, ~20 kg) in halo orbits at a 5 km perimeter, costed at $25–40M."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests surface-only stations: 4–8 imagers, 2–4 lidars, 12–24 monitors and 20–40 coupons, covering a 50–200 m surveillance volume."
+        models:
+          - "GPT"
+  - id: "role-of-electrostatics"
+    topic: "Role of electrostatics"
+    positions:
+      - statement: "Claude recommends dust shields (EDS) on optics and radiators only, with passive containment and consolidation carrying the load."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers EDS-lined shrouds at 1–3 kV as an active containment element, plus ITO EDS on radiators."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests electrostatic and magnetic capture be supplemental only, never credited as a barrier."
+        models:
+          - "GPT"
+  - id: "scope-ownership-and-independence"
+    topic: "Scope ownership and independence"
+    positions:
+      - statement: "Claude recommends a standalone line with an organisationally independent compliance cell and open data within 90 days. Shrouds and enclosures stay in bom-0-2 and bom-0-3, estimated at a further $15–40M for visibility only."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers to cost robot shrouds and EDS coatings ($20–35M) inside this item."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests this item own dedicated shrouds, transfer sleeves, capture packages and cells, with an independent safety controller for autonomous stops."
+        models:
+          - "GPT"
+  - id: "power-and-the-primary-hazard-driver"
+    topic: "Power and the primary hazard driver"
+    positions:
+      - statement: "Claude recommends 25–50 kWe plus 100–140 kWt solar-direct. It argues that self-contamination of its own arrays sets the particulate ceiling. On its analysis, third-party flux is negligible (<10⁻⁶ of the natural background) except at SEL1, which it makes a zero-release zone."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 50 kW continuous and emphasises arrays, sensors and tug collision risk."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 8–25 kW average and 30–60 kW peak. It names disturbance of accumulated tailings, for example by a tug plume, as the highest-consequence hazard."
+        models:
+          - "GPT"

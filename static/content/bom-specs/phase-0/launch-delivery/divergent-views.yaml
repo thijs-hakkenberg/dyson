@@ -9,36 +9,72 @@ topics:
   - id: "0b-cost-and-what-it-includes"
     topic: "0B cost and what it includes"
     positions:
-      - statement: "a $9"
+      - statement: "Claude recommends a $9.3B P50 planning value (P10–P90 $4–16B). This covers propellant for the full 5-year production run (1.57 kt gross) plus about 170 EDCs and pallets."
         models:
           - "Claude"
+      - statement: "Gemini prefers $2.5–5.4B. Its total is $2.7–5.9B including 0A. This assumes mature reusable super-heavy pricing and covers only 1.2 kt of initial propellant."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests $7.3B as a reference (range $3.25–15.7B). This covers only 800 t of initial propellant. Recurring replenishment of 300–900 t/yr, about $0.5–2.5B/yr, is excluded and must be added at the gate."
+        models:
+          - "GPT"
   - id: "mass-floor-and-scaling-basis"
     topic: "Mass floor and scaling basis"
     positions:
-      - statement: "1"
+      - statement: "Claude recommends 1.3–4.5 kt. It rejects the round-2 floor of 2.5 kt because D-01 sizes 0B by signed demand, and a low-demand case (0.6 kt/yr × 4 yr) needs only about 1.3 kt."
         models:
           - "Claude"
+      - statement: "Gemini prefers about 2.4 kt delivered. Its plant (800 t) and tugs (15 × 50 t) are heavier than Claude's. Its figures are internally inconsistent: it states escape payload is 30–35% of LEO capacity, but its ~3.5 kt \"LEO-equivalent\" total implies a far higher ratio."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 2.5–6 kt with a 4 kt reference. This uses heavier placeholders: tugs at 65 t dry each, 550 t of site power, and 440 t of delivery-only carriers."
+        models:
+          - "GPT"
   - id: "handover-point-and-the-deep-space-leg"
     topic: "Handover point and the deep-space leg"
     positions:
-      - statement: "one gateway at SEL1, reached by direct injection at C3 ≈ −0"
+      - statement: "Claude recommends one gateway at SEL1, reached by direct injection at C3 ≈ −0.7. Passive EDCs and pallets are captured by the receiving node (bom-0-13). Tugs carry site cargo on outbound legs that would otherwise fly empty, so the NEA leg is a marginal cost."
         models:
           - "Claude"
+      - statement: "Gemini prefers handover in high Earth orbit or at escape. Tugs take over for transit to the NEA or SEL1, and smart tanks dock with tugs in high Earth orbit."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a mixed campaign. About 55% of cargo uses LEO staging or low-energy handover, and about 45% departs directly. Acceptance has four milestones (launch, cruise, destination, operational handover), and the \"delivered\" price is not paid in full at launch."
+        models:
+          - "GPT"
   - id: "module-size-launcher-dependence-and-tug-power"
     topic: "Module size, launcher dependence and tug power"
     positions:
-      - statement: "a \"Class M\" module limit of ≤12 t at C3 −0"
+      - statement: "Claude recommends a \"Class M\" module limit of ≤12 t at C3 −0.7 within Ø4.5 m × 10 m, flyable on at least two vehicle families. On that basis Claude recommends tugs of 1.2–1.5 MWe launched as two modules each. 2.5 MWe tugs would be infeasible without demonstrated refuelled super-heavy delivery."
         models:
           - "Claude"
+      - statement: "Gemini prefers designing to fairings up to 8 m × 18 m, launched as 20–30 super-heavy flights."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests two classes: standard (10–25 t, ≤4.5 m) and heavy (25–60 t, ≤7 m), with a 1.5 MWe tug used for screening."
+        models:
+          - "GPT"
   - id: "launch-price-basis"
     topic: "Launch price basis"
     positions:
-      - statement: "departure prices (P_dep) of about $3"
+      - statement: "Claude recommends departure prices (P_dep) of about $3.8k/kg for hardware and $3.0k/kg for propellant, and SEL1 handover prices (P_hand) of $4.7k/kg for hardware and $3.8k/kg for iodine. It treats mature super-heavy pricing as an upside, not a planning value."
         models:
           - "Claude"
+      - statement: "Gemini prefers $4–6k/kg delivered in 0A, falling to $2.5–4.5k/kg in 0B."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests $800–1,800/kg to LEO plus an onward-delivery charge, giving about $1.8–2.6k/kg effective at the reference point."
+        models:
+          - "GPT"
   - id: "cadence-and-launch-count"
     topic: "Cadence and launch count"
     positions:
-      - statement: "about 210 Class M-equivalent launches over about 8 years, roughly 25 per year"
+      - statement: "Claude recommends about 210 Class M-equivalent launches over about 8 years, roughly 25 per year. The alternative is about 27 super-heavy departures plus 80–160 tanker flights."
         models:
           - "Claude"
+      - statement: "Gemini prefers 20–30 super-heavy launches within a 24-month campaign."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 60–160 principal missions, with additional departure-stage or tanker flights if the architecture aggregates in orbit."
+        models:
+          - "GPT"

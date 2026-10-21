@@ -9,12 +9,77 @@ topics:
   - id: "contingency-treatment"
     topic: "Contingency treatment"
     positions:
-      - statement: "excluding it entirely and holding it in bom-0-17"
+      - statement: "Claude recommends excluding it entirely and holding it in bom-0-17."
         models:
           - "Claude"
-      - statement: "including a 20% contingency ($14M) inside bom-0-7"
+      - statement: "Gemini prefers including a 20% contingency ($14M) inside bom-0-7."
         models:
           - "Gemini"
-      - statement: "excluding it, as Claude does, and warns that embedding it would fund uncertainty twice"
+      - statement: "GPT suggests excluding it, as Claude does, and warns that embedding it would fund uncertainty twice."
         models:
-          - "Gpt"
+          - "Claude"
+          - "GPT"
+  - id: "costing-frame-and-totals"
+    topic: "Costing frame and totals"
+    positions:
+      - statement: "Claude recommends a 7-year 0A at $64M central (plausible $40–100M; corners $30–130M), plus a gated 0B increment of $34M (plausible $20–55M)."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a single 10-year baseline covering 0A and 0B governance, at $84M (range $65–110M)."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a 6-year 0A at $44M (range $31–66M), plus an illustrative 5-year 0B at $46M (range $34–69M) with 18–26 FTE."
+        models:
+          - "GPT"
+  - id: "archive-sizing-and-cost"
+    topic: "Archive sizing and cost"
+    positions:
+      - statement: "Claude recommends about 1 TB/yr of governance data plus 10 TB/yr of released-baseline escrow. That totals about 230 TB raw over 0A, at under $3M including labour."
+        models:
+          - "Claude"
+      - statement: "Claude calls Gemini's figure about 4× too high."
+        models:
+          - "Claude"
+          - "Gemini"
+      - statement: "Gemini prefers a 600 TB triple-redundant archive at $10M over 10 years."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 2–20 TB/yr logical ingest with a 54–720 TB infrastructure allowance. Archive sits inside about $0.4M/yr for IT, archive and security combined."
+        models:
+          - "GPT"
+  - id: "reporting-line-of-independent-reviews"
+    topic: "Reporting line of independent reviews"
+    positions:
+      - statement: "Claude recommends the Independent Safety Authority (ISA) report to the Operator Board Safety Committee. Its non-concurrence could be overridden only by both boards, with public disclosure. The Independent Cost Review would report to the Association Board."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers housing both functions under the governance entity (Entity A) within bom-0-7."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests both report to a board committee and hold a \"hold recommendation\" power that ordinary management cannot override."
+        models:
+          - "GPT"
+  - id: "readiness-and-licence-gate-formalism"
+    topic: "Readiness and licence-gate formalism"
+    positions:
+      - statement: "Claude recommends a Regulatory Readiness Level (RRL 1–6) scale. KDP-0B would require RRL 6 with no waivers; the current level is RRL 1–2."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers an early KDP-0A organizational review at month 12 and offers no licence-maturity scale."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a checklist of organizational readiness criteria and explicitly rejects assigning the organization a TRL-like rating."
+        models:
+          - "GPT"
+  - id: "jurisdiction-selection-timing-and-the-earth-proximity-issue"
+    topic: "Jurisdiction selection timing and the Earth-proximity issue"
+    positions:
+      - statement: "Claude recommends a must/want screen decided at month 12, with Luxembourg as lead. He flags that SEL1 deliveries of 150–300 t Fe-Ni make 0B a near-Earth liability problem. He proposes a placeholder Earth-impact ceiling of no looser than 10⁻⁶ per transfer and possible 0B TPL of $1–10M/yr."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers incorporating Entity B in months 1–3 with the jurisdiction still TBD. It frames TPL around tugs near the NEA."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests selection within 6–9 months. GPT also notes that SEL1 delivery invalidates any \"remote from Earth\" risk assumption, but it does not quantify the exposure."
+        models:
+          - "GPT"

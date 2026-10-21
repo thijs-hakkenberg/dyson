@@ -670,11 +670,11 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Where the processing happens',
-				body: 'The models still split on the **metallurgy route**: no-melt carbonyl refining, hydrogen reduction or partial-gravity melting, each judged on its own at KDP-0B. Silicon is deferred, and Phase 0 is uncrewed.',
+				body: 'The models still split on the **metallurgy route**: Claude baselines no-melt carbonyl refining, Gemini and GPT rotating melt cartridges. Both routes go to TRL 4–5 in 0A and one is chosen at a Route Selection Review. Silicon is deferred, and Phase 0 is uncrewed.',
 				duration: 10,
 				workbench: 'bom-0-3',
 				wbView: 'consensus',
-				wbSelection: 'smelting-technology'
+				wbSelection: 'primary-process-route'
 			},
 			{
 				title: 'The open questions',

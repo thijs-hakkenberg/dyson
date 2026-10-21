@@ -1,0 +1,72 @@
+# Divergent Views for comms-ground-segment
+# Auto-generated from consensus document
+
+bomId: "bom-0-9"
+itemSlug: "comms-ground-segment"
+generated: "2026-10-20"
+
+topics:
+  - id: "relay-satellites-and-optical-communications"
+    topic: "Relay satellites and optical communications"
+    positions:
+      - statement: "Claude recommends no relays in the baseline. Its alternative is to make conjunction tolerance a target-gate criterion and reopen the relay trade (~$200–400M) at KDP-0B only if the chosen target fails. Optical is limited to a reserved growth slot of about 50 kg and 300 W on the site terminal."
+        models:
+          - "Claude"
+      - statement: "Gemini proposes two 500 kg, 2 kW relays at SEL1 with 2.5 m Ka reflectors and a 1,550 nm, 1 Gbps optical demonstrator, costed at $60–120M in 0B."
+        models:
+          - "Gemini"
+      - statement: "GPT recommends no relays unless a specific coverage deficit is shown, and no optical dependency in Phase 0."
+        models:
+          - "GPT"
+  - id: "site-trunk-sizing-and-data-volume"
+    topic: "Site trunk sizing and data volume"
+    positions:
+      - statement: "Claude puts the margin in space: two 3 m terminals with 250 W Ka and 1.5 kW DC draw, giving about 1.7 Mbps at 2 AU into an 18 m-class station. That supports 15–40 GB/day in 0B and 2–10 GB/day in 0A."
+        models:
+          - "Claude"
+      - statement: "Gemini assumes 10–50 Mbps from the NEA to SEL1 and 50–250 Mbps from SEL1 to Earth."
+        models:
+          - "Gemini"
+      - statement: "GPT baselines X-band only: a 1.5–2 m dish at 40–100 W, giving about 32–64 kbps at 2 AU into 34 m-class G/T. That supports 50–200 MB/day, with Ka added only if it is cheaper per bit than more contact time."
+        models:
+          - "GPT"
+      - statement: "Claude's and GPT's estimates differ by roughly a factor of 100."
+        models:
+          - "Claude"
+          - "GPT"
+  - id: "ground-aperture-class"
+    topic: "Ground aperture class"
+    positions:
+      - statement: "Claude specifies three bands × 2 antennas of 18 m class, with G/T ≥53 dB/K at Ka and ≥45 dB/K at X, plus 34 m cross-support for emergency LGA commanding."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers commercial 18–32 m antennas at three nodes."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests procuring by G/T, uplink EIRP (2–20 kW) and availability rather than by diameter. GPT's rate tables assume 34–35 m-class performance and warn that smaller dishes are not a like-for-like substitute."
+        models:
+          - "GPT"
+  - id: "scope-boundaries-which-risk-double-counting"
+    topic: "Scope boundaries, which risk double counting"
+    positions:
+      - statement: "Claude puts scout and tug transponders in the host BOMs, but keeps the site trunk terminals, crypto/OTAR/OTSE and EP-plume RF NRE in bom-0-9. bom-0-11 must then exclude that NRE."
+        models:
+          - "Claude"
+      - statement: "Gemini carries fleet-wide transceivers in bom-0-9 ($10–15M in 0A, $25–40M in 0B) along with crypto NRE."
+        models:
+          - "Gemini"
+      - statement: "GPT costs all flight communications terminals in bom-0-9, carried as allocated mass and power on the hosts. It places comms development and qualification in bom-0-11."
+        models:
+          - "GPT"
+  - id: "outage-and-conjunction-tolerance"
+    topic: "Outage and conjunction tolerance"
+    positions:
+      - statement: "Claude requires the site to operate for ≥30 days and tugs for ≥45 days without contact, with no trajectory-critical events within ±10 days of a Sun–Earth–probe (SEP) angle below 5°. It adds a target criterion that continuous time at SEP < 3° must not exceed 45 days."
+        models:
+          - "Claude"
+      - statement: "Gemini enters safe standby after more than 48 h of loss of signal."
+        models:
+          - "Gemini"
+      - statement: "GPT requires 72 h of normal unattended operation and 30 days of survival, which need not mean production. It uses a 14–30 day conjunction placeholder."
+        models:
+          - "GPT"

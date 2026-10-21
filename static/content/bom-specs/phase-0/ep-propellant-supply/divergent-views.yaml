@@ -1,0 +1,80 @@
+# Divergent Views for ep-propellant-supply
+# Auto-generated from consensus document
+
+bomId: "bom-0-16"
+itemSlug: "ep-propellant-supply"
+generated: "2026-10-20"
+
+topics:
+  - id: "what-bom-0-16-owns-in-0a-and-its-budget"
+    topic: "What bom-0-16 owns in 0A, and its budget"
+    positions:
+      - statement: "Claude carries the full logistics development in this line: PCU and coupling development, the fill pilot line and pathfinder hosted hardware, for $75–185M."
+        models:
+          - "Claude"
+      - statement: "Gemini carries $35–50M for materials, valves and thermal-vacuum work."
+        models:
+          - "Gemini"
+      - statement: "GPT keeps only $0.5–1.7M direct (audit, specification, samples). It assigns $10–35M of development to bom-0-11 and bom-0-12."
+        models:
+          - "GPT"
+  - id: "sel1-handling-infrastructure"
+    topic: "SEL1 handling infrastructure"
+    positions:
+      - statement: "Claude specifies a free-flying Propellant Yard at 5–20 km standoff, with 20–32 berths and 2 servicers. 0B capital is $180–475M; a hosted option saves $60–150M."
+        models:
+          - "Claude"
+      - statement: "Gemini assumes cartridge buffer storage at the bom-0-13 node."
+        models:
+          - "Gemini"
+      - statement: "GPT assigns berths and robots to bom-0-13. It leaves the handover point open: node, NEA, or split."
+        models:
+          - "GPT"
+  - id: "cartridge-cost-and-therefore-the-recurring-line-cost"
+    topic: "Cartridge cost, and therefore the recurring line cost"
+    positions:
+      - statement: "Claude: a $0.3–1.0M PCU inside a $1.4–4.5M 15 t pallet. Recurring cost is $72–205M/yr at 400 t/yr, or $180–510/kg before launch."
+        models:
+          - "Claude"
+      - statement: "Gemini: $250k per 5 t cartridge. Recurring cost is $27–33M/yr at 300 t/yr."
+        models:
+          - "Gemini"
+      - statement: "GPT: $0.15–0.45M per 5 t cassette. Recurring cost is $16–45M/yr at 230 t/yr."
+        models:
+          - "GPT"
+  - id: "demand-basis"
+    topic: "Demand basis"
+    positions:
+      - statement: "Claude: 400 t/yr at 1.3 kt/yr, using a 30 t tug dry mass, 2,500 s and 4 km/s per leg."
+        models:
+          - "Claude"
+      - statement: "Gemini: 200–400 t/yr at ~1 kt/yr and ≥3,000 s, with no worked derivation."
+        models:
+          - "Gemini"
+      - statement: "GPT: 230 t/yr at 1 kt/yr, using an 80 t dry mass, 3,000 s and 3 km/s per leg. Its sensitivity envelope is 60–1,250 t/yr."
+        models:
+          - "GPT"
+  - id: "disposition-of-empty-cartridges"
+    topic: "Disposition of empty cartridges"
+    positions:
+      - statement: "Claude retains empties at the yard (~35–40 t/yr) as Phase 1 or NEA scrap feedstock."
+        models:
+          - "Claude"
+      - statement: "Gemini baselines return to Earth for refill."
+        models:
+          - "Gemini"
+      - statement: "GPT treats disposable versus reusable as an open trade on lifetime cost per usable kilogram."
+        models:
+          - "GPT"
+  - id: "gate-metric-and-argon-pressure"
+    topic: "Gate metric and argon pressure"
+    positions:
+      - statement: "Claude proposes a Propellant Import Ratio (PIR) at KDP-0B: target ≤0.35, hard limit ≤0.50. It specifies argon COPVs at 300 bar."
+        models:
+          - "Claude"
+      - statement: "Gemini proposes no metric and specifies argon at 700 bar."
+        models:
+          - "Gemini"
+      - statement: "GPT poses the import-burden threshold as an open question and suggests 20–35 MPa."
+        models:
+          - "GPT"
