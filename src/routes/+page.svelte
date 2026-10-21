@@ -3,15 +3,16 @@
 	import { getPhases, formatCurrency, getTotalProjectCost } from '$lib/services/content';
 	import { trackCTA } from '$lib/services/mixpanel';
 	import HeroSun from '$lib/components/home/HeroSun.svelte';
-	import { PHASE_0_ARCHITECTURE } from '$lib/services/phase-0-plan';
+	import { PHASE_0_TOTALS, moneyRange } from '$lib/services/phase-0-bom';
 
 	let { data } = $props();
 
 	const phases = getPhases();
 	const recentPosts = $derived(data.recentPosts);
 	const totalCost = getTotalProjectCost();
-	// Phase 0's BOM is being rebuilt after the re-assessment; until then show the panel's range
-	const phase0Cost = PHASE_0_ARCHITECTURE.phaseCostEnvelope;
+	// Phase 0 is shown as envelopes: 0A is committed, 0B is a gated option (D-01)
+	const phase0A = moneyRange(PHASE_0_TOTALS.a);
+	const phase0All = moneyRange(PHASE_0_TOTALS.all);
 
 	let scrollProgress = $state(0);
 	let starfieldEl: HTMLDivElement;
@@ -206,7 +207,7 @@
 						</h3>
 						<div class="phase-meta">
 							{#if phase.id === 'phase-0'}
-								<span class="cost" title="Range across the three re-assessment models; the Phase 0 BOM is being rebuilt">{formatCurrency(phase0Cost.min)}–{formatCurrency(phase0Cost.max)} (panel range)</span>
+								<span class="cost" title="Consensus envelopes with contingency. 0A is committed; 0B production is a gated option decided at KDP-0B.">0A {phase0A} · with 0B {phase0All}</span>
 							{:else}
 								<span class="cost">{formatCurrency(phase.totalCost)}</span>
 							{/if}

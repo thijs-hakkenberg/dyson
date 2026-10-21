@@ -78,56 +78,131 @@ const perDay = (r: Range): Range => ({ base: r.base / 24, min: r.min / 24, max: 
 
 export const ITEM_METRICS: ItemMetrics[] = [
 	// ── Phase 0 ─────────────────────────────────────────────────────────
+	// Regenerated consensus, 2026-10-20 (static/content/bom-specs/phase-0/*/consensus.md).
+	// Quantities and costs come from reconciliation/phase-0/bom-numbers.yaml via content.ts.
 	{
 		bomId: 'bom-0-1',
 		group: 'Spacecraft',
 		countable: true,
-		throughput: { perHour: perYear(fixed(20)), unit: 'asteroids surveyed' },
-		source: 'Survey rate target 20+ asteroids per satellite per year'
+		genW: span(3.6 * k, 4 * k),
+		useW: span(3.6 * k, 4 * k),
+		throughput: { perHour: perYear(span(0.2, 0.25)), unit: 'asteroids sampled' },
+		source:
+			'Consensus: 500–550 kg SEP rendezvous scouts, 3.6–4 kW BOL array (~2–2.5 kW to EP); one credited primary target per scout over a 4–5 yr primary life'
 	},
 	{
 		bomId: 'bom-0-2',
 		group: 'Robots',
 		countable: true,
-		useW: span(20 * k, 50 * k),
-		throughput: { perHour: span(2, 5), unit: 't regolith excavated' },
-		source: 'Mechanical power 20–50 kW; continuous excavation 2–5 t/h per robot'
+		useW: geo(2.5 * k, 16 * k, 25 * k),
+		// 6 of the planning 12 are active (2 reserve, 2–4 replacements): output per unit halved
+		throughput: { perHour: perYear(geo(0.5 * 4_000, 0.5 * 3_000, 0.5 * 2_200)), unit: 't regolith excavated' },
+		source:
+			'Power: Claude 2.5 kW average, GPT 12–20 kW excavating, Gemini 25 kW peak (no consensus value; PMAD rated 15–30 kW). Output per active robot: Claude 4 kt/yr, Gemini 3, GPT ~2.2 (1,100 h at 2 t/h); KDP-0B criterion ≥2.5 kt/yr. 6 of 12 units active'
 	},
 	{
 		bomId: 'bom-0-3',
 		group: 'Facilities',
 		countable: true,
-		useW: span(0.5 * M, 8.5 * M),
-		throughput: { perHour: perYear(span(600, 2_500)), unit: 't Fe-Ni product' },
+		useW: span(0.6 * M, 2.5 * M),
+		throughput: { perHour: perYear(span(1_000, 1_300)), unit: 't Fe-Ni product' },
 		source:
-			'Phase 0 re-assessment, round 2 (plant co-located at the NEA): product 0.6–2.5 kt/yr (Claude 0.6–2.2, central 1.3; Gemini 1.0–2.5; GPT 0.67–1.33 capacity). Plant power: Claude 1–2.5 MW, GPT 0.5–1.5 MW average, Gemini 8.5 MWe. Consensus regeneration pending.'
+			'Consensus: 3 process trains of ~0.6 kt/yr nameplate ≈ 1.0–1.3 kt/yr delivered (N = 2–6 set at KDP-0B); power allocation 0.6–2.5 MWe (carbonyl low, melt high)'
 	},
 	{
 		bomId: 'bom-0-4',
 		group: 'Spacecraft',
 		countable: true,
-		source: 'No consensus power or cadence figure'
+		genW: span(1.2 * M, 2.0 * M),
+		useW: span(1.2 * M, 2.0 * M),
+		throughput: { perHour: perYear(span(46, 93, 71)), unit: 't Fe-Ni delivered to SEL1' },
+		source:
+			'Consensus TUG-BL-0: ~1.2–2.0 MWe to the PPUs at 1.3 AU end of life (self-powered). Fleet delivers ~1 kt/yr (Claude 0.65–1.3), shared over 14 tugs'
 	},
 	{
 		bomId: 'bom-0-5',
 		group: 'Power generation',
 		countable: false,
 		genW: fixed(1 * M),
-		source: '100 MW total at 1 AU (quantity is MW of capacity)'
+		source: 'Quantity is MW BOL at 1 AU: consensus 2–8 MW, ~4 MW interim interface value for 1.3 kt/yr; tug arrays are in bom-0-4'
 	},
 	{
 		bomId: 'bom-0-6',
 		group: 'Facilities',
 		countable: true,
-		useW: span(150 * k, 250 * k, 250 * k),
-		throughput: { perHour: perYear(span(100, 120, 110)), unit: 't propellant' },
-		source: '~250 kWe per module (Gemini 150 kWe + solar-thermal); 100–120 t/yr'
+		useW: span(75 * k, 100 * k, 75 * k),
+		throughput: { perHour: perYear(span(10, 30, 22.5)), unit: 't water' },
+		source: 'Consensus water pilot (C-type target only): ~75 kWe continuous, ≤100 kWe peak; 10–30 t/yr, design point 20–25'
 	},
 	{
 		bomId: 'bom-0-7',
 		group: 'Compute & control',
 		countable: false,
 		source: 'Organisation, not hardware'
+	},
+	{
+		bomId: 'bom-0-8',
+		group: 'Spacecraft',
+		countable: false,
+		source: 'Launch and delivery service; quantity is kt delivered (1.3–6 kt, central 2.5–4)'
+	},
+	{
+		bomId: 'bom-0-9',
+		group: 'Compute & control',
+		countable: false,
+		source: 'Leased ground service (8,000–14,000 antenna-h/yr in 0B); site trunk terminals draw on bom-0-5'
+	},
+	{
+		bomId: 'bom-0-10',
+		group: 'Compute & control',
+		countable: false,
+		source: 'Operations staff and facilities, not flight hardware'
+	},
+	{
+		bomId: 'bom-0-11',
+		group: 'Facilities',
+		countable: false,
+		source: 'Ground R&D, test facilities and qualification on Earth'
+	},
+	{
+		bomId: 'bom-0-12',
+		group: 'Spacecraft',
+		countable: true,
+		genW: span(60 * k, 80 * k),
+		useW: span(60 * k, 80 * k),
+		source: 'Consensus: single-launch demonstrator, ~6–10 t dry, 60–80 kWe BOL; 300 kg–5 t feed, 10–500 kg product'
+	},
+	{
+		bomId: 'bom-0-13',
+		group: 'Facilities',
+		countable: true,
+		genW: span(60 * k, 100 * k),
+		useW: span(60 * k, 100 * k),
+		source: 'Consensus: passive uncrewed warehouse at SEL1, 25–40 t dry, 60–100 kW BOL, 0.6–1.0 kt initial inventory'
+	},
+	{
+		bomId: 'bom-0-14',
+		group: 'Spacecraft',
+		countable: false,
+		source: 'Spares programme (Earth, SEL1 cache, NEA depot); not counted as units'
+	},
+	{
+		bomId: 'bom-0-15',
+		group: 'Compute & control',
+		countable: false,
+		source: 'Containment verification and monitoring programme'
+	},
+	{
+		bomId: 'bom-0-16',
+		group: 'Spacecraft',
+		countable: false,
+		source: 'Imported iodine, 230–400 t/yr (contract 150–700); delivery mass is in bom-0-8'
+	},
+	{
+		bomId: 'bom-0-17',
+		group: 'Compute & control',
+		countable: false,
+		source: 'Contingency and reserve, not hardware'
 	},
 
 	// ── Phase 1 ─────────────────────────────────────────────────────────

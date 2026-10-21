@@ -1,0 +1,111 @@
+# Phase 0 BOM quantities and costs, taken from the regenerated consensus (2026-10-20, panel
+# Claude Opus 5.5 / Gemini 3.1 Pro / GPT-6.1 Sol, synthesis by Claude Opus 5.5).
+#
+# Structure (which items exist, 0A/0B split) is the owner decision in bom-structure.yaml. The
+# numbers below are transcribed from each item's consensus.md "Recommended Approach"; `source`
+# names the step. Rules:
+#   - Costs are 2026 USD, launch excluded unless the item is launch (bom-0-8), contingency
+#     excluded (it is bom-0-17, computed from the rates below).
+#   - `a` = Phase 0A (committed), `b` = Phase 0B (gated option, D-01). [min, max] is the envelope.
+#   - `point` is the consensus planning value where it states one; otherwise none is invented
+#     and scripts/build-bom-data.js uses the midpoint, marked as such on the site.
+#   - `conditional` items are 0 at the low end (bom-0-6 flies only for a C-type target).
+#   - `derived` blocks are arithmetic on figures the consensus states, not new estimates.
+#   - `per_unit: false` marks a quantity that is a sizing figure (hours, FTE, tonnes a year), not
+#     a count of the thing being bought, so no unit cost is shown.
+# Divergent model positions stay in each item's divergent-views.yaml; this file holds only the
+# consensus envelope.
+generated: '2026-10-21'
+consensus_generated: '2026-10-20'
+items:
+  bom-0-1:
+    quantity: { value: 6, unit: scouts, range: '4–8', note: 'reference fleet in a 4–8 authorisation; first pair, then evidence-gated tranches' }
+    a: { range: [500e6, 900e6], point: 650e6 }
+    b: { range: [0, 150e6] }
+    source: 'consensus §Recommended 1 and 6 (survey $30–60M, development $180–320M, $45–85M per unit; 0B 0–2 site-confirmation scouts)'
+  bom-0-2:
+    quantity: { value: 12, unit: robots, range: '2 + 10–12', note: '2 instrumented flight pathfinders in 0A; 0B planning reference 6 active + 2 reserve + 2–4 replacements' }
+    a: { range: [90e6, 245e6] }
+    b: { range: [280e6, 825e6] }
+    source: 'consensus §Recommended 1–2 (robot NRE $300–850M carried in bom-0-11)'
+  bom-0-3:
+    quantity: { value: 1, unit: plant, range: '3 trains (N = 2–6)', note: '~0.6 kt/yr nameplate per train; 3-train reference ≈ 1.0–1.3 kt/yr delivered; 250–400 t delivered mass; 0.6–2.5 MWe' }
+    a: { range: [80e6, 200e6] }
+    b: { range: [4.5e9, 9e9], point: 6.5e9 }
+    source: 'consensus §Recommended 1, 4 and 6 (plant maturation in bom-0-11, pathfinder content in bom-0-12)'
+  bom-0-4:
+    quantity: { value: 14, unit: tugs, range: '10–18', note: '2–4 procured at KDP-0B, the rest after the first full cycle; ~1.2–2.0 MWe to the PPUs at 1.3 AU end of life' }
+    a: { range: [40e6, 90e6] }
+    b: { range: [3e9, 10e9] }
+    unit_cost: [0.3e9, 0.8e9]
+    source: 'consensus §Recommended 1 and 4 (~$0.3–0.8B per unit including arrays)'
+  bom-0-5:
+    quantity: { value: 4, unit: MW BOL, range: '2–8 MW', note: '200–500 kW modules; ~4 MW interim interface value for 1.3 kt/yr; 1–2.5 MWh survival storage' }
+    a: { range: [10e6, 25e6] }
+    b: { range: [0.3e9, 1.8e9], point: 0.7e9 }
+    source: 'consensus §Recommended 2, 5–7 (0B P50 $0.6–0.8B in a $0.3–1.8B scenario range; tug arrays are in bom-0-4)'
+  bom-0-6:
+    quantity: { value: 1, unit: pilot, range: '0–1', note: 'one 10–30 t/yr water pilot, only if the target is C-type (D-05)' }
+    a: { range: [15e6, 45e6] }
+    b: { range: [120e6, 315e6], point: 200e6, conditional: 'C-type target only' }
+    source: 'consensus §Recommended 1 and 3'
+  bom-0-7:
+    quantity: { value: 1, unit: organization, note: 'Association + Operator, two entities' }
+    a: { range: [30e6, 100e6], point: 55e6 }
+    b: { range: [34e6, 46e6] }
+    source: 'consensus §Recommended 2 (0A central $45–65M; liquidity reserve and wind-down escrow held as financing lines)'
+  bom-0-8:
+    quantity: { value: 3, unit: kt delivered, range: '1.3–6 kt', note: 'central 2.5–4 kt; ~12 t module class at C3 −0.7, dual-sourced' }
+    a: { range: [0.25e9, 0.9e9], point: 0.45e9 }
+    b: { range: [3e9, 16e9], point: 8.5e9 }
+    source: 'consensus §Recommended 2–3 (0B ~$8–9B P50, re-sized at KDP-0B from signed demand)'
+  bom-0-9:
+    quantity: { value: 8000, unit: antenna-h/yr, per_unit: false, range: '8,000–14,000 h/yr in 0B', note: 'leased commercial ground access in three longitude bands; no relays, no owned stations' }
+    a: { range: [60e6, 170e6], point: 105e6 }
+    b: { range: [130e6, 440e6], point: 260e6 }
+    source: 'consensus §Recommended 3 and 7'
+  bom-0-10:
+    quantity: { value: 230, unit: FTE peak, per_unit: false, range: '80–125 (0A), 180–230 (0B)', note: 'about 10–12 years; 0A $35–55M/yr, 0B steady state $70–130M/yr' }
+    a: { range: [190e6, 300e6] }
+    b: { range: [450e6, 700e6] }
+    source: 'consensus §Recommended 1–3 (autonomy-shortfall risk $200–300M named in bom-0-17)'
+  bom-0-11:
+    quantity: { value: 1, unit: programme, note: 'technology maturation, ground facilities, element qualification, SE/independent TRL boards' }
+    a: { range: [3.9e9, 6.6e9], point: 4.75e9 }
+    b: { range: [2.1e9, 4.5e9], point: 3.0e9 }
+    source: 'consensus §Recommended 2 (0A planning point $4.5–5.0B)'
+  bom-0-12:
+    quantity: { value: 1, unit: mission, note: '~6–10 t dry, 60–80 kWe BOL, single launch; full-scale critical units' }
+    a: { range: [1.0e9, 2.5e9], point: 1.6e9 }
+    b: { range: [0, 0] }
+    source: 'consensus §Recommended 4 (fully burdened attributable view $1.8–3.5B, across lines)'
+  bom-0-13:
+    quantity: { value: 1, unit: node, range: '0–1', note: 'passive uncrewed warehouse at SEL1; tier chosen at KDP-0B; 0.6–1.0 kt initial inventory' }
+    a: { range: [5e6, 15e6] }
+    b: { range: [160e6, 550e6], point: 300e6 }
+    source: 'consensus §Recommended 1 and 6 (launch $90–300M in bom-0-8)'
+  bom-0-14:
+    quantity: { value: 1, unit: programme, note: 'multi-echelon spares (Earth, SEL1, NEA); 0B initial provisioning $0.5–0.9B plus $70–250M/yr' }
+    a: { range: [20e6, 45e6] }
+    b: { range: [0.65e9, 1.55e9], point: 1.3e9 }
+    source: 'consensus §Recommended 2 and 5 (0B over 5 years; ~$2.0B P50 over 10)'
+  bom-0-15:
+    quantity: { value: 1, unit: programme, note: 'containment, verification and independent monitoring; interim ceiling ≤1×10⁻⁴ of handled mass (D-03)' }
+    a: { range: [45e6, 80e6] }
+    b: { range: [75e6, 145e6] }
+    source: 'consensus §Recommended 7 (total $120–225M, point ≈ $170M)'
+  bom-0-16:
+    quantity: { value: 300, unit: t/yr iodine, per_unit: false, range: '230–400 t/yr', note: 'contract envelope 150–700 t/yr; argon 15–45 t/yr auxiliary; delivery mass is costed in bom-0-8' }
+    a: { range: [20e6, 60e6] }
+    b:
+      derived:
+        per_year: [40e6, 200e6]
+        years: [5, 6.5]
+        one_time: [120e6, 475e6]
+        note: 'recurring supply $40–200M/yr before launch over 5–6.5 operating years (bom-0-14 and bom-0-10 horizons), plus the SEL1 yard placeholder $120–475M'
+    source: 'consensus §Recommended 1, 3 and 5'
+contingency:
+  bomId: bom-0-17
+  a: { rate: [0.40, 0.50], point: 0.45, note: '35–40% project contingency + ~10% owner/programme reserve; sets funded 0A authority' }
+  b: { rate: [0.55, 0.70], point: 0.65, note: '45–50% project contingency + 15–18% owner reserve; uncommitted planning provision' }
+  source: 'bom-0-17 consensus §Recommended 1; applied to the 0A and 0B base of bom-0-1…16'

@@ -24,6 +24,7 @@
 	} from '$lib/services/decision-gates';
 	import { PHASE_0_ARCHITECTURE, PHASE_0_ASSUMPTIONS, PHASE_0_DECISION_LIST, D01 } from '$lib/services/phase-0-plan';
 	import RulingStatus from '$lib/components/analysis/RulingStatus.svelte';
+	import { PHASE_0_BOM, moneyRange } from '$lib/services/phase-0-bom';
 
 	const q = getOverallStats();
 	const trl = getTRLStats();
@@ -34,6 +35,7 @@
 	const slugs = new Map(QUESTION_DEPENDENCIES.map((x) => [x.questionId, x.slug]));
 	const rq = (id: string) => QUESTION_DEPENDENCIES.find((x) => x.questionId === id);
 	const thread = (id: string) => TECHNOLOGY_THREADS.find((t) => t.id === id);
+	const fmtRate = (r?: [number, number]) => (r ? `${Math.round(r[0] * 100)}–${Math.round(r[1] * 100)}%` : '');
 	const fmt = (min: number, max?: number | null) => (max != null && max !== min ? `${min}–${max}` : `${min}`);
 
 	const SEVERITY: Record<string, number> = { 'project-ending': 3, 'architecture-change': 2, 'schedule-delay': 1, 'cost-increase': 0 };
@@ -240,8 +242,40 @@
 				</table>
 			</div>
 			<p class="text-xs text-star-faint">
-				Source: <code>{PHASE_0_ARCHITECTURE.source}</code> §2 and §3.17. Most cost figures are low-confidence allowances; the
-				BOM is being rebuilt from these ranges. See <a href="/analysis/cost-reconciliation" class="text-cosmic-cyan hover:underline">cost reconciliation</a>.
+				Source: <code>{PHASE_0_ARCHITECTURE.source}</code> §2 and §3.17. These are the round-2 estimates, before the BOM was
+				regenerated; they are kept as the models gave them.
+			</p>
+			<h3 id="bom" class="text-lg font-bold text-star-white pt-4">Phase 0 BOM, regenerated</h3>
+			<p class="text-sm text-star-dim">
+				{PHASE_0_BOM.items.length} items in the structure the owner accepted on {PHASE_0_BOM.structureDecided}, with quantities and
+				costs from new per-item specs and consensus ({PHASE_0_BOM.panel.join(', ')}; {PHASE_0_BOM.consensusGenerated}). Each cell
+				is the consensus envelope; launch is in its own line, and contingency is computed from the bom-0-17 rates. Where models
+				disagree, each position is kept on the item's page.
+			</p>
+			<div class="overflow-x-auto">
+				<table class="w-full text-sm">
+					<thead><tr class="text-left text-star-faint border-b border-space-500"><th class="py-2 pr-3">Item</th><th class="py-2 pr-3">Quantity</th><th class="py-2 pr-3">0A (committed)</th><th class="py-2">0B (gated option)</th></tr></thead>
+					<tbody>
+						{#each PHASE_0_BOM.items as i}
+							<tr class="border-b border-space-600/60 align-top">
+								<td class="py-2 pr-3"><a href="/plan/phase-0/bom/{i.slug}" class="text-star-white hover:text-cosmic-cyan">{i.name}</a> <span class="text-star-faint text-xs">{i.bomId}</span></td>
+								<td class="py-2 pr-3 text-star-dim text-xs">{#if i.bomId === 'bom-0-17'}0A {fmtRate(i.a.rate)}, 0B {fmtRate(i.b.rate)} of base{:else}{i.quantity.value.toLocaleString('en-US')} {i.quantity.unit}{i.quantity.range ? ` (${i.quantity.range})` : ''}{/if}</td>
+								<td class="py-2 pr-3 text-star-dim">{moneyRange(i.a)}</td>
+								<td class="py-2 text-star-dim">{i.b.max === 0 ? '—' : moneyRange(i.b)}{#if i.b.conditional} <span class="text-xs text-star-faint">({i.b.conditional})</span>{/if}</td>
+							</tr>
+						{/each}
+						<tr class="border-t border-space-400">
+							<td class="py-2 pr-3 text-star-white font-semibold" colspan="2">Total with contingency</td>
+							<td class="py-2 pr-3 text-sun-gold font-semibold">{moneyRange(PHASE_0_BOM.totals.withContingency.a)}</td>
+							<td class="py-2 text-sun-gold font-semibold">{moneyRange(PHASE_0_BOM.totals.withContingency.b)}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<p class="text-xs text-star-faint">
+				Sources: <code>{PHASE_0_BOM.sources.structure}</code>, <code>{PHASE_0_BOM.sources.numbers}</code>. Totals add envelope
+				ends (lows with lows, highs with highs), so the full range is wider than any likely outcome. 0A and 0B together:
+				{moneyRange(PHASE_0_BOM.totals.withContingency.all)}. See <a href="/analysis/cost-reconciliation" class="text-cosmic-cyan hover:underline">cost reconciliation</a>.
 			</p>
 		</div>
 	</section>

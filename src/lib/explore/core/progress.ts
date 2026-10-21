@@ -9,10 +9,12 @@ import { TIMELINE, deploymentFraction, phaseWindow } from './timeline';
 /** Sub-window [from, to] as fractions of the phase window. */
 const STAGES: Record<string, [number, number]> = {
 	'bom-0-1': [0, 0.35], // prospecting first
+	'bom-0-12': [0.1, 0.45], // 0A pathfinder before KDP-0B
 	'bom-0-3': [0.15, 0.6],
 	'bom-0-2': [0.3, 0.8],
 	'bom-0-6': [0.35, 0.85],
 	'bom-0-4': [0.4, 1],
+	'bom-0-13': [0.45, 0.8], // receiving node before the first product arrives
 	'bom-1-4': [0, 0.3], // assembly node before collectors
 	'bom-1-5': [0.05, 0.45],
 	'bom-1-1': [0.2, 1]

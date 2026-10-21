@@ -85,103 +85,135 @@ const SRC = (slug: string) => `bom-specs/${slug}/consensus.md`;
 
 export const ELEMENT_MODELS: ElementModel[] = [
 	// ── Phase 0 ─────────────────────────────────────────────────────────────
+	// Regenerated consensus, 2026-10-20 (dimensions from the consensus key specifications; per-model
+	// specs where the consensus gives none, attributed in `after`).
 	{
 		bomId: 'bom-0-1',
 		archetype: 'smallsat',
-		params: { size: 5, aspect: 0.8, dish: true },
-		sizeBasis: 'model',
-		after: 'Claude',
-		mass: '80–120 kg',
-		dims: 'Bus 0.8 × 0.8 × 1.2 m; 5.0 m deployed; 6.5 m² GaAs array',
-		variants: [],
+		params: { size: 12, aspect: 0.8, dish: true },
+		sizeBasis: 'consensus',
+		mass: '500–550 kg wet (400–600 kg envelope)',
+		dims: 'SEP rendezvous scout; 3.6–4 kW BOL array (~12 m span); 0.5–0.8 m high-gain antenna',
+		variants: [{ label: '250 kg impactor scout', model: 'Gemini', size: 7, note: 'Rejected by the consensus: no subsurface sampling, uncontained impactor' }],
 		callouts: [
-			{ label: 'Triple-junction GaAs wings · 6.5 m²', at: [0.38, 0, 0] },
-			{ label: 'Spectrometer / imager deck', at: [0, 0, 0.14] },
-			{ label: 'X-band high-gain antenna', at: [0, 0.18, -0.06] }
+			{ label: 'Solar arrays · 3.6–4 kW BOL', at: [0.38, 0, 0] },
+			{ label: 'VNIR/SWIR + thermal-IR remote sensing', at: [0, 0, 0.14] },
+			{ label: 'Sampler (anchored lander or arm, T18)', at: [0, -0.18, 0.06] },
+			{ label: 'X/Ka high-gain antenna', at: [0, 0.18, -0.06] }
 		],
-		source: `${SRC('phase-0/prospecting-satellites')}; dimensions from claude-opus-4-6.md`
+		source: SRC('phase-0/prospecting-satellites')
 	},
 	{
 		bomId: 'bom-0-2',
 		archetype: 'rover',
-		params: { size: 4.5, count: 6, wheel: true },
+		params: { size: 3.3, count: 6, wheel: false },
 		sizeBasis: 'consensus',
-		mass: '2,500–3,500 kg incl. tooling',
-		dims: '~4.5 m long; dual bucket-wheel excavator; 2–5 t/h',
-		variants: [{ label: 'Low-mass concept (500 kg)', size: fromMass(500, 60), note: 'Consensus warns 10+ kW reaction torque is unmanageable at 500 kg' }],
+		mass: '2.65–3.4 t dry (Claude 2,650 · Gemini 2,800 · GPT 3,400 kg)',
+		dims: 'Stowed ~3–3.5 × 2.2–2.4 m; enclosed counter-rotating drums, ~2 t/h nameplate (1–3); 2 kV DC tether, 30 kWh battery',
+		variants: [],
 		callouts: [
-			{ label: 'Dual counter-rotating bucket wheels', at: [0.5, -0.05, 0] },
-			{ label: 'Anchoring legs (microgravity)', at: [-0.1, -0.2, 0.25] },
-			{ label: 'Dust containment shroud', at: [0.25, 0.12, 0] }
+			{ label: 'Enclosed drum head · ~2 t/h', at: [0.5, -0.05, 0] },
+			{ label: 'Anchors (≥200 N sustained, T16)', at: [-0.1, -0.2, 0.25] },
+			{ label: '2 kV DC power tether', at: [-0.45, 0.05, 0] },
+			{ label: 'Sealed transfer hopper', at: [0.2, 0.15, 0] }
 		],
 		source: SRC('phase-0/mining-robots')
 	},
 	{
 		bomId: 'bom-0-3',
 		archetype: 'station',
-		params: { size: 180, aspect: 0.66, count: 6, concentrator: true },
-		sizeBasis: 'model',
-		after: 'Claude',
-		mass: 'Round 2 (plant at the NEA): Claude 250–500 t, GPT 180–300 t; Gemini not stated. March 2026 station: 400–1,000 t',
-		dims: 'Shown: the March 2026 station design (180 × 120 × 80 m). The co-located plant is re-specified when the Phase 0 consensus is regenerated',
+		// two radiator wings of ~1,500 m² total around a ~10 m process core
+		params: { size: 2 * Math.sqrt(1500 / 2) + 10, aspect: 0.5, count: 3, concentrator: false },
+		sizeBasis: 'consensus',
+		mass: '250–400 t delivered',
+		dims: '3 process trains (~0.6 kt/yr nameplate each, N = 2–6); 1,000–2,000 m² of radiator panels; 0.6–2.5 MWe',
 		variants: [],
 		callouts: [
-			{ label: 'Solar-thermal concentrator (March 2026 design)', at: [0, 0.32, 0.3] },
-			{ label: 'Processing modules (March 2026 design)', at: [0, 0, 0] },
-			{ label: 'Radiators · 4,000 m²', at: [-0.42, 0, 0] },
-			{ label: 'PV arrays · 8,000 m²', at: [0.42, 0.1, 0] }
+			{ label: 'Process trains ×3 (carbonyl or melt route)', at: [0, 0, 0] },
+			{ label: 'Radiators · 1,000–2,000 m²', at: [-0.42, 0, 0] },
+			{ label: 'Enclosed tailings handling (10–20 kt/yr)', at: [0.3, -0.15, 0] },
+			{ label: 'Product pallet staging for tugs', at: [0.42, 0.1, 0] }
 		],
-		source: `${SRC('phase-0/material-processing-station')}; dimensions from claude-opus-4-6.md`
+		source: SRC('phase-0/material-processing-station')
 	},
 	{
 		bomId: 'bom-0-4',
 		archetype: 'tug',
-		params: { size: 65, aspect: 0.7 },
-		sizeBasis: 'model',
-		after: 'Claude',
-		mass: 'Payload 150,000–250,000 kg',
-		dims: '65 m long; 45 m array span; 400 m² PV; 100 m² radiators',
-		variants: [],
-		callouts: [
-			{ label: 'Ore container · 200 t baseline', at: [0, 0, 0.42] },
-			{ label: 'Propellant tanks · Δv 6–10 km/s', at: [0, 0, 0.05] },
-			{ label: 'Solar arrays · 45 m span', at: [0.34, 0, -0.1] },
-			{ label: 'Electric propulsion cluster', at: [0, 0, -0.48] }
+		params: { size: geomean(circleDia(3_500), circleDia(4_600), 210), aspect: 0.7 },
+		sizeBasis: 'geomean',
+		mass: 'Dry: Claude 45 t (38–60) · Gemini 38 t · GPT 70 t (55–85); 100–150 t iodine installed',
+		dims: 'Array: Claude ~4,600 m² · Gemini ~3,500 m² · GPT ~16,000 m² spanning 180–240 m; 15–24 × ~100 kW strings',
+		variants: [
+			{ label: '1.5 MWe BOL, four wings', model: 'Claude', size: circleDia(4_600), note: '~1.1 MWe end of life' },
+			{ label: '2.0 MWe to propulsion at 1.3 AU EOL', model: 'GPT', size: 210, note: '~4.8 MW BOL at 1 AU' }
 		],
-		source: `${SRC('phase-0/transport-vehicles')}; dimensions from claude-opus-4-6.md`
+		callouts: [
+			{ label: 'Product pallet · 150–300 t', at: [0, 0, 0.42] },
+			{ label: 'Sealed iodine cassettes · 100–150 t', at: [0, 0, 0.05] },
+			{ label: 'Solar arrays · 1.2–2.0 MWe at 1.3 AU EOL', at: [0.34, 0, -0.1] },
+			{ label: 'Hall cluster · 15–24 × ~100 kW', at: [0, 0, -0.48] }
+		],
+		source: SRC('phase-0/transport-vehicles')
 	},
 	{
 		bomId: 'bom-0-5',
 		archetype: 'membrane',
-		params: { size: 120, shape: 'rect', aspect: 50 / 120 },
+		params: { size: 28, shape: 'rect', aspect: 10 / 28 },
 		sizeBasis: 'model',
-		mass: '~120 kg per 25 kW concentrator unit (alt. design)',
-		dims: 'Module 120 × 50 m; 285,000 m² total for 100 MW',
-		variants: [{ label: 'Concentrator unit (2 × 20 × 10 m)', size: 40, note: '25 kW, 400 m² reflector → 20 m² receiver' }],
+		after: 'Claude',
+		mass: 'Site total depends on illumination class and anchoring',
+		dims: 'One roll-out wing 10 × 28 m (2 per ~200 kW unit); site 2–8 MW BOL in 200–500 kW modules',
+		variants: [],
 		callouts: [
-			{ label: 'PV blanket · 10,000 cells / module', at: [0.2, 0, 0.05] },
-			{ label: 'Deployable truss', at: [-0.45, 0, 0] }
+			{ label: 'ROSA-type blanket · ~350 W/m²', at: [0.2, 0, 0.05] },
+			{ label: 'Mast and azimuth drive', at: [-0.45, 0, 0] }
 		],
-		source: `${SRC('phase-0/solar-power-arrays')}; module dimensions from model specs`
+		source: `${SRC('phase-0/solar-power-arrays')}; wing dimensions from claude-opus-5-5.md`
 	},
 	{
 		bomId: 'bom-0-6',
 		archetype: 'station',
-		params: { size: geomean(fromMass(2500, 120), fromMass(4500, 120), fromMass(18000, 120)), aspect: 0.5, count: 2 },
-		sizeBasis: 'geomean',
-		mass: 'Claude 2,500 kg · Gemini 4,500 kg · GPT 18,000 kg (dry)',
-		dims: '250 kWe class module; 60–200 kg/h regolith feed',
-		variants: [
-			{ label: 'MRE module (fixed plant)', model: 'Claude', size: fromMass(2500, 120), note: '100 t LOX/yr; 50–100 modules per site' },
-			{ label: '"Hydra" harvester (mobile)', model: 'Gemini', size: fromMass(4500, 120), note: 'Self-propelled, swarm-deployable' },
-			{ label: 'ISPP-10 skid', model: 'GPT', size: fromMass(18000, 120), note: '~120 t/yr LOX/LH₂' }
-		],
+		params: { size: 15, aspect: 0.5, count: 2 },
+		sizeBasis: 'consensus',
+		mass: '6–10 t dry plus growth',
+		dims: 'One flight skid with two isolatable batch retorts; 45–180 m² radiators; ≤100 kWe peak',
+		variants: [],
 		callouts: [
-			{ label: 'Electrolysis / reactor stack', at: [0, 0, 0] },
-			{ label: 'Cryogenic LOX tanks', at: [0.3, 0, 0.1] },
-			{ label: 'Radiators', at: [-0.4, 0, 0] }
+			{ label: 'Batch retorts ×2', at: [0, 0, 0] },
+			{ label: 'Frost-deposition capture train', at: [0.3, 0, 0.1] },
+			{ label: 'Radiators · 45–180 m²', at: [-0.4, 0, 0] }
 		],
 		source: SRC('phase-0/ispp-systems')
+	},
+	{
+		bomId: 'bom-0-12',
+		archetype: 'smallsat',
+		params: { size: 20, aspect: 0.9, dish: true },
+		sizeBasis: 'consensus',
+		mass: '~6–10 t dry (Claude ~16 t, Gemini 2.45 t wet)',
+		dims: '60–80 kWe BOL; single launch; full-scale crucible, cutter head, canister and docking port',
+		variants: [{ label: 'End-to-end subscale', model: 'Gemini', size: 9, note: 'Rejected: 3 kW furnace cannot support a no-waiver TRL 6 claim' }],
+		callouts: [
+			{ label: 'Centrifugal induction melt cell', at: [0, 0, 0] },
+			{ label: 'Containment demonstration experiment', at: [0.2, -0.15, 0] },
+			{ label: 'Arrays · 60–80 kWe', at: [0.4, 0, 0] }
+		],
+		source: SRC('phase-0/pathfinder-demonstrator')
+	},
+	{
+		bomId: 'bom-0-13',
+		archetype: 'station',
+		params: { size: 25, aspect: 0.5, count: 2 },
+		sizeBasis: 'consensus',
+		mass: '25–40 t dry (Gemini 45–65 t)',
+		dims: 'Passive warehouse; 60–100 kW BOL; 0.6–1.0 kt initial inventory, berths to grow toward 3 kt',
+		variants: [],
+		callouts: [
+			{ label: 'Product berths (preloaded latches)', at: [0, 0, 0] },
+			{ label: 'Independent disposal unit', at: [-0.35, 0, 0.1] },
+			{ label: 'Arrays · 60–100 kW', at: [0.4, 0, 0] }
+		],
+		source: SRC('phase-0/receiving-node')
 	},
 
 	// ── Phase 1 ─────────────────────────────────────────────────────────────
@@ -632,6 +664,14 @@ export const ELEMENT_MODELS: ElementModel[] = [
 /** Items with no physical hardware to model. */
 export const NON_PHYSICAL: Record<string, string> = {
 	'bom-0-7': 'Organisational infrastructure — people, governance and facilities, not flight hardware.',
+	'bom-0-8': 'Launch and delivery service — the hardware it carries is modelled under its own item.',
+	'bom-0-9': 'Leased ground stations and command security; flight terminals are part of their host items.',
+	'bom-0-10': 'Mission operations — staff, facilities and software.',
+	'bom-0-11': 'Ground R&D, test facilities and qualification on Earth.',
+	'bom-0-14': 'Spares programme — the parts are those of the items they replace.',
+	'bom-0-15': 'Containment and monitoring programme; shrouds belong to the robots and plant.',
+	'bom-0-16': 'Imported iodine in sealed cartridges — a commodity, not a vehicle.',
+	'bom-0-17': 'Contingency and reserve — money, not hardware.',
 	'bom-3a-5': 'Distributed computational OS — software running across the substrate tiles.'
 };
 

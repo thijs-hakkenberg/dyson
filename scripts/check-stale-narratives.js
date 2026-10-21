@@ -9,8 +9,9 @@
  *
  * Dated records are exempt: blog posts (they get a dated update note instead),
  * per-model specs, deliberation transcripts, rounds and syntheses (primary and
- * alternate, with their divergent views), the March 2026 legacy data files, and
- * the issue log. A line that
+ * alternate, with their divergent views), the March 2026 legacy data files, the
+ * issue log, and BOM consensus documents generated on or after the re-baseline
+ * (REBASELINED, built from the revised architecture). A line that
  * quotes a superseded claim on purpose carries the marker `stale-ok` (in an HTML comment
  * in Markdown).
  */
@@ -36,6 +37,12 @@ const RULES = [
 	['B', /Sun–Earth L4\*\*[^\n]{0,80}(?:station|refin)|processing station at Sun–Earth L4/, 'Processing co-located at the NEA'],
 	['B', /quarterly (?:crew )?visits|human-tended/i, 'Phase 0 is uncrewed']
 ];
+
+// Consensus generated from the revised Phase 0 architecture (query-bom-specs.js phase0Context)
+const REBASELINED = '2026-10-20';
+const regeneratedConsensus = (file, text) =>
+	/^static\/content\/bom-specs\/.*\/consensus\.md$/.test(file) &&
+	(text.match(/^generated:\s*"?(\d{4}-\d{2}-\d{2})/m)?.[1] ?? '') >= REBASELINED;
 
 const SCAN = ['src/routes', 'src/lib', 'src/content', 'static/content'];
 const EXEMPT = [
@@ -65,7 +72,9 @@ let hits = 0;
 for (const dir of SCAN) {
 	for await (const file of walk(dir)) {
 		if (EXEMPT.some((r) => r.test(file))) continue;
-		const lines = (await fs.readFile(path.join(ROOT, file), 'utf8')).split('\n');
+		const text = await fs.readFile(path.join(ROOT, file), 'utf8');
+		if (regeneratedConsensus(file, text)) continue;
+		const lines = text.split('\n');
 		lines.forEach((line, i) => {
 			if (line.includes('stale-ok')) return;
 			for (const [p, re, why] of rules) {

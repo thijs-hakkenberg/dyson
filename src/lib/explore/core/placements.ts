@@ -57,23 +57,30 @@ const shell = (rAU: number) => ({ rAU, tempK: cascadeTemperature(rAU) });
 
 export const PLACEMENTS: Placement[] = [
 	// ── Phase 0 ────────────────────────────────────────────────────────────
+	// Regenerated consensus 2026-10-20; items and slugs from reconciliation/phase-0/bom-structure.yaml
 	{
 		bomId: 'bom-0-1',
 		slug: 'prospecting-satellites',
 		phaseId: 'phase-0',
-		anchor: { kind: 'nea', count: 32 },
-		baselineModels: [],
-		note: 'Survey fleet assigned to candidate NEAs. Assignment is illustrative; the NEA population is a statistical synthetic sample, not catalogued objects.',
-		alternatives: [],
+		anchor: { kind: 'nea', count: 6 },
+		baselineModels: ['Claude', 'GPT'],
+		note: 'Reference fleet of 6 SEP rendezvous scouts (4–8 authorised), one credited primary target each, procured as a first pair plus evidence-gated tranches. Targets are illustrative; the NEA population is a statistical synthetic sample, not catalogued objects.',
+		alternatives: [
+			{
+				anchor: { kind: 'nea', count: 12 },
+				models: ['Gemini'],
+				note: 'Gemini proposes 12 × 250 kg impactor scouts; the consensus rejects this (no subsurface sampling, uncontained impactor).'
+			}
+		],
 		visual: 'marker'
 	},
 	{
 		bomId: 'bom-0-2',
 		slug: 'mining-robots',
 		phaseId: 'phase-0',
-		anchor: { kind: 'nea', count: 4 },
+		anchor: { kind: 'nea', count: 1 },
 		baselineModels: [],
-		note: 'Mining operations at the highest-value synthetic NEAs (illustrative site selection).',
+		note: 'Tether-powered robots in bounded work cells at the single target NEA: 2 flight pathfinders in 0A; 0B planning reference 6 active + 2 reserve + 2–4 replacements.',
 		alternatives: [],
 		visual: 'marker'
 	},
@@ -83,12 +90,12 @@ export const PLACEMENTS: Placement[] = [
 		phaseId: 'phase-0',
 		anchor: { kind: 'nea', count: 1 },
 		baselineModels: ['Claude', 'Gemini', 'GPT'],
-		note: 'Phase 0 re-assessment (round 2, 2026-10): all three models co-locate beneficiation and primary processing at the target NEA and ship product, not ore. The central 50,000 t/yr station at Sun–Earth L4/L5 is abandoned. GPT: "favoured but not universally optimal".', // stale-ok: names the superseded design
+		note: 'Modular plant co-located at the target NEA: 3 process trains (~0.6 kt/yr nameplate each, N = 2–6 set at KDP-0B), native/reduced Fe-Ni only, product shipped to SEL1. Route (carbonyl vs. melt) is chosen at a Route Selection Review in 0A.',
 		alternatives: [
 			{
 				anchor: { kind: 'lagrange', body: 'earth', point: 'L1' },
 				models: ['Claude'],
-				note: 'Claude keeps a central station near SEL1 fed with ≥20:1 concentrate as an alternative; Gemini\'s own weighted scoring rates SEL1 marginally higher.'
+				note: 'Round 2 only (not carried into the regenerated consensus): Claude kept a central station near SEL1 fed with ≥20:1 concentrate as an alternative; Gemini\'s own weighted scoring rated SEL1 marginally higher.'
 			}
 		],
 		visual: 'marker'
@@ -98,7 +105,7 @@ export const PLACEMENTS: Placement[] = [
 		slug: 'transport-vehicles',
 		phaseId: 'phase-0',
 		baselineModels: [],
-		note: 'MW-class SEP cargo tugs (1–2.5 MWe each) carry product from the processing plant at the NEA to the delivery node (SEL1, D-04 interim). Propellant: none selected; iodine reference, argon alternate (D-05 interim).',
+		note: 'TUG-BL-0: ~1.2–2.0 MWe SEP cargo tugs (10–18, reference 14) carry product from the NEA plant to the SEL1 receiving node (D-04 interim). Iodine reference, argon alternate (D-05 interim).',
 		alternatives: [],
 		visual: 'none'
 	},
@@ -107,7 +114,7 @@ export const PLACEMENTS: Placement[] = [
 		slug: 'solar-power-arrays',
 		phaseId: 'phase-0',
 		baselineModels: [],
-		note: 'Site power at the NEA (HV tethers to the robots, distributed storage); tug arrays belong to the tugs. Site scale differs by model (round 2).',
+		note: 'Site power at the NEA: 2–8 MW BOL (≈4 MW interim) in 200–500 kW modules on a ±1 kV bipolar bus, 1–2.5 MWh survival storage. Tug arrays belong to the tugs.',
 		alternatives: [],
 		visual: 'none'
 	},
@@ -116,7 +123,7 @@ export const PLACEMENTS: Placement[] = [
 		slug: 'ispp-systems',
 		phaseId: 'phase-0',
 		baselineModels: [],
-		note: 'Water pilot at the NEA, only if the target is C-type (D-05 interim). No production LOX/LH₂ in Phase 0.',
+		note: 'One 10–30 t/yr water pilot at the NEA, only if the target is C-type (D-05 interim). No production LOX/LH₂ in Phase 0.',
 		alternatives: [],
 		visual: 'none'
 	},
@@ -127,6 +134,109 @@ export const PLACEMENTS: Placement[] = [
 		anchor: { kind: 'body', body: 'earth' },
 		baselineModels: [],
 		note: 'Governance, legal and coordination infrastructure — Earth-based.',
+		alternatives: [],
+		visual: 'none'
+	},
+	{
+		bomId: 'bom-0-8',
+		slug: 'launch-delivery',
+		phaseId: 'phase-0',
+		anchor: { kind: 'body', body: 'earth' },
+		baselineModels: [],
+		note: 'Launch and delivery: ~12 t dual-sourced modules by direct injection (C3 −0.7) to an SEL1 handover; tugs carry site cargo on outbound legs.',
+		alternatives: [],
+		visual: 'none'
+	},
+	{
+		bomId: 'bom-0-9',
+		slug: 'comms-ground-segment',
+		phaseId: 'phase-0',
+		anchor: { kind: 'body', body: 'earth' },
+		baselineModels: ['Claude', 'GPT'],
+		note: 'Direct-to-Earth over leased commercial ground stations in three longitude bands; no relays, no owned stations.',
+		alternatives: [
+			{
+				anchor: { kind: 'lagrange', body: 'earth', point: 'L1' },
+				models: ['Gemini'],
+				note: 'Gemini proposes two relays at SEL1; the consensus deletes them (SEL1 is ~0.01 AU from Earth, no conjunction relief).'
+			}
+		],
+		visual: 'none'
+	},
+	{
+		bomId: 'bom-0-10',
+		slug: 'mission-operations',
+		phaseId: 'phase-0',
+		anchor: { kind: 'body', body: 'earth' },
+		baselineModels: [],
+		note: 'Mission operations centre plus a backup MOC ≥500 km away; 80–125 FTE in 0A, 180–230 in 0B.',
+		alternatives: [],
+		visual: 'none'
+	},
+	{
+		bomId: 'bom-0-11',
+		slug: 'nre-qualification',
+		phaseId: 'phase-0',
+		anchor: { kind: 'body', body: 'earth' },
+		baselineModels: [],
+		note: 'Ground R&D, test facilities (iodine EP endurance cells, dusty thermal-vacuum complex) and qualification.',
+		alternatives: [],
+		visual: 'none'
+	},
+	{
+		bomId: 'bom-0-12',
+		slug: 'pathfinder-demonstrator',
+		phaseId: 'phase-0',
+		anchor: { kind: 'nea', count: 1 },
+		baselineModels: ['GPT'],
+		note: '0A pathfinder at the target NEA: ~6–10 t dry, 60–80 kWe, tests excavation, processing and containment before KDP-0B.',
+		alternatives: [],
+		visual: 'marker'
+	},
+	{
+		bomId: 'bom-0-13',
+		slug: 'receiving-node',
+		phaseId: 'phase-0',
+		anchor: { kind: 'lagrange', body: 'earth', point: 'L1' },
+		baselineModels: ['Claude'],
+		note: 'Passive uncrewed warehouse at SEL1 (D-04 interim), 0.6–1.0 kt initial inventory; direct tug-to-Phase-1 handover is the fallback. Lunar DRO is the formal D-04 alternate.',
+		alternatives: [],
+		visual: 'marker'
+	},
+	{
+		bomId: 'bom-0-14',
+		slug: 'spares-replacements',
+		phaseId: 'phase-0',
+		baselineModels: [],
+		note: 'Multi-echelon spares: Earth, an SEL1 cache and a forward depot at the NEA.',
+		alternatives: [],
+		visual: 'none'
+	},
+	{
+		bomId: 'bom-0-15',
+		slug: 'debris-contamination',
+		phaseId: 'phase-0',
+		anchor: { kind: 'nea', count: 1 },
+		baselineModels: [],
+		note: 'Containment and independent monitoring at the NEA site; SEL1 is a zero-intentional-release zone.',
+		alternatives: [],
+		visual: 'none'
+	},
+	{
+		bomId: 'bom-0-16',
+		slug: 'ep-propellant-supply',
+		phaseId: 'phase-0',
+		baselineModels: [],
+		note: 'Imported iodine in sealed 5 t cartridges, delivered to an SEL1 yard (gated 0B option). Argon alternate.',
+		alternatives: [],
+		visual: 'none'
+	},
+	{
+		bomId: 'bom-0-17',
+		slug: 'contingency-reserve',
+		phaseId: 'phase-0',
+		baselineModels: [],
+		note: 'Contingency and reserve: not a physical item.',
 		alternatives: [],
 		visual: 'none'
 	},

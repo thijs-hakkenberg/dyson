@@ -11,9 +11,14 @@
  * Statements are kept whole — never split at full stops, which broke on "$9.3B" and "C3 −0.7".
  */
 
+/** @typedef {{ statement: string, models: string[] }} Position */
+/** @typedef {{ id: string, topic: string, positions: Position[] }} Topic */
+/** @typedef {{ depth: number, text: string }} Line */
+
 const MODELS = ['Claude', 'Gemini', 'GPT'];
 const LEAD_CHARS = 40;
 
+/** @param {string} text */
 function stripMarkdown(text) {
 	return text
 		.replace(/\*\*([^*]+)\*\*/g, '$1')
@@ -23,11 +28,13 @@ function stripMarkdown(text) {
 		.trim();
 }
 
+/** @param {string} text */
 function modelsNamedAtStart(text) {
 	const lead = stripMarkdown(text).slice(0, LEAD_CHARS);
 	return MODELS.filter((m) => new RegExp(`\\b${m}\\b`).test(lead));
 }
 
+/** @param {string} text */
 function slugify(text) {
 	return text
 		.toLowerCase()
@@ -35,8 +42,13 @@ function slugify(text) {
 		.replace(/^-|-$/g, '');
 }
 
-/** Split the section into topic blocks: { topic, lines: [{ depth, text }] }. */
+/**
+ * Split the section into topic blocks.
+ * @param {string} section
+ * @returns {{ topic: string, lines: Line[] }[]}
+ */
 function topicBlocks(section) {
+	/** @type {{ topic: string, lines: Line[] }[]} */
 	const blocks = [];
 	for (const raw of section.split('\n')) {
 		if (!raw.trim()) continue;
@@ -63,8 +75,14 @@ function topicBlocks(section) {
 // have no space after the point, so they never split.
 const SENTENCE_BREAK = /(?<=[.!?])\s+(?=\*{0,2}[A-Z])/;
 
+/**
+ * @param {Line[]} lines
+ * @returns {Position[]}
+ */
 function positionsFor(lines) {
+	/** @type {(Position & { depth: number })[]} */
 	const positions = [];
+	/** @type {(Position & { depth: number }) | null} */
 	let current = null;
 	for (const { depth, text } of lines) {
 		const [first, ...rest] = text.split(SENTENCE_BREAK);
@@ -89,6 +107,7 @@ function positionsFor(lines) {
 		}
 	}
 	// Merge repeated attributions to the same model set ("On that basis Claude recommends…").
+	/** @type {Position[]} */
 	const merged = [];
 	for (const p of positions) {
 		const prev = merged.find((m) => m.models.join() === p.models.join());
@@ -100,7 +119,7 @@ function positionsFor(lines) {
 
 /**
  * @param {string} consensusContent full consensus markdown (frontmatter optional)
- * @returns {{ id: string, topic: string, positions: { statement: string, models: string[] }[] }[]}
+ * @returns {Topic[]}
  */
 export function parseDivergentViews(consensusContent) {
 	const match = consensusContent.match(/^## Divergent Views[^\n]*\n([\s\S]*?)(?=^## |(?![\s\S]))/m);
@@ -110,11 +129,15 @@ export function parseDivergentViews(consensusContent) {
 		.filter((t) => t.positions.length > 0);
 }
 
+/** @param {string} text */
 function quote(text) {
 	return `"${text.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`;
 }
 
-/** Serialise to the divergent-views.yaml layout the site reads. */
+/**
+ * Serialise to the divergent-views.yaml layout the site reads.
+ * @param {{ bomId: string, itemSlug: string, generated: string, topics: Topic[] }} data
+ */
 export function divergentViewsYaml({ bomId, itemSlug, generated, topics }) {
 	let yaml = `# Divergent Views for ${itemSlug}\n# Auto-generated from consensus document\n\n`;
 	yaml += `bomId: ${quote(bomId)}\nitemSlug: ${quote(itemSlug)}\ngenerated: ${quote(generated)}\n\ntopics:\n`;

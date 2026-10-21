@@ -6,6 +6,7 @@
  */
 
 import type { CostConfidenceLevel } from '$lib/types';
+import { phase0BomMeta } from '../phase-0-bom';
 
 /**
  * Material alternative research reference
@@ -38,7 +39,7 @@ export interface BOMItemMeta {
  * BOM Item slug mappings (ID -> slug)
  */
 export const BOM_ITEM_SLUGS: Record<string, string> = {
-	// Phase 0
+	// Phase 0 (reconciliation/phase-0/bom-structure.yaml)
 	'bom-0-1': 'prospecting-satellites',
 	'bom-0-2': 'mining-robots',
 	'bom-0-3': 'material-processing-station',
@@ -46,6 +47,16 @@ export const BOM_ITEM_SLUGS: Record<string, string> = {
 	'bom-0-5': 'solar-power-arrays',
 	'bom-0-6': 'ispp-systems',
 	'bom-0-7': 'organizational-infrastructure',
+	'bom-0-8': 'launch-delivery',
+	'bom-0-9': 'comms-ground-segment',
+	'bom-0-10': 'mission-operations',
+	'bom-0-11': 'nre-qualification',
+	'bom-0-12': 'pathfinder-demonstrator',
+	'bom-0-13': 'receiving-node',
+	'bom-0-14': 'spares-replacements',
+	'bom-0-15': 'debris-contamination',
+	'bom-0-16': 'ep-propellant-supply',
+	'bom-0-17': 'contingency-reserve',
 	// Phase 1
 	'bom-1-1': 'collector-units',
 	'bom-1-2': 'pv-blanket-arrays',
@@ -90,95 +101,10 @@ export const SLUG_TO_BOM_ID: Record<string, string> = Object.entries(BOM_ITEM_SL
 );
 
 /**
- * Phase 0 BOM Items
- * Uncertainty ranges: typically +/-30-50% for near-term space hardware
+ * Phase 0 BOM Items — built from the regenerated consensus (src/lib/services/phase-0-bom.ts);
+ * edit reconciliation/phase-0/bom-numbers.yaml, then run node scripts/build-bom-data.js
  */
-export const PHASE_0_BOM_ITEMS: BOMItemMeta[] = [
-	{
-		bomId: 'bom-0-1',
-		slug: 'prospecting-satellites',
-		name: 'Prospecting Satellites',
-		quantity: '32 units',
-		cost: '$160M',
-		category: 'Spacecraft',
-		costMin: '$112M',
-		costMax: '$240M',
-		costConfidence: 'high',
-		costBasis: 'Based on existing CubeSat and small satellite mission costs with heritage spectrometer payloads'
-	},
-	{
-		bomId: 'bom-0-2',
-		slug: 'mining-robots',
-		name: 'Mining Robots',
-		quantity: '20 units',
-		cost: '$1B',
-		category: 'Robotics',
-		costMin: '$600M',
-		costMax: '$1.5B',
-		costConfidence: 'medium',
-		costBasis: 'Extrapolated from planetary rover costs; asteroid surface operations add uncertainty'
-	},
-	{
-		bomId: 'bom-0-3',
-		slug: 'material-processing-station',
-		name: 'Material Processing Station',
-		quantity: '1 station',
-		cost: '$10B',
-		category: 'Infrastructure',
-		costMin: '$7B',
-		costMax: '$15B',
-		costConfidence: 'medium',
-		costBasis: 'Scaled from ISS module costs; novel processing equipment adds uncertainty'
-	},
-	{
-		bomId: 'bom-0-4',
-		slug: 'transport-vehicles',
-		name: 'Transport Vehicles',
-		quantity: '15 units',
-		cost: '$2B',
-		category: 'Spacecraft',
-		costMin: '$1.4B',
-		costMax: '$3B',
-		costConfidence: 'medium',
-		costBasis: 'Based on SEP spacecraft costs; krypton/iodine propulsion well-characterized'
-	},
-	{
-		bomId: 'bom-0-5',
-		slug: 'solar-power-arrays',
-		name: 'Solar Power Arrays',
-		quantity: '100 MW',
-		cost: '$500M',
-		category: 'Power Systems',
-		costMin: '$350M',
-		costMax: '$750M',
-		costConfidence: 'high',
-		costBasis: 'Based on current thin-film PV costs with established space deployment track record'
-	},
-	{
-		bomId: 'bom-0-6',
-		slug: 'ispp-systems',
-		name: 'In-Situ Propellant Production Systems',
-		quantity: '4 units',
-		cost: '$2B',
-		category: 'Infrastructure',
-		costMin: '$1.4B',
-		costMax: '$3B',
-		costConfidence: 'medium',
-		costBasis: 'Based on arxiv 1702.00335 bucket-wheel excavation with integrated electrolysis'
-	},
-	{
-		bomId: 'bom-0-7',
-		slug: 'organizational-infrastructure',
-		name: 'Organizational Infrastructure',
-		quantity: '1 organization',
-		cost: '$50M',
-		category: 'Governance',
-		costMin: '$20M',
-		costMax: '$100M',
-		costConfidence: 'low',
-		costBasis: 'Legal setup, coordination systems, governance tooling, and succession mechanisms for multi-century operations'
-	}
-];
+export const PHASE_0_BOM_ITEMS: BOMItemMeta[] = phase0BomMeta();
 
 /**
  * Phase 1 BOM Items - Initial Swarm Deployment

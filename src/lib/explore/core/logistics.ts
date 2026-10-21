@@ -7,12 +7,12 @@
  * drawn between the stages' scene positions.
  *
  * Chains (all figures from consensus documents):
- *  - Asteroid product (P0→P1): mining robots 2–5 t/h of regolith each →
- *    processing plant co-located at the target NEA, 0.6–2.5 kt/yr of Fe-Ni
- *    product across models (Phase 0 re-assessment, round 2) → tugs → delivery
- *    node at Sun–Earth L1 (D-04 interim), where the Phase 1 assembly node is.
- *    The mining stage is ore, the plant stage product: the plant always limits
- *    the chain, and the gap between the two is the beneficiation ratio (CI-20).
+ *  - Asteroid product (P0→P1): mining robots (2.2–4 kt/yr of regolith per
+ *    active robot) → processing plant co-located at the target NEA, 1.0–1.3
+ *    kt/yr of Fe-Ni product (3 trains) → MW-class tugs, ~1 kt/yr as a fleet →
+ *    receiving node at Sun–Earth L1 (D-04 interim) for the Phase 1 assembly
+ *    node (regenerated consensus, 2026-10-20). The mining stage is ore, the
+ *    others product; the gap between the two is the beneficiation ratio (CI-20).
  *  - Lunar launch (P1): mass drivers ~21,900 t/yr each (Claude; GPT
  *    8,760–26,280; Gemini 31,536) → assembly node.
  *  - Swarm manufacturing (P2): nodes refine 10–25 t/day → collector band.
@@ -90,7 +90,7 @@ export function buildChains(): Chain[] {
 			label: 'Asteroid Fe-Ni product',
 			phaseId: 'phase-0',
 			color: '#f0a830',
-			note: 'Mining 2–5 t/h of regolith per robot; the plant at the asteroid ships 0.6–2.5 kt/yr of product across models (round 2). Product, not ore, is shipped.',
+			note: 'Robots excavate 2.2–4 kt/yr of regolith each; the 3-train plant at the asteroid makes 1.0–1.3 kt/yr of Fe-Ni and the tug fleet delivers ~1 kt/yr to SEL1 (regenerated consensus). Product, not ore, is shipped.',
 			stages: [
 				{
 					id: 'mine',
@@ -107,9 +107,16 @@ export function buildChains(): Chain[] {
 					pos: (y) => [anchorPosition({ kind: 'nea', count: 1 }, y)]
 				},
 				{
+					id: 'tugs',
+					label: 'Cargo tugs',
+					bomId: 'bom-0-4',
+					capacity: 0,
+					pos: (y) => [anchorPosition({ kind: 'nea', count: 1 }, y), lagrangePosition('earth', 'L1', y)]
+				},
+				{
 					id: 'node',
-					label: 'Delivery and assembly node (SEL1)',
-					bomId: 'bom-1-4',
+					label: 'Receiving node (SEL1)',
+					bomId: 'bom-0-13',
 					capacity: Infinity,
 					pos: (y) => [lagrangePosition('earth', 'L1', y)]
 				}
@@ -217,6 +224,7 @@ function capacity(stage: Stage, phaseId: string, year: number): number {
 			const q = e?.bom?.quantity ?? 1;
 			return n * ((1e12 * SECONDS_PER_YEAR) / 1000 / q);
 		}
+		case 'bom-0-13':
 		case 'bom-1-4':
 		case 'bom-2-1':
 		case 'bom-3a-4':

@@ -52,7 +52,7 @@ For background shell commands, use `export $(cat .env | xargs) &&` prefix (not `
 | `src/lib/services/decision-gates.ts` | Gate milestones and readiness criteria |
 | `src/lib/services/bom-specs.ts` | Fetches/parses markdown specs from `static/content/bom-specs/` |
 
-**Keep `bom-data.ts` and `content.ts` in sync** — they contain overlapping BOM data for different purposes.
+**Keep `bom-data.ts` and `content.ts` in sync** — they contain overlapping BOM data for different purposes. Phase 0 is generated: edit `reconciliation/phase-0/bom-numbers.yaml` (numbers) or `bom-structure.yaml` (items), then `node scripts/build-bom-data.js`; both files map from `src/lib/services/phase-0-bom.ts`.
 
 ### Research Questions
 
@@ -91,6 +91,8 @@ Status values in `critical-path.ts`: `'open'`, `'investigating'`, `'answered'`
 # Generate BOM specs from LLMs
 node scripts/query-bom-specs.js --phase=phase-0 --item=item-slug
 node scripts/query-bom-specs.js --phase=phase-0 --item=item-slug --consensus-only
+node scripts/query-bom-specs.js --phase=phase-0 --divergent-only   # rebuild divergent-views.yaml from consensus.md (no API)
+node scripts/build-bom-data.js [--check]                           # Phase 0 BOM JSON from bom-structure + bom-numbers
 
 # Run multi-model deliberation
 node scripts/run-discussion.js --question=<slug> --auto [--hidden-winner]

@@ -5,6 +5,7 @@
  * consistent if phase durations change.
  */
 
+import { PHASE_0_TOTALS, moneyRange } from '$lib/services/phase-0-bom';
 import type { Tour } from './tour.svelte';
 import { phaseWindow } from './timeline';
 import { TODAY_YEAR } from './state.svelte';
@@ -612,7 +613,7 @@ export const TOURS: Tour[] = [
 		steps: [
 			{
 				title: 'Phase 0 · Space resource processing',
-				body: `${F0.items} items, **${F0.cost}**, ~${F0.years} years (start year assumed). Before any collector flies, the project needs an industry in space.`,
+				body: `${F0.items} items: **0A ${moneyRange(PHASE_0_TOTALS.a)}** committed, **${moneyRange(PHASE_0_TOTALS.all)}** if production (0B) is exercised; ~${F0.years} years (start year assumed). Before any collector flies, the project needs an industry in space — or proof that it cannot have one.`,
 				duration: 9,
 				lens: 'physical',
 				workbench: null,
@@ -624,7 +625,7 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Prospecting satellites',
-				body: '80–120 kg spacecraft with **visible/near-IR spectrometers (0.4–2.5 μm)** and 30 days of autonomy. The BOM funds 32; the consensus text says 50 (logged as CI-16).',
+				body: '**6 rendezvous scouts** of about 500 kg (4–8 authorised), each sampling one asteroid below the surface and assaying how much metal can actually be recovered. Remote spectra alone cannot pass the target gate.',
 				duration: 10,
 				year: { to: at('phase-0', 0.25), over: 3 },
 				focus: 'bom-0-1',
@@ -632,7 +633,7 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Mining robots',
-				body: '**20 robots** of 2.5–3.5 t on multiple legs, anchored to low-gravity rock, concentrating ore on board. How to anchor is a **critical** open fork.',
+				body: '**Tether-powered robots** of 2.65–3.4 t: two pathfinders in 0A, then about 6 active plus reserves and replacements in 0B. Anchoring in rubble (≥200 N sustained) is the first risk to retire; the mobility concept is still a fork.',
 				duration: 10,
 				year: { to: at('phase-0', 0.5), over: 3 },
 				focus: 'bom-0-2',
@@ -640,13 +641,13 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Transport vehicles',
-				body: '**MW-class cargo tugs**, 1–2.5 MWe each, carry 150–300 t of product per trip: Claude 12, Gemini 14, GPT 10. No propellant is selected yet; iodine is the costed reference, argon the alternate (D-05, interim).',
+				body: '**MW-class cargo tugs**, about 1.2–2.0 MWe to the thrusters, 10–18 in all (Claude 12, Gemini 15, GPT 14), bought 2–4 at a time. No propellant is selected yet; iodine is the costed reference, argon the alternate (D-05, interim).',
 				duration: 10,
 				select: 'bom-0-4'
 			},
 			{
 				title: 'The processing plant',
-				body: 'Beneficiation and primary processing at the target asteroid, **iron-nickel only**. Plant mass: Claude 250–500 t, GPT 180–300 t. Plant power ranges from 0.5–1.5 MW average (GPT) to 8.5 MWe (Gemini).',
+				body: 'Beneficiation and primary processing at the target asteroid, **iron-nickel only**: 1.0–1.3 kt/yr from three trains, 250–400 t delivered, 0.6–2.5 MWe. Carbonyl or melt is chosen in 0A.',
 				duration: 10,
 				year: { to: at('phase-0', 0.8), over: 3 },
 				focus: 'bom-0-3',
@@ -654,15 +655,15 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Power and propellant',
-				body: 'Site power differs by model: Claude 2.5–8 MW at the site (tug arrays count with the tugs), GPT 35–50 MW in total, Gemini 50 MW. There is no propellant production; **water is a pilot**, only if the target is C-type (D-05, interim).',
+				body: 'Site power is **2–8 MW** at the asteroid (about 4 MW for 1.3 kt/yr), built from 200–500 kW modules; tug arrays count with the tugs. There is no propellant production: iodine is imported, and **water is a 10–30 t/yr pilot**, only if the target is C-type (D-05, interim).',
 				duration: 10,
 				focus: 'earth',
 				select: 'bom-0-6',
 				camera: { distance: 0.03, polar: 65 }
 			},
 			{
-				title: 'The March 2026 design, up close',
-				body: 'This model is still the **March 2026 station design**: 180 × 120 × 80 m with a solar-thermal smelter. The co-located plant will be re-specified when the Phase 0 consensus is regenerated.',
+				title: 'The plant, up close',
+				body: 'The plant at the asteroid is **three process trains** of about 0.6 kt/yr each, with 1,000–2,000 m² of radiators and 0.6–2.5 MWe. Its design driver is the waste: 10–20 kt/yr of tailings, handled enclosed.',
 				duration: 12,
 				workbench: 'bom-0-3',
 				wbView: 'model',

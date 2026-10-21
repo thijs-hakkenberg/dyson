@@ -1,5 +1,6 @@
 import type { Phase, BlogPost, BOMItem, TimelineNode, PhaseDependencyGraph } from '$lib/types';
 import { DECISION_GATES } from './decision-gates';
+import { PHASE_0_TOTALS, phase0BomItems } from './phase-0-bom';
 
 /**
  * Phase data for the Dyson swarm project
@@ -19,114 +20,10 @@ export const PHASES: Phase[] = [
 			'Pass the target, demand, economics and licence gates before committing to production',
 			'If 0B goes ahead: process Fe-Ni at the asteroid and deliver product to the SEL1 node'
 		],
-		bom: [
-			{
-				id: 'bom-0-1',
-				name: 'Prospecting Satellites',
-				description: 'Small satellites equipped with spectrometers for asteroid composition analysis',
-				quantity: 32,
-				unit: 'units',
-				unitCost: 5000000,
-				totalCost: 160000000,
-				category: 'Spacecraft',
-				slug: 'prospecting-satellites',
-				costMin: 112000000,
-				costMax: 240000000,
-				costConfidence: 'high',
-				costBasis: 'Based on existing CubeSat and small satellite mission costs with heritage spectrometer payloads'
-			},
-			{
-				id: 'bom-0-2',
-				name: 'Mining Robots',
-				description: 'Autonomous mining and extraction robots for asteroid surface operations',
-				quantity: 20,
-				unit: 'units',
-				unitCost: 50000000,
-				totalCost: 1000000000,
-				category: 'Robotics',
-				slug: 'mining-robots',
-				costMin: 600000000,
-				costMax: 1500000000,
-				costConfidence: 'medium',
-				costBasis: 'Extrapolated from planetary rover costs; asteroid surface operations add uncertainty'
-			},
-			{
-				id: 'bom-0-3',
-				name: 'Material Processing Station',
-				description: 'Orbital facility for refining raw asteroid materials',
-				quantity: 1,
-				unit: 'station',
-				unitCost: 10000000000,
-				totalCost: 10000000000,
-				category: 'Infrastructure',
-				slug: 'material-processing-station',
-				costMin: 7000000000,
-				costMax: 15000000000,
-				costConfidence: 'medium',
-				costBasis: 'Scaled from ISS module costs; novel processing equipment adds uncertainty'
-			},
-			{
-				id: 'bom-0-4',
-				name: 'Transport Vehicles',
-				description: 'Cargo spacecraft for moving materials between asteroids and processing station. Krypton/iodine propulsion (xenon not viable due to supply constraints - demand exceeds global production 15-20x)',
-				quantity: 15,
-				unit: 'units',
-				unitCost: 133333333,
-				totalCost: 2000000000,
-				category: 'Spacecraft',
-				slug: 'transport-vehicles',
-				costMin: 1400000000,
-				costMax: 3000000000,
-				costConfidence: 'medium',
-				costBasis: 'Based on SEP spacecraft costs; krypton/iodine propulsion well-characterized'
-			},
-			{
-				id: 'bom-0-5',
-				name: 'Solar Power Arrays',
-				description: 'Power generation for mining and processing operations',
-				quantity: 100,
-				unit: 'MW capacity',
-				unitCost: 5000000,
-				totalCost: 500000000,
-				category: 'Power Systems',
-				slug: 'solar-power-arrays',
-				costMin: 350000000,
-				costMax: 750000000,
-				costConfidence: 'high',
-				costBasis: 'Based on current thin-film PV costs with established space deployment track record'
-			},
-			{
-				id: 'bom-0-6',
-				name: 'In-Situ Propellant Production Systems',
-				description: 'Integrated water extraction and electrolysis systems (H2O -> H2 + O2) using bucket-wheel excavation. Dual counter-rotating design for torque balancing in microgravity. Heats regolith to 1000C to liberate water.',
-				quantity: 4,
-				unit: 'units',
-				unitCost: 500000000,
-				totalCost: 2000000000,
-				category: 'Infrastructure',
-				slug: 'ispp-systems',
-				costMin: 1400000000,
-				costMax: 3000000000,
-				costConfidence: 'medium',
-				costBasis: 'Based on arxiv 1702.00335 bucket-wheel excavation with integrated electrolysis'
-			},
-			{
-				id: 'bom-0-7',
-				name: 'Organizational Infrastructure',
-				description: 'Legal, governance, and coordination infrastructure for multi-century project execution. Includes legal entity establishment, succession mechanisms, global coordination systems, conflict resolution frameworks, and governance tooling.',
-				quantity: 1,
-				unit: 'organization',
-				unitCost: 50000000,
-				totalCost: 50000000,
-				category: 'Governance',
-				slug: 'organizational-infrastructure',
-				costMin: 20000000,
-				costMax: 100000000,
-				costConfidence: 'low',
-				costBasis: 'Legal setup, coordination systems, governance tooling, and succession mechanisms for multi-century operations'
-			}
-		],
-		totalCost: 15710000000,
+		// 17 items from the regenerated consensus (src/lib/services/phase-0-bom.ts); 0B is a gated option
+		bom: phase0BomItems(),
+		// 0A + 0B with contingency, planning values; the envelope is PHASE_0_TOTALS.all
+		totalCost: PHASE_0_TOTALS.all.point,
 		estimatedDuration: '10-15 years',
 		dependencies: [],
 		relatedResearch: ['asteroid mining', 'in-situ resource utilization', 'space manufacturing']

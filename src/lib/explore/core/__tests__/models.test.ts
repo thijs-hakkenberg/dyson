@@ -43,8 +43,8 @@ describe('element models', () => {
 	});
 
 	it('key consensus dimensions', () => {
-		expect(elementModel('bom-0-3')!.params.size).toBe(180);
-		expect(elementModel('bom-0-4')!.params.size).toBe(65);
+		expect(elementModel('bom-0-3')!.params.size).toBeCloseTo(2 * Math.sqrt(750) + 10, 6);
+		expect(elementModel('bom-0-4')!.params.size).toBeGreaterThan(65);
 		const node = elementModel('bom-1-4')!;
 		expect(node.variants.map((v) => v.size).sort((a, b) => a - b)).toEqual([18, 120, 340]);
 	});
