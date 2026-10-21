@@ -1,0 +1,20 @@
+# Divergent Views for organizational-infrastructure
+# Auto-generated from consensus document
+
+bomId: "bom-0-7"
+itemSlug: "organizational-infrastructure"
+generated: "2026-10-20"
+
+topics:
+  - id: "contingency-treatment"
+    topic: "Contingency treatment"
+    positions:
+      - statement: "excluding it entirely and holding it in bom-0-17"
+        models:
+          - "Claude"
+      - statement: "including a 20% contingency ($14M) inside bom-0-7"
+        models:
+          - "Gemini"
+      - statement: "excluding it, as Claude does, and warns that embedding it would fund uncertainty twice"
+        models:
+          - "Gpt"

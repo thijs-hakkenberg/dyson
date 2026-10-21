@@ -1,0 +1,44 @@
+# Divergent Views for launch-delivery
+# Auto-generated from consensus document
+
+bomId: "bom-0-8"
+itemSlug: "launch-delivery"
+generated: "2026-10-20"
+
+topics:
+  - id: "0b-cost-and-what-it-includes"
+    topic: "0B cost and what it includes"
+    positions:
+      - statement: "a $9"
+        models:
+          - "Claude"
+  - id: "mass-floor-and-scaling-basis"
+    topic: "Mass floor and scaling basis"
+    positions:
+      - statement: "1"
+        models:
+          - "Claude"
+  - id: "handover-point-and-the-deep-space-leg"
+    topic: "Handover point and the deep-space leg"
+    positions:
+      - statement: "one gateway at SEL1, reached by direct injection at C3 ≈ −0"
+        models:
+          - "Claude"
+  - id: "module-size-launcher-dependence-and-tug-power"
+    topic: "Module size, launcher dependence and tug power"
+    positions:
+      - statement: "a \"Class M\" module limit of ≤12 t at C3 −0"
+        models:
+          - "Claude"
+  - id: "launch-price-basis"
+    topic: "Launch price basis"
+    positions:
+      - statement: "departure prices (P_dep) of about $3"
+        models:
+          - "Claude"
+  - id: "cadence-and-launch-count"
+    topic: "Cadence and launch count"
+    positions:
+      - statement: "about 210 Class M-equivalent launches over about 8 years, roughly 25 per year"
+        models:
+          - "Claude"
