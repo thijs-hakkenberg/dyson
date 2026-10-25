@@ -238,6 +238,8 @@ to carry 250–440 t/yr of propellant launch load, which over a 5–6.5 year 0B 
 1.25–2.9 kt of propellant alone, before hardware (plant 250–400 t, 10–18 tugs of 38–70 t
 dry). The 1.3 kt floor holds only if propellant scales down with demand, which neither
 document states. *BOM:* both envelopes as stated.
+*2026-10-25 (rq-0-61 chain model):* launched mass is 5.3 kt at P50 with the consensus
+budgets as written and 6.4 kt with catalogue trajectories; no draw falls below 1.3 kt.
 
 ### CI-29 · 0A cost is above the D-01 assumption — `phase-0` · open
 `reconciliation/phase-0/decisions.md` assumption A4: "0A ($3.5–16B) is fundable".
@@ -246,4 +248,23 @@ bom-0-17 rates (40–50%). The low end is about 2.5× the assumed one, and with 
 the top passes $16B. NRE and qualification (bom-0-11, $3.9–6.6B) is over half the 0A base.
 A4's falsifier is "no funding path". This log does not change the decision record; the
 owner re-checks A4.
+*2026-10-25 (rq-0-84):* with historical cost growth on development lines, P(0A ≤ $16B) is
+0.63–0.81, and the 45% 0A rate buys about 57% confidence.
+
+### CI-30 · Δv budgets do not close against the asteroid catalogue — `bom-0-1`, `bom-0-4` · open
+`phase-0/prospecting-satellites`: ≤3.5 km/s EP to the primary target from launch at C3 ≈ 0.
+`phase-0/transport-vehicles`: storage sized for "a 5 km/s-per-leg envelope" and a KDP-0B
+criterion of a ≤3.0-year named-target cycle. The rq-0-52 screen of the JPL SBDB catalogue
+(direct transfers, 2030–2040) finds **no** asteroid of ~100 m or more that meets all three.
+From C3 ≈ 0, scouts reach 2 large targets within 4.5 km/s; at 5 km/s per leg the shortest
+tug cycle is 4.7 years. It closes for 15 targets with scouts launched to C3 = 10 and tug legs
+of 6.5 km/s within 4 years, still below Claude's falsifier of 20. Gravity assists are not yet
+modelled and would add candidates.
+
+### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
+`phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
+(≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the
+catalogue supports are 5.6–6.5 km/s. The rq-0-61 chain model then gives 520–860 t/yr (P10–P90)
+and an import ratio of 0.66 at P50, failing the ≤0.50 limit in 97% of draws. Isp of
+3,000–3,500 s, the bom-0-16 trade range, brings it to about 0.48.
 

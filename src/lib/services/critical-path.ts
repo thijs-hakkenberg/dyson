@@ -131,7 +131,8 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 			'rq-0-40',
 			'rq-0-41',
 			'rq-0-42',
-			'rq-0-60'
+			'rq-0-60',
+			'rq-0-85'
 		],
 		rationale:
 			'Mining is the first link in the production chain. Excavation rate determines material throughput, which sizes the processing plant co-located at the asteroid, which sizes the site power system. Anchoring reliability and regolith behavior are existential unknowns.'
@@ -143,7 +144,7 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 			'Does the energy budget close? Covers solar array design, energy storage, radiation degradation, concentrator vs flat-plate tradeoffs, and in-space manufacturing of power infrastructure.',
 		color: '#f97316', // orange
 		icon: '⚡',
-		questionIds: ['rq-0-21', 'rq-0-22', 'rq-0-23', 'rq-0-25'],
+		questionIds: ['rq-0-21', 'rq-0-22', 'rq-0-23', 'rq-0-25', 'rq-0-86'],
 		rationale:
 			'Every other system draws power. MW-class arrays drive both the tugs and the site plant; their degradation sets the replacement schedule, storage covers safe-mode and shadowing, and waste heat must be rejected. Array size drives tug and plant mass.'
 	},
@@ -165,7 +166,7 @@ export const TECHNOLOGY_THREADS: TechnologyThread[] = [
 			'How does it all fit together? Covers multi-century governance, cost methodology, the TRL re-baseline and decision gates, and the owner rulings that set the gate thresholds.',
 		color: '#6366f1', // indigo
 		icon: '🏛',
-		questionIds: ['rq-0-29', 'rq-0-46', 'rq-0-57', 'rq-0-58', 'rq-0-61', 'rq-0-62', 'rq-0-63', 'rq-0-64', 'rq-0-65', 'rq-0-66', 'rq-0-67', 'rq-0-68', 'rq-0-69', 'rq-0-70', 'rq-0-71', 'rq-0-72', 'rq-0-73', 'rq-0-74', 'rq-0-75', 'rq-0-76', 'rq-0-77', 'rq-0-78', 'rq-0-81', 'rq-0-82', 'rq-0-83'],
+		questionIds: ['rq-0-29', 'rq-0-46', 'rq-0-57', 'rq-0-58', 'rq-0-61', 'rq-0-62', 'rq-0-63', 'rq-0-64', 'rq-0-65', 'rq-0-66', 'rq-0-67', 'rq-0-68', 'rq-0-69', 'rq-0-70', 'rq-0-71', 'rq-0-72', 'rq-0-73', 'rq-0-74', 'rq-0-75', 'rq-0-76', 'rq-0-77', 'rq-0-78', 'rq-0-81', 'rq-0-82', 'rq-0-83', 'rq-0-84', 'rq-0-87'],
 		rationale:
 			'A multi-century, volunteer-driven, global project requires governance structures that do not yet exist. Cost methodology must account for ISRU economics that break traditional space program models.'
 	}
@@ -1322,6 +1323,62 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		hasLiteratureReview: false,
 		hasConclusion: false,
 		gateDescription: 'M180 sunset and licence-recovery rules (rulings sheet 2.9-2.11)'
+	},
+	{
+		questionId: 'rq-0-84',
+		slug: 'phase-0-cost-confidence',
+		title: 'What confidence do the Phase 0 contingency rates buy, and is 0A within the D-01 assumption?',
+		status: 'investigating',
+		priority: 'critical',
+		threadId: 'governance-integration',
+		dependsOn: [],
+		blocks: ['rq-0-82'],
+		criticalPath: false,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Funded 0A authority and D-01 assumption A4'
+	},
+	{
+		questionId: 'rq-0-85',
+		slug: 'site-debris-escape-ballistics',
+		title: 'What fraction of handled regolith escapes the target, by particle size and release speed?',
+		status: 'open',
+		priority: 'high',
+		threadId: 'mining-operations',
+		dependsOn: [],
+		blocks: ['rq-0-70'],
+		criticalPath: false,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Interim D-03 escape ceiling for the licence gate'
+	},
+	{
+		questionId: 'rq-0-86',
+		slug: 'target-spin-power-comms',
+		title: "How do the target's spin state and pole set site power storage and Earth visibility?",
+		status: 'open',
+		priority: 'high',
+		threadId: 'power-thermal',
+		dependsOn: ['rq-0-52'],
+		blocks: [],
+		criticalPath: false,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'Spin and illumination thresholds for the target gate'
+	},
+	{
+		questionId: 'rq-0-87',
+		slug: 'programme-management-scope',
+		title: 'Which BOM line owns programme management, systems engineering and mission assurance, and how long is 0A?',
+		status: 'open',
+		priority: 'high',
+		threadId: 'governance-integration',
+		dependsOn: [],
+		blocks: ['rq-0-84'],
+		criticalPath: false,
+		hasLiteratureReview: false,
+		hasConclusion: false,
+		gateDescription: 'WBS completeness and the 0A planning length'
 	}
 ];
 

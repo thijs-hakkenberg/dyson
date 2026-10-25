@@ -3,6 +3,24 @@
 **Generated:** 2026-02-22
 **Based on:** Feasibility assessment, 142 research questions (107 open), 12 TRL assessments, 5 decision gates
 
+> **Update 2026-10-25.** The text below is the February 2026 roadmap and keeps its original
+> figures; Phase 0 has since been re-baselined (D-01…D-05, 17-item BOM, TRL re-baseline). Current
+> Phase 0 research status and next steps:
+>
+> | Study | RQ | Status | Next step |
+> |---|---|---|---|
+> | NEA joint accessibility on the JPL catalogue | rq-0-52 | First pass done: consensus Δv budgets close for 0 large targets; 15 with scouts at C3 = 10 and 6.5 km/s tug legs | Optimised low-thrust arcs with lunar/Earth flybys for the top 15–40 |
+> | Chain closure and $/kg vs Earth supply | rq-0-61 | First pass done: ~$21k/kg (5× Earth) at planned scale; 0B launches more mass than it delivers | Replacement cycles; re-run on optimised trajectories |
+> | Contingency confidence and A4 | rq-0-84 | Done for envelope, growth and duration cases | TRL/AD²-specific growth; owner re-checks A4 and the 0A rate |
+> | Debris escape ballistics | rq-0-85 | Open | Build the rotating-body Monte Carlo |
+> | Spin state → storage and Earth visibility | rq-0-86 | Open | Run on the rq-0-52 shortlist |
+> | PM/SE/MA ownership and 0A length | rq-0-87 | Open (owner decision) | WBS entry and planning 0A length |
+> | Literature on the project-ending unknowns | rq-0-50, 54, 56, 78, 80 | Open | Anchoring in rubble, recoverable metal, iodine thruster life, carbonyl kinetics (Databricks machine) |
+> | Phase 1 product specification | rq-0-58 | Open | Specify from the Phase 1 side; six Phase 0 items depend on it |
+>
+> Code: `publications/scripts/{nea_accessibility,phase0_cost_risk,phase0_chain_model}.py`; data:
+> `publications/data/{nea-catalogue,phase0-cost-risk,phase0-chain}/`.
+
 ---
 
 ## Executive Summary
