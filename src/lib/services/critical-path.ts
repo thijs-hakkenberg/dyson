@@ -936,7 +936,7 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		questionId: 'rq-0-56',
 		slug: 'no-melt-fe-ni-refining',
 		title: 'No-melt Fe-Ni refining routes (carbonyl, H₂ reduction): yield and reagent recycling',
-		status: 'open',
+		status: 'investigating',
 		priority: 'high',
 		threadId: 'isru-materials',
 		dependsOn: ['rq-0-51'],
