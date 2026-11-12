@@ -33,7 +33,13 @@ import numpy as np
 from scipy.stats import norm
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
-BOM_JSON = os.path.join(ROOT, 'src', 'lib', 'data', 'phase-0-bom.json')
+# In the web repo the BOM is the generated site data; the research archive (dyson-research)
+# carries a snapshot of the same file under publications/data/phase0-bom/.
+_BOM_PATHS = [
+    os.path.join(ROOT, 'src', 'lib', 'data', 'phase-0-bom.json'),
+    os.path.join(ROOT, 'publications', 'data', 'phase0-bom', 'phase-0-bom.json'),
+]
+BOM_JSON = next((p for p in _BOM_PATHS if os.path.exists(p)), _BOM_PATHS[0])
 
 Z90 = norm.ppf(0.9)
 Z95 = norm.ppf(0.95)
