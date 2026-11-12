@@ -28,7 +28,8 @@
 		{ value: 'pv-research', label: 'PV Research' },
 		{ value: 'manufacturing', label: 'Manufacturing' },
 		{ value: 'university', label: 'Universities' },
-		{ value: 'standards-body', label: 'Standards Bodies' }
+		{ value: 'standards-body', label: 'Standards Bodies' },
+		{ value: 'oversight-regulatory', label: 'Oversight & Regulatory' }
 	];
 </script>
 

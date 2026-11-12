@@ -14,7 +14,8 @@
 		'pv-research': 'PV Research',
 		manufacturing: 'Manufacturing',
 		university: 'University',
-		'standards-body': 'Standards Body'
+		'standards-body': 'Standards Body',
+		'oversight-regulatory': 'Oversight & Regulatory'
 	};
 
 	const categoryColors: Record<string, string> = {
@@ -23,7 +24,8 @@
 		'pv-research': 'bg-yellow-500/20 text-yellow-400',
 		manufacturing: 'bg-green-500/20 text-green-400',
 		university: 'bg-purple-500/20 text-purple-400',
-		'standards-body': 'bg-cyan-500/20 text-cyan-400'
+		'standards-body': 'bg-cyan-500/20 text-cyan-400',
+		'oversight-regulatory': 'bg-rose-500/20 text-rose-400'
 	};
 </script>
 

@@ -14,7 +14,8 @@ export type OrganizationCategory =
 	| 'pv-research'
 	| 'manufacturing'
 	| 'university'
-	| 'standards-body';
+	| 'standards-body'
+	| 'oversight-regulatory';
 
 // Question status workflow
 export type QuestionStatus = 'draft' | 'sent' | 'awaiting-response' | 'responded' | 'closed';
@@ -89,7 +90,8 @@ export function isOrganizationCategory(value: string): value is OrganizationCate
 		'pv-research',
 		'manufacturing',
 		'university',
-		'standards-body'
+		'standards-body',
+		'oversight-regulatory'
 	].includes(value);
 }
 

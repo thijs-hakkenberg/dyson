@@ -19,7 +19,8 @@
 		'pv-research': 'PV Research',
 		manufacturing: 'Manufacturing',
 		university: 'University',
-		'standards-body': 'Standards Body'
+		'standards-body': 'Standards Body',
+		'oversight-regulatory': 'Oversight & Regulatory'
 	};
 </script>
 

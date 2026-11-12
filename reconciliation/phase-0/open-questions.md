@@ -49,6 +49,51 @@ A question can need several methods. The first one listed is the one to start wi
 | rq-0-11 | note added | Whether gravity is needed at all is contested; the scale-gap framing is disputed | Experiment (≥1 t batch at 0.05–0.15 g) vs rq-0-56 |
 | rq-0-16 | note added | The 30,000 h kW-class Hall result does not cover MW-class or iodine | Experiment → rq-0-54 |
 
+## Gate-ruling evidence questions (rq-0-76 … rq-0-83)
+
+*2026-10-20. The framework-mode deliberations on the WP-A gate rulings (rq-0-65 … rq-0-75)
+converged on eight points, which the owner confirmed
+([`trl/gate-rulings.yaml`](trl/gate-rulings.yaml)). The rest could not be settled by reasoning:
+the positions turn on facts nobody supplied or on practice the panel was not given. Each open
+choice on the [decision sheet](trl/gate-rulings-sheet.md) is routed to one of these questions.
+Each question names what the owner still decides once the evidence is in.*
+
+| RQ | Question | Methods | Priority | Feeds (sheet items) |
+|---|---|---|---|---|
+| rq-0-76 | Agency practice: composite TRLs, TRL 6 scale, flown experiments | Literature → Stakeholder | high | rq-0-65, 71–74 (2.1, 2.12, 2.14, 2.16–2.18) |
+| rq-0-77 | Fallback dossiers for the split technologies | Analysis, Simulation, Literature | critical | rq-0-65, 66 (2.1, 2.2, 2.4) |
+| rq-0-78 | Scale-up evidence base: extrapolation ratios and failures | Literature → Analysis | high | rq-0-71, 75 (2.12, 2.13, 2.19) |
+| rq-0-79 | MW-class EP (T01): ground facilities, cluster model, flight-subset cost | Simulation, Literature, Stakeholder | critical | rq-0-75 (2.19) |
+| rq-0-80 | Sampling and assay evidence that bounds a target's bulk grade | Simulation, Literature, Stakeholder | critical | rq-0-66, 73 (2.3, 2.15, 2.16) |
+| rq-0-81 | Bankable demand and capacity sizing | Literature, Simulation, Stakeholder | critical | rq-0-68 (2.7, 2.8) |
+| rq-0-82 | Economics-gate cost statistic and premium authorisation | Literature → Stakeholder | critical | rq-0-67 (2.5, 2.6) |
+| rq-0-83 | Sunsets, option preservation and licence reapplication in practice | Literature → Stakeholder | high | rq-0-69, 70 (2.9–2.11) |
+
+**Simulations to build or extend.** rq-0-77 and rq-0-81 reuse `isru-economics`, `supply-chain`
+and `reliability-model.ts`. rq-0-79 needs a new facility-pumping and cluster-interaction model.
+rq-0-80 needs a new grade-estimation Monte Carlo on synthetic rubble piles, which can draw on
+`spectral-analysis` and `nea-population.ts`.
+
+**Expert outreach** (drafts in `src/content/external-organizations/index.yaml`):
+
+| Draft | Organisation | For |
+|---|---|---|
+| oq-1-5 | NASA (TRA practice) | rq-0-76 |
+| oq-3-3 | ESA (ECSS / ISO 16290) | rq-0-76 |
+| oq-12-1 | GAO (TRA Guide, maturity vs cost growth) | rq-0-76 |
+| oq-1-6 | NASA (EP vacuum facilities) | rq-0-79 |
+| oq-2-3 | JPL (EP cluster interactions) | rq-0-79 |
+| oq-4-2 | Busek (cluster ground and flight tests) | rq-0-79 |
+| oq-5-2 | Aerojet Rocketdyne (ground-to-flight prediction) | rq-0-79, rq-0-78 |
+| oq-10-2 | JAXA (Ryugu sample representativeness) | rq-0-80 |
+| oq-13-1 | CRIRSCO (resource confidence categories) | rq-0-80 |
+| oq-12-2 | GAO (cost statistic, capability premiums) | rq-0-82 |
+| oq-15-1 | ICEAA (cost-confidence practice) | rq-0-82 |
+| oq-14-1 | Luxembourg Space Agency (authorisation and reapplication) | rq-0-83 |
+
+Two gaps without a named organisation yet: project-finance practitioners for captive-customer
+offtake (rq-0-81), and the US authority for novel in-space activities (rq-0-83).
+
 ## Round-2 open questions already covered elsewhere
 
 | Panel question (§5) | Where it lives |

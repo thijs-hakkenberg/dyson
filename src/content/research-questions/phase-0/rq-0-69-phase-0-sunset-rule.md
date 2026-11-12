@@ -14,6 +14,7 @@ relatedBOMItems:
 relatedResearchQuestions:
   - "rq-0-62"
   - "rq-0-63"
+  - "rq-0-83"
 tags:
   - "gates"
   - "trl"
@@ -65,3 +66,7 @@ An automatic sunset (Claude) is a pre-commitment that caps 0A spend and prevents
 1. Decide the ruling, with the criteria stated first and the null option (leave the panel's split as is) assessed.
 2. State the gate criterion or rule text that follows from it.
 3. Name the evidence that would change the ruling.
+
+## Status (2026-10-20)
+
+The owner confirmed the converged part (G-1.6 in `reconciliation/phase-0/trl/gate-rulings.yaml`). The deliberation could not settle the rest: the positions turn on evidence nobody supplied, and on practice the panel was not given. The open choices (decision sheet `reconciliation/phase-0/trl/gate-rulings-sheet.md`) are routed to evidence questions: rq-0-83. This question stays open until they report; then the owner rules, or the panel deliberates again with that evidence.

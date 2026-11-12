@@ -135,7 +135,8 @@ export function computeOrganizationStats(organizations: ExternalOrganization[]):
 			'pv-research': 0,
 			manufacturing: 0,
 			university: 0,
-			'standards-body': 0
+			'standards-body': 0,
+			'oversight-regulatory': 0
 		},
 		withContacts: 0,
 		withRecentContact: 0
