@@ -942,7 +942,7 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		dependsOn: ['rq-0-51'],
 		blocks: ['rq-0-61'],
 		criticalPath: true,
-		hasLiteratureReview: false,
+		hasLiteratureReview: true,
 		hasConclusion: false,
 		gateDescription: 'May remove the need for an artificial-gravity module'
 	},
