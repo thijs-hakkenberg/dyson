@@ -261,6 +261,8 @@ tug cycle is 4.7 years. It closes for 15 targets with scouts launched to C3 = 10
 of 6.5 km/s within 4 years, still below Claude's falsifier of 20. Gravity assists are not yet
 modelled and would add candidates.
 
+**Update 2026-11-12 (second pass, rq-0-52).** With multi-revolution transfers, lunar flybys and optimised low-thrust legs, 45 targets close inside the 5 km/s leg cap if scouts launch to C3 = 10 km²/s², tugs use a lunar flyby at each end and cycles run to 4 years. Nothing closes at the consensus budgets as written, and no setting reaches 20 targets at a 3-year cycle. The specs do not mention lunar flybys, and the result rests on an unsourced flyby gain of 1.0–1.5 km/s. Still open.
+
 ### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
 `phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
 (≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the
