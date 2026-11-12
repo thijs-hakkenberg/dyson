@@ -475,11 +475,13 @@ questions:
   # Aerojet Rocketdyne - New Question
   - id: "oq-5-1"
     organizationId: "org-005"
-    question: "What is the current AEPS thruster lifetime test status, and what performance data exists for 100+ kW class Hall thruster arrays?"
-    context: "Project Dyson transport vehicles require 100+ kW solar electric propulsion. AEPS at 12.5 kW is the nearest flight-qualified system. Understanding the scaling pathway from 12.5 kW to 100+ kW is critical for fleet sizing and mission profile planning."
+    question: "What is the current AEPS thruster lifetime and qualification status, and what performance and wear data exist for Hall thrusters and clusters at 100–250 kW per module?"
+    context: "Project Dyson's revised Phase 0 cargo tugs need 1–2.5 MWe of electric propulsion, built from 100–250 kW modules; our model panel rates this TRL 2–4 against TRL 6 at the production decision. AEPS at 12.5 kW is the nearest system in qualification. The scaling path from 12.5 kW modules to MW-class clusters, and what ground tests can show, drives the test plan (rq-0-79)."
     relatedRQs:
       - "rq-0-16"
       - "rq-0-19"
+      - "rq-0-54"
+      - "rq-0-79"
     priority: "high"
     status: "draft"
     dateCreated: "2026-02-13"

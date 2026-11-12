@@ -6,7 +6,7 @@
 	import { getEntity } from '../core/registry';
 	import { PHASE_COLORS, PRIORITY_COLORS, RQ_STATUS_COLORS } from '../core/theme';
 	import { TECHNOLOGY_THREADS } from '$lib/services/critical-path';
-	import { getGatesForQuestion, getGateReadiness } from '$lib/services/decision-gates';
+	import { getGatesForQuestion, getGateReadiness, gateWindow } from '$lib/services/decision-gates';
 	import { fetchQuestionById } from '$lib/services/questions/questions-fetchers';
 	import type { ResearchQuestion } from '$lib/types/entities';
 
@@ -93,7 +93,7 @@
 				<h3>Feeds decision gates</h3>
 				<ul class="links">
 					{#each gates as g (g.id)}
-						<li><span>{g.name}</span><span class="dim">{Math.round(getGateReadiness(g) * 100)}% met</span></li>
+						<li><span>{g.name}</span><span class="dim">{gateWindow(g)} · {getGateReadiness(g)}% met</span></li>
 					{/each}
 				</ul>
 			{/if}

@@ -1,34 +1,80 @@
+# Divergent Views for material-processing-station
+# Auto-generated from consensus document
+
 bomId: "bom-0-3"
 itemSlug: "material-processing-station"
-generated: "2026-02-01"
+generated: "2026-10-20"
+
 topics:
-  - id: "crew-presence"
-    topic: "Crew Presence"
+  - id: "primary-process-route"
+    topic: "Primary process route"
     positions:
-      - statement: "Human-tended with quarterly visits"
-        models: ["Claude", "GPT"]
-      - statement: "Fully autonomous with annual visits only"
-        models: ["Gemini"]
-  - id: "silicon-processing"
-    topic: "Silicon Processing"
+      - statement: "Claude baselines no-melt carbonyl refining (T06), with short-arm melting (T07/T23) as a qualified alternate up to a Route Selection Review around 2029/30. Its main argument is that melting dissolves troilite sulfur into the metal, and desulfurising would need imported CaO flux of 30–80 t/yr."
+        models:
+          - "Claude"
+      - statement: "Gemini baselines induction melting in twin 15 t centrifuge cartridges, with slag skimmed at 0.1 g."
+        models:
+          - "Gemini"
+      - statement: "GPT baselines rotating melt cartridges plus coalescence surfaces and melt filtration. It keeps carbonyl and H₂ reduction as research-only alternatives, and also notes that melting does not remove dissolved S or P."
+        models:
+          - "GPT"
+  - id: "electrical-power"
+    topic: "Electrical power"
     positions:
-      - statement: "Dedicated silicon refining module included"
-        models: ["Claude"]
-      - statement: "Solar-grade silicon may not be achievable in early phases"
-        models: ["Gemini"]
-  - id: "smelting-technology"
-    topic: "Smelting Technology"
+      - statement: "Claude recommends 0.85 MWe installed (0.6–1.1) and about 0.5 MWe average (≈3.4 kWh/kg product), with a 120 kW night load."
+        models:
+          - "Claude"
+      - statement: "Gemini specifies 1.5 MWe installed, including about 800 kW peak for induction."
+        models:
+          - "Gemini"
+      - statement: "GPT requests 1.5–2.5 MWe connected and 0.45–0.9 MWe average (4–8 GWh/yr)."
+        models:
+          - "GPT"
+  - id: "radiator-area"
+    topic: "Radiator area"
     positions:
-      - statement: "Solar concentrator furnaces"
-        models: ["Claude"]
-      - statement: "Electric arc furnaces"
-        models: ["GPT"]
-      - statement: "Hybrid approach"
-        models: ["Gemini"]
-  - id: "location"
-    topic: "Location"
+      - statement: "Claude sizes about 950 m² (700–1,300) at 6–9 t across low-, mid- and high-temperature loops."
+        models:
+          - "Claude"
+      - statement: "Gemini specifies 750 m² of two-phase radiators at 350 K for 1.2 MWth."
+        models:
+          - "Gemini"
+      - statement: "GPT calculates 1,800–3,000 m² emitting area (1,000–2,000 m² physical). It explicitly rejects \"1 MW at 350 K in ~700 m²\", because ideal emission at 350 K is only about 0.72 kW/m² before derating."
+        models:
+          - "GPT"
+  - id: "tailings-method-and-escape-ceiling"
+    topic: "Tailings method and escape ceiling"
     positions:
-      - statement: "L4/L5 co-located with asteroid"
-        models: ["Claude", "Gemini"]
-      - statement: "L4/L5 optimized for Earth access"
-        models: ["GPT"]
+      - statement: "Claude proposes face-side backfill into the mined void, capped with Fe-Ni foil from the CVD line (about 4 t/yr of product). Its interim ceiling is ≤0.5 t/yr (≈2.5×10⁻⁵ of ROM throughput)."
+        models:
+          - "Claude"
+      - statement: "Gemini proposes sintered blocks or bags, \"safe ejection\" as an option, and electrostatic precipitators. It sets no numeric ceiling."
+        models:
+          - "Gemini"
+      - statement: "GPT proposes compacted or contained blocks handed over to a bom-0-15 repository. Its interim ceiling is <10⁻⁶ of processed mass (about 12 kg/yr), supplemented by particle-size, velocity and trajectory limits."
+        models:
+          - "GPT"
+  - id: "product-form-and-packaging"
+    topic: "Product form and packaging"
+    positions:
+      - statement: "Claude recommends CVD/carbonyl granules (CF-1) or powder (CF-2) in 1 t CVD-formed Fe-Ni canisters, in 20 t certified lots. The canister counts as product."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 5 t ingots or billets with tug grapple fixtures."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 25–100 kg remelt billets with lot traceability. It sets an initial envelope of Fe+Ni ≥97 wt%, S ≤0.10 wt% and P ≤0.10 wt%."
+        models:
+          - "GPT"
+  - id: "cost-scope-and-the-0a-split"
+    topic: "Cost scope and the 0A split"
+    positions:
+      - statement: "Claude puts $80–200M of 0A plant engineering in bom-0-3, with $0.6–1.4B of maturation demand on bom-0-11 and $0.3–0.8B on bom-0-12."
+        models:
+          - "Claude"
+      - statement: "Gemini includes $1.5–3.5B of launch and assembly inside bom-0-3, which conflicts with the bom-0-8 boundary. It treats 0A as amortized."
+        models:
+          - "Gemini"
+      - statement: "GPT puts zero 0A procurement in bom-0-3, and $1.2–2.8B of enabling work in bom-0-11 and bom-0-12."
+        models:
+          - "GPT"

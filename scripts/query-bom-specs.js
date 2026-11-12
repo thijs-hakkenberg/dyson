@@ -14,7 +14,11 @@
  *
  *   # Generate consensus from existing specs (loads all available model files)
  *   node scripts/query-bom-specs.js --phase=phase-0 --consensus-only
+ *   # Phase 0 after the re-assessment: prompts carry bom-structure.yaml + the revised architecture.
+ *   # --dry-run writes every prompt to reconciliation/<phase>/bom-specs/prompts/ without API calls.
+ *   node scripts/query-bom-specs.js --phase=phase-0 --panel=latest --generate-consensus --dry-run
  *   node scripts/query-bom-specs.js --phase=phase-1 --item=collector-units --consensus-only
+ *   node scripts/query-bom-specs.js --phase=phase-0 --divergent-only   # rebuild divergent-views.yaml from consensus.md, no API
  *
  *   # Add Claude 4.6 specs alongside existing 4.5 specs
  *   node scripts/query-bom-specs.js --phase=phase-0 --add-claude-46
@@ -41,6 +45,8 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import yaml from 'js-yaml';
+import { divergentViewsYaml, parseDivergentViews } from './lib/divergent-views.js';
 import { MODELS, PANELS, archiveRaw, familyOf, handleInfoFlags, panelArgs, queryModel, registerEndpoint, resolvePanel } from './lib/llm.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -51,61 +57,26 @@ const PROJECT_ROOT = path.resolve(__dirname, '..');
 // existing specs were written with; choose another with --panel or --models.
 let DEFAULT_SPEC_MODELS = [...PANELS.feb];
 let SYNTHESIZER = 'claude-opus-4-6';
+const DRY_RUN = process.argv.includes('--dry-run');
+const DRY_RUN_DIR = (phaseId) => path.join(PROJECT_ROOT, 'reconciliation', phaseId, 'bom-specs', 'prompts');
+
+/** --dry-run: write a prompt where it can be read (git-ignored) instead of calling a model. */
+async function writeDryRunPrompt(phaseId, name, prompt) {
+  await fs.mkdir(DRY_RUN_DIR(phaseId), { recursive: true });
+  await fs.writeFile(path.join(DRY_RUN_DIR(phaseId), name), prompt, 'utf-8');
+  console.log(`    dry run: ${path.relative(PROJECT_ROOT, path.join(DRY_RUN_DIR(phaseId), name))} (~${Math.round(prompt.length / 4)} tokens)`);
+}
 const RAW_DIR = path.join(PROJECT_ROOT, 'data/raw-exchanges/bom-specs');
 
 // All Claude models (for generating 4.6 alongside existing 4.5)
 const CLAUDE_MODELS = ['claude-opus-4-5', 'claude-opus-4-6'];
 
-const PHASE_0_BOM_ITEMS = [
-  {
-    bomId: 'bom-0-1',
-    slug: 'prospecting-satellites',
-    name: 'Prospecting Satellites',
-    quantity: '50 units',
-    cost: '$250M',
-    category: 'Spacecraft'
-  },
-  {
-    bomId: 'bom-0-2',
-    slug: 'mining-robots',
-    name: 'Mining Robots',
-    quantity: '20 units',
-    cost: '$1B',
-    category: 'Robotics'
-  },
-  {
-    bomId: 'bom-0-3',
-    slug: 'material-processing-station',
-    name: 'Material Processing Station',
-    quantity: '1 station',
-    cost: '$10B',
-    category: 'Infrastructure'
-  },
-  {
-    bomId: 'bom-0-4',
-    slug: 'transport-vehicles',
-    name: 'Transport Vehicles',
-    quantity: '10 units',
-    cost: '$2B',
-    category: 'Spacecraft'
-  },
-  {
-    bomId: 'bom-0-5',
-    slug: 'solar-power-arrays',
-    name: 'Solar Power Arrays',
-    quantity: '100 MW',
-    cost: '$500M',
-    category: 'Power Systems'
-  },
-  {
-    bomId: 'bom-0-6',
-    slug: 'ispp-systems',
-    name: 'In-Situ Propellant Production Systems',
-    quantity: '4 units',
-    cost: '$2B',
-    category: 'Infrastructure'
-  }
-];
+// Phase 0 items follow the accepted post-re-assessment structure (owner decision 2026-10-20):
+// reconciliation/phase-0/bom-structure.yaml. Numbers are left to the models.
+const PHASE_0_STRUCTURE = yaml.load(
+  await fs.readFile(path.join(PROJECT_ROOT, 'reconciliation/phase-0/bom-structure.yaml'), 'utf-8')
+);
+const PHASE_0_BOM_ITEMS = PHASE_0_STRUCTURE.items.map(({ bomId, slug, name, category }) => ({ bomId, slug, name, category }));
 
 const PHASE_1_BOM_ITEMS = [
   { bomId: 'bom-1-1', slug: 'collector-units', name: 'Solar Collector Units', category: 'Spacecraft' },
@@ -237,6 +208,60 @@ const ALL_BOM_ITEMS = {
 
 // Legacy alias for backwards compatibility
 const BOM_ITEMS = PHASE_0_BOM_ITEMS;
+
+/**
+ * Phase 0 context after the re-assessment: the agreed architecture, owner decisions, the
+ * item's accepted scope and round-2 delta rows, its round-2 reconciliation, and the
+ * technologies the TRL re-baseline links to it. Without this, a regenerated spec would
+ * re-propose the abandoned central station.
+ */
+async function phase0Context(item, { brief = false } = {}) {
+  const readiness = JSON.parse(await fs.readFile(path.join(PROJECT_ROOT, 'src/lib/data/phase-0-readiness.json'), 'utf-8'));
+  const s = PHASE_0_STRUCTURE.items.find((x) => x.bomId === item.bomId);
+  const range = (r) => (r.min === r.max ? `${r.min}` : `${r.min}–${r.max}`);
+  const agreed = readiness.architecture.agreedChanges.map((c) => `- ${c.change}: ${c.value} (${c.attribution})`).join('\n');
+  const decisions = readiness.decisions.map((d) => `- ${d.id} (${d.status === 'accepted' ? `accepted ${d.decided}` : 'proposed; treat as interim'}): ${d.recommendation}`).join('\n');
+  const deltaRows = readiness.architecture.bomDelta
+    .filter((r) => (s.delta ?? []).some((d) => d.toLowerCase().startsWith(`${r.action} ${r.item}`.toLowerCase())))
+    .map((r) => `- ${r.action} · ${r.item} · supported by ${r.supportedBy} · quantity: ${r.quantity} · cost: ${r.unitCost} · confidence: ${r.confidence}`)
+    .join('\n');
+  const techs = readiness.technologies
+    .filter((t) => t.relatedBOMIds.includes(item.bomId))
+    .map((t) => `- ${t.id} ${t.technology}: TRL ${range(t.currentTRL)} now, target ${t.targetTRL}, AD² ${range(t.ad2)}, ${t.riskIfFail}`)
+    .join('\n');
+  const others = PHASE_0_STRUCTURE.items.filter((x) => x.bomId !== item.bomId).map((x) => `${x.bomId} ${x.name}`).join('; ');
+  let recon = '';
+  if (!brief) {
+    recon = await fs
+      .readFile(path.join(PROJECT_ROOT, `reconciliation/phase-0/round-2/reconciliation/${item.bomId}.md`), 'utf-8')
+      .then((t) => t.replace(/^---[\s\S]*?---\n*/, ''))
+      .catch(() => '');
+  }
+  return `
+## Phase 0 after the 2026 re-assessment (binding context)
+
+The original Phase 0 plan (a central 50 kt/yr processing station at Sun–Earth L4/L5, crew visits,
+production LOX/LH₂, 100 kW-class freighters) was found not to close and is abandoned. Design for the
+revised architecture below. Do not re-propose the abandoned design.
+
+### Agreed by all three re-assessment models
+${agreed}
+
+### Owner decisions
+${decisions}
+
+Under D-02, KDP-0B (the one-way commitment to 0B production) needs every project-ending technology
+at TRL 6 in a relevant environment with no waivers; internal 0A milestones need TRL 4–5.
+
+### This item: ${item.bomId} ${s.name} (${s.sub_phase})
+Accepted scope: ${s.scope}
+${deltaRows ? `\nRound-2 proposals for this item (per model; not approved as numbers):\n${deltaRows}\n` : ''}${techs ? `\nCritical technologies (TRL re-baseline, panel envelope):\n${techs}\n` : ''}
+Other Phase 0 items (do not duplicate their scope): ${others}.
+
+State quantities and costs as ranges with their basis, split 0A and 0B where the item spans both,
+and say where you disagree with the round-2 figures and why.
+${recon ? `\n### Round-2 reconciliation for this item\n\n${recon}\n` : ''}`;
+}
 
 /**
  * Get phase context description for prompts
@@ -531,6 +556,7 @@ function extractItemContext(bomConsensus, itemName, bomId) {
 
 async function generatePrompt(item, phaseId = 'phase-0', compactContext = false) {
   let contextAddendum = '';
+  if (phaseId === 'phase-0') contextAddendum = await phase0Context(item);
 
   // For Phase 3a (Matrioshka Brain), include context (compact or full)
   if (phaseId === 'phase-3a') {
@@ -734,6 +760,10 @@ async function processItemModel(item, modelKey, phaseId = 'phase-0', options = {
   console.log(`  Querying ${model.name}...`);
 
   const prompt = await generatePrompt(item, phaseId, compactContext);
+  if (DRY_RUN) {
+    await writeDryRunPrompt(phaseId, `${item.slug}.${modelKey}.md`, prompt);
+    return null;
+  }
   // Use reduced max_tokens for compact context to speed up response
   const tokenLimit = maxTokens || (compactContext ? 16000 : 64000);
   const content = await queryDatabricks(modelKey, prompt, { maxTokens: tokenLimit });
@@ -804,8 +834,9 @@ async function generateConsensus(item, specs, phaseId = 'phase-0') {
     })
     .join('\n\n---\n\n');
 
+  const context = phaseId === 'phase-0' ? await phase0Context(item, { brief: true }) : '';
   const prompt = `You are synthesizing technical specifications from 3 AI models for "${item.name}" in the context of ${getPhaseContext(phaseId)}.
-
+${context}
 ## Model Specifications:
 
 ${specsText}
@@ -829,6 +860,10 @@ A numbered list of 5-7 synthesized recommendations.
 
 Be specific about which model holds which view in the Divergent Views section.`;
 
+  if (DRY_RUN) {
+    await writeDryRunPrompt(phaseId, `${item.slug}.consensus.md`, prompt);
+    return null;
+  }
   console.log(`  Generating consensus for ${item.name}...`);
   const content = await queryDatabricks(SYNTHESIZER, prompt, { label: 'synthesis' });
 
@@ -841,117 +876,32 @@ Be specific about which model holds which view in the Divergent Views section.`;
 }
 
 /**
- * Parse positions from divergent views text
+ * Generate divergent views YAML from consensus content (parser: scripts/lib/divergent-views.js)
  */
-function parsePositions(text) {
-  const positions = [];
-  const modelPositions = {};
-
-  // Split by semicolons and parse each
-  const parts = text.split(/[;.]/);
-  for (const part of parts) {
-    const trimmedPart = part.trim();
-    if (!trimmedPart) continue;
-
-    // Match patterns like "Claude recommends X" or "Gemini prefers Y"
-    const match = trimmedPart.match(/^(Claude|Gemini|GPT)(?:\s+\w+)?\s+(.+)/i);
-    if (match) {
-      const model = match[1];
-      const statement = match[2].trim();
-
-      // Normalize model name
-      const normalizedModel = model.charAt(0).toUpperCase() + model.slice(1).toLowerCase();
-
-      // Group by statement similarity (simple approach)
-      if (!modelPositions[statement]) {
-        modelPositions[statement] = [];
-      }
-      modelPositions[statement].push(normalizedModel);
-    }
-  }
-
-  for (const [statement, models] of Object.entries(modelPositions)) {
-    positions.push({ statement, models });
-  }
-
-  return positions;
-}
-
-/**
- * Generate divergent views YAML from consensus content
- */
-function generateDivergentViewsYAML(consensusContent, item, phaseId = 'phase-0') {
-  // Parse the Divergent Views section from consensus
-  const dvMatch = consensusContent.match(/## Divergent Views\n([\s\S]*?)(?=\n## |$)/);
-  if (!dvMatch) {
-    console.log('    No Divergent Views section found in consensus');
-    return null;
-  }
-
-  const topics = [];
-  const lines = dvMatch[1].split('\n').filter(l => l.trim().startsWith('- **'));
-
-  for (const line of lines) {
-    const topicMatch = line.match(/\*\*([^*]+)\*\*:\s*(.+)/);
-    if (!topicMatch) continue;
-
-    const topic = topicMatch[1].trim();
-    const positionsText = topicMatch[2];
-    const positions = parsePositions(positionsText);
-
-    if (positions.length > 0) {
-      topics.push({
-        id: topic.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
-        topic,
-        positions
-      });
-    }
-  }
-
+function generateDivergentViewsYAML(consensusContent, item, generated = new Date().toISOString().split('T')[0]) {
+  const topics = parseDivergentViews(consensusContent);
   if (topics.length === 0) {
-    console.log('    No topics parsed from Divergent Views section');
+    console.log('    No divergent-view topics parsed from consensus');
     return null;
   }
-
-  // Generate YAML content
-  const yamlContent = generateYAMLContent({
-    bomId: item.bomId,
-    itemSlug: item.slug,
-    generated: new Date().toISOString().split('T')[0],
-    topics
-  });
-
-  return yamlContent;
+  return divergentViewsYaml({ bomId: item.bomId, itemSlug: item.slug, generated, topics });
 }
 
 /**
- * Generate YAML string from object
+ * Rebuild divergent-views.yaml from the committed consensus.md (no API calls).
  */
-function generateYAMLContent(data) {
-  let yaml = `# Divergent Views for ${data.itemSlug}\n`;
-  yaml += `# Auto-generated from consensus document\n\n`;
-  yaml += `bomId: "${data.bomId}"\n`;
-  yaml += `itemSlug: "${data.itemSlug}"\n`;
-  yaml += `generated: "${data.generated}"\n\n`;
-  yaml += `topics:\n`;
-
-  for (const topic of data.topics) {
-    yaml += `  - id: "${topic.id}"\n`;
-    yaml += `    topic: "${topic.topic}"\n`;
-    yaml += `    positions:\n`;
-
-    for (const pos of topic.positions) {
-      // Escape quotes in statement
-      const escapedStatement = pos.statement.replace(/"/g, '\\"');
-      yaml += `      - statement: "${escapedStatement}"\n`;
-      yaml += `        models:\n`;
-      for (const model of pos.models) {
-        yaml += `          - "${model}"\n`;
-      }
-    }
+async function rebuildDivergentViews(item, phaseId) {
+  const consensusPath = path.join(PROJECT_ROOT, 'static/content/bom-specs', phaseId, item.slug, 'consensus.md');
+  let content;
+  try {
+    content = await fs.readFile(consensusPath, 'utf-8');
+  } catch {
+    console.log(`  ${item.slug}: no consensus.md, skipped`);
+    return;
   }
-
-  return yaml;
+  const generated = content.match(/^generated:\s*"?([0-9-]+)"?/m)?.[1];
+  const yamlContent = generateDivergentViewsYAML(content, item, generated);
+  if (yamlContent) await saveDivergentViews(item, yamlContent, phaseId);
 }
 
 /**
@@ -1025,7 +975,7 @@ async function processItem(item, modelsToProcess, phaseId, options = {}) {
       await saveConsensus(item, consensusContent, phaseId);
 
       // Generate divergent views YAML
-      const yamlContent = generateDivergentViewsYAML(consensusContent, item, phaseId);
+      const yamlContent = generateDivergentViewsYAML(consensusContent, item);
       if (yamlContent) {
         await saveDivergentViews(item, yamlContent, phaseId);
       }
@@ -1046,6 +996,7 @@ async function main() {
   const proposeBOMFlag = args.includes('--propose-bom');
   const addClaude46 = args.includes('--add-claude-46');
   const compactContext = args.includes('--compact-context');
+  const divergentOnly = args.includes('--divergent-only');
   const flags = panelArgs(args);
   if (await handleInfoFlags(flags)) return;
   if (flags.panel || flags.models) DEFAULT_SPEC_MODELS = await resolvePanel(flags);
@@ -1115,6 +1066,12 @@ async function main() {
   const itemsToProcess = itemFilter
     ? phaseItems.filter(i => i.slug === itemFilter)
     : phaseItems;
+
+  if (divergentOnly) {
+    console.log(`Mode: rebuild divergent-views.yaml from consensus.md (${phaseFilter}, no API calls)`);
+    for (const item of itemsToProcess) await rebuildDivergentViews(item, phaseFilter);
+    return;
+  }
 
   // Determine models to process
   let modelsToProcess;

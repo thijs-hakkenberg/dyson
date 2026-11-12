@@ -1,36 +1,80 @@
+# Divergent Views for transport-vehicles
+# Auto-generated from consensus document
+
 bomId: "bom-0-4"
 itemSlug: "transport-vehicles"
-generated: "2026-02-01"
+generated: "2026-10-20"
+
 topics:
-  - id: "propulsion-type"
-    topic: "Propulsion Type"
+  - id: "power-rating-basis-and-array-size"
+    topic: "Power rating basis and array size"
     positions:
-      - statement: "Hall-effect thrusters"
-        models: ["Claude", "GPT"]
-      - statement: "Gridded ion for higher Isp despite lower thrust"
-        models: ["Gemini"]
-  - id: "payload-capacity"
-    topic: "Payload Capacity"
+      - statement: "Claude recommends 1.5 MWe BOL at 1 AU (~4,600 m², four wings). This gives ~1.1 MWe at end of life and ~0.72× that at 1.2 AU, with a 2.0 MWe growth scar."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 1.5 MWe BOL from two 750 kWe roll-out wings of only ~3,500 m². Note: Gemini's stated 28 N at 2,100 s from ~1.2–1.5 MW implies only ~20% efficiency. The same power at the ~60% efficiency the other two assume would give ~85 N. Gemini's figure looks like an internal inconsistency."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests specifying 2.0 MWe to propulsion at 1.3 AU, end of life, which requires ~4.8 MW BOL at 1 AU and ~16,000 m² of array spanning 180–240 m."
+        models:
+          - "GPT"
+  - id: "fleet-size-and-procurement"
+    topic: "Fleet size and procurement"
     positions:
-      - statement: "200,000 kg"
-        models: ["Claude"]
-      - statement: "150,000 kg for faster transits"
-        models: ["Gemini"]
-      - statement: "Variable configuration"
-        models: ["GPT"]
-  - id: "propellant-source"
-    topic: "Propellant Source"
+      - statement: "Claude recommends 12 tugs bought in gated tranches of 4, then 8 (range 6–14), with Tranche 2 sized after the first full cycle."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 15 operational vehicles in serial production from 2032."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a 14-vehicle planning case (12 in service plus 2 reserve, range 10–18), procured as 2 initial vehicles followed by lots of 3–4."
+        models:
+          - "GPT"
+  - id: "dry-mass-and-propellant-storage"
+    topic: "Dry mass and propellant storage"
     positions:
-      - statement: "Xenon initially, early transition to asteroid-derived alternatives"
-        models: ["Claude"]
-      - statement: "Xenon initially, later transition to asteroid-derived alternatives"
-        models: ["Gemini", "GPT"]
-  - id: "docking-approach"
-    topic: "Docking Approach"
+      - statement: "Claude recommends 45 t dry (38–60) with 100 t iodine in ten swappable 10 t cassettes."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 38 t dry with 75 t iodine in fixed conformal tanks sublimated by PPU waste heat."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 70 t dry (55–85) with a deliberately oversized 200 t storage envelope (60–70 m³), normally only partly filled."
+        models:
+          - "GPT"
+  - id: "unit-and-fleet-cost-including-arrays"
+    topic: "Unit and fleet cost, including arrays"
     positions:
-      - statement: "Autonomous docking"
-        models: ["Claude"]
-      - statement: "Robotic berthing backup"
-        models: ["GPT"]
-      - statement: "Dedicated cargo handling spacecraft"
-        models: ["Gemini"]
+      - statement: "Claude recommends $280M per unit ($175–450M) and $3.8B for the item ($2.4–5.9B), with $40–90M of 0A design to PDR. Arrays are priced at $40–100/W. On the round-2 $150–350M per tug: Claude raises its top end to $450M; GPT rejects the range outright; Gemini's $220M sits within it."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers $220M per unit, a $3.3B fleet, $1.2B NRE and ~$120M per vehicle for launch."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests $0.43–1.2B per unit (working band $0.65–0.85B), a ~$10.5B fleet at 14 × $0.75B, and $1.6–4.0B of tug-related 0A work booked in bom-0-11 and bom-0-12."
+        models:
+          - "GPT"
+  - id: "waste-heat-rejection-and-t03-classification"
+    topic: "Waste-heat rejection and T03 classification"
+    positions:
+      - statement: "Claude recommends ~60 kWt (100 kWt design) on a ~160 m² single-phase pumped loop. It argues most thruster loss leaves through the plume or by direct head radiation, so T03 for the tug should be reclassified to architecture-change, AD² 4."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers rejecting ~400 kW through NaK-type liquid-metal loops."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a 0.45 MW-class active system with 600–1,000 m² of radiators and insists every part of the ~0.8 MW of non-jet power be accounted for."
+        models:
+          - "GPT"
+  - id: "bus-voltage-and-dockside-power"
+    topic: "Bus voltage and dockside power"
+    positions:
+      - statement: "Claude recommends a 300 V-class bus, with direct drive at ~600 V only after arcing tests, zero dockside power, and an optional 200 kW export port."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 1–3 kV array output fed directly to the PPUs, with 0.1 MW peak dockside power."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 1–3 kV as the starting trade and a 100–250 kWe dockside service interface."
+        models:
+          - "GPT"

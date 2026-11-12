@@ -22,6 +22,8 @@ createdDate: "2026-01-31"
 
 ## Background
 
+> **Update, 20 October 2026.** The Phase 0 re-assessment removed production LOX/LH₂ and the central station from Phase 0, and made Phase 0 uncrewed. Water is a pilot only if the target is C-type (D-05, proposed). The background below describes the March 2026 design.
+
 The Material Processing Station is a cornerstone infrastructure element for Project Dyson's Phase 0, designed to convert raw asteroid material into refined metals and potentially solar-grade silicon. The consensus document specifies a facility with 50,000 tonnes/year throughput at full capacity, solar-powered with 1-2.5 MW capacity, and located at Sun-Earth L4/L5. Among the open questions identified across all three AI models is whether propellant production should be included in the Phase 0 scope of this station.
 
 This question emerges from a fundamental architectural decision: should the Material Processing Station be a single-purpose refinery focused on structural materials, or should it serve as a multi-function In-Situ Resource Utilization (ISRU) hub that also produces propellant for spacecraft operations? The consensus document explicitly lists this as an unresolved scope question, and the answer has significant implications for station mass, power requirements, and operational complexity.
@@ -51,7 +53,7 @@ The $10B baseline budget noted in the consensus document assumes successful tech
 
 **Thermal management:** Cryogenic propellant storage at L4/L5 requires active cooling systems to prevent boiloff. Solar thermal loads at 1 AU are significant, complicating long-term storage.
 
-**Crew presence trade-off:** The consensus recommends human-tended operations with quarterly visits. Propellant production adds operational complexity that may favor more frequent crew presence, conflicting with Gemini's fully autonomous preference.
+**Crew presence trade-off:** The consensus recommends human-tended operations with quarterly visits. Propellant production adds operational complexity that may favor more frequent crew presence, conflicting with Gemini's fully autonomous preference. <!-- stale-ok -->
 
 **Smelting synergies:** The hybrid solar/electric smelting approach recommended in the consensus could share thermal management infrastructure with propellant liquefaction systems, offering potential mass savings through integration.
 

@@ -42,6 +42,13 @@ describe('risk heuristic', () => {
 		expect(r.technology).toBeCloseTo(SEVERITY['project-ending'] * (4 / 7), 6);
 	});
 
+	it('AD² raises the technology term for an equally immature but harder technology', () => {
+		const easy = riskFor(bom(), [trl({ ad2: { min: 2, max: 2 } })]);
+		const hard = riskFor(bom(), [trl({ ad2: { min: 8, max: 8 } })]);
+		expect(hard.technology!).toBeGreaterThan(easy.technology!);
+		expect(hard.technology).toBeCloseTo(0.7 * (4 / 7) + 0.3 * (7 / 8), 6);
+	});
+
 	it('high confidence and tight ranges score lower than low confidence and wide ranges', () => {
 		const tight = riskFor(bom({ costConfidence: 'high', costMin: 90, costMax: 110 }), []);
 		const wide = riskFor(bom({ costConfidence: 'low', costMin: 10, costMax: 1000 }), []);

@@ -1,0 +1,88 @@
+# Divergent Views for contingency-reserve
+# Auto-generated from consensus document
+
+bomId: "bom-0-17"
+itemSlug: "contingency-reserve"
+generated: "2026-10-21"
+
+topics:
+  - id: "0b-reserve-at-the-kdp-0b-gate"
+    topic: "0B reserve at the KDP-0B gate"
+    positions:
+      - statement: "Claude recommends a pre-stated drop to 35% project contingency (range 30–40, the P80 level) plus 14% owner reserve, to reach P90 once the estimate reaches AACE Class 3."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers holding 40–50% at the KDP-0B gate, drawn down only as operational milestones are met."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests recalculating from evidence and explicitly refusing to \"promise a lower percentage in advance.\""
+        models:
+          - "GPT"
+  - id: "reserve-layering"
+    topic: "Reserve layering"
+    positions:
+      - statement: "Claude recommends three layers: project contingency, owner reserve, and a non-monetary descope ladder worth about 10% (0A) and 25–35% (0B) of base."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a three-tier money split: 0A is 15% subsystem plus 20% project manager; 0B is 10% subsystem, 25% project manager and 10% Board."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests exactly two monetary layers in 0A: 25–30% project contingency plus 10% programme reserve. GPT allows \"no third automatic owner contingency\" stacked above these."
+        models:
+          - "GPT"
+  - id: "confidence-level-basis"
+    topic: "Confidence-level basis"
+    positions:
+      - statement: "Claude maps percentages to P70/P80/P90 using a lognormal cost-ratio model. 0A uses σ(ln) = 0.25. 0B now uses σ(ln) = 0.35. 0B at gate uses σ(ln) = 0.20. The bottom-up element rates are cross-checked against this."
+        models:
+          - "Claude"
+      - statement: "Gemini cites NASA NPR 7120.5F norms without stating a confidence level."
+        models:
+          - "Gemini"
+      - statement: "GPT targets a joint cost-and-schedule P80 (from at least 10,000 runs) but forbids labelling any percentage-derived budget \"P80\" before that analysis exists."
+        models:
+          - "GPT"
+  - id: "dollar-sizing"
+    topic: "Dollar sizing"
+    positions:
+      - statement: "Claude carries working bases of $6.0B for 0A (range 3.5–9.0) and $19B for 0B (range 10–40). This gives reserve of $3.0B for 0A (1.5–5.6) and $12.9B for 0B (5.5–34)."
+        models:
+          - "Claude"
+      - statement: "Gemini assumes bases of $2.5–4.0B (0A) and $12–18B (0B), for a total reserve of $6.3–9.5B."
+        models:
+          - "Gemini"
+      - statement: "GPT gives only normalized rates per $1B, plus an illustrative $2B/$20B case totalling $8.7–10.8B."
+        models:
+          - "GPT"
+      - statement: "Claude and GPT both say the round-2 \"$5–27B\" figure is not adoptable because it mixes phases and layers."
+        models:
+          - "Claude"
+          - "GPT"
+  - id: "fundamental-technology-failure"
+    topic: "Fundamental technology failure"
+    positions:
+      - statement: "Claude recommends treating outright failure of microgravity Fe-Ni metallurgy as a gate decision that triggers the Earth-supplied fallback, not a reserve draw."
+        models:
+          - "Claude"
+      - statement: "GPT agrees and adds reporting of gate probability, spend-to-gate and bounded shutdown cost."
+        models:
+          - "GPT"
+      - statement: "Gemini lists the fallback pivot as something that \"will consume massive schedule and financial reserve.\""
+        models:
+          - "Gemini"
+  - id: "schedule-reserve-and-margins"
+    topic: "Schedule reserve and margins"
+    positions:
+      - statement: "Claude: 1 month per year before I&T and 2 months per year during I&T; a backup NEA with a window within 24 months; one funded 12-month 0B slip (about $0.7B); power EOL margin of 25/20/15/10% across SRR/PDR/CDR/launch; Δv +10%."
+        models:
+          - "Claude"
+      - statement: "Gemini: 2 months per year in 0A and 3 months per year in 0B, plus a 12-month window reserve; 30% power margin; Δv +15%."
+        models:
+          - "Gemini"
+      - statement: "GPT: stress-tests 6–12 months (0A) and 12–24 months (0B) only, with no fixed allowance."
+        models:
+          - "GPT"
+      - statement: "Claude and Gemini agree on dry-mass growth allowances of 30% at SRR/PDR, 20% at PDR/CDR, and 10% at delivery."
+        models:
+          - "Claude"
+          - "Gemini"

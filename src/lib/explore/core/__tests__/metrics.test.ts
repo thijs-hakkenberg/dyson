@@ -48,11 +48,15 @@ describe('metrics', () => {
 		}
 	});
 
-	it('Phase 0 complete delivers its 100 MW array', () => {
+	it('Phase 0 complete delivers its site array plus the self-powered vehicles', () => {
 		const p0 = TIMELINE.find((w) => w.id === 'phase-0')!;
 		const p1 = TIMELINE.find((w) => w.id === 'phase-1')!;
 		const t = telemetryAt((p0.end + p1.start) / 2);
-		expect(t.genW.base).toBeCloseTo(100e6, -3);
+		const phase0 = PHASES.find((p) => p.id === 'phase-0')!.bom;
+		const expected = phase0.reduce((s, b) => s + (ITEM_METRICS.find((m) => m.bomId === b.id)?.genW?.base ?? 0) * b.quantity, 0);
+		expect(t.genW.base).toBeCloseTo(expected, -3);
+		// the site array alone: ~4 MW BOL (consensus interim value)
+		expect(phase0.find((b) => b.id === 'bom-0-5')!.quantity).toBe(4);
 	});
 
 	it('build rate is positive mid-phase and zero once complete', () => {

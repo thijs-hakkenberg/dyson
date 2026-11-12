@@ -75,10 +75,13 @@ recommendation (~0.5–5 MW tiles) sits between; unit cost is $100M in the BOM.
 Divergence is legitimate, but the BOM unit cost implicitly picks a size.
 *Explorer:* base = geometric mid of the recommended 0.5–5 MW.
 
-### CI-16 · Prospecting fleet size — `bom-0-1` · open
-`phase-0/prospecting-satellites/consensus.md`: "Fleet size of 50 satellites is
+### CI-16 · Prospecting fleet size — `bom-0-1` · resolved (2026-10-21)
+`phase-0/prospecting-satellites/consensus.md` (March): "Fleet size of 50 satellites is
 appropriate for comprehensive NEA survey". content.ts / BOM: quantity 32.
-*Explorer:* uses the BOM quantity (32), including in the "From asteroid to swarm" tour.
+*Resolution:* the regenerated consensus (2026-10-20) replaces the survey fleet with
+SEP rendezvous scouts: a 6-scout reference in a 4–8 authorisation (Gemini's 12 × 250 kg
+impactors kept as a divergent view). The BOM now reads 6 from
+`reconciliation/phase-0/bom-numbers.yaml`; the explorer places 6.
 
 ## Sign / meaning disagreements
 
@@ -97,8 +100,7 @@ No structured divergent views for: `phase-3a/computational-substrate-tiles`,
 `phase-3b/solar-wind-collectors`. (The inspector fetch 404s for these.)
 
 ### CI-13 · Items without power/throughput figures · open
-No consensus power or rate figure for: transport vehicles (`bom-0-4`),
-swarm control (`bom-1-7`), maintenance drones (`bom-2-2`), optical backbone
+No consensus power or rate figure for: swarm control (`bom-1-7`), maintenance drones (`bom-2-2`), optical backbone
 (`bom-3a-2`), shell construction swarm (`bom-3a-8`), jet engine power,
 mass lifting (`bom-3b-4`), EM accelerators (`bom-3b-6`). Mass drivers give
 pulse power (120 MW–2.8 GW) but no average.
@@ -110,46 +112,57 @@ Shkadov cap. *Explorer:* thrust axis = ecliptic north, labelled illustrative.
 ### CI-15 · Phase 0 start date · open
 `content.ts` gives durations but no absolute start. *Explorer:* assumes 2030
 (`ASSUMED_PHASE0_START`).
+*2026-10-21:* the regenerated consensus dates its milestones as if 0A starts about
+2026–27: LEO furnace free-flyer ~2028–29 (bom-0-12), Route Selection Review ~2029/30
+(bom-0-3), tug wear test started by 2030 (bom-0-4), KDP-0B slipping to ~2037–38 if
+first-pair sampling fails (bom-0-1). Still no stated start; the explorer keeps 2030.
 
-### CI-17 · Transport vehicle fleet size — `bom-0-4` · open
-`phase-0/transport-vehicles/consensus.md`: "Fleet of 10 vehicles for initial
+### CI-17 · Transport vehicle fleet size — `bom-0-4` · resolved (2026-10-21)
+`phase-0/transport-vehicles/consensus.md` (March): "Fleet of 10 vehicles for initial
 operations". content.ts / BOM: quantity 15 ($133M each).
-*Explorer:* uses the BOM quantity.
+*Resolution:* the regenerated consensus gives 10–18 MW-class tugs (Claude 12, Gemini 15,
+GPT 14), 2–4 bought at KDP-0B, at $0.3–0.8B each including arrays. The BOM carries 14
+(the range midpoint and GPT's planning case) with the 10–18 range shown.
 
 ## Planning data inconsistencies
 
-### CI-18 · Decision gates scheduled before their technologies are ready · open
-Combining `decision-gates.ts` (decision month from Phase 0 start, assumed 2030)
-with `trl-assessment.ts` (`yearsToTarget` from today, Oct 2026), 6 gate→technology
-dependencies reach target TRL after the gate decides:
+### CI-18 · Decision gates scheduled before their technologies are ready · resolved (2026-10-20)
+`decision-gates.ts` (decision month from Phase 0 start, assumed 2030) combined with
+`trl-assessment.ts` (`yearsToTarget` from today) put 6 gate→technology dependencies
+after the gate decided (gate-1, gate-3, gate-4, gate-5 against the March 2026 rows).
 
-| Gate (decision) | Technology | TRL | Target reached ~ |
-|---|---|---|---|
-| gate-4 Asteroid Target Selection (M24 ≈ 2032.0) | autonomous-asteroid-prospecting | 5→8, 6 y | 2032.8 |
-| gate-1 Microgravity Materials Processing (M36 ≈ 2033.0) | microgravity-metallurgy | 3→7, 8 y | 2034.8 |
-| gate-1 (M36) | in-space-silicon-purification | 2→6, 10 y | 2036.8 |
-| gate-3 ISRU Water Extraction Rate (M48 ≈ 2034.0) | isru-water-extraction | 3→7, 8 y | 2034.8 |
-| gate-5 Phase 0 PDR (M60 ≈ 2035.0) | asteroid-mining-bucket-wheel | 3→6, 10 y | 2036.8 |
-| gate-5 (M60) | in-space-silicon-purification | 2→6, 10 y | 2036.8 |
+**Outcome.** D-02 and the WP-A re-baseline replaced the five March gates with decision
+*windows* (KDP-0A M0–3 … KDP-0B M72–180), and each criterion now states the TRL it
+requires (KDP-0A requires none; internal 0A milestones TRL 4–5; KDP-0B TRL 6). The
+Gate Tunnel times each link against that required TRL, not the target. On the panel's
+optimistic estimates no dependency is late. On the pessimistic estimates 17 technologies
+can slip into the KDP-0B window, T11/T18 into both scout gates, and 12 into the 0A
+mid-term review: shown amber ("at risk"). The old six are history (`decision-gates-legacy.ts`).
+*Explorer:* red = misses the window even optimistically; amber = pessimistic estimate
+lands inside it; grey = the gate names the technology without a TRL requirement.
 
-Possible readings: gates decide on partial evidence (target TRL not required
-at the gate), the Phase 0 start is later than 2030, or the gate months/TRL
-timelines need reconciling. Sensitive to `ASSUMED_PHASE0_START` (CI-15).
-*Explorer:* Gate Tunnel draws these links in red and counts them per gate.
+### CI-19 · TRL assessments cover only 6 of 33 BOM items · partly resolved (2026-10-20)
+`trl-assessment.ts` linked technologies to bom-0-2, 0-3, 0-4, 0-5, 0-6 and a few
+others; 27 items had no technology readiness or risk-if-fail rating.
 
-### CI-19 · TRL assessments cover only 6 of 33 BOM items · open
-`trl-assessment.ts` links technologies to bom-0-2, 0-3, 0-4, 0-5, 0-6 and a few
-others; 27 items (all of Phases 1–3b except where linked) have no technology
-readiness or risk-if-fail rating. *Explorer:* Risk lens marks them
-"unassessed" (grey halo, technology term unknown, not zero).
+**Outcome.** The Phase 0 TRL re-baseline rates 26 critical technologies, and every
+Phase 0 BOM item (bom-0-1 … bom-0-7) now has at least one. Phases 1–3b are still
+unassessed; their re-baselines follow the phase-by-phase reconciliation.
+*Explorer:* Risk lens marks them "unassessed" (grey halo, technology term unknown,
+not zero).
 
-### CI-20 · Phase 0 mining capacity is ~12× the station's processing capacity · open
+### CI-20 · Phase 0 mining capacity is ~12× the station's processing capacity · resolved (2026-10-21)
 `phase-0/mining-robots`: 20 robots × 2–5 t/h continuous excavation ≈ 350–880 kt/yr.
 `phase-0/material-processing-station`: 50,000 t/yr at full capacity. Either the
 mining fleet is oversized, the robots run at a low duty cycle (not stated), or
 concentration on board removes ~90% of mass before transport (consensus mentions
 "on-board material processing for initial concentration" but gives no ratio).
 *Explorer:* Logistics lens shows the station as the ore chain's bottleneck.
+*Resolution:* the regenerated consensus sizes the fleet by formula, N_active =
+⌈M_exc / measured per-robot output⌉: about 6 active robots at 2.2–4 kt/yr of regolith
+(13–24 kt/yr) feed a 3-train plant making 1.0–1.3 kt/yr of Fe-Ni, a ratio set by the
+8–18 wt% feed grade. The logistics lens now runs robots → plant → tugs → SEL1 node;
+plant or tugs (~1 kt/yr as a fleet) limit it.
 
 ### CI-21 · Phase 2 collector areal density spans ~3,800× for similar areas · open
 `phase-2/collector-satellites`: Claude 1 km² at **850 t** (850 g/m²), Gemini
@@ -198,3 +211,60 @@ star", homepage) implies quantities some ten orders of magnitude beyond the BOM.
 (Phases 2–3a) is the stated route to scale, but no phase lists the target count,
 the doubling time to reach it, or where the power for growth comes from (see CI-24).
 *Explorer:* telemetry shows generation as a fraction of L☉ (saturation).
+
+## Phase 0 BOM after regeneration (2026-10-21)
+
+Found while turning the 17 regenerated consensus documents into
+`reconciliation/phase-0/bom-numbers.yaml`. Each item's figures are carried as its own
+consensus states them; nothing below is netted out.
+
+### CI-26 · Robot replacements counted in two items — `bom-0-2`, `bom-0-14` · open
+`phase-0/mining-robots`: the 0B planning reference is "6 active + 2 reserve, plus 2–4
+reliability-derived replacements (10–12 total), costing about $280–825M recurring".
+`phase-0/spares-replacements`: "Include robot attrition and whole-robot replacements in
+bom-0-14. bom-0-2 then means the initial fleet only." Read together, 2–4 robots
+($56–260M at $28–65M each) are in both lines. *BOM:* both carried as stated.
+
+### CI-27 · 0A length assumed by operations is shorter than the KDP-0B window — `bom-0-10` · open
+`phase-0/mission-operations` prices 0A at $35–55M/yr over about 4–5.5 years
+($190–300M). D-02 puts KDP-0B between month 72 and month 180, so 0A lasts 6–15 years;
+at the same rate that is $210–825M. The other 0A lines that run per year (bom-0-7,
+bom-0-9) do not state the duration they assume. *BOM:* carries the consensus 0A figure.
+
+### CI-28 · Launch mass floor is below the propellant it must carry — `bom-0-8`, `bom-0-16` · open
+`phase-0/launch-delivery` plans 1.3–6 kt delivered and rejects a 2.5 kt floor, the low
+end being a 0.6 kt/yr × 4 yr low-demand case. `phase-0/ep-propellant-supply` asks bom-0-8
+to carry 250–440 t/yr of propellant launch load, which over a 5–6.5 year 0B run is
+1.25–2.9 kt of propellant alone, before hardware (plant 250–400 t, 10–18 tugs of 38–70 t
+dry). The 1.3 kt floor holds only if propellant scales down with demand, which neither
+document states. *BOM:* both envelopes as stated.
+*2026-10-25 (rq-0-61 chain model):* launched mass is 5.3 kt at P50 with the consensus
+budgets as written and 6.4 kt with catalogue trajectories; no draw falls below 1.3 kt.
+
+### CI-29 · 0A cost is above the D-01 assumption — `phase-0` · open
+`reconciliation/phase-0/decisions.md` assumption A4: "0A ($3.5–16B) is fundable".
+The regenerated 0A sums to $6.3–12.3B before contingency and $8.8–18.4B with the
+bom-0-17 rates (40–50%). The low end is about 2.5× the assumed one, and with contingency
+the top passes $16B. NRE and qualification (bom-0-11, $3.9–6.6B) is over half the 0A base.
+A4's falsifier is "no funding path". This log does not change the decision record; the
+owner re-checks A4.
+*2026-10-25 (rq-0-84):* with historical cost growth on development lines, P(0A ≤ $16B) is
+0.63–0.81, and the 45% 0A rate buys about 57% confidence.
+
+### CI-30 · Δv budgets do not close against the asteroid catalogue — `bom-0-1`, `bom-0-4` · open
+`phase-0/prospecting-satellites`: ≤3.5 km/s EP to the primary target from launch at C3 ≈ 0.
+`phase-0/transport-vehicles`: storage sized for "a 5 km/s-per-leg envelope" and a KDP-0B
+criterion of a ≤3.0-year named-target cycle. The rq-0-52 screen of the JPL SBDB catalogue
+(direct transfers, 2030–2040) finds **no** asteroid of ~100 m or more that meets all three.
+From C3 ≈ 0, scouts reach 2 large targets within 4.5 km/s; at 5 km/s per leg the shortest
+tug cycle is 4.7 years. It closes for 15 targets with scouts launched to C3 = 10 and tug legs
+of 6.5 km/s within 4 years, still below Claude's falsifier of 20. Gravity assists are not yet
+modelled and would add candidates.
+
+### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
+`phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
+(≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the
+catalogue supports are 5.6–6.5 km/s. The rq-0-61 chain model then gives 520–860 t/yr (P10–P90)
+and an import ratio of 0.66 at P50, failing the ≤0.50 limit in 97% of draws. Isp of
+3,000–3,500 s, the bom-0-16 trade range, brings it to about 0.48.
+

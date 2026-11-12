@@ -5,12 +5,15 @@
  * consistent if phase durations change.
  */
 
+import { PHASE_0_TOTALS, moneyRange } from '$lib/services/phase-0-bom';
 import type { Tour } from './tour.svelte';
 import { phaseWindow } from './timeline';
 import { TODAY_YEAR } from './state.svelte';
 import { PHASES } from '$lib/services/content';
 import { formatUSD } from './units';
 import { hardwareDistance, nearFieldModel } from './nearfield';
+import { QUESTION_DEPENDENCIES } from '$lib/services/critical-path';
+import { DECISION_GATES, GATE_RULINGS } from '$lib/services/decision-gates';
 
 /** Camera distance that frames an item's true-scale model in the orrery. */
 const hw = (id: string) => hardwareDistance(nearFieldModel(id)!);
@@ -293,7 +296,7 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Prospecting',
-				body: '**32 prospecting satellites** each survey 20+ asteroids a year to find the best targets.',
+				body: 'First Phase 0 has to find a target. The re-assessment replaced the small-prospector fleet with a **remote survey plus electric-propulsion rendezvous scouts** that sample candidates: 4–10 across the models.',
 				duration: 8,
 				year: { to: at('phase-0', 0.3), over: 3 },
 				focus: 'bom-0-1',
@@ -301,15 +304,15 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Mining',
-				body: '**20 mining robots** work the richest asteroids, each excavating **2–5 tonnes per hour**.',
+				body: 'Tether-powered **mining robots** work the target, each excavating **2–5 tonnes per hour**. How many is open: Claude 8 plus 4 replacements, Gemini 20, GPT 6 plus 6.',
 				duration: 8,
 				year: { to: at('phase-0', 0.6), over: 3 },
 				focus: 'bom-0-2',
 				select: 'bom-0-2'
 			},
 			{
-				title: 'Processing at L4',
-				body: 'Ore is refined at a **processing station at Sun–Earth L4**, up to 50,000 tonnes a year. The models agree on L4 or L5 — the dashed marker is the L5 option.',
+				title: 'Processing at the asteroid',
+				body: 'Ore is no longer shipped to a central station. All three models put the **plant at the target asteroid** and ship product: **0.6–2.5 kt a year of iron-nickel**. The dashed marker is Claude’s alternative, a central station near SEL1 fed with concentrate.',
 				duration: 9,
 				year: { to: at('phase-0', 0.8), over: 3 },
 				focus: 'bom-0-3',
@@ -318,7 +321,7 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'The assembly node',
-				body: 'Refined metal feeds the **assembly node**, where Phase 1 collectors are built.',
+				body: 'MW-class tugs carry the metal to the **delivery node at SEL1** (interim, D-04), where the Phase 1 assembly node builds collectors.',
 				duration: 8,
 				year: { to: at('phase-1', 0.3), over: 4 },
 				focus: 'bom-1-4',
@@ -610,7 +613,7 @@ export const TOURS: Tour[] = [
 		steps: [
 			{
 				title: 'Phase 0 · Space resource processing',
-				body: `${F0.items} items, **${F0.cost}**, ~${F0.years} years (start year assumed). Before any collector flies, the project needs an industry in space.`,
+				body: `${F0.items} items: **0A ${moneyRange(PHASE_0_TOTALS.a)}** committed, **${moneyRange(PHASE_0_TOTALS.all)}** if production (0B) is exercised; ~${F0.years} years (start year assumed). Before any collector flies, the project needs an industry in space — or proof that it cannot have one.`,
 				duration: 9,
 				lens: 'physical',
 				workbench: null,
@@ -622,7 +625,7 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Prospecting satellites',
-				body: '80–120 kg spacecraft with **visible/near-IR spectrometers (0.4–2.5 μm)** and 30 days of autonomy. The BOM funds 32; the consensus text says 50 (logged as CI-16).',
+				body: '**6 rendezvous scouts** of about 500 kg (4–8 authorised), each sampling one asteroid below the surface and assaying how much metal can actually be recovered. Remote spectra alone cannot pass the target gate.',
 				duration: 10,
 				year: { to: at('phase-0', 0.25), over: 3 },
 				focus: 'bom-0-1',
@@ -630,7 +633,7 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Mining robots',
-				body: '**20 robots** of 2.5–3.5 t on multiple legs, anchored to low-gravity rock, concentrating ore on board. How to anchor is a **critical** open fork.',
+				body: '**Tether-powered robots** of 2.65–3.4 t: two pathfinders in 0A, then about 6 active plus reserves and replacements in 0B. Anchoring in rubble (≥200 N sustained) is the first risk to retire; the mobility concept is still a fork.',
 				duration: 10,
 				year: { to: at('phase-0', 0.5), over: 3 },
 				focus: 'bom-0-2',
@@ -638,13 +641,13 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Transport vehicles',
-				body: 'Ion-propelled freighters with **150–250 t** payloads and 6–10 km/s of Δv carry ore inward. Fleet size differs again: 10 in the consensus, 15 in the BOM (CI-17).',
+				body: '**MW-class cargo tugs**, about 1.2–2.0 MWe to the thrusters, 10–18 in all (Claude 12, Gemini 15, GPT 14), bought 2–4 at a time. No propellant is selected yet; iodine is the costed reference, argon the alternate (D-05, interim).',
 				duration: 10,
 				select: 'bom-0-4'
 			},
 			{
-				title: 'Material processing station',
-				body: 'One modular station at **Sun–Earth L4**, 400–500 t growing to ~1,000 t, refining **50,000 t a year** on 1–2.5 MW of solar power.',
+				title: 'The processing plant',
+				body: 'Beneficiation and primary processing at the target asteroid, **iron-nickel only**: 1.0–1.3 kt/yr from three trains, 250–400 t delivered, 0.6–2.5 MWe. Carbonyl or melt is chosen in 0A.',
 				duration: 10,
 				year: { to: at('phase-0', 0.8), over: 3 },
 				focus: 'bom-0-3',
@@ -652,15 +655,15 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Power and propellant',
-				body: '**100 MW** of triple-junction arrays (32–36% efficient) power the base, and **ISPP** modules of ~250 kWe each turn water ice into 100–120 t of propellant a year.',
+				body: 'Site power is **2–8 MW** at the asteroid (about 4 MW for 1.3 kt/yr), built from 200–500 kW modules; tug arrays count with the tugs. There is no propellant production: iodine is imported, and **water is a 10–30 t/yr pilot**, only if the target is C-type (D-05, interim).',
 				duration: 10,
 				focus: 'earth',
 				select: 'bom-0-6',
 				camera: { distance: 0.03, polar: 65 }
 			},
 			{
-				title: 'The station, up close',
-				body: 'The **processing station**: 180 × 120 × 80 m, a solar-thermal concentrator for smelting, 8,000 m² of PV and 4,000 m² of radiators. Initial mass 400–500 t, growing to about 1,000 t.',
+				title: 'The plant, up close',
+				body: 'The plant at the asteroid is **three process trains** of about 0.6 kt/yr each, with 1,000–2,000 m² of radiators and 0.6–2.5 MWe. Its design driver is the waste: 10–20 kt/yr of tailings, handled enclosed.',
 				duration: 12,
 				workbench: 'bom-0-3',
 				wbView: 'model',
@@ -668,15 +671,15 @@ export const TOURS: Tour[] = [
 			},
 			{
 				title: 'Where the processing happens',
-				body: 'Inside the station, the models split on smelting technology, silicon processing and whether to send a crew at all.',
+				body: 'The models still split on the **metallurgy route**: Claude baselines no-melt carbonyl refining, Gemini and GPT rotating melt cartridges. Both routes go to TRL 4–5 in 0A and one is chosen at a Route Selection Review. Silicon is deferred, and Phase 0 is uncrewed.',
 				duration: 10,
 				workbench: 'bom-0-3',
 				wbView: 'consensus',
-				wbSelection: 'smelting-technology'
+				wbSelection: 'primary-process-route'
 			},
 			{
 				title: 'The open questions',
-				body: 'Phase 0 has **49 research questions** and five decision gates — the most mature graph in the project. The red artery is its critical path.',
+				body: `Phase 0 has **${QUESTION_DEPENDENCIES.length} research questions** and ${DECISION_GATES.length} decision gates under D-02, ${GATE_RULINGS.length} gate rulings confirmed and the rest waiting on evidence — the most mature graph in the project. The red artery is its critical path.`,
 				duration: 11,
 				workbench: null,
 				lens: 'knowledge',

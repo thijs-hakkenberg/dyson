@@ -18,6 +18,8 @@ relatedPhases:
   - "phase-0"
 ---
 
+> **Update, 20 October 2026.** Phase 0 no longer plans a central station processing 50,000 tonnes a year. The re-assessment co-locates processing at the target asteroid, narrows the product to Fe-Ni at roughly 1 kt/yr, and judges each metallurgy route separately. See the [feasibility report](/analysis/feasibility).
+
 # Four Critical Unknowns: What ArXiv Research Tells Us About Asteroid Mining and Processing
 
 Phase 0 of Project Dyson has 46 research questions. Four of them are classified as critical priority and share a common thread: they address fundamental physical processes that have never been demonstrated at the scales we need. We conducted a systematic literature review across arxiv to assess what is known, what is not, and where the real risks lie.

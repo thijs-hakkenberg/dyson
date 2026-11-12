@@ -1,36 +1,80 @@
+# Divergent Views for solar-power-arrays
+# Auto-generated from consensus document
+
 bomId: "bom-0-5"
 itemSlug: "solar-power-arrays"
-generated: "2026-02-01"
+generated: "2026-10-20"
+
 topics:
-  - id: "concentrator-vs-flat-plate"
-    topic: "Concentrator vs. Flat-Plate"
+  - id: "site-nameplate-and-delivered-mass"
+    topic: "Site nameplate and delivered mass"
     positions:
-      - statement: "Flat-plate for simplicity"
-        models: ["Claude", "GPT"]
-      - statement: "Concentrators could reduce cell costs"
-        models: ["Gemini"]
-  - id: "energy-storage"
-    topic: "Energy Storage"
+      - statement: "Claude recommends 2.0 MW / about 45 t (Class P), or 3.8 MW / about 79 t (Class E), built from 200 kW Site Power Units with N+1 redundancy."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 5.0 MW with about 45 t of array plus 15.6 t of battery."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 8 MW from 16 × 500 kW modules at 110–185 t."
+        models:
+          - "GPT"
+  - id: "bus-voltage-and-topology"
+    topic: "Bus voltage and topology"
     positions:
-      - statement: "500 MWh Li-ion"
-        models: ["Claude"]
-      - statement: "200 MWh is sufficient"
-        models: ["Gemini"]
-      - statement: "Flow batteries for longer life"
-        models: ["GPT"]
-  - id: "module-size"
-    topic: "Module Size"
+      - statement: "Claude recommends bipolar ±1 kV (2 kV pole-to-pole), qualified to ±1.5 kV, with array strings ≤300 V and encapsulated. The rationale is that it allows 3.3 kV SiC parts at ≤50% stress for single-event-burnout margin."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a 3.0 kV DC bus exported directly to plant and robots, mitigated by conformal coating and plasma contactors if needed."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 3 kV DC as a ±1.5 kV bipolar reference, with two sectionalised buses and a protected tie."
+        models:
+          - "GPT"
+  - id: "storage-sizing-basis-and-price"
+    topic: "Storage sizing basis and price"
     positions:
-      - statement: "2 MW modules"
-        models: ["Claude"]
-      - statement: "1 MW for easier handling"
-        models: ["Gemini"]
-      - statement: "5 MW for efficiency"
-        models: ["GPT"]
-  - id: "cell-technology"
-    topic: "Cell Technology"
+      - statement: "Claude recommends survival-only storage, conditional on every bom-0-3 unit being cold-shutdown tolerant. He uses 4 h × 130 kW (P) or 6 h of night keep-alive (E), at $40–120M/MWh."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 2.5 MWh sized for 1 h of 2.5 MW furnace keep-alive to prevent melt freezing, at about $10M/MWh. That keep-alive figure is internally inconsistent with Gemini's own \"10% of full load\" hold estimate."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests an explicit emergency budget of about 0.73 MWh (25 kW essential × 12 h plus shutdown and robot recovery). This closes on 2.0 MWh nameplate with one unit out, at $50–140M/MWh."
+        models:
+          - "GPT"
+  - id: "illumination-and-array-mounting-strategy"
+    topic: "Illumination and array mounting strategy"
     positions:
-      - statement: "Use current III-V cells"
-        models: ["Claude", "Gemini"]
-      - statement: "Wait for next-generation (40%+) options"
-        models: ["GPT"]
+      - statement: "Claude recommends a polar-mast \"Class P\" site with vertical tracking wings on 15–25 m masts, giving 0.85–0.95 illumination. He wants spin state made a formal target-gate criterion, worth about $0.35B and 34 t against Class E, and would fail tumbling targets."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers radially deployed wings around a central hub, with no spin-state treatment."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests spatially separated articulated array fields with terrain-resolved illumination modelling, rejecting targets whose geometry fails rather than proposing a polar layout."
+        models:
+          - "GPT"
+  - id: "phase-0a-pathfinder-and-cost-attribution"
+    topic: "Phase 0A pathfinder and cost attribution"
+    positions:
+      - statement: "Claude recommends $10–25M in this line. Separately, a 4–6 t, ~50 kW subscale SPU kit (1 SPU-P, mini-hub with 100 kWh, 1 PDN with tethered robot) would fly on the target NEA via bom-0-12 ($60–150M). It must anchor and operate for ≥6 months, and Claude treats this as mandatory for TRL 6."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a 100 kW pathfinder at SEL1 or a proxy NEA, with $152M (including $120M NRE) carried in this line."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a 100–250 kW demonstrator, preferably on the target body, with $160–400M attributed to bom-0-11 and bom-0-12 rather than bom-0-5."
+        models:
+          - "GPT"
+  - id: "power-system-heat-rejection"
+    topic: "Power-system heat rejection"
+    positions:
+      - statement: "Claude recommends about 120–170 m² of two-sided radiator at 320 K (60–120 kW of hub losses)."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 1.5 MWth on an ammonia loop with about 1,500 m²."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 110–220 kW of duty with about 700 m² reference area at 300–330 K."
+        models:
+          - "GPT"

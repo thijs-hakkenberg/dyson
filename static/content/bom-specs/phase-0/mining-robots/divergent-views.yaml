@@ -1,50 +1,80 @@
+# Divergent Views for mining-robots
+# Auto-generated from consensus document
+
 bomId: "bom-0-2"
 itemSlug: "mining-robots"
-generated: "2026-02-01"
+generated: "2026-10-20"
+
 topics:
-  - id: "mobility-architecture"
-    topic: "Mobility Architecture"
+  - id: "0a-pathfinder-count"
+    topic: "0A pathfinder count"
     positions:
-      - statement: "Hexapod design"
-        models: ["Claude"]
-      - statement: "Wheeled rovers for simplicity"
-        models: ["Gemini"]
-      - statement: "Hybrid wheel-leg systems"
-        models: ["GPT"]
-    priority: "high"
-    impact: "Mobility system choice directly affects robot mass, power consumption, terrain capability, and manufacturing complexity. Wrong choice could result in robots unable to traverse asteroid terrain effectively."
-    resolutionPath: "Conduct trade study with simulated asteroid terrain models. Build and test prototypes of each mobility approach in reduced-gravity environments."
-  - id: "anchoring-system"
-    topic: "Anchoring System"
+      - statement: "Claude recommends 2 flight units plus 1 ground QM (in bom-0-11). Its reason is that a peer-servicing pair is needed to retire T21, and a QM tested to failure is worth more than a third flight unit."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 3 flight pathfinders at about $50M each ($150M)."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 2 instrumented flight pathfinders at $90–160M total, preceded by ground prototypes."
+        models:
+          - "GPT"
+  - id: "electrical-power-and-heat-rejection"
+    topic: "Electrical power and heat rejection"
     positions:
-      - statement: "Microspines"
-        models: ["Claude"]
-      - statement: "Harpoon-tethers"
-        models: ["GPT"]
-      - statement: "Gecko-inspired adhesives"
-        models: ["Gemini"]
-    priority: "critical"
-    impact: "In microgravity, anchoring is essential for mining operations. Failure of anchoring system means robots cannot exert force for drilling/excavation. Safety-critical for preventing robots from drifting away."
-    resolutionPath: "Test all three approaches on asteroid simulant materials in vacuum chamber. Evaluate against multiple surface types (regolith, solid rock, mixed)."
-  - id: "processing-capability"
-    topic: "Processing Capability"
+      - statement: "Claude recommends 2.5 kW average and 8 kW peak, with tether and PMAD rated to 15 kW for growth. Radiators are about 2 × 3 m² rejecting 1–1.5 kW."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a 25 kW excavation peak and 3–5 kW for tramming."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 12–20 kW while excavating, a 30 kW continuous rating and a 40 kW peak (10 s). Radiators are about 30 m² rejecting 10–15 kW. GPT allocates 200 kW of site branch capacity for the fleet."
+        models:
+          - "GPT"
+  - id: "mobility-and-anchoring"
+    topic: "Mobility and anchoring"
     positions:
-      - statement: "Magnetic/electrostatic separation on-robot"
-        models: ["Claude", "Gemini"]
-      - statement: "Minimal processing with bulk transport"
-        models: ["GPT"]
-    priority: "medium"
-    impact: "Affects material transport logistics and processing station requirements. On-robot processing reduces transport volume but increases robot complexity and mass."
-    resolutionPath: "Model total system mass and energy for both approaches across expected asteroid compositions. Decision depends on transport vehicle capacity and processing station throughput."
-  - id: "communication"
-    topic: "Communication"
+      - statement: "Claude recommends a wheel-less sled moved as a cable-driven parallel robot inside pre-anchored 30 m cells. Anchors are boulder slings and screw-umbrella piles. The viability threshold is ≥200 N sustained and ≥1 kN transient per anchor."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a hexapod with micro-spine feet rated >500 N holding force."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests winch-assisted restrained repositioning with multiple attachment modes (bands, clamps, drilled anchors, reaction frames). Its restraint allocation is much larger: 10 kN working resultant, 15 kN·m moment and 5 kN transient."
+        models:
+          - "GPT"
+  - id: "drum-torque-tip-speed-and-reaction-cancellation"
+    topic: "Drum torque, tip speed and reaction cancellation"
     positions:
-      - statement: "Inter-robot mesh networks"
-        models: ["Gemini"]
-      - statement: "Relay orbiter"
-        models: ["Claude"]
-      - statement: "Hybrid approach"
-        models: ["GPT"]
-    priority: "low"
-    impact: "All approaches are technically viable. Choice affects latency and redundancy but not fundamental mission capability. Can be adapted after deployment."
-    resolutionPath: "Start with relay orbiter baseline (proven technology). Implement mesh networking as secondary mode for inter-robot coordination."
+      - statement: "Claude recommends ≤2 rpm and ≤0.05 m/s tip speed scheduled to v_esc. Steady torque is 3–30 N·m, with a 50–200 N·m clutch and 500 N·m stall. No cancellation fraction is credited."
+        models:
+          - "Claude"
+      - statement: "Gemini credits 90–95% reaction-torque cancellation at a ≤0.2 m/s tip speed."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 0.2 m/s tip speed with 2–8 kN·m normal and 12 kN·m jam torque per drum, also with no cancellation credit."
+        models:
+          - "GPT"
+  - id: "containment-rule"
+    topic: "Containment rule"
+    positions:
+      - statement: "Claude recommends body-relative limits: ≤0.3 v_esc for tool-imparted particle velocity and ≤0.25 v_esc for body speed. Its release allocation is ≤10 kg per robot per year, of which ≤1 kg may be at >0.5 v_esc."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a fixed mechanical tip-speed governor of ≤0.2 m/s."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a site ceiling of 100 kg/yr, with 60 kg/yr allocated to mining and a 10 kg/yr escape analysis target. It holds that tip speed is not a particle-release limit."
+        models:
+          - "GPT"
+  - id: "duty-and-0b-cost"
+    topic: "Duty and 0B cost"
+    positions:
+      - statement: "Claude recommends 2,000 cutting h/yr in 0B (400–1,000 h in 0A), giving about 4 kt/yr per robot. Its 0B cost is $345–730M for 8 + 3 robots."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers about 1,800 h/yr and 3 kt/yr per robot. Its 0B cost is $250–300M."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 1,100 h/yr (12.6% of calendar time). Its 0B cost is $370–825M for 10–12 robots."
+        models:
+          - "GPT"

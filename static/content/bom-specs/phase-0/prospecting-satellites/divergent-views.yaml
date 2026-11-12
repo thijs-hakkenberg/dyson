@@ -1,27 +1,80 @@
+# Divergent Views for prospecting-satellites
+# Auto-generated from consensus document
+
 bomId: "bom-0-1"
 itemSlug: "prospecting-satellites"
-generated: "2026-02-01"
+generated: "2026-10-20"
+
 topics:
-  - id: "propulsion-system"
-    topic: "Propulsion System"
+  - id: "fleet-size-and-spacecraft-class"
+    topic: "Fleet size and spacecraft class"
     positions:
-      - statement: "Green monopropellant for simplicity"
-        models: ["Claude"]
-      - statement: "Electric propulsion for higher delta-V"
-        models: ["Gemini"]
-      - statement: "Hybrid approach"
-        models: ["GPT"]
-  - id: "thermal-infrared-capability"
-    topic: "Thermal Infrared Capability"
+      - statement: "Claude recommends 6 scouts (range 4–8), each about 550 kg wet (460–600 kg), carrying two Surface Assay Packages. Claude sizes for P(≥2 commit-grade targets) ≥ 0.85."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 12 scouts of 250 kg wet (205 kg dry), on a 1.5 kW, 600 W single-thruster bus. Gemini assumes a 25 % hit rate yielding 3 sites."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 6 scouts as a planning reference (envelope 4–10), each about 500 kg wet (400–600 kg) on a 4 kW array. GPT's illustrative model shows six scouts give only about 58 % probability of ≥2 qualifying targets, so six cannot be claimed sufficient if a backup is mandatory."
+        models:
+          - "GPT"
+  - id: "subsurface-sampling-method-scope-compliance"
+    topic: "Subsurface sampling method (scope compliance)"
     positions:
-      - statement: "TIR mapping (3-14 um) included"
-        models: ["Claude", "GPT"]
-      - statement: "TIR optional due to cooling complexity"
-        models: ["Gemini"]
-  - id: "inter-satellite-communication"
-    topic: "Inter-satellite Communication"
+      - statement: "Claude recommends expendable anchored landers. Two SAPs per scout, each about 42 kg, use screw anchors and a rotary-percussive drill to 1.0 m, followed by an in-situ \"beneficiation in a box\": sieve, crush, magnetic separation, microgravity mass balance, micro-XRF, EGA and contact GRNS. The mothership never descends below 50 m."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a 2 kg spring-loaded kinetic impactor observed from hover, with no sample acquisition or bulk assay."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests an articulated 1.5–2 m sampling arm on the scout itself, with restraint downselected after testing. It specifies ≥0.3 m minimum and 1 m goal penetration, 8 or more increments across 4 stations, and an XRF + XRD + magnetic-separation chain. It explicitly rejects uncontained impactors."
+        models:
+          - "GPT"
+  - id: "cost-level-and-accounting-boundary"
+    topic: "Cost level and accounting boundary"
     positions:
-      - statement: "Mesh networking for data relay emphasized"
-        models: ["Gemini"]
-      - statement: "Secondary to ground communication"
-        models: ["Claude", "GPT"]
+      - statement: "Claude recommends $680M nominal ($495–900M) for bom-0-1 0A. This includes $240M of item-specific development and implies about $100M all-in per scout ($55–70M recurring), plus a 35–50 % reserve."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers $569M, which includes launch ($90M) and ops/ground ($85M) that belong to bom-0-8/9/10. Its recurring cost is $22M per unit."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests $290–490M direct, covering survey plus recurring units at $40–85M each, with $150–300M of NRE placed in bom-0-11. Its lifecycle envelope is $0.85–1.8B including reserve."
+        models:
+          - "GPT"
+  - id: "pathfinder-tranche-size-and-gating"
+    topic: "Pathfinder tranche size and gating"
+    positions:
+      - statement: "Claude recommends 2 pathfinders, then 2–6 more at a \"Gate A\". Gate A requires a core to ≥0.8 m and assay within ±15 %. Tranche-2 long-lead items are ordered at T1 CDR + 12 months."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 4 pathfinders followed by 8 production units, on a compressed schedule: launch at year 2.5, gate at year 4."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests three gated pairs. Each later pair is justified only if it beats redesign, alternative sourcing or stopping."
+        models:
+          - "GPT"
+  - id: "propulsion-rationale-and-alternate"
+    topic: "Propulsion rationale and alternate"
+    positions:
+      - statement: "Claude recommends iodine with argon as the D-05 alternate. He quantifies that argon adds 45–70 kg and breaches the 600 kg envelope unless one SAP or the secondary target is dropped."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers iodine chosen deliberately as a tug-commonality pathfinder, with krypton as the fallback. Krypton is not the D-05 alternate."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests selecting neither propellant yet and not forcing scout–tug commonality. It sets a qualification target of 12,000–16,000 equivalent hours, against Claude's 6,500 h."
+        models:
+          - "GPT"
+  - id: "bulk-composition-and-contamination-details"
+    topic: "Bulk-composition and contamination details"
+    positions:
+      - statement: "Claude recommends contact gamma/neutron spectroscopy on the SAP, with no orbital GRNS. He keeps a 20 km main-EP exclusion zone and sets an interim limit of ≤100 g per site lofted above escape speed."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers no GRNS. It uses an autonomy-\"levels\" framework and does not address an ejecta limit."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests no GRNS baseline. It adds XRD and a magnetometer, uses a 1 km EP exclusion as a planning value, and requires captured cuttings, deferring any release ceiling to licensing under ALARP."
+        models:
+          - "GPT"

@@ -1,0 +1,84 @@
+# Divergent Views for spares-replacements
+# Auto-generated from consensus document
+
+bomId: "bom-0-14"
+itemSlug: "spares-replacements"
+generated: "2026-10-20"
+
+topics:
+  - id: "sizing-method"
+    topic: "Sizing method"
+    positions:
+      - statement: "Claude recommends physics-based, multi-echelon (METRIC-type) sparing. Each item is classed as random failure, wear-out or attrition. Stock is set by lead-time demand at stock-out targets of α = 2%, 10% and 25% by criticality. Claude rejects flat percentages."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers percentage buffers: about a 20% inventory buffer overall, 20–30% for wear items and 10% for avionics. This equals about 15–20% of initial deployed mass, or 40–60 t."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests item-specific Poisson and lead-time screening. Its targets are criticality-A stock-out below 0.5–1% per replenishment interval and stock-out loss below 1–2 percentage points of annual production. GPT also rejects the 20% rule."
+        models:
+          - "GPT"
+  - id: "0b-cost-and-campaign-horizon"
+    topic: "0B cost and campaign horizon"
+    positions:
+      - statement: "Claude recommends a 10-year basis of P10 $1.1B / P50 $2.0B / P90 $3.4B. This is roughly $600M of initial provisioning plus about $145M/yr. Claude says the round-2 Claude $0.5–1.5B figure is too low because it under-weights thruster wear and robot attrition. On a common 5-year basis, Claude's P50 is about $1.3–1.4B, inside GPT's range. The real gap is in the time horizon and the treatment of the tail."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers $0.6–1.4B, covering the initial cache plus 5 years of replenishment."
+        models:
+          - "Gemini"
+      - statement: "Gemini calls GPT's $2.5B upper bound evidence of an unsuitable reliability baseline."
+        models:
+          - "Gemini"
+          - "GPT"
+      - statement: "GPT suggests $0.65–1.55B over 5 years including robots. GPT treats $0.8–2.5B as a defensible high-risk envelope but not the default."
+        models:
+          - "GPT"
+  - id: "imported-spares-mass"
+    topic: "Imported spares mass"
+    positions:
+      - statement: "Claude recommends planning for 150–600 t over 10 years, about 27 t/yr at steady state plus 105–150 t of initial provisioning. That is about 15–30 kg per tonne of product. Claude's drivers are thrusters, wear parts and eclipse-cycled batteries."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers 40–60 t as the initial cache."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 80–180 t delivered over 5 years, with 45–60% deployed initially."
+        models:
+          - "GPT"
+  - id: "tug-sparing-and-servicing-location"
+    topic: "Tug sparing and servicing location"
+    positions:
+      - statement: "Claude recommends SEL1 as the mandatory logistics hub. Class-L tug units such as thrusters and array segments would be swapped there by the node manipulator in 24–72 h. Claude would also add a contingency kit of about 2 t at the NEA and require N+k thruster redundancy for ≥99% probability of completing a round trip without service."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers routing all spares through SEL1, with tug self-maintenance there left as an open question."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests using SEL1 only where trajectories justify it. GPT would add small tug-carried recovery kits, installed fault tolerance for in-transit failures, and an explicit whole-tug-loss policy. That policy would choose between fleet margin, a funded replacement tug, or reduced delivery."
+        models:
+          - "GPT"
+  - id: "0a-funding-and-ownership"
+    topic: "0A funding and ownership"
+    positions:
+      - statement: "Claude recommends $20–50M (central $30M) inside bom-0-14. This covers the interface standard, the sparing model, the reliability database and 5–12 test ORUs for the pathfinder."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers $50–100M for interface R&D and pathfinder spares."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests $20–45M, charged to bom-0-11 and bom-0-12 and not added again to bom-0-14."
+        models:
+          - "GPT"
+  - id: "replenishment-lead-time"
+    topic: "Replenishment lead time"
+    positions:
+      - statement: "Claude recommends designing to 3.0 years Earth-to-NEA, within a 2.5–4 year range."
+        models:
+          - "Claude"
+      - statement: "Gemini does not specify a value."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 18–30 months, to be refined from actual trajectories."
+        models:
+          - "GPT"

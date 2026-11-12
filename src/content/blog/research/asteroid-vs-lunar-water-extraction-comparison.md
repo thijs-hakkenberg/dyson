@@ -16,6 +16,8 @@ tags:
   - "paper-05"
 ---
 
+> **Update, 20 October 2026.** Under the proposed decision D-05, water electric propulsion stays a desk study until a C-type target is confirmed, and Phase 0 delivers to SEL1 (D-04, proposed). This comparison is input to that desk study. See the [feasibility report](/analysis/feasibility).
+
 # Asteroid vs. Lunar Water: Which Source Wins for Space Propellant?
 
 Any large-scale space infrastructure program needs water. Lots of it. Electrolyzed into hydrogen and oxygen, water becomes the highest-performance cryogenic propellant available. The question is where to get it: C-type near-Earth asteroids or lunar polar ice deposits?

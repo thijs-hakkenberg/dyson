@@ -17,6 +17,8 @@ relatedPhases:
   - "phase-1"
 ---
 
+> **Update, 20 October 2026.** Phase 0 now needs 1–2.5 MWe cargo tugs, not 100 kW-class SEP. The proposed decision D-05 picks no propellant yet: iodine is the costed reference, argon the alternate, xenon is not baselined. The MW-class cluster is rated TRL 2–4. See the [TRL dashboard](/analysis/technology-readiness).
+
 # The Xenon Crisis: Why Project Dyson Must Abandon Its Baseline Propellant
 
 Our transport fleet design calls for Hall-effect ion thrusters using xenon propellant. There's just one problem: **we would need 15-20x the entire world's annual xenon production.**

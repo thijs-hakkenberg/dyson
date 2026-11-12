@@ -1,0 +1,68 @@
+# Divergent Views for receiving-node
+# Auto-generated from consensus document
+
+bomId: "bom-0-13"
+itemSlug: "receiving-node"
+generated: "2026-10-20"
+
+topics:
+  - id: "inventory-capacity-and-handling-unit"
+    topic: "Inventory capacity and handling unit"
+    positions:
+      - statement: "Claude recommends a 3.0 kt buffer: 20 whole-berthed 150 t pallets of about 1 t billets, expandable to 6 kt only by gate. This sizing covers a one-year Phase 1 slip."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers a 600 t buffer (3–6 months) handled as standardised 5 t hexagonal cassettes."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 600 t (growth to 900 t) handled as 5–20 t units on a rail carriage."
+        models:
+          - "GPT"
+  - id: "cost-and-its-basis"
+    topic: "Cost and its basis"
+    positions:
+      - statement: "Claude recommends a bottom-up estimate excluding launch: 0A: $5–12M in this item (plus $5–12M of breadboards in bom-0-11). 0B: $160–380M, central $250M. Claude rejects the upper half of the round-2 range as Tier 2 \"active hub\" scope."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers to keep the round-2 $200–600M range: 0A: $35–60M. 0B: $250–450M, including $70–150M launch."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests a procurement range excluding launch: 0B: $300–550M, calling $200M optimistic for first-of-kind heavy-cargo handling. 0A: $15–35M, charged to bom-0-11 and bom-0-12."
+        models:
+          - "GPT"
+  - id: "station-keeping-v-and-earth-safety-design-driver"
+    topic: "Station-keeping Δv and Earth-safety design driver"
+    positions:
+      - statement: "Claude recommends 3 m/s/yr nominal and 10 m/s/yr design. It adds biased station-keeping so that loss of control departs sunward, plus an independent Dead-man Disposal Unit. Claude's interim ceiling is P(Earth-intersecting departure) ≤ 10⁻⁴."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers about 50 m/s/yr, with redundant thrusters and generous reserves as the main safety measure."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests 5–20 m/s/yr for station-keeping within a 30–60 m/s/yr total budget. GPT's safety emphasis is debris containment (≤10⁻⁶ of handled mass escaping) and tugs able to wait 30–90 days if acceptance is delayed."
+        models:
+          - "GPT"
+  - id: "propellant-role-for-tugs"
+    topic: "Propellant role for tugs"
+    positions:
+      - statement: "Claude recommends sealed propellant-module swap berths with no fluid transfer, costing +$8–20M."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers an active fluid-transfer EP depot to maximise tug payload fraction."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests no depot function: the tug remains self-sufficient."
+        models:
+          - "GPT"
+  - id: "capture-method"
+    topic: "Capture method"
+    positions:
+      - statement: "Claude recommends the tug performs autonomous hard docking to a 400 t-class Large Berthing Interface at ≤3 cm/s, then nulls the stack's rotation rates."
+        models:
+          - "Claude"
+      - statement: "Gemini prefers that the tug holds at 50 m while the node's arms grapple and berth it, ISS Dragon/Cygnus-style."
+        models:
+          - "Gemini"
+      - statement: "GPT suggests capturing a standardised transport fixture at ≤0.02 m/s, using a separate structural latch for storage."
+        models:
+          - "GPT"

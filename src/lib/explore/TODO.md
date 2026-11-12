@@ -8,6 +8,7 @@
 - [x] Sun v1.1 — Hα-style false-colour look (default), prominences scaled by solar activity, spicule fringe, corona streamers
 - [ ] Expose Sun style toggle (Hα-style ↔ white light) in the Layers panel (`style` option already in `SunSurfaceOptions`)
 - [x] Milky Way background sphere (ESO/S. Brunier, CC BY 4.0) in galactic → ecliptic frame
+- [x] Calmer sky: point stars of the magnified panorama suppressed (minimum-filter band + 30% star residual), black point and slight desaturation (`MilkyWay.svelte` props)
 - [x] Superseded phases fade (to 18%) once the next phase is under way; selection restores a phase; toggle in Layers
 - [ ] **Prettier UI** — open; user to give feedback on what feels off
 - [ ] Crisp point stars from a real catalogue (HYG / Gaia bright stars) layered over the Milky Way image
@@ -47,6 +48,13 @@
    - [x] Risk & Validation lens (R) — heuristic risk halos with breakdown, validation beacons, ranked list, claims
    - [x] Simulation sandboxes (Workbench drawer) — radiation degradation per model orbit, self-replication per model cycle/closure, Shkadov standoff trade; more modules can register in `core/sandboxes.ts`
    - [x] Deliberation Chamber (Consensus lens, C) — 20 discussions replayed round by round: response beams, vote arcs, winners, termination votes, conclusion crystal
+
+## Phase 0 after the BOM regeneration (2026-10-21)
+
+- [x] 17-item Phase 0 BOM in the explorer: metrics, element models, placements, product chain robots → plant → tugs → SEL1 node, tours
+- [ ] Show the rq-0-52 accessible-asteroid shortlist (real catalogue objects) in the orrery instead of the synthetic NEA sample
+- [ ] Logistics lens: tug cycle time and propellant flow from the rq-0-61 chain model (iodine import chain Earth → SEL1 → NEA)
+- [ ] Workbench sandboxes for the new models: tug Δv/Isp/payload → propellant and fleet; contingency rate → confidence
 
 ## Consensus issues
 

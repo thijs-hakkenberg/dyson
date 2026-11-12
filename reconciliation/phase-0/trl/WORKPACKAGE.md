@@ -179,3 +179,60 @@ of writing):
 - **Issue log.** CI-15 to CI-20 are closed or updated.
 
 **Acceptance:** `node scripts/check-stale-narratives.js` (both packages) exits 0.
+
+### WP-B status (2026-10-20) and the Databricks step
+
+Done in PR #15 without new numbers: explorer placement, product chain and tours on the agreed
+architecture; homepage (D-01 framing, panel cost range); Phase 0 description, objectives and a
+timeline derived from the D-02 gates; dated notes on rq-0-11, 14, 29, 32.
+
+**BOM structure accepted (owner, 2026-10-20):** [`../bom-structure.yaml`](../bom-structure.yaml),
+17 items (7 rescoped, 10 new), with removals. Numbers come from regenerated specs, not from the
+round-2 table. `query-bom-specs.js` now builds Phase 0 prompts from that file plus the revised
+architecture (agreed changes, D-01…D-05, the item's round-2 delta rows and reconciliation, its
+re-baselined technologies).
+
+**On the Databricks machine:**
+
+```bash
+# 1. Check the prompts first (no API calls; written to reconciliation/phase-0/bom-specs/prompts/)
+node scripts/query-bom-specs.js --phase=phase-0 --panel=latest --generate-consensus --dry-run
+
+# 2. Generate the new per-model specs and synthesise consensus from them
+node scripts/query-bom-specs.js --phase=phase-0 --panel=latest --generate-consensus
+#    (one item at a time: add --item=<slug>)
+```
+
+Use `--generate-consensus`, **not** `--consensus-only`: the latter loads every spec file in the
+item's folder, including the March 2026 station-era specs, and would merge old and new designs.
+
+**Then (either machine):**
+
+1. Read each new `consensus.md` / `divergent-views.yaml`. Set `content.ts` and `bom-data.ts`
+   (kept in sync) from them: quantities, costs as ranges with `costMin`/`costMax`, and the
+   10 new items (ids and slugs from `bom-structure.yaml`); add the 0A/0B split.
+2. Mirror figures into the explorer: `metrics.ts`, `models.ts` (the plant model and new items),
+   placement counts in `placements.ts` (scouts, robots), then remove the interim
+   round-2 ranges and the panel cost range on the homepage.
+3. Close or update CI-15, CI-16, CI-17 and CI-20 in `CONSENSUS-ISSUES.md`.
+4. `node scripts/check-stale-narratives.js` exits 0; `npm run check && npm run test:run && npm run build`.
+
+**Done (2026-10-21).** The Databricks run (commits 38b760d, 8af382c) produced three specs and a
+consensus for all 17 items. Then:
+
+1. Numbers: [`../bom-numbers.yaml`](../bom-numbers.yaml) transcribes each consensus envelope
+   (0A, 0B, quantity, source step); `node scripts/build-bom-data.js` merges it with
+   `bom-structure.yaml` into `src/lib/data/phase-0-bom.json`, computes bom-0-17 from its rates
+   and sums envelope ends. `content.ts` and `bom-data.ts` both map from it
+   (`src/lib/services/phase-0-bom.ts`); a test runs `--check`.
+2. Divergent views: the October run's YAML was broken (statements cut at full stops, 8 items
+   missing). The parser is now `scripts/lib/divergent-views.js`, and
+   `query-bom-specs.js --divergent-only` rebuilt all 17 from the committed consensus.
+3. Explorer: metrics, models, placements, product chain (robots → plant → tugs → SEL1 node)
+   and tour captions use the new figures; homepage and feasibility report show the envelopes.
+4. `CONSENSUS-ISSUES.md`: CI-16, CI-17, CI-20 resolved; CI-15 updated; new CI-26…29 (robot
+   replacements in two lines, 0A length vs. the KDP-0B window, launch mass floor vs.
+   propellant, 0A cost vs. D-01 assumption A4).
+5. `check-stale-narratives.js` exits 0 (consensus generated on or after the re-baseline is
+   exempt, like the per-model specs).
+

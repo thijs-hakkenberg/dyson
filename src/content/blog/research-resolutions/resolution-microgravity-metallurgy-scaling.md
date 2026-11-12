@@ -16,6 +16,8 @@ tags:
   - "project-ending-risk"
 ---
 
+> **Update, 20 October 2026.** The station this resolution sized was abandoned in the October 2026 re-assessment. Whether gravity is needed at all is now contested: partial-gravity melting (T07) is one route alongside no-melt carbonyl refining (T06) and H₂ reduction (T17), each at TRL 2–3 to 2–4. A 100 g ISS experiment cannot retire the risk. See the [TRL dashboard](/analysis/technology-readiness).
+
 # Resolved: Can We Do Metallurgy in Space at Industrial Scale?
 
 This was the question that kept us up at night. Project Dyson's Material Processing Station needs to process 50,000 tonnes of asteroid material per year. The ISS Electromagnetic Levitator processes 2-gram samples. That's a gap of six to eight orders of magnitude, and the entire project dies if we can't bridge it.

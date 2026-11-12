@@ -1,4 +1,6 @@
 import type { Phase, BlogPost, BOMItem, TimelineNode, PhaseDependencyGraph } from '$lib/types';
+import { DECISION_GATES } from './decision-gates';
+import { PHASE_0_TOTALS, phase0BomItems } from './phase-0-bom';
 
 /**
  * Phase data for the Dyson swarm project
@@ -9,123 +11,19 @@ export const PHASES: Phase[] = [
 		number: 0,
 		title: 'Space Resource Processing',
 		description:
-			'Establish the foundational infrastructure for asteroid mining and material processing in space. This phase focuses on developing the supply chain for raw materials needed for subsequent construction phases.',
+			'Find out whether asteroid material can supply the swarm. Phase 0A funds the research, rendezvous scouts and a pathfinder; Phase 0B, iron-nickel production at the target asteroid, is held as an option and committed only at KDP-0B (decision D-01).',
 		status: 'in-progress',
 		objectives: [
-			'Deploy asteroid prospecting satellites',
-			'Establish first mining operation on near-Earth asteroid',
-			'Build orbital material processing facility',
-			'Create initial stockpile of construction materials',
-			'Test and validate in-situ resource utilization techniques'
+			'Survey and sample candidate near-Earth asteroids with rendezvous scouts',
+			'Mature the critical technologies to the readiness the gates require (TRL 6 before KDP-0B)',
+			'Fly a pathfinder that tests excavation, processing and containment at the asteroid',
+			'Pass the target, demand, economics and licence gates before committing to production',
+			'If 0B goes ahead: process Fe-Ni at the asteroid and deliver product to the SEL1 node'
 		],
-		bom: [
-			{
-				id: 'bom-0-1',
-				name: 'Prospecting Satellites',
-				description: 'Small satellites equipped with spectrometers for asteroid composition analysis',
-				quantity: 32,
-				unit: 'units',
-				unitCost: 5000000,
-				totalCost: 160000000,
-				category: 'Spacecraft',
-				slug: 'prospecting-satellites',
-				costMin: 112000000,
-				costMax: 240000000,
-				costConfidence: 'high',
-				costBasis: 'Based on existing CubeSat and small satellite mission costs with heritage spectrometer payloads'
-			},
-			{
-				id: 'bom-0-2',
-				name: 'Mining Robots',
-				description: 'Autonomous mining and extraction robots for asteroid surface operations',
-				quantity: 20,
-				unit: 'units',
-				unitCost: 50000000,
-				totalCost: 1000000000,
-				category: 'Robotics',
-				slug: 'mining-robots',
-				costMin: 600000000,
-				costMax: 1500000000,
-				costConfidence: 'medium',
-				costBasis: 'Extrapolated from planetary rover costs; asteroid surface operations add uncertainty'
-			},
-			{
-				id: 'bom-0-3',
-				name: 'Material Processing Station',
-				description: 'Orbital facility for refining raw asteroid materials',
-				quantity: 1,
-				unit: 'station',
-				unitCost: 10000000000,
-				totalCost: 10000000000,
-				category: 'Infrastructure',
-				slug: 'material-processing-station',
-				costMin: 7000000000,
-				costMax: 15000000000,
-				costConfidence: 'medium',
-				costBasis: 'Scaled from ISS module costs; novel processing equipment adds uncertainty'
-			},
-			{
-				id: 'bom-0-4',
-				name: 'Transport Vehicles',
-				description: 'Cargo spacecraft for moving materials between asteroids and processing station. Krypton/iodine propulsion (xenon not viable due to supply constraints - demand exceeds global production 15-20x)',
-				quantity: 15,
-				unit: 'units',
-				unitCost: 133333333,
-				totalCost: 2000000000,
-				category: 'Spacecraft',
-				slug: 'transport-vehicles',
-				costMin: 1400000000,
-				costMax: 3000000000,
-				costConfidence: 'medium',
-				costBasis: 'Based on SEP spacecraft costs; krypton/iodine propulsion well-characterized'
-			},
-			{
-				id: 'bom-0-5',
-				name: 'Solar Power Arrays',
-				description: 'Power generation for mining and processing operations',
-				quantity: 100,
-				unit: 'MW capacity',
-				unitCost: 5000000,
-				totalCost: 500000000,
-				category: 'Power Systems',
-				slug: 'solar-power-arrays',
-				costMin: 350000000,
-				costMax: 750000000,
-				costConfidence: 'high',
-				costBasis: 'Based on current thin-film PV costs with established space deployment track record'
-			},
-			{
-				id: 'bom-0-6',
-				name: 'In-Situ Propellant Production Systems',
-				description: 'Integrated water extraction and electrolysis systems (H2O -> H2 + O2) using bucket-wheel excavation. Dual counter-rotating design for torque balancing in microgravity. Heats regolith to 1000C to liberate water.',
-				quantity: 4,
-				unit: 'units',
-				unitCost: 500000000,
-				totalCost: 2000000000,
-				category: 'Infrastructure',
-				slug: 'ispp-systems',
-				costMin: 1400000000,
-				costMax: 3000000000,
-				costConfidence: 'medium',
-				costBasis: 'Based on arxiv 1702.00335 bucket-wheel excavation with integrated electrolysis'
-			},
-			{
-				id: 'bom-0-7',
-				name: 'Organizational Infrastructure',
-				description: 'Legal, governance, and coordination infrastructure for multi-century project execution. Includes legal entity establishment, succession mechanisms, global coordination systems, conflict resolution frameworks, and governance tooling.',
-				quantity: 1,
-				unit: 'organization',
-				unitCost: 50000000,
-				totalCost: 50000000,
-				category: 'Governance',
-				slug: 'organizational-infrastructure',
-				costMin: 20000000,
-				costMax: 100000000,
-				costConfidence: 'low',
-				costBasis: 'Legal setup, coordination systems, governance tooling, and succession mechanisms for multi-century operations'
-			}
-		],
-		totalCost: 15710000000,
+		// 17 items from the regenerated consensus (src/lib/services/phase-0-bom.ts); 0B is a gated option
+		bom: phase0BomItems(),
+		// 0A + 0B with contingency, planning values; the envelope is PHASE_0_TOTALS.all
+		totalCost: PHASE_0_TOTALS.all.point,
 		estimatedDuration: '10-15 years',
 		dependencies: [],
 		relatedResearch: ['asteroid mining', 'in-situ resource utilization', 'space manufacturing']
@@ -774,184 +672,42 @@ export function groupBOMByCategory(items: BOMItem[]): Record<string, BOMItem[]> 
 
 /**
  * Phase 0 Timeline/DAG data
+ *
+ * Built from the D-02 decision gates (decision-gates.ts): each gate spans its proposed
+ * decision window in months from Phase 0 start. Dependencies follow the gate criteria
+ * (KDP-0B requires the four discriminating gates, the 0A mid-term review and the
+ * pathfinder results; the target gate needs scout data). The integrated activity
+ * schedule is open (rq-0-63); until it reports, this graph shows the gates only.
  */
+const PHASE_0_GATE_DEPENDENCIES: Record<string, string[]> = {
+	'kdp-0a': [],
+	'0a-scout-pdr': ['kdp-0a'],
+	'g-scout-flight': ['0a-scout-pdr'],
+	'0a-mtr': ['kdp-0a'],
+	'g-target': ['g-scout-flight'],
+	'g-demand': ['kdp-0a'],
+	'g-licence': ['kdp-0a'],
+	'g-economics': ['g-target', 'g-demand'],
+	'pf-results': ['0a-mtr'],
+	'kdp-0b': ['g-target', 'g-demand', 'g-economics', 'g-licence', '0a-mtr', 'pf-results'],
+	'g-water-pilot': ['g-target']
+};
+const PHASE_0_CRITICAL = new Set(['kdp-0a', '0a-scout-pdr', 'g-scout-flight', 'g-target', 'g-economics', 'kdp-0b']);
+
 export const PHASE_0_TIMELINE: PhaseDependencyGraph = {
 	phaseId: 'phase-0',
-	criticalPathDuration: 84,
-	nodes: [
-		{
-			id: 'site-survey',
-			name: 'NEA Site Survey',
-			type: 'activity',
-			startMonth: 0,
-			endMonth: 24,
-			dependencies: [],
-			status: 'in-progress',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/prospecting-satellites'
-		},
-		{
-			id: 'sat-design',
-			name: 'Satellite Design & Build',
-			type: 'activity',
-			startMonth: 0,
-			endMonth: 36,
-			dependencies: [],
-			status: 'in-progress',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/prospecting-satellites'
-		},
-		{
-			id: 'sat-deploy',
-			name: 'Satellite Deployment',
-			type: 'milestone',
-			startMonth: 36,
-			endMonth: 48,
-			dependencies: ['sat-design'],
-			status: 'pending',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/prospecting-satellites'
-		},
-		{
-			id: 'robot-dev',
-			name: 'Mining Robot Development',
-			type: 'activity',
-			startMonth: 12,
-			endMonth: 48,
-			dependencies: [],
-			status: 'pending',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/mining-robots'
-		},
-		{
-			id: 'target-select',
-			name: 'Target Asteroid Selection',
-			type: 'decision',
-			startMonth: 24,
-			endMonth: 30,
-			dependencies: ['site-survey'],
-			status: 'pending',
-			criticalPath: true
-		},
-		{
-			id: 'robot-deploy',
-			name: 'Mining Robot Deployment',
-			type: 'milestone',
-			startMonth: 48,
-			endMonth: 54,
-			dependencies: ['robot-dev', 'target-select', 'sat-deploy'],
-			status: 'pending',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/mining-robots'
-		},
-		{
-			id: 'station-design',
-			name: 'Processing Station Design',
-			type: 'activity',
-			startMonth: 6,
-			endMonth: 36,
-			dependencies: [],
-			status: 'pending',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/material-processing-station'
-		},
-		{
-			id: 'station-build',
-			name: 'Station Module Construction',
-			type: 'activity',
-			startMonth: 36,
-			endMonth: 60,
-			dependencies: ['station-design'],
-			status: 'pending',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/material-processing-station'
-		},
-		{
-			id: 'station-assembly',
-			name: 'On-Orbit Assembly',
-			type: 'activity',
-			startMonth: 60,
-			endMonth: 72,
-			dependencies: ['station-build'],
-			status: 'pending',
-			criticalPath: true,
-			linkTo: '/plan/phase-0/bom/material-processing-station'
-		},
-		{
-			id: 'transport-dev',
-			name: 'Transport Vehicle Development',
-			type: 'activity',
-			startMonth: 24,
-			endMonth: 48,
-			dependencies: [],
-			status: 'pending',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/transport-vehicles'
-		},
-		{
-			id: 'transport-fleet',
-			name: 'Transport Fleet Deployment',
-			type: 'milestone',
-			startMonth: 48,
-			endMonth: 60,
-			dependencies: ['transport-dev'],
-			status: 'pending',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/transport-vehicles'
-		},
-		{
-			id: 'power-design',
-			name: 'Solar Array Design',
-			type: 'activity',
-			startMonth: 0,
-			endMonth: 24,
-			dependencies: [],
-			status: 'in-progress',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/solar-power-arrays'
-		},
-		{
-			id: 'power-deploy',
-			name: 'Power System Deployment',
-			type: 'activity',
-			startMonth: 48,
-			endMonth: 66,
-			dependencies: ['power-design', 'station-build'],
-			status: 'pending',
-			criticalPath: false,
-			linkTo: '/plan/phase-0/bom/solar-power-arrays'
-		},
-		{
-			id: 'mining-ops',
-			name: 'Initial Mining Operations',
-			type: 'milestone',
-			startMonth: 54,
-			endMonth: 60,
-			dependencies: ['robot-deploy'],
-			status: 'pending',
-			criticalPath: false
-		},
-		{
-			id: 'station-ops',
-			name: 'Station Operational',
-			type: 'milestone',
-			startMonth: 72,
-			endMonth: 78,
-			dependencies: ['station-assembly', 'power-deploy'],
-			status: 'pending',
-			criticalPath: true
-		},
-		{
-			id: 'full-ops',
-			name: 'Full Phase 0 Operations',
-			type: 'milestone',
-			startMonth: 78,
-			endMonth: 84,
-			dependencies: ['station-ops', 'mining-ops', 'transport-fleet'],
-			status: 'pending',
-			criticalPath: true
-		}
-	]
+	criticalPathDuration: Math.max(...DECISION_GATES.map((g) => g.decisionMonthMax ?? g.decisionMonth)),
+	nodes: DECISION_GATES.map((g) => ({
+		id: g.id,
+		name: g.name,
+		type: g.type === 'review' ? 'milestone' : 'decision',
+		startMonth: g.decisionMonth,
+		endMonth: g.decisionMonthMax ?? g.decisionMonth,
+		dependencies: PHASE_0_GATE_DEPENDENCIES[g.id] ?? [],
+		status: 'pending',
+		criticalPath: PHASE_0_CRITICAL.has(g.id),
+		linkTo: `/analysis/decision-gates#${g.id}`
+	}))
 };
 
 /**
@@ -1676,9 +1432,11 @@ export interface ProjectMilestone {
 }
 
 export const PROJECT_MILESTONES: ProjectMilestone[] = [
+	// Phase 0 years are illustrative points inside the D-02 gate windows (target gate M48–180,
+	// KDP-0B M72–180); the integrated schedule is rq-0-63.
 	{
 		id: 'p0-mining-ops',
-		name: 'First Asteroid Mining',
+		name: 'Target asteroid selected (target gate)',
 		phase: 'phase-0',
 		targetYear: 5,
 		dependencies: [],
@@ -1686,7 +1444,7 @@ export const PROJECT_MILESTONES: ProjectMilestone[] = [
 	},
 	{
 		id: 'p0-station-ops',
-		name: 'Processing Station Operational',
+		name: 'KDP-0B: decide on Phase 0B production',
 		phase: 'phase-0',
 		targetYear: 7,
 		dependencies: ['p0-mining-ops'],

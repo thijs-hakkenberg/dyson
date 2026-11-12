@@ -14,6 +14,8 @@ relatedPhases:
   - "phase-0"
 ---
 
+> **Update, 20 October 2026.** This post describes the original Phase 0 BOM. The October 2026 re-assessment split Phase 0 into 0A and a gated 0B, co-located processing at the asteroid and removed crew. The BOM is being rebuilt. See the [feasibility report](/analysis/feasibility).
+
 # Phase 0 BOM: Three AI Perspectives
 
 Our multi-LLM consensus approach has yielded fascinating insights into how different AI models approach the Bill of Materials for space resource processing.

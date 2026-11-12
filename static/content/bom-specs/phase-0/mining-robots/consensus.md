@@ -2,128 +2,98 @@
 bomId: "bom-0-2"
 itemName: "Mining Robots"
 itemSlug: "mining-robots"
-generated: "2026-01-31"
-phase: "phase-0"
 type: "consensus"
+generated: "2026-10-20"
+phase: "phase-0"
 ---
 
-# Mining Robots - Consensus Analysis
-
-This document synthesizes specifications from Claude Opus 4.5, Gemini 3 Pro, and GPT-5.2 to identify areas of agreement, divergence, and open questions.
+# bom-0-2 Mining Robots: Consensus Synthesis (Phase 0, revised architecture)
 
 ## Key Specifications
 
-All models agree on these fundamental specifications:
+All three models agree on the following points.
 
-- Fleet of 20 robots is appropriate for initial mining operations
-- Mass per robot: 2,500-3,500 kg including tooling
-- Multi-leg mobility (hexapod or similar) for asteroid surface traversal
-- Autonomous operation capability for months without ground intervention
-- On-board material processing for initial concentration
-- 5-year minimum operational lifetime
-- Solar-powered with battery backup for shadow operations
-- Extraction rate target: 1,000+ tonnes per robot per year
+- **Tether power at 2 kV DC.** Claude specifies ±1 kV bipolar (2 kV pole-to-pole); Gemini and GPT specify 2 kV nominal. All three keep this inside the binding 1–3 kV envelope. Site generation, storage and power nodes belong to bom-0-5; the robot carries its own tether, reel and DC-DC conversion. GPT and Claude add explicitly that the electrical tether is never a load-bearing or safety line.
+- **30 kWh onboard battery.** Usable capacity is about 20–24 kWh (Claude 24, GPT 20–23, Gemini LTO chemistry). It covers mobility, tether-loss safe-hold and recovery. Claude and GPT state outright that routine production digging on battery is not baselined.
+- **Excavation head.** The reference is an enclosed counter-rotating or opposed drum pair: Claude's up-cut drums, Gemini's dual bucket drums, GPT's opposed-drum candidate. Nameplate rate is about **2 t/h, with a range of 1–3 t/h**; Gemini gives 1.5–2.5. All three expect to downselect against alternates (grab, coring, scraping) during 0A.
+- **Unbeneficiated feed through a sealed interface.** Fines go to bom-0-3 unbeneficiated (1:1). Transfer is through sealed containers or a double-door port, never open hopper transfer.
+- **Robot mass of about 2.65–3.4 t dry.** Claude gives 2,650 kg MEV, Gemini 2,800 kg and GPT 3,400 kg. The excavation head is allocated 240–550 kg. The stowed envelope is about 3–3.5 m × 2.2–2.4 m.
+- **Production fleet of about 6 robots plus reserves, not 20.**
+  - Claude: 6 active + 2 spare + 3 replacements.
+  - GPT: 6 operating + 2 reserve + 2–4 conditional replacements.
+  - Gemini: 5 new 0B units plus 2 spares, alongside its 3 pathfinders. This implicitly withdraws its own round-2 figure of 20.
+  - Final N is fixed at KDP-0B from signed Phase 1 demand and measured pathfinder productivity.
+- **Recurring unit cost of about $28–65M per production robot.** Robot NRE is $300–850M and is carried outside the bom-0-2 recurring line, except that Gemini folds it into its 0A budget. Claude and GPT state, and Gemini's own figures imply, that the round-2 **$30–80M is only plausible as a unit price**, not as a fleet or programme cost.
+- **Containment governed by more than mass fraction.** Particle velocity or kinematic limits plus enclosure are the controls, and site-wide ownership sits with bom-0-15 under the D-03 ALARP interim ceiling.
+- **Precursor anchoring and geotechnical data before pathfinder build.** Claude recommends a 20–40 kg anchor-pull and penetrometer package on ≥2 bom-0-1 scouts. Gemini proposes a precursor penetrometer probe. GPT states attachment-data requirements that bom-0-1 must satisfy.
 
 ## Divergent Views
 
-Models have different perspectives on these aspects:
-
-- **Mobility Architecture**: Claude strongly favors hexapod design, Gemini prefers wheeled rovers for simplicity, GPT suggests hybrid wheel-leg systems.
-- **Anchoring System**: Significant divergence on microspines vs. harpoon-tethers vs. gecko-inspired adhesives. Each model prioritizes different approach.
-- **Processing Capability**: Claude and Gemini include magnetic/electrostatic separation on-robot, GPT prefers minimal processing with bulk transport.
-- **Communication**: Gemini emphasizes inter-robot mesh networks, Claude focuses on relay orbiter, GPT suggests hybrid approach.
-- **Cost Per Unit**: Estimates range from $40M to $65M due to different technology assumptions.
-
-## Research Resolution: Excavation Architecture (rq-0-26)
-
-**Status**: Resolved via multi-model discussion (2026-02-08)
-
-The **dual counter-rotating bucket-wheel architecture** is validated as the baseline excavation mechanism for Phase 0 mining robots. This resolution emerged from unanimous consensus across Claude, Gemini, and GPT models.
-
-### Key Decisions
-
-- **Torque cancellation is mandatory**: Single-axis excavation generates 50–200 N·m of continuous reaction torque at 10+ kW—unmanageable without counter-rotation
-- **Dual wheels reduce net torque by 90–95%**: Residual imbalance from asymmetric cutting loads drops to 5–10% of single-wheel values
-- **Mass penalty acceptable**: 15–25 kg for second wheel assembly is justified against alternative of massively overbuilt anchoring
-- **Asymmetric wheel sizing recommended**: Different diameters (e.g., 80% and 100%) with ~100 Hz differential speed control desynchronizes correlated load spikes
-
-### Excavation Subsystem Specifications
-
-| Parameter | Value |
-|-----------|-------|
-| Mechanical power | 20–50 kW |
-| Excavation rate | 2–5 tonnes/hour |
-| Subsystem mass | 60–80 kg (dual wheels, housing, motors, ISPP interface) |
-| Particle containment | >99% required |
-| Design life | 5+ years, 20,000+ operating hours |
-
-### Critical Integration Requirements
-
-- **Direct ISPP coupling**: Excavation head feeds directly into sealed screw auger connected to water extraction systems—no intermediate hoppers
-- **Particle containment is co-equal design driver**: Even at 99% containment, 5 t/hr excavator releases 50 kg/hr of fugitive particles
-- **Thermal isolation required**: Excavation heat conducted into regolith face could drive off volatiles before extraction
-
-### Remaining Open Questions
-
-- Subsurface regolith mechanical properties (beyond surface characterization)
-- Thermal management vs. volatile preservation trade-off
-- Fleet-level contamination thresholds
-- Autonomous adaptation to voids and heterogeneous material
+- **0A pathfinder count**
+  - Claude recommends 2 flight units plus 1 ground QM (in bom-0-11). Its reason is that a peer-servicing pair is needed to retire T21, and a QM tested to failure is worth more than a third flight unit.
+  - Gemini prefers 3 flight pathfinders at about $50M each ($150M).
+  - GPT suggests 2 instrumented flight pathfinders at $90–160M total, preceded by ground prototypes.
+- **Electrical power and heat rejection**
+  - Claude recommends 2.5 kW average and 8 kW peak, with tether and PMAD rated to 15 kW for growth. Radiators are about 2 × 3 m² rejecting 1–1.5 kW.
+  - Gemini prefers a 25 kW excavation peak and 3–5 kW for tramming.
+  - GPT suggests 12–20 kW while excavating, a 30 kW continuous rating and a 40 kW peak (10 s). Radiators are about 30 m² rejecting 10–15 kW. GPT allocates 200 kW of site branch capacity for the fleet.
+- **Mobility and anchoring**
+  - Claude recommends a wheel-less sled moved as a cable-driven parallel robot inside pre-anchored 30 m cells. Anchors are boulder slings and screw-umbrella piles. The viability threshold is ≥200 N sustained and ≥1 kN transient per anchor.
+  - Gemini prefers a hexapod with micro-spine feet rated >500 N holding force.
+  - GPT suggests winch-assisted restrained repositioning with multiple attachment modes (bands, clamps, drilled anchors, reaction frames). Its restraint allocation is much larger: 10 kN working resultant, 15 kN·m moment and 5 kN transient.
+- **Drum torque, tip speed and reaction cancellation**
+  - Claude recommends ≤2 rpm and ≤0.05 m/s tip speed scheduled to v_esc. Steady torque is 3–30 N·m, with a 50–200 N·m clutch and 500 N·m stall. No cancellation fraction is credited.
+  - Gemini credits 90–95% reaction-torque cancellation at a ≤0.2 m/s tip speed.
+  - GPT suggests 0.2 m/s tip speed with 2–8 kN·m normal and 12 kN·m jam torque per drum, also with no cancellation credit.
+- **Containment rule**
+  - Claude recommends body-relative limits: ≤0.3 v_esc for tool-imparted particle velocity and ≤0.25 v_esc for body speed. Its release allocation is ≤10 kg per robot per year, of which ≤1 kg may be at >0.5 v_esc.
+  - Gemini prefers a fixed mechanical tip-speed governor of ≤0.2 m/s.
+  - GPT suggests a site ceiling of 100 kg/yr, with 60 kg/yr allocated to mining and a 10 kg/yr escape analysis target. It holds that tip speed is not a particle-release limit.
+- **Duty and 0B cost**
+  - Claude recommends 2,000 cutting h/yr in 0B (400–1,000 h in 0A), giving about 4 kt/yr per robot. Its 0B cost is $345–730M for 8 + 3 robots.
+  - Gemini prefers about 1,800 h/yr and 3 kt/yr per robot. Its 0B cost is $250–300M.
+  - GPT suggests 1,100 h/yr (12.6% of calendar time). Its 0B cost is $370–825M for 10–12 robots.
 
 ## Open Questions
 
-Critical decisions and research needs identified across all models:
-
-- ~~How does regolith behave during excavation in microgravity?~~ **Partially resolved** via bucket-wheel architecture
-- What anchoring technology is most reliable across asteroid types (C, S, M)?
-- What is the optimal fleet composition: homogeneous vs. specialized robots?
-- How to handle electrostatic charging effects on mechanisms?
-- What level of on-board processing is cost-effective vs. bulk transport?
-
-## Resolved Architecture Decisions
-
-The following architectural decisions have been resolved through multi-model deliberation:
-
-### Excavation System: Dual Counter-Rotating Bucket Wheels (rq-0-26)
-
-**Decision**: Adopt dual counter-rotating bucket-wheel architecture as the baseline excavation mechanism.
-
-**Rationale** (from unanimous multi-model consensus, 2026-02-08):
-- Single-axis excavation generates 50–200 N·m of continuous reaction torque at 10+ kW—unmanageable for a 500 kg robot
-- Counter-rotating wheels reduce net torque by **90–95%**, bringing residual loads within anchoring/attitude control budgets
-- Mass penalty of 15–25 kg for second wheel assembly is acceptable vs. alternative of overbuilt anchoring
-- Asymmetric wheel sizing (80%/100% diameter ratio) with differential speed control desynchronizes load spikes from consolidated clasts
-
-**Excavation Subsystem Specifications**:
-- Mechanical power: 20–50 kW
-- Continuous excavation rate: 2–5 tonnes/hour per robot
-- Subsystem mass: 60–80 kg (dual wheels, housing, motors, direct ISPP feed interface)
-- Particle containment: >99% required (fugitive particles at >0.1 m/s escape velocity are permanently lost)
-- Direct ISPP integration: Sealed screw auger or pneumatic transfer to water extraction systems
-
-**Co-Design Requirements**:
-- Housing must achieve >99% particle containment through enclosed cutting faces and flexible seals
-- Thermal isolation required between excavation mechanism and regolith face to preserve volatiles
-- Fleet-level contamination modeling required before hardware freeze
-
-**Development Program**: $17M, 18-month phased approach:
-1. DEM simulation campaign (Months 1–6, ~$2M)
-2. 1/3-scale parabolic flight testing (Months 4–12, ~$5M)
-3. Full-scale ISPP integration prototype (Months 10–18, ~$10M)
-
----
+1. **Real anchor capacity under cyclic load in target rubble.** This is the dominant project-ending unknown (T16). Claude rates the likelihood of failing 200 N sustained at 40–60%, and it sets clutch limits, cut depth and dig rate.
+2. **Accessible free-metal grade and how it partitions by size.** Effective yield of about 2.5–15% moves excavation demand from about 4 kt/yr to over 50 kt/yr. If the metal sits in coarse clasts or coherent masses, a different head or a plant crusher is needed.
+3. **Enclosure-to-natural-surface seal and release verification.** Can kilogram-scale release bounds be demonstrated, with upper confidence limits, against kiloton-scale flows? The verification must cover repositioning, servicing and faults, and electrostatic lofting must be characterised.
+4. **Residual six-axis head loads.** Does counter-rotating or up-cut geometry actually produce net bearing rather than uplift in pascal-cohesion fines? Neither the 90–95% cancellation claim nor any other figure is yet supported by measurement.
+5. **HV tether snag, abrasion and partial discharge on boulder fields.** Abrasion and partial discharge must be checked with dust and plasma charging present. The allowed snag rate and maximum tether length (50–350 m) are unresolved.
+6. **Seal and port wear life in vacuum abrasive fines, and real peer-servicing capability.** Wear sets LRU intervals (500–3,000 h), the bom-0-14 spares demand and the true replacement count.
 
 ## Recommended Approach
 
-Based on multi-model analysis, the recommended approach is:
-
-1. **Baseline dual counter-rotating bucket wheels** for excavation (see resolved decision above)
-2. **Prioritize anchoring technology R&D** through parabolic flight and ISS testing
-3. **Design modular tool system** that can adapt to different asteroid compositions
-4. **Start with conservative hexapod design** with backup wheeled option
-5. **Integrate excavation directly with ISPP** to eliminate intermediate hoppers and containment risks
-6. **Minimize on-robot processing** initially; add capability based on operational experience
-7. **Deploy small pathfinder fleet (2-3 robots)** before committing to full production
-8. **Plan for cooperative operations** even if initial robots work independently
-
-The total budget of $1B for 20 units ($50M/unit) aligns with consensus estimates but requires careful development cost management. Development alone may consume $300-400M.
+1. **Fund 0A bom-0-2 at 2 instrumented flight pathfinders.** The cost is about $90–245M for hardware including research instrumentation. Add 1 ground QM for test-to-failure and concurrent life testing, funded in bom-0-11.
+   - Reject Gemini's third flight unit. Two units are the minimum to demonstrate peer LRU swaps (T21) and still tolerate one loss.
+   - Carry robot NRE of $300–850M in bom-0-11. Do not double-count it in bom-0-2.
+2. **Hold 0B as a gated option sized by formula, not forecast.**
+   - Size excavation demand as M_exc = P / (g·r·a·d), with N_active = ⌈M_exc / measured per-robot output⌉.
+   - The planning reference is **6 active + 2 reserve, plus 2–4 reliability-derived replacements (10–12 total), costing about $280–825M recurring.**
+   - Cap the fleet at about 16. Above that, re-target rather than scale.
+   - This replaces all three round-2 figures. Gemini's 20 has no Fe-Ni closure. GPT's 6 replacements on 6 is an unsupported loss forecast. The round-2 $30–80M totals are unit prices.
+3. **Freeze the interfaces now, but not the head, anchors or fleet size.**
+   - Freeze the 2 kV DC tether and 30 kWh battery for safe mode and recovery only, with no production digging on battery.
+   - Freeze sealed transfer with the robot specifying its hopper and port. bom-0-3 owns container and surge sizing in its 0.5–2 t trade range.
+   - Downselect the head (enclosed drums, sealed grab, coring) and the mobility concept (cable-driven cell, restrained winch, legged) at PDR, using six-axis vacuum test data.
+4. **Bound the power and thermal allocation to cover the model spread until measured.**
+   - Rate the robot PMAD and tether at 15–30 kW.
+   - Design radiators for the upper case with derating as the fallback.
+   - Have bom-0-5 carry about 120–200 kW of fleet branch capacity until pathfinder data narrows it.
+   - Credit no torque cancellation in any load case.
+5. **Make anchoring the first-retired risk.**
+   - Fly an anchor-pull and penetrometer package on ≥2 bom-0-1 scouts before pathfinder CDR.
+   - Adopt Claude's thresholds as KDP-0B criteria: P10 ≥200 N sustained and ≥1 kN transient over ≥30 anchors, with a 100 N concept-break threshold triggering a grab head or target rejection.
+6. **Adopt layered containment controls as the robot allocation to bom-0-15 under the D-03 interim ceiling.**
+   - Use body-relative kinematic limits (≤0.25 v_esc body, ≤0.3 v_esc tool-imparted) in place of a fixed 0.2 m/s, which approximately equals v_esc on Bennu-class bodies.
+   - Add per-robot kg/yr release allocations consistent with GPT's site budget (about 60 kg/yr for mining) and automatic stop rules.
+   - Verify with upper-bound methods that include maintenance and fault releases.
+7. **Set quantitative KDP-0B exit criteria with no waivers (D-02).** Each project-ending technology must reach TRL 6 at the target. T09 must also reach TRL 6, even though it is architecture-changing, because the fleet depends on tethers. The criteria are:
+   - sustained dig rate ≥1.25 t/h over ≥200 cutting h;
+   - extrapolated output ≥2.5 kt/yr per robot;
+   - ≥95% intervention-free cutting hours;
+   - ≥3 peer LRU swaps;
+   - ≤1 snag-stop per 100 m of tether;
+   - wear supporting ≥1,000 h LRU intervals;
+   - bom-0-3 feed acceptance at an 8–18 wt% metal grade.

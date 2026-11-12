@@ -24,7 +24,9 @@ createdDate: "2026-02-10"
 
 ## Background
 
-The consensus recommendation for the Material Processing Station specifies human-tended operations with quarterly crew visits. However, the addition of propellant production capability (resolved in rq-0-14) adds operational complexity that may require more frequent human presence. Electrolysis systems, cryogenic storage, and propellant transfer operations involve failure modes (leaks, valve failures, ice blockages) that may exceed the autonomous fault-recovery capabilities of the station's control systems.
+> **Update, 20 October 2026.** The Phase 0 re-assessment made Phase 0 uncrewed (all three models), removed production LOX/LH₂, and moved processing to the target asteroid. This question no longer applies to Phase 0 as planned; it is kept for later phases. The background below describes the March 2026 design.
+
+The consensus recommendation for the Material Processing Station specifies human-tended operations with quarterly crew visits. However, the addition of propellant production capability (resolved in rq-0-14) adds operational complexity that may require more frequent human presence. Electrolysis systems, cryogenic storage, and propellant transfer operations involve failure modes (leaks, valve failures, ice blockages) that may exceed the autonomous fault-recovery capabilities of the station's control systems. <!-- stale-ok -->
 
 ## Why This Matters
 

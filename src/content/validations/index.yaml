@@ -209,7 +209,19 @@ validations:
           - "rq-0-20"
         validator: "Literature Review (external + arxiv)"
         notes: "HERMeS 3,570h test data, Mikellides shielding physics, NSTAR/NEXT comparative data. See updated handover at publications/handover/rq-0-16-thruster-lifetime-isp-tradeoff-handover.md"
-    lastUpdated: "2026-03-18"
+      - id: "val-006-5"
+        date: "2026-10-20"
+        source: "deliberation"
+        sourceDetails: "Phase 0 TRL re-baseline (reconciliation/phase-0/trl/, technology T01), three-model panel"
+        conclusion: "The panel finds AEPS has not flown and that required life is undemonstrated at relevant power in every propellant branch: the best Hall wear evidence is ~3,570 h at 12.5 kW Xe (HERMeS), the best throughput evidence ~918 kg at <=7 kW Xe (NEXT, gridded ion). The revised Phase 0 tugs need 1-2.5 MWe, rated TRL 2-4. The lifetime claim stands for the kW class; it does not transfer to MW-class clusters or to iodine and argon."
+        confidence: 60
+        relatedRQs:
+          - "rq-0-16"
+          - "rq-0-54"
+          - "rq-0-79"
+        validator: "TRL Re-baseline Panel"
+        notes: "Scope note, not a refutation. See /analysis/technology-readiness#T01."
+    lastUpdated: "2026-10-20"
     phaseId: "phase-0"
     tags:
       - "hall-thruster"
@@ -290,7 +302,7 @@ validations:
     claim: "Zero boil-off cryogenic LH2/LOX storage at L4/L5 requires less than 1% of station power budget"
     bomItemId: "bom-0-3"
     questionId: "rq-0-30"
-    status: "validated"
+    status: "outdated"
     validations:
       - id: "val-009-1"
         date: "2026-03-19"
@@ -304,7 +316,17 @@ validations:
           - "rq-0-48"
         validator: "Multi-Model Deliberation"
         notes: "Backed by NASA GRC ZBO test data"
-    lastUpdated: "2026-03-19"
+      - id: "val-009-2"
+        date: "2026-10-20"
+        source: "deliberation"
+        sourceDetails: "Phase 0 re-assessment, round 2 (reconciliation/phase-0/round-2/reconciliation/phase.md §2)"
+        conclusion: "All three models agree there is no production LOX/LH2 in Phase 0; the cryogenic depot is removed from Phase 0 and deferred to Phase 1. The thermal result is unchanged, but its premise (a Phase 0 depot at L4/L5) no longer holds."
+        confidence: 85
+        relatedRQs:
+          - "rq-0-30"
+        validator: "Phase 0 Re-assessment Panel"
+        notes: "Marked outdated for Phase 0; reusable when cryogens return in Phase 1."
+    lastUpdated: "2026-10-20"
     phaseId: "phase-0"
     tags:
       - "cryogenic"
@@ -318,7 +340,7 @@ validations:
     claim: "Hybrid multi-gravity-zone station (0.05-0.15g smelting + 0g refining) fits within 400-500k kg mass envelope"
     bomItemId: "bom-0-3"
     questionId: "rq-0-11"
-    status: "partially-validated"
+    status: "outdated"
     validations:
       - id: "val-010-1"
         date: "2026-03-19"
@@ -332,7 +354,18 @@ validations:
           - "rq-0-15"
         validator: "Multi-Model Deliberation"
         notes: "Gravity thresholds based on dimensional analysis only. Needs 0.01-0.2g experiment data."
-    lastUpdated: "2026-03-19"
+      - id: "val-010-2"
+        date: "2026-10-20"
+        source: "deliberation"
+        sourceDetails: "Phase 0 re-assessment, round 2 (§2, §3.9) and TRL re-baseline (T05-T07, T17, T23)"
+        conclusion: "The central station this mass envelope sized is abandoned; processing is co-located at the target NEA. Whether gravity is needed at all is contested: partial-gravity melting is one route (T07, TRL 2-3) alongside no-melt carbonyl refining (T06) and H2 reduction (T17). Each route is judged separately at KDP-0B."
+        confidence: 60
+        relatedRQs:
+          - "rq-0-11"
+          - "rq-0-56"
+        validator: "Phase 0 Re-assessment Panel"
+        notes: "Marked outdated: the station premise no longer holds."
+    lastUpdated: "2026-10-20"
     phaseId: "phase-0"
     tags:
       - "metallurgy"
@@ -360,7 +393,18 @@ validations:
           - "rq-0-31"
         validator: "Paper 05 Simulation"
         notes: "Model uncalibrated against real extraction data. Bennu is one data point."
-    lastUpdated: "2026-03-19"
+      - id: "val-011-2"
+        date: "2026-10-20"
+        source: "deliberation"
+        sourceDetails: "Phase 0 decisions D-04 and D-05 (proposed), reconciliation/phase-0/decisions.md"
+        conclusion: "The comparison assumes delivery to L4/L5. Under the interim positions, Phase 0 delivers to SEL1 (D-04) and water EP stays a desk study until a C-type target is confirmed (D-05). The cost ranking is input to that desk study, not a Phase 0 baseline."
+        confidence: 60
+        relatedRQs:
+          - "rq-0-55"
+          - "rq-0-59"
+        validator: "Phase 0 Re-assessment Panel"
+        notes: "Context note; status unchanged."
+    lastUpdated: "2026-10-20"
     phaseId: "phase-0"
     tags:
       - "isru"

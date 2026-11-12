@@ -72,7 +72,7 @@
 		{/each}
 	</ul>
 	<p class="foot">
-		Halo size/colour = risk score (0.6 technology severity × TRL gap, 0.25 cost confidence, 0.15 cost spread). Beams =
+		Halo size/colour = risk score (0.6 technology severity × difficulty (TRL gap blended 70/30 with AD²), 0.25 cost confidence, 0.15 cost spread). Beams =
 		validation claims: colour = status, height = latest confidence.
 	</p>
 </section>

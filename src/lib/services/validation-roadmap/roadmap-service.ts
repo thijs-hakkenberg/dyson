@@ -112,7 +112,8 @@ function parseExperimentsYaml(content: string): {
 						'relatedBOMItems',
 						'tags',
 						'expectedOutcomes',
-						'relatedExperiments'
+						'relatedExperiments',
+						'relatedTechnologies'
 					].includes(keyTrimmed)
 				) {
 					currentArray = keyTrimmed;
@@ -153,7 +154,9 @@ function parseExperiment(raw: Record<string, unknown>): Experiment {
 		tags: (raw.tags as string[]) || [],
 		expectedOutcomes: (raw.expectedOutcomes as string[]) || undefined,
 		referenceUrl: (raw.referenceUrl as string) || undefined,
-		notes: (raw.notes as string) || undefined
+		notes: (raw.notes as string) || undefined,
+		relatedTechnologies: (raw.relatedTechnologies as string[]) || undefined,
+		trlTarget: (raw.trlTarget as string) || undefined
 	};
 }
 
