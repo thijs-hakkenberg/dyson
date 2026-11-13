@@ -131,9 +131,41 @@ Targets of about 100 m or more that close a tug cycle of four years or less, re-
 
 The last column is a lower bound, because it drops out-of-plane legs instead of re-optimising them. With a supported flyby the falsifier of 20 candidates does not clear at 5 km/s per leg and four years. It clears at 6.5 km/s per leg, or at five-year cycles (51–83 targets at 90 days, before the direction limit). The scout constraint was not re-applied.
 
+## Third pass (2026-11-13): the flyby from a three-body model
+
+The literature check left the leg between the SEL1 node and the Moon without a source, so it is now computed. `publications/scripts/cislunar_flyby.py` flies a tug from a periodic orbit about SEL1 to the Moon in the Sun–Earth three-body problem, turns it at one or two lunar swingbys, and records every escape with its speed, direction and time. The leg optimiser then limits the flyby credit by direction using that table (`run_trajectory_flyby_model.py`).
+
+What the three-body model shows:
+
+1. **The swingby gives more than assumed in the ecliptic and less out of it.** Within 90 days of a 150 m/s node burn the median reach is 1.58 km/s in the ecliptic, 1.35 km/s at 15–30° latitude, 0.87 km/s at 30–45°, 0.46 km/s at 45–60° and nothing above 60°.
+2. **The coast from the node to the Moon sets the time, and it is bought with a burn at the node.** The fastest first lunar encounter comes 65 days after a 50 m/s burn, 37 days after 150 m/s and 22 days after 300 m/s. Escape at 1.4 km/s or more follows at 77, 53 and 36 days. Without a burn the coast takes about four months.
+3. **Each solution needs the Moon at one phase**, which comes round once a synodic month. The study adds a mean wait of 15 days per assisted leg.
+4. **The simplified swingby holds up.** In 15 encounters re-flown with the Moon's gravity acting throughout, the largest escape speed was 0.95–1.13 times the simplified model's (median 0.99), with the same out-of-plane reach.
+
+Targets of about 100 m or more that close a tug cycle, of the 150 studied. Leg Δv includes the node burn; cycle time runs node to node.
+
+| Leg Δv cap | Cycle ≤ 4 yr | Cycle ≤ 5 yr |
+|---|---|---|
+| 5.0 km/s | 26 | 67 |
+| 5.75 km/s | 39 | 93 |
+| 6.5 km/s | 54 | 116 |
+
+With node burns limited to 150 m/s the first row is 23 and 65. For comparison, the second pass counted 20–45 at 5.0 km/s and four years, and the literature-corrected filter 5–16. The falsifier of 20 candidates clears at the consensus leg cap, narrowly, and with room at five-year cycles. Median cycle at the 5.0 km/s cap is 4.6 years.
+
+Limits of this pass:
+
+- **Node orbits are planar** (Lyapunov orbits, 20,000–200,000 km from SEL1 on the Sun side). Halo orbits are not modelled.
+- **The Moon is on a circular orbit in the ecliptic.** Its 5° inclination is ignored.
+- **The node burn is impulsive.** At the tug's thrust 150 m/s takes 4–8 days and 300 m/s takes 8–16.
+- **Return is taken as the mirror image of departure**, which the equations allow; it was not computed separately, and the tug's position on the node orbit is treated as plannable.
+- **At most two swingbys**, the second after an in-plane transfer.
+- **The scout constraint was not re-applied.**
+
+Results: `publications/data/cislunar-flyby/` and `publications/data/nea-trajectories/{legs-flyby-model.csv, flyby-model.json}`.
+
 ## Next steps
 
-1. Put the flyby direction limit and a direction-dependent time allowance into the leg optimiser, and compute the SEL1 node-to-Moon leg and its phasing wait in a three-body model; the literature review found no source for the last.
+1. Re-apply the scout constraint to the third-pass targets, and extend the three-body model to halo node orbits and the Moon's inclined orbit.
 2. Re-run the chain model (rq-0-61) with per-target cycle time, Δv and thrust time from `targets.csv`, and trade tug power against cycle time.
 3. Hand the shortlist to the remote survey for taxonomy and rotation (bom-0-1, rq-0-50).
 4. Higher-fidelity check of the best ten targets (ephemeris model, flyby geometry).
