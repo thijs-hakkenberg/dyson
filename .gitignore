@@ -42,3 +42,4 @@ research/*.pdf
 # Re-assessment dry-run prompts (regenerate with --dry-run)
 reconciliation/*/round-*/prompts/
 reconciliation/**/prompts/
+publications/data/cislunar-flyby/escapes*.npz

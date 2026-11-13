@@ -265,6 +265,8 @@ modelled and would add candidates.
 
 **Update 2026-11-13 (flyby literature check, rq-0-52).** The flyby size (1.0–1.5 km/s) is supported by the literature at about 1.4 km/s; the 30-day allowance and free direction are not. With 90 days per assisted leg and the excess velocity within 30° of the ecliptic, 5–16 targets close at 5 km/s per leg and four years (tug only), below the falsifier of 20. It clears at 6.5 km/s per leg (17–31) or with five-year cycles.
 
+**Update 2026-11-13 (three-body flyby model, rq-0-52).** With the flyby computed in a three-body model of the SEL1 node, the Moon and the escape (node burn counted in leg Δv, cycles timed node to node), 26 targets close at 5 km/s per leg and four years, 67 at five years, and 54 at 6.5 km/s and four years (tug only). The 3-year cycle criterion was not re-counted; at the 5 km/s cap the median cycle is 4.6 years and the fastest tenth of targets take 3.6.
+
 ### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
 `phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
 (≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the
