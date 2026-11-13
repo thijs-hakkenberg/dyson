@@ -71,9 +71,53 @@ What the model shows:
 
 Limits: tug, plant and robot replacement over long runs is not modelled, which flatters the 15–20-year cases. Gravity assists (rq-0-52) would lower Δv and propellant. Product value at SEL1 beyond its mass (for example avoided Earth-departure constraints) is not credited.
 
+## Second pass (2026-11-12): optimised trajectories and replacements
+
+Code: `publications/scripts/phase0_chain_model.py` (`trajectory='optimised'`, `replacements=True`), `run_phase0_chain_v2.py`. Data: `publications/data/phase0-chain/results-v2.json`.
+
+Two things changed. Tug cycles now come from the optimised low-thrust legs of rq-0-52, each re-checked against the thrust of the tug being modelled. Runs longer than the hardware's service life now buy replacements: tugs and plant modules after 10–15 years, robots at 0.3–0.7 a year beyond the first six.
+
+**Cost against Earth supply (P50 ratio, 1.0–1.3 kt a year, with replacements):**
+
+| Trajectory setting | Targets | Import ratio | 6.25 yr | 10 yr | 15 yr | 20 yr |
+|---|---|---|---|---|---|---|
+| No flyby, legs ≤ 6.5 km/s | 16 | 0.58 | 5.2× | 2.8× | 2.1× | 1.9× |
+| Lunar flyby 1.0 km/s, legs ≤ 5.0 km/s | 20 | 0.43 | 4.7× | 2.5× | 1.8× | 1.6× |
+| Lunar flyby 1.0 km/s, legs ≤ 6.5 km/s | 58 | 0.52 | 5.0× | 2.7× | 2.0× | 1.8× |
+| Lunar flyby 1.5 km/s, legs ≤ 5.0 km/s | 45 | 0.41 | 4.6× | 2.4× | 1.8× | 1.6× |
+
+What it shows:
+
+1. **The cost ratio barely moves at the planned scale.** About five times Earth supply for a six-year run, as in the first pass. Hardware and ground cost dominate, not trajectories.
+2. **Lunar flybys fix the import ratio, not the cost.** With flybys and the 5 km/s cap, propellant falls to about 420 t a year and the import ratio to 0.41–0.43, inside the ≤ 0.50 limit. Without flybys it is 0.58.
+3. **Replacements take back part of the long-run gain.** At 20 years they cost about $9B and raise the ratio from 1.55× to 1.8×. The first pass's "within about 20% of Earth" for a long, large run becomes 1.45× (2.3–2.7 kt a year, 20 years) and 1.3× at 5 kt a year. Asteroid supply beats Earth supply in at most 12% of draws in any case run.
+4. **Picking a fast target helps modestly.** Sampling only the fastest quarter of targets lowers the six-year ratio from 4.7–5.0× to 3.9–4.1×.
+
+**Tug sizing trade** (lunar flyby 1.0 km/s, legs ≤ 6.5 km/s, 10-year run; cells are targets that close / cost ratio / import ratio):
+
+| Tug power | Isp 2,500 s, 150 t payload | Isp 2,500 s, 300 t | Isp 3,250 s, 150 t | Isp 3,250 s, 300 t |
+|---|---|---|---|---|
+| 0.75 MW | 49 / 2.7× / 0.52 | 21 / 2.1× / 0.37 | 39 / 2.4× / 0.38 | 12 / 1.9× / 0.27 |
+| 1.0 MW | 56 / 2.8× / 0.55 | 39 / 2.2× / 0.43 | 53 / 2.5× / 0.41 | 24 / 2.0× / 0.30 |
+| 1.5 MW | 58 / 3.1× / 0.59 | 54 / 2.4× / 0.48 | 58 / 2.8× / 0.45 | 48 / 2.2× / 0.35 |
+| 3.0 MW | 58 / 3.9× / 0.71 | 58 / 2.8× / 0.54 | 58 / 3.5× / 0.53 | 58 / 2.5× / 0.40 |
+
+5. **More tug power does not buy a shorter cycle.** Cycle time stays at 3.5–3.8 years across a fourfold range of power, because it is set by orbital phasing, not by thrust. Extra power only adds tug mass and cost.
+6. **Payload per trip is the strongest lever on cost, and it trades against target choice.** Going from 150 t to 300 t per trip cuts the ratio by about a fifth, but a heavier tug can fly fewer legs: at 1.0 MW and 3,250 s, 300 t leaves 24 targets where 150 t leaves 53.
+7. **Higher Isp helps on both counts** (cost and import ratio) and costs targets through lower thrust.
+
+This gives a position on the tug question (plan item 1.3): keep the 5 km/s leg cap and plan on lunar flybys; allow 4-year cycles; do not raise tug power above about 1.5 MW; push payload per trip towards 250–300 t and Isp towards 3,000 s or more, to the extent the candidate count stays above 20. It should be revisited if the flyby gain turns out lower than 1.0 km/s, or if the metal-bearing targets turn out to be among those a heavier tug cannot reach.
+
+Limits of this pass:
+
+- It inherits the limits of rq-0-52, above all the unsourced lunar-flyby gain.
+- A leg that the study's tug could not fly is never added back for a more powerful tug, so the benefit of more power is understated in target count (not in cycle time for the targets shown).
+- 55% of tug mass and cost is assumed to scale with power; replacement lives and fractions are assumptions listed in the results file.
+- Repeat departure windows are not enforced: the fleet is sized from average cycle time.
+
 ## Next steps
 
-1. Re-run with optimised trajectories once rq-0-52 has them.
-2. Add replacement cycles for tugs, plant trains and robots to the long-run cases.
+1. Source the lunar-flyby gain (rq-0-52); the import-ratio result depends on it.
+2. Enforce repeat departure windows per target when sizing the fleet.
 3. Put the import ratio and the launched-to-delivered mass ratio into the economics gate (rq-0-82), alongside $/kg.
-
+4. Re-run the bom-0-4 and bom-0-16 consensus with these findings.

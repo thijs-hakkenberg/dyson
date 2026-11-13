@@ -270,3 +270,4 @@ catalogue supports are 5.6–6.5 km/s. The rq-0-61 chain model then gives 520–
 and an import ratio of 0.66 at P50, failing the ≤0.50 limit in 97% of draws. Isp of
 3,000–3,500 s, the bom-0-16 trade range, brings it to about 0.48.
 
+**Update 2026-11-12 (second pass, rq-0-61).** With the optimised legs of rq-0-52 and a lunar flyby at each end, propellant falls to about 420 t/yr and the import ratio to 0.41–0.43 inside the 5 km/s leg cap, so the ≤0.50 limit is met. Without flybys it is 0.58. The specs do not plan on lunar flybys and the flyby gain is unsourced. Still open.
