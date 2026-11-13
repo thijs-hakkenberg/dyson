@@ -115,9 +115,19 @@ Limits of this pass:
 - 55% of tug mass and cost is assumed to scale with power; replacement lives and fractions are assumptions listed in the results file.
 - Repeat departure windows are not enforced: the fleet is sized from average cycle time.
 
+## Flyby assumption checked (2026-11-13)
+
+The lunar-flyby gain these results rest on has been checked against the literature (rq-0-52, `research/analysis.md`). The size holds at about 1.4 km/s. The 30 days allowed per assisted leg does not; the sources need 60–200.
+
+- **Cost and import ratio do not depend on the allowance.** At 90 days per assisted leg and four-year cycles the import ratio is 0.42–0.43 and a 20-year run costs 1.6× Earth supply, as before.
+- **The target count does.** At 5 km/s per leg and four years it falls from 20–45 to 12–28, and to 5–16 once the flyby direction is limited to 30° from the ecliptic.
+- **Five-year cycles restore the count but cost more.** 51–83 targets close, the fleet grows by three or four tugs, the six-year run rises from about 4.6× to 5.6–5.9× and the 20-year run from 1.6× to 1.75–1.8×. The import ratio stays at 0.42–0.44.
+
+So the position recorded above (5 km/s cap, lunar flybys, four-year cycles) holds on cost and import ratio but leaves too few targets. The trade is now between a 6.5 km/s leg cap (import ratio about 0.48–0.51) and five-year cycles (more tugs). Results are in `publications/data/phase0-chain/flyby-allowance.json`.
+
 ## Next steps
 
-1. Source the lunar-flyby gain (rq-0-52); the import-ratio result depends on it.
+1. Re-run with the flyby direction limit inside the trajectory optimiser (rq-0-52), then settle the trade between a 6.5 km/s leg cap and five-year cycles.
 2. Enforce repeat departure windows per target when sizing the fleet.
 3. Put the import ratio and the launched-to-delivered mass ratio into the economics gate (rq-0-82), alongside $/kg.
 4. Re-run the bom-0-4 and bom-0-16 consensus with these findings.
