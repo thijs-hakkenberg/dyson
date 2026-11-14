@@ -159,13 +159,31 @@ Limits of this pass:
 - **The node burn is impulsive.** At the tug's thrust 150 m/s takes 4–8 days and 300 m/s takes 8–16.
 - **Return is taken as the mirror image of departure**, which the equations allow; it was not computed separately, and the tug's position on the node orbit is treated as plannable.
 - **At most two swingbys**, the second after an in-plane transfer.
-- **The scout constraint was not re-applied.**
 
 Results: `publications/data/cislunar-flyby/` and `publications/data/nea-trajectories/{legs-flyby-model.csv, flyby-model.json}`.
 
+### Scout constraint on the third-pass targets (2026-11-14)
+
+A scout must reach its asteroid within 3.5 km/s of its own propulsion (bom-0-1). `run_scout_flyby_model.py` applies that to the targets above for two ways of starting. The swingby option is computed in the same three-body model: a launch that just reaches the Moon, one swingby, escape.
+
+| Tug leg Δv cap, cycle | Tug only | And scout launched to C3 = 10 km²/s² | And scout launched to C3 ≈ 0 with a lunar swingby |
+|---|---|---|---|
+| 5.0 km/s, 4 yr | 26 | 26 | 8–16 |
+| 5.0 km/s, 5 yr | 67 | 67 | 21–31 |
+| 6.5 km/s, 4 yr | 53 | 52 | 11–21 |
+| 6.5 km/s, 5 yr | 114 | 112 | 21–31 |
+
+1. **Launched to C3 = 10, the scout does not bind.** 141 of the 150 studied targets are within the scout's 3.5 km/s, and every target that closes at the 5 km/s tug cap is among them. The joint count at the consensus tug budget and four years is 26.
+2. **Launched to C3 ≈ 0 with a lunar swingby, the scout is the limit.** 22–32 targets are within reach, and 8–16 of the 26 remain. The range is the launch energy: the swingby gives 1.5 km/s in the ecliptic from a launch at C3 ≤ −1.0 km²/s², which matches the published single-flyby figures, and 1.8 km/s from C3 = −0.2. The higher figure has not been checked with the Moon's gravity acting throughout.
+3. **So the falsifier of 20 clears only with the C3 = 10 scout launch**, which the consensus does not specify (it gives C3 ≈ 0). That is open trade question 1.2 in the plan, and this is its answer on target count; the launch-mass side of the trade is not done.
+4. **Taxonomy is still the gap.** Of the 26, 23 are unclassified and one is metal-plausible by taxonomy.
+
+Tug-only counts in this table differ by one or two from the table above at the looser caps because they are re-assembled from the rounded leg file. Results: `publications/data/nea-trajectories/{targets-flyby-model.csv, scout-flyby-model.json, scout-flyby-model-low-launch.json}`.
+
 ## Next steps
 
-1. Re-apply the scout constraint to the third-pass targets, and extend the three-body model to halo node orbits and the Moon's inclined orbit.
+1. Extend the three-body model to halo node orbits and the Moon's inclined orbit, and check the launch-to-Moon swingby with the Moon's gravity on.
+1. Launch-mass side of the scout trade: what C3 = 10 costs in scout mass or launcher class against C3 ≈ 0 with a swingby.
 2. Re-run the chain model (rq-0-61) with per-target cycle time, Δv and thrust time from `targets.csv`, and trade tug power against cycle time.
 3. Hand the shortlist to the remote survey for taxonomy and rotation (bom-0-1, rq-0-50).
 4. Higher-fidelity check of the best ten targets (ephemeris model, flyby geometry).

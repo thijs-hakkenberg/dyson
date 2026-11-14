@@ -267,6 +267,8 @@ modelled and would add candidates.
 
 **Update 2026-11-13 (three-body flyby model, rq-0-52).** With the flyby computed in a three-body model of the SEL1 node, the Moon and the escape (node burn counted in leg Δv, cycles timed node to node), 26 targets close at 5 km/s per leg and four years, 67 at five years, and 54 at 6.5 km/s and four years (tug only). The 3-year cycle criterion was not re-counted; at the 5 km/s cap the median cycle is 4.6 years and the fastest tenth of targets take 3.6.
 
+**Update 2026-11-14 (scout constraint on those targets).** All 26 remain if scouts launch to C3 = 10 km²/s²; 8–16 remain with the C3 ≈ 0 launch that `phase-0/prospecting-satellites` specifies plus a lunar swingby. The scout launch energy, not the tug, now decides whether the falsifier of 20 clears.
+
 ### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
 `phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
 (≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the
