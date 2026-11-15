@@ -886,7 +886,7 @@ export const QUESTION_DEPENDENCIES: QuestionDependency[] = [
 		dependsOn: [],
 		blocks: ['rq-0-53', 'rq-0-55', 'rq-0-59', 'rq-0-61'],
 		criticalPath: true,
-		hasLiteratureReview: false,
+		hasLiteratureReview: true,
 		hasConclusion: false,
 		gateDescription: 'Cadence sets fleet size and propellant demand'
 	},

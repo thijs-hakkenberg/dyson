@@ -106,14 +106,34 @@ What it shows:
 
 Limits of this pass:
 
-- **The flyby gain is an assumption.** The 1.0–1.5 km/s figure is recalled from the asteroid-redirect trajectory studies and has not been checked against a source. It is applied as an energy credit with free direction; the Moon's 5° inclination and the transfer between the flyby and the SEL1 node are not modelled.
+- **The flyby gain was an assumption when this pass was run.** It has since been checked against the literature; see the next section. The size holds, the 30-day allowance and the free direction do not.
 - **Screening-grade optimisation.** Two-body dynamics, 20 segments per leg, thrust acceleration fixed at the leg's starting mass (conservative), solar power held at its 1 AU value (optimistic beyond 1 AU).
 - **Counts are lower bounds.** Stage 2 covers 150 of 379 eligible asteroids, seeded from a 20-day departure grid.
 - **Not modelled:** Earth resonant flybys, which add about a year per use, and double lunar flybys.
 
+## Flyby assumption checked against the literature (2026-11-13)
+
+The review is in `research/analysis.md`, with sources in `research/papers.yaml`.
+
+- **Size: supported.** Four independent trajectory analyses give 1.2–1.46 km/s of Earth-relative excess speed from lunar flybys, for capture as well as escape. The best-supported single value is 1.4 km/s; the 1.5 km/s case above is slightly high.
+- **Time: not supported.** The sources need 60–200 days per assisted leg, not 30.
+- **Direction: not supported as modelled.** A short flyby sequence is limited to about 30° from the ecliptic; 61% of the legs in this study are inside that.
+- **No source** for the wait at the SEL1 node for a suitable lunar encounter, or for capture of a loaded tug back to that node.
+
+Targets of about 100 m or more that close a tug cycle of four years or less, re-counted (`publications/data/nea-trajectories/flyby-check.json`):
+
+| Flyby, leg Δv cap | As run (30 d, any direction) | 90 d | 90 d and within 30° of the ecliptic |
+|---|---|---|---|
+| 1.0 km/s, 5.0 km/s | 20 | 12 | 5 |
+| 1.5 km/s, 5.0 km/s | 45 | 28 | 16 |
+| 1.0 km/s, 6.5 km/s | 58 | 33 | 17 |
+| 1.5 km/s, 6.5 km/s | 82 | 53 | 31 |
+
+The last column is a lower bound, because it drops out-of-plane legs instead of re-optimising them. With a supported flyby the falsifier of 20 candidates does not clear at 5 km/s per leg and four years. It clears at 6.5 km/s per leg, or at five-year cycles (51–83 targets at 90 days, before the direction limit). The scout constraint was not re-applied.
+
 ## Next steps
 
-1. Find a source for the lunar-flyby excess speed and its geometric limits; this is now the assumption the result rests on.
+1. Put the flyby direction limit and a direction-dependent time allowance into the leg optimiser, and compute the SEL1 node-to-Moon leg and its phasing wait in a three-body model; the literature review found no source for the last.
 2. Re-run the chain model (rq-0-61) with per-target cycle time, Δv and thrust time from `targets.csv`, and trade tug power against cycle time.
 3. Hand the shortlist to the remote survey for taxonomy and rotation (bom-0-1, rq-0-50).
 4. Higher-fidelity check of the best ten targets (ephemeris model, flyby geometry).
