@@ -265,6 +265,12 @@ modelled and would add candidates.
 
 **Update 2026-11-13 (flyby literature check, rq-0-52).** The flyby size (1.0–1.5 km/s) is supported by the literature at about 1.4 km/s; the 30-day allowance and free direction are not. With 90 days per assisted leg and the excess velocity within 30° of the ecliptic, 5–16 targets close at 5 km/s per leg and four years (tug only), below the falsifier of 20. It clears at 6.5 km/s per leg (17–31) or with five-year cycles.
 
+**Update 2026-11-13 (three-body flyby model, rq-0-52).** With the flyby computed in a three-body model of the SEL1 node, the Moon and the escape (node burn counted in leg Δv, cycles timed node to node), 26 targets close at 5 km/s per leg and four years, 67 at five years, and 54 at 6.5 km/s and four years (tug only). The 3-year cycle criterion was not re-counted; at the 5 km/s cap the median cycle is 4.6 years and the fastest tenth of targets take 3.6.
+
+**Update 2026-11-14 (scout constraint on those targets).** All 26 remain if scouts launch to C3 = 10 km²/s²; 8–16 remain with the C3 ≈ 0 launch that `phase-0/prospecting-satellites` specifies plus a lunar swingby. The scout launch energy, not the tug, now decides whether the falsifier of 20 clears.
+
+**Update 2026-11-15 (scout launch trade).** C3 = 6 km²/s² keeps all 26 inside the scout's 3.5 km/s, so C3 = 10 is not needed. The specified C3 ≈ 0 launch with a lunar swingby keeps 25–26 if the scout spends 4.5 km/s on the transfer, which Claude's (4.5 km/s) and GPT's (4.81 km/s) designs carry and Gemini's 250 kg design does not (9,000 thruster hours on one 600 W thruster). The ride-along the consensus assumes fixes the launch date, and a 500–550 kg scout exceeds the standard 320 kg large port. Details and a proposed position are in rq-0-52; the model positions are not changed.
+
 ### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
 `phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
 (≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the

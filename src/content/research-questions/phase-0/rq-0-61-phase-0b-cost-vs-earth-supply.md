@@ -125,9 +125,22 @@ The lunar-flyby gain these results rest on has been checked against the literatu
 
 So the position recorded above (5 km/s cap, lunar flybys, four-year cycles) holds on cost and import ratio but leaves too few targets. The trade is now between a 6.5 km/s leg cap (import ratio about 0.48–0.51) and five-year cycles (more tugs). Results are in `publications/data/phase0-chain/flyby-allowance.json`.
 
+## Re-run on the three-body flyby legs (2026-11-13)
+
+rq-0-52 now takes the flyby from a three-body model of the SEL1 node, the Moon and the escape, with the node burn counted in the leg Δv and the cycle timed node to node. Median results at 1.0–1.3 kt a year, with replacements:
+
+| Leg Δv cap, cycle limit | Targets | Cycle | Import ratio | P(ratio ≤ 0.5) | 6.25 yr | 10 yr | 20 yr |
+|---|---|---|---|---|---|---|---|
+| 5.0 km/s, 4 yr | 26 | 3.7 yr | 0.46 | 0.69 | 4.9× | 2.6× | 1.7× |
+| 5.0 km/s, 5 yr | 67 | 4.3 yr | 0.47 | 0.64 | 5.8× | 2.8× | 1.8× |
+| 5.75 km/s, 4 yr | 39 | 3.6 yr | 0.52 | 0.44 | 4.9× | 2.6× | 1.8× |
+| 6.5 km/s, 4 yr | 53 | 3.6 yr | 0.55 | 0.32 | 5.1× | 2.7× | 1.9× |
+
+The position recorded in the second pass stands with one change in its basis: the 5 km/s leg cap with lunar flybys and four-year cycles closes on 26 targets, keeps the import ratio at 0.46 and costs the same as before. Raising the cap to 6.5 km/s doubles the targets but takes the import ratio over the 0.50 limit. Five-year cycles are the cheaper way to more targets on import ratio, and the dearer one on cost for a short run. Results are in `publications/data/phase0-chain/flyby-model.json`.
+
 ## Next steps
 
-1. Re-run with the flyby direction limit inside the trajectory optimiser (rq-0-52), then settle the trade between a 6.5 km/s leg cap and five-year cycles.
+1. Enforce repeat departure windows in fleet sizing, using the third-pass legs.
 2. Enforce repeat departure windows per target when sizing the fleet.
 3. Put the import ratio and the launched-to-delivered mass ratio into the economics gate (rq-0-82), alongside $/kg.
 4. Re-run the bom-0-4 and bom-0-16 consensus with these findings.
