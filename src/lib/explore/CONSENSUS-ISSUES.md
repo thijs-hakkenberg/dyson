@@ -271,6 +271,8 @@ modelled and would add candidates.
 
 **Update 2026-11-15 (scout launch trade).** C3 = 6 km²/s² keeps all 26 inside the scout's 3.5 km/s, so C3 = 10 is not needed. The specified C3 ≈ 0 launch with a lunar swingby keeps 25–26 if the scout spends 4.5 km/s on the transfer, which Claude's (4.5 km/s) and GPT's (4.81 km/s) designs carry and Gemini's 250 kg design does not (9,000 thruster hours on one 600 W thruster). The ride-along the consensus assumes fixes the launch date, and a 500–550 kg scout exceeds the standard 320 kg large port. Details and a proposed position are in rq-0-52; the model positions are not changed.
 
+**Update 2026-11-15 (halo node orbits, inclined Moon).** With the node on a halo orbit and the Moon on its tilted orbit, 23 targets close at 5 km/s legs and four years (26 before), all within the scout's reach from C3 = 6. This needs node burns of up to 300 m/s; with 150 m/s only, 13 close. The node's orbit type and its departure burn are not in any spec and now bear on the falsifier.
+
 ### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
 `phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
 (≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the
