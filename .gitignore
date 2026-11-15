@@ -43,3 +43,4 @@ research/*.pdf
 reconciliation/*/round-*/prompts/
 reconciliation/**/prompts/
 publications/data/cislunar-flyby/escapes*.npz
+publications/data/nea-trajectories/scout-launch-trade-cache.json

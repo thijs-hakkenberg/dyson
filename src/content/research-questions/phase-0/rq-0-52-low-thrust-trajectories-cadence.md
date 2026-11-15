@@ -180,10 +180,47 @@ A scout must reach its asteroid within 3.5 km/s of its own propulsion (bom-0-1).
 
 Tug-only counts in this table differ by one or two from the table above at the looser caps because they are re-assembled from the rounded leg file. Results: `publications/data/nea-trajectories/{targets-flyby-model.csv, scout-flyby-model.json, scout-flyby-model-low-launch.json}`.
 
+### Scout launch trade (2026-11-15)
+
+The launch-mass side of open question 1.2: what each way of leaving Earth costs. `run_scout_launch_sweep.py` re-solves the scout transfer to all 150 targets for a launch to C3 = 0, to C3 ≈ 0 with a lunar swingby, and straight to C3 = 2 to 20 km²/s², this time keeping transfers above 3.5 km/s. `run_scout_launch_trade.py` adds the mass, launcher and shared-launch checks.
+
+**Targets against launch energy and scout Δv.** Joint count with the tug at a 5 km/s leg cap and a four-year cycle (26 targets):
+
+| Scout leaves by | Scout Δv 3.5 km/s | 4.0 | 4.5 | Δv for all 26 |
+|---|---|---|---|---|
+| Launch to C3 = 0, no assist | 0 | 1 | 3 | 7.1 km/s |
+| C3 ≈ 0 and a lunar swingby | 8–16 | 19–23 | 25–26 | 4.2–5.0 km/s |
+| Launch to C3 = 4 | 20 | 26 | 26 | 4.0 km/s |
+| Launch to C3 = 6 | 26 | 26 | 26 | 3.4 km/s |
+| Launch to C3 = 10 | 26 | 26 | 26 | 2.7 km/s |
+
+1. **C3 = 10 is more than these targets need.** C3 = 6 keeps all 26 inside 3.5 km/s, and C3 = 4 keeps 20. At the looser tug settings C3 = 6 keeps 62 of 67 (five-year cycle) and 45 of 53 (6.5 km/s legs).
+2. **The swingby route closes with about 1 km/s more scout Δv.** At 4.5 km/s it reaches 25–26 of the 26. Claude's scout is designed for 4.5 km/s and GPT's for 4.81 km/s ideal, with 3.5 km/s allocated to the transfer, so on those designs the swingby route spends the margin and the secondary target, not new hardware.
+3. **Electric Δv is cheap in mass and dear in thruster hours.** On Claude's 550 kg scout, 3.5 → 4.5 km/s is 32 kg more (518 → 550 kg) and 3,900 → 5,200 firing hours, against a planned qualification of 6,500 h. Gemini's 250 kg scout on one 600 W thruster needs 6,800 h at 3.5 km/s and 9,000 h at 4.5 km/s, so the swingby route does not close for that design.
+
+**What the launch costs.** Launcher payload against C3 is our estimate from published payloads of a Falcon 9 class vehicle (the provider's curve was not obtained): 2.2–2.7 t to C3 = 10 and 3.3–3.6 t to C3 = 0 with the first stage recovered, 4.0–4.6 t to C3 = 10 expended.
+
+4. **On a dedicated launch, C3 = 10 costs nothing extra.** A pair of scouts is 0.5–1.1 t. The launcher has more than twice that at C3 = 10, so the price is the same at either energy: about $70–100M a launch at published prices, or three launches for six scouts against a 0A launch line of $250–900M (bom-0-8). ESCAPADE, two 535 kg spacecraft, flew for about $20M on an early New Glenn.
+5. **Two scouts on one launch to C3 = 10 must leave on the same day in the same direction.** Of the 325 pairs among the 26 targets, 25 can share a launch with both scouts inside 3.5 km/s (219 of 2,211 pairs among the 67). So pairs can share, but the launch fixes which two asteroids go together. This is a lower bound: the second scout was put on the first one's best launch, not a jointly chosen one.
+6. **C3 ≈ 0 is only cheaper as a ride-along, and a ride-along gives up the date.** Janus lost its asteroids, and ESCAPADE its ride, when the main passenger's launch changed. The swingby gives back the choice of direction, not of date. A 500–550 kg scout also needs the 700 kg class of ride-along port; the standard large port carries 320 kg. No price for a ride-along to lunar transfer was found.
+
+**Two ways to add energy after a C3 ≈ 0 launch.**
+
+7. **A chemical burn at perigee** of 0.45–0.53 km/s raises C3 ≈ 0 to C3 = 10. It adds 96–113 kg and a second propulsion system: 614–631 kg in all for Claude's scout, above its 600 kg envelope, and 548–563 kg for GPT's.
+8. **A loop under thrust and an Earth flyby** (the route Hayabusa flew, and close to what ESCAPADE flew chemically). In our solver 0.6–0.7 km/s of thrust over 1.3–2.1 years turns the swingby's 1.5–1.8 km/s into a return at 3.2 km/s. If the flyby can then point that speed anywhere, all 26 targets are inside 3.5 km/s. That is an upper bound: the flyby's turn is limited and was not modelled. It delays arrival by 1.3–2.1 years.
+
+**Proposed position for question 1.2** (a bet, to be revisited, not a ruling):
+
+- Size the scout launch for C3 ≈ 6 on a dedicated launch per pair, and choose each pair from the asteroid pairs that can share one.
+- Keep 4.5 km/s or more of ideal Δv on the scout, as Claude and GPT already do. That keeps the C3 ≈ 0 ride-along with a lunar swingby open as a fallback that reaches 25–26 of the 26.
+- Revisit if a ride-along to lunar transfer is priced well below a dedicated launch, if iodine thruster life (rq-0-54) falls short of about 5,200 h, or if the halo-orbit and inclined-Moon extension changes the tug's target set.
+
+Limits: the scout's acceleration is held at the 525 kg reference while its mass changes by up to 10%; the least-Δv transfers found are long (median 700 days) and arrival date was not traded; loiter orbits before a swingby are not modelled; prices are published list or contract figures, not quotes. Results: `publications/data/nea-trajectories/{scout-launch-sweep.csv, scout-launch-sweep.json, scout-launch-trade.json}`.
+
 ## Next steps
 
 1. Extend the three-body model to halo node orbits and the Moon's inclined orbit.
-1. Launch-mass side of the scout trade: what C3 = 10 costs in scout mass or launcher class against C3 ≈ 0 with a swingby.
+1. Scout launch trade, remaining: a priced ride-along to lunar transfer, the Earth flyby's turn limit, arrival date against Δv, and loiter before the swingby.
 2. Re-run the chain model (rq-0-61) with per-target cycle time, Δv and thrust time from `targets.csv`, and trade tug power against cycle time.
 3. Hand the shortlist to the remote survey for taxonomy and rotation (bom-0-1, rq-0-50).
 4. Higher-fidelity check of the best ten targets (ephemeris model, flyby geometry).
