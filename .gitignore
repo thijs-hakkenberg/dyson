@@ -44,3 +44,5 @@ reconciliation/*/round-*/prompts/
 reconciliation/**/prompts/
 publications/data/cislunar-flyby/escapes*.npz
 publications/data/nea-trajectories/scout-launch-trade-cache.json
+publications/data/nea-trajectories/legs-flyby-station-*.csv
+publications/data/nea-trajectories/flyby-station-*-p[0-9].json

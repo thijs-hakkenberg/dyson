@@ -150,6 +150,17 @@ rq-0-52's fourth pass puts the node on a halo orbit and the Moon on its tilted o
 
 The position stands unchanged. What the halo orbit changes is the node burn: with 150 m/s only, 13 targets close instead of 23, at the same cost ratios. Results: `publications/data/phase0-chain/flyby-3d-{planar-orbits,halo}.json`.
 
+## Re-run with the station at one place on one node orbit (2026-11-16)
+
+rq-0-52's fifth pass requires the tug to leave from, and return to, the place the station is at on the day. Far fewer targets then close at 5 km/s legs and four-year cycles. The chain model was re-run on the best and the worst case (`run_phase0_chain_flyby.py --model=station-<orbit> --phase0=k`), node burns up to 300 m/s:
+
+| Station | Targets | Cycle | Import ratio | 6.25 yr | 10 yr | 20 yr |
+|---|---|---|---|---|---|---|
+| Halo 120,000 km, first place | 9 | 3.61 yr | 0.47 | 4.9× | 2.57× | 1.72× |
+| Halo 300,000 km, fourth place | 5 | 3.93 yr | 0.46 | 5.2× | 2.64× | 1.74× |
+
+The cost position stands: the chain needs only a few good targets, and those that remain have much the same cycle and Δv. What does not stand is the margin on target count, which rq-0-52 now puts between about 9 and 23 against a falsifier of 20. Results: `publications/data/phase0-chain/flyby-station-{halo-120-p0,halo-300-p3}.json`.
+
 ## Next steps
 
 1. Enforce repeat departure windows in fleet sizing, using the third-pass legs.
