@@ -273,6 +273,8 @@ modelled and would add candidates.
 
 **Update 2026-11-15 (halo node orbits, inclined Moon).** With the node on a halo orbit and the Moon on its tilted orbit, 23 targets close at 5 km/s legs and four years (26 before), all within the scout's reach from C3 = 6. This needs node burns of up to 300 m/s; with 150 m/s only, 13 close. The node's orbit type and its departure burn are not in any spec and now bear on the falsifier.
 
+**Update 2026-11-16 (station place on the node orbit).** The 23 assumed a tug could use any place on any halo orbit. A station is at one place on one orbit on a given day, and tugs must leave from and return to it. With that, 5–9 targets close at 5 km/s legs and four years (three orbits, eight initial station places each); 20 is passed only with 6.5 km/s legs (20–30) or five-year cycles (26–42). The new counts are a low estimate (tables not converged, 20-day date steps), the 23 a high one. Claude's bom-0-1 falsifier of 20 is therefore not shown to clear at the consensus leg Δv and cycle. No spec says which node orbit the station is on, how many stations there are, or whether a tug may park away from the station before departure. The chain cost ratios are unchanged (4.9–5.2×, 2.6×, 1.7×).
+
 ### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
 `phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
 (≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the
