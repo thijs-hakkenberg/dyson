@@ -277,6 +277,8 @@ modelled and would add candidates.
 
 **Update 2026-11-17 (count solved directly).** Solving the node-to-escape leg for each tug leg directly, instead of reading the tables, gives 3–6 targets at 5 km/s legs and four years for the best node orbit (two station places tried); the tables over-counted by interpolating between bins. The falsifier of 20 is not met at the consensus leg Δv and cycle with one station and no parking. The count depends on an unspecified operational choice: how many stations share the node orbit, or whether tugs park on it before departure.
 
+**Update 2026-11-17 (several stations, or parking).** Solving every leg from each of eight station places and combining them: 2–6 targets with one station, 7–10 with two, 11–12 with four, and 15 with eight. Fifteen is also the upper bound for one station whose tugs park anywhere on the orbit (phasing not charged). Requiring a tug to return to the station it left gives 11 at most. At 5 km/s legs and four-year cycles the falsifier of 20 is not met by any number of stations. Whether it can be met now depends on the caps, which are to be checked directly at 6.5 km/s and five years with the place free. The number of stations, or tug parking, is still an operational choice that no spec makes; it roughly trebles the count.
+
 ### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
 `phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
 (≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the

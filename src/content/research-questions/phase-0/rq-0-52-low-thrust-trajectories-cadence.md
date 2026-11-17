@@ -320,10 +320,36 @@ How firm: the solver is local, so a leg it fails on is not proven impossible. Bu
 
 Results: `publications/data/nea-trajectories/node-legs-direct-halo-120-p{0,4}[-station-legs].json`.
 
+## Several stations, or tugs parking on the node orbit (2026-11-17)
+
+The count above holds for one station, whose place on the node orbit is fixed by the date. Here the same 235 legs are solved directly from each of the eight station places, an eighth of the orbit apart (`run_node_legs_direct.py --phase0=0,…,7`). They are then combined for 1, 2, 4 or 8 stations spread evenly round the orbit, with every rotation of each set counted (`run_node_stations_direct.py`). A tug leaves from any station of the set and comes back to any. The stricter count makes it come back to the one it left. The escape may fall 10 days either side of the leg's date, which moves the place by about half an eighth, so eight places together cover the orbit. Eight stations therefore also stand for one station whose tugs park on the orbit and leave from wherever they need to. The cost of moving round the orbit to get there (phasing), and of getting back to the station afterwards, is not charged, so that count is an upper bound for parking. Each leg had at most 15 minutes of solving; none ran out. The two places run before (first and fifth eighths) gave the same counts again.
+
+Halo 120,000 km node orbit, 5 km/s legs, four-year cycles, burns up to 300 m/s:
+
+| Stations on the node orbit | Targets | Returning to the station it left | Median cycle |
+|---|---|---|---|
+| 1 (each of 8 places) | 2–6 | 2–6 | 3.1–3.6 yr |
+| 2, opposite | 7–10 | 4–8 | 3.3–3.6 yr |
+| 4 | 11–12 | 8–10 | 3.4–3.5 yr |
+| 8, or one station with tugs parking anywhere (phasing not charged) | 15 | 11 | 3.5 yr |
+
+Of the 167 distinct legs, 55 can be delivered in full from some place, and 148 at least in part. A leg delivered in full is typically delivered from only one place of the eight. Eight of the 23 targets close from no place.
+
+What this settles:
+
+1. **Choice of place roughly trebles the count, but does not reach 20 at the consensus caps.** Even with the place free and phasing free, 15 targets close at 5 km/s legs and four-year cycles. The remaining gap from the pooled table's 23 is the tables' interpolation over-count, not the station's place. So the falsifier is not met at these caps by any number of stations.
+2. **Several stations are worth about as much as parking.** Four stations already give 11–12. A tug that must return to the station it left loses a quarter of that.
+3. **The cycles stay at about 3.5 years**, so the chain cost ratios of rq-0-61 hold (they were the same for 5, 9, 23 and 26 targets).
+4. **The falsifier now turns on the caps.** Reaching 20 needs faster legs, longer cycles, or both, as well as choice of place. The tables put 20 within reach at 6.5 km/s or five years, but that has to be checked directly.
+
+How firm: the solver is local, as before. The eight-station count leaves out the phasing cost, so for parking it is an upper bound. One node orbit was run.
+
+Results: `publications/data/nea-trajectories/node-legs-direct-halo-120-p{0..7}.json` with per-leg `…-legs.csv`, `node-stations-direct-halo-120.json`, `targets-node-stations-direct-halo-120.csv`.
+
 ## Next steps
 
-1. Model what would give back choice of place: two or more stations on the node orbit, or a tug parking on it before departure, and solve the count again directly.
-1. Check the counts at 6.5 km/s legs and five-year cycles directly (1,800 legs per case at five years).
+1. Check the counts at 6.5 km/s legs and five-year cycles directly, with the place free (eight places). This now decides the falsifier.
+1. Price phasing on the node orbit, so that the parking count can be charged for it, and set the number of stations against that.
 1. Check the inclined swingby against the Moon's gravity.
 1. Scout launch trade, remaining: a priced ride-along to lunar transfer, the Earth flyby's turn limit, arrival date against Δv, and loiter before the swingby.
 2. Re-run the chain model (rq-0-61) with per-target cycle time, Δv and thrust time from `targets.csv`, and trade tug power against cycle time.
