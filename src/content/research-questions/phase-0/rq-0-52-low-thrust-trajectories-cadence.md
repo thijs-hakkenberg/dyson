@@ -333,23 +333,25 @@ Halo 120,000 km node orbit, 5 km/s legs, four-year cycles, burns up to 300 m/s:
 | 4 | 11–12 | 8–10 | 3.4–3.5 yr |
 | 8, or one station with tugs parking anywhere (phasing not charged) | 15 | 11 | 3.5 yr |
 
-Of the 167 distinct legs, 55 can be delivered in full from some place, and 148 at least in part. A leg delivered in full is typically delivered from only one place of the eight. Eight of the 23 targets close from no place.
+Of the 235 distinct legs, 64 can be delivered in full from some place, and 201 at least in part. A leg delivered in full is typically delivered from only one place of the eight.
+
+**Phasing priced (2026-11-18).** For parking, the tug has to move round the orbit from the station to the place it leaves from, and back from where it arrives. A two-burn transfer in the Sun–Earth three-body model does this (`node_phasing.py`, `run_node_phasing.py`). It was solved by shooting for 16 start places, offsets of one to four eighths either way, and 20 to 200 days. The cost is about 200 m/s per eighth (median 208 m/s for one eighth, 382–399 for two, 513–536 for three, 572 for half the orbit), at a best duration of about four months. Charged out of the leg's 5 km/s and added to the cycle, this gives **6–11 targets with one station and parking tugs**, depending on where the station is (median cycle 3.5–3.7 years). Two burns is an upper bound on phasing cost; more burns or revolutions may cost less. So parking lies between 6–11 and the uncharged 15. Eight of the 23 targets close from no place.
 
 What this settles:
 
 1. **Choice of place roughly trebles the count, but does not reach 20 at the consensus caps.** Even with the place free and phasing free, 15 targets close at 5 km/s legs and four-year cycles. The remaining gap from the pooled table's 23 is the tables' interpolation over-count, not the station's place. So the falsifier is not met at these caps by any number of stations.
-2. **Several stations are worth about as much as parking.** Four stations already give 11–12. A tug that must return to the station it left loses a quarter of that.
+2. **Several stations do better than parking at this phasing cost.** Four stations give 11–12; one station with tugs paying for two-burn phasing gives 6–11. A tug that must return to the station it left loses about a quarter.
 3. **The cycles stay at about 3.5 years**, so the chain cost ratios of rq-0-61 hold (they were the same for 5, 9, 23 and 26 targets).
 4. **The falsifier now turns on the caps.** Reaching 20 needs faster legs, longer cycles, or both, as well as choice of place. The tables put 20 within reach at 6.5 km/s or five years, but that has to be checked directly.
 
 How firm: the solver is local, as before. The eight-station count leaves out the phasing cost, so for parking it is an upper bound. One node orbit was run.
 
-Results: `publications/data/nea-trajectories/node-legs-direct-halo-120-p{0..7}.json` with per-leg `…-legs.csv`, `node-stations-direct-halo-120.json`, `targets-node-stations-direct-halo-120.csv`.
+Results: `publications/data/nea-trajectories/node-legs-direct-halo-120-p{0..7}.json` with per-leg `…-legs.csv`, `node-stations-direct-halo-120.json` (includes the parking count with phasing), `targets-node-stations-direct-halo-120.csv`, `node-phasing-halo-120.json`.
 
 ## Next steps
 
 1. Check the counts at 6.5 km/s legs and five-year cycles directly, with the place free (eight places). This now decides the falsifier.
-1. Price phasing on the node orbit, so that the parking count can be charged for it, and set the number of stations against that.
+1. Look for cheaper phasing than two burns (several burns, low thrust over more revolutions); at about 200 m/s per eighth it decides whether parking can stand in for more stations.
 1. Check the inclined swingby against the Moon's gravity.
 1. Scout launch trade, remaining: a priced ride-along to lunar transfer, the Earth flyby's turn limit, arrival date against Δv, and loiter before the swingby.
 2. Re-run the chain model (rq-0-61) with per-target cycle time, Δv and thrust time from `targets.csv`, and trade tug power against cycle time.
