@@ -297,10 +297,33 @@ How firm the new counts are: they are a low estimate, as the pooled 23 was a hig
 
 Limits of this pass: station place in eighths of the period and node angle in 60° steps, interpolated; one swingby; the swingby patched, not flown with the Moon's gravity; a 14.8-day mean wait for the Moon, during which the station moves less than one bin; three orbits out of the two families. Results: `publications/data/cislunar-flyby/{arrival-check.json, reach-3d-station-*.json, summary-3d-station.json, station-reach-convergence.json}`, `publications/data/nea-trajectories/{flyby-station-compare.json, targets-flyby-station.csv}` and `publications/data/phase0-chain/flyby-station-*.json`.
 
+## Count settled with the station's place fixed (2026-11-17)
+
+The fifth pass left the count between about 9 and 23. Here the leg between the node and the edge of the Earth's sphere of influence is solved for each tug leg directly, instead of read from a table (`node_leg_direct.py`, `run_node_legs_direct.py`). On the date of the leg, with the station where it is, the Moon where it is and its node line where it is, a least-squares solver looks for a burn at the station (date, direction, size up to the budget) and a swingby (turn up to the lowest pass, any azimuth). These must give exactly the excess velocity the leg uses, with the escape within 10 days of the leg's date and within the leg's time budget. Seeds come from the sample of 8 million escapes behind the station tables. Where the full excess speed cannot be had in the wanted direction, the most that can is found by stepping the speed up from a reachable one, and the shortfall is charged to the tug's thrusters one for one. Arrivals are solved as their mirror image. Re-flying stored escapes with the single-trajectory code reproduces them to a few metres per second.
+
+Halo 120,000 km node orbit (the best of the three in the fifth pass), 5 km/s legs, four-year cycles, burns up to 300 m/s:
+
+| Station's place at J2000 | Legs from the pooled table | Legs from this station's table | Either | Table said |
+|---|---|---|---|---|
+| First eighth | 6 | 4 | 6 | 9 |
+| Fifth eighth | 3 | 2 | 3 | 8 |
+
+Of the 235 legs behind the pooled 23, the right excess velocity could be delivered in full for 9–11. For 67–78 it could be delivered only in part, and for 24–40 no stored escape came near enough to start from. Even ignoring the Δv and cycle caps, only 9–11 of the 23 targets have both an outbound and a return leg that can be flown at all.
+
+What this settles:
+
+1. **At 5 km/s legs and four-year cycles, with one station on one node orbit, the count is in single figures: 3–6.** The tables over-counted as well as under-counted. Interpolating between bins credited directions and dates no single trajectory reaches. So the fifth pass's 5–9 was not a low estimate after all, and the falsifier of 20 is not met at the consensus leg Δv and cycle.
+2. **The cycles of the targets that do close are not longer** (median 3.5 years), so the chain cost model is unaffected (rq-0-61, fifth-pass section).
+3. **What would restore the count is choice of the station's place,** which none of the specs provide: several stations spread round the orbit, or a tug that can park and wait on the orbit before leaving. Or else the caps are relaxed. The fifth pass's tables put 20 within reach at 6.5 km/s legs or five-year cycles, but those counts carry the same over-count and have not been checked directly.
+
+How firm: the solver is local, so a leg it fails on is not proven impossible. But it recovers known escapes from perturbed starts, and its seeds are the densest sample yet. Only two targets close in both station places tried. The count cannot reach 20 unless most of the legs it fails on are in fact reachable. Two station places of eight were run on one orbit (a run takes 7 to 25 minutes, though one stalled for hours on slow solves).
+
+Results: `publications/data/nea-trajectories/node-legs-direct-halo-120-p{0,4}[-station-legs].json`.
+
 ## Next steps
 
-1. Settle the count with the station's place fixed: solve the node-to-escape leg for each tug leg directly (target the needed escape direction on the needed date) instead of reading a table, with departure dates a few days apart. This decides whether the falsifier of 20 clears at 5 km/s and four years.
-1. Options that would restore choice of place, none yet modelled: two stations half a period apart, a tug that parks on a different node orbit before departure, or a second swingby used for timing.
+1. Model what would give back choice of place: two or more stations on the node orbit, or a tug parking on it before departure, and solve the count again directly.
+1. Check the counts at 6.5 km/s legs and five-year cycles directly (1,800 legs per case at five years).
 1. Check the inclined swingby against the Moon's gravity.
 1. Scout launch trade, remaining: a priced ride-along to lunar transfer, the Earth flyby's turn limit, arrival date against Δv, and loiter before the swingby.
 2. Re-run the chain model (rq-0-61) with per-target cycle time, Δv and thrust time from `targets.csv`, and trade tug power against cycle time.
