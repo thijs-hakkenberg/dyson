@@ -348,9 +348,38 @@ How firm: the solver is local, as before. The eight-station count leaves out the
 
 Results: `publications/data/nea-trajectories/node-legs-direct-halo-120-p{0..7}.json` with per-leg `…-legs.csv`, `node-stations-direct-halo-120.json` (includes the parking count with phasing), `targets-node-stations-direct-halo-120.csv`, `node-phasing-halo-120.json`.
 
+## Relaxed caps solved directly (2026-11-18)
+
+The same direct solve and combination at the two relaxed caps that the fifth pass's tables said would reach 20. Every leg of a cycle within the caps on the pooled table was solved from all eight station places (`run_node_legs_direct.py --phase0=0,…,7 --cap=… --cycle=…`), with legs already solved reused. That is 801 distinct legs at 6.5 km/s and four years, and 1,816 at 5 km/s and five years. None ran out of time. The count is then made as above (`run_node_stations_direct.py --cap=… --cycle=…`).
+
+Halo 120,000 km node orbit, burns up to 300 m/s:
+
+| Stations on the node orbit | 5 km/s, 4 yr | 6.5 km/s, 4 yr | 5 km/s, 5 yr |
+|---|---|---|---|
+| 1 (each of 8 places) | 2–6 | 17–27 | 26–34 |
+| 1, tugs parking, two-burn phasing charged | 6–11 | 36–39 | 38–46 |
+| 2, opposite | 7–10 | 31–37 | 39–42 |
+| 4 | 11–12 | 39–41 | 46–47 |
+| 8 (or parking, phasing not charged) | 15 | 41 | 51 |
+| Targets closing on the pooled table | 23 | 48 | 58 |
+| Median cycle, one station | 3.1–3.6 yr | 3.5 yr | 4.4 yr |
+
+At 6.5 km/s, 7 of the 8 station places reach 20 with one station. At five years all 8 do. Requiring the tug to return to the station it left changes nothing with one station, and costs 2–5 targets with more.
+
+What this settles:
+
+1. **The falsifier is met with one station once either cap is relaxed, and not at the consensus caps.** At 5 km/s and four years no arrangement reaches 20 (at most 15). At 6.5 km/s and four years one station gives 17–27, and at 5 km/s and five years 26–34. So the count depends on the caps far more than on the stations: raising either cap does more than any number of stations.
+2. **The direct solve keeps about half the table's targets at the relaxed caps** (41 of 48 and 51 of 58 with the place free; 17–34 with one station). It kept about two-thirds at the consensus caps (15 of 23). The over-count from interpolation is real, but the margin at the relaxed caps survives it.
+3. **Which cap to relax is a trade, not settled here.** rq-0-61 found that 6.5 km/s legs take the import ratio over its 0.50 limit (0.55), while five-year cycles keep it at 0.47 but cost more over a short run (5.8× against 4.9× at 6.25 years). The cycles solved directly at five years (median 4.4 years with one station) are close to the 4.3 years that result used. Proposed position, to be checked by re-running the chain model on these legs: **five-year cycles with one station**, which gives 26–34 targets at the consensus leg Δv, with more stations kept as the way to add margin.
+4. **Parking with two-burn phasing does almost as well as two stations at the relaxed caps** (36–39 and 38–46). At the consensus caps it is the worse choice.
+
+How firm: the solver is local, so these counts are lower bounds on what the model allows, and the relaxed-cap counts clear 20 with room. One node orbit was run. The cycle cap of five years was not combined with 6.5 km/s (2,730 legs at eight places, about a day of computing).
+
+Results: `publications/data/nea-trajectories/node-legs-direct-halo-120-p{0..7}-c{6.5-y4,5-y5}.json` with per-leg `…-legs.csv`, `node-stations-direct-halo-120-c{6.5-y4,5-y5}.json`, `targets-node-stations-direct-halo-120-c{6.5-y4,5-y5}.csv`.
+
 ## Next steps
 
-1. Check the counts at 6.5 km/s legs and five-year cycles directly, with the place free (eight places). This now decides the falsifier.
+1. Re-run the chain model (rq-0-61) on the legs solved directly at five-year cycles with one station, to confirm the proposed position on cost and import ratio.
 1. Look for cheaper phasing than two burns (several burns, low thrust over more revolutions); at about 200 m/s per eighth it decides whether parking can stand in for more stations.
 1. Check the inclined swingby against the Moon's gravity.
 1. Scout launch trade, remaining: a priced ride-along to lunar transfer, the Earth flyby's turn limit, arrival date against Δv, and loiter before the swingby.

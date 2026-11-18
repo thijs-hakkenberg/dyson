@@ -161,8 +161,15 @@ rq-0-52's fifth pass requires the tug to leave from, and return to, the place th
 
 The cost position stands: the chain needs only a few good targets, and those that remain have much the same cycle and Δv. What does not stand is the margin on target count, which rq-0-52 now puts between about 9 and 23 against a falsifier of 20. Results: `publications/data/phase0-chain/flyby-station-{halo-120-p0,halo-300-p3}.json`.
 
+## Target count solved directly (2026-11-18)
+
+rq-0-52 has now solved the tug legs directly instead of reading them from reach tables. At 5 km/s legs and four-year cycles the count is at most 15, even with the station's place free, which is short of the falsifier of 20. With one station it is 17–27 at 6.5 km/s legs, and 26–34 at five-year cycles. The median cycle with one station at five years is 4.4 years, close to the 4.3 years of the five-year row above (5.8× at 6.25 years, import ratio 0.47).
+
+So the trade recorded above is now the one that decides the target count. Five-year cycles are proposed in rq-0-52, because they keep the import ratio under 0.50, but the chain model has not yet been run on the directly solved legs.
+
 ## Next steps
 
+1. Run the chain model on the legs rq-0-52 solved directly at five-year cycles with one station (`node-legs-direct-halo-120-p*-c5-y5-legs.csv`).
 1. Enforce repeat departure windows in fleet sizing, using the third-pass legs.
 2. Enforce repeat departure windows per target when sizing the fleet.
 3. Put the import ratio and the launched-to-delivered mass ratio into the economics gate (rq-0-82), alongside $/kg.

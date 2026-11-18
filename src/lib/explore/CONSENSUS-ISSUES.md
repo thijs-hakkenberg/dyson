@@ -281,6 +281,8 @@ modelled and would add candidates.
 
 **Update 2026-11-18 (phasing priced).** Moving a tug round the node orbit with two burns costs about 200 m/s per eighth of the orbit, at about four months per move. Charged against the leg Δv, one station with parking tugs gives 6–11 targets at 5 km/s and four years, compared with 11–12 for four stations. Two burns is an upper bound on the cost.
 
+**Update 2026-11-18 (relaxed caps solved directly).** The relaxed caps were also solved directly. With one station, 6.5 km/s legs and four-year cycles give 17–27 targets, and 5 km/s legs and five-year cycles give 26–34; with the place free, 41 and 51. The falsifier is met at either relaxed cap and not at the consensus caps. Which cap to relax trades import ratio (6.5 km/s exceeds 0.50, rq-0-61) against cost over a short run (five-year cycles). It is recorded in rq-0-52 as an open question, with five-year cycles and one station as the proposed position. The spec conflict stands: the consensus leg Δv and cycle together do not support the 20-target falsifier.
+
 ### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
 `phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
 (≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the
