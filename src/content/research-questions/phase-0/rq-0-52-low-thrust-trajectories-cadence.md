@@ -217,9 +217,91 @@ The launch-mass side of open question 1.2: what each way of leaving Earth costs.
 
 Limits: the scout's acceleration is held at the 525 kg reference while its mass changes by up to 10%; the least-Δv transfers found are long (median 700 days) and arrival date was not traded; loiter orbits before a swingby are not modelled; prices are published list or contract figures, not quotes. Results: `publications/data/nea-trajectories/{scout-launch-sweep.csv, scout-launch-sweep.json, scout-launch-trade.json}`.
 
+## Fourth pass (2026-11-15): halo node orbits and the Moon's inclined orbit
+
+The third pass kept the node on planar orbits and the Moon in the ecliptic. `run_cislunar_flyby_3d.py` removes both simplifications.
+
+- **Moon's orbit.** It is tilted 5.1° to the ecliptic, so a departure meets the Moon only where its path crosses the Moon's orbit plane. The out-of-plane part of the node burn is solved to make that happen, inside the same burn budget. The Moon's node line turns once a year against the Sun–Earth line, so the reach is tabulated by that angle and the leg optimiser reads it for the date of each leg.
+- **Node orbits.** Two northern halo orbits, 120,000 and 300,000 km above the ecliptic at their highest (the first is the size SOHO flies), next to the three planar orbits.
+- **One swingby.** In the third pass the second swingby added at most 0.07 km/s to the reach in any direction band, so it is left out here.
+
+Check: with the tilt set to zero and the whole burn in the ecliptic, the new code reproduces the third pass's single-swingby reach tables exactly, with the same 1,151 encounters.
+
+**Reach.** Median excess speed within 15° of the ecliptic, km/s:
+
+| Node burn, days from burn to escape | Third pass | Planar orbits, tilted Moon | Halo orbits, tilted Moon |
+|---|---|---|---|
+| 150 m/s, 60 d | 1.42 | 1.31 | 0 |
+| 150 m/s, 90 d | 1.58 | 1.53 | 1.36 |
+| 150 m/s, 150 d | 1.62 | 1.60 | 1.55 |
+| 300 m/s, 60 d | 1.64 | 1.62 | 1.60 |
+| 300 m/s, 105 d | 1.65 | 1.64 | 1.63 |
+
+**Targets.** Tug legs re-solved against each table (`run_trajectory_flyby_model.py --model=…`), 150 targets:
+
+| Tug leg Δv cap, cycle | Third pass | Planar orbits, tilted Moon | Halo orbits, tilted Moon |
+|---|---|---|---|
+| 5.0 km/s, 4 yr | 26 | 25 | 23 |
+| 5.0 km/s, 4 yr, 150 m/s burns only | 23 | 21 | 13 |
+| 5.0 km/s, 5 yr | 67 | 65 | 58 |
+| 5.75 km/s, 4 yr | 39 | 38 | 34 |
+| 6.5 km/s, 4 yr | 53 | 52 | 48 |
+| 6.5 km/s, 5 yr | 114 | 110 | 108 |
+
+1. **The Moon's tilt costs almost nothing.** One target of 26 is lost. The out-of-plane part of the burn it needs is small: a median of 5° of the burn's direction at 300 m/s and 11° at 150 m/s.
+2. **A halo node orbit costs three targets of 26, and makes the larger burn necessary.** The burn has to cancel the orbit's motion across the ecliptic before the tug can meet the Moon. With 300 m/s available, 23 targets close. With 150 m/s only, 13 do, and in most directions no escape is reached within 60 days. A 50 m/s burn from a halo orbit rarely reaches the Moon at all.
+3. **The falsifier of 20 still clears, at 23**, with a halo node, burns up to 300 m/s, and scouts launched to C3 = 6 or more. All 23 are inside the scout's 3.5 km/s from C3 = 6. With a C3 ≈ 0 launch and a lunar swingby 14 are within 3.5 km/s and all 23 within 4.5 km/s.
+4. **No target is gained and cycle times do not move.** The targets that remain keep their cycle (median change 0.0 years); the ones lost were at the edge of the Δv cap or the cycle limit.
+5. **The chain model does not move** (rq-0-61): at 5 km/s legs and four years the import ratio is 0.45–0.46 and the cost ratio to Earth supply is 4.9×, 2.5× and 1.7× for 6.25, 10 and 20 years, on all three models.
+
+Limits of this pass: the scout's launch-to-Moon swingby still uses the Moon in the ecliptic; the return is still the mirror image, not computed separately; the swingby is patched and was checked against the Moon's gravity only in the planar case; node orbits are sampled at 16 points and the node angle in 60° steps; the phase of the tug on its node orbit is taken as plannable. Results: `publications/data/cislunar-flyby/{reach-3d-planar-orbits.json, reach-3d-halo.json, summary-3d.json, summary-3d-inc0.json}` and `publications/data/nea-trajectories/{legs-flyby-3d-*.csv, flyby-3d-*.json, flyby-3d-compare.json, targets-flyby-3d.csv}`.
+
+## Fifth pass (2026-11-16): the return leg, and where the station is on its orbit
+
+The fourth pass took the return to the node as the mirror image of the departure, and took the best of every place on every node orbit of a kind. This pass checks the first and removes the second.
+
+**The mirror image is exact, and was checked by flying arrivals forwards.** Reflecting a path in the plane through the Sun, the Earth and the ecliptic pole and reversing time leaves the equations unchanged. A northern halo orbit maps onto itself, and the Moon stays prograde with its node at 180° − node. `run_flyby_arrival_check.py` takes 2,483 departures (two halo orbits and one planar orbit), reflects each, and integrates it forwards from the edge of the Earth's sphere of influence. Every one meets the Moon's orbit plane (within 2.3 km), leaves the swingby with the same excess speed inside the allowed turn, and reaches the same node orbit within 830 km with an insertion burn inside the budget. The direction, node angle and station place the leg solver looks up for an arrival are those of the departure it mirrors. So nothing changes from this.
+
+**What the mirror image hid is that the tug must return to where the station is.** A station is on one orbit, at one place on it, on any given day. The node orbits have periods of 175 to 179 days, so the place is fixed by the date and by where the station was first put. A tug cannot choose it. The reach tables now carry the station's place at the moment of escape as a further dimension (eighths of the period), for three single orbits, from a run with four times the departures (`run_cislunar_flyby_3d.py --station`). The legs were re-solved for eight initial station places on each orbit (`run_trajectory_flyby_model.py --model=station-<orbit> --phase0=k`).
+
+Reach within 15° of the ecliptic, median over direction, node angle and station place (km/s); the pooled column is the fourth pass:
+
+| Node burn, days to escape | Pooled halo orbits | Halo 120,000 km | Halo 300,000 km | Planar 100,000 km |
+|---|---|---|---|---|
+| 150 m/s, 90 d | 1.36 | 0.81 | 0.00 | 0.86 |
+| 150 m/s, 150 d | 1.55 | 1.07 | 0.91 | 1.05 |
+| 300 m/s, 60 d | 1.60 | 0.98 | 0.96 | 0.83 |
+| 300 m/s, 105 d | 1.63 | 1.30 | 1.26 | 1.37 |
+
+Targets closing, as the range over the eight initial station places:
+
+| Tug leg Δv cap, cycle | Pooled halo (fourth pass) | Halo 120,000 km | Halo 300,000 km | Planar 100,000 km (pooled planar: 25 / 65 / 52 / 110) |
+|---|---|---|---|---|
+| 5.0 km/s, 4 yr | 23 | 7–9 | 5–7 | 4–6 |
+| 5.0 km/s, 4 yr, 150 m/s burns only | 13 | 3–5 | 2–4 | 1–4 |
+| 5.0 km/s, 5 yr | 58 | 33–42 | 26–31 | 25–30 |
+| 5.75 km/s, 4 yr | 34 | 14–21 | 12–15 | 9–14 |
+| 6.5 km/s, 4 yr | 48 | 24–30 | 20–25 | 17–27 |
+| 6.5 km/s, 5 yr | 108 | 83–91 | 76–88 | 74–79 |
+
+What this shows:
+
+1. **The falsifier of 20 is no longer shown to clear at 5 km/s legs and four-year cycles.** With the station at one place on one orbit, 5 to 9 targets close, against 23 when the place was free. It takes legs of 6.5 km/s (20–30 targets) or cycles of five years (26–42) to pass 20.
+2. **The loss is in the four-year cycle limit more than in the Δv.** A leg now has to leave or arrive on a date when the station is well placed, which costs waiting time. At a five-year limit about two thirds of the pooled targets remain; at four years about a third.
+3. **Where the station is first put matters little** (7–9, 5–7, 4–6 across the eight places), so this is not something a choice of initial place repairs. Which targets close does change: only 3 of the halo 120,000 km orbit's targets close for every initial place, and 15 for at least one.
+4. **The smaller halo orbit does better than the larger one**, and the one planar orbit tried does no better than either.
+5. **Scouts do not cut these further**: every target that closes is within the scout's 3.5 km/s from a launch to C3 = 6.
+6. **The chain cost model still does not move** (rq-0-61): with 9 targets (halo 120,000 km) or 5 (halo 300,000 km) the import ratio is 0.46–0.47 and the cost ratio to Earth supply 4.9–5.2×, 2.6× and 1.7× for 6.25, 10 and 20 years. The model needs few targets; the falsifier is about how many exist to choose from.
+
+How firm the new counts are: they are a low estimate, as the pooled 23 was a high one. The finer tables are not converged. Halving the departures lowers the mean in-plane reach by 3–4% (`station-reach-convergence.json`), and on one case (halo 120,000 km, first station place) lowers the count from 9 to 7 and from 41 to 36 at five years. The leg solver also tries departure dates 20 days apart, which is coarse once only some dates are good. The true count at 5 km/s and four years lies between about 9 and 23, and nothing here says it reaches 20.
+
+Limits of this pass: station place in eighths of the period and node angle in 60° steps, interpolated; one swingby; the swingby patched, not flown with the Moon's gravity; a 14.8-day mean wait for the Moon, during which the station moves less than one bin; three orbits out of the two families. Results: `publications/data/cislunar-flyby/{arrival-check.json, reach-3d-station-*.json, summary-3d-station.json, station-reach-convergence.json}`, `publications/data/nea-trajectories/{flyby-station-compare.json, targets-flyby-station.csv}` and `publications/data/phase0-chain/flyby-station-*.json`.
+
 ## Next steps
 
-1. Extend the three-body model to halo node orbits and the Moon's inclined orbit.
+1. Settle the count with the station's place fixed: solve the node-to-escape leg for each tug leg directly (target the needed escape direction on the needed date) instead of reading a table, with departure dates a few days apart. This decides whether the falsifier of 20 clears at 5 km/s and four years.
+1. Options that would restore choice of place, none yet modelled: two stations half a period apart, a tug that parks on a different node orbit before departure, or a second swingby used for timing.
+1. Check the inclined swingby against the Moon's gravity.
 1. Scout launch trade, remaining: a priced ride-along to lunar transfer, the Earth flyby's turn limit, arrival date against Δv, and loiter before the swingby.
 2. Re-run the chain model (rq-0-61) with per-target cycle time, Δv and thrust time from `targets.csv`, and trade tug power against cycle time.
 3. Hand the shortlist to the remote survey for taxonomy and rotation (bom-0-1, rq-0-50).
