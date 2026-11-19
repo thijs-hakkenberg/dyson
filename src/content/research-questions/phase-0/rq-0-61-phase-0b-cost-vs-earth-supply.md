@@ -161,6 +161,29 @@ rq-0-52's fifth pass requires the tug to leave from, and return to, the place th
 
 The cost position stands: the chain needs only a few good targets, and those that remain have much the same cycle and Δv. What does not stand is the margin on target count, which rq-0-52 now puts between about 9 and 23 against a falsifier of 20. Results: `publications/data/phase0-chain/flyby-station-{halo-120-p0,halo-300-p3}.json`.
 
+## Target count solved directly (2026-11-18)
+
+rq-0-52 has now solved the tug legs directly instead of reading them from reach tables. At 5 km/s legs and four-year cycles the count is at most 15, even with the station's place free, which is short of the falsifier of 20. With one station it is 17–27 at 6.5 km/s legs, and 26–34 at five-year cycles. The median cycle with one station at five years is 4.4 years, close to the 4.3 years of the five-year row above (5.8× at 6.25 years, import ratio 0.47).
+
+So the trade recorded above is now the one that decides the target count. Five-year cycles are proposed in rq-0-52, because they keep the import ratio under 0.50.
+
+**Chain model on the directly solved legs (2026-11-19).** The directly solved legs were written in the chain model's leg layout for each of the eight station places (`run_phase0_chain_direct.py`). The Δv includes the excess speed the node leg could not deliver, charged to the thrusters. The node dates are the ones the direct solve found, and the thrust fraction is scaled up for the extra Δv. The chain was then run at 5 km/s legs, with node burns up to 300 m/s, at five-year cycles and, for comparison, four-year cycles. Ranges are over the eight station places, at 1.0–1.3 kt a year with replacements:
+
+| One station, 5 km/s legs | Targets | Cycle | Fleet | Import ratio | P(ratio ≤ 0.5) | 6.25 yr | 10 yr | 20 yr |
+|---|---|---|---|---|---|---|---|---|
+| Five-year cycles | 26–34 | 4.3–4.4 yr | 24–25 | 0.44–0.46 | 0.66–0.74 | 5.9–6.2× | 2.84–2.90× | 1.82–1.86× |
+| Four-year cycles | 3–7 | 3.1–3.9 yr | 19–22 | 0.41–0.46 | 0.67–0.81 | 4.5–5.3× | 2.43–2.70× | 1.63–1.77× |
+| Five-year cycles, table legs (halo, 2026-11-15 legs) | 58 | 4.3 yr | | 0.46 | 0.66 | | | |
+
+What this settles:
+
+1. **The proposed position holds on import ratio.** Five-year cycles with one station keep the import ratio at 0.44–0.46, under the 0.50 limit, with 26–34 targets. That clears the falsifier of 20 at every station place.
+2. **What it costs is time and tugs, not import ratio.** The fleet grows from about 20 tugs to 24–25. The cost relative to Earth supply rises by about a fifth for a 6.25-year run (6.0× against 4.8× at the median place), and by less over longer runs (2.86× against 2.50× at 10 years, 1.84× against 1.67× at 20).
+3. **The four-year cycles are cheaper but have too few targets** (3–7). The cost position of the earlier sections does not change: on the directly solved legs the chain still needs only a few good targets.
+4. **The directly solved legs match the table legs on import ratio and cycle.** They lose about half the targets, but the cycle (4.4 years) and the import ratio barely move.
+
+Results: `publications/data/phase0-chain/direct-halo-120-c5-y5.json`; leg files `publications/data/nea-trajectories/legs-direct-halo-120-p{0..7}-c5-y5.csv`.
+
 ## Next steps
 
 1. Enforce repeat departure windows in fleet sizing, using the third-pass legs.
