@@ -370,7 +370,7 @@ What this settles:
 
 1. **The falsifier is met with one station once either cap is relaxed, and not at the consensus caps.** At 5 km/s and four years no arrangement reaches 20 (at most 15). At 6.5 km/s and four years one station gives 17–27, and at 5 km/s and five years 26–34. So the count depends on the caps far more than on the stations: raising either cap does more than any number of stations.
 2. **The direct solve keeps about half the table's targets at the relaxed caps** (41 of 48 and 51 of 58 with the place free; 17–34 with one station). It kept about two-thirds at the consensus caps (15 of 23). The over-count from interpolation is real, but the margin at the relaxed caps survives it.
-3. **Which cap to relax is a trade, not settled here.** rq-0-61 found that 6.5 km/s legs take the import ratio over its 0.50 limit (0.55), while five-year cycles keep it at 0.47 but cost more over a short run (5.8× against 4.9× at 6.25 years). The cycles solved directly at five years (median 4.4 years with one station) are close to the 4.3 years that result used. Proposed position, to be checked by re-running the chain model on these legs: **five-year cycles with one station**, which gives 26–34 targets at the consensus leg Δv, with more stations kept as the way to add margin.
+3. **Which cap to relax is a trade, not settled here.** rq-0-61 found that 6.5 km/s legs take the import ratio over its 0.50 limit (0.55), while five-year cycles keep it at 0.47 but cost more over a short run (5.8× against 4.9× at 6.25 years). The cycles solved directly at five years (median 4.4 years with one station) are close to the 4.3 years that result used. Proposed position: **five-year cycles with one station**, which gives 26–34 targets at the consensus leg Δv, with more stations kept as the way to add margin. The chain model run on these legs bears it out (rq-0-61, 2026-11-19). The import ratio stays at 0.44–0.46, and what it costs is a fleet of 24–25 tugs instead of about 20, and about a fifth more over a 6.25-year run (6.0× Earth supply against 4.8×).
 4. **Parking with two-burn phasing does almost as well as two stations at the relaxed caps** (36–39 and 38–46). At the consensus caps it is the worse choice.
 
 How firm: the solver is local, so these counts are lower bounds on what the model allows, and the relaxed-cap counts clear 20 with room. One node orbit was run. The cycle cap of five years was not combined with 6.5 km/s (2,730 legs at eight places, about a day of computing).
@@ -379,7 +379,6 @@ Results: `publications/data/nea-trajectories/node-legs-direct-halo-120-p{0..7}-c
 
 ## Next steps
 
-1. Re-run the chain model (rq-0-61) on the legs solved directly at five-year cycles with one station, to confirm the proposed position on cost and import ratio.
 1. Look for cheaper phasing than two burns (several burns, low thrust over more revolutions); at about 200 m/s per eighth it decides whether parking can stand in for more stations.
 1. Check the inclined swingby against the Moon's gravity.
 1. Scout launch trade, remaining: a priced ride-along to lunar transfer, the Earth flyby's turn limit, arrival date against Δv, and loiter before the swingby.

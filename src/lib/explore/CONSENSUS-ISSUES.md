@@ -283,6 +283,8 @@ modelled and would add candidates.
 
 **Update 2026-11-18 (relaxed caps solved directly).** The relaxed caps were also solved directly. With one station, 6.5 km/s legs and four-year cycles give 17–27 targets, and 5 km/s legs and five-year cycles give 26–34; with the place free, 41 and 51. The falsifier is met at either relaxed cap and not at the consensus caps. Which cap to relax trades import ratio (6.5 km/s exceeds 0.50, rq-0-61) against cost over a short run (five-year cycles). It is recorded in rq-0-52 as an open question, with five-year cycles and one station as the proposed position. The spec conflict stands: the consensus leg Δv and cycle together do not support the 20-target falsifier.
 
+**Update 2026-11-19 (chain model on the direct legs).** The chain model was run on the five-year, one-station legs. It gives 26–34 targets at an import ratio of 0.44–0.46, with a fleet of 24–25 tugs, at 6.0× Earth supply over a 6.25-year run (4.8× at four-year cycles, which have 3–7 targets). The proposed position holds. The consensus cycle limit of four years is what conflicts with the falsifier.
+
 ### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
 `phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
 (≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the
