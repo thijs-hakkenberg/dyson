@@ -377,9 +377,41 @@ How firm: the solver is local, so these counts are lower bounds on what the mode
 
 Results: `publications/data/nea-trajectories/node-legs-direct-halo-120-p{0..7}-c{6.5-y4,5-y5}.json` with per-leg `…-legs.csv`, `node-stations-direct-halo-120-c{6.5-y4,5-y5}.json`, `targets-node-stations-direct-halo-120-c{6.5-y4,5-y5}.csv`.
 
+## Cheaper phasing: many burns, longer transfers (2026-11-19)
+
+Phasing was solved again with a burn every 20 days instead of two in all, and with transfers of up to 360 days (two revolutions) as well as 20–200 (`node_phasing_multi.py`, `run_node_phasing_multi.py`). The transfer is split into coasts, solved by multiple shooting, and the sum of the burns is minimised. With many short coasts this approaches what a low-thrust tug pays. It is the same grid of 16 start places and offsets of one to four eighths either way. Each cell keeps the cheaper of this and the two-burn cost. 2,654 of 2,816 transfers were found, and none passes closer to Earth than 1.23 million km, so the Moon, which the model leaves out, does not come into it.
+
+| Offset round the orbit | Two burns, best over 20–200 days | Many burns, best over 20–360 days |
+|---|---|---|
+| 1/8 | 204–208 m/s | 185–187 m/s |
+| 2/8 | 382–399 m/s | 349–352 m/s |
+| 3/8 | 513–536 m/s | 466–469 m/s |
+| 1/2 | 572 m/s | 511–512 m/s |
+
+(Ranges are the medians over start places for the two directions.) The saving is 8–12%. Most of it comes within about four months: beyond 120 days, adding time or burns lowers the cost by only a few per cent more (for one eighth: 196 m/s at 120 days, 191 at 200, 187 at 360).
+
+The cost follows the chord of the phase shift, about 2 sin(Δφ/2) times that of half an orbit (196, 362 and 473 m/s predicted from 512 m/s, against 185, 350 and 468 found). That is what a linear oscillator does. Close to the orbit the motion round it is nearly harmonic, and the period hardly changes with the size of the orbit. So a tug cannot drift round cheaply by waiting, however many burns it has. Shifting the phase means turning the state round, and that costs about the same whenever it is done. Only a route that leaves the orbit's neighbourhood, along its unstable and stable manifolds, could escape this. A local search from a guess that slides along the orbit does not find such a route.
+
+Parking count with the cheaper phasing (one station, phasing charged):
+
+| Caps | Two-burn phasing | Many-burn phasing |
+|---|---|---|
+| 5 km/s, 4 yr | 6–11 | 6–11 (one more target at two of the eight places) |
+| 6.5 km/s, 4 yr | 36–39 | 36–39 (one more at two places) |
+| 5 km/s, 5 yr | 38–46 | 38–46 (one more at one place) |
+
+What this settles:
+
+1. **Cheaper phasing does not change the arrangement.** At the consensus caps, parking still gives 6–11 against 11–12 for four stations. At the relaxed caps it still matches about two stations. The point made above (several stations do better than parking) holds with phasing priced near its floor for nearby routes.
+2. **Phasing costs about 190 m/s per eighth of the orbit, and waiting longer does not help.** A move of one to three eighths takes 4–9% of a 5 km/s leg, and a parked tug may need one at each end of its cycle. More stations are the way to cover more of the orbit, not more time spent phasing.
+
+How firm: the optimiser is local and starts from one guess. Routes along the orbit's manifolds were not searched and might be much cheaper, but would take longer. One node orbit was run.
+
+Results: `publications/data/nea-trajectories/node-phasing-multi-halo-120.json`; `parking_multi_burn_phasing` in `node-stations-direct-halo-120[-c6.5-y4|-c5-y5].json`.
+
 ## Next steps
 
-1. Look for cheaper phasing than two burns (several burns, low thrust over more revolutions); at about 200 m/s per eighth it decides whether parking can stand in for more stations.
+1. Phasing along the node orbit's unstable and stable manifolds (an excursion away and back), the only route the chord argument above does not cover; worth doing only if parking is to be kept as an alternative to more stations.
 1. Check the inclined swingby against the Moon's gravity.
 1. Scout launch trade, remaining: a priced ride-along to lunar transfer, the Earth flyby's turn limit, arrival date against Δv, and loiter before the swingby.
 2. Re-run the chain model (rq-0-61) with per-target cycle time, Δv and thrust time from `targets.csv`, and trade tug power against cycle time.

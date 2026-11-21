@@ -285,6 +285,8 @@ modelled and would add candidates.
 
 **Update 2026-11-19 (chain model on the direct legs).** The chain model was run on the five-year, one-station legs. It gives 26–34 targets at an import ratio of 0.44–0.46, with a fleet of 24–25 tugs, at 6.0× Earth supply over a 6.25-year run (4.8× at four-year cycles, which have 3–7 targets). The proposed position holds. The consensus cycle limit of four years is what conflicts with the falsifier.
 
+**Update 2026-11-19 (cheaper phasing).** Phasing with many burns over up to a year costs about 187 m/s per eighth of the orbit, against about 206 m/s with two burns. Waiting longer barely helps: the cost follows the chord of the phase shift, as for a linear oscillator. The parking counts do not change (6–11 at the consensus caps), so several stations still beat parking. The number of stations stays an operational choice that no spec makes.
+
 ### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
 `phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
 (≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the
