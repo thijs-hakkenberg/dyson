@@ -287,6 +287,8 @@ modelled and would add candidates.
 
 **Update 2026-11-19 (cheaper phasing).** Phasing with many burns over up to a year costs about 187 m/s per eighth of the orbit, against about 206 m/s with two burns. Waiting longer barely helps: the cost follows the chord of the phase shift, as for a linear oscillator. The parking counts do not change (6–11 at the consensus caps), so several stations still beat parking. The number of stations stays an operational choice that no spec makes.
 
+**Update 2026-11-23 (Moon's gravity on the node legs).** Flying the five-year one-station legs with the Moon's gravity all the way, instead of a patched instant swingby, adds a median 135 m/s per leg (upper bound; 90th percentile 348 m/s). The legs spend months near the Moon's orbit before the swingby. The count falls from 32 to 24–27 targets, which still meets the falsifier of 20 with less margin. The counts at the consensus caps, which had none, are the most exposed. No spec states the leg Δv margin for lunar perturbations, and none is set here.
+
 ### CI-31 · Propellant demand assumes lighter legs than the catalogue supports — `bom-0-16` · open
 `phase-0/ep-propellant-supply` plans 230–400 t/yr of iodine and an import-ratio gate of ≤0.50
 (≤0.35 target), noting demand moves "from about 0.13 to 0.61 across 3–6 km/s". The legs the
