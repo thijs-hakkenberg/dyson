@@ -442,10 +442,44 @@ How firm: the extra Δv is an upper bound. SLSQP was stopped at its iteration ca
 
 Results: `publications/data/nea-trajectories/node-moon-gravity-halo-120-p0-c5-y5.json`, per leg `node-moon-gravity-halo-120-p0-c5-y5-legs.csv`.
 
+## Novelty and positioning review (2026-11-24)
+
+Before any paper is written on these results, an outside research agent checked them against the literature. It worked from a brief (`publications/handover/rq-0-52-nea-tug-cycles-literature-brief.md`) that put our results as nine claims, C1–C9. Its review is in `research/novelty-review.md`, and the sources are added to `research/papers.yaml` with the reviewer's read levels. Its verdicts, as given:
+
+| Claim | Reviewer's verdict | Deciding sources |
+|---|---|---|
+| C1. 2–6 targets at 5 km/s and 4 yr, one station | new | none counts round trips from a libration-point node |
+| C2. 11–15 at best arrangement; falsifier unmet | new | none counts station arrangements on a halo |
+| C3. 17–27 at 6.5 km/s; 26–34 at 5 yr | partly known | the sensitivity to caps is published (Tyler & Wittig 2021: +20% threshold, +50% targets) |
+| C4. Interpolated reach tables over-count | partly known; the size and direction are new | no published check of a v∞ reach table against a direct solve |
+| C5. Station place on the halo worth a factor 2–3 | new | halo phase is a variable in Chen et al. 2016b and Qi & de Ruiter 2020, but never carried through to a count |
+| C6. Phasing follows the chord law, ~512 m/s per half orbit, and waiting does not help | known, partly contradicted | Sato, Kitamura & Shima 2015 (same shape, Earth–Moon L2, 397 m/s at half an orbit); Fu, Wang & Zhang 2023 (on a lunar DRO, cost does fall with time) |
+| C7. Patched swingby under-prices legs by a median of 135 m/s | new, but an outlier | published model-transition penalties for related problems are a few m/s |
+| C8. Mixed-frame drift of ~12.5 m/s per node | known as a class; drop | Jorba-Cuscó, Farrés & Jorba 2018 (the bicircular problem is not coherent) |
+| C9. v∞ 1.2–1.46 km/s; direction limited by the Moon's plane | known | Casalino & Lantoine 2020: C₃ 1.5 km²/s² in any direction, ±30° at C₃ 2; our band sits between them |
+
+Where the review misreads our runs (recorded here, the review is kept as received):
+
+1. It describes C7 as a distribution "over 1,816 legs". The Moon check covered 125 legs at one station place. 1,816 is the number of legs solved with the patched swingby.
+2. It suggests our finding that waiting does not help may come from a time horizon of about 0.67 of an orbit (120 days). Phasing was in fact solved out to 360 days, about two periods of the node orbit, and the cost for one eighth fell only from 196 to 187 m/s. That is beyond the 1.5 periods where Fu et al.'s cost levels off. Their orbit (a stable lunar DRO) is not ours, so both are kept: on a Sun–Earth halo, as solved, waiting barely helps.
+3. It dates Sato et al. 2015 "seven years" before our claim; it is eleven. Minor.
+
+What the review changes (proposed positions, not settled):
+
+1. **C8 is withdrawn as a claim.** It stays as a methods note citing the known incoherence of bicircular models. The coherent models (quasi-bicircular, Rosales et al. 2023; Li et al. 2025, 2026) are what a referee will compare our construction against, and checking against one is an open item.
+2. **C6 and C9 become calibrations, not findings.** C6 places a Sun–Earth halo of 120,000 km on the published Earth–Moon curves. C9's only new element is the inclined, regressing lunar orbit. Sato et al.'s manifold detour (3.2 times cheaper at half an orbit, worth it above about 70°) is the benchmark for the manifold-phasing next step.
+3. **C7 needs a second number before it is claimed.** The 135 m/s is what it costs to *repair* the patched designs. Nodes and settings were kept where the patched solution put them, and SLSQP was stopped short. A leg optimised from scratch in the full model could be much cheaper. Until a few legs are, the claim is "an upper bound on repairing patched-swingby designs, growing with time spent near the Moon's orbit", not "what the Moon costs". A referee will compare it with a few m/s (Tyler & Wittig, Fu et al.), 28 kg of 9,664 (Casalino & Lantoine) and ARTEMIS's flown corrections (deep-space manoeuvres up to 24 m/s).
+4. **Several stations may be answering the wrong question.** Chen, Kawakatsu & Hanada 2016b, which the brief missed, price reaching the Moon at any lunar phase from a halo of 100,000 km at about 14 m/s. Our solver already lets the departure date and burn vary (±10 days, up to 300 m/s). But it needs a given v∞ vector on a given date, not just a lunar encounter, and it does not let the tug wait extra revolutions on the halo before leaving. If waiting opens enough lunar geometry, the station-arrangement result (C2) weakens. This should be checked before a paper is framed around station arrangements.
+5. **Prior work to cite and set ourselves apart from:** Peng, Zhang & Gao 2024 (reusable probes from a lunar DRO station, 105 asteroids, but flybys from cislunar space). Xie & Dempster 2022 (1,684 of 24,149 NEAs for low-thrust round trips from Earth, with no node or swingby constraint). The easily-retrievable-objects line (García Yárnoz et al. 2013; Tyler & Wittig 2021): one-way, no reuse, no Moon. Tan et al. 2021–2023 (capture of asteroids, not tugs, to Sun–Earth L1/L2 with a lunar flyby), the nearest work to our return leg. Our return legs are mirrored escapes, which is an assumption no source tests.
+
+The paper, if written, would rest on C1, C2, C4, C5 and C7, with C3, C6 and C9 as context. It is provisionally Paper 12 ("NEA tug cycles through a Sun–Earth halo node with lunar swingbys"); number 06 is the cryogenic paper.
+
 ## Next steps
 
+1. Before framing a paper: (a) re-optimise five legs from scratch in the full model, to see how much of the 135 m/s is repair rather than the Moon; (b) let the tug wait whole revolutions on the halo before leaving, to test whether several stations are needed (Chen et al. 2016b).
 1. Moon's gravity for the remaining station places and caps (about two hours per place at 125 legs), and the longer cycles of the targets lost here; more SLSQP iterations to tighten the upper bounds.
-1. Phasing along the node orbit's unstable and stable manifolds (an excursion away and back), the only route the chord argument above does not cover; worth doing only if parking is to be kept as an alternative to more stations.
+1. Check the full-model construction against a coherent four-body model (quasi-bicircular).
+1. Phasing along the node orbit's unstable and stable manifolds (an excursion away and back), the only route the chord argument above does not cover; benchmark: Sato et al. 2015's 3.2× saving at half an orbit. Worth doing only if parking is to be kept as an alternative to more stations.
 1. Scout launch trade, remaining: a priced ride-along to lunar transfer, the Earth flyby's turn limit, arrival date against Δv, and loiter before the swingby.
 2. Re-run the chain model (rq-0-61) with per-target cycle time, Δv and thrust time from `targets.csv`, and trade tug power against cycle time.
 3. Hand the shortlist to the remote survey for taxonomy and rotation (bom-0-1, rq-0-50).
