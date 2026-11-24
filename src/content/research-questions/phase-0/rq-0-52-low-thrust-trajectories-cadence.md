@@ -409,10 +409,43 @@ How firm: the optimiser is local and starts from one guess. Routes along the orb
 
 Results: `publications/data/nea-trajectories/node-phasing-multi-halo-120.json`; `parking_multi_burn_phasing` in `node-stations-direct-halo-120[-c6.5-y4|-c5-y5].json`.
 
+## The node leg flown with the Moon's gravity (2026-11-23)
+
+Every count above comes from legs whose swingby is patched. Where the path crosses the Moon's orbital distance, with the Moon there, the excess velocity is turned at once, and the Moon does not pull at any other time. Here each leg is flown again with the Moon's gravity throughout (`moon_gravity.py`, `run_moon_gravity_check.py`). The Sun–Earth three-body model's Earth point becomes the Earth–Moon barycentre, with the Earth and the Moon either side of it and the Moon on its inclined orbit, placed by the leg's clocks. The leg is solved by multiple shooting from the patched path. Nodes are every 10 days, and the patched turn is replaced by the perilune state of the matching hyperbola. A correction burn is allowed at every node, and the sum of the burns is minimised. The escape must give the same excess velocity within the escape window and the time budget, and the tug must stay at least 100 km above the Moon. The extra Δv over the patched burn is charged to the leg.
+
+Checked: one station at place 0, halo 120,000 km node orbit, 5 km/s and five years (the proposed position above, 32 targets). For each target, the legs of its three shortest cycles were checked, 125 legs in all. Each leg was solved again by `node_leg_direct.reachable`, which reproduces its stored delivery, and then flown in the full model.
+
+| | |
+|---|---|
+| Legs whose full-model path joins (within 1 km and 0.1 m/s, ≥ 100 km above the Moon) | 109 of 125 |
+| Extra Δv over the patched burn, joined legs: quartiles | 70 / 135 / 222 m/s |
+| 90th percentile, largest | 348 m/s, 572 m/s |
+| Under 50 / 50–150 / 150–300 / over 300 m/s | 20 / 43 / 32 / 14 legs |
+| Correction burns over 1 m/s per leg (quartiles) | 5 / 6 / 10 |
+| Legs whose extra Δv exceeds their headroom to 5 km/s | 20 of 109 |
+| Escape date moved | under 0.14 days |
+| **Targets still closing, unjoined legs kept at their patched cost** | **27 of 32** |
+| **Targets still closing, unjoined legs dropped** | **24 of 32** |
+
+Lost either way: 2015 HV182, 2020 UF2, 363305, 459200, 470975. Lost too if unjoined legs are dropped: 2015 NA14, 2025 VD24, 89136.
+
+Where the cost comes from: the patched path is far off from the start, not only at the swingby. Over every 10-day stretch, it misses by 700–2,000 km and 2–6 m/s when flown with the Moon. These legs spend months 450,000–1,600,000 km from Earth before the swingby, some of it just beyond the Moon's orbit. Near the Moon, the patched crossing and the real hyperbola differ by 25,000–45,000 km and 60–260 m/s. The Moon itself is where the clocks put it (65–3,600 km from the patched crossing point). So the patched model leaves out a real, leg-to-leg varying cost of about 0.1–0.2 km/s, and it is not small next to the median headroom of about 0.46 km/s.
+
+Two set-ups were tried and dropped, recorded here so they are not repeated. Holding the Earth fixed and adding the Moon's pull on it makes the tug drift about 12.5 m/s (about 10,000 km per 10 days) against every patched state. That is an artefact of mixing frames: it more than doubled the apparent cost. Allowing only one correction, two days before the swingby, rarely converges. Neither does a continuation from a small share of the Moon's mass, because at a small share the swingby passes tens of km from a point Moon.
+
+What this settles:
+
+1. **The proposed position survives the Moon's gravity: 24–27 targets with one station at 5 km/s and five years**, against 32 patched. That still clears the falsifier's 20, with less room. Neither end of the range is preferred. Unjoined legs may have a full-model path that a better start would find, or none.
+2. **Patched-swingby leg costs are optimistic by a median of about 135 m/s** on these slow halo-to-escape legs. Counts elsewhere in this note (the consensus caps, more stations, parking) are patched and should be read as upper bounds by about this much per leg. The consensus-cap counts, which had no room, are the ones most likely to drop.
+
+How firm: the extra Δv is an upper bound. SLSQP was stopped at its iteration cap (300, restarted three times) before it reported convergence, and on test legs more iterations lowered it (for example 18 to 9 m/s). The recount uses only each target's three shortest cycles; a lost target may still close by a longer one, which were not checked. Both make 24–27 a lower bound for this model. The Moon is on a circular inclined orbit, and the Sun's pull on the Moon and the planets is left out (an ephemeris check is the next step for the best targets). One station place and one node orbit were run.
+
+Results: `publications/data/nea-trajectories/node-moon-gravity-halo-120-p0-c5-y5.json`, per leg `node-moon-gravity-halo-120-p0-c5-y5-legs.csv`.
+
 ## Next steps
 
+1. Moon's gravity for the remaining station places and caps (about two hours per place at 125 legs), and the longer cycles of the targets lost here; more SLSQP iterations to tighten the upper bounds.
 1. Phasing along the node orbit's unstable and stable manifolds (an excursion away and back), the only route the chord argument above does not cover; worth doing only if parking is to be kept as an alternative to more stations.
-1. Check the inclined swingby against the Moon's gravity.
 1. Scout launch trade, remaining: a priced ride-along to lunar transfer, the Earth flyby's turn limit, arrival date against Δv, and loiter before the swingby.
 2. Re-run the chain model (rq-0-61) with per-target cycle time, Δv and thrust time from `targets.csv`, and trade tug power against cycle time.
 3. Hand the shortlist to the remote survey for taxonomy and rotation (bom-0-1, rq-0-50).
